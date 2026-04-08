@@ -248,5 +248,30 @@ const PUZZLES = [
         words: ["PLANT", "NAP", "WASH", "RANGER"]
       }
     ]
+  },
+  {
+    id: 11,
+    groups: [
+      {
+        category: "90s bands that are also everyday words",
+        level: 0,
+        words: ["GARBAGE", "HOLE", "BUSH", "FUEL"]
+      },
+      {
+        category: "Michael Jackson album titles",
+        level: 1,
+        words: ["THRILLER", "BAD", "DANGEROUS", "INVINCIBLE"]
+      },
+      {
+        category: "Artists who go by one name",
+        level: 2,
+        words: ["SEAL", "PRINCE", "JEWEL", "PINK"]
+      },
+      {
+        category: "First word of an 80s/90s band name",
+        level: 3,
+        words: ["JANE", "NINE", "SMASHING", "GREEN"]
+      }
+    ]
   }
 ];
