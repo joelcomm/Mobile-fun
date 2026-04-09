@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <title>Trapdoor</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Intro screen -->
+    <div id="intro-screen">
+      <h1 class="title">TRAPDOOR</h1>
+      <p class="tagline">NOT EVERY TILE CAN BE TRUSTED</p>
+      <div class="rules">
+        <p><span class="hl">25</span> tiles. <span class="hl">5</span> are trapdoors.</p>
+        <p>Swipe to spell words. Score points.</p>
+        <p>Hit a trapdoor? Word <span class="danger">rejected</span>. Tile <span class="danger">destroyed</span>.</p>
+        <p>Deduce. Avoid. Survive.</p>
+      </div>
+      <button id="btn-start" class="btn-main">ENTER</button>
+    </div>
+
+    <!-- Game screen -->
+    <div id="game-screen" class="hidden">
+      <div id="game-header">
+        <div id="score-display">SCORE: <span id="score">0</span></div>
+        <div id="traps-display">TRAPS: <span id="traps-left">5</span></div>
+      </div>
+
+      <div id="current-word"></div>
+
+      <div id="board-container">
+        <div id="board"></div>
+      </div>
+
+      <div id="word-status"></div>
+
+      <div id="found-words">
+        <span id="found-count">0</span> words found
+      </div>
+
+      <button id="btn-done" class="btn-secondary">END GAME</button>
+    </div>
+
+    <!-- Results screen -->
+    <div id="results-screen" class="hidden">
+      <h2 class="title">CASE CLOSED</h2>
+      <div id="final-score-display"></div>
+      <div id="stats"></div>
+      <div id="words-list"></div>
+      <button id="btn-replay" class="btn-main">NEW BOARD</button>
+    </div>
+  </div>
+
+  <div id="toast" class="hidden"></div>
+
+  <script src="words.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
