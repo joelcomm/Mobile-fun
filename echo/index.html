@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#08090e">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <title>Echo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a href="../hub.html" class="back-link">&larr; ALL GAMES</a>
+  <div id="app">
+
+    <!-- Title Screen -->
+    <div id="title-screen">
+      <div class="title-icon">&#x1F519;</div>
+      <h1 class="game-title">ECHO</h1>
+      <p class="tagline">WATCH. REMEMBER. REVERSE.</p>
+      <div class="rules-box">
+        <p><span class="hl">Watch</span> the sequence of colored tiles flash.</p>
+        <p><span class="hl">Tap</span> them back in <span class="hl">REVERSE</span> order.</p>
+        <p><span class="hl">Survive</span> as long as you can — it gets longer each round.</p>
+      </div>
+      <button id="btn-start" class="btn-main">START ECHO</button>
+      <p id="best-score" class="best-score"></p>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="hidden">
+      <div class="game-header">
+        <span id="round-label" class="round-label">ROUND 1</span>
+        <span id="score-label" class="score-label">0</span>
+      </div>
+      <p id="status-label" class="status-label">WATCH</p>
+      <div id="tile-grid" class="tile-grid">
+        <button class="tile tile-0" data-tile="0"></button>
+        <button class="tile tile-1" data-tile="1"></button>
+        <button class="tile tile-2" data-tile="2"></button>
+        <button class="tile tile-3" data-tile="3"></button>
+        <button class="tile tile-4" data-tile="4"></button>
+        <button class="tile tile-5" data-tile="5"></button>
+      </div>
+      <div id="input-dots" class="input-dots"></div>
+      <p id="hint-label" class="hint-label"></p>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameover-screen" class="hidden">
+      <h2 class="gameover-heading">GAME OVER</h2>
+      <div id="final-round" class="final-round"></div>
+      <div id="final-score" class="final-score"></div>
+      <div id="final-rank" class="final-rank"></div>
+      <button id="btn-replay" class="btn-main">TRY AGAIN</button>
+    </div>
+
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>

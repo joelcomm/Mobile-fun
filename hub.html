@@ -142,6 +142,18 @@
     .witness .card-title { color: #c8a84e; }
     .witness .card-tag { background: rgba(200, 168, 78, 0.1); color: #c8a84e; }
 
+    .bluff .card-icon { background: rgba(232, 102, 74, 0.12); }
+    .bluff .card-title { color: #e8664a; }
+    .bluff .card-tag { background: rgba(232, 102, 74, 0.1); color: #e8664a; }
+
+    .lineup .card-icon { background: rgba(108, 140, 255, 0.12); }
+    .lineup .card-title { color: #6c8cff; }
+    .lineup .card-tag { background: rgba(108, 140, 255, 0.1); color: #6c8cff; }
+
+    .echo .card-icon { background: rgba(160, 108, 213, 0.12); }
+    .echo .card-title { color: #a06cd5; }
+    .echo .card-tag { background: rgba(160, 108, 213, 0.1); color: #a06cd5; }
+
     footer {
       text-align: center;
       padding-top: 28px;
@@ -157,8 +169,11 @@
 
     .game-card { animation: fadeInUp 0.4s ease-out both; }
     .game-card:nth-child(1) { animation-delay: 0.05s; }
-    .game-card:nth-child(2) { animation-delay: 0.15s; }
-    .game-card:nth-child(3) { animation-delay: 0.25s; }
+    .game-card:nth-child(2) { animation-delay: 0.12s; }
+    .game-card:nth-child(3) { animation-delay: 0.19s; }
+    .game-card:nth-child(4) { animation-delay: 0.26s; }
+    .game-card:nth-child(5) { animation-delay: 0.33s; }
+    .game-card:nth-child(6) { animation-delay: 0.40s; }
   </style>
 </head>
 <body>
@@ -194,6 +209,33 @@
         </div>
         <div class="card-desc">Read a scene. Memorize everything. Answer questions and spot the one detail that was a lie.</div>
         <span class="card-tag">Memory &amp; Deduction</span>
+      </a>
+
+      <a href="bluff/" class="game-card bluff">
+        <div class="card-top">
+          <div class="card-icon">&#x1F0CF;</div>
+          <div class="card-title">Bluff</div>
+        </div>
+        <div class="card-desc">Three facts about a topic. Two are real, one is made up. Can you spot the lie?</div>
+        <span class="card-tag">True or False</span>
+      </a>
+
+      <a href="lineup/" class="game-card lineup">
+        <div class="card-top">
+          <div class="card-icon">&#x1F4CA;</div>
+          <div class="card-title">Lineup</div>
+        </div>
+        <div class="card-desc">Five items, one rule. Drag them into the correct order before your attempts run out.</div>
+        <span class="card-tag">Sorting &amp; Trivia</span>
+      </a>
+
+      <a href="echo/" class="game-card echo">
+        <div class="card-top">
+          <div class="card-icon">&#x1F519;</div>
+          <div class="card-title">Echo</div>
+        </div>
+        <div class="card-desc">Watch colored tiles flash in sequence. Now tap them back — in reverse. How far can you go?</div>
+        <span class="card-tag">Memory &amp; Reflexes</span>
       </a>
     </div>
 

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0b0c10">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <title>Lineup</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a href="../hub.html" class="back-link">&larr; ALL GAMES</a>
+  <div id="app">
+
+    <!-- Title Screen -->
+    <div id="title-screen">
+      <div class="title-icon">&#x1F4CA;</div>
+      <h1 class="game-title">LINEUP</h1>
+      <p class="tagline">PUT THEM IN ORDER. TRUST YOUR GUT.</p>
+      <div class="rules-box">
+        <p><span class="hl">See</span> 5 items and an ordering rule.</p>
+        <p><span class="hl">Drag</span> them into the correct order.</p>
+        <p><span class="hl">Lock in</span> your answer — you get 3 attempts per round.</p>
+      </div>
+      <button id="btn-start" class="btn-main">START LINEUP</button>
+      <p id="best-score" class="best-score"></p>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="hidden">
+      <div class="game-header">
+        <span id="round-label" class="round-label">1 / 10</span>
+        <span id="score-label" class="score-label">0</span>
+      </div>
+      <div id="progress-bar" class="progress-bar"></div>
+      <p id="category-label" class="category-label"></p>
+      <p id="instruction-label" class="instruction-label"></p>
+      <div id="attempts-label" class="attempts-label"></div>
+      <div id="sortable-list" class="sortable-list"></div>
+      <button id="btn-lock" class="btn-main btn-lock">LOCK IN</button>
+      <div id="round-feedback" class="round-feedback hidden">
+        <p id="rf-text" class="rf-text"></p>
+        <div id="rf-correct-order" class="rf-correct-order"></div>
+        <button id="btn-next-round" class="btn-main btn-next-round">NEXT</button>
+      </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameover-screen" class="hidden">
+      <h2 class="gameover-heading">ALL DONE</h2>
+      <div id="final-score" class="final-score"></div>
+      <div id="final-rank" class="final-rank"></div>
+      <div id="final-stats" class="final-stats"></div>
+      <button id="btn-replay" class="btn-main">PLAY AGAIN</button>
+    </div>
+
+  </div>
+  <script src="puzzles.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
