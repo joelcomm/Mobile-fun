@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0a0a10">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <title>Mobile Fun</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    :root {
+      --bg: #0a0a10;
+      --card: #12121c;
+      --card-hover: #1a1a28;
+      --border: #24243a;
+      --text: #ccccd4;
+      --text-dim: #5a5a6a;
+      --white: #f0f0f5;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 18px;
+    }
+
+    #app {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 24px 20px;
+      padding-top: calc(24px + var(--safe-top));
+      padding-bottom: calc(24px + var(--safe-bottom));
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 36px;
+      padding-top: 32px;
+    }
+
+    h1 {
+      font-size: 36px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: var(--white);
+    }
+
+    .subtitle {
+      font-size: 13px;
+      letter-spacing: 3px;
+      color: var(--text-dim);
+      margin-top: 8px;
+      text-transform: uppercase;
+    }
+
+    .games {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex: 1;
+    }
+
+    .game-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.15s;
+    }
+
+    .game-card:active {
+      background: var(--card-hover);
+      transform: scale(0.98);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+
+    .card-icon {
+      font-size: 32px;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    .card-title {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .card-desc {
+      font-size: 15px;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    .card-tag {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Per-game accent colors */
+    .connections .card-icon { background: rgba(249, 223, 109, 0.12); }
+    .connections .card-title { color: #f9df6d; }
+    .connections .card-tag { background: rgba(249, 223, 109, 0.1); color: #f9df6d; }
+
+    .alibi .card-icon { background: rgba(240, 184, 64, 0.12); }
+    .alibi .card-title { color: #f0b840; }
+    .alibi .card-tag { background: rgba(240, 184, 64, 0.1); color: #f0b840; }
+
+    .witness .card-icon { background: rgba(200, 168, 78, 0.12); }
+    .witness .card-title { color: #c8a84e; }
+    .witness .card-tag { background: rgba(200, 168, 78, 0.1); color: #c8a84e; }
+
+    footer {
+      text-align: center;
+      padding-top: 28px;
+      font-size: 12px;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .game-card { animation: fadeInUp 0.4s ease-out both; }
+    .game-card:nth-child(1) { animation-delay: 0.05s; }
+    .game-card:nth-child(2) { animation-delay: 0.15s; }
+    .game-card:nth-child(3) { animation-delay: 0.25s; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>MOBILE FUN</h1>
+      <p class="subtitle">Word games for your phone</p>
+    </header>
+
+    <div class="games">
+      <a href="connections/" class="game-card connections">
+        <div class="card-top">
+          <div class="card-icon">&#x1F7E8;</div>
+          <div class="card-title">Connections</div>
+        </div>
+        <div class="card-desc">Group 16 words into 4 categories. Find the hidden connections before your mistakes run out.</div>
+        <span class="card-tag">Word Grouping</span>
+      </a>
+
+      <a href="alibi/" class="game-card alibi">
+        <div class="card-top">
+          <div class="card-icon">&#x1F575;</div>
+          <div class="card-title">Alibi</div>
+        </div>
+        <div class="card-desc">9 words. 1 culprit. Eight have alibis — they belong to one category. Find the word that fits them all.</div>
+        <span class="card-tag">Word Mystery</span>
+      </a>
+
+      <a href="witness/" class="game-card witness">
+        <div class="card-top">
+          <div class="card-icon">&#x1F441;</div>
+          <div class="card-title">Witness</div>
+        </div>
+        <div class="card-desc">Read a scene. Memorize everything. Answer questions and spot the one detail that was a lie.</div>
+        <span class="card-tag">Memory &amp; Deduction</span>
+      </a>
+    </div>
+
+    <footer>Built with Claude</footer>
+  </div>
+</body>
+</html>
