@@ -154,6 +154,18 @@
     .echo .card-title { color: #a06cd5; }
     .echo .card-tag { background: rgba(160, 108, 213, 0.1); color: #a06cd5; }
 
+    .drift .card-icon { background: rgba(64, 200, 224, 0.12); }
+    .drift .card-title { color: #40c8e0; }
+    .drift .card-tag { background: rgba(64, 200, 224, 0.1); color: #40c8e0; }
+
+    .cipher .card-icon { background: rgba(78, 230, 138, 0.12); }
+    .cipher .card-title { color: #4ee68a; }
+    .cipher .card-tag { background: rgba(78, 230, 138, 0.1); color: #4ee68a; }
+
+    .reflex .card-icon { background: rgba(245, 197, 66, 0.12); }
+    .reflex .card-title { color: #f5c542; }
+    .reflex .card-tag { background: rgba(245, 197, 66, 0.1); color: #f5c542; }
+
     footer {
       text-align: center;
       padding-top: 28px;
@@ -174,6 +186,9 @@
     .game-card:nth-child(4) { animation-delay: 0.26s; }
     .game-card:nth-child(5) { animation-delay: 0.33s; }
     .game-card:nth-child(6) { animation-delay: 0.40s; }
+    .game-card:nth-child(7) { animation-delay: 0.47s; }
+    .game-card:nth-child(8) { animation-delay: 0.54s; }
+    .game-card:nth-child(9) { animation-delay: 0.61s; }
   </style>
 </head>
 <body>
@@ -236,6 +251,33 @@
         </div>
         <div class="card-desc">Watch colored tiles flash in sequence. Now tap them back — in reverse. How far can you go?</div>
         <span class="card-tag">Memory &amp; Reflexes</span>
+      </a>
+
+      <a href="drift/" class="game-card drift">
+        <div class="card-top">
+          <div class="card-icon">&#x1F4A8;</div>
+          <div class="card-title">Drift</div>
+        </div>
+        <div class="card-desc">Letters appear one at a time. Guess the word before it's fully revealed — fewer letters, more points.</div>
+        <span class="card-tag">Word Guess</span>
+      </a>
+
+      <a href="cipher/" class="game-card cipher">
+        <div class="card-top">
+          <div class="card-icon">&#x1F510;</div>
+          <div class="card-title">Cipher</div>
+        </div>
+        <div class="card-desc">Every letter has been swapped. Crack the substitution code to reveal the famous quote hidden underneath.</div>
+        <span class="card-tag">Codebreaking</span>
+      </a>
+
+      <a href="reflex/" class="game-card reflex">
+        <div class="card-top">
+          <div class="card-icon">&#x26A1;</div>
+          <div class="card-title">Reflex</div>
+        </div>
+        <div class="card-desc">A word flashes. Tap left or right to sort it into the correct category. It speeds up. 3 lives.</div>
+        <span class="card-tag">Speed Sorting</span>
       </a>
     </div>
 

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0a0b10">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <title>Drift</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a href="../hub.html" class="back-link">&larr; ALL GAMES</a>
+  <div id="app">
+
+    <!-- Title Screen -->
+    <div id="title-screen">
+      <div class="title-icon">&#x1F4A8;</div>
+      <h1 class="game-title">DRIFT</h1>
+      <p class="tagline">GUESS THE WORD. FEWER LETTERS = MORE POINTS.</p>
+      <div class="rules-box">
+        <p><span class="hl">Watch</span> letters appear one at a time.</p>
+        <p><span class="hl">Guess</span> the word as soon as you can.</p>
+        <p><span class="hl">Score</span> big by guessing with fewer letters.</p>
+      </div>
+      <button id="btn-start" class="btn-main">START</button>
+      <p id="best-score" class="best-score"></p>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="hidden">
+      <div class="game-header">
+        <span id="round-label" class="round-label">1 / 15</span>
+        <span id="score-label" class="score-label">0</span>
+      </div>
+      <div id="progress-bar" class="progress-bar"></div>
+      <p id="hint-label" class="hint-label"></p>
+      <div id="letter-display" class="letter-display"></div>
+      <div id="guess-area" class="guess-area">
+        <input type="text" id="guess-input" class="guess-input" placeholder="Type your guess..." autocomplete="off" autocapitalize="characters" spellcheck="false">
+        <button id="btn-guess" class="btn-guess">GO</button>
+      </div>
+      <div id="feedback" class="feedback hidden">
+        <p id="feedback-text" class="feedback-text"></p>
+        <p id="feedback-word" class="feedback-word"></p>
+        <p id="feedback-pts" class="feedback-pts"></p>
+        <button id="btn-next" class="btn-main btn-sm">NEXT</button>
+      </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameover-screen" class="hidden">
+      <h2 class="gameover-heading">GAME OVER</h2>
+      <div id="final-score" class="final-score"></div>
+      <div id="final-rank" class="final-rank"></div>
+      <div id="final-stats" class="final-stats"></div>
+      <button id="btn-replay" class="btn-main">PLAY AGAIN</button>
+    </div>
+
+  </div>
+  <script src="words.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
