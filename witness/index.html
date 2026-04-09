@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0c0c14">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <title>Witness</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- Title Screen -->
+    <div id="title-screen">
+      <div class="eye-icon">&#x1F441;</div>
+      <h1 class="game-title">WITNESS</h1>
+      <p class="tagline">EVERY DETAIL MATTERS. ONE IS A LIE.</p>
+      <div class="rules-box">
+        <p><span class="hl">Read</span> the scene carefully. You have 10 seconds.</p>
+        <p><span class="hl">Answer</span> 5 questions from memory.</p>
+        <p><span class="hl">Spot</span> the one detail that was false.</p>
+      </div>
+      <button id="btn-start" class="btn-main">BEGIN INVESTIGATION</button>
+      <p id="best-score" class="best-score"></p>
+    </div>
+
+    <!-- Scene Reading Screen -->
+    <div id="scene-screen" class="hidden">
+      <div class="timer-bar-track"><div id="scene-timer-bar" class="timer-bar-fill"></div></div>
+      <p id="round-label" class="round-label">SCENE 1 OF 5</p>
+      <div id="scene-text" class="scene-text"></div>
+      <div class="scene-footer">
+        <p class="memorize-label">MEMORIZE EVERYTHING</p>
+        <p id="scene-countdown" class="countdown"></p>
+      </div>
+    </div>
+
+    <!-- Question Screen -->
+    <div id="question-screen" class="hidden">
+      <div class="q-header">
+        <span id="q-progress">Q1 OF 5</span>
+        <span id="q-score" class="q-score">0</span>
+      </div>
+      <div class="timer-bar-track"><div id="q-timer-bar" class="timer-bar-fill"></div></div>
+      <p id="q-text" class="q-text"></p>
+      <div id="q-options" class="q-options"></div>
+    </div>
+
+    <!-- Lie Detection Screen -->
+    <div id="lie-screen" class="hidden">
+      <div class="lie-icon">&#x1F50D;</div>
+      <h2 class="lie-heading">SPOT THE LIE</h2>
+      <p class="lie-subtext">Which detail was false?</p>
+      <div id="lie-options" class="lie-options"></div>
+    </div>
+
+    <!-- Round Result Screen -->
+    <div id="result-screen" class="hidden">
+      <h2 id="result-title" class="result-title"></h2>
+      <p id="result-scene-name" class="result-scene-name"></p>
+      <div id="result-questions" class="result-questions"></div>
+      <div id="result-lie" class="result-lie"></div>
+      <div id="result-breakdown" class="result-breakdown"></div>
+      <p id="result-explanation" class="result-explanation"></p>
+      <button id="btn-next-round" class="btn-main">NEXT SCENE</button>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameover-screen" class="hidden">
+      <h2 class="gameover-heading">CASE CLOSED</h2>
+      <div id="final-score" class="final-score"></div>
+      <div id="rank-title" class="rank-title"></div>
+      <div id="round-summary" class="round-summary"></div>
+      <div id="final-stats" class="final-stats"></div>
+      <button id="btn-replay" class="btn-main">INVESTIGATE AGAIN</button>
+    </div>
+
+  </div>
+
+  <script src="scenes.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
