@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Connections">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="manifest" href="manifest.json">
+  <title>Connections</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>Connections</h1>
+      <p class="subtitle">Group 4 words that share a connection</p>
+    </header>
+
+    <!-- Solved groups appear here -->
+    <div id="solved-area"></div>
+
+    <!-- Word grid -->
+    <div id="grid"></div>
+
+    <!-- Mistakes -->
+    <div id="mistakes">
+      Mistakes remaining:
+      <span id="mistake-dots"></span>
+    </div>
+
+    <!-- Action buttons -->
+    <div id="actions">
+      <button id="btn-shuffle" class="btn btn-secondary">Shuffle</button>
+      <button id="btn-deselect" class="btn btn-secondary" disabled>Deselect All</button>
+      <button id="btn-submit" class="btn btn-primary" disabled>Submit</button>
+    </div>
+
+    <!-- Game over overlay -->
+    <div id="overlay" class="hidden">
+      <div id="overlay-content">
+        <h2 id="overlay-title"></h2>
+        <div id="overlay-results"></div>
+        <div id="overlay-answers"></div>
+        <button id="btn-next" class="btn btn-primary">Next Puzzle</button>
+        <button id="btn-share" class="btn btn-secondary">Share Results</button>
+      </div>
+    </div>
+
+    <!-- Puzzle selector -->
+    <div id="puzzle-nav">
+      <button id="btn-prev-puzzle" class="btn-nav">&larr;</button>
+      <span id="puzzle-label">Puzzle 1 / 10</span>
+      <button id="btn-next-puzzle" class="btn-nav">&rarr;</button>
+    </div>
+  </div>
+
+  <!-- Toast notification -->
+  <div id="toast" class="hidden"></div>
+
+  <script src="puzzles.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
