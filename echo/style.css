@@ -8,8 +8,8 @@
   --accent-dim: rgba(160, 108, 213, 0.12);
   --correct: #3ecf72;
   --wrong: #e84057;
-  --text: #d0d0d8;
-  --text-dim: #5a5a6a;
+  --text: #e8e8ee;
+  --text-dim: #a0a0b0;
   --white: #f0f0f5;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
@@ -47,7 +47,7 @@ html, body {
   top: 12px;
   left: 12px;
   font-size: 13px;
-  color: #6a6a7a;
+  color: #a0a0b0;
   text-decoration: none;
   letter-spacing: 1px;
   font-family: sans-serif;

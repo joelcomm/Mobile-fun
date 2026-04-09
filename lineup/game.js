@@ -169,7 +169,7 @@
     }
 
     // Show correct order
-    dom.rfCorrectOrder.innerHTML = '<p style="font-size:12px;letter-spacing:2px;color:#5a5a6a;margin-bottom:8px;">CORRECT ORDER</p>';
+    dom.rfCorrectOrder.innerHTML = '<p style="font-size:12px;letter-spacing:2px;color:#a0a0b0;margin-bottom:8px;">CORRECT ORDER</p>';
     state.correctOrder.forEach((label, i) => {
       const d = document.createElement('div');
       d.className = 'rf-item';
