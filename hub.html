@@ -170,6 +170,86 @@
     .vanish .card-title { color: #00f5c4; }
     .vanish .card-tag { background: rgba(0, 245, 196, 0.1); color: #00f5c4; }
 
+    /* ─── Hub Progress & Stats ─────────────────────────────────── */
+    .hub-progress {
+      margin-top: 16px;
+    }
+
+    .progress-ring {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .progress-count {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+    .progress-count strong {
+      color: #3ecf72;
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .progress-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .pdot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: background 0.3s;
+    }
+    .pdot.filled { background: #3ecf72; }
+
+    .stats-link {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--text-dim);
+      text-decoration: none;
+      padding: 6px 16px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: all 0.15s;
+    }
+    .stats-link:active { background: var(--card-hover); color: var(--white); }
+
+    .card-done-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 8px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      background: rgba(62, 207, 114, 0.1);
+      color: #3ecf72;
+    }
+
+    .card-streak-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      margin-top: 8px;
+      margin-left: 6px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      background: rgba(245, 197, 66, 0.1);
+      color: #f5c542;
+    }
     footer {
       text-align: center;
       padding-top: 28px;
@@ -202,6 +282,7 @@
       <h1>MOBILE FUN</h1>
       <p class="subtitle">Daily puzzles for your phone</p>
       <p id="hub-date" class="subtitle" style="margin-top:4px;color:#f5c542;font-size:12px"></p>
+      <div id="hub-progress" class="hub-progress"></div>
     </header>
 
     <div class="games">
@@ -300,6 +381,48 @@
     <script src="daily.js"></script>
     <script>
       document.getElementById('hub-date').textContent = Daily.getDateString();
+
+      // Completion tracking
+      (function () {
+        var DAILY_KEYS = ['threads','alibi','witness','bluff','lineup','echo','drift','cipher','reflex'];
+        var DAILY_CSS = ['threads','alibi','witness','bluff','lineup','echo','drift','cipher','reflex'];
+        var done = 0;
+        var cards = document.querySelectorAll('.game-card');
+
+        DAILY_KEYS.forEach(function (key, i) {
+          var result = Daily.getDailyResult(key);
+          var streak = Daily.getStreak(key);
+          var card = document.querySelector('.game-card.' + DAILY_CSS[i]);
+          if (!card) return;
+
+          var badges = '';
+          if (result) {
+            done++;
+            badges += '<span class="card-done-badge">\u2713 DONE</span>';
+          }
+          if (streak > 1) {
+            badges += '<span class="card-streak-badge">\uD83D\uDD25 ' + streak + '</span>';
+          }
+          if (badges) {
+            var wrap = document.createElement('div');
+            wrap.innerHTML = badges;
+            card.appendChild(wrap);
+          }
+        });
+
+        // Progress bar
+        var prog = document.getElementById('hub-progress');
+        var dots = '';
+        for (var i = 0; i < 9; i++) {
+          dots += '<div class="pdot' + (i < done ? ' filled' : '') + '"></div>';
+        }
+        prog.innerHTML =
+          '<div class="progress-ring">' +
+            '<div class="progress-count"><strong>' + done + '</strong>/9 today</div>' +
+            '<div class="progress-dots">' + dots + '</div>' +
+          '</div>' +
+          '<a href="stats.html" class="stats-link">VIEW STATS \u2192</a>';
+      })();
     </script>
   </div>
 </body>

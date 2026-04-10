@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0a0a10">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <title>Stats — Mobile Fun</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    :root {
+      --bg: #0a0a10;
+      --card: #12121c;
+      --card-hover: #1a1a28;
+      --border: #24243a;
+      --text: #e8e8ee;
+      --text-dim: #a0a0b0;
+      --white: #f0f0f5;
+      --accent: #f5c542;
+      --green: #3ecf72;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 18px;
+    }
+
+    .back-link {
+      position: fixed; top: 14px; left: 16px; z-index: 50;
+      font-size: 13px; font-weight: 600; color: var(--text-dim);
+      text-decoration: none; letter-spacing: 1px;
+      padding-top: var(--safe-top);
+    }
+
+    #app {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 24px 20px;
+      padding-top: calc(24px + var(--safe-top));
+      padding-bottom: calc(24px + var(--safe-bottom));
+      min-height: 100dvh;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 28px;
+      padding-top: 32px;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: var(--white);
+    }
+
+    .subtitle {
+      font-size: 13px;
+      letter-spacing: 3px;
+      color: var(--text-dim);
+      margin-top: 6px;
+      text-transform: uppercase;
+    }
+
+    /* ─── Summary Cards ────────────────────────────────────────── */
+    .summary-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .summary-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 12px;
+      text-align: center;
+    }
+
+    .summary-num {
+      font-size: 32px;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .summary-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+
+    /* ─── Countdown ────────────────────────────────────────────── */
+    .countdown-bar {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .countdown-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--text-dim);
+      margin-bottom: 6px;
+    }
+
+    .countdown-time {
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--accent);
+      letter-spacing: 3px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ─── Section Headers ──────────────────────────────────────── */
+    .section-hdr {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    /* ─── Game Stats Grid ──────────────────────────────────────── */
+    .game-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .gs-card {
+      display: grid;
+      grid-template-columns: 44px 1fr auto;
+      align-items: center;
+      gap: 14px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.15s;
+    }
+    .gs-card:active { background: var(--card-hover); transform: scale(0.98); }
+
+    .gs-icon {
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 10px;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .gs-info { min-width: 0; }
+
+    .gs-name {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 3px;
+    }
+
+    .gs-meta {
+      font-size: 12px;
+      color: var(--text-dim);
+      display: flex;
+      gap: 12px;
+    }
+
+    .gs-meta span { white-space: nowrap; }
+
+    .gs-status {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+    }
+
+    .gs-badge {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .gs-badge.done {
+      background: rgba(62, 207, 114, 0.12);
+      color: var(--green);
+    }
+
+    .gs-badge.pending {
+      background: rgba(160, 160, 176, 0.08);
+      color: var(--text-dim);
+    }
+
+    .gs-score {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-dim);
+    }
+
+    /* ─── Streak Chart ─────────────────────────────────────────── */
+    .streak-section { margin-bottom: 28px; }
+
+    .streak-grid {
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      gap: 6px;
+    }
+
+    .streak-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .streak-bar-wrap {
+      width: 100%;
+      height: 80px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .streak-bar {
+      width: 100%;
+      border-radius: 4px 4px 0 0;
+      min-height: 4px;
+      transition: height 0.3s;
+    }
+
+    .streak-label {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--text-dim);
+      text-align: center;
+      line-height: 1.1;
+    }
+
+    .streak-num {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    /* ─── Vanish Best ──────────────────────────────────────────── */
+    .vanish-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .vanish-card:active { background: var(--card-hover); }
+
+    .vanish-icon {
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 10px;
+      font-size: 22px;
+      background: rgba(0, 245, 196, 0.12);
+    }
+
+    .vanish-info { flex: 1; }
+
+    .vanish-name {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #00f5c4;
+      margin-bottom: 2px;
+    }
+
+    .vanish-desc {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    .vanish-best {
+      font-size: 24px;
+      font-weight: 900;
+      color: #00f5c4;
+    }
+
+    .vanish-best-label {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+      text-align: right;
+    }
+
+    /* ─── Per-game accent colors ───────────────────────────────── */
+    .gs-threads .gs-icon { background: rgba(249,223,109,.12); }
+    .gs-threads .gs-name { color: #f9df6d; }
+
+    .gs-alibi .gs-icon { background: rgba(240,184,64,.12); }
+    .gs-alibi .gs-name { color: #f0b840; }
+
+    .gs-witness .gs-icon { background: rgba(200,168,78,.12); }
+    .gs-witness .gs-name { color: #c8a84e; }
+
+    .gs-bluff .gs-icon { background: rgba(232,102,74,.12); }
+    .gs-bluff .gs-name { color: #e8664a; }
+
+    .gs-lineup .gs-icon { background: rgba(108,140,255,.12); }
+    .gs-lineup .gs-name { color: #6c8cff; }
+
+    .gs-echo .gs-icon { background: rgba(160,108,213,.12); }
+    .gs-echo .gs-name { color: #a06cd5; }
+
+    .gs-drift .gs-icon { background: rgba(64,200,224,.12); }
+    .gs-drift .gs-name { color: #40c8e0; }
+
+    .gs-cipher .gs-icon { background: rgba(78,230,138,.12); }
+    .gs-cipher .gs-name { color: #4ee68a; }
+
+    .gs-reflex .gs-icon { background: rgba(245,197,66,.12); }
+    .gs-reflex .gs-name { color: #f5c542; }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .gs-card { animation: fadeInUp 0.35s ease-out both; }
+    .gs-card:nth-child(1) { animation-delay: 0.03s; }
+    .gs-card:nth-child(2) { animation-delay: 0.08s; }
+    .gs-card:nth-child(3) { animation-delay: 0.13s; }
+    .gs-card:nth-child(4) { animation-delay: 0.18s; }
+    .gs-card:nth-child(5) { animation-delay: 0.23s; }
+    .gs-card:nth-child(6) { animation-delay: 0.28s; }
+    .gs-card:nth-child(7) { animation-delay: 0.33s; }
+    .gs-card:nth-child(8) { animation-delay: 0.38s; }
+    .gs-card:nth-child(9) { animation-delay: 0.43s; }
+
+    footer {
+      text-align: center;
+      padding-top: 20px;
+      font-size: 12px;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+  <a href="hub.html" class="back-link">&larr; GAMES</a>
+  <div id="app">
+    <header>
+      <h1>YOUR STATS</h1>
+      <p class="subtitle">Daily progress &amp; streaks</p>
+    </header>
+
+    <!-- Summary -->
+    <div class="summary-row">
+      <div class="summary-card">
+        <div id="sum-today" class="summary-num" style="color:var(--green)">0</div>
+        <div class="summary-label">Today</div>
+      </div>
+      <div class="summary-card">
+        <div id="sum-streak" class="summary-num" style="color:var(--accent)">0</div>
+        <div class="summary-label">Best Streak</div>
+      </div>
+      <div class="summary-card">
+        <div id="sum-total" class="summary-num" style="color:#a06cd5">0</div>
+        <div class="summary-label">All Time</div>
+      </div>
+    </div>
+
+    <!-- Countdown -->
+    <div class="countdown-bar">
+      <div class="countdown-label">NEXT DAILY PUZZLE</div>
+      <div id="countdown" class="countdown-time">--:--:--</div>
+    </div>
+
+    <!-- Streak Chart -->
+    <div class="streak-section">
+      <div class="section-hdr">Current Streaks</div>
+      <div id="streak-chart" class="streak-grid"></div>
+    </div>
+
+    <!-- Daily Games -->
+    <div class="section-hdr">Daily Games</div>
+    <div id="daily-games" class="game-stats"></div>
+
+    <!-- Vanish (non-daily) -->
+    <div class="section-hdr">Arcade</div>
+    <a href="vanish/" class="vanish-card" id="vanish-card">
+      <div class="vanish-icon">&#x1F7E9;</div>
+      <div class="vanish-info">
+        <div class="vanish-name">VANISH</div>
+        <div class="vanish-desc">Not a daily — play anytime</div>
+      </div>
+      <div style="text-align:right">
+        <div id="vanish-best" class="vanish-best">—</div>
+        <div class="vanish-best-label">BEST</div>
+      </div>
+    </a>
+
+    <footer>Built with Claude</footer>
+  </div>
+
+  <script src="daily.js"></script>
+  <script>
+  (function () {
+    var GAMES = [
+      { key: 'threads',  name: 'Threads',  icon: '\uD83E\uDDF5', href: 'threads/',  abbr: 'THR' },
+      { key: 'alibi',    name: 'Alibi',    icon: '\uD83D\uDD75',  href: 'alibi/',    abbr: 'ALI' },
+      { key: 'witness',  name: 'Witness',  icon: '\uD83D\uDC41',  href: 'witness/',  abbr: 'WIT' },
+      { key: 'bluff',    name: 'Bluff',    icon: '\uD83C\uDCCF', href: 'bluff/',    abbr: 'BLF' },
+      { key: 'lineup',   name: 'Lineup',   icon: '\uD83D\uDCCA', href: 'lineup/',   abbr: 'LIN' },
+      { key: 'echo',     name: 'Echo',     icon: '\uD83D\uDD19', href: 'echo/',     abbr: 'ECH' },
+      { key: 'drift',    name: 'Drift',    icon: '\uD83D\uDCA8', href: 'drift/',    abbr: 'DRI' },
+      { key: 'cipher',   name: 'Cipher',   icon: '\uD83D\uDD10', href: 'cipher/',   abbr: 'CIP' },
+      { key: 'reflex',   name: 'Reflex',   icon: '\u26A1',       href: 'reflex/',   abbr: 'RFX' }
+    ];
+
+    var todayCount = 0;
+    var bestStreak = 0;
+    var totalPlayed = 0;
+    var streaks = [];
+    var gameData = [];
+
+    GAMES.forEach(function (g) {
+      var result = Daily.getDailyResult(g.key);
+      var streak = Daily.getStreak(g.key);
+      var played = result !== null;
+      if (played) todayCount++;
+      if (streak > bestStreak) bestStreak = streak;
+      streaks.push({ abbr: g.abbr, streak: streak, color: getColor(g.key) });
+
+      // Count total plays from streak data
+      try {
+        var sd = JSON.parse(localStorage.getItem(g.key + '-streak') || '{}');
+        if (sd.lastDay) totalPlayed++;
+      } catch (e) {}
+
+      gameData.push({
+        key: g.key, name: g.name, icon: g.icon, href: g.href,
+        played: played, score: result ? result.score : null, streak: streak
+      });
+    });
+
+    // Summary cards
+    document.getElementById('sum-today').textContent = todayCount + '/9';
+    document.getElementById('sum-streak').textContent = bestStreak;
+    document.getElementById('sum-total').textContent = totalPlayed;
+
+    // Countdown
+    function tickCd() {
+      document.getElementById('countdown').textContent = Daily.formatCountdown();
+    }
+    tickCd();
+    setInterval(tickCd, 1000);
+
+    // Streak chart
+    var maxStreak = Math.max.apply(null, streaks.map(function (s) { return s.streak; }));
+    if (maxStreak < 1) maxStreak = 1;
+    var chartEl = document.getElementById('streak-chart');
+    streaks.forEach(function (s) {
+      var col = document.createElement('div');
+      col.className = 'streak-col';
+      var h = Math.max((s.streak / maxStreak) * 68, s.streak > 0 ? 8 : 4);
+      col.innerHTML =
+        '<div class="streak-num">' + s.streak + '</div>' +
+        '<div class="streak-bar-wrap"><div class="streak-bar" style="height:' + h + 'px;background:' + s.color + '"></div></div>' +
+        '<div class="streak-label">' + s.abbr + '</div>';
+      chartEl.appendChild(col);
+    });
+
+    // Game cards
+    var listEl = document.getElementById('daily-games');
+    gameData.forEach(function (g) {
+      var a = document.createElement('a');
+      a.href = g.href;
+      a.className = 'gs-card gs-' + g.key;
+
+      var streakText = g.streak > 0 ? '\uD83D\uDD25 ' + g.streak : '—';
+      var scoreText = g.score !== null ? 'Score: ' + g.score : '';
+      var badge = g.played
+        ? '<span class="gs-badge done">DONE</span>'
+        : '<span class="gs-badge pending">PLAY</span>';
+
+      a.innerHTML =
+        '<div class="gs-icon">' + g.icon + '</div>' +
+        '<div class="gs-info">' +
+          '<div class="gs-name">' + g.name.toUpperCase() + '</div>' +
+          '<div class="gs-meta"><span>Streak: ' + streakText + '</span>' +
+          (scoreText ? '<span>' + scoreText + '</span>' : '') +
+          '</div>' +
+        '</div>' +
+        '<div class="gs-status">' + badge + '</div>';
+      listEl.appendChild(a);
+    });
+
+    // Vanish best
+    var vb = localStorage.getItem('vanish-best');
+    if (vb) document.getElementById('vanish-best').textContent = vb;
+
+    function getColor(key) {
+      var colors = {
+        threads: '#f9df6d', alibi: '#f0b840', witness: '#c8a84e',
+        bluff: '#e8664a', lineup: '#6c8cff', echo: '#a06cd5',
+        drift: '#40c8e0', cipher: '#4ee68a', reflex: '#f5c542'
+      };
+      return colors[key] || '#888';
+    }
+  })();
+  </script>
+</body>
+</html>
