@@ -31,6 +31,7 @@
   let revealTimer = null;
 
   function init() {
+    Daily.injectDailyInfo('#title-screen', 'drift');
     showBest();
     dom.btnStart.addEventListener('click', startGame);
     dom.btnNext.addEventListener('click', nextRound);
@@ -54,9 +55,9 @@
   }
 
   function startGame() {
-    const shuffled = [...WORDS].sort(() => Math.random() - 0.5);
+    var rng = Daily.createRng(Daily.getDayNumber() * 4049);
     state = {
-      words: shuffled.slice(0, TOTAL_ROUNDS),
+      words: Daily.pick(WORDS, TOTAL_ROUNDS, rng),
       current: 0,
       score: 0,
       correctCount: 0,
@@ -190,6 +191,7 @@
       state.correctCount + ' / ' + TOTAL_ROUNDS + ' correct<br>' +
       state.earlyGuesses + ' early guesses (≤ 2 letters)';
 
+    Daily.saveDailyResult('drift', state.score);
     const prev = parseInt(localStorage.getItem('drift-best') || '0');
     if (state.score > prev) localStorage.setItem('drift-best', state.score);
     showBest();

@@ -1,5 +1,5 @@
 // ─── State ───────────────────────────────────────────────────────
-let currentPuzzleIndex = 0;
+let currentPuzzleIndex = Daily.getDayNumber() % PUZZLES.length;
 let selected = [];
 let solvedGroups = [];
 let mistakesLeft = 4;
@@ -100,9 +100,10 @@ function updateButtons() {
 }
 
 function updatePuzzleNav() {
-  puzzleLabel.textContent = `Puzzle ${currentPuzzleIndex + 1} / ${PUZZLES.length}`;
-  btnPrevPuzzle.disabled = currentPuzzleIndex === 0;
-  btnNextPuzzle.disabled = currentPuzzleIndex === PUZZLES.length - 1;
+  puzzleLabel.textContent = Daily.getDateString();
+  // Hide prev/next for daily mode
+  btnPrevPuzzle.style.display = 'none';
+  btnNextPuzzle.style.display = 'none';
 }
 
 // ─── Tile interaction ────────────────────────────────────────────
@@ -249,6 +250,7 @@ function getSelectedTiles() {
 // ─── End game ────────────────────────────────────────────────────
 function endGame(won) {
   gameOver = true;
+  Daily.saveDailyResult('connections', won ? (mistakesLeft + 1) * 25 : 0);
 
   overlayTitle.textContent = won ? "You got it!" : "Next time!";
 
@@ -310,9 +312,11 @@ function copyToClipboard(text) {
 }
 
 // ─── Shuffle ─────────────────────────────────────────────────────
+var _connRng;
 function shuffle(arr) {
+  if (!_connRng) _connRng = Daily.createRng(Daily.getDayNumber() * 8089);
   for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor(_connRng() * (i + 1));
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr;
@@ -363,6 +367,7 @@ btnNextPuzzle.addEventListener("click", () => {
 });
 
 // ─── Start ───────────────────────────────────────────────────────
+Daily.injectDailyInfo('#app header', 'connections');
 initPuzzle();
 
 // Register service worker

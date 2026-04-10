@@ -195,7 +195,8 @@
   <div id="app">
     <header>
       <h1>MOBILE FUN</h1>
-      <p class="subtitle">Word games for your phone</p>
+      <p class="subtitle">Daily puzzles for your phone</p>
+      <p id="hub-date" class="subtitle" style="margin-top:4px;color:#f5c542;font-size:12px"></p>
     </header>
 
     <div class="games">
@@ -282,6 +283,10 @@
     </div>
 
     <footer>Built with Claude</footer>
+    <script src="daily.js"></script>
+    <script>
+      document.getElementById('hub-date').textContent = Daily.getDateString();
+    </script>
   </div>
 </body>
 </html>

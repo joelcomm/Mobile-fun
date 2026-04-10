@@ -96,8 +96,11 @@ function cancelTimer() {
 }
 
 // ─── Game Init ───────────────────────────────────
+var dailyRng;
 function initGame() {
-  sceneOrder = shuffle([...Array(SCENES.length).keys()]).slice(0, ROUNDS_PER_GAME);
+  dailyRng = Daily.createRng(Daily.getDayNumber() * 7079);
+  var indices = Daily.pick([...Array(SCENES.length).keys()], ROUNDS_PER_GAME, dailyRng);
+  sceneOrder = indices;
   roundIndex = 0;
   score = 0;
   roundResults = [];
@@ -352,6 +355,7 @@ function showGameOver() {
     localStorage.setItem('witness-best', score);
   }
 
+  Daily.saveDailyResult('witness', score);
   showScreen('gameover');
 }
 
@@ -391,4 +395,5 @@ function shuffle(arr) {
 }
 
 // ─── Init ────────────────────────────────────────
+Daily.injectDailyInfo('#title-screen', 'witness');
 showBestScore();

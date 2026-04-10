@@ -31,6 +31,7 @@
   let timerRaf = null;
 
   function init() {
+    Daily.injectDailyInfo('#title-screen', 'reflex');
     showBest();
     dom.btnStart.addEventListener('click', startGame);
     dom.btnReplay.addEventListener('click', startGame);
@@ -51,6 +52,7 @@
   }
 
   function startGame() {
+    var rng = Daily.createRng(Daily.getDayNumber() * 6067);
     state = {
       score: 0,
       lives: MAX_LIVES,
@@ -62,7 +64,10 @@
       currentWord: null,
       currentCategory: null,
       answered: false,
-      timeLimit: BASE_TIME
+      timeLimit: BASE_TIME,
+      rng: rng,
+      categoryOrder: Daily.seededShuffle([...CATEGORIES], rng),
+      categoryIdx: 0
     };
 
     showScreen('game');
@@ -70,10 +75,10 @@
   }
 
   function loadNextCategory() {
-    // Pick a random category
-    const cat = CATEGORIES[Math.floor(Math.random() * CATEGORIES.length)];
+    const cat = state.categoryOrder[state.categoryIdx % state.categoryOrder.length];
+    state.categoryIdx++;
     state.currentCategory = cat;
-    state.wordQueue = [...cat.words].sort(() => Math.random() - 0.5);
+    state.wordQueue = Daily.seededShuffle([...cat.words], state.rng);
     state.categoriesUsed++;
 
     dom.labelLeft.textContent = cat.left;
@@ -217,6 +222,7 @@
       'Best streak: ' + state.maxStreak + '<br>' +
       state.categoriesUsed + ' categories played';
 
+    Daily.saveDailyResult('reflex', state.score);
     const prev = parseInt(localStorage.getItem('reflex-best') || '0');
     if (state.score > prev) localStorage.setItem('reflex-best', state.score);
     showBest();

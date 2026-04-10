@@ -25,6 +25,7 @@
   let state = {};
 
   function init() {
+    Daily.injectDailyInfo('#title-screen', 'bluff');
     showBest();
     dom.btnStart.addEventListener('click', startGame);
     dom.btnNext.addEventListener('click', nextRound);
@@ -45,10 +46,10 @@
   }
 
   function startGame() {
-    // Shuffle and pick TOTAL_ROUNDS facts
-    const shuffled = [...FACTS].sort(() => Math.random() - 0.5);
+    var rng = Daily.createRng(Daily.getDayNumber() * 1013);
     state = {
-      rounds: shuffled.slice(0, TOTAL_ROUNDS),
+      rounds: Daily.pick(FACTS, TOTAL_ROUNDS, rng),
+      rng: rng,
       current: 0,
       score: 0,
       streak: 0,
@@ -71,7 +72,7 @@
     dom.feedback.classList.add('hidden');
 
     // Shuffle statement order
-    const indices = [0, 1, 2].sort(() => Math.random() - 0.5);
+    const indices = Daily.seededShuffle([0, 1, 2], state.rng);
     dom.statements.innerHTML = '';
     indices.forEach(i => {
       const s = round.statements[i];
@@ -160,7 +161,7 @@
       state.correctCount + ' / ' + TOTAL_ROUNDS + ' correct (' + pct + '%)<br>' +
       'Best streak: ' + state.maxStreak;
 
-    // Save best
+    Daily.saveDailyResult('bluff', state.score);
     const prev = parseInt(localStorage.getItem('bluff-best') || '0');
     if (state.score > prev) {
       localStorage.setItem('bluff-best', state.score);

@@ -32,6 +32,7 @@
   let state = {};
 
   function init() {
+    Daily.injectDailyInfo('#title-screen', 'cipher');
     showBest();
     dom.btnStart.addEventListener('click', startGame);
     dom.btnReplay.addEventListener('click', startGame);
@@ -54,7 +55,7 @@
     if (b) dom.bestScore.textContent = 'BEST: ' + b;
   }
 
-  function generateCipherMap(text) {
+  function generateCipherMap(text, rng) {
     // Get unique letters in the text
     const letters = [];
     for (const ch of text.toUpperCase()) {
@@ -64,7 +65,7 @@
     // Create shuffled mapping ensuring no letter maps to itself
     let shuffled;
     do {
-      shuffled = [...letters].sort(() => Math.random() - 0.5);
+      shuffled = Daily.seededShuffle([...letters], rng);
     } while (shuffled.some((ch, i) => ch === letters[i]));
 
     const map = {};
@@ -78,9 +79,10 @@
   }
 
   function startGame() {
-    const shuffled = [...QUOTES].sort(() => Math.random() - 0.5);
+    var rng = Daily.createRng(Daily.getDayNumber() * 5059);
     state = {
-      quotes: shuffled.slice(0, TOTAL_ROUNDS),
+      quotes: Daily.pick(QUOTES, TOTAL_ROUNDS, rng),
+      dailyRng: rng,
       current: 0,
       score: 0,
       solvedCount: 0,
@@ -93,7 +95,7 @@
 
   function showRound() {
     const quote = state.quotes[state.current];
-    const { map, reverseMap } = generateCipherMap(quote.text);
+    const { map, reverseMap } = generateCipherMap(quote.text, state.dailyRng);
     state.cipherMap = map;         // original -> cipher
     state.reverseMap = reverseMap; // cipher -> original
     state.playerMap = {};          // cipher -> player's guess
@@ -352,6 +354,7 @@
       state.noHintSolves + ' solved without hints<br>' +
       state.hintsUsedTotal + ' total hints used';
 
+    Daily.saveDailyResult('cipher', state.score);
     const prev = parseInt(localStorage.getItem('cipher-best') || '0');
     if (state.score > prev) localStorage.setItem('cipher-best', state.score);
     showBest();

@@ -26,6 +26,7 @@
   let state = {};
 
   function init() {
+    Daily.injectDailyInfo('#title-screen', 'echo');
     showBest();
     dom.btnStart.addEventListener('click', startGame);
     dom.btnReplay.addEventListener('click', startGame);
@@ -45,6 +46,7 @@
   }
 
   function startGame() {
+    var rng = Daily.createRng(Daily.getDayNumber() * 3037);
     state = {
       round: 1,
       score: 0,
@@ -52,7 +54,8 @@
       sequence: [],
       reversed: [],
       inputIndex: 0,
-      phase: 'idle' // idle, showing, input, result
+      phase: 'idle',
+      rng: rng
     };
     showScreen('game');
     startRound();
@@ -65,7 +68,7 @@
     // Generate sequence
     state.sequence = [];
     for (let i = 0; i < state.seqLength; i++) {
-      state.sequence.push(Math.floor(Math.random() * TILE_COUNT));
+      state.sequence.push(Math.floor(state.rng() * TILE_COUNT));
     }
     state.reversed = [...state.sequence].reverse();
 
@@ -209,6 +212,7 @@
 
     dom.finalRank.textContent = rank;
 
+    Daily.saveDailyResult('echo', state.score);
     const prev = parseInt(localStorage.getItem('echo-best') || '0');
     if (state.score > prev) localStorage.setItem('echo-best', state.score);
     showBest();

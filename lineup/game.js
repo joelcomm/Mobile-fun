@@ -30,6 +30,7 @@
   let dragState = null;
 
   function init() {
+    Daily.injectDailyInfo('#title-screen', 'lineup');
     showBest();
     dom.btnStart.addEventListener('click', startGame);
     dom.btnLock.addEventListener('click', lockIn);
@@ -51,9 +52,10 @@
   }
 
   function startGame() {
-    const shuffled = [...PUZZLES].sort(() => Math.random() - 0.5);
+    var rng = Daily.createRng(Daily.getDayNumber() * 2027);
     state = {
-      puzzles: shuffled.slice(0, ROUNDS),
+      puzzles: Daily.pick(PUZZLES, ROUNDS, rng),
+      rng: rng,
       current: 0,
       score: 0,
       perfectCount: 0,
@@ -82,7 +84,7 @@
     const sorted = puzzle.items.slice().sort((a, b) => a.value - b.value);
     state.correctOrder = sorted.map(item => item.label);
 
-    const shuffledItems = puzzle.items.slice().sort(() => Math.random() - 0.5);
+    const shuffledItems = Daily.seededShuffle(puzzle.items.slice(), state.rng);
     renderList(shuffledItems.map(item => item.label));
   }
 
@@ -207,6 +209,7 @@
       state.perfectCount + ' perfect rounds (1st attempt)<br>' +
       'Average attempts: ' + (state.totalAttempts / ROUNDS).toFixed(1);
 
+    Daily.saveDailyResult('lineup', state.score);
     const prev = parseInt(localStorage.getItem('lineup-best') || '0');
     if (state.score > prev) localStorage.setItem('lineup-best', state.score);
     showBest();
