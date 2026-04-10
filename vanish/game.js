@@ -1,13 +1,10 @@
 (function () {
-  // ─── Letter pool (weighted for English frequency) ─────────────────
   var LETTER_POOL = "EEEEEEEEEEEEAAAAAAAAAIIIIIIIIIOOOOOOOONNNNNNSSSSSSTTTTTTRRRRRRLLLLLUUUUDDDDGGGBBCCMMPPFFHHVVWWYYKJXQZ".split("");
 
   var POINTS = { 3: 1, 4: 2, 5: 4, 6: 6, 7: 10, 8: 14 };
   function wordPoints(len) { return POINTS[Math.min(len, 8)] || 14; }
-
   function isValidWord(word) { return DICTIONARY.has(word.toLowerCase()); }
 
-  // ─── DOM refs ─────────────────────────────────────────────────────
   var dom = {
     introScreen: document.getElementById('intro-screen'),
     gameScreen: document.getElementById('game-screen'),
@@ -29,7 +26,6 @@
     bestScore: document.getElementById('best-score')
   };
 
-  // ─── State ────────────────────────────────────────────────────────
   var grid = [];
   var selected = [];
   var foundWords = [];
@@ -39,7 +35,6 @@
   var vanishingId = null;
   var msgTimer = null;
 
-  // ─── Screen management ────────────────────────────────────────────
   function showScreen(name) {
     dom.introScreen.classList.add('hidden');
     dom.gameScreen.classList.add('hidden');
@@ -52,7 +47,6 @@
     if (b) dom.bestScore.textContent = 'BEST: ' + b + ' pts';
   }
 
-  // ─── Grid generation ─────────────────────────────────────────────
   function generateGrid() {
     var pool = LETTER_POOL.slice();
     var result = [];
@@ -65,7 +59,6 @@
     return result;
   }
 
-  // ─── Start game ──────────────────────────────────────────────────
   function startGame() {
     grid = generateGrid();
     selected = [];
@@ -86,7 +79,6 @@
     timerInterval = setInterval(tick, 1000);
   }
 
-  // ─── Timer ────────────────────────────────────────────────────────
   function tick() {
     countdown--;
     renderTimer();
@@ -102,10 +94,7 @@
     if (alive.length <= 2) return;
     var target = alive[Math.floor(Math.random() * alive.length)];
     vanishingId = target.id;
-
-    // Remove from selected if selected
     selected = selected.filter(function (id) { return id !== target.id; });
-
     renderGrid();
     renderWordBar();
 
@@ -125,7 +114,6 @@
     }
   }
 
-  // ─── Cell interaction ─────────────────────────────────────────────
   function toggleCell(cell) {
     if (!cell.alive) return;
     var idx = selected.indexOf(cell.id);
@@ -145,7 +133,6 @@
     }).join('');
   }
 
-  // ─── Submit word ──────────────────────────────────────────────────
   function submitWord() {
     var word = getWord().toLowerCase();
     if (word.length < 3) { showMessage('Too short \u2014 3 letters minimum', 'bad'); return; }
@@ -157,7 +144,6 @@
     score += pts;
 
     showMessage('+' + pts + (pts === 1 ? ' point' : ' points') + '!', 'good');
-
     dom.scoreDisplay.classList.add('score-flash');
     setTimeout(function () { dom.scoreDisplay.classList.remove('score-flash'); }, 400);
 
@@ -174,7 +160,6 @@
     renderWordBar();
   }
 
-  // ─── Rendering ────────────────────────────────────────────────────
   function renderGrid() {
     dom.gridEl.innerHTML = '';
     grid.forEach(function (cell) {
@@ -205,9 +190,9 @@
     var word = getWord();
     if (word) {
       dom.currentWord.textContent = word;
-      dom.currentWord.className = 'vg-current-word';
+      dom.currentWord.className = 'current-word';
     } else {
-      dom.currentWord.innerHTML = '<span class="vg-placeholder">select letters\u2026</span>';
+      dom.currentWord.innerHTML = '<span class="placeholder">tap letters\u2026</span>';
     }
     dom.btnClear.disabled = selected.length === 0;
     dom.btnSubmit.disabled = selected.length < 3;
@@ -216,17 +201,17 @@
   function renderFoundWords() {
     dom.foundList.innerHTML = '';
     if (foundWords.length === 0) {
-      dom.foundList.innerHTML = '<span class="vg-empty">none yet</span>';
+      dom.foundList.innerHTML = '<span class="found-empty">none yet</span>';
       return;
     }
     foundWords.forEach(function (f) {
       var div = document.createElement('div');
-      div.className = 'vg-found-item';
+      div.className = 'found-item';
       var wordSpan = document.createElement('span');
-      wordSpan.className = 'vg-found-word';
+      wordSpan.className = 'found-word';
       wordSpan.textContent = f.word;
       var ptsSpan = document.createElement('span');
-      ptsSpan.className = 'vg-found-pts';
+      ptsSpan.className = 'found-pts';
       ptsSpan.textContent = '+' + f.points;
       div.appendChild(wordSpan);
       div.appendChild(ptsSpan);
@@ -236,25 +221,24 @@
 
   function showMessage(text, type) {
     dom.message.textContent = text;
-    dom.message.className = 'vg-message ' + type;
+    dom.message.className = 'message ' + type;
     clearTimeout(msgTimer);
     msgTimer = setTimeout(hideMessage, 1800);
   }
 
   function hideMessage() {
-    dom.message.className = 'vg-message hidden';
+    dom.message.className = 'message hidden';
   }
 
-  // ─── End game ─────────────────────────────────────────────────────
   function endGame() {
     showScreen('over');
     dom.finalScore.textContent = score;
 
     var best = foundWords.slice().sort(function (a, b) { return b.points - a.points; }).slice(0, 5);
     if (best.length > 0) {
-      var html = '<div class="vg-best-hdr">TOP WORDS</div>';
+      var html = '<div class="best-hdr">TOP WORDS</div>';
       best.forEach(function (f) {
-        html += '<div class="vg-best-row"><span>' + f.word + '</span><span class="vg-found-pts">+' + f.points + '</span></div>';
+        html += '<div class="best-row"><span>' + f.word + '</span><span class="found-pts">+' + f.points + '</span></div>';
       });
       dom.bestWords.innerHTML = html;
     } else {
@@ -266,7 +250,6 @@
     showBest();
   }
 
-  // ─── Event listeners ──────────────────────────────────────────────
   dom.btnPlay.addEventListener('click', startGame);
   dom.btnReplay.addEventListener('click', startGame);
   dom.btnClear.addEventListener('click', clearSelection);

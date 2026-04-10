@@ -1,81 +1,367 @@
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
 :root {
-  --bg: #060810; --card: #0d1020; --accent: #00f5c4; --accent2: #7b61ff;
-  --danger: #ff3b6b; --text: #e8eaf0; --muted: #4a5070; --border: #1a2040; --sel: #00f5c420;
+  --bg: #0d0d0b;
+  --card: #181816;
+  --border: #2a2a26;
+  --text: #e8e8ee;
+  --text-dim: #a0a0b0;
+  --accent: #00d4a8;
+  --danger: #e85454;
+  --white: #f0f0f5;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, Arial, Helvetica, sans-serif;
+  font-size: 18px;
+}
+
 .hidden { display: none !important; }
 
 .back-link {
-  position: fixed; top: 12px; left: 16px; z-index: 50;
-  font-family: 'Share Tech Mono', monospace; font-size: 13px;
-  color: var(--muted); text-decoration: none; letter-spacing: 1px;
+  position: fixed; top: 14px; left: 16px; z-index: 50;
+  font-size: 13px; font-weight: 600; color: var(--text-dim);
+  text-decoration: none; letter-spacing: 1px;
   padding-top: var(--safe-top);
 }
-.back-link:active { color: var(--accent); }
 
-.vg-root { min-height: 100vh; min-height: 100dvh; background: var(--bg); color: var(--text); font-family: 'Share Tech Mono', monospace; position: relative; overflow: hidden; }
-.vg-bg { position: fixed; inset: 0; background: radial-gradient(ellipse at 20% 50%, #0a0f2e 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, #0f0a2e 0%, transparent 50%); pointer-events: none; }
-.vg-center { display: flex; align-items: center; justify-content: center; min-height: 100vh; min-height: 100dvh; padding: 24px; position: relative; z-index: 1; }
-.vg-intro { max-width: 420px; width: 100%; text-align: center; border: 1px solid var(--border); background: var(--card); padding: 48px 36px; position: relative; }
-.vg-intro::before { content: ''; position: absolute; inset: -1px; background: linear-gradient(135deg, var(--accent), var(--accent2)); z-index: -1; border-radius: inherit; opacity: 0.15; }
-.vg-logo { font-family: 'Black Ops One', sans-serif; font-size: clamp(52px, 14vw, 80px); letter-spacing: 0.1em; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 8px; filter: drop-shadow(0 0 20px rgba(0,245,196,0.3)); }
-.vg-tagline { font-size: 13px; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 28px; text-transform: uppercase; }
-.vg-rules { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px; }
-.vg-rule { background: #0a0d1a; border: 1px solid var(--border); padding: 10px 14px; font-size: 13px; display: flex; justify-content: space-between; align-items: center; }
-.vg-rule-pts { font-family: 'Black Ops One', sans-serif; color: var(--accent); font-size: 15px; }
-.vg-warn { font-size: 11px; color: var(--danger); margin-bottom: 28px; letter-spacing: 0.05em; line-height: 1.5; }
-.vg-best-all { font-size: 12px; color: var(--muted); margin-top: 16px; letter-spacing: 0.1em; }
-.vg-start { font-family: 'Black Ops One', sans-serif; font-size: 18px; letter-spacing: 0.15em; background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #060810; border: none; cursor: pointer; padding: 16px 48px; transition: all 0.2s; clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); }
-.vg-start:active { filter: brightness(1.15) drop-shadow(0 0 12px var(--accent)); transform: translateY(-2px); }
-.vg-game { max-width: 480px; margin: 0 auto; padding: 16px 16px 32px; padding-top: calc(16px + var(--safe-top) + 30px); padding-bottom: calc(32px + var(--safe-bottom)); position: relative; z-index: 1; display: flex; flex-direction: column; gap: 12px; }
-.vg-header { display: flex; align-items: center; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
-.vg-title-sm { font-family: 'Black Ops One', sans-serif; font-size: 20px; letter-spacing: 0.15em; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; flex: 1; }
-.vg-score { display: flex; align-items: baseline; gap: 3px; transition: transform 0.2s; }
-.vg-score.score-flash { animation: scorePop 0.4s ease; }
-@keyframes scorePop { 0% { transform: scale(1); } 50% { transform: scale(1.4); filter: drop-shadow(0 0 8px var(--accent)); } 100% { transform: scale(1); } }
-.vg-score-num { font-family: 'Black Ops One', sans-serif; font-size: 28px; color: var(--accent); }
-.vg-score-label { font-size: 12px; color: var(--muted); }
-.vg-timer-wrap { display: flex; align-items: center; gap: 6px; }
-.vg-timer-track { width: 60px; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
-.vg-timer-fill { height: 100%; border-radius: 2px; transition: width 1s linear, background 0.3s; }
-.vg-timer-num { font-size: 12px; min-width: 24px; text-align: right; }
-.vg-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
-.vg-cell { aspect-ratio: 1; background: var(--card); border: 1px solid var(--border); color: var(--text); font-family: 'Black Ops One', sans-serif; font-size: clamp(16px, 4vw, 22px); cursor: pointer; transition: all 0.15s; position: relative; overflow: hidden; }
-.vg-cell:active:not(.dead):not(.sel) { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 10px rgba(0,245,196,0.15); }
-.vg-cell.sel { border-color: var(--accent); background: var(--sel); color: var(--accent); box-shadow: 0 0 14px rgba(0,245,196,0.25) inset; }
-.vg-cell.dead { background: #08090f; border-color: #0d0e14; cursor: default; }
-.vg-cell.vanishing { animation: vanish 0.6s ease forwards; }
-@keyframes vanish { 0% { transform: scale(1); opacity: 1; background: var(--danger); border-color: var(--danger); } 50% { transform: scale(1.15); opacity: 0.6; } 100% { transform: scale(0); opacity: 0; } }
-.vg-word-bar { display: flex; align-items: center; gap: 8px; border: 1px solid var(--border); background: var(--card); padding: 10px 12px; }
-.vg-current-word { flex: 1; font-family: 'Black Ops One', sans-serif; font-size: 20px; letter-spacing: 0.1em; color: var(--accent); min-height: 28px; text-transform: uppercase; }
-.vg-placeholder { color: var(--muted); font-size: 13px; font-family: 'Share Tech Mono', monospace; }
-.vg-actions { display: flex; gap: 6px; }
-.vg-btn { font-family: 'Share Tech Mono', monospace; font-size: 13px; letter-spacing: 0.1em; border: 1px solid; cursor: pointer; padding: 8px 14px; transition: all 0.15s; background: transparent; }
-.vg-btn.clear { border-color: var(--muted); color: var(--muted); }
-.vg-btn.clear:active:not([disabled]) { border-color: var(--danger); color: var(--danger); }
-.vg-btn.submit { border-color: var(--accent); color: var(--accent); }
-.vg-btn.submit:active:not([disabled]) { background: var(--accent); color: var(--bg); }
-.vg-btn:disabled { opacity: 0.3; cursor: default; }
-.vg-message { text-align: center; font-size: 13px; letter-spacing: 0.1em; padding: 8px; animation: fadeMsg 0.2s ease; text-transform: uppercase; }
-.vg-message.good { color: var(--accent); }
-.vg-message.bad { color: var(--danger); }
+#app {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 20px 20px calc(20px + var(--safe-bottom));
+  padding-top: calc(20px + var(--safe-top));
+  min-height: 100dvh;
+}
+
+/* ─── Intro Screen ──────────────────────────────────────────── */
+#intro-screen {
+  text-align: center;
+  padding-top: 60px;
+}
+
+.title-icon { font-size: 48px; margin-bottom: 8px; }
+
+.game-title {
+  font-size: 52px;
+  font-weight: 900;
+  letter-spacing: 6px;
+  color: var(--white);
+}
+
+.tagline {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  margin-top: 8px;
+  margin-bottom: 28px;
+}
+
+.rules-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 28px;
+  text-align: left;
+}
+
+.rules-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 16px;
+  font-size: 15px;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.rule-pts {
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.warn {
+  font-size: 13px;
+  color: var(--danger);
+  font-weight: 600;
+  text-align: center;
+}
+
+.btn-main {
+  display: inline-block;
+  background: var(--accent);
+  color: #0d0d0b;
+  border: none;
+  border-radius: 10px;
+  padding: 16px 52px;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+.btn-main:active { opacity: 0.85; transform: scale(0.97); }
+
+.best-score {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-top: 16px;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+/* ─── Game Screen ───────────────────────────────────────────── */
+.game-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0 12px;
+  margin-top: 28px;
+}
+
+.header-title {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  color: var(--white);
+}
+
+.score-label {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-dim);
+  transition: transform 0.2s;
+}
+.score-label #score-num {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--accent);
+}
+.score-label.score-flash { animation: scorePop 0.4s ease; }
+@keyframes scorePop { 50% { transform: scale(1.2); } }
+
+.timer-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.timer-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--accent);
+  transition: width 1s linear, background 0.3s;
+}
+
+.timer-num {
+  text-align: right;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+/* ─── Letter Grid ───────────────────────────────────────────── */
+.letter-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.vg-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  color: var(--white);
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-size: clamp(18px, 5vw, 24px);
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.12s;
+  user-select: none;
+}
+
+.vg-cell:active:not(.dead):not(.sel) {
+  border-color: var(--accent);
+  background: #1a2a24;
+}
+
+.vg-cell.sel {
+  border-color: var(--accent);
+  background: #14322a;
+  color: var(--accent);
+}
+
+.vg-cell.dead {
+  background: var(--bg);
+  border-color: transparent;
+  cursor: default;
+}
+
+.vg-cell.vanishing {
+  animation: vanish 0.6s ease forwards;
+}
+
+@keyframes vanish {
+  0% { transform: scale(1); opacity: 1; border-color: var(--danger); background: #3a1a1a; }
+  50% { transform: scale(1.1); opacity: 0.5; }
+  100% { transform: scale(0); opacity: 0; }
+}
+
+/* ─── Word Bar ──────────────────────────────────────────────── */
+.word-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+
+.current-word {
+  flex: 1;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--accent);
+  min-height: 30px;
+  text-transform: uppercase;
+}
+
+.placeholder {
+  color: var(--text-dim);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.word-actions { display: flex; gap: 8px; }
+
+.btn-sm {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.12s;
+}
+
+.btn-dim {
+  background: var(--border);
+  color: var(--text-dim);
+}
+.btn-dim:active:not([disabled]) { background: #3a2020; color: var(--danger); }
+
+.btn-accent {
+  background: var(--accent);
+  color: #0d0d0b;
+}
+.btn-accent:active:not([disabled]) { opacity: 0.85; }
+
+.btn-sm:disabled { opacity: 0.25; cursor: default; }
+
+/* ─── Messages ──────────────────────────────────────────────── */
+.message {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 8px;
+  animation: fadeMsg 0.2s ease;
+  text-transform: uppercase;
+}
+.message.good { color: var(--accent); }
+.message.bad { color: var(--danger); }
 @keyframes fadeMsg { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; } }
-.vg-found { border: 1px solid var(--border); background: var(--card); padding: 12px; max-height: 200px; overflow-y: auto; }
-.vg-found::-webkit-scrollbar { width: 4px; }
-.vg-found::-webkit-scrollbar-thumb { background: var(--border); }
-.vg-found-header { font-size: 10px; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; }
-.vg-found-list { display: flex; flex-direction: column; gap: 4px; }
-.vg-empty { font-size: 12px; color: var(--muted); }
-.vg-found-item { display: flex; justify-content: space-between; font-size: 13px; padding: 3px 0; border-bottom: 1px solid var(--border); animation: slideIn 0.2s ease; }
+
+/* ─── Found Words ───────────────────────────────────────────── */
+.found-section {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.found-header {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.found-list { display: flex; flex-direction: column; gap: 4px; }
+
+.found-empty { font-size: 14px; color: var(--text-dim); }
+
+.found-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border);
+  animation: slideIn 0.2s ease;
+}
 @keyframes slideIn { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; } }
-.vg-found-word { color: var(--text); letter-spacing: 0.08em; }
-.vg-found-pts { color: var(--accent); font-family: 'Black Ops One', sans-serif; }
-.vg-over { max-width: 360px; width: 100%; text-align: center; border: 1px solid var(--border); background: var(--card); padding: 48px 36px; }
-.vg-over-title { font-family: 'Black Ops One', sans-serif; font-size: 14px; letter-spacing: 0.4em; color: var(--danger); margin-bottom: 16px; text-transform: uppercase; }
-.vg-final-score { font-family: 'Black Ops One', sans-serif; font-size: clamp(64px, 18vw, 96px); background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 20px rgba(0,245,196,0.4)); line-height: 1; }
-.vg-final-label { font-size: 11px; letter-spacing: 0.25em; color: var(--muted); margin-bottom: 24px; text-transform: uppercase; }
-.vg-best { margin-bottom: 28px; text-align: left; }
-.vg-best-hdr { font-size: 10px; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 8px; }
-.vg-best-row { display: flex; justify-content: space-between; font-size: 14px; padding: 5px 0; border-bottom: 1px solid var(--border); }
+
+.found-word { color: var(--text); font-weight: 600; letter-spacing: 1px; }
+.found-pts { color: var(--accent); font-weight: 800; }
+
+/* ─── Game Over ─────────────────────────────────────────────── */
+#over-screen { text-align: center; padding-top: 80px; }
+
+.gameover-heading {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: var(--danger);
+  margin-bottom: 16px;
+}
+
+.final-score {
+  font-size: 72px;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.final-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--text-dim);
+  margin-bottom: 28px;
+}
+
+.best-words { margin-bottom: 28px; text-align: left; }
+.best-words .best-hdr {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+.best-words .best-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border);
+}
