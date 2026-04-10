@@ -166,6 +166,10 @@
     .reflex .card-title { color: #f5c542; }
     .reflex .card-tag { background: rgba(245, 197, 66, 0.1); color: #f5c542; }
 
+    .vanish .card-icon { background: rgba(0, 245, 196, 0.12); }
+    .vanish .card-title { color: #00f5c4; }
+    .vanish .card-tag { background: rgba(0, 245, 196, 0.1); color: #00f5c4; }
+
     footer {
       text-align: center;
       padding-top: 28px;
@@ -189,6 +193,7 @@
     .game-card:nth-child(7) { animation-delay: 0.47s; }
     .game-card:nth-child(8) { animation-delay: 0.54s; }
     .game-card:nth-child(9) { animation-delay: 0.61s; }
+    .game-card:nth-child(10) { animation-delay: 0.68s; }
   </style>
 </head>
 <body>
@@ -279,6 +284,15 @@
         </div>
         <div class="card-desc">A word flashes. Tap left or right to sort it into the correct category. It speeds up. 3 lives.</div>
         <span class="card-tag">Speed Sorting</span>
+      </a>
+
+      <a href="vanish/" class="game-card vanish">
+        <div class="card-top">
+          <div class="card-icon">&#x1F7E9;</div>
+          <div class="card-title">Vanish</div>
+        </div>
+        <div class="card-desc">Letters disappear every 10 seconds. Find words before the grid is gone. Longer words score more.</div>
+        <span class="card-tag">Word Hunt</span>
       </a>
     </div>
 

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#060810">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <title>Vanish</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a href="../hub.html" class="back-link">&larr; ALL GAMES</a>
+  <div class="vg-root">
+    <div class="vg-bg"></div>
+
+    <!-- Intro Screen -->
+    <div id="intro-screen" class="vg-center">
+      <div class="vg-intro">
+        <div class="vg-logo">VANISH</div>
+        <p class="vg-tagline">The grid is disappearing. Make words. Fast.</p>
+        <div class="vg-rules">
+          <div class="vg-rule"><span class="vg-rule-pts">1pt</span> 3-letter words</div>
+          <div class="vg-rule"><span class="vg-rule-pts">2pt</span> 4-letter words</div>
+          <div class="vg-rule"><span class="vg-rule-pts">4pt</span> 5-letter words</div>
+          <div class="vg-rule"><span class="vg-rule-pts">6pt</span> 6-letter words</div>
+          <div class="vg-rule"><span class="vg-rule-pts">10pt</span> 7-letter words</div>
+          <div class="vg-rule"><span class="vg-rule-pts">14pt</span> 8-letter words</div>
+        </div>
+        <p class="vg-warn">&#x26A0; Every 10 seconds, a letter vanishes. Game ends at 2 letters left.</p>
+        <button id="btn-play" class="vg-start">PLAY</button>
+        <p id="best-score" class="vg-best-all"></p>
+      </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="vg-game hidden">
+      <header class="vg-header">
+        <div class="vg-title-sm">VANISH</div>
+        <div id="score-display" class="vg-score">
+          <span id="score-num" class="vg-score-num">0</span>
+          <span class="vg-score-label">pts</span>
+        </div>
+        <div class="vg-timer-wrap">
+          <div class="vg-timer-track">
+            <div id="timer-fill" class="vg-timer-fill"></div>
+          </div>
+          <span id="timer-num" class="vg-timer-num">10s</span>
+        </div>
+      </header>
+      <div id="grid" class="vg-grid"></div>
+      <div class="vg-word-bar">
+        <div id="current-word" class="vg-current-word">
+          <span class="vg-placeholder">select letters&hellip;</span>
+        </div>
+        <div class="vg-actions">
+          <button id="btn-clear" class="vg-btn clear" disabled>&#x2715;</button>
+          <button id="btn-submit" class="vg-btn submit" disabled>SUBMIT</button>
+        </div>
+      </div>
+      <div id="message" class="vg-message hidden"></div>
+      <div class="vg-found">
+        <div class="vg-found-header">FOUND WORDS</div>
+        <div id="found-list" class="vg-found-list">
+          <span class="vg-empty">none yet</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="over-screen" class="vg-center hidden">
+      <div class="vg-over">
+        <div class="vg-over-title">GRID GONE</div>
+        <div id="final-score" class="vg-final-score">0</div>
+        <div class="vg-final-label">FINAL SCORE</div>
+        <div id="best-words" class="vg-best"></div>
+        <button id="btn-replay" class="vg-start">PLAY AGAIN</button>
+      </div>
+    </div>
+
+  </div>
+  <script src="words.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

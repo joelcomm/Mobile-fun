@@ -1,0 +1,81 @@
+:root {
+  --bg: #060810; --card: #0d1020; --accent: #00f5c4; --accent2: #7b61ff;
+  --danger: #ff3b6b; --text: #e8eaf0; --muted: #4a5070; --border: #1a2040; --sel: #00f5c420;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+.hidden { display: none !important; }
+
+.back-link {
+  position: fixed; top: 12px; left: 16px; z-index: 50;
+  font-family: 'Share Tech Mono', monospace; font-size: 13px;
+  color: var(--muted); text-decoration: none; letter-spacing: 1px;
+  padding-top: var(--safe-top);
+}
+.back-link:active { color: var(--accent); }
+
+.vg-root { min-height: 100vh; min-height: 100dvh; background: var(--bg); color: var(--text); font-family: 'Share Tech Mono', monospace; position: relative; overflow: hidden; }
+.vg-bg { position: fixed; inset: 0; background: radial-gradient(ellipse at 20% 50%, #0a0f2e 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, #0f0a2e 0%, transparent 50%); pointer-events: none; }
+.vg-center { display: flex; align-items: center; justify-content: center; min-height: 100vh; min-height: 100dvh; padding: 24px; position: relative; z-index: 1; }
+.vg-intro { max-width: 420px; width: 100%; text-align: center; border: 1px solid var(--border); background: var(--card); padding: 48px 36px; position: relative; }
+.vg-intro::before { content: ''; position: absolute; inset: -1px; background: linear-gradient(135deg, var(--accent), var(--accent2)); z-index: -1; border-radius: inherit; opacity: 0.15; }
+.vg-logo { font-family: 'Black Ops One', sans-serif; font-size: clamp(52px, 14vw, 80px); letter-spacing: 0.1em; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 8px; filter: drop-shadow(0 0 20px rgba(0,245,196,0.3)); }
+.vg-tagline { font-size: 13px; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 28px; text-transform: uppercase; }
+.vg-rules { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px; }
+.vg-rule { background: #0a0d1a; border: 1px solid var(--border); padding: 10px 14px; font-size: 13px; display: flex; justify-content: space-between; align-items: center; }
+.vg-rule-pts { font-family: 'Black Ops One', sans-serif; color: var(--accent); font-size: 15px; }
+.vg-warn { font-size: 11px; color: var(--danger); margin-bottom: 28px; letter-spacing: 0.05em; line-height: 1.5; }
+.vg-best-all { font-size: 12px; color: var(--muted); margin-top: 16px; letter-spacing: 0.1em; }
+.vg-start { font-family: 'Black Ops One', sans-serif; font-size: 18px; letter-spacing: 0.15em; background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #060810; border: none; cursor: pointer; padding: 16px 48px; transition: all 0.2s; clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); }
+.vg-start:active { filter: brightness(1.15) drop-shadow(0 0 12px var(--accent)); transform: translateY(-2px); }
+.vg-game { max-width: 480px; margin: 0 auto; padding: 16px 16px 32px; padding-top: calc(16px + var(--safe-top) + 30px); padding-bottom: calc(32px + var(--safe-bottom)); position: relative; z-index: 1; display: flex; flex-direction: column; gap: 12px; }
+.vg-header { display: flex; align-items: center; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.vg-title-sm { font-family: 'Black Ops One', sans-serif; font-size: 20px; letter-spacing: 0.15em; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; flex: 1; }
+.vg-score { display: flex; align-items: baseline; gap: 3px; transition: transform 0.2s; }
+.vg-score.score-flash { animation: scorePop 0.4s ease; }
+@keyframes scorePop { 0% { transform: scale(1); } 50% { transform: scale(1.4); filter: drop-shadow(0 0 8px var(--accent)); } 100% { transform: scale(1); } }
+.vg-score-num { font-family: 'Black Ops One', sans-serif; font-size: 28px; color: var(--accent); }
+.vg-score-label { font-size: 12px; color: var(--muted); }
+.vg-timer-wrap { display: flex; align-items: center; gap: 6px; }
+.vg-timer-track { width: 60px; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.vg-timer-fill { height: 100%; border-radius: 2px; transition: width 1s linear, background 0.3s; }
+.vg-timer-num { font-size: 12px; min-width: 24px; text-align: right; }
+.vg-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.vg-cell { aspect-ratio: 1; background: var(--card); border: 1px solid var(--border); color: var(--text); font-family: 'Black Ops One', sans-serif; font-size: clamp(16px, 4vw, 22px); cursor: pointer; transition: all 0.15s; position: relative; overflow: hidden; }
+.vg-cell:active:not(.dead):not(.sel) { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 10px rgba(0,245,196,0.15); }
+.vg-cell.sel { border-color: var(--accent); background: var(--sel); color: var(--accent); box-shadow: 0 0 14px rgba(0,245,196,0.25) inset; }
+.vg-cell.dead { background: #08090f; border-color: #0d0e14; cursor: default; }
+.vg-cell.vanishing { animation: vanish 0.6s ease forwards; }
+@keyframes vanish { 0% { transform: scale(1); opacity: 1; background: var(--danger); border-color: var(--danger); } 50% { transform: scale(1.15); opacity: 0.6; } 100% { transform: scale(0); opacity: 0; } }
+.vg-word-bar { display: flex; align-items: center; gap: 8px; border: 1px solid var(--border); background: var(--card); padding: 10px 12px; }
+.vg-current-word { flex: 1; font-family: 'Black Ops One', sans-serif; font-size: 20px; letter-spacing: 0.1em; color: var(--accent); min-height: 28px; text-transform: uppercase; }
+.vg-placeholder { color: var(--muted); font-size: 13px; font-family: 'Share Tech Mono', monospace; }
+.vg-actions { display: flex; gap: 6px; }
+.vg-btn { font-family: 'Share Tech Mono', monospace; font-size: 13px; letter-spacing: 0.1em; border: 1px solid; cursor: pointer; padding: 8px 14px; transition: all 0.15s; background: transparent; }
+.vg-btn.clear { border-color: var(--muted); color: var(--muted); }
+.vg-btn.clear:active:not([disabled]) { border-color: var(--danger); color: var(--danger); }
+.vg-btn.submit { border-color: var(--accent); color: var(--accent); }
+.vg-btn.submit:active:not([disabled]) { background: var(--accent); color: var(--bg); }
+.vg-btn:disabled { opacity: 0.3; cursor: default; }
+.vg-message { text-align: center; font-size: 13px; letter-spacing: 0.1em; padding: 8px; animation: fadeMsg 0.2s ease; text-transform: uppercase; }
+.vg-message.good { color: var(--accent); }
+.vg-message.bad { color: var(--danger); }
+@keyframes fadeMsg { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; } }
+.vg-found { border: 1px solid var(--border); background: var(--card); padding: 12px; max-height: 200px; overflow-y: auto; }
+.vg-found::-webkit-scrollbar { width: 4px; }
+.vg-found::-webkit-scrollbar-thumb { background: var(--border); }
+.vg-found-header { font-size: 10px; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; }
+.vg-found-list { display: flex; flex-direction: column; gap: 4px; }
+.vg-empty { font-size: 12px; color: var(--muted); }
+.vg-found-item { display: flex; justify-content: space-between; font-size: 13px; padding: 3px 0; border-bottom: 1px solid var(--border); animation: slideIn 0.2s ease; }
+@keyframes slideIn { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; } }
+.vg-found-word { color: var(--text); letter-spacing: 0.08em; }
+.vg-found-pts { color: var(--accent); font-family: 'Black Ops One', sans-serif; }
+.vg-over { max-width: 360px; width: 100%; text-align: center; border: 1px solid var(--border); background: var(--card); padding: 48px 36px; }
+.vg-over-title { font-family: 'Black Ops One', sans-serif; font-size: 14px; letter-spacing: 0.4em; color: var(--danger); margin-bottom: 16px; text-transform: uppercase; }
+.vg-final-score { font-family: 'Black Ops One', sans-serif; font-size: clamp(64px, 18vw, 96px); background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 20px rgba(0,245,196,0.4)); line-height: 1; }
+.vg-final-label { font-size: 11px; letter-spacing: 0.25em; color: var(--muted); margin-bottom: 24px; text-transform: uppercase; }
+.vg-best { margin-bottom: 28px; text-align: left; }
+.vg-best-hdr { font-size: 10px; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 8px; }
+.vg-best-row { display: flex; justify-content: space-between; font-size: 14px; padding: 5px 0; border-bottom: 1px solid var(--border); }
