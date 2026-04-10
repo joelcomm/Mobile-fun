@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#0d0d0b">
+  <meta name="theme-color" content="#0b0a0f">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <title>Alibi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <title>Cipher</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,15 +18,15 @@
 
     <!-- Title Screen -->
     <div id="title-screen">
-      <div class="title-icon">&#x1F575;</div>
-      <h1 class="game-title">ALIBI</h1>
-      <p class="tagline">9 WORDS. 8 HAVE ALIBIS. FIND THE CULPRIT.</p>
+      <div class="title-icon">&#x1F510;</div>
+      <h1 class="game-title">CIPHER</h1>
+      <p class="tagline">CRACK THE CODE. DECODE THE QUOTE.</p>
       <div class="rules-box">
-        <p><span class="hl">Eight words</span> share a hidden connection.</p>
-        <p><span class="hl">One word</span> doesn't belong — it's the culprit.</p>
-        <p><span class="hl">Tap</span> the word with no alibi.</p>
+        <p><span class="hl">Each letter</span> has been swapped with another.</p>
+        <p><span class="hl">Tap</span> a coded letter, then tap its replacement.</p>
+        <p><span class="hl">Decode</span> the famous quote to win.</p>
       </div>
-      <button id="btn-start" class="btn-main">START INVESTIGATION</button>
+      <button id="btn-start" class="btn-main">BEGIN DECRYPTION</button>
       <p id="best-score" class="best-score"></p>
     </div>
 
@@ -37,20 +37,25 @@
         <span id="score-label" class="score-label">0</span>
       </div>
       <div id="progress-bar" class="progress-bar"></div>
-      <p class="prompt-label">FIND THE CULPRIT</p>
-      <p class="sub-label">One word doesn't belong</p>
-      <div id="word-grid" class="word-grid"></div>
-      <div id="feedback" class="feedback hidden">
-        <p id="fb-result" class="fb-result"></p>
-        <p id="fb-category" class="fb-category"></p>
-        <p id="fb-explain" class="fb-explain"></p>
+      <div id="cipher-display" class="cipher-display"></div>
+      <p id="author-label" class="author-label"></p>
+      <div id="selected-info" class="selected-info"></div>
+      <div id="letter-picker" class="letter-picker"></div>
+      <div class="game-actions">
+        <button id="btn-check" class="btn-main btn-sm">CHECK</button>
+        <button id="btn-hint" class="btn-hint">HINT</button>
+      </div>
+      <div id="round-feedback" class="round-feedback hidden">
+        <p id="rf-text" class="rf-text"></p>
+        <p id="rf-quote" class="rf-quote"></p>
+        <p id="rf-pts" class="rf-pts"></p>
         <button id="btn-next" class="btn-main btn-sm">NEXT</button>
       </div>
     </div>
 
     <!-- Game Over -->
     <div id="gameover-screen" class="hidden">
-      <h2 class="gameover-heading">CASE CLOSED</h2>
+      <h2 class="gameover-heading">DECRYPTED</h2>
       <div id="final-score" class="final-score"></div>
       <div id="final-rank" class="final-rank"></div>
       <div id="final-stats" class="final-stats"></div>
@@ -59,7 +64,7 @@
 
   </div>
   <script src="../daily.js"></script>
-  <script src="puzzles.js"></script>
+  <script src="quotes.js"></script>
   <script src="game.js"></script>
 </body>
 </html>

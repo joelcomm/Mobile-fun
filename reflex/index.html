@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#0d0d0b">
+  <meta name="theme-color" content="#0c0a0f">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <title>Alibi</title>
+  <title>Reflex</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,39 +18,46 @@
 
     <!-- Title Screen -->
     <div id="title-screen">
-      <div class="title-icon">&#x1F575;</div>
-      <h1 class="game-title">ALIBI</h1>
-      <p class="tagline">9 WORDS. 8 HAVE ALIBIS. FIND THE CULPRIT.</p>
+      <div class="title-icon">&#x26A1;</div>
+      <h1 class="game-title">REFLEX</h1>
+      <p class="tagline">SORT FAST. THINK FASTER.</p>
       <div class="rules-box">
-        <p><span class="hl">Eight words</span> share a hidden connection.</p>
-        <p><span class="hl">One word</span> doesn't belong — it's the culprit.</p>
-        <p><span class="hl">Tap</span> the word with no alibi.</p>
+        <p><span class="hl">A word</span> appears in the center.</p>
+        <p><span class="hl">Tap left or right</span> to sort it into the correct category.</p>
+        <p><span class="hl">3 mistakes</span> and you're out. It speeds up!</p>
       </div>
-      <button id="btn-start" class="btn-main">START INVESTIGATION</button>
+      <button id="btn-start" class="btn-main">GO</button>
       <p id="best-score" class="best-score"></p>
     </div>
 
     <!-- Game Screen -->
     <div id="game-screen" class="hidden">
       <div class="game-header">
-        <span id="round-label" class="round-label">1 / 10</span>
         <span id="score-label" class="score-label">0</span>
+        <span id="lives-label" class="lives-label"></span>
       </div>
-      <div id="progress-bar" class="progress-bar"></div>
-      <p class="prompt-label">FIND THE CULPRIT</p>
-      <p class="sub-label">One word doesn't belong</p>
-      <div id="word-grid" class="word-grid"></div>
-      <div id="feedback" class="feedback hidden">
-        <p id="fb-result" class="fb-result"></p>
-        <p id="fb-category" class="fb-category"></p>
-        <p id="fb-explain" class="fb-explain"></p>
-        <button id="btn-next" class="btn-main btn-sm">NEXT</button>
+      <div id="timer-bar" class="timer-bar">
+        <div id="timer-fill" class="timer-fill"></div>
       </div>
+      <div class="arena">
+        <button id="btn-left" class="sort-btn sort-left">
+          <span id="label-left" class="sort-cat-label"></span>
+        </button>
+        <div class="word-zone">
+          <p id="category-hint" class="category-hint"></p>
+          <div id="word-display" class="word-display"></div>
+          <p id="flash-feedback" class="flash-feedback"></p>
+        </div>
+        <button id="btn-right" class="sort-btn sort-right">
+          <span id="label-right" class="sort-cat-label"></span>
+        </button>
+      </div>
+      <div id="streak-label" class="streak-label"></div>
     </div>
 
     <!-- Game Over -->
     <div id="gameover-screen" class="hidden">
-      <h2 class="gameover-heading">CASE CLOSED</h2>
+      <h2 class="gameover-heading">TIME'S UP</h2>
       <div id="final-score" class="final-score"></div>
       <div id="final-rank" class="final-rank"></div>
       <div id="final-stats" class="final-stats"></div>
@@ -59,7 +66,7 @@
 
   </div>
   <script src="../daily.js"></script>
-  <script src="puzzles.js"></script>
+  <script src="data.js"></script>
   <script src="game.js"></script>
 </body>
 </html>
