@@ -250,7 +250,7 @@ function getSelectedTiles() {
 // ─── End game ────────────────────────────────────────────────────
 function endGame(won) {
   gameOver = true;
-  Daily.saveDailyResult('connections', won ? (mistakesLeft + 1) * 25 : 0);
+  Daily.saveDailyResult('threads', won ? (mistakesLeft + 1) * 25 : 0);
 
   overlayTitle.textContent = won ? "You got it!" : "Next time!";
 
@@ -288,7 +288,7 @@ function endGame(won) {
 // ─── Share ───────────────────────────────────────────────────────
 function shareResults() {
   const levelEmojis = ["🟨", "🟩", "🟦", "🟪"];
-  let text = `Connections Puzzle #${currentPuzzleIndex + 1}\n`;
+  let text = `Threads Puzzle #${currentPuzzleIndex + 1}\n`;
 
   guessHistory.forEach(levels => {
     text += levels.map(l => levelEmojis[l]).join("") + "\n";
@@ -367,7 +367,7 @@ btnNextPuzzle.addEventListener("click", () => {
 });
 
 // ─── Start ───────────────────────────────────────────────────────
-Daily.injectDailyInfo('#app header', 'connections');
+Daily.injectDailyInfo('#app header', 'threads');
 initPuzzle();
 
 // Register service worker

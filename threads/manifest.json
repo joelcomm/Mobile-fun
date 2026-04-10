@@ -1,6 +1,6 @@
 {
-  "name": "Connections Puzzle",
-  "short_name": "Connections",
+  "name": "Threads Puzzle",
+  "short_name": "Threads",
   "description": "Find the four groups of four words that share a connection!",
   "start_url": "/",
   "display": "standalone",

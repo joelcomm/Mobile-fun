@@ -81,6 +81,7 @@
     dom.guessArea.style.display = 'flex';
     dom.guessInput.value = '';
     dom.guessInput.disabled = false;
+    dom.guessInput.focus();
 
     // Build letter boxes
     dom.letterDisplay.innerHTML = '';

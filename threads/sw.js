@@ -1,4 +1,4 @@
-const CACHE_NAME = "connections-v2";
+const CACHE_NAME = "threads-v1";
 const ASSETS = [
   "/",
   "/index.html",
