@@ -26,6 +26,11 @@
         <p><span class="hl">Guess</span> the word as soon as you can.</p>
         <p><span class="hl">Score</span> big by guessing with fewer letters.</p>
       </div>
+      <div class="difficulty-picker">
+        <button class="diff-btn" data-speed="1800">EASY</button>
+        <button class="diff-btn active" data-speed="1200">NORMAL</button>
+        <button class="diff-btn" data-speed="600">PRO</button>
+      </div>
       <button id="btn-start" class="btn-main">START</button>
       <p id="best-score" class="best-score"></p>
     </div>
@@ -57,7 +62,7 @@
       <div id="final-score" class="final-score"></div>
       <div id="final-rank" class="final-rank"></div>
       <div id="final-stats" class="final-stats"></div>
-      <button id="btn-replay" class="btn-main">PLAY AGAIN</button>
+      <p id="next-puzzle-cd" class="next-puzzle-cd"></p>
     </div>
 
   </div>

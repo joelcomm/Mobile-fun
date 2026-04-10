@@ -1,6 +1,6 @@
 (function () {
   const TOTAL_ROUNDS = 15;
-  const REVEAL_INTERVAL = 1200; // ms between letters
+  var revealInterval = 1200; // ms between letters, set by difficulty
 
   const dom = {
     titleScreen: document.getElementById('title-screen'),
@@ -8,7 +8,7 @@
     gameoverScreen: document.getElementById('gameover-screen'),
     btnStart: document.getElementById('btn-start'),
     btnNext: document.getElementById('btn-next'),
-    btnReplay: document.getElementById('btn-replay'),
+    nextPuzzleCd: document.getElementById('next-puzzle-cd'),
     btnGuess: document.getElementById('btn-guess'),
     guessInput: document.getElementById('guess-input'),
     roundLabel: document.getElementById('round-label'),
@@ -35,10 +35,19 @@
     showBest();
     dom.btnStart.addEventListener('click', startGame);
     dom.btnNext.addEventListener('click', nextRound);
-    dom.btnReplay.addEventListener('click', startGame);
     dom.btnGuess.addEventListener('click', submitGuess);
     dom.guessInput.addEventListener('keydown', function (e) {
       if (e.key === 'Enter') submitGuess();
+    });
+
+    // Difficulty picker
+    var diffBtns = document.querySelectorAll('.diff-btn');
+    diffBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        diffBtns.forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        revealInterval = parseInt(btn.getAttribute('data-speed'));
+      });
     });
   }
 
@@ -112,7 +121,7 @@
     boxes[state.revealed].classList.add('revealed');
     state.revealed++;
 
-    revealTimer = setTimeout(revealNext, REVEAL_INTERVAL);
+    revealTimer = setTimeout(revealNext, revealInterval);
   }
 
   function submitGuess() {
@@ -190,12 +199,21 @@
     dom.finalRank.textContent = rank;
     dom.finalStats.innerHTML =
       state.correctCount + ' / ' + TOTAL_ROUNDS + ' correct<br>' +
-      state.earlyGuesses + ' early guesses (≤ 2 letters)';
+      state.earlyGuesses + ' early guesses (\u2264 2 letters)';
 
     Daily.saveDailyResult('drift', state.score);
     const prev = parseInt(localStorage.getItem('drift-best') || '0');
     if (state.score > prev) localStorage.setItem('drift-best', state.score);
     showBest();
+
+    // Countdown to next puzzle
+    function tickCd() {
+      dom.nextPuzzleCd.innerHTML =
+        '<span class="cd-label">NEW PUZZLE IN</span>' +
+        '<span class="cd-time">' + Daily.formatCountdown() + '</span>';
+    }
+    tickCd();
+    setInterval(tickCd, 1000);
   }
 
   init();
