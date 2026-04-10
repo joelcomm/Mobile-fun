@@ -25,9 +25,9 @@ const PUZZLES = [
     instruction: "Shortest to tallest",
     category: "Structures by Height",
     items: [
+      { label: "Leaning Tower of Pisa", value: 56 },
       { label: "Statue of Liberty", value: 93 },
       { label: "Big Ben", value: 96 },
-      { label: "Leaning Tower of Pisa", value: 56 },
       { label: "Great Pyramid of Giza", value: 139 },
       { label: "Eiffel Tower", value: 330 }
     ]
@@ -380,8 +380,8 @@ const PUZZLES = [
     items: [
       { label: "Breaking Bad", value: 62 },
       { label: "Game of Thrones", value: 73 },
-      { label: "Friends", value: 236 },
       { label: "Seinfeld", value: 180 },
+      { label: "Friends", value: 236 },
       { label: "The Simpsons", value: 750 }
     ]
   },
@@ -446,8 +446,8 @@ const PUZZLES = [
     items: [
       { label: "Copper", value: 0.25 },
       { label: "Silver", value: 25 },
-      { label: "Gold", value: 2000 },
       { label: "Platinum", value: 1000 },
+      { label: "Gold", value: 2000 },
       { label: "Rhodium", value: 4500 }
     ]
   },
@@ -510,8 +510,8 @@ const PUZZLES = [
     instruction: "Fewest to most goals in career",
     category: "Soccer Players by Career Goals",
     items: [
-      { label: "Zinedine Zidane", value: 156 },
       { label: "David Beckham", value: 127 },
+      { label: "Zinedine Zidane", value: 156 },
       { label: "Ronaldinho", value: 219 },
       { label: "Lionel Messi", value: 838 },
       { label: "Cristiano Ronaldo", value: 900 }
@@ -576,9 +576,9 @@ const PUZZLES = [
     instruction: "Fewest to most keys",
     category: "Instruments by Number of Keys/Strings",
     items: [
+      { label: "Trumpet (valves)", value: 3 },
       { label: "Ukulele (strings)", value: 4 },
       { label: "Guitar (strings)", value: 6 },
-      { label: "Trumpet (valves)", value: 3 },
       { label: "Saxophone (keys)", value: 23 },
       { label: "Piano (keys)", value: 88 }
     ]
@@ -596,13 +596,13 @@ const PUZZLES = [
   },
   {
     instruction: "Least to most venomous",
-    category: "Snakes by LD50 (lower = more venomous)",
+    category: "Venomous Snakes by Danger",
     items: [
-      { label: "Copperhead", value: 10.9 },
-      { label: "King Cobra", value: 1.8 },
-      { label: "Black Mamba", value: 0.32 },
-      { label: "Eastern Brown", value: 0.053 },
-      { label: "Inland Taipan", value: 0.025 }
+      { label: "Copperhead", value: 1 },
+      { label: "King Cobra", value: 2 },
+      { label: "Black Mamba", value: 3 },
+      { label: "Eastern Brown Snake", value: 4 },
+      { label: "Inland Taipan", value: 5 }
     ]
   },
   {
