@@ -1,18 +1,18 @@
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 :root {
-  --bg: #0b0a0f;
-  --card: #14131c;
-  --card-border: #26253a;
-  --accent: #4ee68a;
-  --accent-dim: rgba(78, 230, 138, 0.12);
-  --correct: #3ecf72;
-  --wrong: #e84057;
-  --locked: #3e8cf0;
-  --locked-dim: rgba(62, 140, 240, 0.12);
-  --text: #e8e8ee;
-  --text-dim: #a0a0b0;
-  --white: #f0f0f5;
+  --bg: #f8f8fa;
+  --card: #ffffff;
+  --card-border: #dddde4;
+  --accent: #1a9850;
+  --accent-dim: rgba(26, 152, 80, 0.1);
+  --correct: #1a9a45;
+  --wrong: #d03040;
+  --locked: #3070d0;
+  --locked-dim: rgba(48, 112, 208, 0.1);
+  --text: #2a2a3e;
+  --text-dim: #6b6b80;
+  --white: #1a1a2e;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
@@ -31,7 +31,7 @@ html, body {
 
 .back-link {
   position: fixed; top: 12px; left: 12px; font-size: 13px;
-  color: #a0a0b0; text-decoration: none; letter-spacing: 1px;
+  color: #6b6b80; text-decoration: none; letter-spacing: 1px;
   font-family: sans-serif; z-index: 999; padding: 8px;
 }
 
@@ -57,7 +57,7 @@ html, body {
 
 /* Buttons */
 .btn-main {
-  background: var(--accent); color: #000; font-family: inherit;
+  background: var(--accent); color: #fff; font-family: inherit;
   font-size: 18px; font-weight: 800; letter-spacing: 2px; border: none;
   border-radius: 10px; padding: 0 32px; min-height: 58px; cursor: pointer;
   transition: all 0.15s; text-transform: uppercase; width: 100%; max-width: 340px;

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#0a0a10">
+  <meta name="theme-color" content="#f8f8fa">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -14,15 +14,15 @@
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
     :root {
-      --bg: #0a0a10;
-      --card: #12121c;
-      --card-hover: #1a1a28;
-      --border: #24243a;
-      --text: #e8e8ee;
-      --text-dim: #a0a0b0;
-      --white: #f0f0f5;
-      --accent: #f5c542;
-      --green: #3ecf72;
+      --bg: #f8f8fa;
+      --card: #ffffff;
+      --card-hover: #f0f0f5;
+      --border: #dddde4;
+      --text: #2a2a3e;
+      --text-dim: #6b6b80;
+      --white: #1a1a2e;
+      --accent: #c89818;
+      --green: #1a9a45;
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
@@ -204,7 +204,7 @@
     }
 
     .gs-badge.done {
-      background: rgba(62, 207, 114, 0.12);
+      background: rgba(26, 154, 69, 0.08);
       color: var(--green);
     }
 
@@ -285,7 +285,7 @@
       display: flex; align-items: center; justify-content: center;
       border-radius: 10px;
       font-size: 22px;
-      background: rgba(0, 245, 196, 0.12);
+      background: rgba(0, 152, 120, 0.08);
     }
 
     .vanish-info { flex: 1; }
@@ -294,7 +294,7 @@
       font-size: 16px;
       font-weight: 800;
       letter-spacing: 1px;
-      color: #00f5c4;
+      color: #009878;
       margin-bottom: 2px;
     }
 
@@ -306,7 +306,7 @@
     .vanish-best {
       font-size: 24px;
       font-weight: 900;
-      color: #00f5c4;
+      color: #009878;
     }
 
     .vanish-best-label {
@@ -318,32 +318,32 @@
     }
 
     /* ─── Per-game accent colors ───────────────────────────────── */
-    .gs-threads .gs-icon { background: rgba(249,223,109,.12); }
-    .gs-threads .gs-name { color: #f9df6d; }
+    .gs-threads .gs-icon { background: rgba(138,109,0,.08); }
+    .gs-threads .gs-name { color: #8a6d00; }
 
-    .gs-alibi .gs-icon { background: rgba(240,184,64,.12); }
-    .gs-alibi .gs-name { color: #f0b840; }
+    .gs-alibi .gs-icon { background: rgba(200,144,24,.08); }
+    .gs-alibi .gs-name { color: #c89018; }
 
-    .gs-witness .gs-icon { background: rgba(200,168,78,.12); }
-    .gs-witness .gs-name { color: #c8a84e; }
+    .gs-witness .gs-icon { background: rgba(160,128,48,.08); }
+    .gs-witness .gs-name { color: #a08030; }
 
-    .gs-bluff .gs-icon { background: rgba(232,102,74,.12); }
-    .gs-bluff .gs-name { color: #e8664a; }
+    .gs-bluff .gs-icon { background: rgba(208,80,53,.08); }
+    .gs-bluff .gs-name { color: #d05035; }
 
-    .gs-lineup .gs-icon { background: rgba(108,140,255,.12); }
-    .gs-lineup .gs-name { color: #6c8cff; }
+    .gs-lineup .gs-icon { background: rgba(74,110,224,.08); }
+    .gs-lineup .gs-name { color: #4a6ee0; }
 
-    .gs-echo .gs-icon { background: rgba(160,108,213,.12); }
-    .gs-echo .gs-name { color: #a06cd5; }
+    .gs-echo .gs-icon { background: rgba(126,78,184,.08); }
+    .gs-echo .gs-name { color: #7e4eb8; }
 
-    .gs-drift .gs-icon { background: rgba(64,200,224,.12); }
-    .gs-drift .gs-name { color: #40c8e0; }
+    .gs-drift .gs-icon { background: rgba(24,144,168,.08); }
+    .gs-drift .gs-name { color: #1890a8; }
 
-    .gs-cipher .gs-icon { background: rgba(78,230,138,.12); }
-    .gs-cipher .gs-name { color: #4ee68a; }
+    .gs-cipher .gs-icon { background: rgba(26,152,80,.08); }
+    .gs-cipher .gs-name { color: #1a9850; }
 
-    .gs-reflex .gs-icon { background: rgba(245,197,66,.12); }
-    .gs-reflex .gs-name { color: #f5c542; }
+    .gs-reflex .gs-icon { background: rgba(200,152,24,.08); }
+    .gs-reflex .gs-name { color: #c89818; }
 
     /* Animations */
     @keyframes fadeInUp {
@@ -389,7 +389,7 @@
         <div class="summary-label">Best Streak</div>
       </div>
       <div class="summary-card">
-        <div id="sum-total" class="summary-num" style="color:#a06cd5">0</div>
+        <div id="sum-total" class="summary-num" style="color:#7e4eb8">0</div>
         <div class="summary-label">All Time</div>
       </div>
     </div>
@@ -526,9 +526,9 @@
 
     function getColor(key) {
       var colors = {
-        threads: '#f9df6d', alibi: '#f0b840', witness: '#c8a84e',
-        bluff: '#e8664a', lineup: '#6c8cff', echo: '#a06cd5',
-        drift: '#40c8e0', cipher: '#4ee68a', reflex: '#f5c542'
+        threads: '#8a6d00', alibi: '#c89018', witness: '#a08030',
+        bluff: '#d05035', lineup: '#4a6ee0', echo: '#7e4eb8',
+        drift: '#1890a8', cipher: '#1a9850', reflex: '#c89818'
       };
       return colors[key] || '#888';
     }

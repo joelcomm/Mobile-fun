@@ -1,25 +1,25 @@
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 :root {
-  --bg: #08090e;
-  --card: #12141c;
-  --card-border: #22253a;
-  --accent: #a06cd5;
-  --accent-dim: rgba(160, 108, 213, 0.12);
-  --correct: #3ecf72;
-  --wrong: #e84057;
-  --text: #e8e8ee;
-  --text-dim: #a0a0b0;
-  --white: #f0f0f5;
+  --bg: #f8f8fa;
+  --card: #ffffff;
+  --card-border: #dddde4;
+  --accent: #7e4eb8;
+  --accent-dim: rgba(126, 78, 184, 0.1);
+  --correct: #1a9a45;
+  --wrong: #d03040;
+  --text: #2a2a3e;
+  --text-dim: #6b6b80;
+  --white: #1a1a2e;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 
-  --c0: #e84057;
-  --c1: #3e8cf0;
-  --c2: #3ecf72;
-  --c3: #f0b840;
-  --c4: #a06cd5;
-  --c5: #e8834a;
+  --c0: #d03040;
+  --c1: #3070d0;
+  --c2: #1a9a45;
+  --c3: #c89018;
+  --c4: #7e4eb8;
+  --c5: #c86830;
 }
 
 html, body {
@@ -47,7 +47,7 @@ html, body {
   top: 12px;
   left: 12px;
   font-size: 13px;
-  color: #a0a0b0;
+  color: #6b6b80;
   text-decoration: none;
   letter-spacing: 1px;
   font-family: sans-serif;

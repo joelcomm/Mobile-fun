@@ -7,17 +7,17 @@
 }
 
 :root {
-  --bg: #0c0c14;
-  --bg-card: #151522;
-  --bg-hover: #1c1c2e;
-  --border: #2a2a3d;
-  --text: #e8e8ee;
-  --text-dim: #a0a0b0;
-  --text-bright: #f0f0f5;
-  --accent: #c8a84e;
-  --accent-dim: #8a6e2a;
-  --correct: #3ecf72;
-  --wrong: #e84057;
+  --bg: #f8f8fa;
+  --bg-card: #ffffff;
+  --bg-hover: #f0f0f5;
+  --border: #dddde4;
+  --text: #2a2a3e;
+  --text-dim: #6b6b80;
+  --text-bright: #1a1a2e;
+  --accent: #a08030;
+  --accent-dim: #7a6020;
+  --correct: #1a9a45;
+  --wrong: #d03040;
   --font-display: 'Special Elite', 'Courier New', monospace;
   --font-body: 'Inter', -apple-system, sans-serif;
   --safe-top: env(safe-area-inset-top, 0px);
@@ -69,7 +69,7 @@ html, body {
   font-size: 46px;
   letter-spacing: 8px;
   color: var(--accent);
-  text-shadow: 0 0 40px rgba(200, 168, 78, 0.25);
+  text-shadow: 0 0 40px rgba(160, 128, 48, 0.15);
 }
 
 .tagline {
@@ -243,13 +243,13 @@ html, body {
 
 .option-btn.correct {
   border-color: var(--correct);
-  background: rgba(62, 207, 114, 0.15);
+  background: rgba(26, 154, 69, 0.1);
   color: var(--correct);
 }
 
 .option-btn.wrong {
   border-color: var(--wrong);
-  background: rgba(232, 64, 87, 0.15);
+  background: rgba(208, 48, 64, 0.1);
   color: var(--wrong);
 }
 
@@ -320,13 +320,13 @@ html, body {
 
 .lie-btn.correct {
   border-color: var(--correct);
-  background: rgba(62, 207, 114, 0.15);
+  background: rgba(26, 154, 69, 0.1);
   color: var(--correct);
 }
 
 .lie-btn.wrong {
   border-color: var(--wrong);
-  background: rgba(232, 64, 87, 0.15);
+  background: rgba(208, 48, 64, 0.1);
   color: var(--wrong);
 }
 
@@ -378,13 +378,13 @@ html, body {
 }
 
 .rq-dot.right {
-  background: rgba(62, 207, 114, 0.15);
+  background: rgba(26, 154, 69, 0.1);
   border: 1.5px solid var(--correct);
   color: var(--correct);
 }
 
 .rq-dot.wrong-dot {
-  background: rgba(232, 64, 87, 0.15);
+  background: rgba(208, 48, 64, 0.1);
   border: 1.5px solid var(--wrong);
   color: var(--wrong);
 }
@@ -446,7 +446,7 @@ html, body {
   font-weight: 900;
   color: var(--accent);
   margin-top: 16px;
-  text-shadow: 0 0 30px rgba(200, 168, 78, 0.3);
+  text-shadow: 0 0 30px rgba(160, 128, 48, 0.15);
 }
 
 .rank-title {

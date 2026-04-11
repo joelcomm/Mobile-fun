@@ -93,13 +93,13 @@ const Daily = (function () {
       st.id = 'daily-css';
       st.textContent =
         '.daily-hdr{text-align:center;margin-bottom:12px}' +
-        '.daily-badge{display:inline-block;padding:3px 12px;border-radius:4px;font-size:11px;font-weight:800;letter-spacing:2px;background:rgba(245,197,66,.14);color:#f5c542;margin-bottom:6px}' +
-        '.daily-date{font-size:14px;letter-spacing:1px;color:#b0b0be}' +
-        '.daily-streak{font-size:14px;color:#f5c542;letter-spacing:1px;margin-top:2px}' +
-        '.daily-done{text-align:center;margin:12px 0;padding:16px;background:rgba(62,207,114,.08);border:1px solid rgba(62,207,114,.2);border-radius:10px}' +
-        '.daily-done-lbl{font-size:13px;font-weight:700;color:#3ecf72;letter-spacing:2px;margin-bottom:4px}' +
-        '.daily-done-score{font-size:32px;font-weight:900;color:#3ecf72}' +
-        '.daily-cd{font-size:13px;color:#a0a0b0;letter-spacing:1px;margin-top:8px}';
+        '.daily-badge{display:inline-block;padding:3px 12px;border-radius:4px;font-size:11px;font-weight:800;letter-spacing:2px;background:rgba(200,152,24,.1);color:#c89818;margin-bottom:6px}' +
+        '.daily-date{font-size:14px;letter-spacing:1px;color:#6b6b80}' +
+        '.daily-streak{font-size:14px;color:#c89818;letter-spacing:1px;margin-top:2px}' +
+        '.daily-done{text-align:center;margin:12px 0;padding:16px;background:rgba(26,154,69,.06);border:1px solid rgba(26,154,69,.15);border-radius:10px}' +
+        '.daily-done-lbl{font-size:13px;font-weight:700;color:#1a9a45;letter-spacing:2px;margin-bottom:4px}' +
+        '.daily-done-score{font-size:32px;font-weight:900;color:#1a9a45}' +
+        '.daily-cd{font-size:13px;color:#6b6b80;letter-spacing:1px;margin-top:8px}';
       document.head.appendChild(st);
     }
 

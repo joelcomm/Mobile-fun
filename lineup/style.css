@@ -1,18 +1,18 @@
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 :root {
-  --bg: #0b0c10;
-  --card: #14161e;
-  --card-border: #24273a;
-  --accent: #6c8cff;
-  --accent-dim: rgba(108, 140, 255, 0.12);
-  --correct: #3ecf72;
-  --correct-dim: rgba(62, 207, 114, 0.1);
-  --wrong: #e84057;
-  --wrong-dim: rgba(232, 64, 87, 0.1);
-  --text: #e8e8ee;
-  --text-dim: #a0a0b0;
-  --white: #f0f0f5;
+  --bg: #f8f8fa;
+  --card: #ffffff;
+  --card-border: #dddde4;
+  --accent: #4a6ee0;
+  --accent-dim: rgba(74, 110, 224, 0.1);
+  --correct: #1a9a45;
+  --correct-dim: rgba(26, 154, 69, 0.1);
+  --wrong: #d03040;
+  --wrong-dim: rgba(208, 48, 64, 0.1);
+  --text: #2a2a3e;
+  --text-dim: #6b6b80;
+  --white: #1a1a2e;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
@@ -42,7 +42,7 @@ html, body {
   top: 12px;
   left: 12px;
   font-size: 13px;
-  color: #a0a0b0;
+  color: #6b6b80;
   text-decoration: none;
   letter-spacing: 1px;
   font-family: sans-serif;
@@ -259,7 +259,7 @@ html, body {
   margin-bottom: 16px;
 }
 .rf-text.perfect { color: var(--correct); }
-.rf-text.close { color: #f0b840; }
+.rf-text.close { color: #c89018; }
 .rf-text.miss { color: var(--wrong); }
 
 .rf-correct-order {

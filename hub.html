@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#0a0a10">
+  <meta name="theme-color" content="#f8f8fa">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -14,13 +14,13 @@
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
     :root {
-      --bg: #0a0a10;
-      --card: #12121c;
-      --card-hover: #1a1a28;
-      --border: #24243a;
-      --text: #e8e8ee;
-      --text-dim: #a0a0b0;
-      --white: #f0f0f5;
+      --bg: #f8f8fa;
+      --card: #ffffff;
+      --card-hover: #f0f0f5;
+      --border: #dddde4;
+      --text: #2a2a3e;
+      --text-dim: #6b6b80;
+      --white: #1a1a2e;
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
@@ -77,7 +77,8 @@
       text-decoration: none;
       color: inherit;
       background: var(--card);
-      border: 1.5px solid var(--border);
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
       border-radius: 12px;
       padding: 24px;
       transition: all 0.15s;
@@ -130,45 +131,45 @@
     }
 
     /* Per-game accent colors */
-    .threads .card-icon { background: rgba(249, 223, 109, 0.12); }
-    .threads .card-title { color: #f9df6d; }
-    .threads .card-tag { background: rgba(249, 223, 109, 0.1); color: #f9df6d; }
+    .threads .card-icon { background: rgba(138, 109, 0, 0.08); }
+    .threads .card-title { color: #8a6d00; }
+    .threads .card-tag { background: rgba(138, 109, 0, 0.06); color: #8a6d00; }
 
-    .alibi .card-icon { background: rgba(240, 184, 64, 0.12); }
-    .alibi .card-title { color: #f0b840; }
-    .alibi .card-tag { background: rgba(240, 184, 64, 0.1); color: #f0b840; }
+    .alibi .card-icon { background: rgba(200, 144, 24, 0.08); }
+    .alibi .card-title { color: #c89018; }
+    .alibi .card-tag { background: rgba(200, 144, 24, 0.06); color: #c89018; }
 
-    .witness .card-icon { background: rgba(200, 168, 78, 0.12); }
-    .witness .card-title { color: #c8a84e; }
-    .witness .card-tag { background: rgba(200, 168, 78, 0.1); color: #c8a84e; }
+    .witness .card-icon { background: rgba(160, 128, 48, 0.08); }
+    .witness .card-title { color: #a08030; }
+    .witness .card-tag { background: rgba(160, 128, 48, 0.06); color: #a08030; }
 
-    .bluff .card-icon { background: rgba(232, 102, 74, 0.12); }
-    .bluff .card-title { color: #e8664a; }
-    .bluff .card-tag { background: rgba(232, 102, 74, 0.1); color: #e8664a; }
+    .bluff .card-icon { background: rgba(208, 80, 53, 0.08); }
+    .bluff .card-title { color: #d05035; }
+    .bluff .card-tag { background: rgba(208, 80, 53, 0.06); color: #d05035; }
 
-    .lineup .card-icon { background: rgba(108, 140, 255, 0.12); }
-    .lineup .card-title { color: #6c8cff; }
-    .lineup .card-tag { background: rgba(108, 140, 255, 0.1); color: #6c8cff; }
+    .lineup .card-icon { background: rgba(74, 110, 224, 0.08); }
+    .lineup .card-title { color: #4a6ee0; }
+    .lineup .card-tag { background: rgba(74, 110, 224, 0.06); color: #4a6ee0; }
 
-    .echo .card-icon { background: rgba(160, 108, 213, 0.12); }
-    .echo .card-title { color: #a06cd5; }
-    .echo .card-tag { background: rgba(160, 108, 213, 0.1); color: #a06cd5; }
+    .echo .card-icon { background: rgba(126, 78, 184, 0.08); }
+    .echo .card-title { color: #7e4eb8; }
+    .echo .card-tag { background: rgba(126, 78, 184, 0.06); color: #7e4eb8; }
 
-    .drift .card-icon { background: rgba(64, 200, 224, 0.12); }
-    .drift .card-title { color: #40c8e0; }
-    .drift .card-tag { background: rgba(64, 200, 224, 0.1); color: #40c8e0; }
+    .drift .card-icon { background: rgba(24, 144, 168, 0.08); }
+    .drift .card-title { color: #1890a8; }
+    .drift .card-tag { background: rgba(24, 144, 168, 0.06); color: #1890a8; }
 
-    .cipher .card-icon { background: rgba(78, 230, 138, 0.12); }
-    .cipher .card-title { color: #4ee68a; }
-    .cipher .card-tag { background: rgba(78, 230, 138, 0.1); color: #4ee68a; }
+    .cipher .card-icon { background: rgba(26, 152, 80, 0.08); }
+    .cipher .card-title { color: #1a9850; }
+    .cipher .card-tag { background: rgba(26, 152, 80, 0.06); color: #1a9850; }
 
-    .reflex .card-icon { background: rgba(245, 197, 66, 0.12); }
-    .reflex .card-title { color: #f5c542; }
-    .reflex .card-tag { background: rgba(245, 197, 66, 0.1); color: #f5c542; }
+    .reflex .card-icon { background: rgba(200, 152, 24, 0.08); }
+    .reflex .card-title { color: #c89818; }
+    .reflex .card-tag { background: rgba(200, 152, 24, 0.06); color: #c89818; }
 
-    .vanish .card-icon { background: rgba(0, 245, 196, 0.12); }
-    .vanish .card-title { color: #00f5c4; }
-    .vanish .card-tag { background: rgba(0, 245, 196, 0.1); color: #00f5c4; }
+    .vanish .card-icon { background: rgba(0, 152, 120, 0.08); }
+    .vanish .card-title { color: #009878; }
+    .vanish .card-tag { background: rgba(0, 152, 120, 0.06); color: #009878; }
 
     /* ─── Hub Progress & Stats ─────────────────────────────────── */
     .hub-progress {
@@ -189,7 +190,7 @@
       letter-spacing: 1px;
     }
     .progress-count strong {
-      color: #3ecf72;
+      color: #1a9a45;
       font-size: 22px;
       font-weight: 900;
     }
@@ -205,7 +206,7 @@
       background: var(--border);
       transition: background 0.3s;
     }
-    .pdot.filled { background: #3ecf72; }
+    .pdot.filled { background: #1a9a45; }
 
     .stats-link {
       display: inline-block;
@@ -232,8 +233,8 @@
       font-size: 10px;
       font-weight: 800;
       letter-spacing: 1px;
-      background: rgba(62, 207, 114, 0.1);
-      color: #3ecf72;
+      background: rgba(26, 154, 69, 0.08);
+      color: #1a9a45;
     }
 
     .card-streak-badge {
@@ -247,8 +248,8 @@
       font-size: 10px;
       font-weight: 800;
       letter-spacing: 1px;
-      background: rgba(245, 197, 66, 0.1);
-      color: #f5c542;
+      background: rgba(200, 152, 24, 0.08);
+      color: #c89818;
     }
     footer {
       text-align: center;
