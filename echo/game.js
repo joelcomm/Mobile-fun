@@ -9,7 +9,7 @@
     gameScreen: document.getElementById('game-screen'),
     gameoverScreen: document.getElementById('gameover-screen'),
     btnStart: document.getElementById('btn-start'),
-    btnReplay: document.getElementById('btn-replay'),
+    nextCd: document.getElementById('next-cd'),
     roundLabel: document.getElementById('round-label'),
     scoreLabel: document.getElementById('score-label'),
     statusLabel: document.getElementById('status-label'),
@@ -29,7 +29,6 @@
     Daily.injectDailyInfo('#title-screen', 'echo');
     showBest();
     dom.btnStart.addEventListener('click', startGame);
-    dom.btnReplay.addEventListener('click', startGame);
     dom.tileGrid.addEventListener('click', handleTap);
   }
 
@@ -216,6 +215,12 @@
     const prev = parseInt(localStorage.getItem('echo-best') || '0');
     if (state.score > prev) localStorage.setItem('echo-best', state.score);
     showBest();
+
+    function tickCd() {
+      dom.nextCd.innerHTML = '<span style="display:block;font-size:11px;letter-spacing:2px;color:#6b6b80;margin-bottom:4px">NEW PUZZLE IN</span>' + Daily.formatCountdown();
+    }
+    tickCd();
+    setInterval(tickCd, 1000);
   }
 
   init();

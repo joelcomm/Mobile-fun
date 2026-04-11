@@ -99,7 +99,8 @@ const Daily = (function () {
         '.daily-done{text-align:center;margin:12px 0;padding:16px;background:rgba(26,154,69,.06);border:1px solid rgba(26,154,69,.15);border-radius:10px}' +
         '.daily-done-lbl{font-size:13px;font-weight:700;color:#1a9a45;letter-spacing:2px;margin-bottom:4px}' +
         '.daily-done-score{font-size:32px;font-weight:900;color:#1a9a45}' +
-        '.daily-cd{font-size:13px;color:#6b6b80;letter-spacing:1px;margin-top:8px}';
+        '.daily-cd{font-size:13px;color:#6b6b80;letter-spacing:1px;margin-top:8px}' +
+        '.daily-hub-link{display:inline-block;margin-top:14px;padding:14px 32px;background:var(--accent,#c89818);color:#fff;border-radius:10px;font-size:16px;font-weight:800;letter-spacing:2px;text-decoration:none;text-align:center}';
       document.head.appendChild(st);
     }
 
@@ -123,14 +124,15 @@ const Daily = (function () {
       box.innerHTML =
         '<p class="daily-done-lbl">COMPLETED TODAY</p>' +
         '<p class="daily-done-score">' + res.score + '</p>' +
-        '<p class="daily-cd" id="daily-cd"></p>';
+        '<p class="daily-cd" id="daily-cd"></p>' +
+        '<a href="../hub.html" class="daily-hub-link">ALL GAMES</a>';
       var btn = el.querySelector('.btn-main');
       if (btn) {
-        btn.textContent = 'PLAY AGAIN';
+        btn.style.display = 'none';
         el.insertBefore(box, btn);
       }
       var cdEl = box.querySelector('#daily-cd');
-      function tick() { cdEl.textContent = 'Next puzzle in ' + formatCountdown(); }
+      function tick() { cdEl.textContent = 'New puzzle in ' + formatCountdown(); }
       tick(); setInterval(tick, 1000);
     }
   }

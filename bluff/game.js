@@ -7,7 +7,7 @@
     gameoverScreen: document.getElementById('gameover-screen'),
     btnStart: document.getElementById('btn-start'),
     btnNext: document.getElementById('btn-next'),
-    btnReplay: document.getElementById('btn-replay'),
+    nextCd: document.getElementById('next-cd'),
     roundLabel: document.getElementById('round-label'),
     scoreLabel: document.getElementById('score-label'),
     streakBar: document.getElementById('streak-bar'),
@@ -29,7 +29,6 @@
     showBest();
     dom.btnStart.addEventListener('click', startGame);
     dom.btnNext.addEventListener('click', nextRound);
-    dom.btnReplay.addEventListener('click', startGame);
     dom.statements.addEventListener('click', handlePick);
   }
 
@@ -169,6 +168,12 @@
     showBest();
 
     dom.streakBar.style.setProperty('--progress', '100%');
+
+    function tickCd() {
+      dom.nextCd.innerHTML = '<span style="display:block;font-size:11px;letter-spacing:2px;color:#6b6b80;margin-bottom:4px">NEW PUZZLE IN</span>' + Daily.formatCountdown();
+    }
+    tickCd();
+    setInterval(tickCd, 1000);
   }
 
   init();

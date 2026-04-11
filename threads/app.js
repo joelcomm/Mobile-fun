@@ -19,7 +19,7 @@ const overlay = document.getElementById("overlay");
 const overlayTitle = document.getElementById("overlay-title");
 const overlayResults = document.getElementById("overlay-results");
 const overlayAnswers = document.getElementById("overlay-answers");
-const btnNext = document.getElementById("btn-next");
+const nextCd = document.getElementById("next-cd");
 const btnShare = document.getElementById("btn-share");
 const btnPrevPuzzle = document.getElementById("btn-prev-puzzle");
 const btnNextPuzzle = document.getElementById("btn-next-puzzle");
@@ -283,6 +283,12 @@ function endGame(won) {
     });
 
   overlay.classList.remove("hidden");
+
+  function tickCd() {
+    nextCd.innerHTML = '<span style="display:block;font-size:11px;letter-spacing:2px;color:#6b6b80;margin-bottom:4px">NEW PUZZLE IN</span>' + Daily.formatCountdown();
+  }
+  tickCd();
+  setInterval(tickCd, 1000);
 }
 
 // ─── Share ───────────────────────────────────────────────────────
@@ -344,12 +350,6 @@ btnDeselect.addEventListener("click", () => {
   updateButtons();
 });
 btnSubmit.addEventListener("click", submitGuess);
-btnNext.addEventListener("click", () => {
-  if (currentPuzzleIndex < PUZZLES.length - 1) {
-    currentPuzzleIndex++;
-    initPuzzle();
-  }
-});
 btnShare.addEventListener("click", shareResults);
 
 btnPrevPuzzle.addEventListener("click", () => {

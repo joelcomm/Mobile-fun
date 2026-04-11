@@ -357,6 +357,12 @@ function showGameOver() {
 
   Daily.saveDailyResult('witness', score);
   showScreen('gameover');
+
+  function tickCd() {
+    nextCd.innerHTML = '<span style="display:block;font-size:11px;letter-spacing:2px;color:#6b6b80;margin-bottom:4px">NEW PUZZLE IN</span>' + Daily.formatCountdown();
+  }
+  tickCd();
+  setInterval(tickCd, 1000);
 }
 
 // ─── Event Listeners ─────────────────────────────
@@ -374,10 +380,7 @@ dom.btnNextRound.addEventListener('click', () => {
   }
 });
 
-document.getElementById('btn-replay').addEventListener('click', () => {
-  initGame();
-  startRound();
-});
+const nextCd = document.getElementById('next-cd');
 
 // Prevent scrolling during gameplay
 document.addEventListener('touchmove', (e) => {

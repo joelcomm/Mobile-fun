@@ -8,7 +8,7 @@
     gameoverScreen: document.getElementById('gameover-screen'),
     btnStart: document.getElementById('btn-start'),
     btnNext: document.getElementById('btn-next'),
-    nextPuzzleCd: document.getElementById('next-puzzle-cd'),
+    nextCd: document.getElementById('next-cd'),
     btnGuess: document.getElementById('btn-guess'),
     guessInput: document.getElementById('guess-input'),
     roundLabel: document.getElementById('round-label'),
@@ -206,11 +206,8 @@
     if (state.score > prev) localStorage.setItem('drift-best', state.score);
     showBest();
 
-    // Countdown to next puzzle
     function tickCd() {
-      dom.nextPuzzleCd.innerHTML =
-        '<span class="cd-label">NEW PUZZLE IN</span>' +
-        '<span class="cd-time">' + Daily.formatCountdown() + '</span>';
+      dom.nextCd.innerHTML = '<span style="display:block;font-size:11px;letter-spacing:2px;color:#6b6b80;margin-bottom:4px">NEW PUZZLE IN</span>' + Daily.formatCountdown();
     }
     tickCd();
     setInterval(tickCd, 1000);

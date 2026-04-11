@@ -11,7 +11,7 @@
     btnStart: document.getElementById('btn-start'),
     btnLeft: document.getElementById('btn-left'),
     btnRight: document.getElementById('btn-right'),
-    btnReplay: document.getElementById('btn-replay'),
+    nextCd: document.getElementById('next-cd'),
     labelLeft: document.getElementById('label-left'),
     labelRight: document.getElementById('label-right'),
     scoreLabel: document.getElementById('score-label'),
@@ -34,7 +34,6 @@
     Daily.injectDailyInfo('#title-screen', 'reflex');
     showBest();
     dom.btnStart.addEventListener('click', startGame);
-    dom.btnReplay.addEventListener('click', startGame);
     dom.btnLeft.addEventListener('click', function () { answer('left'); });
     dom.btnRight.addEventListener('click', function () { answer('right'); });
   }
@@ -226,6 +225,12 @@
     const prev = parseInt(localStorage.getItem('reflex-best') || '0');
     if (state.score > prev) localStorage.setItem('reflex-best', state.score);
     showBest();
+
+    function tickCd() {
+      dom.nextCd.innerHTML = '<span style="display:block;font-size:11px;letter-spacing:2px;color:#6b6b80;margin-bottom:4px">NEW PUZZLE IN</span>' + Daily.formatCountdown();
+    }
+    tickCd();
+    setInterval(tickCd, 1000);
   }
 
   init();

@@ -9,7 +9,7 @@
     btnStart: document.getElementById('btn-start'),
     btnLock: document.getElementById('btn-lock'),
     btnNextRound: document.getElementById('btn-next-round'),
-    btnReplay: document.getElementById('btn-replay'),
+    nextCd: document.getElementById('next-cd'),
     roundLabel: document.getElementById('round-label'),
     scoreLabel: document.getElementById('score-label'),
     progressBar: document.getElementById('progress-bar'),
@@ -35,7 +35,6 @@
     dom.btnStart.addEventListener('click', startGame);
     dom.btnLock.addEventListener('click', lockIn);
     dom.btnNextRound.addEventListener('click', nextRound);
-    dom.btnReplay.addEventListener('click', startGame);
     setupDrag();
   }
 
@@ -214,6 +213,12 @@
     if (state.score > prev) localStorage.setItem('lineup-best', state.score);
     showBest();
     dom.progressBar.style.setProperty('--progress', '100%');
+
+    function tickCd() {
+      dom.nextCd.innerHTML = '<span style="display:block;font-size:11px;letter-spacing:2px;color:#6b6b80;margin-bottom:4px">NEW PUZZLE IN</span>' + Daily.formatCountdown();
+    }
+    tickCd();
+    setInterval(tickCd, 1000);
   }
 
   // ---- Touch drag-to-reorder ----
