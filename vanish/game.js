@@ -12,7 +12,7 @@
     btnPlay: document.getElementById('btn-play'),
     btnClear: document.getElementById('btn-clear'),
     btnSubmit: document.getElementById('btn-submit'),
-    btnReplay: document.getElementById('btn-replay'),
+    nextCd: document.getElementById('next-cd'),
     scoreDisplay: document.getElementById('score-display'),
     scoreNum: document.getElementById('score-num'),
     timerFill: document.getElementById('timer-fill'),
@@ -34,6 +34,7 @@
   var timerInterval = null;
   var vanishingId = null;
   var msgTimer = null;
+  var rng = null;
 
   function showScreen(name) {
     dom.introScreen.classList.add('hidden');
@@ -51,7 +52,7 @@
     var pool = LETTER_POOL.slice();
     var result = [];
     for (var i = 0; i < 25; i++) {
-      var idx = Math.floor(Math.random() * pool.length);
+      var idx = Math.floor(rng() * pool.length);
       result.push({ id: i, letter: pool[idx], alive: true });
       pool.splice(idx, 1);
       if (pool.length === 0) pool = LETTER_POOL.slice();
@@ -60,6 +61,7 @@
   }
 
   function startGame() {
+    rng = Daily.createRng(Daily.getDayNumber() * 7919);
     grid = generateGrid();
     selected = [];
     foundWords = [];
@@ -92,7 +94,7 @@
   function vanishRandomCell() {
     var alive = grid.filter(function (c) { return c.alive; });
     if (alive.length <= 2) return;
-    var target = alive[Math.floor(Math.random() * alive.length)];
+    var target = alive[Math.floor(rng() * alive.length)];
     vanishingId = target.id;
     selected = selected.filter(function (id) { return id !== target.id; });
     renderGrid();
@@ -248,12 +250,20 @@
     var prev = parseInt(localStorage.getItem('vanish-best') || '0');
     if (score > prev) localStorage.setItem('vanish-best', score);
     showBest();
+
+    Daily.saveDailyResult('vanish', score);
+
+    function tickCd() {
+      dom.nextCd.innerHTML = '<span style="display:block;font-size:11px;letter-spacing:2px;color:#6b6b80;margin-bottom:4px">NEW PUZZLE IN</span>' + Daily.formatCountdown();
+    }
+    tickCd();
+    setInterval(tickCd, 1000);
   }
 
   dom.btnPlay.addEventListener('click', startGame);
-  dom.btnReplay.addEventListener('click', startGame);
   dom.btnClear.addEventListener('click', clearSelection);
   dom.btnSubmit.addEventListener('click', submitWord);
 
+  Daily.injectDailyInfo('#intro-screen', 'vanish');
   showBest();
 })();

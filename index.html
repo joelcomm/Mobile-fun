@@ -139,10 +139,6 @@
     .alibi .card-title { color: #c89018; }
     .alibi .card-tag { background: rgba(200, 144, 24, 0.06); color: #c89018; }
 
-    .witness .card-icon { background: rgba(160, 128, 48, 0.08); }
-    .witness .card-title { color: #a08030; }
-    .witness .card-tag { background: rgba(160, 128, 48, 0.06); color: #a08030; }
-
     .bluff .card-icon { background: rgba(208, 80, 53, 0.08); }
     .bluff .card-title { color: #d05035; }
     .bluff .card-tag { background: rgba(208, 80, 53, 0.06); color: #d05035; }
@@ -274,7 +270,6 @@
     .game-card:nth-child(7) { animation-delay: 0.47s; }
     .game-card:nth-child(8) { animation-delay: 0.54s; }
     .game-card:nth-child(9) { animation-delay: 0.61s; }
-    .game-card:nth-child(10) { animation-delay: 0.68s; }
   </style>
 </head>
 <body>
@@ -303,15 +298,6 @@
         </div>
         <div class="card-desc">9 words. 1 culprit. Eight have alibis — they belong to one category. Find the word that fits them all.</div>
         <span class="card-tag">Word Mystery</span>
-      </a>
-
-      <a href="witness/" class="game-card witness">
-        <div class="card-top">
-          <div class="card-icon">&#x1F441;</div>
-          <div class="card-title">Witness</div>
-        </div>
-        <div class="card-desc">Read a scene. Memorize everything. Answer questions and spot the one detail that was a lie.</div>
-        <span class="card-tag">Memory &amp; Deduction</span>
       </a>
 
       <a href="bluff/" class="game-card bluff">
@@ -385,8 +371,8 @@
 
       // Completion tracking
       (function () {
-        var DAILY_KEYS = ['threads','alibi','witness','bluff','lineup','echo','drift','cipher','reflex'];
-        var DAILY_CSS = ['threads','alibi','witness','bluff','lineup','echo','drift','cipher','reflex'];
+        var DAILY_KEYS = ['threads','alibi','bluff','lineup','echo','drift','cipher','reflex','vanish'];
+        var DAILY_CSS = ['threads','alibi','bluff','lineup','echo','drift','cipher','reflex','vanish'];
         var done = 0;
         var cards = document.querySelectorAll('.game-card');
 

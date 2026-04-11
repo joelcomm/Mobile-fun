@@ -265,67 +265,12 @@
       color: var(--white);
     }
 
-    /* ─── Vanish Best ──────────────────────────────────────────── */
-    .vanish-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px 20px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 28px;
-      text-decoration: none;
-      color: inherit;
-    }
-    .vanish-card:active { background: var(--card-hover); }
-
-    .vanish-icon {
-      width: 44px; height: 44px;
-      display: flex; align-items: center; justify-content: center;
-      border-radius: 10px;
-      font-size: 22px;
-      background: rgba(0, 152, 120, 0.08);
-    }
-
-    .vanish-info { flex: 1; }
-
-    .vanish-name {
-      font-size: 16px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      color: #009878;
-      margin-bottom: 2px;
-    }
-
-    .vanish-desc {
-      font-size: 12px;
-      color: var(--text-dim);
-    }
-
-    .vanish-best {
-      font-size: 24px;
-      font-weight: 900;
-      color: #009878;
-    }
-
-    .vanish-best-label {
-      font-size: 9px;
-      font-weight: 700;
-      color: var(--text-dim);
-      letter-spacing: 1px;
-      text-align: right;
-    }
-
     /* ─── Per-game accent colors ───────────────────────────────── */
     .gs-threads .gs-icon { background: rgba(138,109,0,.08); }
     .gs-threads .gs-name { color: #8a6d00; }
 
     .gs-alibi .gs-icon { background: rgba(200,144,24,.08); }
     .gs-alibi .gs-name { color: #c89018; }
-
-    .gs-witness .gs-icon { background: rgba(160,128,48,.08); }
-    .gs-witness .gs-name { color: #a08030; }
 
     .gs-bluff .gs-icon { background: rgba(208,80,53,.08); }
     .gs-bluff .gs-name { color: #d05035; }
@@ -344,6 +289,9 @@
 
     .gs-reflex .gs-icon { background: rgba(200,152,24,.08); }
     .gs-reflex .gs-name { color: #c89818; }
+
+    .gs-vanish .gs-icon { background: rgba(0,152,120,.08); }
+    .gs-vanish .gs-name { color: #009878; }
 
     /* Animations */
     @keyframes fadeInUp {
@@ -410,20 +358,6 @@
     <div class="section-hdr">Daily Games</div>
     <div id="daily-games" class="game-stats"></div>
 
-    <!-- Vanish (non-daily) -->
-    <div class="section-hdr">Arcade</div>
-    <a href="vanish/" class="vanish-card" id="vanish-card">
-      <div class="vanish-icon">&#x1F7E9;</div>
-      <div class="vanish-info">
-        <div class="vanish-name">VANISH</div>
-        <div class="vanish-desc">Not a daily — play anytime</div>
-      </div>
-      <div style="text-align:right">
-        <div id="vanish-best" class="vanish-best">—</div>
-        <div class="vanish-best-label">BEST</div>
-      </div>
-    </a>
-
     <footer>Built with Claude</footer>
   </div>
 
@@ -433,13 +367,13 @@
     var GAMES = [
       { key: 'threads',  name: 'Threads',  icon: '\uD83E\uDDF5', href: 'threads/',  abbr: 'THR' },
       { key: 'alibi',    name: 'Alibi',    icon: '\uD83D\uDD75',  href: 'alibi/',    abbr: 'ALI' },
-      { key: 'witness',  name: 'Witness',  icon: '\uD83D\uDC41',  href: 'witness/',  abbr: 'WIT' },
       { key: 'bluff',    name: 'Bluff',    icon: '\uD83C\uDCCF', href: 'bluff/',    abbr: 'BLF' },
       { key: 'lineup',   name: 'Lineup',   icon: '\uD83D\uDCCA', href: 'lineup/',   abbr: 'LIN' },
       { key: 'echo',     name: 'Echo',     icon: '\uD83D\uDD19', href: 'echo/',     abbr: 'ECH' },
       { key: 'drift',    name: 'Drift',    icon: '\uD83D\uDCA8', href: 'drift/',    abbr: 'DRI' },
       { key: 'cipher',   name: 'Cipher',   icon: '\uD83D\uDD10', href: 'cipher/',   abbr: 'CIP' },
-      { key: 'reflex',   name: 'Reflex',   icon: '\u26A1',       href: 'reflex/',   abbr: 'RFX' }
+      { key: 'reflex',   name: 'Reflex',   icon: '\u26A1',       href: 'reflex/',   abbr: 'RFX' },
+      { key: 'vanish',   name: 'Vanish',   icon: '\uD83D\uDFE9', href: 'vanish/',   abbr: 'VAN' }
     ];
 
     var todayCount = 0;
@@ -520,15 +454,12 @@
       listEl.appendChild(a);
     });
 
-    // Vanish best
-    var vb = localStorage.getItem('vanish-best');
-    if (vb) document.getElementById('vanish-best').textContent = vb;
-
     function getColor(key) {
       var colors = {
-        threads: '#8a6d00', alibi: '#c89018', witness: '#a08030',
+        threads: '#8a6d00', alibi: '#c89018',
         bluff: '#d05035', lineup: '#4a6ee0', echo: '#7e4eb8',
-        drift: '#1890a8', cipher: '#1a9850', reflex: '#c89818'
+        drift: '#1890a8', cipher: '#1a9850', reflex: '#c89818',
+        vanish: '#009878'
       };
       return colors[key] || '#888';
     }
