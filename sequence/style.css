@@ -1,0 +1,263 @@
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+:root {
+  --bg: #f8f8fa;
+  --card: #ffffff;
+  --card-border: #dddde4;
+  --accent: #4a6ee0;
+  --accent-dim: rgba(74, 110, 224, 0.1);
+  --correct: #1a9a45;
+  --correct-dim: rgba(26, 154, 69, 0.1);
+  --wrong: #d03040;
+  --wrong-dim: rgba(208, 48, 64, 0.1);
+  --text: #2a2a3e;
+  --text-dim: #6b6b80;
+  --white: #1a1a2e;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 18px;
+  overflow-x: hidden;
+}
+
+#app {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 20px;
+  padding-top: calc(48px + var(--safe-top));
+  padding-bottom: calc(24px + var(--safe-bottom));
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.back-link {
+  position: fixed; top: 12px; left: 12px; font-size: 13px;
+  color: #6b6b80; text-decoration: none; letter-spacing: 1px;
+  font-family: sans-serif; z-index: 999; padding: 8px;
+}
+
+.hidden { display: none !important; }
+
+/* ── Title Screen ──────────────────────────────────────── */
+#title-screen {
+  text-align: center; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; flex: 1;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.title-icon { font-size: 64px; margin-bottom: 12px; }
+.game-title {
+  font-size: 48px; font-weight: 900; letter-spacing: 6px;
+  color: var(--accent);
+}
+.tagline {
+  font-size: 14px; letter-spacing: 3px; color: var(--text-dim);
+  margin-top: 8px; text-transform: uppercase;
+}
+.rules-box {
+  margin: 32px 0; text-align: left; background: var(--card);
+  border: 1.5px solid var(--card-border); border-radius: 12px;
+  padding: 20px 24px; width: 100%;
+}
+.rules-box p {
+  font-size: 16px; line-height: 1.8; color: var(--text);
+}
+.hl { color: var(--accent); font-weight: 700; }
+.best-score {
+  font-size: 13px; color: var(--text-dim); margin-top: 12px; letter-spacing: 1px;
+}
+
+/* ── Buttons ───────────────────────────────────────────── */
+.btn-main {
+  background: var(--accent); color: #fff; font-family: inherit;
+  font-size: 18px; font-weight: 800; letter-spacing: 2px; border: none;
+  border-radius: 10px; padding: 0 32px; min-height: 58px; cursor: pointer;
+  transition: all 0.15s; text-transform: uppercase; width: 100%; max-width: 340px;
+}
+.btn-main:active { transform: scale(0.97); opacity: 0.9; }
+
+/* ── Game Screen ───────────────────────────────────────── */
+#game-screen {
+  display: flex; flex-direction: column; flex: 1;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.game-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 8px;
+}
+.round-label {
+  font-size: 14px; font-weight: 700; letter-spacing: 2px;
+  color: var(--text-dim);
+}
+.score-label {
+  font-size: 22px; font-weight: 900; color: var(--accent);
+  letter-spacing: 1px;
+}
+
+.progress-bar {
+  height: 4px; background: var(--card-border); border-radius: 2px;
+  margin-bottom: 28px; overflow: hidden; position: relative;
+}
+.progress-bar::after {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: var(--progress, 0%); background: var(--accent);
+  border-radius: 2px; transition: width 0.3s ease;
+}
+
+/* ── Sequence Display ──────────────────────────────────── */
+.seq-section {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 32px;
+}
+
+.seq-label {
+  font-size: 12px; font-weight: 700; letter-spacing: 3px;
+  color: var(--text-dim); text-transform: uppercase;
+}
+
+.seq-row {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px; flex-wrap: wrap;
+}
+
+.seq-num {
+  min-width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; font-weight: 900; color: var(--white);
+  background: var(--card); border: 2px solid var(--card-border);
+  border-radius: 10px; padding: 0 12px;
+}
+
+.seq-num.mystery {
+  color: var(--accent); border-color: var(--accent);
+  background: var(--accent-dim);
+  font-size: 22px; letter-spacing: 2px;
+  min-width: 56px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.seq-num.mystery.revealed {
+  animation: none;
+}
+.seq-num.mystery.correct-reveal {
+  animation: none;
+  border-color: var(--correct); color: var(--correct);
+  background: var(--correct-dim);
+}
+.seq-num.mystery.wrong-reveal {
+  animation: none;
+  border-color: var(--wrong); color: var(--wrong);
+  background: var(--wrong-dim);
+}
+
+.seq-arrow {
+  font-size: 18px; color: var(--card-border); font-weight: 700;
+}
+
+/* ── Choices ───────────────────────────────────────────── */
+.choices {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  width: 100%; max-width: 320px;
+}
+
+.choice-btn {
+  background: var(--card); border: 2.5px solid var(--card-border);
+  border-radius: 12px; padding: 16px 8px;
+  font-family: inherit; font-size: 22px; font-weight: 800;
+  color: var(--white); cursor: pointer;
+  transition: all 0.15s; text-align: center;
+}
+.choice-btn:active { transform: scale(0.96); }
+
+.choice-btn.selected {
+  border-color: var(--accent); background: var(--accent-dim);
+  color: var(--accent);
+}
+.choice-btn.correct-pick {
+  border-color: var(--correct); background: var(--correct-dim);
+  color: var(--correct);
+}
+.choice-btn.wrong-pick {
+  border-color: var(--wrong); background: var(--wrong-dim);
+  color: var(--wrong);
+}
+.choice-btn.correct-reveal {
+  border-color: var(--correct); background: var(--correct-dim);
+  color: var(--correct);
+}
+.choice-btn.locked {
+  pointer-events: none; opacity: 0.5;
+}
+.choice-btn.locked.correct-pick,
+.choice-btn.locked.wrong-pick,
+.choice-btn.locked.correct-reveal {
+  opacity: 1;
+}
+
+/* ── Feedback ──────────────────────────────────────────── */
+.feedback {
+  margin-top: 20px; text-align: center;
+  animation: slideUp 0.3s ease-out;
+}
+.feedback-result {
+  font-size: 20px; font-weight: 800; letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+.feedback-result.correct { color: var(--correct); }
+.feedback-result.wrong { color: var(--wrong); }
+
+.feedback-hint {
+  font-size: 14px; line-height: 1.5; color: var(--text-dim);
+  margin-bottom: 18px;
+}
+
+.btn-next { max-width: 240px; margin: 0 auto; }
+
+/* ── Game Over ─────────────────────────────────────────── */
+#gameover-screen {
+  text-align: center; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; flex: 1;
+  animation: fadeIn 0.5s ease-out;
+}
+.gameover-heading {
+  font-size: 32px; font-weight: 900; letter-spacing: 4px;
+  color: var(--white); margin-bottom: 16px;
+}
+.final-score {
+  font-size: 64px; font-weight: 900; color: var(--accent);
+  margin-bottom: 8px;
+}
+.final-rank {
+  font-size: 20px; font-weight: 700; color: var(--text);
+  letter-spacing: 2px; margin-bottom: 24px;
+}
+.final-stats {
+  font-size: 15px; color: var(--text-dim); line-height: 2;
+  margin-bottom: 32px;
+}
+
+/* ── Animations ────────────────────────────────────────── */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+@media (max-height: 667px) {
+  .game-title { font-size: 38px; }
+  .rules-box { padding: 14px 18px; margin: 20px 0; }
+  .seq-num { min-width: 40px; height: 40px; font-size: 20px; }
+  .choice-btn { padding: 12px 6px; font-size: 18px; }
+}

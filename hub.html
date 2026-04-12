@@ -167,6 +167,10 @@
     .vanish .card-title { color: #009878; }
     .vanish .card-tag { background: rgba(0, 152, 120, 0.06); color: #009878; }
 
+    .sequence .card-icon { background: rgba(74, 110, 224, 0.08); }
+    .sequence .card-title { color: #4a6ee0; }
+    .sequence .card-tag { background: rgba(74, 110, 224, 0.06); color: #4a6ee0; }
+
     /* ─── Hub Progress & Stats ─────────────────────────────────── */
     .hub-progress {
       margin-top: 16px;
@@ -270,6 +274,7 @@
     .game-card:nth-child(7) { animation-delay: 0.47s; }
     .game-card:nth-child(8) { animation-delay: 0.54s; }
     .game-card:nth-child(9) { animation-delay: 0.61s; }
+    .game-card:nth-child(10) { animation-delay: 0.68s; }
   </style>
 </head>
 <body>
@@ -362,6 +367,15 @@
         <div class="card-desc">Letters disappear every 10 seconds. Find words before the grid is gone. Longer words score more.</div>
         <span class="card-tag">Word Hunt</span>
       </a>
+
+      <a href="sequence/" class="game-card sequence">
+        <div class="card-top">
+          <div class="card-icon">&#x1F522;</div>
+          <div class="card-title">Sequence</div>
+        </div>
+        <div class="card-desc">Study the pattern. Pick the missing number. 10 rounds of number sequences that get trickier.</div>
+        <span class="card-tag">Pattern &amp; Logic</span>
+      </a>
     </div>
 
     <footer>Built with Claude</footer>
@@ -371,8 +385,8 @@
 
       // Completion tracking
       (function () {
-        var DAILY_KEYS = ['threads','alibi','bluff','lineup','echo','drift','cipher','reflex','vanish'];
-        var DAILY_CSS = ['threads','alibi','bluff','lineup','echo','drift','cipher','reflex','vanish'];
+        var DAILY_KEYS = ['threads','alibi','bluff','lineup','echo','drift','cipher','reflex','vanish','sequence'];
+        var DAILY_CSS = ['threads','alibi','bluff','lineup','echo','drift','cipher','reflex','vanish','sequence'];
         var done = 0;
         var cards = document.querySelectorAll('.game-card');
 
@@ -400,12 +414,12 @@
         // Progress bar
         var prog = document.getElementById('hub-progress');
         var dots = '';
-        for (var i = 0; i < 9; i++) {
+        for (var i = 0; i < 10; i++) {
           dots += '<div class="pdot' + (i < done ? ' filled' : '') + '"></div>';
         }
         prog.innerHTML =
           '<div class="progress-ring">' +
-            '<div class="progress-count"><strong>' + done + '</strong>/9 today</div>' +
+            '<div class="progress-count"><strong>' + done + '</strong>/10 today</div>' +
             '<div class="progress-dots">' + dots + '</div>' +
           '</div>' +
           '<a href="stats.html" class="stats-link">VIEW STATS \u2192</a>';
