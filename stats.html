@@ -224,7 +224,7 @@
 
     .streak-grid {
       display: grid;
-      grid-template-columns: repeat(10, 1fr);
+      grid-template-columns: repeat(11, 1fr);
       gap: 6px;
     }
 
@@ -296,6 +296,9 @@
     .gs-sequence .gs-icon { background: rgba(74,110,224,.08); }
     .gs-sequence .gs-name { color: #4a6ee0; }
 
+    .gs-rank .gs-icon { background: rgba(184,150,10,.08); }
+    .gs-rank .gs-name { color: #b8960a; }
+
     /* Animations */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(12px); }
@@ -312,6 +315,7 @@
     .gs-card:nth-child(8) { animation-delay: 0.38s; }
     .gs-card:nth-child(9) { animation-delay: 0.43s; }
     .gs-card:nth-child(10) { animation-delay: 0.48s; }
+    .gs-card:nth-child(11) { animation-delay: 0.53s; }
 
     footer {
       text-align: center;
@@ -378,7 +382,8 @@
       { key: 'cipher',   name: 'Cipher',   icon: '\uD83D\uDD10', href: 'cipher/',   abbr: 'CIP' },
       { key: 'reflex',   name: 'Reflex',   icon: '\u26A1',       href: 'reflex/',   abbr: 'RFX' },
       { key: 'vanish',   name: 'Vanish',   icon: '\uD83D\uDFE9', href: 'vanish/',   abbr: 'VAN' },
-      { key: 'sequence', name: 'Sequence', icon: '\uD83D\uDD22', href: 'sequence/', abbr: 'SEQ' }
+      { key: 'sequence', name: 'Sequence', icon: '\uD83D\uDD22', href: 'sequence/', abbr: 'SEQ' },
+      { key: 'rank',     name: 'Rank',     icon: '\uD83C\uDFAF', href: 'rank/',     abbr: 'RNK' }
     ];
 
     var todayCount = 0;
@@ -408,7 +413,7 @@
     });
 
     // Summary cards
-    document.getElementById('sum-today').textContent = todayCount + '/10';
+    document.getElementById('sum-today').textContent = todayCount + '/11';
     document.getElementById('sum-streak').textContent = bestStreak;
     document.getElementById('sum-total').textContent = totalPlayed;
 
@@ -465,7 +470,8 @@
         bluff: '#d05035', lineup: '#4a6ee0', echo: '#7e4eb8',
         drift: '#1890a8', cipher: '#1a9850', reflex: '#c89818',
         vanish: '#009878',
-        sequence: '#4a6ee0'
+        sequence: '#4a6ee0',
+        rank: '#b8960a'
       };
       return colors[key] || '#888';
     }

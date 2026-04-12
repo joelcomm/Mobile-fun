@@ -171,6 +171,10 @@
     .sequence .card-title { color: #4a6ee0; }
     .sequence .card-tag { background: rgba(74, 110, 224, 0.06); color: #4a6ee0; }
 
+    .rank .card-icon { background: rgba(184, 150, 10, 0.08); }
+    .rank .card-title { color: #b8960a; }
+    .rank .card-tag { background: rgba(184, 150, 10, 0.06); color: #b8960a; }
+
     /* ─── Hub Progress & Stats ─────────────────────────────────── */
     .hub-progress {
       margin-top: 16px;
@@ -275,6 +279,7 @@
     .game-card:nth-child(8) { animation-delay: 0.54s; }
     .game-card:nth-child(9) { animation-delay: 0.61s; }
     .game-card:nth-child(10) { animation-delay: 0.68s; }
+    .game-card:nth-child(11) { animation-delay: 0.75s; }
   </style>
 </head>
 <body>
@@ -376,6 +381,15 @@
         <div class="card-desc">Study the pattern. Pick the missing number. 10 rounds of number sequences that get trickier.</div>
         <span class="card-tag">Pattern &amp; Logic</span>
       </a>
+
+      <a href="rank/" class="game-card rank">
+        <div class="card-top">
+          <div class="card-icon">&#x1F3AF;</div>
+          <div class="card-title">Rank</div>
+        </div>
+        <div class="card-desc">Four items, one hidden metric. Drag them into the correct order — then discover the surprising truth.</div>
+        <span class="card-tag">Ranking &amp; Trivia</span>
+      </a>
     </div>
 
     <footer>Built with Claude</footer>
@@ -385,8 +399,8 @@
 
       // Completion tracking
       (function () {
-        var DAILY_KEYS = ['threads','alibi','bluff','lineup','echo','drift','cipher','reflex','vanish','sequence'];
-        var DAILY_CSS = ['threads','alibi','bluff','lineup','echo','drift','cipher','reflex','vanish','sequence'];
+        var DAILY_KEYS = ['threads','alibi','bluff','lineup','echo','drift','cipher','reflex','vanish','sequence','rank'];
+        var DAILY_CSS = ['threads','alibi','bluff','lineup','echo','drift','cipher','reflex','vanish','sequence','rank'];
         var done = 0;
         var cards = document.querySelectorAll('.game-card');
 
@@ -414,12 +428,12 @@
         // Progress bar
         var prog = document.getElementById('hub-progress');
         var dots = '';
-        for (var i = 0; i < 10; i++) {
+        for (var i = 0; i < 11; i++) {
           dots += '<div class="pdot' + (i < done ? ' filled' : '') + '"></div>';
         }
         prog.innerHTML =
           '<div class="progress-ring">' +
-            '<div class="progress-count"><strong>' + done + '</strong>/10 today</div>' +
+            '<div class="progress-count"><strong>' + done + '</strong>/11 today</div>' +
             '<div class="progress-dots">' + dots + '</div>' +
           '</div>' +
           '<a href="stats.html" class="stats-link">VIEW STATS \u2192</a>';

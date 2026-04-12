@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0f0f0f">
+  <title>RANK</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: { colors: { accent: '#FFE500', surface: '#1a1a1a' } } }
+    };
+  </script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    body{font-family:'Inter',-apple-system,sans-serif;background:#0f0f0f;color:#fff;overflow-x:hidden}
+    @keyframes revealPop{0%{transform:scale(1)}30%{transform:scale(0.92)}70%{transform:scale(1.04)}100%{transform:scale(1)}}
+    @keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.6}}
+    .anim-pop{animation:revealPop 0.5s ease-out}
+    .anim-slide{animation:slideUp 0.5s ease-out both}
+    .anim-fade{animation:fadeIn 0.4s ease-out both}
+    .anim-pulse{animation:pulse 2s ease-in-out infinite}
+  </style>
+</head>
+<body>
+  <a href="../hub.html" style="position:fixed;top:12px;left:12px;z-index:999;font-size:13px;color:#555;text-decoration:none;letter-spacing:1px;padding:8px;font-family:sans-serif">&larr; GAMES</a>
+  <div id="root">
+    <div style="display:flex;align-items:center;justify-content:center;height:100dvh;color:#FFE500;font-family:sans-serif;font-weight:900;font-size:32px;letter-spacing:8px">RANK</div>
+  </div>
+  <script src="../daily.js"></script>
+  <script type="text/babel">
+    const { useState, useEffect, useRef, useMemo } = React;
+
+    /* ═══════════════════════════════════════════════════════
+       PUZZLE DATA — items listed in CORRECT order
+       ═══════════════════════════════════════════════════════ */
+    const PUZZLES = [
+      { // Day 0 — Sunday
+        items: [
+          { emoji: '🚗', name: 'Tesla Model 3' },
+          { emoji: '🐘', name: 'African Elephant' },
+          { emoji: '🌋', name: 'Mt. Vesuvius eruption' },
+          { emoji: '☀️', name: '1 sec of sunlight on Earth' },
+        ],
+        metric: 'Energy released',
+        fact: '1 second of sunlight hitting Earth equals 470,000 Hiroshima bombs.',
+        factEmoji: '☀️',
+      },
+      { // Day 1 — Monday
+        items: [
+          { emoji: '🦈', name: 'Great White Shark' },
+          { emoji: '🐊', name: 'Saltwater Crocodile' },
+          { emoji: '🦁', name: 'Lion' },
+          { emoji: '🦟', name: 'Mosquito' },
+        ],
+        metric: 'Annual human deaths caused',
+        fact: 'Mosquitoes kill 725,000+ humans per year. Sharks kill fewer than 10.',
+        factEmoji: '🦟',
+      },
+      { // Day 2 — Tuesday
+        items: [
+          { emoji: '🥑', name: 'Avocado' },
+          { emoji: '🫐', name: 'Blueberries' },
+          { emoji: '☕', name: 'Coffee' },
+          { emoji: '🍌', name: 'Banana' },
+        ],
+        metric: 'Radioactivity',
+        fact: "Bananas contain potassium-40, a naturally radioactive isotope. You'd need 10 million bananas to get a harmful dose.",
+        factEmoji: '🍌',
+      },
+      { // Day 3 — Wednesday
+        items: [
+          { emoji: '🚀', name: 'Intl Space Station' },
+          { emoji: '🗼', name: 'Eiffel Tower' },
+          { emoji: '🌉', name: 'Golden Gate Bridge' },
+          { emoji: '🏰', name: 'Great Wall of China' },
+        ],
+        metric: 'Weight in tons',
+        fact: "The Great Wall contains enough material to circle Earth's equator 360 times.",
+        factEmoji: '🏰',
+      },
+      { // Day 4 — Thursday
+        items: [
+          { emoji: '🦗', name: 'Cricket chirp' },
+          { emoji: '🎸', name: 'Electric guitar note' },
+          { emoji: '🌪️', name: 'Category 5 hurricane' },
+          { emoji: '🚀', name: 'Saturn V rocket launch' },
+        ],
+        metric: 'Decibels (loudness)',
+        fact: 'Saturn V launch at 204dB was loud enough to melt concrete nearby and was heard 50 miles away.',
+        factEmoji: '🚀',
+      },
+      { // Day 5 — Friday
+        items: [
+          { emoji: '🪨', name: 'Granite rock (1m\u00B3)' },
+          { emoji: '🌡️', name: 'Room temp air (1m\u00B3)' },
+          { emoji: '🧠', name: 'Human brain' },
+          { emoji: '💻', name: 'MacBook Pro M3' },
+        ],
+        metric: 'Electrical conductivity',
+        fact: 'Air is a near-perfect insulator. Your brain conducts electricity 10 trillion times better than air.',
+        factEmoji: '🧠',
+      },
+      { // Day 6 — Saturday
+        items: [
+          { emoji: '🦞', name: 'American Lobster' },
+          { emoji: '🐢', name: 'Gal\u00E1pagos Tortoise' },
+          { emoji: '🌲', name: 'Bristlecone Pine' },
+          { emoji: '🪸', name: 'Immortal Jellyfish' },
+        ],
+        metric: 'Maximum recorded lifespan',
+        fact: 'The immortal jellyfish (Turritopsis dohrnii) can biologically revert to childhood and has theoretically unlimited lifespan.',
+        factEmoji: '🪸',
+      },
+    ];
+
+    /* ═══════════════════════════════════════════════════════
+       UTILITIES
+       ═══════════════════════════════════════════════════════ */
+    function mulberry32(seed) {
+      var s = seed | 0;
+      return function () {
+        s = s + 0x6D2B79F5 | 0;
+        var t = Math.imul(s ^ s >>> 15, 1 | s);
+        t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+      };
+    }
+
+    function shuffle(arr, rng) {
+      var a = arr.slice();
+      for (var i = a.length - 1; i > 0; i--) {
+        var j = Math.floor(rng() * (i + 1));
+        var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+      }
+      return a;
+    }
+
+    var EPOCH = Date.UTC(2024, 0, 1);
+    function dayNum() {
+      var now = new Date();
+      return Math.floor((Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()) - EPOCH) / 86400000);
+    }
+
+    function todayKey() { return new Date().toISOString().slice(0, 10); }
+
+    function loadResult() {
+      try { return JSON.parse(localStorage.getItem('rank_result_' + todayKey())); }
+      catch (e) { return null; }
+    }
+
+    function saveGame(score, order) {
+      var today = todayKey();
+      var prev = localStorage.getItem('rank_last_played');
+      var yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+      var streak = parseInt(localStorage.getItem('rank_streak') || '0');
+      if (prev === yesterday) streak++;
+      else if (prev !== today) streak = 1;
+      localStorage.setItem('rank_streak', '' + streak);
+      localStorage.setItem('rank_last_played', today);
+      localStorage.setItem('rank_result_' + today, JSON.stringify({ score: score, order: order }));
+      if (typeof Daily !== 'undefined') Daily.saveDailyResult('rank', score);
+    }
+
+    function loadStreak() {
+      var last = localStorage.getItem('rank_last_played');
+      var s = parseInt(localStorage.getItem('rank_streak') || '0');
+      var today = todayKey();
+      var yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+      if (last === today || last === yesterday) return s;
+      return 0;
+    }
+
+    function fmtCountdown() {
+      var now = new Date();
+      var tom = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1));
+      var ms = tom - now;
+      var h = String(Math.floor(ms / 3600000)).padStart(2, '0');
+      var m = String(Math.floor((ms % 3600000) / 60000)).padStart(2, '0');
+      var sec = String(Math.floor((ms % 60000) / 1000)).padStart(2, '0');
+      return h + ':' + m + ':' + sec;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       APP
+       ═══════════════════════════════════════════════════════ */
+    function App() {
+      var puzzle = PUZZLES[new Date().getDay()];
+      var dn = dayNum();
+
+      var withIds = useMemo(function () {
+        return puzzle.items.map(function (it, i) { return Object.assign({}, it, { ci: i }); });
+      }, []);
+
+      var saved = useMemo(function () { return loadResult(); }, []);
+
+      var initItems = useMemo(function () {
+        if (saved) return saved.order.map(function (i) { return withIds[i]; });
+        var rng = mulberry32(dn * 4217);
+        var result;
+        do { result = shuffle(withIds, rng); }
+        while (result.every(function (it, i) { return it.ci === i; }));
+        return result;
+      }, []);
+
+      var _phase = useState(saved ? 'done' : 'play');
+      var phase = _phase[0], setPhase = _phase[1];
+
+      var _items = useState(initItems);
+      var items = _items[0], setItems = _items[1];
+
+      var _revN = useState(saved ? 4 : 0);
+      var revN = _revN[0], setRevN = _revN[1];
+
+      var _showFact = useState(!!saved);
+      var showFact = _showFact[0], setShowFact = _showFact[1];
+
+      var _score = useState(saved ? saved.score : 0);
+      var score = _score[0], setScore = _score[1];
+
+      var _streak = useState(loadStreak);
+      var streak = _streak[0], setStreak = _streak[1];
+
+      var _copied = useState(false);
+      var copied = _copied[0], setCopied = _copied[1];
+
+      var _cd = useState(fmtCountdown());
+      var cd = _cd[0], setCd = _cd[1];
+
+      var _dragIdx = useState(null);
+      var dragIdx = _dragIdx[0], setDragIdx = _dragIdx[1];
+
+      var _dragOff = useState(0);
+      var dragOff = _dragOff[0], setDragOff = _dragOff[1];
+
+      var dref = useRef(null);
+
+      // Countdown tick
+      useEffect(function () {
+        var id = setInterval(function () { setCd(fmtCountdown()); }, 1000);
+        return function () { clearInterval(id); };
+      }, []);
+
+      // ── Drag ──────────────────────────────────────────
+      function grab(e, idx) {
+        if (phase !== 'play') return;
+        e.preventDefault();
+        var ch = e.currentTarget.offsetHeight + 12;
+        dref.current = { idx: idx, sy: e.clientY, ch: ch };
+        setDragIdx(idx);
+        setDragOff(0);
+
+        function mv(ev) {
+          ev.preventDefault();
+          var y = ev.clientY;
+          if (!dref.current) return;
+          var dy = y - dref.current.sy;
+          setDragOff(dy);
+          var ci = dref.current.idx;
+          var h = dref.current.ch;
+          if (dy > h * 0.45 && ci < 3) {
+            setItems(function (p) {
+              var n = p.slice(); var tmp = n[ci]; n[ci] = n[ci + 1]; n[ci + 1] = tmp; return n;
+            });
+            dref.current.idx = ci + 1;
+            dref.current.sy += h;
+            setDragIdx(ci + 1);
+            setDragOff(dy - h);
+          } else if (dy < -h * 0.45 && ci > 0) {
+            setItems(function (p) {
+              var n = p.slice(); var tmp = n[ci]; n[ci] = n[ci - 1]; n[ci - 1] = tmp; return n;
+            });
+            dref.current.idx = ci - 1;
+            dref.current.sy -= h;
+            setDragIdx(ci - 1);
+            setDragOff(dy + h);
+          }
+        }
+
+        function up() {
+          dref.current = null;
+          setDragIdx(null);
+          setDragOff(0);
+          document.removeEventListener('pointermove', mv);
+          document.removeEventListener('pointerup', up);
+          document.removeEventListener('pointercancel', up);
+        }
+
+        document.addEventListener('pointermove', mv, { passive: false });
+        document.addEventListener('pointerup', up);
+        document.addEventListener('pointercancel', up);
+      }
+
+      // ── Submit ────────────────────────────────────────
+      function submit() {
+        setPhase('revealing');
+        var sc = items.reduce(function (s, it, i) { return s + (it.ci === i ? 1 : 0); }, 0);
+        setScore(sc);
+        saveGame(sc, items.map(function (it) { return it.ci; }));
+        setStreak(loadStreak());
+        [0, 1, 2, 3].forEach(function (i) {
+          setTimeout(function () { setRevN(i + 1); }, (i + 1) * 550);
+        });
+        setTimeout(function () { setShowFact(true); setPhase('done'); }, 3000);
+      }
+
+      // ── Share ─────────────────────────────────────────
+      function share() {
+        var grid = items.map(function (it, i) { return it.ci === i ? '\uD83D\uDFE9' : '\uD83D\uDFE5'; }).join('');
+        var txt = 'RANK #' + dn + ' ' + score + '/4\n' + grid + '\nawesomegames777.netlify.app/rank';
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(txt).then(function () {
+            setCopied(true);
+            setTimeout(function () { setCopied(false); }, 2000);
+          });
+        }
+      }
+
+      // ── Render ────────────────────────────────────────
+      var isPlay = phase === 'play';
+
+      return (
+        <div className="max-w-[480px] mx-auto px-5 min-h-[100dvh] flex flex-col"
+          style={{ paddingTop: 'calc(52px + env(safe-area-inset-top, 0px))', paddingBottom: 'calc(24px + env(safe-area-inset-bottom, 0px))' }}>
+
+          {/* Header */}
+          <div className="flex justify-between items-center mb-5">
+            <h1 className="text-3xl font-black tracking-[6px] text-accent">RANK</h1>
+            {streak > 0 && <span className="text-base font-bold tracking-wide">{'\uD83D\uDD25'} {streak}</span>}
+          </div>
+
+          {/* Metric */}
+          <div className="text-center mb-5">
+            <p className="text-[11px] font-bold tracking-[3px] text-gray-600 uppercase mb-2">
+              Rank from lowest to highest
+            </p>
+            <p className="text-xl font-extrabold tracking-wide"
+              style={{ color: isPlay ? '#444' : '#FFE500' }}>
+              {isPlay ? '? ? ?' : puzzle.metric}
+            </p>
+          </div>
+
+          {/* Cards */}
+          <div className="flex flex-col gap-3 mb-6"
+            style={{ touchAction: isPlay ? 'none' : 'auto' }}>
+            {items.map(function (item, i) {
+              var shown = i < revN;
+              var ok = item.ci === i;
+              var dragging = dragIdx === i;
+
+              var borderColor = '#2a2a2a';
+              var bgColor = '#1a1a1a';
+              if (dragging) { borderColor = '#FFE500'; bgColor = '#222210'; }
+              else if (shown) {
+                borderColor = ok ? 'rgba(34,197,94,0.6)' : 'rgba(239,68,68,0.6)';
+                bgColor = ok ? 'rgba(34,197,94,0.06)' : 'rgba(239,68,68,0.06)';
+              }
+
+              return (
+                <div key={item.ci}
+                  className={'relative flex items-center gap-3 px-4 py-[14px] rounded-xl select-none' + (shown ? ' anim-pop' : '')}
+                  style={{
+                    border: '2px solid ' + borderColor,
+                    background: bgColor,
+                    transform: dragging ? 'translateY(' + dragOff + 'px) scale(1.03)' : 'none',
+                    transition: dragging ? 'none' : 'all 0.25s ease',
+                    zIndex: dragging ? 50 : 1,
+                    boxShadow: dragging ? '0 8px 32px rgba(255,229,0,0.12)' : 'none',
+                    cursor: isPlay ? 'grab' : 'default',
+                    touchAction: 'none',
+                  }}
+                  onPointerDown={function (e) { grab(e, i); }}>
+
+                  {isPlay ? (
+                    <span style={{ color: '#444', fontSize: '14px', width: '20px', flexShrink: 0 }}>{'\u2B0D'}</span>
+                  ) : (
+                    <span className="flex items-center justify-center flex-shrink-0 text-[11px] font-bold rounded-full"
+                      style={{
+                        width: '24px', height: '24px',
+                        background: shown ? (ok ? '#22c55e' : '#ef4444') : '#333',
+                        color: shown ? (ok ? '#000' : '#fff') : '#666',
+                      }}>
+                      {i + 1}
+                    </span>
+                  )}
+
+                  <span className="text-[1.5rem] leading-none">{item.emoji}</span>
+                  <span className="font-bold text-[14px] flex-1 leading-snug">{item.name}</span>
+
+                  {shown && (
+                    <span className="text-base font-black"
+                      style={{ color: ok ? '#4ade80' : '#f87171' }}>
+                      {ok ? '\u2713' : '\u2717'}
+                    </span>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Submit */}
+          {isPlay && (
+            <button onClick={submit}
+              className="w-full py-4 rounded-xl bg-accent font-extrabold text-lg tracking-[3px] active:scale-[0.97] transition-transform"
+              style={{ color: '#0f0f0f' }}>
+              SUBMIT
+            </button>
+          )}
+
+          {/* Score + Correct Order */}
+          {revN >= 4 && (
+            <div className="anim-fade text-center mb-5">
+              <div className="mb-3">
+                <span className="text-5xl font-black text-accent">{score}</span>
+                <span className="text-xl font-bold" style={{ color: '#555' }}>/4</span>
+              </div>
+              <p className="text-[10px] font-bold tracking-[3px] mb-2" style={{ color: '#555' }}>CORRECT ORDER</p>
+              <div className="flex justify-center gap-4">
+                {puzzle.items.map(function (it, i) {
+                  return (
+                    <div key={i} className="flex flex-col items-center gap-1">
+                      <span className="text-[10px] font-bold" style={{ color: '#555' }}>{i + 1}</span>
+                      <span className="text-xl">{it.emoji}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Fact */}
+          {showFact && (
+            <div className="anim-slide rounded-xl p-5 mb-5"
+              style={{ background: 'rgba(255,229,0,0.05)', border: '1px solid rgba(255,229,0,0.12)' }}>
+              <p className="text-center text-3xl mb-3">{puzzle.factEmoji}</p>
+              <p className="text-[14px] leading-relaxed text-center" style={{ color: '#999' }}>{puzzle.fact}</p>
+            </div>
+          )}
+
+          {/* Share + Countdown */}
+          {phase === 'done' && (
+            <div className="anim-fade flex flex-col items-center gap-4 pb-4">
+              <button onClick={share}
+                className="w-full py-4 rounded-xl bg-accent font-extrabold text-lg tracking-[3px] active:scale-[0.97] transition-transform"
+                style={{ color: '#0f0f0f' }}>
+                {copied ? '\u2713 COPIED!' : 'SHARE RESULT'}
+              </button>
+              <div className="text-center">
+                <p className="text-[10px] font-bold tracking-[3px] mb-1" style={{ color: '#555' }}>NEW PUZZLE IN</p>
+                <p className="text-lg font-bold text-accent tracking-[3px]" style={{ fontVariantNumeric: 'tabular-nums' }}>{cd}</p>
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
