@@ -225,25 +225,27 @@ export const EVENT_ROLL_CHANCE = 0.45;
 export const REP_HAPPY_THRESHOLD = 95;
 export const REP_HAPPY_GAIN_INTERVAL_MS = 30000;
 // ── Adoption (graduation) thresholds and reward tuning ───────────────────
-// Players spend a long bond raising a pup to L15 before they can be sent
-// home — sim shows ~20m for the first adoption with active play, then
-// escalating send-off fees keep the loop from snowballing.
+// Tuned so a single adoption reward covers ~30% of the L1→L15 level-up
+// grind. The rest must come from passive Joy/s, which forces the player
+// to invest in buildings between cycles instead of self-funding back-to-
+// back adoptions off a previous reward. See puptown/sim/balance.mjs for
+// the comparison vs. the old (live) values.
 export const ADOPTION_LEVEL_REQ = 15;
 export const ADOPTION_HAPPINESS_REQ = 95;
 // Joy lump-sum = JOY_BASE * level^EXP * roleMultiplier.
-export const ADOPTION_JOY_BASE = 250;
-export const ADOPTION_LEVEL_EXP = 2.2;
+export const ADOPTION_JOY_BASE = 50;
+export const ADOPTION_LEVEL_EXP = 2.1;
 // Reputation per adoption: 1 + floor(level / 5).
 export const ADOPTION_BASE_REP = 1;
-// Send-off fee: covers vet, paperwork, supplies. Climbs each adoption so
-// the loop self-paces — see puptown/sim/balance.mjs.
-export const ADOPTION_FEE_BASE = 200;
-export const ADOPTION_FEE_MULT = 1.5;
+// Send-off fee: front-loaded so the very first adoption costs something
+// real, then climbs gently so late-game players aren't walled.
+export const ADOPTION_FEE_BASE = 500;
+export const ADOPTION_FEE_MULT = 1.3;
 // Naming a stray costs Joy and locks them in as yours.
 export const NAMING_COST_JOY = 80;
-// LV UP cost curve.
+// LV UP cost curve — slightly steeper so deeper levels cost meaningfully.
 export const LV_UP_BASE = 30;
-export const LV_UP_MULT = 1.5;
+export const LV_UP_MULT = 1.55;
 // ── Rescue Centers (multi-yard expansion) ────────────────────────────────
 // Players start with one center. Each additional center costs Joy and
 // requires a minimum number of lifetime adoptions, then gives a compounding

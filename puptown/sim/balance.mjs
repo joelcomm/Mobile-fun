@@ -64,6 +64,49 @@ const SCENARIOS = {
     HAPPY_DRIFT: -0.4,
     SEND_OFF_FEE: (n) => Math.ceil(150 * Math.pow(1.6, n)), // n = previous adoptions
   },
+  // Exactly what's shipped in src/config.ts today — baseline for the rebalance.
+  live: {
+    label: "LIVE (config.ts): reward 250*lvl^2.2, cost 30*1.5^lvl, fee 200*1.5^n",
+    ADOPTION_LEVEL: 15,
+    ADOPTION_HAPPINESS: 95,
+    LV_UP_COST: (lvl) => Math.ceil(30 * Math.pow(1.5, lvl)),
+    REWARD: (lvl, roleMult) => Math.floor(250 * Math.pow(lvl, 2.2) * roleMult),
+    HAPPY_DRIFT: -0.35,
+    SEND_OFF_FEE: (n) => Math.ceil(200 * Math.pow(1.5, n)),
+  },
+  // Proposed: reward covers ~40% of a level-up grind, so passive income
+  // has to fill the rest. Steeper L-UP curve and front-loaded fee slow
+  // the early spam cycle without walling the late game.
+  rebalanced: {
+    label: "REBALANCE: reward 60*lvl^2.1, cost 35*1.6^lvl, fee 1000*1.35^n",
+    ADOPTION_LEVEL: 15,
+    ADOPTION_HAPPINESS: 92,
+    LV_UP_COST: (lvl) => Math.ceil(35 * Math.pow(1.6, lvl)),
+    REWARD: (lvl, roleMult) => Math.floor(60 * Math.pow(lvl, 2.1) * roleMult),
+    HAPPY_DRIFT: -0.35,
+    SEND_OFF_FEE: (n) => Math.ceil(1000 * Math.pow(1.35, n)),
+  },
+  rebalancedB: {
+    label: "REBALANCE B (gentler): reward 90*lvl^2.0, cost 30*1.55^lvl, fee 600*1.4^n",
+    ADOPTION_LEVEL: 15,
+    ADOPTION_HAPPINESS: 92,
+    LV_UP_COST: (lvl) => Math.ceil(30 * Math.pow(1.55, lvl)),
+    REWARD: (lvl, roleMult) => Math.floor(90 * Math.pow(lvl, 2.0) * roleMult),
+    HAPPY_DRIFT: -0.35,
+    SEND_OFF_FEE: (n) => Math.ceil(600 * Math.pow(1.4, n)),
+  },
+  // Final-candidate tuning: reward ~30% of L1→L15 cost, so every adoption
+  // requires passive income to fund the next. Fee climbs gently enough to
+  // never wall late-game players.
+  rebalancedC: {
+    label: "REBALANCE C: reward 50*lvl^2.1, cost 30*1.55^lvl, fee 500*1.3^n, happy 90",
+    ADOPTION_LEVEL: 15,
+    ADOPTION_HAPPINESS: 90,
+    LV_UP_COST: (lvl) => Math.ceil(30 * Math.pow(1.55, lvl)),
+    REWARD: (lvl, roleMult) => Math.floor(50 * Math.pow(lvl, 2.1) * roleMult),
+    HAPPY_DRIFT: -0.35,
+    SEND_OFF_FEE: (n) => Math.ceil(500 * Math.pow(1.3, n)),
+  },
 };
 
 // Static (shared across scenarios)
