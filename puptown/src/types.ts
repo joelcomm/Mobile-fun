@@ -40,6 +40,7 @@ export interface DogData {
   tapBonus: number;
   position: Vec2;
   animState: AnimState;
+  readyForAdoption?: boolean;
 }
 
 export interface Resources {

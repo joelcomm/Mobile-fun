@@ -53,6 +53,7 @@ export class ProductionSystem {
             if (veryHappy > 0)
                 this.resources.add({ reputation: veryHappy });
         }
+        this.dogs.markReadyIfQualified();
     }
     /** Apply offline earnings for `ms` elapsed since last save. */
     applyOffline(ms) {

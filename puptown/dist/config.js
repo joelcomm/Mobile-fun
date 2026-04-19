@@ -190,3 +190,10 @@ export const EVENT_ROLL_CHANCE = 0.45;
 // Reputation is rare and global; given when dogs max happiness or by rescue.
 export const REP_HAPPY_THRESHOLD = 95;
 export const REP_HAPPY_GAIN_INTERVAL_MS = 30000;
+// ── Adoption (graduation) thresholds and reward tuning ───────────────────
+export const ADOPTION_LEVEL_REQ = 5;
+export const ADOPTION_HAPPINESS_REQ = 95;
+// Joy lump-sum = JOY_BASE * level^1.5 * roleMultiplier.
+export const ADOPTION_JOY_BASE = 800;
+// Reputation per adoption: 1 + floor(level / 5).
+export const ADOPTION_BASE_REP = 1;

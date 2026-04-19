@@ -76,6 +76,19 @@ export class Game {
         this.dogs.updateHappiness(dogId, dog.happiness + 0.8);
         return joy;
     }
+    /**
+     * Send a ready dog to a forever home. Awards Joy + Reputation, removes the
+     * dog. Returns the reward, or null if the dog isn't ready / doesn't exist.
+     */
+    handleGraduate(dogId) {
+        const dog = this.dogs.get(dogId);
+        if (!dog || !this.dogs.isReady(dog))
+            return null;
+        const reward = this.dogs.adoptionReward(dog);
+        this.resources.add({ joy: reward.joy, reputation: reward.rep });
+        this.dogs.remove(dogId);
+        return reward;
+    }
     forceSave() {
         this.save.save(this.snapshotSave(), 0);
     }

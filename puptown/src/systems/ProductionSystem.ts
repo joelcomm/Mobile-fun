@@ -71,6 +71,8 @@ export class ProductionSystem {
         .filter((d) => d.happiness >= REP_HAPPY_THRESHOLD).length;
       if (veryHappy > 0) this.resources.add({ reputation: veryHappy });
     }
+
+    this.dogs.markReadyIfQualified();
   }
 
   /** Apply offline earnings for `ms` elapsed since last save. */
