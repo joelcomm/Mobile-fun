@@ -1,20 +1,33 @@
 // YardScene: renders the yard, spawns dogs, handles taps and floating Joy text.
-import { GAME_WIDTH, YARD } from "../config.js";
+import { GAME_WIDTH, YARD, kennelTierFor } from "../config.js";
 import { DogSprite } from "../entities/Dog.js";
 import { Game } from "../Game.js";
+import { formatNumber } from "../util/format.js";
 export class YardScene extends Phaser.Scene {
     constructor() {
         super("Yard");
         this.sprites = new Map();
         this.treatEmitterTimer = 0;
+        this.kennelVisualLevel = -1;
     }
     create() {
         const game = Game.instance();
         // Canvas background is already sky-blue from the Phaser config; the
         // yard layout is compressed on phones so we skip the cloud strip.
-        // Grass yard.
-        const grass = this.add.tileSprite(YARD.x + YARD.width / 2, YARD.y + YARD.height / 2, YARD.width, YARD.height, "grass");
-        grass.setDepth(-5);
+        // Grass yard. Tint and label come from the Kennel level.
+        this.grass = this.add.tileSprite(YARD.x + YARD.width / 2, YARD.y + YARD.height / 2, YARD.width, YARD.height, "grass");
+        this.grass.setDepth(-5);
+        this.kennelBanner = this.add.text(GAME_WIDTH / 2, YARD.y + YARD.height - 14, "", {
+            fontFamily: "Inter, sans-serif",
+            fontSize: "11px",
+            fontStyle: "bold",
+            color: "#2a2a3e",
+            backgroundColor: "#fff6d6aa",
+            padding: { left: 6, right: 6, top: 2, bottom: 2 },
+        });
+        this.kennelBanner.setOrigin(0.5);
+        this.kennelBanner.setDepth(-4);
+        this.refreshKennelVisual(true);
         // Fence border.
         const fenceCount = Math.ceil(YARD.width / 16);
         for (let i = 0; i < fenceCount; i++) {
@@ -47,6 +60,7 @@ export class YardScene extends Phaser.Scene {
         Game.instance().tick(delta);
         for (const s of this.sprites.values())
             s.tickUpdate(delta);
+        this.refreshKennelVisual();
         // Auto-taps from Auto-Walker.
         const game = Game.instance();
         const auto = game.buildings.autoTapsPerSec();
@@ -92,6 +106,16 @@ export class YardScene extends Phaser.Scene {
     /** Used by DogPanel to fetch a sprite for animation/positioning. */
     getSprite(id) {
         return this.sprites.get(id);
+    }
+    /** Recolor the grass + label when the kennel tier changes. */
+    refreshKennelVisual(force = false) {
+        const level = Game.instance().buildings.levelOf("kennel");
+        if (!force && level === this.kennelVisualLevel)
+            return;
+        this.kennelVisualLevel = level;
+        const tier = kennelTierFor(level);
+        this.grass.setTint(tier.grassTint);
+        this.kennelBanner.setText(`\u{1F3E0} ${tier.label}  Lv${level}`);
     }
     /** Floating reward text where a graduating pup stood. */
     showRewardBurst(x, y, reward) {
@@ -151,13 +175,4 @@ export class YardScene extends Phaser.Scene {
             onComplete: () => banner.destroy(),
         });
     }
-}
-function formatNumber(n) {
-    if (n < 10)
-        return n.toFixed(1);
-    if (n < 1000)
-        return Math.floor(n).toString();
-    if (n < 1000000)
-        return (n / 1000).toFixed(1) + "k";
-    return (n / 1000000).toFixed(2) + "m";
 }

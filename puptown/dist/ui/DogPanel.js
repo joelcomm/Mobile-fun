@@ -2,6 +2,7 @@
 import { BREED_LABELS, LV_UP_BASE, LV_UP_MULT, NAMING_COST_JOY, ROLE_INFO, GAME_WIDTH, } from "../config.js";
 import { Game } from "../Game.js";
 import { Panel } from "./Panel.js";
+import { formatNumber } from "../util/format.js";
 export class DogPanel extends Panel {
     constructor(scene) {
         super(scene, "YOUR PUPS");
@@ -160,11 +161,4 @@ export class DogPanel extends Panel {
         rect.setFillStyle(color);
         this.scene.time.delayedCall(200, () => rect.setFillStyle(orig));
     }
-}
-function formatNumber(n) {
-    if (n < 1000)
-        return Math.floor(n).toString();
-    if (n < 1000000)
-        return (n / 1000).toFixed(1) + "k";
-    return (n / 1000000).toFixed(2) + "m";
 }

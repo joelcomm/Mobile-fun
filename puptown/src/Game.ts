@@ -85,15 +85,21 @@ export class Game {
 
   /** Main tick. Called from YardScene.update. */
   tick(deltaMs: number): void {
-    this.totalPlaytimeMs += deltaMs;
-    this.tickAccum += deltaMs;
-    this.events.tick(deltaMs);
-    while (this.tickAccum >= TICK_MS) {
-      this.production.tick(TICK_MS);
-      this.tickAccum -= TICK_MS;
+    try {
+      this.totalPlaytimeMs += deltaMs;
+      this.tickAccum += deltaMs;
+      this.events.tick(deltaMs);
+      while (this.tickAccum >= TICK_MS) {
+        this.production.tick(TICK_MS);
+        this.tickAccum -= TICK_MS;
+      }
+      // Throttled save.
+      this.save.save(this.snapshotSave(), SAVE_THROTTLE_MS);
+    } catch (e) {
+      console.error("[PupTown] tick error:", e);
+      // Drop accumulated time so we don't re-hit the same error next frame.
+      this.tickAccum = 0;
     }
-    // Throttled save.
-    this.save.save(this.snapshotSave(), SAVE_THROTTLE_MS);
   }
 
   /** Process a tap on a dog; returns the Joy awarded. */
