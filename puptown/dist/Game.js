@@ -16,6 +16,7 @@ export class Game {
         this.tickAccum = 0;
         this.startTime = Date.now();
         this.pendingOffline = null;
+        this.wiping = false;
     }
     static instance() {
         if (!this._instance)
@@ -52,12 +53,18 @@ export class Game {
             this.production = new ProductionSystem(this.dogs, this.buildings, this.resources, this.events);
             this.dogs.spawnStarter();
         }
-        // Autosave when tab hides / unloads.
+        // Autosave when tab hides / unloads. Skip while wiping so the wipe sticks.
         window.addEventListener("visibilitychange", () => {
+            if (this.wiping)
+                return;
             if (document.visibilityState === "hidden")
                 this.forceSave();
         });
-        window.addEventListener("beforeunload", () => this.forceSave());
+        window.addEventListener("beforeunload", () => {
+            if (this.wiping)
+                return;
+            this.forceSave();
+        });
     }
     /** Main tick. Called from YardScene.update. */
     tick(deltaMs) {
@@ -119,6 +126,7 @@ export class Game {
         this.save.save(this.snapshotSave(), 0);
     }
     wipeAndReload() {
+        this.wiping = true;
         this.save.wipe();
         window.location.reload();
     }
