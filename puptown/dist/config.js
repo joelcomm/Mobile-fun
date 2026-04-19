@@ -105,16 +105,29 @@ export const DOG_NAMES = [
     "Willow", "Comet", "Tofu", "Muffin", "Biscotti", "Sesame",
 ];
 // ── Buildings / upgrades ─────────────────────────────────────────────────
+// Max levels are intentionally very high so the game keeps progressing into
+// the long tail. Costs grow exponentially so the level you can *afford*
+// still limits pacing.
 export const BUILDINGS = [
+    {
+        id: "kennel",
+        name: "Kennel",
+        icon: "\u{1F3E0}",
+        description: "Upgrade the kennel: +4% Joy/s per level. Yard looks fancier too.",
+        baseCost: { joy: 600 },
+        costMultiplier: 1.55,
+        effect: { kind: "production", value: 0.04 },
+        maxLevel: 999,
+    },
     {
         id: "bowl",
         name: "Treat Bowl",
         icon: "\u{1F374}",
         description: "+0.6 happiness/s (all dogs).",
         baseCost: { joy: 40 },
-        costMultiplier: 1.8,
+        costMultiplier: 1.7,
         effect: { kind: "happiness", value: 0.6 },
-        maxLevel: 20,
+        maxLevel: 120,
     },
     {
         id: "squeak",
@@ -122,9 +135,9 @@ export const BUILDINGS = [
         icon: "\u{1F9F8}",
         description: "+15% Joy per second per level.",
         baseCost: { joy: 100 },
-        costMultiplier: 2.0,
+        costMultiplier: 1.9,
         effect: { kind: "production", value: 0.15 },
-        maxLevel: 15,
+        maxLevel: 120,
     },
     {
         id: "agility",
@@ -132,9 +145,9 @@ export const BUILDINGS = [
         icon: "\u{1F3C6}",
         description: "+2 tap bonus per level.",
         baseCost: { joy: 75, treats: 10 },
-        costMultiplier: 1.9,
+        costMultiplier: 1.8,
         effect: { kind: "tapBonus", value: 2 },
-        maxLevel: 25,
+        maxLevel: 120,
     },
     {
         id: "kitchen",
@@ -142,9 +155,9 @@ export const BUILDINGS = [
         icon: "\u{1F36A}",
         description: "Bakes +0.5 Treats/s per level.",
         baseCost: { joy: 300 },
-        costMultiplier: 2.1,
+        costMultiplier: 2.0,
         effect: { kind: "treatsPerSec", value: 0.5 },
-        maxLevel: 12,
+        maxLevel: 60,
     },
     {
         id: "dogwalker",
@@ -152,11 +165,32 @@ export const BUILDINGS = [
         icon: "\u{1F6B6}",
         description: "Auto-tap: +1 tap/s per level.",
         baseCost: { joy: 500, reputation: 2 },
-        costMultiplier: 2.2,
+        costMultiplier: 2.1,
         effect: { kind: "automation", value: 1 },
-        maxLevel: 10,
+        maxLevel: 50,
     },
 ];
+// ── Kennel visual tiers ──────────────────────────────────────────────────
+// Every 5 kennel levels unlocks a new grass tint — subtle progression the
+// player can actually see in the yard as they invest.
+export const KENNEL_TIERS = [
+    { minLevel: 0, grassTint: 0xffffff, label: "Starter Yard" },
+    { minLevel: 5, grassTint: 0xd8f0c8, label: "Fresh Turf" },
+    { minLevel: 10, grassTint: 0xc6ebb4, label: "Lush Lawn" },
+    { minLevel: 20, grassTint: 0xf0e6b0, label: "Sunny Meadow" },
+    { minLevel: 35, grassTint: 0xe0b0ff, label: "Enchanted Park" },
+    { minLevel: 50, grassTint: 0xffc68a, label: "Golden Grounds" },
+    { minLevel: 75, grassTint: 0x9ad0ff, label: "Cloudtop Kennel" },
+    { minLevel: 100, grassTint: 0xff9ac1, label: "Rainbow Estate" },
+];
+export function kennelTierFor(level) {
+    let tier = KENNEL_TIERS[0];
+    for (const t of KENNEL_TIERS) {
+        if (level >= t.minLevel)
+            tier = t;
+    }
+    return tier;
+}
 // ── Random events ────────────────────────────────────────────────────────
 export const RANDOM_EVENTS = [
     {

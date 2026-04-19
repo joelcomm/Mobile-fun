@@ -3,6 +3,7 @@
 import { BUILDINGS, GAME_WIDTH } from "../config.js";
 import { Game } from "../Game.js";
 import { Panel } from "./Panel.js";
+import { formatNumber } from "../util/format.js";
 
 declare const Phaser: typeof import("phaser");
 
@@ -85,10 +86,4 @@ export class BuildMenu extends Panel {
 
     this.content.add([bg, title, desc, btnBg, btnLabel]);
   }
-}
-
-function formatNumber(n: number): string {
-  if (n < 1000) return Math.floor(n).toString();
-  if (n < 1_000_000) return (n / 1000).toFixed(1) + "k";
-  return (n / 1_000_000).toFixed(2) + "m";
 }

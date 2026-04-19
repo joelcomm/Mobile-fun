@@ -1,4 +1,8 @@
 // Settings panel: manual save, wipe save, show playtime.
+//
+// Unlike the other panels, we build the buttons once in the constructor and
+// only mutate the info text on refresh. Tearing the SAVE button down every
+// 600ms clobbered in-flight flashText tweens and felt like a lockup.
 
 import { GAME_HEIGHT, GAME_WIDTH } from "../config.js";
 import { Game } from "../Game.js";
@@ -7,28 +11,32 @@ import { Panel } from "./Panel.js";
 declare const Phaser: typeof import("phaser");
 
 export class SettingsPanel extends Panel {
+  private infoText!: Phaser.GameObjects.Text;
+  private saveLabel!: Phaser.GameObjects.Text;
+  private saveFlashTimer?: Phaser.Time.TimerEvent;
+
   constructor(scene: Phaser.Scene) {
     super(scene, "SETTINGS");
-    this.refresh();
+    this.buildOnce();
   }
 
-  refresh(): void {
-    this.clearContent();
+  private buildOnce(): void {
     const game = Game.instance();
     const y = Panel.TOP + 34;
 
-    const info = this.scene.add.text(
-      16, y,
-      `Version 0.1.0\nPlaytime: ${formatDuration(game.totalPlaytimeMs)}\nDogs: ${game.dogs.count()}\nRep: ${Math.floor(game.resources.snapshot.reputation)}`,
-      { fontFamily: "monospace", fontSize: "14px", color: "#2a2a3e", lineSpacing: 4 }
-    );
-    this.content.add(info);
+    this.infoText = this.scene.add.text(16, y, this.infoString(), {
+      fontFamily: "monospace",
+      fontSize: "14px",
+      color: "#2a2a3e",
+      lineSpacing: 4,
+    });
 
     const btnY = y + 108;
     const saveBtn = this.makeButton(GAME_WIDTH / 2 - 76, btnY, 140, 40, "\u{1F4BE} SAVE", 0x7fc56b);
+    this.saveLabel = saveBtn.label;
     saveBtn.bg.on("pointerdown", () => {
       Game.instance().forceSave();
-      this.flashText(saveBtn.label, "SAVED!");
+      this.flashSaveLabel();
     });
 
     const wipeBtn = this.makeButton(GAME_WIDTH / 2 + 76, btnY, 140, 40, "\u{1F5D1} WIPE", 0xff9ac1);
@@ -39,7 +47,28 @@ export class SettingsPanel extends Panel {
       );
     });
 
-    this.content.add([saveBtn.bg, saveBtn.label, wipeBtn.bg, wipeBtn.label]);
+    this.content.add([this.infoText, saveBtn.bg, saveBtn.label, wipeBtn.bg, wipeBtn.label]);
+    this.setContentBottom(btnY + 30);
+  }
+
+  refresh(): void {
+    if (!this.infoText || !this.infoText.scene) return;
+    this.infoText.setText(this.infoString());
+  }
+
+  private infoString(): string {
+    const game = Game.instance();
+    return `Version 0.1.0\nPlaytime: ${formatDuration(game.totalPlaytimeMs)}\nDogs: ${game.dogs.count()}\nAdoptions: ${game.totalAdoptions}\nRep: ${Math.floor(game.resources.snapshot.reputation)}`;
+  }
+
+  private flashSaveLabel(): void {
+    this.saveLabel.setText("SAVED!");
+    this.saveFlashTimer?.remove(false);
+    this.saveFlashTimer = this.scene.time.delayedCall(900, () => {
+      if (this.saveLabel && this.saveLabel.scene) {
+        this.saveLabel.setText("\u{1F4BE} SAVE");
+      }
+    });
   }
 
   private showConfirm(message: string, onYes: () => void): void {
@@ -47,14 +76,13 @@ export class SettingsPanel extends Panel {
     const layer = scene.add.container(0, 0);
     layer.setDepth(1000);
 
-    // Dim/blocker — captures pointer so taps don't fall through.
     const dim = scene.add.rectangle(
       GAME_WIDTH / 2, GAME_HEIGHT / 2,
       GAME_WIDTH, GAME_HEIGHT,
       0x000000, 0.55
     );
     dim.setInteractive();
-    dim.on("pointerdown", () => {}); // swallow taps on backdrop
+    dim.on("pointerdown", () => {});
 
     const boxW = GAME_WIDTH - 48;
     const boxH = 170;
@@ -98,12 +126,6 @@ export class SettingsPanel extends Panel {
     });
     text.setOrigin(0.5);
     return { bg, label: text };
-  }
-
-  private flashText(t: Phaser.GameObjects.Text, newText: string): void {
-    const original = t.text;
-    t.setText(newText);
-    this.scene.time.delayedCall(900, () => t.setText(original));
   }
 }
 

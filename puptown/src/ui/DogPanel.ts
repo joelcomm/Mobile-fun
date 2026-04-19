@@ -12,6 +12,7 @@ import { Game } from "../Game.js";
 import { YardScene } from "../scenes/YardScene.js";
 import { DogData } from "../types.js";
 import { Panel } from "./Panel.js";
+import { formatNumber } from "../util/format.js";
 
 declare const Phaser: typeof import("phaser");
 
@@ -211,8 +212,3 @@ export class DogPanel extends Panel {
   }
 }
 
-function formatNumber(n: number): string {
-  if (n < 1000) return Math.floor(n).toString();
-  if (n < 1_000_000) return (n / 1000).toFixed(1) + "k";
-  return (n / 1_000_000).toFixed(2) + "m";
-}
