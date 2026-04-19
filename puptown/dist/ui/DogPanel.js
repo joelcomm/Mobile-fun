@@ -17,6 +17,7 @@ export class DogPanel extends Panel {
             y += 58;
         }
         this.drawUnlockRow(y);
+        this.setContentBottom(y + 52);
     }
     drawDogRow(d, y) {
         const scene = this.scene;
