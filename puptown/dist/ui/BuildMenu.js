@@ -53,7 +53,7 @@ export class BuildMenu extends Panel {
             if (cost.reputation)
                 parts.push(`\u2B50${cost.reputation}`);
             label = `BUILD\n${parts.join(" ")}`;
-            color = game.resources.canAfford(cost) ? 0x7fc56b : 0xeeeee6;
+            color = game.resources.canAfford(cost) ? 0x7fc56b : 0xff9ac1;
         }
         const btnBg = scene.add.rectangle(btnX, btnY, 88, 28, color);
         btnBg.setStrokeStyle(1, 0x2a2a3e, 0.4);
