@@ -78,9 +78,14 @@ export class DogPanel extends Panel {
       return;
     }
 
-    const btn = this.makeButton(GAME_WIDTH - 52, y + 26, 80, 40, "LV UP", 0xff9ac1);
+    const cost = Math.ceil(40 * Math.pow(2, d.level));
+    const affordable = game.resources.canAfford({ joy: cost });
+    const btn = this.makeButton(
+      GAME_WIDTH - 52, y + 26, 80, 40,
+      `LV UP\n\u2600\uFE0F${formatNumber(cost)}`,
+      affordable ? 0x7fc56b : 0xff9ac1
+    );
     btn.bg.on("pointerdown", () => {
-      const cost = Math.ceil(20 * Math.pow(1.7, d.level));
       if (game.resources.spend({ joy: cost })) {
         game.dogs.levelUp(d.id);
         this.refresh();
@@ -88,8 +93,6 @@ export class DogPanel extends Panel {
         this.flash(btn.bg, 0xff5a7e);
       }
     });
-    const cost = Math.ceil(20 * Math.pow(1.7, d.level));
-    btn.label.setText(`LV UP\n${formatNumber(cost)}`);
 
     this.content.add([rowBg, text, btn.bg, btn.label]);
   }
@@ -124,11 +127,17 @@ export class DogPanel extends Panel {
       lineSpacing: 3,
     });
 
+    const canAfford = game.resources.canAfford({ joy: cost });
+    const color = locked
+      ? 0xaaaaaa
+      : canAfford
+        ? 0x7fc56b
+        : 0xff9ac1;
     const btn = this.makeButton(
       GAME_WIDTH - 52, y + 26,
       80, 40,
-      `ADOPT\n${formatNumber(cost)}`,
-      locked ? 0xaaaaaa : 0x7fc56b
+      `ADOPT\n\u2600\uFE0F${formatNumber(cost)}`,
+      color
     );
     btn.bg.on("pointerdown", () => {
       if (locked) return;

@@ -58,7 +58,7 @@ export class BuildMenu extends Panel {
       if (cost.treats) parts.push(`\u{1F36A}${formatNumber(cost.treats)}`);
       if (cost.reputation) parts.push(`\u2B50${cost.reputation}`);
       label = `BUILD\n${parts.join(" ")}`;
-      color = game.resources.canAfford(cost) ? 0x7fc56b : 0xeeeee6;
+      color = game.resources.canAfford(cost) ? 0x7fc56b : 0xff9ac1;
     }
 
     const btnBg = scene.add.rectangle(btnX, btnY, 88, 28, color);
