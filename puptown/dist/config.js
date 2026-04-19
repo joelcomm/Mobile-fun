@@ -191,9 +191,22 @@ export const EVENT_ROLL_CHANCE = 0.45;
 export const REP_HAPPY_THRESHOLD = 95;
 export const REP_HAPPY_GAIN_INTERVAL_MS = 30000;
 // ── Adoption (graduation) thresholds and reward tuning ───────────────────
-export const ADOPTION_LEVEL_REQ = 5;
+// Players spend a long bond raising a pup to L15 before they can be sent
+// home — sim shows ~20m for the first adoption with active play, then
+// escalating send-off fees keep the loop from snowballing.
+export const ADOPTION_LEVEL_REQ = 15;
 export const ADOPTION_HAPPINESS_REQ = 95;
-// Joy lump-sum = JOY_BASE * level^1.5 * roleMultiplier.
-export const ADOPTION_JOY_BASE = 800;
+// Joy lump-sum = JOY_BASE * level^EXP * roleMultiplier.
+export const ADOPTION_JOY_BASE = 250;
+export const ADOPTION_LEVEL_EXP = 2.2;
 // Reputation per adoption: 1 + floor(level / 5).
 export const ADOPTION_BASE_REP = 1;
+// Send-off fee: covers vet, paperwork, supplies. Climbs each adoption so
+// the loop self-paces — see puptown/sim/balance.mjs.
+export const ADOPTION_FEE_BASE = 200;
+export const ADOPTION_FEE_MULT = 1.5;
+// Naming a stray costs Joy and locks them in as yours.
+export const NAMING_COST_JOY = 80;
+// LV UP cost curve.
+export const LV_UP_BASE = 30;
+export const LV_UP_MULT = 1.5;

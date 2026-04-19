@@ -41,6 +41,7 @@ export interface DogData {
   position: Vec2;
   animState: AnimState;
   readyForAdoption?: boolean;
+  named?: boolean;
 }
 
 export interface Resources {
@@ -94,6 +95,7 @@ export interface SaveState {
   buildings: BuildingData[];
   unlockedDogSlots: number;
   totalPlaytimeMs: number;
+  totalAdoptions?: number;       // drives escalating send-off fees
 }
 
 export const SAVE_VERSION = 1;

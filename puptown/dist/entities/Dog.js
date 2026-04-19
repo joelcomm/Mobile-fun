@@ -106,7 +106,12 @@ export class DogSprite extends Phaser.GameObjects.Container {
             const vy = (dy / dist) * this.speed;
             this.x += vx * dt;
             this.y += vy * dt;
-            this.setScale(vx < 0 ? -1.35 : 1.35, 1.35);
+            const facing = vx < 0 ? -1 : 1;
+            this.setScale(facing * 1.35, 1.35);
+            // Container flips kids too; counter-flip text labels so they read normally.
+            this.nameLabel.setScale(facing, 1);
+            this.heart.setScale(facing, 1);
+            this.readyMark.setScale(facing, 1);
         }
         this.tailWave += dt * 10;
         this.tail.rotation = Math.sin(this.tailWave) * 0.5;

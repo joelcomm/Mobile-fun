@@ -93,8 +93,11 @@ export class YardScene extends Phaser.Scene {
     const seen = new Set<string>();
     for (const d of list) {
       seen.add(d.id);
-      if (!this.sprites.has(d.id)) {
+      const existing = this.sprites.get(d.id);
+      if (!existing) {
         this.sprites.set(d.id, new DogSprite(this, d));
+      } else if (existing.dogData.name !== d.name) {
+        existing.setDogName(d.name);
       }
     }
     for (const [id, s] of this.sprites) {
