@@ -57,5 +57,6 @@ export class EventsPanel extends Panel {
       this.content.add([row, eText]);
       y += 44;
     }
+    this.setContentBottom(y);
   }
 }

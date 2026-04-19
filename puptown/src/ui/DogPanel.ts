@@ -29,6 +29,7 @@ export class DogPanel extends Panel {
     }
 
     this.drawUnlockRow(y);
+    this.setContentBottom(y + 52);
   }
 
   private drawDogRow(d: DogData, y: number): void {

@@ -14,6 +14,7 @@ export class BuildMenu extends Panel {
             this.drawRow(def.id, y);
             y += 36;
         }
+        this.setContentBottom(y);
     }
     drawRow(id, y) {
         const scene = this.scene;

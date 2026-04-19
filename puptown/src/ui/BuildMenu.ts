@@ -19,6 +19,7 @@ export class BuildMenu extends Panel {
       this.drawRow(def.id, y);
       y += 36;
     }
+    this.setContentBottom(y);
   }
 
   private drawRow(id: string, y: number): void {
