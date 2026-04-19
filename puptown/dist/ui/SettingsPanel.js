@@ -1,5 +1,5 @@
 // Settings panel: manual save, wipe save, show playtime.
-import { GAME_WIDTH } from "../config.js";
+import { GAME_HEIGHT, GAME_WIDTH } from "../config.js";
 import { Game } from "../Game.js";
 import { Panel } from "./Panel.js";
 export class SettingsPanel extends Panel {
@@ -21,11 +21,40 @@ export class SettingsPanel extends Panel {
         });
         const wipeBtn = this.makeButton(GAME_WIDTH / 2 + 76, btnY, 140, 40, "\u{1F5D1} WIPE", 0xff9ac1);
         wipeBtn.bg.on("pointerdown", () => {
-            if (confirm("Wipe your Pup Town save? This cannot be undone.")) {
-                Game.instance().wipeAndReload();
-            }
+            this.showConfirm("This will completely reset your progress. Are you sure?", () => Game.instance().wipeAndReload());
         });
         this.content.add([saveBtn.bg, saveBtn.label, wipeBtn.bg, wipeBtn.label]);
+    }
+    showConfirm(message, onYes) {
+        const scene = this.scene;
+        const layer = scene.add.container(0, 0);
+        layer.setDepth(1000);
+        // Dim/blocker — captures pointer so taps don't fall through.
+        const dim = scene.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, 0x000000, 0.55);
+        dim.setInteractive();
+        dim.on("pointerdown", () => { }); // swallow taps on backdrop
+        const boxW = GAME_WIDTH - 48;
+        const boxH = 170;
+        const boxY = GAME_HEIGHT / 2;
+        const box = scene.add.rectangle(GAME_WIDTH / 2, boxY, boxW, boxH, 0xfff6d6);
+        box.setStrokeStyle(2, 0x2a2a3e, 0.7);
+        box.setInteractive();
+        box.on("pointerdown", () => { });
+        const msg = scene.add.text(GAME_WIDTH / 2, boxY - 30, message, {
+            fontFamily: "Inter, sans-serif",
+            fontSize: "15px",
+            color: "#2a2a3e",
+            align: "center",
+            wordWrap: { width: boxW - 28 },
+        });
+        msg.setOrigin(0.5);
+        const yesBtn = this.makeButton(GAME_WIDTH / 2 - 60, boxY + 42, 100, 42, "YES", 0xff5a7e);
+        yesBtn.label.setColor("#fff6d6");
+        const noBtn = this.makeButton(GAME_WIDTH / 2 + 60, boxY + 42, 100, 42, "NO", 0x7fc56b);
+        const close = () => layer.destroy();
+        yesBtn.bg.on("pointerdown", () => { close(); onYes(); });
+        noBtn.bg.on("pointerdown", close);
+        layer.add([dim, box, msg, yesBtn.bg, yesBtn.label, noBtn.bg, noBtn.label]);
     }
     makeButton(x, y, w, h, label, color) {
         const bg = this.scene.add.rectangle(x, y, w, h, color);
