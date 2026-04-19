@@ -10,6 +10,7 @@ import {
   TICK_MS,
 } from "./config.js";
 import { BuildingManager } from "./managers/BuildingManager.js";
+import { CenterManager } from "./managers/CenterManager.js";
 import { DogManager } from "./managers/DogManager.js";
 import { ResourceManager } from "./managers/ResourceManager.js";
 import { SaveManager } from "./managers/SaveManager.js";
@@ -26,6 +27,7 @@ export class Game {
   public buildings!: BuildingManager;
   public events!: EventSystem;
   public production!: ProductionSystem;
+  public centers!: CenterManager;
 
   public totalPlaytimeMs = 0;
   public totalAdoptions = 0;
@@ -42,17 +44,20 @@ export class Game {
   boot(): void {
     const loaded = this.save.load();
     if (loaded) {
-      // Migrate older saves: dogs without `named` should be considered named
-      // so existing players don't have their pups demoted to "Stray".
+      this.centers = new CenterManager(loaded.centers, loaded.currentCenterId);
+      const defaultCenterId = this.centers.current().id;
+      // Migrate older saves: dogs default to named + the first center.
       const migratedDogs = loaded.dogs.map((d) => ({
         ...d,
         named: d.named ?? true,
+        centerId: d.centerId ?? defaultCenterId,
       }));
       this.resources = new ResourceManager(loaded.resources);
       this.dogs = new DogManager(migratedDogs);
+      this.dogs.setCurrentCenter(this.centers.currentIdValue());
       this.buildings = new BuildingManager(loaded.buildings);
       this.events = new EventSystem();
-      this.production = new ProductionSystem(this.dogs, this.buildings, this.resources, this.events);
+      this.production = new ProductionSystem(this.dogs, this.buildings, this.resources, this.events, this.centers);
       this.totalPlaytimeMs = loaded.totalPlaytimeMs ?? 0;
       this.totalAdoptions = loaded.totalAdoptions ?? 0;
       // Offline earnings, capped.
@@ -65,12 +70,17 @@ export class Game {
       }
     } else {
       this.resources = new ResourceManager({ joy: 0, treats: 0, reputation: 0 });
+      this.centers = new CenterManager();
       this.dogs = new DogManager();
+      this.dogs.setCurrentCenter(this.centers.currentIdValue());
       this.buildings = new BuildingManager();
       this.events = new EventSystem();
-      this.production = new ProductionSystem(this.dogs, this.buildings, this.resources, this.events);
+      this.production = new ProductionSystem(this.dogs, this.buildings, this.resources, this.events, this.centers);
       this.dogs.spawnStarter();
     }
+
+    // When the player switches centers, DogManager's view changes too.
+    this.centers.on((_, currentId) => this.dogs.setCurrentCenter(currentId));
 
     // Autosave when tab hides / unloads. Skip while wiping so the wipe sticks.
     window.addEventListener("visibilitychange", () => {
@@ -132,9 +142,19 @@ export class Game {
     if (!this.resources.spend({ joy: fee })) return null;
     const reward = this.dogs.adoptionReward(dog);
     this.resources.add({ joy: reward.joy, reputation: reward.rep });
+    if (dog.centerId) this.centers.recordAdoption(dog.centerId);
     this.dogs.remove(dogId);
     this.totalAdoptions += 1;
     return { joy: reward.joy, rep: reward.rep, fee };
+  }
+
+  /** Try to buy the next rescue center; returns true on success. */
+  handleBuyCenter(): boolean {
+    const cost = this.centers.costNext();
+    if (this.totalAdoptions < cost.adoptions) return false;
+    if (!this.resources.spend({ joy: cost.joy })) return false;
+    this.centers.buyNext();
+    return true;
   }
 
   /** Pay to name a stray; returns chosen name or null on failure. */
@@ -171,6 +191,8 @@ export class Game {
       unlockedDogSlots: this.dogs.count(),
       totalPlaytimeMs: this.totalPlaytimeMs,
       totalAdoptions: this.totalAdoptions,
+      centers: this.centers.toData(),
+      currentCenterId: this.centers.currentIdValue(),
     };
   }
 }

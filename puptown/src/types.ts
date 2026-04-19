@@ -42,6 +42,13 @@ export interface DogData {
   animState: AnimState;
   readyForAdoption?: boolean;
   named?: boolean;
+  centerId?: string;             // which Rescue Center this pup lives in
+}
+
+export interface Center {
+  id: string;
+  name: string;
+  adoptions: number;             // pups sent home from this center
 }
 
 export interface Resources {
@@ -96,6 +103,8 @@ export interface SaveState {
   unlockedDogSlots: number;
   totalPlaytimeMs: number;
   totalAdoptions?: number;       // drives escalating send-off fees
+  centers?: Center[];            // rescue centers owned; old saves default to one
+  currentCenterId?: string;
 }
 
 export const SAVE_VERSION = 1;

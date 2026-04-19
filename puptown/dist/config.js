@@ -244,3 +244,26 @@ export const NAMING_COST_JOY = 80;
 // LV UP cost curve.
 export const LV_UP_BASE = 30;
 export const LV_UP_MULT = 1.5;
+// ── Rescue Centers (multi-yard expansion) ────────────────────────────────
+// Players start with one center. Each additional center costs Joy and
+// requires a minimum number of lifetime adoptions, then gives a compounding
+// global Joy bonus. Use this to extend the game infinitely.
+export const CENTER_BASE_JOY_COST = 500000;
+export const CENTER_JOY_MULT = 3; // cost for center N+1 = base * mult^(N-1)
+export const CENTER_ADOPTIONS_PER_TIER = 10; // center N unlocks after 10*(N-1) lifetime adoptions
+export const CENTER_JOY_BONUS_PER = 0.15; // +15% global Joy/s per extra center owned
+export const CENTER_NAMES = [
+    "Sunny Rescue",
+    "Willow Haven",
+    "Pine Ridge Pups",
+    "Harborside Kennel",
+    "Moonlit Meadow",
+    "Evergreen Rescue",
+    "Coral Bay Pups",
+    "Starlight Shelter",
+    "Wildflower Woofs",
+    "Cloudtop Kennel",
+];
+export function centerNameFor(index) {
+    return CENTER_NAMES[index] ?? `Rescue Center ${index + 1}`;
+}

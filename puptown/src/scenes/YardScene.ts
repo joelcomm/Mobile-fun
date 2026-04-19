@@ -13,6 +13,9 @@ export class YardScene extends Phaser.Scene {
   private grass!: Phaser.GameObjects.TileSprite;
   private kennelBanner!: Phaser.GameObjects.Text;
   private kennelVisualLevel = -1;
+  private centerLabel!: Phaser.GameObjects.Text;
+  private centerLeftArrow!: Phaser.GameObjects.Text;
+  private centerRightArrow!: Phaser.GameObjects.Text;
 
   constructor() {
     super("Yard");
@@ -55,8 +58,46 @@ export class YardScene extends Phaser.Scene {
       bot.setDepth(-4);
     }
 
-    // Spawn sprites for all current dogs.
-    for (const d of game.dogs.list()) {
+    // Center switcher (only visible once the player owns 2+ centers).
+    this.centerLeftArrow = this.add.text(YARD.x + 8, YARD.y + 10, "\u25C0", {
+      fontFamily: "sans-serif",
+      fontSize: "22px",
+      color: "#2a2a3e",
+      backgroundColor: "#fff6d6cc",
+      padding: { left: 6, right: 6, top: 2, bottom: 2 },
+    });
+    this.centerLeftArrow.setOrigin(0, 0);
+    this.centerLeftArrow.setDepth(60);
+    this.centerLeftArrow.setInteractive({ useHandCursor: true });
+    this.centerLeftArrow.on("pointerdown", () => game.centers.cycle(-1));
+
+    this.centerRightArrow = this.add.text(YARD.x + YARD.width - 8, YARD.y + 10, "\u25B6", {
+      fontFamily: "sans-serif",
+      fontSize: "22px",
+      color: "#2a2a3e",
+      backgroundColor: "#fff6d6cc",
+      padding: { left: 6, right: 6, top: 2, bottom: 2 },
+    });
+    this.centerRightArrow.setOrigin(1, 0);
+    this.centerRightArrow.setDepth(60);
+    this.centerRightArrow.setInteractive({ useHandCursor: true });
+    this.centerRightArrow.on("pointerdown", () => game.centers.cycle(1));
+
+    this.centerLabel = this.add.text(GAME_WIDTH / 2, YARD.y + 14, "", {
+      fontFamily: "Inter, sans-serif",
+      fontSize: "14px",
+      fontStyle: "bold",
+      color: "#2a2a3e",
+      backgroundColor: "#fff6d6cc",
+      padding: { left: 10, right: 10, top: 3, bottom: 3 },
+    });
+    this.centerLabel.setOrigin(0.5, 0);
+    this.centerLabel.setDepth(60);
+
+    game.centers.on((_list, _id) => this.refreshCenterHeader());
+
+    // Spawn sprites for all current-center dogs.
+    for (const d of game.dogs.listCurrent()) {
       this.sprites.set(d.id, new DogSprite(this, d));
     }
     game.dogs.on((list) => this.syncDogs(list));
@@ -80,16 +121,16 @@ export class YardScene extends Phaser.Scene {
     for (const s of this.sprites.values()) s.tickUpdate(delta);
     this.refreshKennelVisual();
 
-    // Auto-taps from Auto-Walker.
+    // Auto-taps from Auto-Walker (targets the visible center's dogs).
     const game = Game.instance();
     const auto = game.buildings.autoTapsPerSec();
-    if (auto > 0 && game.dogs.count() > 0) {
+    const visible = game.dogs.listCurrent();
+    if (auto > 0 && visible.length > 0) {
       this.treatEmitterTimer += delta;
       const interval = 1000 / auto;
       while (this.treatEmitterTimer >= interval) {
         this.treatEmitterTimer -= interval;
-        const dogs = game.dogs.list();
-        const pick = dogs[Math.floor(Math.random() * dogs.length)];
+        const pick = visible[Math.floor(Math.random() * visible.length)];
         const gained = game.handleTap(pick.id);
         const sprite = this.sprites.get(pick.id);
         if (sprite) {
@@ -116,10 +157,18 @@ export class YardScene extends Phaser.Scene {
         existing.setDogName(d.name);
       }
     }
+    // A sprite not in the current list either graduated (no longer exists in
+    // any center) or moved out of view because we switched centers. Only the
+    // former should play the fly-away animation.
+    const allIds = new Set(Game.instance().dogs.list().map((d) => d.id));
     for (const [id, s] of this.sprites) {
       if (!seen.has(id)) {
         this.sprites.delete(id);
-        s.playGraduateAnimation(() => s.destroy());
+        if (allIds.has(id)) {
+          s.destroy();
+        } else {
+          s.playGraduateAnimation(() => s.destroy());
+        }
       }
     }
   }
@@ -127,6 +176,17 @@ export class YardScene extends Phaser.Scene {
   /** Used by DogPanel to fetch a sprite for animation/positioning. */
   getSprite(id: string): DogSprite | undefined {
     return this.sprites.get(id);
+  }
+
+  /** Refresh the rescue-center header (arrows + label). */
+  private refreshCenterHeader(): void {
+    const game = Game.instance();
+    const count = game.centers.count();
+    const current = game.centers.current();
+    this.centerLabel.setText(`\u{1F3E1} ${current.name}`);
+    const many = count > 1;
+    this.centerLeftArrow.setVisible(many);
+    this.centerRightArrow.setVisible(many);
   }
 
   /** Recolor the grass + label when the kennel tier changes. */
