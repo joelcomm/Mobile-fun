@@ -2,7 +2,10 @@
 // Scenes talk to it via Game.instance().
 
 import {
+  ADOPTION_FEE_BASE,
+  ADOPTION_FEE_MULT,
   MAX_OFFLINE_MS,
+  NAMING_COST_JOY,
   SAVE_THROTTLE_MS,
   TICK_MS,
 } from "./config.js";
@@ -25,6 +28,7 @@ export class Game {
   public production!: ProductionSystem;
 
   public totalPlaytimeMs = 0;
+  public totalAdoptions = 0;
   private tickAccum = 0;
   private startTime = Date.now();
   private pendingOffline: { joy: number; treats: number } | null = null;
@@ -37,12 +41,19 @@ export class Game {
   boot(): void {
     const loaded = this.save.load();
     if (loaded) {
+      // Migrate older saves: dogs without `named` should be considered named
+      // so existing players don't have their pups demoted to "Stray".
+      const migratedDogs = loaded.dogs.map((d) => ({
+        ...d,
+        named: d.named ?? true,
+      }));
       this.resources = new ResourceManager(loaded.resources);
-      this.dogs = new DogManager(loaded.dogs);
+      this.dogs = new DogManager(migratedDogs);
       this.buildings = new BuildingManager(loaded.buildings);
       this.events = new EventSystem();
       this.production = new ProductionSystem(this.dogs, this.buildings, this.resources, this.events);
       this.totalPlaytimeMs = loaded.totalPlaytimeMs ?? 0;
+      this.totalAdoptions = loaded.totalAdoptions ?? 0;
       // Offline earnings, capped.
       const elapsed = Math.min(
         Math.max(0, Date.now() - loaded.lastSavedAt),
@@ -93,17 +104,34 @@ export class Game {
     return joy;
   }
 
+  /** Send-off fee climbs each adoption to keep the loop self-pacing. */
+  nextSendOffFee(): number {
+    return Math.ceil(ADOPTION_FEE_BASE * Math.pow(ADOPTION_FEE_MULT, this.totalAdoptions));
+  }
+
   /**
-   * Send a ready dog to a forever home. Awards Joy + Reputation, removes the
-   * dog. Returns the reward, or null if the dog isn't ready / doesn't exist.
+   * Send a ready dog to a forever home. Pays the send-off fee, awards
+   * Joy + Reputation, removes the dog. Returns net reward + fee paid, or
+   * null if not ready / can't pay the fee.
    */
-  handleGraduate(dogId: string): { joy: number; rep: number } | null {
+  handleGraduate(dogId: string): { joy: number; rep: number; fee: number } | null {
     const dog = this.dogs.get(dogId);
     if (!dog || !this.dogs.isReady(dog)) return null;
+    const fee = this.nextSendOffFee();
+    if (!this.resources.spend({ joy: fee })) return null;
     const reward = this.dogs.adoptionReward(dog);
     this.resources.add({ joy: reward.joy, reputation: reward.rep });
     this.dogs.remove(dogId);
-    return reward;
+    this.totalAdoptions += 1;
+    return { joy: reward.joy, rep: reward.rep, fee };
+  }
+
+  /** Pay to name a stray; returns chosen name or null on failure. */
+  handleNameStray(dogId: string): string | null {
+    const dog = this.dogs.get(dogId);
+    if (!dog || dog.named) return null;
+    if (!this.resources.spend({ joy: NAMING_COST_JOY })) return null;
+    return this.dogs.nameStray(dogId);
   }
 
   forceSave(): void {
@@ -130,6 +158,7 @@ export class Game {
       buildings: this.buildings.toData(),
       unlockedDogSlots: this.dogs.count(),
       totalPlaytimeMs: this.totalPlaytimeMs,
+      totalAdoptions: this.totalAdoptions,
     };
   }
 }

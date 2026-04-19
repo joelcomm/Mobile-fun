@@ -4,6 +4,7 @@ import {
   ADOPTION_BASE_REP,
   ADOPTION_HAPPINESS_REQ,
   ADOPTION_JOY_BASE,
+  ADOPTION_LEVEL_EXP,
   ADOPTION_LEVEL_REQ,
   ALL_BREEDS,
   ALL_PERSONALITIES,
@@ -69,15 +70,18 @@ export class DogManager {
 
   spawnStarter(): DogData {
     const dog = this.makeDog("companion", 1);
-    dog.name = "Biscuit"; // starter always Biscuit for a familiar opener
+    dog.name = "Biscuit"; // starter always Biscuit, pre-named for the tutorial
+    dog.named = true;
     this.dogs.push(dog);
     this.emit();
     return dog;
   }
 
-  /** Create & adopt a new dog with a given role at current happiness. */
+  /** Create & adopt a new stray with a given role; player must name it. */
   adopt(role: DogRole = pickRole()): DogData {
     const dog = this.makeDog(role, 1);
+    dog.name = "Stray";
+    dog.named = false;
     this.dogs.push(dog);
     this.emit();
     return dog;
@@ -110,8 +114,19 @@ export class DogManager {
 
   /** Returns true if a dog has reached the threshold to graduate. */
   isReady(d: DogData): boolean {
+    if (!d.named) return false;
     if (d.readyForAdoption) return true;
     return d.level >= ADOPTION_LEVEL_REQ && d.happiness >= ADOPTION_HAPPINESS_REQ;
+  }
+
+  /** Assigns a random name to a stray; returns the chosen name. */
+  nameStray(id: string): string | null {
+    const dog = this.get(id);
+    if (!dog || dog.named) return null;
+    dog.name = DOG_NAMES[Math.floor(Math.random() * DOG_NAMES.length)];
+    dog.named = true;
+    this.emit();
+    return dog.name;
   }
 
   /** Mark any qualifying dogs as ready (sticky once true). */
@@ -129,7 +144,7 @@ export class DogManager {
   /** Joy + Reputation reward for graduating a given dog. */
   adoptionReward(d: DogData): { joy: number; rep: number } {
     const roleMult = 0.6 + ROLE_INFO[d.role].repChance * 6; // rescue ~1.08, agility ~0.72
-    const joy = Math.floor(ADOPTION_JOY_BASE * Math.pow(d.level, 1.5) * roleMult);
+    const joy = Math.floor(ADOPTION_JOY_BASE * Math.pow(d.level, ADOPTION_LEVEL_EXP) * roleMult);
     const rep = ADOPTION_BASE_REP + Math.floor(d.level / 5);
     return { joy, rep };
   }

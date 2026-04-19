@@ -1,5 +1,5 @@
 // Dog panel: lists each dog with stats and an adoption/unlock button.
-import { BREED_LABELS, ROLE_INFO, GAME_WIDTH, } from "../config.js";
+import { BREED_LABELS, LV_UP_BASE, LV_UP_MULT, NAMING_COST_JOY, ROLE_INFO, GAME_WIDTH, } from "../config.js";
 import { Game } from "../Game.js";
 import { Panel } from "./Panel.js";
 export class DogPanel extends Panel {
@@ -23,25 +23,47 @@ export class DogPanel extends Panel {
         const scene = this.scene;
         const game = Game.instance();
         const ready = game.dogs.isReady(d);
-        const rowBg = scene.add.rectangle(GAME_WIDTH / 2, y + 26, GAME_WIDTH - 24, 52, ready ? 0xfff0b8 : 0xffffff);
-        rowBg.setStrokeStyle(1, ready ? 0xc89818 : 0x2a2a3e, ready ? 0.6 : 0.1);
+        const isStray = !d.named;
+        const rowBg = scene.add.rectangle(GAME_WIDTH / 2, y + 26, GAME_WIDTH - 24, 52, ready ? 0xfff0b8 : isStray ? 0xeae0d6 : 0xffffff);
+        rowBg.setStrokeStyle(1, ready ? 0xc89818 : isStray ? 0x6b6b80 : 0x2a2a3e, ready ? 0.6 : isStray ? 0.4 : 0.1);
         rowBg.setOrigin(0.5);
         const roleLabel = ROLE_INFO[d.role].label;
         const breed = BREED_LABELS[d.breedType];
-        const line1 = `${d.name}  Lv${d.level}${ready ? "  \u{1F393}" : ""}`;
+        const displayName = isStray ? "Stray pup" : d.name;
+        const line1 = `${displayName}  Lv${d.level}${ready ? "  \u{1F393}" : ""}`;
         const line2 = `${breed} / ${roleLabel}`;
-        const line3 = ready
-            ? `Ready for a forever home!`
-            : `\u{1F60A} ${Math.floor(d.happiness)}%  +${d.baseJoyPerSecond.toFixed(1)}/s  tap +${d.tapBonus.toFixed(1)}`;
+        const line3 = isStray
+            ? `Name them to make them yours.`
+            : ready
+                ? `Ready for a forever home!`
+                : `\u{1F60A} ${Math.floor(d.happiness)}%  +${d.baseJoyPerSecond.toFixed(1)}/s  tap +${d.tapBonus.toFixed(1)}`;
         const text = scene.add.text(18, y + 4, line1 + "\n" + line2 + "\n" + line3, {
             fontFamily: "monospace",
             fontSize: "13px",
             color: "#2a2a3e",
             lineSpacing: 2,
         });
+        // Stray: only NAME button is offered.
+        if (isStray) {
+            const canPay = game.resources.canAfford({ joy: NAMING_COST_JOY });
+            const btn = this.makeButton(GAME_WIDTH - 52, y + 26, 80, 40, `\u{1F3F7} NAME\n\u2600\uFE0F${NAMING_COST_JOY}`, canPay ? 0x7fc56b : 0xff9ac1);
+            btn.bg.on("pointerdown", () => {
+                if (Game.instance().handleNameStray(d.id)) {
+                    this.refresh();
+                }
+                else {
+                    this.flash(btn.bg, 0xff5a7e);
+                }
+            });
+            this.content.add([rowBg, text, btn.bg, btn.label]);
+            return;
+        }
         if (ready) {
             const reward = game.dogs.adoptionReward(d);
-            const btn = this.makeButton(GAME_WIDTH - 52, y + 26, 80, 40, `SEND HOME\n+${formatNumber(reward.joy)}`, 0xffd86b);
+            const fee = game.nextSendOffFee();
+            const canPayFee = game.resources.canAfford({ joy: fee });
+            const btn = this.makeButton(GAME_WIDTH - 52, y + 26, 80, 40, `SEND HOME\n+${formatNumber(reward.joy - fee)}\n(fee \u2600\uFE0F${formatNumber(fee)})`, canPayFee ? 0xffd86b : 0xff9ac1);
+            btn.label.setFontSize(11);
             btn.bg.on("pointerdown", () => {
                 const yard = this.getYard();
                 const sprite = yard?.getSprite(d.id);
@@ -50,12 +72,15 @@ export class DogPanel extends Panel {
                 const got = Game.instance().handleGraduate(d.id);
                 if (got && yard)
                     yard.showRewardBurst(x, yPos, got);
-                this.refresh();
+                if (!got)
+                    this.flash(btn.bg, 0xff5a7e);
+                else
+                    this.refresh();
             });
             this.content.add([rowBg, text, btn.bg, btn.label]);
             return;
         }
-        const cost = Math.ceil(40 * Math.pow(2, d.level));
+        const cost = Math.ceil(LV_UP_BASE * Math.pow(LV_UP_MULT, d.level));
         const affordable = game.resources.canAfford({ joy: cost });
         const btn = this.makeButton(GAME_WIDTH - 52, y + 26, 80, 40, `LV UP\n\u2600\uFE0F${formatNumber(cost)}`, affordable ? 0x7fc56b : 0xff9ac1);
         btn.bg.on("pointerdown", () => {
