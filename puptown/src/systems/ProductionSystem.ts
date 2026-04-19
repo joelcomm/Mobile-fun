@@ -1,6 +1,7 @@
 // Calculates passive Joy / Treats / Reputation per second and applies deltas.
 
 import { BuildingManager } from "../managers/BuildingManager.js";
+import { CenterManager } from "../managers/CenterManager.js";
 import { DogManager } from "../managers/DogManager.js";
 import { ResourceManager } from "../managers/ResourceManager.js";
 import { REP_HAPPY_GAIN_INTERVAL_MS, REP_HAPPY_THRESHOLD, ROLE_INFO } from "../config.js";
@@ -19,12 +20,16 @@ export class ProductionSystem {
     private dogs: DogManager,
     private buildings: BuildingManager,
     private resources: ResourceManager,
-    private events: EventSystem
+    private events: EventSystem,
+    private centers: CenterManager
   ) {}
 
-  /** Current per-second rate (joy includes event multipliers). */
+  /** Current per-second rate (joy includes event + center multipliers). */
   rates(): RateSummary {
-    const joyMult = this.buildings.productionMultiplier() * this.events.joyMultiplier();
+    const joyMult =
+      this.buildings.productionMultiplier() *
+      this.events.joyMultiplier() *
+      this.centers.productionMultiplier();
     let joy = 0;
     let repChancePerSec = 0;
     for (const d of this.dogs.list()) {

@@ -1,4 +1,8 @@
 // Owns the list of dogs and handles creation, leveling, and unlock logic.
+//
+// Multi-center aware: each dog carries a `centerId`. `list()` returns every
+// dog (used by production + save). `listCurrent()` returns only dogs in the
+// active center and is what UI subscribers see.
 
 import {
   ADOPTION_BASE_REP,
@@ -22,6 +26,7 @@ export class DogManager {
   private dogs: DogData[] = [];
   private listeners: Set<Listener> = new Set();
   private idCounter = 1;
+  private currentCenterId: string = "";
 
   constructor(initial?: DogData[]) {
     if (initial && initial.length) {
@@ -34,12 +39,29 @@ export class DogManager {
     }
   }
 
+  /** Bind this manager to a current center. UI subscribers see that center. */
+  setCurrentCenter(id: string): void {
+    if (this.currentCenterId === id) return;
+    this.currentCenterId = id;
+    this.emit();
+  }
+
+  /** All dogs across every center (used by production + save). */
   list(): readonly DogData[] {
     return this.dogs;
   }
 
+  /** Only dogs in the active center (used by the yard + dog panel). */
+  listCurrent(): readonly DogData[] {
+    return this.dogs.filter((d) => (d.centerId ?? this.currentCenterId) === this.currentCenterId);
+  }
+
   count(): number {
     return this.dogs.length;
+  }
+
+  countCurrent(): number {
+    return this.listCurrent().length;
   }
 
   get(id: string): DogData | undefined {
@@ -48,23 +70,24 @@ export class DogManager {
 
   on(listener: Listener): () => void {
     this.listeners.add(listener);
-    listener(this.dogs);
+    listener(this.listCurrent());
     return () => this.listeners.delete(listener);
   }
 
   emit(): void {
-    for (const l of this.listeners) l(this.dogs);
+    const visible = this.listCurrent();
+    for (const l of this.listeners) l(visible);
   }
 
-  /** Cost (in Joy) to unlock the next dog slot. */
+  /** Cost (in Joy) to unlock the next dog slot in the current center. */
   nextUnlockCost(): number {
-    const i = this.dogs.length;
+    const i = this.countCurrent();
     return UNLOCK_COSTS[i] ?? UNLOCK_COSTS[UNLOCK_COSTS.length - 1] * Math.pow(2.5, i - UNLOCK_COSTS.length + 1);
   }
 
   /** Reputation needed before next slot can be unlocked. */
   nextUnlockRep(): number {
-    const i = this.dogs.length;
+    const i = this.countCurrent();
     return UNLOCK_REP[i] ?? UNLOCK_REP[UNLOCK_REP.length - 1];
   }
 
@@ -72,16 +95,18 @@ export class DogManager {
     const dog = this.makeDog("companion", 1);
     dog.name = "Biscuit"; // starter always Biscuit, pre-named for the tutorial
     dog.named = true;
+    dog.centerId = this.currentCenterId;
     this.dogs.push(dog);
     this.emit();
     return dog;
   }
 
-  /** Create & adopt a new stray with a given role; player must name it. */
+  /** Create & adopt a new stray in the active center; player must name it. */
   adopt(role: DogRole = pickRole()): DogData {
     const dog = this.makeDog(role, 1);
     dog.name = "Stray";
     dog.named = false;
+    dog.centerId = this.currentCenterId;
     this.dogs.push(dog);
     this.emit();
     return dog;

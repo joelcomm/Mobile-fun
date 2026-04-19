@@ -2,6 +2,7 @@
 // Scenes talk to it via Game.instance().
 import { ADOPTION_FEE_BASE, ADOPTION_FEE_MULT, MAX_OFFLINE_MS, NAMING_COST_JOY, SAVE_THROTTLE_MS, TICK_MS, } from "./config.js";
 import { BuildingManager } from "./managers/BuildingManager.js";
+import { CenterManager } from "./managers/CenterManager.js";
 import { DogManager } from "./managers/DogManager.js";
 import { ResourceManager } from "./managers/ResourceManager.js";
 import { SaveManager } from "./managers/SaveManager.js";
@@ -26,17 +27,20 @@ export class Game {
     boot() {
         const loaded = this.save.load();
         if (loaded) {
-            // Migrate older saves: dogs without `named` should be considered named
-            // so existing players don't have their pups demoted to "Stray".
+            this.centers = new CenterManager(loaded.centers, loaded.currentCenterId);
+            const defaultCenterId = this.centers.current().id;
+            // Migrate older saves: dogs default to named + the first center.
             const migratedDogs = loaded.dogs.map((d) => ({
                 ...d,
                 named: d.named ?? true,
+                centerId: d.centerId ?? defaultCenterId,
             }));
             this.resources = new ResourceManager(loaded.resources);
             this.dogs = new DogManager(migratedDogs);
+            this.dogs.setCurrentCenter(this.centers.currentIdValue());
             this.buildings = new BuildingManager(loaded.buildings);
             this.events = new EventSystem();
-            this.production = new ProductionSystem(this.dogs, this.buildings, this.resources, this.events);
+            this.production = new ProductionSystem(this.dogs, this.buildings, this.resources, this.events, this.centers);
             this.totalPlaytimeMs = loaded.totalPlaytimeMs ?? 0;
             this.totalAdoptions = loaded.totalAdoptions ?? 0;
             // Offline earnings, capped.
@@ -47,12 +51,16 @@ export class Game {
         }
         else {
             this.resources = new ResourceManager({ joy: 0, treats: 0, reputation: 0 });
+            this.centers = new CenterManager();
             this.dogs = new DogManager();
+            this.dogs.setCurrentCenter(this.centers.currentIdValue());
             this.buildings = new BuildingManager();
             this.events = new EventSystem();
-            this.production = new ProductionSystem(this.dogs, this.buildings, this.resources, this.events);
+            this.production = new ProductionSystem(this.dogs, this.buildings, this.resources, this.events, this.centers);
             this.dogs.spawnStarter();
         }
+        // When the player switches centers, DogManager's view changes too.
+        this.centers.on((_, currentId) => this.dogs.setCurrentCenter(currentId));
         // Autosave when tab hides / unloads. Skip while wiping so the wipe sticks.
         window.addEventListener("visibilitychange", () => {
             if (this.wiping)
@@ -116,9 +124,21 @@ export class Game {
             return null;
         const reward = this.dogs.adoptionReward(dog);
         this.resources.add({ joy: reward.joy, reputation: reward.rep });
+        if (dog.centerId)
+            this.centers.recordAdoption(dog.centerId);
         this.dogs.remove(dogId);
         this.totalAdoptions += 1;
         return { joy: reward.joy, rep: reward.rep, fee };
+    }
+    /** Try to buy the next rescue center; returns true on success. */
+    handleBuyCenter() {
+        const cost = this.centers.costNext();
+        if (this.totalAdoptions < cost.adoptions)
+            return false;
+        if (!this.resources.spend({ joy: cost.joy }))
+            return false;
+        this.centers.buyNext();
+        return true;
     }
     /** Pay to name a stray; returns chosen name or null on failure. */
     handleNameStray(dogId) {
@@ -152,6 +172,8 @@ export class Game {
             unlockedDogSlots: this.dogs.count(),
             totalPlaytimeMs: this.totalPlaytimeMs,
             totalAdoptions: this.totalAdoptions,
+            centers: this.centers.toData(),
+            currentCenterId: this.centers.currentIdValue(),
         };
     }
 }

@@ -25,8 +25,12 @@ export class DogPanel extends Panel {
   refresh(): void {
     this.clearContent();
     const game = Game.instance();
-    const dogs = game.dogs.list();
+    const dogs = game.dogs.listCurrent();
     let y = Panel.TOP + 32;
+
+    // Current center header so the player always knows which yard they're
+    // managing, and a small ◀ ▶ shortcut when they own more than one.
+    y = this.drawCenterHeader(y);
 
     for (const d of dogs) {
       this.drawDogRow(d, y);
@@ -34,7 +38,79 @@ export class DogPanel extends Panel {
     }
 
     this.drawUnlockRow(y);
-    this.setContentBottom(y + 52);
+    y += 58;
+    this.drawBuyCenterRow(y);
+    this.setContentBottom(y + 58);
+  }
+
+  private drawCenterHeader(y: number): number {
+    const scene = this.scene;
+    const game = Game.instance();
+    const centers = game.centers.list();
+    const current = game.centers.current();
+    const many = centers.length > 1;
+
+    const bg = scene.add.rectangle(GAME_WIDTH / 2, y + 16, GAME_WIDTH - 24, 32, 0xfff0b8);
+    bg.setStrokeStyle(1, 0xc89818, 0.5);
+    bg.setOrigin(0.5);
+    const label = scene.add.text(GAME_WIDTH / 2, y + 16,
+      `\u{1F3E1} ${current.name}  (${centers.length})`, {
+      fontFamily: "Inter, sans-serif",
+      fontSize: "13px",
+      fontStyle: "bold",
+      color: "#2a2a3e",
+    });
+    label.setOrigin(0.5);
+    this.content.add([bg, label]);
+
+    if (many) {
+      const left = this.makeButton(40, y + 16, 52, 28, "\u25C0", 0xffd86b);
+      left.bg.on("pointerdown", () => { game.centers.cycle(-1); this.refresh(); });
+      const right = this.makeButton(GAME_WIDTH - 40, y + 16, 52, 28, "\u25B6", 0xffd86b);
+      right.bg.on("pointerdown", () => { game.centers.cycle(1); this.refresh(); });
+      this.content.add([left.bg, left.label, right.bg, right.label]);
+    }
+    return y + 40;
+  }
+
+  private drawBuyCenterRow(y: number): void {
+    const scene = this.scene;
+    const game = Game.instance();
+    const cost = game.centers.costNext();
+    const needed = Math.max(0, cost.adoptions - game.totalAdoptions);
+    const canAfford = game.resources.canAfford({ joy: cost.joy });
+    const locked = needed > 0;
+
+    const bg = scene.add.rectangle(GAME_WIDTH / 2, y + 26, GAME_WIDTH - 24, 52, 0xeadff2);
+    bg.setStrokeStyle(1, 0x6b4aa2, 0.3);
+    bg.setOrigin(0.5);
+
+    const msg = locked
+      ? `Unlocks after ${needed} more adoption${needed === 1 ? "" : "s"}.`
+      : `Opens a new yard. +15% Joy/s globally!`;
+    const info = scene.add.text(18, y + 6, `OPEN NEW RESCUE CENTER\n${msg}`, {
+      fontFamily: "monospace",
+      fontSize: "12px",
+      color: "#2a2a3e",
+      lineSpacing: 3,
+    });
+
+    const color = locked ? 0xaaaaaa : canAfford ? 0x7fc56b : 0xff9ac1;
+    const btn = this.makeButton(
+      GAME_WIDTH - 52, y + 26, 80, 40,
+      `OPEN\n\u2600\uFE0F${formatNumber(cost.joy)}`,
+      color
+    );
+    btn.bg.on("pointerdown", () => {
+      if (locked) { this.flash(btn.bg, 0xff5a7e); return; }
+      if (Game.instance().handleBuyCenter()) {
+        this.refresh();
+      } else {
+        this.flash(btn.bg, 0xff5a7e);
+      }
+    });
+
+    this.content.add([bg, info, btn.bg, btn.label]);
   }
 
   private drawDogRow(d: DogData, y: number): void {

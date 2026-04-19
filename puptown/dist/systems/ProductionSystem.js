@@ -1,16 +1,19 @@
 // Calculates passive Joy / Treats / Reputation per second and applies deltas.
 import { REP_HAPPY_GAIN_INTERVAL_MS, REP_HAPPY_THRESHOLD, ROLE_INFO } from "../config.js";
 export class ProductionSystem {
-    constructor(dogs, buildings, resources, events) {
+    constructor(dogs, buildings, resources, events, centers) {
         this.dogs = dogs;
         this.buildings = buildings;
         this.resources = resources;
         this.events = events;
+        this.centers = centers;
         this.repTickAccumMs = 0;
     }
-    /** Current per-second rate (joy includes event multipliers). */
+    /** Current per-second rate (joy includes event + center multipliers). */
     rates() {
-        const joyMult = this.buildings.productionMultiplier() * this.events.joyMultiplier();
+        const joyMult = this.buildings.productionMultiplier() *
+            this.events.joyMultiplier() *
+            this.centers.productionMultiplier();
         let joy = 0;
         let repChancePerSec = 0;
         for (const d of this.dogs.list()) {
