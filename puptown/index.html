@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#bfe6ff">
+  <title>Pup Town Idle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    html, body {
+      height: 100%;
+      background: linear-gradient(180deg, #bfe6ff 0%, #a8d7f5 60%, #7fc56b 100%);
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: #2a2a3e;
+      overflow: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    #app {
+      width: 100vw;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      flex: 0 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px calc(10px + env(safe-area-inset-top, 0px));
+      background: #2a2a3e;
+      color: #fff6d6;
+      letter-spacing: 1px;
+    }
+
+    header .title {
+      font-weight: 900;
+      font-size: 14px;
+      letter-spacing: 2px;
+    }
+
+    header a {
+      color: #ffd86b;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    #game {
+      flex: 1 1 auto;
+      overflow: hidden;
+    }
+
+    #loading {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #fff6d6;
+      background: #2a2a3e;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <header>
+      <span class="title">&#x1F436; PUP TOWN IDLE</span>
+      <a href="../hub.html">&larr; HUB</a>
+    </header>
+    <div id="game"></div>
+  </div>
+  <div id="loading">Loading Pup Town&hellip;</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
+  <script type="module">
+    // Hide loading screen once the main module executes.
+    import("./dist/main.js")
+      .then(() => {
+        const l = document.getElementById("loading");
+        if (l) l.remove();
+      })
+      .catch((err) => {
+        console.error(err);
+        const l = document.getElementById("loading");
+        if (l) l.textContent = "Failed to load: " + err.message;
+      });
+  </script>
+</body>
+</html>

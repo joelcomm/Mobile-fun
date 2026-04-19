@@ -1,0 +1,15 @@
+{
+  "name": "pup-town-idle",
+  "version": "0.1.0",
+  "description": "A cozy idle game about happy dogs generating Joy.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "devDependencies": {
+    "phaser": "^3.80.1",
+    "typescript": "^5.4.0"
+  }
+}

@@ -1,0 +1,99 @@
+// Shared domain types for Pup Town Idle.
+
+export type BreedType =
+  | "mutt"
+  | "shiba"
+  | "corgi"
+  | "husky"
+  | "poodle"
+  | "dachshund"
+  | "bulldog"
+  | "goldie";
+
+export type Personality =
+  | "playful"
+  | "calm"
+  | "brave"
+  | "shy"
+  | "clever"
+  | "zoomy";
+
+export type DogRole = "companion" | "therapy" | "agility" | "rescue";
+
+export type AnimState = "idle" | "walk" | "bark" | "sleep" | "zoomies";
+
+export interface Vec2 {
+  x: number;
+  y: number;
+}
+
+export interface DogData {
+  id: string;
+  name: string;
+  breedType: BreedType;
+  colorVariant: number;          // palette index
+  personality: Personality;
+  role: DogRole;
+  level: number;
+  happiness: number;             // 0..100
+  baseJoyPerSecond: number;
+  tapBonus: number;
+  position: Vec2;
+  animState: AnimState;
+}
+
+export interface Resources {
+  joy: number;
+  treats: number;
+  reputation: number;
+}
+
+export interface BuildingData {
+  id: string;
+  typeId: string;
+  level: number;
+}
+
+export interface BuildingDef {
+  id: string;
+  name: string;
+  icon: string;
+  description: string;
+  baseCost: { joy?: number; treats?: number; reputation?: number };
+  costMultiplier: number;
+  effect: {
+    kind:
+      | "happiness"
+      | "production"
+      | "automation"
+      | "tapBonus"
+      | "treatsPerSec";
+    value: number; // per level
+  };
+  maxLevel: number;
+}
+
+export interface RandomEvent {
+  id: string;
+  name: string;
+  icon: string;
+  description: string;
+  durationMs: number;
+  effect:
+    | { kind: "treatRain"; perSec: number }
+    | { kind: "zoomies"; joyMultiplier: number }
+    | { kind: "goldenSqueaky"; tapMultiplier: number };
+}
+
+export interface SaveState {
+  version: number;
+  lastSavedAt: number;           // unix ms
+  resources: Resources;
+  dogs: DogData[];
+  buildings: BuildingData[];
+  unlockedDogSlots: number;
+  totalPlaytimeMs: number;
+}
+
+export const SAVE_VERSION = 1;
+export const SAVE_KEY = "puptown.save.v1";
