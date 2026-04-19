@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { fetchFeed } from "@/lib/ingestion/rss";
+import { fetchPageSource } from "@/lib/ingestion/pages";
 import { classifyRelevance } from "@/lib/processing/classify";
 import { createServiceClient } from "@/lib/supabase/server";
 import { assertCronAuth } from "@/lib/utils";
@@ -20,40 +20,44 @@ export async function GET(req: Request) {
 
   const { data: sources, error } = await supabase
     .from("sources")
-    .select("id,name,url,language")
-    .eq("source_type", "rss")
-    .eq("active", true);
+    .select("id,name,url,language,priority")
+    .eq("source_type", "official")
+    .eq("active", true)
+    .order("priority", { ascending: true });
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 
-  const results: { source: string; new_items: number }[] = [];
+  const results: { source: string; found: number; new: number }[] = [];
 
   for (const source of sources ?? []) {
-    let items: Awaited<ReturnType<typeof fetchFeed>> = [];
+    let items: Awaited<ReturnType<typeof fetchPageSource>> = [];
     try {
-      items = await fetchFeed(source.url);
+      items = await fetchPageSource(source.url);
     } catch (e) {
-      console.error(`rss fetch failed for ${source.name}:`, (e as Error).message);
+      console.error(
+        `page ingestion failed for ${source.name}:`,
+        (e as Error).message
+      );
       continue;
     }
 
-    let newItems = 0;
-    for (const item of items) {
-      const externalId = `rss:${source.id}:${item.id}`;
+    let newCount = 0;
+    for (const { link, detail } of items) {
       const { data: existing } = await supabase
         .from("ingested_content")
         .select("id")
-        .eq("source_type", "rss")
-        .eq("external_id", externalId)
+        .eq("source_type", "official")
+        .eq("external_id", link.externalId)
         .maybeSingle();
       if (existing) continue;
 
+      const snippet = (detail?.content ?? link.title).slice(0, 800);
       let relevance = 0;
       let category: string | null = null;
       try {
         const result = await classifyRelevance({
-          title: item.title,
-          url: item.link,
-          snippet: item.contentSnippet ?? item.content ?? "",
+          title: detail?.title ?? link.title,
+          url: link.url,
+          snippet,
         });
         relevance = result.relevance_score;
         category = result.category;
@@ -62,19 +66,19 @@ export async function GET(req: Request) {
       }
 
       const { error: insErr } = await supabase.from("ingested_content").insert({
-        source_type: "rss",
-        external_id: externalId,
+        source_type: "official",
+        external_id: link.externalId,
         source_id: source.id,
-        title: item.title,
-        url: item.link,
-        published_at: item.isoDate ?? new Date().toISOString(),
-        content: item.content ?? item.contentSnippet ?? "",
+        title: detail?.title ?? link.title,
+        url: link.url,
+        published_at: detail?.publishedAt ?? new Date().toISOString(),
+        content: detail?.content ?? null,
         language: source.language ?? "en",
-        raw_metadata: null,
+        raw_metadata: { board_no: link.externalId },
         relevance_score: relevance,
         category,
       });
-      if (!insErr) newItems += 1;
+      if (!insErr) newCount += 1;
     }
 
     await supabase
@@ -82,7 +86,7 @@ export async function GET(req: Request) {
       .update({ last_fetched_at: new Date().toISOString() })
       .eq("id", source.id);
 
-    results.push({ source: source.name, new_items: newItems });
+    results.push({ source: source.name, found: items.length, new: newCount });
   }
 
   return NextResponse.json({ ok: true, results });

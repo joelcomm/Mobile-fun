@@ -9,7 +9,7 @@ What's done, what's partial, and what you need to do by hand before the product 
 - Supabase client (browser + server + service-role).
 - Anthropic client with JSON helper and model aliases.
 - Core prompts: daily digest, patch analysis, relevance classifier, boss guide synthesis, Korean translation.
-- Ingestion: YouTube Data API v3, Reddit OAuth, generic RSS, Steam News + player count.
+- Ingestion: YouTube Data API v3, Reddit OAuth, generic RSS, Steam News + player count, Pearl-Abyss notice-board page-diff watcher.
 - Relevance classifier wired into every ingestion route (Haiku).
 - Processing: daily digest, patch analysis (with Korean translation pass), boss guide synthesis, Korean translation.
 - Cron routes for all ingestion + processing jobs, guarded by `CRON_SECRET`.
@@ -19,6 +19,8 @@ What's done, what's partial, and what you need to do by hand before the product 
 - Dashboard with preference-filtered feed.
 - `vercel.json` cron schedule.
 - README with setup, manual ingestion/digest commands, deployment, and editorial rules.
+- Seed SQL `supabase/migrations/0002_seed_lists.sql` that loads the subreddit, the Pearl Abyss EN + KR notice boards, and the verified creators (streamers and one KR YouTube channel) into the database in one paste.
+- `lib/lists/creators.ts` and `lib/lists/sources.ts` populated from real research: Steam AppID 3321460, r/CrimsonDesert, Pearl Abyss notice boards, Asmongold (zackrawrr), CohhCarnage, Maximilian_DOOD, WolfheartFPS, SynthPotato, 김도랜드 (channel ID verified). Entries that need manual handle resolution are seeded `active=false` with `needs-manual-verify` notes pointing at the evidence videos.
 
 ## Partial
 
@@ -33,22 +35,33 @@ What's done, what's partial, and what you need to do by hand before the product 
 
 ## What you must do by hand before shipping
 
-1. **Populate `lib/lists/creators.ts`** with real, verified Crimson Desert creators. This is the product moat.
-2. **Populate `lib/lists/sources.ts`** with the real subreddit name, Pearl Abyss RSS, and any Korean patch notes page you want covered.
-3. **Populate `lib/lists/bosses.ts`** once you can verify names, regions, and difficulty tiers against in-game or official sources.
-4. **Run the migration** in your Supabase project (`supabase/migrations/0001_initial_schema.sql`).
-5. **Seed the database** by inserting the list contents. See README for SQL example.
-6. **Collect API keys** for Supabase, Anthropic, YouTube, Reddit, Steam.
-7. **Set `STEAM_APPID`** once you've confirmed the Crimson Desert Steam AppID.
-8. **Run one ingestion manually**, then one digest, then verify the homepage.
-9. **Deploy to Vercel** with all env vars set; Vercel cron takes over.
+1. **Run both migrations** in your Supabase project in order: `0001_initial_schema.sql` then `0002_seed_lists.sql`. The second one loads the curated lists in a single paste.
+2. **Collect API keys** for Supabase, Anthropic, YouTube (Data API v3), Reddit (script app).
+3. **Set `STEAM_APPID=3321460`** and `STEAM_API_KEY` (only needed for player-count endpoint; news endpoint is keyless).
+4. **Resolve the `needs-manual-verify` creators**. Each seeded entry with `active=false` has a note pointing at the evidence video. Open it, copy the channel handle and UC channel ID from the channel page URL, then:
+   - Update `lib/lists/creators.ts` so the change is in version control.
+   - In Supabase, `update creators set external_id = 'UC...', active = true where handle = '...';`
+5. **Populate `lib/lists/bosses.ts`** once you can verify names, regions, and difficulty tiers against in-game or official sources. (Intentionally still empty — boss-guide synthesis depends on it.)
+6. **Run one ingestion manually**, then one digest, then verify the homepage. Start with Reddit (easiest) and the Pearl Abyss page watcher:
+   ```bash
+   curl -H "Authorization: Bearer $CRON_SECRET" http://localhost:3000/api/cron/ingest-reddit
+   curl -H "Authorization: Bearer $CRON_SECRET" http://localhost:3000/api/cron/ingest-pages
+   curl -H "Authorization: Bearer $CRON_SECRET" http://localhost:3000/api/cron/process-daily-digest
+   ```
+7. **Iterate on the digest prompt** in `lib/anthropic/prompts.ts` until the output reads like a player wrote it, not a press release. Plan on 3-5 revisions.
+8. **Deploy to Vercel** with all env vars set; Vercel cron takes over.
 
-## Things I explicitly did not invent
+## Things I did not invent
 
-- Creator names, handles, or channel IDs.
-- Boss names, regions, phases, mechanics.
-- Source URLs (subreddit names, RSS feeds).
-- The Steam AppID.
-- Tier placements for creators.
+- **Boss names, regions, phases, mechanics** — bosses.ts is still empty.
+- **YouTube channel IDs for creators that weren't verifiable in-session** — seeded as `active=false` with `needs-manual-verify` so the ingestion cron skips them until resolved.
+- **Press-site RSS URLs** — PC Gamer, Kotaku, TheGamer, VGC, Wccftech all have active CD coverage, but I couldn't verify their Crimson-Desert-tag-specific RSS endpoints. Either verify per-host RSS and add them with `source_type='rss'`, or extend `lib/ingestion/pages.ts:extractorFor` with per-host selectors and add them with `source_type='official'`.
 
-Every surface that would normally show fabricated data currently renders an honest empty state.
+What I did seed with confidence:
+
+- **Steam AppID 3321460** (verified via store.steampowered.com/app/3321460).
+- **r/CrimsonDesert** (existence confirmed; subscriber count not re-verified).
+- **Pearl Abyss notice boards** at `crimsondesert.pearlabyss.com/{en-US,ko-KR}/News/Notice`.
+- **Twitch streamers** with recent CD content: zackrawrr, cohhcarnage, maximilian_dood.
+- **X accounts**: WolfheartFPS, SynthPotato (and official @CrimsonDesert_) — stubbed, since X ingestion isn't wired up yet.
+- **Korean YouTube**: 김도랜드 (channel ID UC2_VPutZK0o_tG8ca_QrQRA verified). G식백과 and 게임 헤드라인 need handle resolution.

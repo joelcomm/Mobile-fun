@@ -47,20 +47,11 @@ Fill in:
 
 ### 4. Seed the curated lists
 
-The curation is the product moat. Do it by hand.
+`lib/lists/creators.ts` and `lib/lists/sources.ts` are already populated with real, verified entries. `lib/lists/bosses.ts` is still empty by design — fill it once you can verify names and regions against in-game or official sources.
 
-1. Open `lib/lists/creators.ts` and add verified creators (see the tier guide in the file).
-2. Open `lib/lists/sources.ts` and add verified subreddits, RSS feeds, and official channels.
-3. Open `lib/lists/bosses.ts` and add bosses once you can verify them.
+Load the seeds into Supabase by running `supabase/migrations/0002_seed_lists.sql` in the SQL editor (after the initial schema migration). It's idempotent — re-running is safe.
 
-Then insert the seeds into Supabase. Simplest path: write a one-off script that reads the arrays and upserts into `creators`, `sources`, and `bosses`. Or paste into the Supabase SQL editor. Example for creators:
-
-```sql
-insert into creators (handle, platform, display_name, tier, specialty, language, external_id)
-values
-  ('example_handle', 'youtube', 'Example Creator', 1, 'Sword build theorycraft', 'en', 'UCxxxxxxxx')
-on conflict (handle, platform) do nothing;
-```
+Several creators are seeded `active=false` with a `needs-manual-verify` note because their YouTube channel handles couldn't be pinned down from search alone. `STATUS.md` lists the exact evidence videos; open one, copy the channel handle and UC channel ID, then update both `lib/lists/creators.ts` (for version control) and Supabase (`update creators set external_id='UC...', active=true where handle='...';`).
 
 ## Running locally
 
@@ -83,6 +74,7 @@ Other routes:
 
 - `/api/cron/ingest-youtube`
 - `/api/cron/ingest-rss`
+- `/api/cron/ingest-pages` (page-diff watcher; handles the Pearl Abyss notice board since it has no RSS)
 - `/api/cron/ingest-steam`
 - `/api/cron/process-patch-analysis`
 - `/api/cron/process-daily-digest`
