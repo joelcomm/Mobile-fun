@@ -21,11 +21,11 @@ export class DogPanel extends Panel {
     this.clearContent();
     const game = Game.instance();
     const dogs = game.dogs.list();
-    let y = Panel.TOP + 28;
+    let y = Panel.TOP + 32;
 
     for (const d of dogs) {
       this.drawDogRow(d, y);
-      y += 50;
+      y += 58;
     }
 
     this.drawUnlockRow(y);
@@ -33,22 +33,23 @@ export class DogPanel extends Panel {
 
   private drawDogRow(d: DogData, y: number): void {
     const scene = this.scene;
-    const rowBg = scene.add.rectangle(GAME_WIDTH / 2, y + 22, GAME_WIDTH - 32, 44, 0xffffff);
+    const rowBg = scene.add.rectangle(GAME_WIDTH / 2, y + 26, GAME_WIDTH - 24, 52, 0xffffff);
     rowBg.setStrokeStyle(1, 0x2a2a3e, 0.1);
     rowBg.setOrigin(0.5);
 
     const roleLabel = ROLE_INFO[d.role].label;
     const breed = BREED_LABELS[d.breedType];
-    const line1 = `${d.name}  Lv${d.level}  \u00b7  ${breed} / ${roleLabel}`;
-    const line2 = `\u{1F60A} ${Math.floor(d.happiness)}%  \u00b7  +${d.baseJoyPerSecond.toFixed(1)} Joy/s  \u00b7  tap +${d.tapBonus.toFixed(1)}`;
-    const text = scene.add.text(22, y + 4, line1 + "\n" + line2, {
+    const line1 = `${d.name}  Lv${d.level}`;
+    const line2 = `${breed} / ${roleLabel}`;
+    const line3 = `\u{1F60A} ${Math.floor(d.happiness)}%  +${d.baseJoyPerSecond.toFixed(1)}/s  tap +${d.tapBonus.toFixed(1)}`;
+    const text = scene.add.text(18, y + 4, line1 + "\n" + line2 + "\n" + line3, {
       fontFamily: "monospace",
-      fontSize: "11px",
+      fontSize: "13px",
       color: "#2a2a3e",
       lineSpacing: 2,
     });
 
-    const btn = this.makeButton(GAME_WIDTH - 80, y + 22, 56, 30, "LV UP", 0xff9ac1);
+    const btn = this.makeButton(GAME_WIDTH - 52, y + 26, 80, 40, "LV UP", 0xff9ac1);
     btn.bg.on("pointerdown", () => {
       const game = Game.instance();
       const cost = Math.ceil(20 * Math.pow(1.7, d.level));
@@ -74,27 +75,26 @@ export class DogPanel extends Panel {
     const slotsLeft = cost > 0;
     const repOk = repCurrent >= repNeeded;
 
-    const bg = scene.add.rectangle(GAME_WIDTH / 2, y + 22, GAME_WIDTH - 32, 44, 0xe8e0cf);
+    const bg = scene.add.rectangle(GAME_WIDTH / 2, y + 26, GAME_WIDTH - 24, 52, 0xe8e0cf);
     bg.setStrokeStyle(1, 0x2a2a3e, 0.15);
     bg.setOrigin(0.5);
 
     const locked = !repOk;
     const msg = slotsLeft
       ? locked
-        ? `Locked. Needs \u2B50 ${repNeeded} Reputation.`
-        : `Adopt a new pup! Role is random.`
+        ? `Needs \u2B50 ${repNeeded} Rep.`
+        : `Random role!`
       : `All slots open!`;
-    const info = scene.add.text(22, y + 6, `ADOPT NEXT PUP\n${msg}`, {
+    const info = scene.add.text(18, y + 6, `ADOPT NEXT PUP\n${msg}`, {
       fontFamily: "monospace",
-      fontSize: "11px",
+      fontSize: "13px",
       color: "#2a2a3e",
-      lineSpacing: 2,
+      lineSpacing: 3,
     });
 
     const btn = this.makeButton(
-      GAME_WIDTH - 80,
-      y + 22,
-      56, 30,
+      GAME_WIDTH - 52, y + 26,
+      80, 40,
       `ADOPT\n${formatNumber(cost)}`,
       locked ? 0xaaaaaa : 0x7fc56b
     );
@@ -120,7 +120,7 @@ export class DogPanel extends Panel {
     bg.setInteractive({ useHandCursor: true });
     const text = this.scene.add.text(x, y, label, {
       fontFamily: "monospace",
-      fontSize: "10px",
+      fontSize: "13px",
       fontStyle: "bold",
       color: "#2a2a3e",
       align: "center",

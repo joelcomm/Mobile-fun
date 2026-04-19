@@ -14,10 +14,10 @@ export class BuildMenu extends Panel {
 
   refresh(): void {
     this.clearContent();
-    let y = Panel.TOP + 28;
+    let y = Panel.TOP + 30;
     for (const def of BUILDINGS) {
       this.drawRow(def.id, y);
-      y += 48;
+      y += 36;
     }
   }
 
@@ -28,24 +28,24 @@ export class BuildMenu extends Panel {
     const level = game.buildings.levelOf(id);
     const cost = game.buildings.costFor(id);
 
-    const bg = scene.add.rectangle(GAME_WIDTH / 2, y + 20, GAME_WIDTH - 32, 42, 0xffffff);
+    const bg = scene.add.rectangle(GAME_WIDTH / 2, y + 16, GAME_WIDTH - 24, 32, 0xffffff);
     bg.setStrokeStyle(1, 0x2a2a3e, 0.12);
     bg.setOrigin(0.5);
 
-    const title = scene.add.text(20, y + 2, `${def.icon} ${def.name}  Lv${level}/${def.maxLevel}`, {
+    const title = scene.add.text(16, y + 2, `${def.icon} ${def.name}  Lv${level}/${def.maxLevel}`, {
       fontFamily: "monospace",
-      fontSize: "12px",
+      fontSize: "13px",
       fontStyle: "bold",
       color: "#2a2a3e",
     });
-    const desc = scene.add.text(20, y + 18, def.description, {
+    const desc = scene.add.text(16, y + 18, def.description, {
       fontFamily: "monospace",
-      fontSize: "10px",
+      fontSize: "11px",
       color: "#6b6b80",
     });
 
-    const btnX = GAME_WIDTH - 80;
-    const btnY = y + 20;
+    const btnX = GAME_WIDTH - 54;
+    const btnY = y + 16;
     let label: string;
     let color: number;
     if (!cost) {
@@ -60,7 +60,7 @@ export class BuildMenu extends Panel {
       color = game.resources.canAfford(cost) ? 0x7fc56b : 0xeeeee6;
     }
 
-    const btnBg = scene.add.rectangle(btnX, btnY, 72, 32, color);
+    const btnBg = scene.add.rectangle(btnX, btnY, 88, 28, color);
     btnBg.setStrokeStyle(1, 0x2a2a3e, 0.4);
     btnBg.setInteractive({ useHandCursor: true });
     btnBg.on("pointerdown", () => {
@@ -75,7 +75,7 @@ export class BuildMenu extends Panel {
     });
     const btnLabel = scene.add.text(btnX, btnY, label, {
       fontFamily: "monospace",
-      fontSize: "10px",
+      fontSize: "11px",
       fontStyle: "bold",
       color: "#2a2a3e",
       align: "center",

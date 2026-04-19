@@ -15,22 +15,23 @@ export class SettingsPanel extends Panel {
   refresh(): void {
     this.clearContent();
     const game = Game.instance();
-    const y = Panel.TOP + 36;
+    const y = Panel.TOP + 34;
 
     const info = this.scene.add.text(
-      20, y,
-      `Version 0.1.0\nPlaytime: ${formatDuration(game.totalPlaytimeMs)}\nDogs: ${game.dogs.count()}\nReputation: ${Math.floor(game.resources.snapshot.reputation)}`,
-      { fontFamily: "monospace", fontSize: "12px", color: "#2a2a3e", lineSpacing: 3 }
+      16, y,
+      `Version 0.1.0\nPlaytime: ${formatDuration(game.totalPlaytimeMs)}\nDogs: ${game.dogs.count()}\nRep: ${Math.floor(game.resources.snapshot.reputation)}`,
+      { fontFamily: "monospace", fontSize: "14px", color: "#2a2a3e", lineSpacing: 4 }
     );
     this.content.add(info);
 
-    const saveBtn = this.makeButton(120, y + 92, 180, 36, "\u{1F4BE}  SAVE NOW", 0x7fc56b);
+    const btnY = y + 108;
+    const saveBtn = this.makeButton(GAME_WIDTH / 2 - 76, btnY, 140, 40, "\u{1F4BE} SAVE", 0x7fc56b);
     saveBtn.bg.on("pointerdown", () => {
       Game.instance().forceSave();
       this.flashText(saveBtn.label, "SAVED!");
     });
 
-    const wipeBtn = this.makeButton(GAME_WIDTH - 120, y + 92, 180, 36, "\u{1F5D1}  WIPE SAVE", 0xff9ac1);
+    const wipeBtn = this.makeButton(GAME_WIDTH / 2 + 76, btnY, 140, 40, "\u{1F5D1} WIPE", 0xff9ac1);
     wipeBtn.bg.on("pointerdown", () => {
       if (confirm("Wipe your Pup Town save? This cannot be undone.")) {
         Game.instance().wipeAndReload();
@@ -48,7 +49,7 @@ export class SettingsPanel extends Panel {
     bg.setInteractive({ useHandCursor: true });
     const text = this.scene.add.text(x, y, label, {
       fontFamily: "monospace",
-      fontSize: "12px",
+      fontSize: "14px",
       fontStyle: "bold",
       color: "#2a2a3e",
     });

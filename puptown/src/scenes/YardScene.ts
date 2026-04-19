@@ -8,7 +8,6 @@ declare const Phaser: typeof import("phaser");
 
 export class YardScene extends Phaser.Scene {
   private sprites: Map<string, DogSprite> = new Map();
-  private clouds: Phaser.GameObjects.Image[] = [];
   private treatEmitterTimer = 0;
 
   constructor() {
@@ -18,22 +17,8 @@ export class YardScene extends Phaser.Scene {
   create(): void {
     const game = Game.instance();
 
-    // Background sky.
-    this.add.rectangle(
-      GAME_WIDTH / 2, 55, GAME_WIDTH, 110, 0xbfe6ff
-    ).setDepth(-10);
-
-    // Clouds (parallax).
-    for (let i = 0; i < 3; i++) {
-      const c = this.add.image(
-        Math.random() * GAME_WIDTH,
-        20 + Math.random() * 60,
-        "cloud"
-      );
-      c.setDepth(-9);
-      c.setAlpha(0.9);
-      this.clouds.push(c);
-    }
+    // Canvas background is already sky-blue from the Phaser config; the
+    // yard layout is compressed on phones so we skip the cloud strip.
 
     // Grass yard.
     const grass = this.add.tileSprite(
@@ -79,15 +64,6 @@ export class YardScene extends Phaser.Scene {
     Game.instance().tick(delta);
     for (const s of this.sprites.values()) s.tickUpdate(delta);
 
-    // Drift clouds.
-    for (const c of this.clouds) {
-      c.x += (delta / 1000) * 8;
-      if (c.x > GAME_WIDTH + 30) {
-        c.x = -30;
-        c.y = 20 + Math.random() * 60;
-      }
-    }
-
     // Auto-taps from Auto-Walker.
     const game = Game.instance();
     const auto = game.buildings.autoTapsPerSec();
@@ -132,16 +108,16 @@ export class YardScene extends Phaser.Scene {
   private showFloatingText(x: number, y: number, text: string): void {
     const t = this.add.text(x, y, text, {
       fontFamily: "monospace",
-      fontSize: "14px",
+      fontSize: "18px",
       fontStyle: "bold",
       color: "#ffd86b",
       stroke: "#2a2a3e",
-      strokeThickness: 3,
+      strokeThickness: 4,
     });
     t.setOrigin(0.5);
     this.tweens.add({
       targets: t,
-      y: y - 30,
+      y: y - 34,
       alpha: 0,
       duration: 700,
       ease: "Cubic.easeOut",
@@ -152,7 +128,7 @@ export class YardScene extends Phaser.Scene {
   private spawnTreatDrop(): void {
     const x = YARD.x + Math.random() * YARD.width;
     const treat = this.add.text(x, YARD.y - 10, "\u{1F36A}", {
-      fontSize: "16px",
+      fontSize: "20px",
     });
     treat.setOrigin(0.5);
     this.tweens.add({
@@ -165,20 +141,20 @@ export class YardScene extends Phaser.Scene {
   }
 
   private flashBanner(text: string): void {
-    const banner = this.add.text(GAME_WIDTH / 2, 92, text, {
+    const banner = this.add.text(GAME_WIDTH / 2, YARD.y + 16, text, {
       fontFamily: "Inter, sans-serif",
-      fontSize: "16px",
+      fontSize: "18px",
       fontStyle: "bold",
       color: "#fff6d6",
       backgroundColor: "#ff9ac1",
-      padding: { left: 10, right: 10, top: 4, bottom: 4 },
+      padding: { left: 12, right: 12, top: 6, bottom: 6 },
     });
     banner.setOrigin(0.5);
     banner.setDepth(100);
     this.tweens.add({
       targets: banner,
       alpha: { from: 1, to: 0 },
-      y: 72,
+      y: YARD.y + 4,
       duration: 2400,
       ease: "Quad.easeOut",
       onComplete: () => banner.destroy(),
