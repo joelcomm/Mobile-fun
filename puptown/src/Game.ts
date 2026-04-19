@@ -32,6 +32,7 @@ export class Game {
   private tickAccum = 0;
   private startTime = Date.now();
   private pendingOffline: { joy: number; treats: number } | null = null;
+  private wiping = false;
 
   static instance(): Game {
     if (!this._instance) this._instance = new Game();
@@ -71,11 +72,15 @@ export class Game {
       this.dogs.spawnStarter();
     }
 
-    // Autosave when tab hides / unloads.
+    // Autosave when tab hides / unloads. Skip while wiping so the wipe sticks.
     window.addEventListener("visibilitychange", () => {
+      if (this.wiping) return;
       if (document.visibilityState === "hidden") this.forceSave();
     });
-    window.addEventListener("beforeunload", () => this.forceSave());
+    window.addEventListener("beforeunload", () => {
+      if (this.wiping) return;
+      this.forceSave();
+    });
   }
 
   /** Main tick. Called from YardScene.update. */
@@ -139,6 +144,7 @@ export class Game {
   }
 
   wipeAndReload(): void {
+    this.wiping = true;
     this.save.wipe();
     window.location.reload();
   }

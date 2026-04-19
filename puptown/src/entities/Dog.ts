@@ -70,7 +70,7 @@ export class DogSprite extends Phaser.GameObjects.Container {
     this.eyeR = this.scene.add.rectangle(16, -5, 2, 2, 0x1a1a2e);
     const collar = this.scene.add.rectangle(10, 1, 3, 8, 0xff5a7e);
 
-    this.nameLabel = this.scene.add.text(0, -26, this.dogData.name, {
+    this.nameLabel = this.scene.add.text(0, -26, this.dogData.named ? this.dogData.name : "", {
       fontFamily: "monospace",
       fontSize: "12px",
       fontStyle: "bold",
@@ -79,6 +79,7 @@ export class DogSprite extends Phaser.GameObjects.Container {
       padding: { left: 4, right: 4, top: 1, bottom: 1 },
     });
     this.nameLabel.setOrigin(0.5);
+    this.nameLabel.setVisible(!!this.dogData.named);
 
     this.heart = this.scene.add.text(0, -22, "", {
       fontFamily: "sans-serif",
@@ -195,7 +196,17 @@ export class DogSprite extends Phaser.GameObjects.Container {
 
   setDogName(name: string): void {
     this.dogData.name = name;
+    this.dogData.named = true;
     this.nameLabel.setText(name);
+    this.nameLabel.setVisible(true);
+    // Fade the label in so the moment of becoming "yours" feels rewarding.
+    this.nameLabel.setAlpha(0);
+    this.scene.tweens.add({
+      targets: this.nameLabel,
+      alpha: 1,
+      duration: 280,
+      ease: "Cubic.easeOut",
+    });
   }
 
   /** Goodbye animation: float up, spin gently, fade out, then call onDone. */
