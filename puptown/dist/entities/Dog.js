@@ -11,8 +11,9 @@ export class DogSprite extends Phaser.GameObjects.Container {
         this.dogData = data;
         this.setSize(36, 28);
         this.buildVisual();
+        this.setScale(1.35);
         this.target = this.pickTarget();
-        this.setInteractive(new Phaser.Geom.Rectangle(-20, -18, 40, 36), Phaser.Geom.Rectangle.Contains);
+        this.setInteractive(new Phaser.Geom.Rectangle(-20, -22, 40, 40), Phaser.Geom.Rectangle.Contains);
         this.on("pointerdown", () => {
             this.scene.events.emit("dog:tap", this.dogData.id, this.x, this.y);
             this.playTapBounce();
@@ -39,17 +40,18 @@ export class DogSprite extends Phaser.GameObjects.Container {
         this.eyeL = this.scene.add.rectangle(12, -5, 2, 2, 0x1a1a2e);
         this.eyeR = this.scene.add.rectangle(16, -5, 2, 2, 0x1a1a2e);
         const collar = this.scene.add.rectangle(10, 1, 3, 8, 0xff5a7e);
-        this.nameLabel = this.scene.add.text(0, -22, this.dogData.name, {
+        this.nameLabel = this.scene.add.text(0, -26, this.dogData.name, {
             fontFamily: "monospace",
-            fontSize: "10px",
+            fontSize: "12px",
+            fontStyle: "bold",
             color: "#2a2a3e",
-            backgroundColor: "#fff6d680",
-            padding: { left: 3, right: 3, top: 1, bottom: 1 },
+            backgroundColor: "#fff6d6cc",
+            padding: { left: 4, right: 4, top: 1, bottom: 1 },
         });
         this.nameLabel.setOrigin(0.5);
-        this.heart = this.scene.add.text(0, -18, "", {
+        this.heart = this.scene.add.text(0, -22, "", {
             fontFamily: "sans-serif",
-            fontSize: "12px",
+            fontSize: "16px",
             color: "#ff5a7e",
         });
         this.heart.setOrigin(0.5);
@@ -97,7 +99,7 @@ export class DogSprite extends Phaser.GameObjects.Container {
             const vy = (dy / dist) * this.speed;
             this.x += vx * dt;
             this.y += vy * dt;
-            this.setScale(vx < 0 ? -1 : 1, 1);
+            this.setScale(vx < 0 ? -1.35 : 1.35, 1.35);
         }
         this.tailWave += dt * 10;
         this.tail.rotation = Math.sin(this.tailWave) * 0.5;
@@ -113,7 +115,7 @@ export class DogSprite extends Phaser.GameObjects.Container {
     playTapBounce() {
         this.scene.tweens.add({
             targets: this,
-            scaleY: { from: 1.15, to: 1 },
+            scaleY: { from: 1.55, to: 1.35 },
             duration: 120,
             ease: "Quad.easeOut",
         });

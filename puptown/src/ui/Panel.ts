@@ -6,8 +6,8 @@ import { GAME_HEIGHT, GAME_WIDTH } from "../config.js";
 declare const Phaser: typeof import("phaser");
 
 export class Panel extends Phaser.GameObjects.Container {
-  static readonly TOP = 570;
-  static readonly BOTTOM = GAME_HEIGHT - 72;
+  static readonly TOP = 334;
+  static readonly BOTTOM = GAME_HEIGHT - 78;
 
   protected bg: Phaser.GameObjects.Rectangle;
   protected titleText: Phaser.GameObjects.Text;
@@ -19,14 +19,14 @@ export class Panel extends Phaser.GameObjects.Container {
     this.bg = scene.add.rectangle(
       GAME_WIDTH / 2,
       Panel.TOP + height / 2,
-      GAME_WIDTH - 16,
+      GAME_WIDTH - 12,
       height,
       0xfff6d6
     );
     this.bg.setStrokeStyle(2, 0x2a2a3e, 0.35);
-    this.titleText = scene.add.text(16, Panel.TOP + 6, title, {
+    this.titleText = scene.add.text(14, Panel.TOP + 6, title, {
       fontFamily: "Inter, sans-serif",
-      fontSize: "13px",
+      fontSize: "16px",
       fontStyle: "bold",
       color: "#2a2a3e",
     });

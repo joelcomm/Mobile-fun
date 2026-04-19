@@ -8,6 +8,7 @@ import { ResourceBar } from "../ui/ResourceBar.js";
 import { SettingsPanel } from "../ui/SettingsPanel.js";
 import { Game } from "../Game.js";
 import { Panel } from "../ui/Panel.js";
+import { GAME_HEIGHT, GAME_WIDTH } from "../config.js";
 
 declare const Phaser: typeof import("phaser");
 
@@ -73,24 +74,26 @@ export class UIScene extends Phaser.Scene {
   }
 
   private showOfflineToast(earned: { joy: number; treats: number }): void {
-    const msg = `Welcome back!\n+${Math.floor(earned.joy)} Joy, +${Math.floor(earned.treats)} Treats\n(offline earns at 50%)`;
-    const bg = this.add.rectangle(240, 300, 360, 110, 0xfff6d6);
+    const cx = GAME_WIDTH / 2;
+    const cy = GAME_HEIGHT / 2 - 40;
+    const msg = `Welcome back!\n+${Math.floor(earned.joy)} Joy, +${Math.floor(earned.treats)} Treats\n(offline earns 50%)`;
+    const bg = this.add.rectangle(cx, cy, GAME_WIDTH - 40, 128, 0xfff6d6);
     bg.setStrokeStyle(2, 0x2a2a3e, 0.6);
-    const text = this.add.text(240, 300, msg, {
+    const text = this.add.text(cx, cy - 8, msg, {
       fontFamily: "monospace",
-      fontSize: "14px",
+      fontSize: "16px",
       color: "#2a2a3e",
       align: "center",
-      lineSpacing: 4,
+      lineSpacing: 6,
     });
     text.setOrigin(0.5);
-    const btn = this.add.text(240, 346, "OK", {
+    const btn = this.add.text(cx, cy + 44, "OK", {
       fontFamily: "monospace",
-      fontSize: "13px",
+      fontSize: "16px",
       fontStyle: "bold",
       color: "#2a2a3e",
       backgroundColor: "#7fc56b",
-      padding: { left: 16, right: 16, top: 4, bottom: 4 },
+      padding: { left: 20, right: 20, top: 6, bottom: 6 },
     });
     btn.setOrigin(0.5);
     btn.setInteractive({ useHandCursor: true });

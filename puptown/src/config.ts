@@ -9,15 +9,18 @@ import {
 } from "./types.js";
 
 // ── Game field ───────────────────────────────────────────────────────────
-export const GAME_WIDTH = 480;
-export const GAME_HEIGHT = 800;
+// Logical canvas is small on purpose. Phaser's FIT scale mode will upscale
+// to fill any phone/desktop viewport, which visually enlarges every pixel
+// (including text). ~9:16 mirrors common phone aspect ratios.
+export const GAME_WIDTH = 360;
+export const GAME_HEIGHT = 640;
 
 // Yard is the play area where dogs wander (inside the UI frame).
 export const YARD = {
-  x: 20,
-  y: 110,
-  width: GAME_WIDTH - 40,
-  height: 440,
+  x: 16,
+  y: 74,
+  width: GAME_WIDTH - 32,
+  height: 250,
 };
 
 // ── Economy / pacing ─────────────────────────────────────────────────────
