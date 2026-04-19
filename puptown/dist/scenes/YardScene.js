@@ -78,7 +78,7 @@ export class YardScene extends Phaser.Scene {
             if (!existing) {
                 this.sprites.set(d.id, new DogSprite(this, d));
             }
-            else if (existing.dogData.name !== d.name) {
+            else if (existing.needsNameRefresh()) {
                 existing.setDogName(d.name);
             }
         }

@@ -28,6 +28,7 @@ export class DogSprite extends Phaser.GameObjects.Container {
   private tailWave = 0;
   private zoomTimer = 0;
   private readyBob = 0;
+  private shownName = "";
 
   constructor(scene: Phaser.Scene, data: DogData) {
     super(scene, data.position.x, data.position.y);
@@ -70,7 +71,8 @@ export class DogSprite extends Phaser.GameObjects.Container {
     this.eyeR = this.scene.add.rectangle(16, -5, 2, 2, 0x1a1a2e);
     const collar = this.scene.add.rectangle(10, 1, 3, 8, 0xff5a7e);
 
-    this.nameLabel = this.scene.add.text(0, -26, this.dogData.named ? this.dogData.name : "", {
+    this.shownName = this.dogData.named ? this.dogData.name : "";
+    this.nameLabel = this.scene.add.text(0, -26, this.shownName, {
       fontFamily: "monospace",
       fontSize: "12px",
       fontStyle: "bold",
@@ -197,6 +199,7 @@ export class DogSprite extends Phaser.GameObjects.Container {
   setDogName(name: string): void {
     this.dogData.name = name;
     this.dogData.named = true;
+    this.shownName = name;
     this.nameLabel.setText(name);
     this.nameLabel.setVisible(true);
     // Fade the label in so the moment of becoming "yours" feels rewarding.
@@ -207,6 +210,12 @@ export class DogSprite extends Phaser.GameObjects.Container {
       duration: 280,
       ease: "Cubic.easeOut",
     });
+  }
+
+  /** Returns true if the visible label is out of sync with the data. */
+  needsNameRefresh(): boolean {
+    const wantName = this.dogData.named ? this.dogData.name : "";
+    return wantName !== this.shownName;
   }
 
   /** Goodbye animation: float up, spin gently, fade out, then call onDone. */
