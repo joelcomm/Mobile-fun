@@ -80,10 +80,19 @@ export class YardScene extends Phaser.Scene {
         }
         for (const [id, s] of this.sprites) {
             if (!seen.has(id)) {
-                s.destroy();
                 this.sprites.delete(id);
+                s.playGraduateAnimation(() => s.destroy());
             }
         }
+    }
+    /** Used by DogPanel to fetch a sprite for animation/positioning. */
+    getSprite(id) {
+        return this.sprites.get(id);
+    }
+    /** Floating reward text where a graduating pup stood. */
+    showRewardBurst(x, y, reward) {
+        this.showFloatingText(x, y - 10, `+${formatNumber(reward.joy)} JOY`);
+        this.showFloatingText(x, y - 32, `+${reward.rep}\u2B50`);
     }
     showFloatingText(x, y, text) {
         const t = this.add.text(x, y, text, {

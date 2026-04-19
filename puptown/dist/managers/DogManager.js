@@ -1,5 +1,5 @@
 // Owns the list of dogs and handles creation, leveling, and unlock logic.
-import { ALL_BREEDS, ALL_PERSONALITIES, DOG_NAMES, ROLE_INFO, UNLOCK_COSTS, UNLOCK_REP, YARD, } from "../config.js";
+import { ADOPTION_BASE_REP, ADOPTION_HAPPINESS_REQ, ADOPTION_JOY_BASE, ADOPTION_LEVEL_REQ, ALL_BREEDS, ALL_PERSONALITIES, DOG_NAMES, ROLE_INFO, UNLOCK_COSTS, UNLOCK_REP, YARD, } from "../config.js";
 export class DogManager {
     constructor(initial) {
         this.dogs = [];
@@ -81,6 +81,40 @@ export class DogManager {
         if (!dog)
             return;
         dog.happiness = clamp(value, 0, 100);
+    }
+    /** Returns true if a dog has reached the threshold to graduate. */
+    isReady(d) {
+        if (d.readyForAdoption)
+            return true;
+        return d.level >= ADOPTION_LEVEL_REQ && d.happiness >= ADOPTION_HAPPINESS_REQ;
+    }
+    /** Mark any qualifying dogs as ready (sticky once true). */
+    markReadyIfQualified() {
+        let changed = false;
+        for (const d of this.dogs) {
+            if (!d.readyForAdoption && this.isReady(d)) {
+                d.readyForAdoption = true;
+                changed = true;
+            }
+        }
+        if (changed)
+            this.emit();
+    }
+    /** Joy + Reputation reward for graduating a given dog. */
+    adoptionReward(d) {
+        const roleMult = 0.6 + ROLE_INFO[d.role].repChance * 6; // rescue ~1.08, agility ~0.72
+        const joy = Math.floor(ADOPTION_JOY_BASE * Math.pow(d.level, 1.5) * roleMult);
+        const rep = ADOPTION_BASE_REP + Math.floor(d.level / 5);
+        return { joy, rep };
+    }
+    /** Remove a dog by id; returns true if removed. */
+    remove(id) {
+        const idx = this.dogs.findIndex((d) => d.id === id);
+        if (idx < 0)
+            return false;
+        this.dogs.splice(idx, 1);
+        this.emit();
+        return true;
     }
     toData() {
         return this.dogs.map((d) => ({ ...d, position: { ...d.position } }));

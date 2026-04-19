@@ -21,11 +21,13 @@ export class DogSprite extends Phaser.GameObjects.Container {
   private tail!: Phaser.GameObjects.Rectangle;
   private nameLabel!: Phaser.GameObjects.Text;
   private heart!: Phaser.GameObjects.Text;
+  private readyMark!: Phaser.GameObjects.Text;
 
   private target: { x: number; y: number };
   private speed = 22;
   private tailWave = 0;
   private zoomTimer = 0;
+  private readyBob = 0;
 
   constructor(scene: Phaser.Scene, data: DogData) {
     super(scene, data.position.x, data.position.y);
@@ -86,6 +88,13 @@ export class DogSprite extends Phaser.GameObjects.Container {
     this.heart.setOrigin(0.5);
     this.heart.setAlpha(0);
 
+    this.readyMark = this.scene.add.text(0, -38, "\u{1F393}", {
+      fontFamily: "sans-serif",
+      fontSize: "16px",
+    });
+    this.readyMark.setOrigin(0.5);
+    this.readyMark.setAlpha(0);
+
     this.add([
       this.tail,
       legFL, legFR, legBL, legBR,
@@ -93,7 +102,7 @@ export class DogSprite extends Phaser.GameObjects.Container {
       this.head, this.earL, this.earR, this.snout,
       this.eyeL, this.eyeR,
       collar,
-      this.nameLabel, this.heart,
+      this.nameLabel, this.heart, this.readyMark,
     ]);
   }
 
@@ -142,6 +151,14 @@ export class DogSprite extends Phaser.GameObjects.Container {
       this.bodyRect.y = 0;
     }
 
+    if (this.dogData.readyForAdoption) {
+      this.readyBob += dt * 4;
+      this.readyMark.setAlpha(1);
+      this.readyMark.y = -38 + Math.sin(this.readyBob) * 2;
+    } else if (this.readyMark.alpha !== 0) {
+      this.readyMark.setAlpha(0);
+    }
+
     this.dogData.position.x = this.x;
     this.dogData.position.y = this.y;
   }
@@ -174,5 +191,22 @@ export class DogSprite extends Phaser.GameObjects.Container {
   setDogName(name: string): void {
     this.dogData.name = name;
     this.nameLabel.setText(name);
+  }
+
+  /** Goodbye animation: float up, spin gently, fade out, then call onDone. */
+  playGraduateAnimation(onDone: () => void): void {
+    this.disableInteractive();
+    const baseScale = this.scaleX < 0 ? -1.35 : 1.35;
+    this.scene.tweens.add({
+      targets: this,
+      y: this.y - 70,
+      alpha: 0,
+      scaleX: baseScale * 1.6,
+      scaleY: 1.6,
+      angle: 360,
+      duration: 900,
+      ease: "Cubic.easeIn",
+      onComplete: onDone,
+    });
   }
 }

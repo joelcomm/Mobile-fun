@@ -21,23 +21,42 @@ export class DogPanel extends Panel {
     }
     drawDogRow(d, y) {
         const scene = this.scene;
-        const rowBg = scene.add.rectangle(GAME_WIDTH / 2, y + 26, GAME_WIDTH - 24, 52, 0xffffff);
-        rowBg.setStrokeStyle(1, 0x2a2a3e, 0.1);
+        const game = Game.instance();
+        const ready = game.dogs.isReady(d);
+        const rowBg = scene.add.rectangle(GAME_WIDTH / 2, y + 26, GAME_WIDTH - 24, 52, ready ? 0xfff0b8 : 0xffffff);
+        rowBg.setStrokeStyle(1, ready ? 0xc89818 : 0x2a2a3e, ready ? 0.6 : 0.1);
         rowBg.setOrigin(0.5);
         const roleLabel = ROLE_INFO[d.role].label;
         const breed = BREED_LABELS[d.breedType];
-        const line1 = `${d.name}  Lv${d.level}`;
+        const line1 = `${d.name}  Lv${d.level}${ready ? "  \u{1F393}" : ""}`;
         const line2 = `${breed} / ${roleLabel}`;
-        const line3 = `\u{1F60A} ${Math.floor(d.happiness)}%  +${d.baseJoyPerSecond.toFixed(1)}/s  tap +${d.tapBonus.toFixed(1)}`;
+        const line3 = ready
+            ? `Ready for a forever home!`
+            : `\u{1F60A} ${Math.floor(d.happiness)}%  +${d.baseJoyPerSecond.toFixed(1)}/s  tap +${d.tapBonus.toFixed(1)}`;
         const text = scene.add.text(18, y + 4, line1 + "\n" + line2 + "\n" + line3, {
             fontFamily: "monospace",
             fontSize: "13px",
             color: "#2a2a3e",
             lineSpacing: 2,
         });
+        if (ready) {
+            const reward = game.dogs.adoptionReward(d);
+            const btn = this.makeButton(GAME_WIDTH - 52, y + 26, 80, 40, `SEND HOME\n+${formatNumber(reward.joy)}`, 0xffd86b);
+            btn.bg.on("pointerdown", () => {
+                const yard = this.getYard();
+                const sprite = yard?.getSprite(d.id);
+                const x = sprite?.x ?? d.position.x;
+                const yPos = sprite?.y ?? d.position.y;
+                const got = Game.instance().handleGraduate(d.id);
+                if (got && yard)
+                    yard.showRewardBurst(x, yPos, got);
+                this.refresh();
+            });
+            this.content.add([rowBg, text, btn.bg, btn.label]);
+            return;
+        }
         const btn = this.makeButton(GAME_WIDTH - 52, y + 26, 80, 40, "LV UP", 0xff9ac1);
         btn.bg.on("pointerdown", () => {
-            const game = Game.instance();
             const cost = Math.ceil(20 * Math.pow(1.7, d.level));
             if (game.resources.spend({ joy: cost })) {
                 game.dogs.levelUp(d.id);
@@ -50,6 +69,9 @@ export class DogPanel extends Panel {
         const cost = Math.ceil(20 * Math.pow(1.7, d.level));
         btn.label.setText(`LV UP\n${formatNumber(cost)}`);
         this.content.add([rowBg, text, btn.bg, btn.label]);
+    }
+    getYard() {
+        return this.scene.scene.get("Yard");
     }
     drawUnlockRow(y) {
         const scene = this.scene;
