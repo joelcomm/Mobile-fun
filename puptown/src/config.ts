@@ -108,29 +108,74 @@ export const ROLE_INFO: Record<
 // ── Palettes (breed body + accent) ───────────────────────────────────────
 // Each breed has an array of color variants: [bodyTop, bodyBottom, accent].
 export const BREED_PALETTES: Record<BreedType, number[][]> = {
-  mutt:     [[0xd9b382, 0xb5895a, 0x5a3a22], [0xeadfb4, 0xb09472, 0x5a4222]],
+  chihuahua:[[0xe8c090, 0xb48860, 0x3a2a20], [0xf2d7a8, 0xcba77b, 0x3a2a20]],
+  dachshund:[[0x7a4a22, 0x4e2f15, 0xf3c373], [0x2a2a3e, 0x1a1a2e, 0xdfaa3c]],
   shiba:    [[0xe6a752, 0xbf7a2b, 0xffffff], [0xf2d1a4, 0xc7996a, 0xffffff]],
   corgi:    [[0xf0c070, 0xe69a3b, 0xffffff], [0xe8b48c, 0xbb7d4a, 0xffffff]],
-  husky:    [[0xdfe6ee, 0x7f8ea3, 0x2a2a3e], [0xb8c8d8, 0x5d6d82, 0x2a2a3e]],
+  beagle:   [[0xf0ddb4, 0x9a6636, 0x2a2a3e], [0xffffff, 0x8a5a2e, 0x2a2a3e]],
+  mutt:     [[0xd9b382, 0xb5895a, 0x5a3a22], [0xeadfb4, 0xb09472, 0x5a4222]],
   poodle:   [[0xf6ecd6, 0xd8c9a5, 0xff9ac1], [0x3d3d4a, 0x22222c, 0xff9ac1]],
-  dachshund:[[0x7a4a22, 0x4e2f15, 0xf3c373], [0x2a2a3e, 0x1a1a2e, 0xdfaa3c]],
   bulldog:  [[0xeeeee6, 0xb8b0a2, 0x3a3a4a], [0xd8c2a4, 0xa68a68, 0x3a3a4a]],
+  dalmatian:[[0xfafafa, 0xeaeaea, 0x1a1a1a], [0xfff6d6, 0xe8e8e8, 0x1a1a1a]],
+  husky:    [[0xdfe6ee, 0x7f8ea3, 0x2a2a3e], [0xb8c8d8, 0x5d6d82, 0x2a2a3e]],
   goldie:   [[0xf2d79a, 0xd6a85a, 0xfff6d6], [0xf7e2b1, 0xc89a4c, 0xfff6d6]],
+  greatdane:[[0x8a8272, 0x5e5849, 0x2a2a3e], [0xc0b9a8, 0x726b5a, 0x2a2a3e]],
 };
 
 export const BREED_LABELS: Record<BreedType, string> = {
-  mutt: "Mutt",
+  chihuahua: "Chihuahua",
+  dachshund: "Dachshund",
   shiba: "Shiba",
   corgi: "Corgi",
-  husky: "Husky",
+  beagle: "Beagle",
+  mutt: "Mutt",
   poodle: "Poodle",
-  dachshund: "Dachshund",
   bulldog: "Bulldog",
+  dalmatian: "Dalmatian",
+  husky: "Husky",
   goldie: "Golden",
+  greatdane: "Great Dane",
+};
+
+// Real-world-ish size multipliers. Applied on top of the level growth
+// curve so a chihuahua puppy reads as tiny and a great dane veteran
+// reads as towering. Medium breeds sit at 1.0.
+export const BREED_SIZE: Record<BreedType, number> = {
+  chihuahua: 0.55,
+  dachshund: 0.72,
+  shiba:     0.84,
+  corgi:     0.82,
+  beagle:    0.92,
+  mutt:      1.00,
+  poodle:    1.00,
+  bulldog:   0.95,
+  dalmatian: 1.08,
+  husky:     1.12,
+  goldie:    1.14,
+  greatdane: 1.40,
+};
+
+// Some breeds have distinctive body aspect ratios (dachshund is long-low,
+// bulldog is squat-wide, greatdane is tall). We stretch the sprite along
+// one axis to sell the silhouette without redrawing each breed.
+export const BREED_STRETCH: Record<BreedType, { x: number; y: number }> = {
+  chihuahua: { x: 0.95, y: 0.95 },
+  dachshund: { x: 1.35, y: 0.78 },
+  shiba:     { x: 1.00, y: 1.00 },
+  corgi:     { x: 1.18, y: 0.80 },
+  beagle:    { x: 1.08, y: 0.94 },
+  mutt:      { x: 1.00, y: 1.00 },
+  poodle:    { x: 1.00, y: 1.05 },
+  bulldog:   { x: 1.12, y: 0.90 },
+  dalmatian: { x: 1.05, y: 1.00 },
+  husky:     { x: 1.05, y: 1.02 },
+  goldie:    { x: 1.08, y: 1.02 },
+  greatdane: { x: 1.15, y: 1.20 },
 };
 
 export const ALL_BREEDS: BreedType[] = [
-  "mutt", "shiba", "corgi", "husky", "poodle", "dachshund", "bulldog", "goldie",
+  "chihuahua", "dachshund", "shiba", "corgi", "beagle",
+  "mutt", "poodle", "bulldog", "dalmatian", "husky", "goldie", "greatdane",
 ];
 
 export const ALL_PERSONALITIES: Personality[] = [

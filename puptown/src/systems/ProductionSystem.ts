@@ -47,11 +47,14 @@ export class ProductionSystem {
     const dt = deltaMs / 1000;
     const r = this.rates();
 
-    // Happiness regen + slight drain pressure so bowls matter.
+    // Happiness regen + drain. Drain scales with level so a fussy L15
+    // veteran actually needs a Treat Bowl + attention to stay happy —
+    // otherwise every dog instantly pins to 100% and the bar is decor.
     const regen = this.buildings.happinessRegenPerSec();
     for (const d of this.dogs.list()) {
       const roleGain = ROLE_INFO[d.role].happyGain;
-      const drift = -0.35 + regen * roleGain;
+      const levelDrain = 0.55 + d.level * 0.06;
+      const drift = -levelDrain + regen * roleGain;
       this.dogs.updateHappiness(d.id, d.happiness + drift * dt);
     }
 

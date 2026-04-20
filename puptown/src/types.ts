@@ -1,14 +1,18 @@
 // Shared domain types for Pup Town Idle.
 
 export type BreedType =
-  | "mutt"
+  | "chihuahua"
+  | "dachshund"
   | "shiba"
   | "corgi"
-  | "husky"
+  | "beagle"
+  | "mutt"
   | "poodle"
-  | "dachshund"
   | "bulldog"
-  | "goldie";
+  | "dalmatian"
+  | "husky"
+  | "goldie"
+  | "greatdane";
 
 export type Personality =
   | "playful"

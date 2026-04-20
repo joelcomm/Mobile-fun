@@ -2,7 +2,13 @@
 // itself from colored rectangles (placeholder pixel-art). Handles wandering
 // and emits events when tapped.
 
-import { ADOPTION_LEVEL_REQ, BREED_PALETTES, YARD } from "../config.js";
+import {
+  ADOPTION_LEVEL_REQ,
+  BREED_PALETTES,
+  BREED_SIZE,
+  BREED_STRETCH,
+  YARD,
+} from "../config.js";
 import { DogData } from "../types.js";
 
 declare const Phaser: typeof import("phaser");
@@ -40,15 +46,21 @@ export class DogSprite extends Phaser.GameObjects.Container {
   private shownName = "";
   private shownGrowth = 1;
   private baseScale = 1.35;
+  // Breed-specific aspect ratio (dachshund is long-low, great dane is tall).
+  private stretchX = 1;
+  private stretchY = 1;
 
   constructor(scene: Phaser.Scene, data: DogData) {
     super(scene, data.position.x, data.position.y);
     this.dogData = data;
     this.setSize(36, 28);
+    const stretch = BREED_STRETCH[data.breedType] ?? { x: 1, y: 1 };
+    this.stretchX = stretch.x;
+    this.stretchY = stretch.y;
     this.buildVisual();
     this.shownGrowth = growthScaleForLevel(data.level);
-    this.baseScale = 1.35 * this.shownGrowth;
-    this.setScale(this.baseScale);
+    this.baseScale = 1.35 * this.shownGrowth * (BREED_SIZE[data.breedType] ?? 1);
+    this.setScale(this.baseScale * this.stretchX, this.baseScale * this.stretchY);
     this.target = this.pickTarget();
 
     this.setInteractive(
@@ -119,10 +131,31 @@ export class DogSprite extends Phaser.GameObjects.Container {
     this.veteranFlair.setOrigin(0.5);
     this.veteranFlair.setAlpha(this.dogData.level >= ADOPTION_LEVEL_REQ ? 1 : 0);
 
+    // Dalmatian spots. Scattered black dots on the body so the breed reads
+    // at a glance. Positions are deterministic per color variant so a dog
+    // looks the same across saves, but varies between dogs.
+    const breedExtras: Phaser.GameObjects.GameObject[] = [];
+    if (this.dogData.breedType === "dalmatian") {
+      const v = this.dogData.colorVariant;
+      const spots = [
+        [-6, -1], [2, 2], [8, -2], [-10, 4], [4, 6],
+        [-2, -3], [10, 4],
+      ];
+      for (let i = 0; i < spots.length; i++) {
+        const [sx, sy] = spots[i];
+        const jitter = ((v + i) * 0.37) % 1;
+        const dot = this.scene.add.rectangle(sx, sy + jitter, 2, 2, 0x1a1a1a);
+        breedExtras.push(dot);
+      }
+      // Also a spot on the head.
+      breedExtras.push(this.scene.add.rectangle(10, -6, 2, 2, 0x1a1a1a));
+    }
+
     this.add([
       this.tail,
       legFL, legFR, legBL, legBR,
       this.bodyRect, this.belly,
+      ...breedExtras,
       this.head, this.earL, this.earR, this.snout,
       this.eyeL, this.eyeR,
       collar,
@@ -147,12 +180,12 @@ export class DogSprite extends Phaser.GameObjects.Container {
     const wantGrowth = growthScaleForLevel(this.dogData.level);
     if (wantGrowth !== this.shownGrowth) {
       this.shownGrowth = wantGrowth;
-      const nextBase = 1.35 * wantGrowth;
+      const nextBase = 1.35 * wantGrowth * (BREED_SIZE[this.dogData.breedType] ?? 1);
       const sign = this.scaleX < 0 ? -1 : 1;
       this.scene.tweens.add({
         targets: this,
-        scaleX: sign * nextBase,
-        scaleY: nextBase,
+        scaleX: sign * nextBase * this.stretchX,
+        scaleY: nextBase * this.stretchY,
         duration: 320,
         ease: "Back.easeOut",
       });
@@ -185,7 +218,7 @@ export class DogSprite extends Phaser.GameObjects.Container {
       this.x += vx * dt;
       this.y += vy * dt;
       const facing = vx < 0 ? -1 : 1;
-      this.setScale(facing * this.baseScale, this.baseScale);
+      this.setScale(facing * this.baseScale * this.stretchX, this.baseScale * this.stretchY);
       // Container flips kids too; counter-flip text labels so they read normally.
       this.nameLabel.setScale(facing, 1);
       this.heart.setScale(facing, 1);
@@ -213,10 +246,10 @@ export class DogSprite extends Phaser.GameObjects.Container {
   }
 
   playTapBounce(): void {
-    const rest = this.baseScale;
+    const restY = this.baseScale * this.stretchY;
     this.scene.tweens.add({
       targets: this,
-      scaleY: { from: rest * 1.15, to: rest },
+      scaleY: { from: restY * 1.15, to: restY },
       duration: 120,
       ease: "Quad.easeOut",
     });
@@ -268,8 +301,8 @@ export class DogSprite extends Phaser.GameObjects.Container {
       targets: this,
       y: this.y - 70,
       alpha: 0,
-      scaleX: sign * this.baseScale * 1.2,
-      scaleY: this.baseScale * 1.2,
+      scaleX: sign * this.baseScale * this.stretchX * 1.2,
+      scaleY: this.baseScale * this.stretchY * 1.2,
       angle: 360,
       duration: 900,
       ease: "Cubic.easeIn",
