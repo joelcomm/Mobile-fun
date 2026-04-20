@@ -423,16 +423,16 @@ export function centerNameFor(index) {
     return CENTER_NAMES[index] ?? `Rescue Center ${index + 1}`;
 }
 export const BIOMES = {
-    meadow: { id: "meadow", label: "Meadow", grassTint: 0xffffff, skyTop: 0xbfe6ff, fenceKey: "fence", decor: "\u{1F33C}" },
-    harbor: { id: "harbor", label: "Harborside", grassTint: 0xcfe9f2, skyTop: 0xa8d7f5, fenceKey: "fence_rope", decor: "\u{1F41A}" },
-    pine: { id: "pine", label: "Pine Ridge", grassTint: 0x9fd49a, skyTop: 0xb8d4a8, fenceKey: "fence_log", decor: "\u{1F332}" },
-    cloudtop: { id: "cloudtop", label: "Cloudtop", grassTint: 0xe8d9ff, skyTop: 0xd7c4f7, fenceKey: "fence_iron", decor: "\u{2601}\uFE0F" },
-    moonlit: { id: "moonlit", label: "Moonlit", grassTint: 0xa5b4d8, skyTop: 0x4a4e7a, fenceKey: "fence_iron", decor: "\u{1F319}" },
-    wildflower: { id: "wildflower", label: "Wildflower", grassTint: 0xf6c5e4, skyTop: 0xffd9e0, fenceKey: "fence", decor: "\u{1F337}" },
-    coral: { id: "coral", label: "Coral Bay", grassTint: 0xffd7cc, skyTop: 0xffe8da, fenceKey: "fence_rope", decor: "\u{1F41A}" },
-    evergreen: { id: "evergreen", label: "Evergreen", grassTint: 0x8fc28a, skyTop: 0xcde8c6, fenceKey: "fence_log", decor: "\u{1F343}" },
-    starlight: { id: "starlight", label: "Starlight", grassTint: 0xb6b1e0, skyTop: 0x38406a, fenceKey: "fence_gold", decor: "\u{2B50}" },
-    sunny: { id: "sunny", label: "Sunny", grassTint: 0xfff0b8, skyTop: 0xfff6d6, fenceKey: "fence", decor: "\u{2600}\uFE0F" },
+    meadow: { id: "meadow", label: "Meadow", grassTint: 0xb4e69c, skyTop: 0xbfe6ff, fenceKey: "fence", decor: "\u{1F33C}" },
+    harbor: { id: "harbor", label: "Harborside", grassTint: 0x9ed8e4, skyTop: 0xa8d7f5, fenceKey: "fence_rope", decor: "\u{1F41A}" },
+    pine: { id: "pine", label: "Pine Ridge", grassTint: 0x7cc578, skyTop: 0xb8d4a8, fenceKey: "fence_log", decor: "\u{1F332}" },
+    cloudtop: { id: "cloudtop", label: "Cloudtop", grassTint: 0xd1baff, skyTop: 0xd7c4f7, fenceKey: "fence_iron", decor: "\u{2601}\uFE0F" },
+    moonlit: { id: "moonlit", label: "Moonlit", grassTint: 0x8793c8, skyTop: 0x4a4e7a, fenceKey: "fence_iron", decor: "\u{1F319}" },
+    wildflower: { id: "wildflower", label: "Wildflower", grassTint: 0xf0a6d4, skyTop: 0xffd9e0, fenceKey: "fence", decor: "\u{1F337}" },
+    coral: { id: "coral", label: "Coral Bay", grassTint: 0xffb8a3, skyTop: 0xffe8da, fenceKey: "fence_rope", decor: "\u{1F41A}" },
+    evergreen: { id: "evergreen", label: "Evergreen", grassTint: 0x5ea664, skyTop: 0xcde8c6, fenceKey: "fence_log", decor: "\u{1F343}" },
+    starlight: { id: "starlight", label: "Starlight", grassTint: 0x9892d6, skyTop: 0x38406a, fenceKey: "fence_gold", decor: "\u{2B50}" },
+    sunny: { id: "sunny", label: "Sunny", grassTint: 0xffe57a, skyTop: 0xfff6d6, fenceKey: "fence", decor: "\u{2600}\uFE0F" },
 };
 /** Pick a biome from a human-readable center name. */
 export function biomeForName(name) {
