@@ -18,12 +18,18 @@ export interface PageDetail {
 }
 
 const UA =
-  "crimson-desert-hub/0.1 (+https://example.com; contact=unset) page-watcher";
+  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 " +
+  "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
 
 async function fetchHtml(url: string): Promise<string> {
   const res = await fetch(url, {
     cache: "no-store",
-    headers: { "User-Agent": UA, Accept: "text/html,application/xhtml+xml" },
+    headers: {
+      "User-Agent": UA,
+      Accept:
+        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+      "Accept-Language": "en-US,en;q=0.9",
+    },
   });
   if (!res.ok) {
     throw new Error(`page fetch failed: ${res.status} ${res.statusText}`);
