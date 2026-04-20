@@ -152,6 +152,25 @@ export class Game {
       this.handleTap(pick.id);
     }
 
+    // 0. Empty-yard fast path. If the *visible* center has no dogs, refill
+    // it before doing anything else. Without this, autoplay would happily
+    // burn Joy leveling up dogs in other centers while the player stares
+    // at their empty current yard, looking like autoplay is stuck.
+    if (visible.length === 0) {
+      const rescueCost = this.dogs.nextUnlockCost();
+      const rescueRep = this.dogs.nextUnlockRep();
+      if (
+        this.dogs.countCurrent() < 10 &&
+        this.resources.snapshot.joy >= rescueCost &&
+        this.resources.snapshot.reputation >= rescueRep
+      ) {
+        if (rescueCost === 0 || this.resources.spend({ joy: rescueCost })) {
+          this.dogs.adopt();
+          return;
+        }
+      }
+    }
+
     // 1. Send home any ready dog (always net-positive under the new fee).
     for (const d of this.dogs.list()) {
       if (this.dogs.isReady(d)) {
