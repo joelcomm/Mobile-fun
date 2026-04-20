@@ -10,9 +10,81 @@ export class BootScene extends Phaser.Scene {
         this.makeFenceRopeTexture();
         this.makeFenceIronTexture();
         this.makeFenceGoldTexture();
+        this.makeGateWoodTexture();
+        this.makeGateIronTexture();
+        this.makeGateGoldTexture();
         this.makeCloudTexture();
         this.scene.start("Yard");
         this.scene.launch("UI");
+    }
+    makeGateWoodTexture() {
+        // Double-width arched gate for the bottom-center of the yard fence.
+        const g = this.make.graphics({ x: 0, y: 0 }, false);
+        g.fillStyle(0x000000, 0);
+        g.fillRect(0, 0, 32, 36);
+        // Posts
+        g.fillStyle(0x8a6a45, 1);
+        g.fillRect(1, 6, 4, 28);
+        g.fillRect(27, 6, 4, 28);
+        // Arched top beam
+        g.fillRect(4, 4, 24, 4);
+        g.fillTriangle(12, 0, 20, 0, 16, 4);
+        // Cross-planks
+        g.fillStyle(0xf3dcb4, 1);
+        g.fillRect(6, 12, 20, 3);
+        g.fillRect(6, 20, 20, 3);
+        g.fillRect(6, 28, 20, 3);
+        // Latch dot
+        g.fillStyle(0xcf9a1a, 1);
+        g.fillCircle(16, 24, 1.5);
+        g.generateTexture("gate_wood", 32, 36);
+        g.destroy();
+    }
+    makeGateIronTexture() {
+        const g = this.make.graphics({ x: 0, y: 0 }, false);
+        g.fillStyle(0x000000, 0);
+        g.fillRect(0, 0, 32, 36);
+        g.fillStyle(0x2a2a3e, 1);
+        // Arched frame
+        g.fillRect(2, 6, 3, 28);
+        g.fillRect(27, 6, 3, 28);
+        g.fillRect(4, 4, 24, 3);
+        g.fillTriangle(12, 0, 20, 0, 16, 4);
+        // Slim pickets
+        for (let i = 0; i < 5; i++) {
+            g.fillRect(7 + i * 4, 8, 1.5, 22);
+        }
+        // Cross-rails
+        g.fillRect(4, 14, 24, 2);
+        g.fillRect(4, 26, 24, 2);
+        // Latch highlight
+        g.fillStyle(0xb0b0c8, 1);
+        g.fillCircle(16, 20, 1.5);
+        g.generateTexture("gate_iron", 32, 36);
+        g.destroy();
+    }
+    makeGateGoldTexture() {
+        const g = this.make.graphics({ x: 0, y: 0 }, false);
+        g.fillStyle(0x000000, 0);
+        g.fillRect(0, 0, 32, 36);
+        g.fillStyle(0xcf9a1a, 1);
+        g.fillRect(2, 6, 3, 28);
+        g.fillRect(27, 6, 3, 28);
+        g.fillRect(4, 4, 24, 3);
+        g.fillStyle(0xffd86b, 1);
+        g.fillTriangle(12, 0, 20, 0, 16, 4);
+        for (let i = 0; i < 5; i++) {
+            g.fillStyle(0xcf9a1a, 1);
+            g.fillRect(7 + i * 4, 8, 2, 22);
+        }
+        g.fillStyle(0xffd86b, 1);
+        g.fillRect(4, 14, 24, 2);
+        g.fillRect(4, 26, 24, 2);
+        // Jewel on latch
+        g.fillStyle(0xff5a7e, 1);
+        g.fillCircle(16, 20, 2);
+        g.generateTexture("gate_gold", 32, 36);
+        g.destroy();
     }
     makeGrassTexture() {
         const g = this.make.graphics({ x: 0, y: 0 }, false);

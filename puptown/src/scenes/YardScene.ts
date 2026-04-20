@@ -18,9 +18,11 @@ export class YardScene extends Phaser.Scene {
   private centerRightArrow!: Phaser.GameObjects.Text;
   private biomeDecor!: Phaser.GameObjects.Text;
   private fenceSprites: Phaser.GameObjects.Image[] = [];
+  private gateSprite?: Phaser.GameObjects.Image;
   private milestoneDecor: Phaser.GameObjects.Text[] = [];
   private shownBiomeKey = "";
   private shownFenceKey = "";
+  private shownGateKey = "";
 
   constructor() {
     super("Yard");
@@ -223,23 +225,56 @@ export class YardScene extends Phaser.Scene {
     // skin so early yards feel individual.
     const fenceKey = level >= 50 ? "fence_gold" : level >= 20 ? "fence_iron" : biome.fenceKey;
     if (fenceKey !== this.shownFenceKey) this.rebuildFences(fenceKey);
+    const gateKey = level >= 50 ? "gate_gold" : level >= 20 ? "gate_iron" : "gate_wood";
+    if (gateKey !== this.shownGateKey) this.rebuildGate(gateKey);
     this.refreshMilestoneDecor(level);
   }
 
-  /** Redraw the fence strip using the given texture key. */
+  /** Redraw all four fence edges (top/bottom/left/right) using the given
+   *  texture key, then place a gate in the bottom-center gap. */
   private rebuildFences(key: string): void {
     for (const f of this.fenceSprites) f.destroy();
     this.fenceSprites = [];
-    const count = Math.ceil(YARD.width / 16);
-    for (let i = 0; i < count; i++) {
-      const top = this.add.image(YARD.x + i * 16 + 8, YARD.y - 6, key);
+    const gateHalfTiles = 1; // leave a 2-tile gap in the bottom for the gate
+    const hCount = Math.ceil(YARD.width / 16);
+    const midIdx = Math.floor(hCount / 2);
+    // Top and bottom rows.
+    for (let i = 0; i < hCount; i++) {
+      const x = YARD.x + i * 16 + 8;
+      const top = this.add.image(x, YARD.y - 6, key);
       top.setDepth(-4);
-      const bot = this.add.image(YARD.x + i * 16 + 8, YARD.y + YARD.height + 10, key);
+      this.fenceSprites.push(top);
+      // Skip the middle tiles on the bottom row — gate fills that space.
+      if (i >= midIdx - gateHalfTiles && i <= midIdx + gateHalfTiles - 1) continue;
+      const bot = this.add.image(x, YARD.y + YARD.height + 10, key);
       bot.setFlipY(true);
       bot.setDepth(-4);
-      this.fenceSprites.push(top, bot);
+      this.fenceSprites.push(bot);
+    }
+    // Left and right columns. The fence texture is 16 wide × 32 tall so we
+    // step every 16px vertically to produce a continuous-looking side wall.
+    const vCount = Math.ceil(YARD.height / 16);
+    for (let i = 0; i < vCount; i++) {
+      const y = YARD.y + i * 16 + 8;
+      const left = this.add.image(YARD.x - 6, y, key).setAngle(-90);
+      left.setDepth(-4);
+      const right = this.add.image(YARD.x + YARD.width + 6, y, key).setAngle(90);
+      right.setDepth(-4);
+      this.fenceSprites.push(left, right);
     }
     this.shownFenceKey = key;
+  }
+
+  /** Place / swap the gate sprite in the bottom-center of the fence. */
+  private rebuildGate(gateKey: string): void {
+    if (this.gateSprite) this.gateSprite.destroy();
+    this.gateSprite = this.add.image(
+      YARD.x + YARD.width / 2,
+      YARD.y + YARD.height + 8,
+      gateKey
+    );
+    this.gateSprite.setDepth(-3);
+    this.shownGateKey = gateKey;
   }
 
   /** Reveal/hide milestone decor items based on the current kennel level. */
@@ -336,14 +371,16 @@ export class YardScene extends Phaser.Scene {
   }
 }
 
-/** Average two 0xRRGGBB colors channel-by-channel. Used to keep both a
- *  biome tint and a kennel tier tint legible on the grass tilesprite. */
-function blendColors(a: number, b: number): number {
+/** Weighted blend of two 0xRRGGBB colors. Biome gets 70% weight so its
+ *  identity reads through even when a kennel tier tint is layered on top;
+ *  a simple channel average was washing every biome toward gray. */
+function blendColors(a: number, b: number, aWeight = 0.7): number {
+  const bw = 1 - aWeight;
   const ar = (a >> 16) & 0xff, ag = (a >> 8) & 0xff, ab = a & 0xff;
   const br = (b >> 16) & 0xff, bg = (b >> 8) & 0xff, bb = b & 0xff;
-  const r = (ar + br) >> 1;
-  const g = (ag + bg) >> 1;
-  const bl = (ab + bb) >> 1;
+  const r = Math.round(ar * aWeight + br * bw);
+  const g = Math.round(ag * aWeight + bg * bw);
+  const bl = Math.round(ab * aWeight + bb * bw);
   return (r << 16) | (g << 8) | bl;
 }
 

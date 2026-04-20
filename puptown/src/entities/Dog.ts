@@ -37,6 +37,9 @@ export class DogSprite extends Phaser.GameObjects.Container {
   private heart!: Phaser.GameObjects.Text;
   private readyMark!: Phaser.GameObjects.Text;
   private veteranFlair!: Phaser.GameObjects.Text;
+  private bandana!: Phaser.GameObjects.Rectangle;
+  private bandanaKnot!: Phaser.GameObjects.Rectangle;
+  private charm!: Phaser.GameObjects.Arc;
 
   private target: { x: number; y: number };
   private speed = 22;
@@ -45,6 +48,7 @@ export class DogSprite extends Phaser.GameObjects.Container {
   private readyBob = 0;
   private shownName = "";
   private shownGrowth = 1;
+  private shownLevel = 0;
   private baseScale = 1.5;
   // Breed-specific aspect ratio (dachshund is long-low, great dane is tall).
   private stretchX = 1;
@@ -58,6 +62,8 @@ export class DogSprite extends Phaser.GameObjects.Container {
     this.stretchX = stretch.x;
     this.stretchY = stretch.y;
     this.buildVisual();
+    this.shownLevel = data.level;
+    this.refreshAccessories();
     this.shownGrowth = growthScaleForLevel(data.level);
     this.baseScale = 1.5 * this.shownGrowth * (BREED_SIZE[data.breedType] ?? 1);
     this.setScale(this.baseScale * this.stretchX, this.baseScale * this.stretchY);
@@ -95,6 +101,16 @@ export class DogSprite extends Phaser.GameObjects.Container {
     this.eyeL = this.scene.add.rectangle(12, -5, 2, 2, 0x1a1a2e);
     this.eyeR = this.scene.add.rectangle(16, -5, 2, 2, 0x1a1a2e);
     const collar = this.scene.add.rectangle(10, 1, 3, 8, 0xff5a7e);
+
+    // L5 bandana: a small kerchief hanging from the collar. Color varies by
+    // color variant so bandanas don't all look identical across the yard.
+    const bandanaColors = [0x4a7bd6, 0xe03b3b, 0xffd86b, 0x7fc56b, 0xb06bff];
+    const bandanaColor = bandanaColors[this.dogData.colorVariant % bandanaColors.length];
+    this.bandana = this.scene.add.rectangle(10, 5, 7, 4, bandanaColor);
+    this.bandanaKnot = this.scene.add.rectangle(10, 2, 4, 2, bandanaColor);
+
+    // L10 dog-tag charm: a gold circle dangling from the collar.
+    this.charm = this.scene.add.circle(10, 7, 1.6, 0xffd86b);
 
     this.shownName = this.dogData.named ? this.dogData.name : "";
     this.nameLabel = this.scene.add.text(0, -26, this.shownName, {
@@ -176,9 +192,19 @@ export class DogSprite extends Phaser.GameObjects.Container {
       this.head, this.earL, this.earR, this.snout,
       this.eyeL, this.eyeR,
       collar,
+      this.bandana, this.bandanaKnot, this.charm,
       this.veteranFlair,
       this.nameLabel, this.heart, this.readyMark,
     ]);
+  }
+
+  /** Toggle level-gated flair so a dog's look tracks their progression. */
+  private refreshAccessories(): void {
+    const lvl = this.dogData.level;
+    this.bandana.setAlpha(lvl >= 5 ? 1 : 0);
+    this.bandanaKnot.setAlpha(lvl >= 5 ? 1 : 0);
+    this.charm.setAlpha(lvl >= 10 ? 1 : 0);
+    this.veteranFlair.setAlpha(lvl >= ADOPTION_LEVEL_REQ ? 1 : 0);
   }
 
   private pickTarget(): { x: number; y: number } {
@@ -190,6 +216,18 @@ export class DogSprite extends Phaser.GameObjects.Container {
 
   tickUpdate(deltaMs: number): void {
     const dt = deltaMs / 1000;
+
+    // Level change: refresh gated accessories and pop a little bounce when
+    // a dog unlocks a new piece of flair (L5 bandana, L10 charm, L15 bow).
+    if (this.dogData.level !== this.shownLevel) {
+      const prev = this.shownLevel;
+      this.shownLevel = this.dogData.level;
+      this.refreshAccessories();
+      const crossed = (t: number) => prev < t && this.shownLevel >= t;
+      if (crossed(5) || crossed(10) || crossed(ADOPTION_LEVEL_REQ)) {
+        this.playTapBounce();
+      }
+    }
 
     // Keep the visual growth stage in sync with the dog's level. When a
     // dog crosses a stage boundary we animate the scale change so the
@@ -207,7 +245,6 @@ export class DogSprite extends Phaser.GameObjects.Container {
         ease: "Back.easeOut",
       });
       this.baseScale = nextBase;
-      this.veteranFlair.setAlpha(this.dogData.level >= ADOPTION_LEVEL_REQ ? 1 : 0);
     }
 
     this.zoomTimer -= dt;
