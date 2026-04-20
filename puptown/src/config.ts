@@ -107,19 +107,30 @@ export const ROLE_INFO: Record<
 
 // ── Palettes (breed body + accent) ───────────────────────────────────────
 // Each breed has an array of color variants: [bodyTop, bodyBottom, accent].
+// Poodle variant 2 (pure white) is reserved for Penny — DogManager.makeDog
+// only rolls variants 0..1 for random pups. The yorkiepoo + pomeranian
+// breeds exist only for signature dogs and are excluded from ALL_BREEDS.
 export const BREED_PALETTES: Record<BreedType, number[][]> = {
-  chihuahua:[[0xe8c090, 0xb48860, 0x3a2a20], [0xf2d7a8, 0xcba77b, 0x3a2a20]],
-  dachshund:[[0x7a4a22, 0x4e2f15, 0xf3c373], [0x2a2a3e, 0x1a1a2e, 0xdfaa3c]],
-  shiba:    [[0xe6a752, 0xbf7a2b, 0xffffff], [0xf2d1a4, 0xc7996a, 0xffffff]],
-  corgi:    [[0xf0c070, 0xe69a3b, 0xffffff], [0xe8b48c, 0xbb7d4a, 0xffffff]],
-  beagle:   [[0xf0ddb4, 0x9a6636, 0x2a2a3e], [0xffffff, 0x8a5a2e, 0x2a2a3e]],
-  mutt:     [[0xd9b382, 0xb5895a, 0x5a3a22], [0xeadfb4, 0xb09472, 0x5a4222]],
-  poodle:   [[0xf6ecd6, 0xd8c9a5, 0xff9ac1], [0x3d3d4a, 0x22222c, 0xff9ac1]],
-  bulldog:  [[0xeeeee6, 0xb8b0a2, 0x3a3a4a], [0xd8c2a4, 0xa68a68, 0x3a3a4a]],
-  dalmatian:[[0xfafafa, 0xeaeaea, 0x1a1a1a], [0xfff6d6, 0xe8e8e8, 0x1a1a1a]],
-  husky:    [[0xdfe6ee, 0x7f8ea3, 0x2a2a3e], [0xb8c8d8, 0x5d6d82, 0x2a2a3e]],
-  goldie:   [[0xf2d79a, 0xd6a85a, 0xfff6d6], [0xf7e2b1, 0xc89a4c, 0xfff6d6]],
-  greatdane:[[0x8a8272, 0x5e5849, 0x2a2a3e], [0xc0b9a8, 0x726b5a, 0x2a2a3e]],
+  chihuahua: [[0xe8c090, 0xb48860, 0x3a2a20], [0xf2d7a8, 0xcba77b, 0x3a2a20]],
+  dachshund: [[0x7a4a22, 0x4e2f15, 0xf3c373], [0x2a2a3e, 0x1a1a2e, 0xdfaa3c]],
+  shiba:     [[0xe6a752, 0xbf7a2b, 0xffffff], [0xf2d1a4, 0xc7996a, 0xffffff]],
+  corgi:     [[0xf0c070, 0xe69a3b, 0xffffff], [0xe8b48c, 0xbb7d4a, 0xffffff]],
+  beagle:    [[0xf0ddb4, 0x9a6636, 0x2a2a3e], [0xffffff, 0x8a5a2e, 0x2a2a3e]],
+  mutt:      [[0xd9b382, 0xb5895a, 0x5a3a22], [0xeadfb4, 0xb09472, 0x5a4222]],
+  poodle:    [
+    [0xf6ecd6, 0xd8c9a5, 0xff9ac1],
+    [0x3d3d4a, 0x22222c, 0xff9ac1],
+    [0xffffff, 0xf2f2f2, 0xffc0d6], // Penny: white poodle
+  ],
+  bulldog:   [[0xeeeee6, 0xb8b0a2, 0x3a3a4a], [0xd8c2a4, 0xa68a68, 0x3a3a4a]],
+  dalmatian: [[0xfafafa, 0xeaeaea, 0x1a1a1a], [0xfff6d6, 0xe8e8e8, 0x1a1a1a]],
+  husky:     [[0xdfe6ee, 0x7f8ea3, 0x2a2a3e], [0xb8c8d8, 0x5d6d82, 0x2a2a3e]],
+  goldie:    [[0xf2d79a, 0xd6a85a, 0xfff6d6], [0xf7e2b1, 0xc89a4c, 0xfff6d6]],
+  greatdane: [[0x8a8272, 0x5e5849, 0x2a2a3e], [0xc0b9a8, 0x726b5a, 0x2a2a3e]],
+  // Rufus: black YorkiePoo — dark coat with a tan chest + ear highlight.
+  yorkiepoo: [[0x1a1a1e, 0x2a2a30, 0xa26a3a]],
+  // Ferris: orange-sable Pomeranian — fluffy russet with a cream belly.
+  pomeranian:[[0xe89038, 0xd67a2a, 0xfff0d0]],
 };
 
 export const BREED_LABELS: Record<BreedType, string> = {
@@ -135,6 +146,8 @@ export const BREED_LABELS: Record<BreedType, string> = {
   husky: "Husky",
   goldie: "Golden",
   greatdane: "Great Dane",
+  yorkiepoo: "YorkiePoo",
+  pomeranian: "Pomeranian",
 };
 
 // Real-world-ish size multipliers, compressed so every dog reads clearly
@@ -154,6 +167,8 @@ export const BREED_SIZE: Record<BreedType, number> = {
   husky:     1.08,
   goldie:    1.08,
   greatdane: 1.18,
+  yorkiepoo: 0.90,
+  pomeranian:0.88,
 };
 
 // Silhouette stretch — kept so breeds read by shape (dachshund long-low,
@@ -172,6 +187,8 @@ export const BREED_STRETCH: Record<BreedType, { x: number; y: number }> = {
   husky:     { x: 1.04, y: 1.02 },
   goldie:    { x: 1.06, y: 1.02 },
   greatdane: { x: 1.10, y: 1.10 },
+  yorkiepoo: { x: 0.96, y: 1.02 },
+  pomeranian:{ x: 1.00, y: 1.06 },
 };
 
 export const ALL_BREEDS: BreedType[] = [
@@ -217,9 +234,9 @@ export const DOG_NAMES = [
   "Buddy", "Teddy", "Charlie", "Cooper", "Rocky", "Bear", "Loki", "Zeus",
   "Max", "Duke", "Toby", "Murphy", "Oliver", "Winston", "Oscar", "Gus",
   "Archie", "Walter", "Leo", "Chester", "Dexter", "Frankie", "Remy",
-  "Moose", "Beau", "Banjo", "Scooter", "Rascal", "Rufus", "Shadow",
+  "Moose", "Beau", "Banjo", "Scooter", "Rascal", "Shadow",
   // ── Girly-classic ─────────────────────────────────────────────────────
-  "Bella", "Lucy", "Ruby", "Molly", "Sadie", "Zoe", "Lily", "Penny",
+  "Bella", "Lucy", "Ruby", "Molly", "Sadie", "Zoe", "Lily",
   "Ginger", "Ellie", "Nala", "Willa", "Tilly", "Millie", "Goldie",
   "Piper", "Sassy", "Gracie", "Maggie", "Roxy", "Sophie",
   // ── Quirky / whimsical ────────────────────────────────────────────────
@@ -228,6 +245,32 @@ export const DOG_NAMES = [
   "Snickers", "Snoopy", "Doodle", "Button", "Bumble", "Bubbles", "Cricket",
   "Puddle", "Pebbs", "Truffles", "Whiskers", "Peanut Butter", "Kibble",
 ];
+
+// ── Signature dogs ───────────────────────────────────────────────────────
+// Cameo pups tied to specific real dogs. Their name, breed, and color
+// variant are locked together — Penny is *always* a white poodle, Rufus
+// is always a black YorkiePoo, Ferris is always an orange Pomeranian.
+//
+// Gameplay: when the player adopts a stray and at least one signature
+// dog is not currently on the board and not retired, there is a
+// SIGNATURE_SPAWN_CHANCE chance the stray is rerolled as that signature.
+// On naming, a matching stray claims its signature name instead of the
+// random pool. These names are NOT part of DOG_NAMES so the regular
+// roller can never assign them to the "wrong" dog.
+export interface SignatureDog {
+  name: string;
+  breed: BreedType;
+  colorVariant: number;
+  blurb: string;
+}
+export const SIGNATURE_DOGS: SignatureDog[] = [
+  { name: "Penny",  breed: "poodle",     colorVariant: 2, blurb: "A fluffy white poodle." },
+  { name: "Rufus",  breed: "yorkiepoo",  colorVariant: 0, blurb: "A scruffy black YorkiePoo." },
+  { name: "Ferris", breed: "pomeranian", colorVariant: 0, blurb: "A fiery little Pomeranian." },
+];
+// Chance per adopt() call to force the next stray to be a still-available
+// signature dog (only applies if at least one is waiting to appear).
+export const SIGNATURE_SPAWN_CHANCE = 0.35;
 
 // ── Buildings / upgrades ─────────────────────────────────────────────────
 // Max levels are intentionally very high so the game keeps progressing into
