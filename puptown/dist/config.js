@@ -327,3 +327,58 @@ export const CENTER_NAMES = [
 export function centerNameFor(index) {
     return CENTER_NAMES[index] ?? `Rescue Center ${index + 1}`;
 }
+export const BIOMES = {
+    meadow: { id: "meadow", label: "Meadow", grassTint: 0xffffff, skyTop: 0xbfe6ff, fenceKey: "fence", decor: "\u{1F33C}" },
+    harbor: { id: "harbor", label: "Harborside", grassTint: 0xcfe9f2, skyTop: 0xa8d7f5, fenceKey: "fence_rope", decor: "\u{1F41A}" },
+    pine: { id: "pine", label: "Pine Ridge", grassTint: 0x9fd49a, skyTop: 0xb8d4a8, fenceKey: "fence_log", decor: "\u{1F332}" },
+    cloudtop: { id: "cloudtop", label: "Cloudtop", grassTint: 0xe8d9ff, skyTop: 0xd7c4f7, fenceKey: "fence_iron", decor: "\u{2601}\uFE0F" },
+    moonlit: { id: "moonlit", label: "Moonlit", grassTint: 0xa5b4d8, skyTop: 0x4a4e7a, fenceKey: "fence_iron", decor: "\u{1F319}" },
+    wildflower: { id: "wildflower", label: "Wildflower", grassTint: 0xf6c5e4, skyTop: 0xffd9e0, fenceKey: "fence", decor: "\u{1F337}" },
+    coral: { id: "coral", label: "Coral Bay", grassTint: 0xffd7cc, skyTop: 0xffe8da, fenceKey: "fence_rope", decor: "\u{1F41A}" },
+    evergreen: { id: "evergreen", label: "Evergreen", grassTint: 0x8fc28a, skyTop: 0xcde8c6, fenceKey: "fence_log", decor: "\u{1F343}" },
+    starlight: { id: "starlight", label: "Starlight", grassTint: 0xb6b1e0, skyTop: 0x38406a, fenceKey: "fence_gold", decor: "\u{2B50}" },
+    sunny: { id: "sunny", label: "Sunny", grassTint: 0xfff0b8, skyTop: 0xfff6d6, fenceKey: "fence", decor: "\u{2600}\uFE0F" },
+};
+/** Pick a biome from a human-readable center name. */
+export function biomeForName(name) {
+    const n = name.toLowerCase();
+    if (n.includes("harbor"))
+        return "harbor";
+    if (n.includes("pine"))
+        return "pine";
+    if (n.includes("cloud"))
+        return "cloudtop";
+    if (n.includes("moon"))
+        return "moonlit";
+    if (n.includes("wildflower") || n.includes("woof"))
+        return "wildflower";
+    if (n.includes("coral"))
+        return "coral";
+    if (n.includes("evergreen") || n.includes("willow"))
+        return "evergreen";
+    if (n.includes("star"))
+        return "starlight";
+    if (n.includes("sun"))
+        return "sunny";
+    return "meadow";
+}
+// ── Yard decorations (appear at Kennel tier milestones) ──────────────────
+// Each entry renders once the kennel reaches `minLevel`. Coordinates are in
+// yard-local pixels (0..YARD.width, 0..YARD.height) so the same decor map
+// lands correctly even on the wider tablet canvas.
+export const YARD_DECOR = [
+    { minLevel: 2, emoji: "\u{1F33C}", x: 0.08, y: 0.88, size: 14 }, // daisy SW
+    { minLevel: 5, emoji: "\u{1F950}", x: 0.90, y: 0.10, size: 14 }, // croissant-ish (treat) NE
+    { minLevel: 10, emoji: "\u{1F3BE}", x: 0.14, y: 0.12, size: 14 }, // tennis ball NW
+    { minLevel: 18, emoji: "\u{1F332}", x: 0.93, y: 0.85, size: 18 }, // tree SE
+    { minLevel: 28, emoji: "\u{1F6B6}", x: 0.50, y: 0.12, size: 14 }, // walker N
+    { minLevel: 40, emoji: "\u{1F451}", x: 0.50, y: 0.92, size: 16 }, // crown S (late-game)
+];
+// ── Merge Centers (consolidation / prestige-lite) ────────────────────────
+// When the player owns at least MERGE_UNLOCK_COUNT centers, the option to
+// merge any MERGE_INPUT_COUNT into a single Mega Center appears. The new
+// center inherits the sum of the inputs' mergeWeight plus a synergy kicker.
+export const MERGE_UNLOCK_COUNT = 5;
+export const MERGE_INPUT_COUNT = 3;
+export const MERGE_SYNERGY_BONUS = 0.10; // +10% on top of the summed weight
+export const MERGE_MEGA_LABEL = "Mega Rescue";

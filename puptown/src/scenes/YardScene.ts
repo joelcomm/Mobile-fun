@@ -1,6 +1,6 @@
 // YardScene: renders the yard, spawns dogs, handles taps and floating Joy text.
 
-import { GAME_WIDTH, YARD, kennelTierFor } from "../config.js";
+import { GAME_WIDTH, YARD, YARD_DECOR, kennelTierFor } from "../config.js";
 import { DogSprite } from "../entities/Dog.js";
 import { Game } from "../Game.js";
 import { formatNumber } from "../util/format.js";
@@ -16,6 +16,11 @@ export class YardScene extends Phaser.Scene {
   private centerLabel!: Phaser.GameObjects.Text;
   private centerLeftArrow!: Phaser.GameObjects.Text;
   private centerRightArrow!: Phaser.GameObjects.Text;
+  private biomeDecor!: Phaser.GameObjects.Text;
+  private fenceSprites: Phaser.GameObjects.Image[] = [];
+  private milestoneDecor: Phaser.GameObjects.Text[] = [];
+  private shownBiomeKey = "";
+  private shownFenceKey = "";
 
   constructor() {
     super("Yard");
@@ -48,15 +53,16 @@ export class YardScene extends Phaser.Scene {
     this.kennelBanner.setDepth(-4);
     this.refreshKennelVisual(true);
 
-    // Fence border.
-    const fenceCount = Math.ceil(YARD.width / 16);
-    for (let i = 0; i < fenceCount; i++) {
-      const top = this.add.image(YARD.x + i * 16 + 8, YARD.y - 6, "fence");
-      top.setDepth(-4);
-      const bot = this.add.image(YARD.x + i * 16 + 8, YARD.y + YARD.height + 10, "fence");
-      bot.setFlipY(true);
-      bot.setDepth(-4);
-    }
+    // Fence border (texture key picked per biome + kennel tier).
+    this.rebuildFences("fence");
+
+    // Biome decor (single corner icon — grass tint carries the rest).
+    this.biomeDecor = this.add.text(YARD.x + YARD.width - 18, YARD.y + YARD.height - 22, "", {
+      fontFamily: "sans-serif",
+      fontSize: "18px",
+    });
+    this.biomeDecor.setOrigin(0.5);
+    this.biomeDecor.setDepth(-3);
 
     // Center switcher (only visible once the player owns 2+ centers).
     this.centerLeftArrow = this.add.text(YARD.x + 8, YARD.y + 10, "\u25C0", {
@@ -94,7 +100,11 @@ export class YardScene extends Phaser.Scene {
     this.centerLabel.setOrigin(0.5, 0);
     this.centerLabel.setDepth(60);
 
-    game.centers.on((_list, _id) => this.refreshCenterHeader());
+    game.centers.on((_list, _id) => {
+      this.refreshCenterHeader();
+      this.refreshBiome();
+    });
+    this.refreshBiome();
 
     // Spawn sprites for all current-center dogs.
     for (const d of game.dogs.listCurrent()) {
@@ -189,14 +199,71 @@ export class YardScene extends Phaser.Scene {
     this.centerRightArrow.setVisible(many);
   }
 
-  /** Recolor the grass + label when the kennel tier changes. */
+  /** Recolor the grass + label when the kennel tier changes, and bubble
+   *  any fence-tier or milestone-decor changes in at the same moment. */
   private refreshKennelVisual(force = false): void {
     const level = Game.instance().buildings.levelOf("kennel");
     if (!force && level === this.kennelVisualLevel) return;
     this.kennelVisualLevel = level;
     const tier = kennelTierFor(level);
-    this.grass.setTint(tier.grassTint);
+    // Biome provides a base tint; kennel tier multiplies it so fancier
+    // yards look richer without overriding the biome identity.
+    const biome = Game.instance().centers.biomeFor(Game.instance().centers.currentIdValue());
+    this.grass.setTint(blendColors(biome.grassTint, tier.grassTint));
     this.kennelBanner.setText(`\u{1F3E0} ${tier.label}  Lv${level}`);
+    // Late-game fence upgrade: at kennel tier ≥20 always show wrought iron
+    // (≥50 gold) regardless of biome — the biome still chooses the low-tier
+    // skin so early yards feel individual.
+    const fenceKey = level >= 50 ? "fence_gold" : level >= 20 ? "fence_iron" : biome.fenceKey;
+    if (fenceKey !== this.shownFenceKey) this.rebuildFences(fenceKey);
+    this.refreshMilestoneDecor(level);
+  }
+
+  /** Redraw the fence strip using the given texture key. */
+  private rebuildFences(key: string): void {
+    for (const f of this.fenceSprites) f.destroy();
+    this.fenceSprites = [];
+    const count = Math.ceil(YARD.width / 16);
+    for (let i = 0; i < count; i++) {
+      const top = this.add.image(YARD.x + i * 16 + 8, YARD.y - 6, key);
+      top.setDepth(-4);
+      const bot = this.add.image(YARD.x + i * 16 + 8, YARD.y + YARD.height + 10, key);
+      bot.setFlipY(true);
+      bot.setDepth(-4);
+      this.fenceSprites.push(top, bot);
+    }
+    this.shownFenceKey = key;
+  }
+
+  /** Reveal/hide milestone decor items based on the current kennel level. */
+  private refreshMilestoneDecor(level: number): void {
+    for (const d of this.milestoneDecor) d.destroy();
+    this.milestoneDecor = [];
+    for (const spec of YARD_DECOR) {
+      if (level < spec.minLevel) continue;
+      const x = YARD.x + YARD.width * spec.x;
+      const y = YARD.y + YARD.height * spec.y;
+      const t = this.add.text(x, y, spec.emoji, {
+        fontFamily: "sans-serif",
+        fontSize: `${spec.size}px`,
+      });
+      t.setOrigin(0.5);
+      t.setDepth(-3);
+      this.milestoneDecor.push(t);
+    }
+  }
+
+  /** Sync the biome-owned visuals (grass accent + corner decor). */
+  private refreshBiome(): void {
+    const game = Game.instance();
+    const biome = game.centers.biomeFor(game.centers.currentIdValue());
+    if (biome.id === this.shownBiomeKey) return;
+    this.shownBiomeKey = biome.id;
+    this.biomeDecor.setText(biome.decor);
+    // Force a kennel-visual redraw so the fence + grass tint pick up the
+    // new biome immediately (without this the cache short-circuits).
+    this.kennelVisualLevel = -1;
+    this.refreshKennelVisual(true);
   }
 
   /** Floating reward text where a graduating pup stood. */
@@ -260,5 +327,16 @@ export class YardScene extends Phaser.Scene {
       onComplete: () => banner.destroy(),
     });
   }
+}
+
+/** Average two 0xRRGGBB colors channel-by-channel. Used to keep both a
+ *  biome tint and a kennel tier tint legible on the grass tilesprite. */
+function blendColors(a: number, b: number): number {
+  const ar = (a >> 16) & 0xff, ag = (a >> 8) & 0xff, ab = a & 0xff;
+  const br = (b >> 16) & 0xff, bg = (b >> 8) & 0xff, bb = b & 0xff;
+  const r = (ar + br) >> 1;
+  const g = (ag + bg) >> 1;
+  const bl = (ab + bb) >> 1;
+  return (r << 16) | (g << 8) | bl;
 }
 

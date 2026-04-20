@@ -2,10 +2,18 @@
 // itself from colored rectangles (placeholder pixel-art). Handles wandering
 // and emits events when tapped.
 
-import { BREED_PALETTES, YARD } from "../config.js";
+import { ADOPTION_LEVEL_REQ, BREED_PALETTES, YARD } from "../config.js";
 import { DogData } from "../types.js";
 
 declare const Phaser: typeof import("phaser");
+
+/** Visual growth stages tied to a dog's level. Puppies are small and floppy,
+ *  veterans wear a graduation flair. The middle stage is the baseline. */
+function growthScaleForLevel(level: number): number {
+  if (level <= 4) return 0.82;                   // puppy
+  if (level >= ADOPTION_LEVEL_REQ) return 1.18;  // veteran
+  return 1.0;                                    // adult
+}
 
 export class DogSprite extends Phaser.GameObjects.Container {
   public dogData: DogData;
@@ -22,6 +30,7 @@ export class DogSprite extends Phaser.GameObjects.Container {
   private nameLabel!: Phaser.GameObjects.Text;
   private heart!: Phaser.GameObjects.Text;
   private readyMark!: Phaser.GameObjects.Text;
+  private veteranFlair!: Phaser.GameObjects.Text;
 
   private target: { x: number; y: number };
   private speed = 22;
@@ -29,13 +38,17 @@ export class DogSprite extends Phaser.GameObjects.Container {
   private zoomTimer = 0;
   private readyBob = 0;
   private shownName = "";
+  private shownGrowth = 1;
+  private baseScale = 1.35;
 
   constructor(scene: Phaser.Scene, data: DogData) {
     super(scene, data.position.x, data.position.y);
     this.dogData = data;
     this.setSize(36, 28);
     this.buildVisual();
-    this.setScale(1.35);
+    this.shownGrowth = growthScaleForLevel(data.level);
+    this.baseScale = 1.35 * this.shownGrowth;
+    this.setScale(this.baseScale);
     this.target = this.pickTarget();
 
     this.setInteractive(
@@ -98,6 +111,14 @@ export class DogSprite extends Phaser.GameObjects.Container {
     this.readyMark.setOrigin(0.5);
     this.readyMark.setAlpha(0);
 
+    // Veteran flair (L15+): a little bandana bow that sits between the ears.
+    this.veteranFlair = this.scene.add.text(13, -12, "\u{1F380}", {
+      fontFamily: "sans-serif",
+      fontSize: "10px",
+    });
+    this.veteranFlair.setOrigin(0.5);
+    this.veteranFlair.setAlpha(this.dogData.level >= ADOPTION_LEVEL_REQ ? 1 : 0);
+
     this.add([
       this.tail,
       legFL, legFR, legBL, legBR,
@@ -105,6 +126,7 @@ export class DogSprite extends Phaser.GameObjects.Container {
       this.head, this.earL, this.earR, this.snout,
       this.eyeL, this.eyeR,
       collar,
+      this.veteranFlair,
       this.nameLabel, this.heart, this.readyMark,
     ]);
   }
@@ -118,6 +140,25 @@ export class DogSprite extends Phaser.GameObjects.Container {
 
   tickUpdate(deltaMs: number): void {
     const dt = deltaMs / 1000;
+
+    // Keep the visual growth stage in sync with the dog's level. When a
+    // dog crosses a stage boundary we animate the scale change so the
+    // level-up button doesn't feel abstract.
+    const wantGrowth = growthScaleForLevel(this.dogData.level);
+    if (wantGrowth !== this.shownGrowth) {
+      this.shownGrowth = wantGrowth;
+      const nextBase = 1.35 * wantGrowth;
+      const sign = this.scaleX < 0 ? -1 : 1;
+      this.scene.tweens.add({
+        targets: this,
+        scaleX: sign * nextBase,
+        scaleY: nextBase,
+        duration: 320,
+        ease: "Back.easeOut",
+      });
+      this.baseScale = nextBase;
+      this.veteranFlair.setAlpha(this.dogData.level >= ADOPTION_LEVEL_REQ ? 1 : 0);
+    }
 
     this.zoomTimer -= dt;
     if (this.dogData.animState === "zoomies") {
@@ -144,7 +185,7 @@ export class DogSprite extends Phaser.GameObjects.Container {
       this.x += vx * dt;
       this.y += vy * dt;
       const facing = vx < 0 ? -1 : 1;
-      this.setScale(facing * 1.35, 1.35);
+      this.setScale(facing * this.baseScale, this.baseScale);
       // Container flips kids too; counter-flip text labels so they read normally.
       this.nameLabel.setScale(facing, 1);
       this.heart.setScale(facing, 1);
@@ -172,9 +213,10 @@ export class DogSprite extends Phaser.GameObjects.Container {
   }
 
   playTapBounce(): void {
+    const rest = this.baseScale;
     this.scene.tweens.add({
       targets: this,
-      scaleY: { from: 1.55, to: 1.35 },
+      scaleY: { from: rest * 1.15, to: rest },
       duration: 120,
       ease: "Quad.easeOut",
     });
@@ -221,13 +263,13 @@ export class DogSprite extends Phaser.GameObjects.Container {
   /** Goodbye animation: float up, spin gently, fade out, then call onDone. */
   playGraduateAnimation(onDone: () => void): void {
     this.disableInteractive();
-    const baseScale = this.scaleX < 0 ? -1.35 : 1.35;
+    const sign = this.scaleX < 0 ? -1 : 1;
     this.scene.tweens.add({
       targets: this,
       y: this.y - 70,
       alpha: 0,
-      scaleX: baseScale * 1.6,
-      scaleY: 1.6,
+      scaleX: sign * this.baseScale * 1.2,
+      scaleY: this.baseScale * 1.2,
       angle: 360,
       duration: 900,
       ease: "Cubic.easeIn",

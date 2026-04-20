@@ -278,6 +278,27 @@ export class Game {
     return true;
   }
 
+  /**
+   * Merge N source centers into one Mega Rescue. Any dogs living in the
+   * consumed centers are re-homed to the new one so the player never loses
+   * a pup. Returns true on success.
+   */
+  handleMergeCenters(sourceIds: string[]): boolean {
+    const result = this.centers.merge(sourceIds);
+    if (!result) return false;
+    // Re-parent dogs first — merge() has already flipped current to the
+    // new mega center, so the UI listener will refresh once we emit below.
+    for (const d of this.dogs.list()) {
+      if (d.centerId && result.absorbedIds.includes(d.centerId)) {
+        d.centerId = result.newId;
+      }
+    }
+    // Force a DogManager re-emit so listCurrent() returns the freshly
+    // re-parented dogs (setCurrentCenter short-circuits when the id matches).
+    this.dogs.emit();
+    return true;
+  }
+
   /** Pay to name a stray; returns chosen name or null on failure. */
   handleNameStray(dogId: string): string | null {
     const dog = this.dogs.get(dogId);
