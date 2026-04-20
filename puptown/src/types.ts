@@ -12,7 +12,9 @@ export type BreedType =
   | "dalmatian"
   | "husky"
   | "goldie"
-  | "greatdane";
+  | "greatdane"
+  | "yorkiepoo"
+  | "pomeranian";
 
 export type Personality =
   | "playful"

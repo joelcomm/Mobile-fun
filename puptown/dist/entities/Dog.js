@@ -111,6 +111,21 @@ export class DogSprite extends Phaser.GameObjects.Container {
             // Also a spot on the head.
             breedExtras.push(this.scene.add.rectangle(10, -6, 2, 2, 0x1a1a1a));
         }
+        // Pomeranian: fluffy mane + extra tail puff so the silhouette reads as
+        // a tiny cotton ball of a dog.
+        if (this.dogData.breedType === "pomeranian") {
+            const fluff = top;
+            breedExtras.push(this.scene.add.rectangle(-2, -3, 22, 8, fluff));
+            breedExtras.push(this.scene.add.rectangle(-14, -1, 6, 5, fluff));
+            breedExtras.push(this.scene.add.rectangle(5, -6, 10, 4, fluff));
+        }
+        // YorkiePoo: curly-coat hint with a lighter tan chest patch and
+        // matching ear tips, so the black body reads clearly as a YorkiePoo
+        // rather than just "black dog".
+        if (this.dogData.breedType === "yorkiepoo") {
+            breedExtras.push(this.scene.add.rectangle(-2, 3, 10, 4, accent));
+            breedExtras.push(this.scene.add.rectangle(13, -11, 5, 2, accent));
+        }
         this.add([
             this.tail,
             legFL, legFR, legBL, legBR,

@@ -3,7 +3,7 @@
 // Multi-center aware: each dog carries a `centerId`. `list()` returns every
 // dog (used by production + save). `listCurrent()` returns only dogs in the
 // active center and is what UI subscribers see.
-import { ADOPTION_BASE_REP, ADOPTION_HAPPINESS_REQ, ADOPTION_JOY_BASE, ADOPTION_LEVEL_EXP, ADOPTION_LEVEL_REQ, ALL_BREEDS, ALL_PERSONALITIES, DOG_NAMES, ROLE_INFO, UNLOCK_COSTS, UNLOCK_REP, YARD, } from "../config.js";
+import { ADOPTION_BASE_REP, ADOPTION_HAPPINESS_REQ, ADOPTION_JOY_BASE, ADOPTION_LEVEL_EXP, ADOPTION_LEVEL_REQ, ALL_BREEDS, ALL_PERSONALITIES, DOG_NAMES, ROLE_INFO, SIGNATURE_DOGS, SIGNATURE_SPAWN_CHANCE, UNLOCK_COSTS, UNLOCK_REP, YARD, } from "../config.js";
 export class DogManager {
     constructor(initial, retiredNames) {
         this.dogs = [];
@@ -86,12 +86,45 @@ export class DogManager {
     /** Create & adopt a new stray in the active center; player must name it. */
     adopt(role = pickRole()) {
         const dog = this.makeDog(role, 1);
+        // Signature cameo: occasionally reroll this stray as a still-available
+        // signature dog (Penny, Rufus, Ferris). Their name is applied when the
+        // player pays to name them — we leave .named=false so the UX is the
+        // same as any other stray adoption.
+        const sig = this.pickAvailableSignature();
+        if (sig && Math.random() < SIGNATURE_SPAWN_CHANCE) {
+            dog.breedType = sig.breed;
+            dog.colorVariant = sig.colorVariant;
+        }
         dog.name = "Stray";
         dog.named = false;
         dog.centerId = this.currentCenterId;
         this.dogs.push(dog);
         this.emit();
         return dog;
+    }
+    /** A signature dog is "available" if not currently owned and not retired,
+     *  and no un-named stray is already wearing that breed + color combo. */
+    pickAvailableSignature() {
+        const namedTaken = new Set();
+        for (const d of this.dogs)
+            if (d.named)
+                namedTaken.add(d.name);
+        const available = SIGNATURE_DOGS.filter((s) => {
+            if (namedTaken.has(s.name))
+                return false;
+            if (this.retiredNames.has(s.name))
+                return false;
+            // Block rerolling if a matching un-named stray is already awaiting naming.
+            for (const d of this.dogs) {
+                if (!d.named && d.breedType === s.breed && d.colorVariant === s.colorVariant) {
+                    return false;
+                }
+            }
+            return true;
+        });
+        if (available.length === 0)
+            return null;
+        return available[Math.floor(Math.random() * available.length)];
     }
     levelUp(id) {
         const dog = this.get(id);
@@ -135,10 +168,25 @@ export class DogManager {
         const dog = this.get(id);
         if (!dog || dog.named)
             return null;
-        dog.name = this.pickUnusedName();
+        // If this stray matches a signature dog (breed + exact color variant)
+        // and that signature name is still available, claim the signature name.
+        // Otherwise fall back to the random pool.
+        const claimed = this.claimSignatureNameFor(dog.breedType, dog.colorVariant);
+        dog.name = claimed ?? this.pickUnusedName();
         dog.named = true;
         this.emit();
         return dog.name;
+    }
+    claimSignatureNameFor(breed, variant) {
+        const match = SIGNATURE_DOGS.find((s) => s.breed === breed && s.colorVariant === variant);
+        if (!match)
+            return null;
+        if (this.retiredNames.has(match.name))
+            return null;
+        for (const d of this.dogs)
+            if (d.named && d.name === match.name)
+                return null;
+        return match.name;
     }
     pickUnusedName() {
         const taken = new Set(this.retiredNames);
