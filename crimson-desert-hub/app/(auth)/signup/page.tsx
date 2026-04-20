@@ -6,6 +6,10 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 
+const DEMO_MODE =
+  !process.env.NEXT_PUBLIC_SUPABASE_URL ||
+  process.env.NEXT_PUBLIC_SUPABASE_URL.trim() === "";
+
 export default function SignupPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -15,6 +19,12 @@ export default function SignupPage() {
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (DEMO_MODE) {
+      setError(
+        "Auth is disabled in demo mode. Set NEXT_PUBLIC_SUPABASE_URL and the anon key to enable signup."
+      );
+      return;
+    }
     setError(null);
     setLoading(true);
     const supabase = createClient();
@@ -27,6 +37,11 @@ export default function SignupPage() {
   return (
     <div className="mx-auto max-w-sm py-12">
       <h1 className="text-2xl font-semibold tracking-tight">Sign up</h1>
+      {DEMO_MODE && (
+        <p className="mt-4 rounded-md border border-border bg-muted p-3 text-xs text-muted-foreground">
+          Demo mode — auth is disabled. Configure Supabase to enable real accounts.
+        </p>
+      )}
       <form className="mt-6 space-y-3" onSubmit={onSubmit}>
         <input
           type="email"
@@ -46,7 +61,7 @@ export default function SignupPage() {
           className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
         />
         {error && <p className="text-xs text-destructive">{error}</p>}
-        <Button type="submit" className="w-full" disabled={loading}>
+        <Button type="submit" className="w-full" disabled={loading || DEMO_MODE}>
           {loading ? "Creating…" : "Create account"}
         </Button>
       </form>

@@ -1,18 +1,12 @@
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { createClient } from "@/lib/supabase/server";
-import type { Boss } from "@/lib/supabase/types";
+import { listBosses } from "@/lib/data/queries";
 
 export const revalidate = 300;
 
 export default async function BossesPage() {
-  const supabase = createClient();
-  const { data: bosses } = await supabase
-    .from("bosses")
-    .select("*")
-    .order("region", { ascending: true });
-  const rows = (bosses ?? []) as Boss[];
+  const rows = await listBosses();
 
   if (rows.length === 0) {
     return (

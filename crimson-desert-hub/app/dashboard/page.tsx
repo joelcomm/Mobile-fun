@@ -2,48 +2,27 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { createClient } from "@/lib/supabase/server";
+import { getDashboard } from "@/lib/data/queries";
 import { formatRelativeTime } from "@/lib/utils";
-import type { IngestedContent, UserPreferences } from "@/lib/supabase/types";
 
 export const dynamic = "force-dynamic";
 
 export default async function DashboardPage() {
-  const supabase = createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) redirect("/login");
+  const result = await getDashboard();
+  if (result === "redirect-login") redirect("/login");
 
-  const { data: prefs } = await supabase
-    .from("user_preferences")
-    .select("*")
-    .eq("user_id", user.id)
-    .maybeSingle();
-  const preferences = prefs as UserPreferences | null;
-
-  let query = supabase
-    .from("ingested_content")
-    .select("id,title,url,published_at,category,source_type,relevance_score")
-    .gte("relevance_score", 5)
-    .order("published_at", { ascending: false })
-    .limit(40);
-
-  if (preferences?.topics && preferences.topics.length > 0) {
-    query = query.in("category", preferences.topics);
-  }
-
-  const { data: feed } = await query;
-  const items = (feed ?? []) as IngestedContent[];
+  const { topics, items, mode } = result;
 
   return (
     <div className="space-y-8">
       <header className="space-y-1">
         <h1 className="text-2xl font-semibold tracking-tight">Your feed</h1>
         <p className="text-sm text-muted-foreground">
-          {preferences?.topics?.length
-            ? `Filtered to: ${preferences.topics.join(", ")}`
-            : "No filters set — showing all relevant content. Update preferences below."}
+          {mode === "demo"
+            ? "Demo feed — log in after configuring Supabase to see a personalized one."
+            : topics.length > 0
+              ? `Filtered to: ${topics.join(", ")}`
+              : "No filters set — showing all relevant content. Update preferences below."}
         </p>
       </header>
 

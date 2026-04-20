@@ -1,18 +1,12 @@
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { createClient } from "@/lib/supabase/server";
-import type { Patch } from "@/lib/supabase/types";
+import { listPatches } from "@/lib/data/queries";
 
 export const revalidate = 300;
 
 export default async function PatchesPage() {
-  const supabase = createClient();
-  const { data: patches } = await supabase
-    .from("patches")
-    .select("*")
-    .order("released_at", { ascending: false });
-  const rows = (patches ?? []) as Patch[];
+  const rows = await listPatches();
 
   if (rows.length === 0) {
     return (

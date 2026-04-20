@@ -61,6 +61,14 @@ npm run dev
 
 Open http://localhost:3000.
 
+### Demo mode (no config required)
+
+If `NEXT_PUBLIC_SUPABASE_URL` is unset, the app boots in **demo mode**: every
+page renders fixture data from `lib/demo/fixtures.ts` so you can click through
+the entire site without provisioning Supabase or API keys. An amber banner at
+the top makes it obvious you're looking at sample content, and every demo
+string is prefixed `[DEMO]`. Set the Supabase env vars to switch to real data.
+
 ### Trigger ingestion manually
 
 Every cron route is a `GET` guarded by `CRON_SECRET`:
