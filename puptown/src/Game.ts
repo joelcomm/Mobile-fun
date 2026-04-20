@@ -184,15 +184,17 @@ export class Game {
       }
     }
 
-    // 4. Rescue a new stray if there's room.
+    // 4. Rescue a new stray if there's room. Slot 1 is free (rescueCost=0),
+    // which is exactly how we restart after the board has been cleared.
     const rescueCost = this.dogs.nextUnlockCost();
     const rescueRep = this.dogs.nextUnlockRep();
+    const hasSlot = this.dogs.countCurrent() < 10;
     if (
-      rescueCost > 0 &&
+      hasSlot &&
       this.resources.snapshot.joy >= rescueCost &&
       this.resources.snapshot.reputation >= rescueRep
     ) {
-      if (this.resources.spend({ joy: rescueCost })) {
+      if (rescueCost === 0 || this.resources.spend({ joy: rescueCost })) {
         this.dogs.adopt();
         return;
       }
