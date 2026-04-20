@@ -48,7 +48,41 @@ export class SettingsPanel extends Panel {
     });
 
     this.content.add([this.infoText, saveBtn.bg, saveBtn.label, wipeBtn.bg, wipeBtn.label]);
-    this.setContentBottom(btnY + 30);
+
+    // ── PLAYTEST tools (remove before final release) ──────────────────────
+    const devY = btnY + 52;
+    const devLabel = this.scene.add.text(GAME_WIDTH / 2, devY - 12, "\u2014 PLAYTEST \u2014", {
+      fontFamily: "Inter, sans-serif",
+      fontSize: "11px",
+      fontStyle: "italic",
+      color: "#6b6b80",
+    });
+    devLabel.setOrigin(0.5);
+
+    const autoOn = game.autoPlay;
+    const autoBtn = this.makeButton(
+      GAME_WIDTH / 2 - 76, devY + 18, 140, 38,
+      `AUTO: ${autoOn ? "ON" : "OFF"}`,
+      autoOn ? 0x7fc56b : 0xaaaaaa
+    );
+    autoBtn.bg.on("pointerdown", () => {
+      const on = Game.instance().toggleAutoPlay();
+      autoBtn.label.setText(`AUTO: ${on ? "ON" : "OFF"}`);
+      autoBtn.bg.setFillStyle(on ? 0x7fc56b : 0xaaaaaa);
+    });
+
+    const speedBtn = this.makeButton(
+      GAME_WIDTH / 2 + 76, devY + 18, 140, 38,
+      `SPEED: ${game.speedMultiplier}x`,
+      0xffd86b
+    );
+    speedBtn.bg.on("pointerdown", () => {
+      const s = Game.instance().cycleSpeed();
+      speedBtn.label.setText(`SPEED: ${s}x`);
+    });
+
+    this.content.add([devLabel, autoBtn.bg, autoBtn.label, speedBtn.bg, speedBtn.label]);
+    this.setContentBottom(devY + 50);
   }
 
   refresh(): void {
