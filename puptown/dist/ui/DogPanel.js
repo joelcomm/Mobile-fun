@@ -127,7 +127,7 @@ export class DogPanel extends Panel {
         }
         if (ready) {
             const reward = game.dogs.adoptionReward(d);
-            const fee = game.nextSendOffFee();
+            const fee = game.nextSendOffFee(d);
             const canPayFee = game.resources.canAfford({ joy: fee });
             const btn = this.makeButton(GAME_WIDTH - 52, y + 26, 80, 40, `SEND HOME\n+${formatNumber(reward.joy - fee)}\n(fee \u2600\uFE0F${formatNumber(fee)})`, canPayFee ? 0xffd86b : 0xff9ac1);
             btn.label.setFontSize(11);
@@ -181,7 +181,7 @@ export class DogPanel extends Panel {
                 ? `Needs \u2B50 ${repNeeded} Rep.`
                 : `Random role!`
             : `All slots open!`;
-        const info = scene.add.text(18, y + 6, `ADOPT NEXT PUP\n${msg}`, {
+        const info = scene.add.text(18, y + 6, `RESCUE A STRAY\n${msg}`, {
             fontFamily: "monospace",
             fontSize: "13px",
             color: "#2a2a3e",
@@ -193,7 +193,7 @@ export class DogPanel extends Panel {
             : canAfford
                 ? 0x7fc56b
                 : 0xff9ac1;
-        const btn = this.makeButton(GAME_WIDTH - 52, y + 26, 80, 40, `ADOPT\n\u2600\uFE0F${formatNumber(cost)}`, color);
+        const btn = this.makeButton(GAME_WIDTH - 52, y + 26, 80, 40, `RESCUE\n\u2600\uFE0F${formatNumber(cost)}`, color);
         btn.bg.on("pointerdown", () => {
             if (locked)
                 return;

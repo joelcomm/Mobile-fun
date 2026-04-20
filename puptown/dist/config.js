@@ -237,10 +237,13 @@ export const ADOPTION_JOY_BASE = 50;
 export const ADOPTION_LEVEL_EXP = 2.1;
 // Reputation per adoption: 1 + floor(level / 5).
 export const ADOPTION_BASE_REP = 1;
-// Send-off fee: front-loaded so the very first adoption costs something
-// real, then climbs gently so late-game players aren't walled.
-export const ADOPTION_FEE_BASE = 500;
-export const ADOPTION_FEE_MULT = 1.3;
+// Send-off fee is a fraction of the dog's adoption reward — never a fixed
+// exponential climb. This guarantees net-positive adoptions forever:
+//   fee = min(BASE_FRACTION + PER_ADOPT * totalAdoptions, MAX_FRACTION) * reward
+// Early cycles keep ~80% of the reward; veterans keep ~45%.
+export const ADOPTION_FEE_BASE_FRACTION = 0.20;
+export const ADOPTION_FEE_FRACTION_PER_ADOPT = 0.01;
+export const ADOPTION_FEE_MAX_FRACTION = 0.55;
 // Naming a stray costs Joy and locks them in as yours.
 export const NAMING_COST_JOY = 80;
 // LV UP cost curve — slightly steeper so deeper levels cost meaningfully.

@@ -107,6 +107,21 @@ const SCENARIOS = {
     HAPPY_DRIFT: -0.35,
     SEND_OFF_FEE: (n) => Math.ceil(500 * Math.pow(1.3, n)),
   },
+  // Current shipped tuning: fee is a fraction of the reward so adoption
+  // is always net-positive. Fraction climbs 20% → 55% over time so
+  // veterans still feel a real cost.
+  rebalancedD: {
+    label: "REBALANCE D: reward 50*lvl^2.1, cost 30*1.55^lvl, fee=min(.2+.01n,.55)*reward",
+    ADOPTION_LEVEL: 15,
+    ADOPTION_HAPPINESS: 95,
+    LV_UP_COST: (lvl) => Math.ceil(30 * Math.pow(1.55, lvl)),
+    REWARD: (lvl, roleMult) => Math.floor(50 * Math.pow(lvl, 2.1) * roleMult),
+    HAPPY_DRIFT: -0.35,
+    SEND_OFF_FEE: (n, reward) => {
+      const frac = Math.min(0.2 + 0.01 * n, 0.55);
+      return Math.ceil((reward ?? 11340) * frac);
+    },
+  },
 };
 
 // Static (shared across scenarios)
@@ -187,9 +202,9 @@ function simulate(scenario, opts = {}) {
       // 2. Adopt-out any ready dog (paying escalating send-off fee if defined).
       for (const d of state.dogs) {
         if (d.level >= scenario.ADOPTION_LEVEL && d.happiness >= scenario.ADOPTION_HAPPINESS) {
-          const fee = scenario.SEND_OFF_FEE ? scenario.SEND_OFF_FEE(state.adoptions) : 0;
-          if (state.joy < fee) continue; // can't afford the send-off
           const reward = scenario.REWARD(d.level, ROLE_MULT_COMPANION);
+          const fee = scenario.SEND_OFF_FEE ? scenario.SEND_OFF_FEE(state.adoptions, reward) : 0;
+          if (state.joy < fee) continue; // can't afford the send-off
           state.joy = state.joy - fee + reward;
           state.rep += 1 + Math.floor(d.level / 5);
           state.adoptions += 1;
