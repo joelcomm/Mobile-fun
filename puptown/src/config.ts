@@ -12,15 +12,33 @@ import {
 // Logical canvas is small on purpose. Phaser's FIT scale mode will upscale
 // to fill any phone/desktop viewport, which visually enlarges every pixel
 // (including text). ~9:16 mirrors common phone aspect ratios.
-export const GAME_WIDTH = 360;
-export const GAME_HEIGHT = 640;
+//
+// On tablets (iPad, Surface, Android tablets) we bump to a larger logical
+// canvas so the UI gets more horizontal breathing room — more info per row,
+// wider buttons, easier to tap.
+function detectIsTablet(): boolean {
+  if (typeof window === "undefined" || typeof navigator === "undefined") return false;
+  const short = Math.min(window.innerWidth, window.innerHeight);
+  const long = Math.max(window.innerWidth, window.innerHeight);
+  // iPadOS 13+ reports MacIntel; fall back to touch + size checks.
+  const ua = navigator.userAgent || "";
+  const iPadLike =
+    /iPad/i.test(ua) ||
+    (ua.includes("Macintosh") && typeof navigator.maxTouchPoints === "number" && navigator.maxTouchPoints > 1);
+  if (iPadLike) return true;
+  return short >= 700 && long >= 1000;
+}
+
+export const IS_TABLET = detectIsTablet();
+export const GAME_WIDTH = IS_TABLET ? 480 : 360;
+export const GAME_HEIGHT = IS_TABLET ? 800 : 640;
 
 // Yard is the play area where dogs wander (inside the UI frame).
 export const YARD = {
   x: 16,
   y: 74,
   width: GAME_WIDTH - 32,
-  height: 250,
+  height: IS_TABLET ? 330 : 250,
 };
 
 // ── Economy / pacing ─────────────────────────────────────────────────────
@@ -119,12 +137,49 @@ export const ALL_PERSONALITIES: Personality[] = [
 ];
 
 // ── Name pool ────────────────────────────────────────────────────────────
+// Cozy, food-ish, nature-ish pet names. DogManager.nameStray filters this
+// list against names already in use (current dogs + adopted-out history) so
+// no two pups ever share a name until the pool is exhausted.
 export const DOG_NAMES = [
+  // ── Originals (kept for save-game continuity) ─────────────────────────
   "Biscuit", "Mochi", "Pepper", "Waffle", "Nugget", "Cinnamon", "Olive",
   "Pumpkin", "Scout", "Finn", "Luna", "Bean", "Ziggy", "Pickle", "Clover",
   "Toast", "Taffy", "Sprinkle", "Hazel", "Rusty", "Juniper", "Poppy",
   "Dumpling", "Noodle", "Marble", "Pebble", "Kiwi", "Peanut", "Apollo",
   "Willow", "Comet", "Tofu", "Muffin", "Biscotti", "Sesame",
+  // ── Food & treats ─────────────────────────────────────────────────────
+  "Pretzel", "Cookie", "Cupcake", "Brownie", "Sprout", "Pickles", "Marshmallow",
+  "Butterscotch", "Caramel", "Truffle", "Churro", "Crumpet", "Gingersnap",
+  "Honey", "Jellybean", "Meatball", "Miso", "Pudding", "Ravioli", "Scone",
+  "Soba", "Sushi", "Tater", "Tortellini", "Twix", "Waffles", "Yogurt",
+  "Cheddar", "Brie", "Gouda", "Parmesan", "Ricotta", "Gnocchi", "Latte",
+  "Espresso", "Cocoa", "Pancake", "Popcorn", "Pringle", "Bagel",
+  "Dumplin", "Fig", "Plum", "Peaches", "Cherry", "Berry", "Melon",
+  // ── Nature & flora ────────────────────────────────────────────────────
+  "Daisy", "Rosie", "Violet", "Iris", "Fern", "Ivy", "Magnolia", "Maple",
+  "Cedar", "Birch", "Aspen", "Sage", "Basil", "Rosemary", "Thyme", "Mint",
+  "Cove", "Meadow", "Dune", "Brook", "River", "Sunny", "Misty", "Cloud",
+  "Breeze", "Rain", "Thunder", "Stormy", "Blaze", "Ember", "Ashes",
+  // ── Celestial & sparkly ───────────────────────────────────────────────
+  "Nova", "Stella", "Orion", "Milo", "Cosmo", "Galaxy", "Pixel", "Sparkle",
+  "Twinkle", "Aurora", "Celeste", "Solar", "Lunar", "Halo", "Nebula",
+  // ── Gem & metal ───────────────────────────────────────────────────────
+  "Opal", "Jade", "Pearl", "Amber", "Onyx", "Coral", "Copper",
+  "Quartz", "Topaz", "Sapphire", "Crystal",
+  // ── Classic-cute ──────────────────────────────────────────────────────
+  "Buddy", "Teddy", "Charlie", "Cooper", "Rocky", "Bear", "Loki", "Zeus",
+  "Max", "Duke", "Toby", "Murphy", "Oliver", "Winston", "Oscar", "Gus",
+  "Archie", "Walter", "Leo", "Chester", "Dexter", "Frankie", "Remy",
+  "Moose", "Beau", "Banjo", "Scooter", "Rascal", "Rufus", "Shadow",
+  // ── Girly-classic ─────────────────────────────────────────────────────
+  "Bella", "Lucy", "Ruby", "Molly", "Sadie", "Zoe", "Lily", "Penny",
+  "Ginger", "Ellie", "Nala", "Willa", "Tilly", "Millie", "Goldie",
+  "Piper", "Sassy", "Gracie", "Maggie", "Roxy", "Sophie",
+  // ── Quirky / whimsical ────────────────────────────────────────────────
+  "Mr Bean", "Pom", "Pip", "Yuki", "Bonsai", "Zuzu", "Koda",
+  "Taro", "Boba", "Chai", "Panko", "Ramen", "Pom Pom", "Noo Noo",
+  "Snickers", "Snoopy", "Doodle", "Button", "Bumble", "Bubbles", "Cricket",
+  "Puddle", "Pebbs", "Truffles", "Whiskers", "Peanut Butter", "Kibble",
 ];
 
 // ── Buildings / upgrades ─────────────────────────────────────────────────

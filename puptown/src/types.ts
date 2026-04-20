@@ -105,6 +105,7 @@ export interface SaveState {
   totalAdoptions?: number;       // drives escalating send-off fees
   centers?: Center[];            // rescue centers owned; old saves default to one
   currentCenterId?: string;
+  retiredNames?: string[];       // names of adopted-out dogs — never reused
 }
 
 export const SAVE_VERSION = 1;

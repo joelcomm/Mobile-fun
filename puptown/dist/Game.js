@@ -40,7 +40,7 @@ export class Game {
                 centerId: d.centerId ?? defaultCenterId,
             }));
             this.resources = new ResourceManager(loaded.resources);
-            this.dogs = new DogManager(migratedDogs);
+            this.dogs = new DogManager(migratedDogs, loaded.retiredNames);
             this.dogs.setCurrentCenter(this.centers.currentIdValue());
             this.buildings = new BuildingManager(loaded.buildings);
             this.events = new EventSystem();
@@ -279,6 +279,7 @@ export class Game {
             totalAdoptions: this.totalAdoptions,
             centers: this.centers.toData(),
             currentCenterId: this.centers.currentIdValue(),
+            retiredNames: this.dogs.retiredNamesList(),
         };
     }
 }
