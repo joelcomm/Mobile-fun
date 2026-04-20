@@ -2,8 +2,9 @@
 // Scenes talk to it via Game.instance().
 
 import {
-  ADOPTION_FEE_BASE,
-  ADOPTION_FEE_MULT,
+  ADOPTION_FEE_BASE_FRACTION,
+  ADOPTION_FEE_FRACTION_PER_ADOPT,
+  ADOPTION_FEE_MAX_FRACTION,
   MAX_OFFLINE_MS,
   NAMING_COST_JOY,
   SAVE_THROTTLE_MS,
@@ -16,7 +17,7 @@ import { ResourceManager } from "./managers/ResourceManager.js";
 import { SaveManager } from "./managers/SaveManager.js";
 import { EventSystem } from "./systems/EventSystem.js";
 import { ProductionSystem } from "./systems/ProductionSystem.js";
-import { SAVE_VERSION, SaveState } from "./types.js";
+import { DogData, SAVE_VERSION, SaveState } from "./types.js";
 
 export class Game {
   private static _instance: Game | null = null;
@@ -125,9 +126,25 @@ export class Game {
     return joy;
   }
 
-  /** Send-off fee climbs each adoption to keep the loop self-pacing. */
-  nextSendOffFee(): number {
-    return Math.ceil(ADOPTION_FEE_BASE * Math.pow(ADOPTION_FEE_MULT, this.totalAdoptions));
+  /**
+   * Send-off fee is a fraction of the dog's adoption reward so the net is
+   * always positive. The fraction creeps up with experience (veterans pay
+   * a larger share, capped at ADOPTION_FEE_MAX_FRACTION) so adoptions
+   * still feel costlier over time without ever turning net-negative.
+   */
+  nextSendOffFee(dog?: DogData): number {
+    const fraction = Math.min(
+      ADOPTION_FEE_BASE_FRACTION + ADOPTION_FEE_FRACTION_PER_ADOPT * this.totalAdoptions,
+      ADOPTION_FEE_MAX_FRACTION
+    );
+    if (!dog) {
+      // Fallback preview when the caller doesn't have a specific dog in
+      // hand — approximate against a L15 companion baseline.
+      const previewReward = 50 * Math.pow(15, 2.1) * 0.72;
+      return Math.ceil(previewReward * fraction);
+    }
+    const reward = this.dogs.adoptionReward(dog);
+    return Math.ceil(reward.joy * fraction);
   }
 
   /**
@@ -138,7 +155,7 @@ export class Game {
   handleGraduate(dogId: string): { joy: number; rep: number; fee: number } | null {
     const dog = this.dogs.get(dogId);
     if (!dog || !this.dogs.isReady(dog)) return null;
-    const fee = this.nextSendOffFee();
+    const fee = this.nextSendOffFee(dog);
     if (!this.resources.spend({ joy: fee })) return null;
     const reward = this.dogs.adoptionReward(dog);
     this.resources.add({ joy: reward.joy, reputation: reward.rep });

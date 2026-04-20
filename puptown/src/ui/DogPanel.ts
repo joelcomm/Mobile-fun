@@ -167,7 +167,7 @@ export class DogPanel extends Panel {
 
     if (ready) {
       const reward = game.dogs.adoptionReward(d);
-      const fee = game.nextSendOffFee();
+      const fee = game.nextSendOffFee(d);
       const canPayFee = game.resources.canAfford({ joy: fee });
       const btn = this.makeButton(
         GAME_WIDTH - 52, y + 26, 80, 40,
@@ -231,7 +231,7 @@ export class DogPanel extends Panel {
         ? `Needs \u2B50 ${repNeeded} Rep.`
         : `Random role!`
       : `All slots open!`;
-    const info = scene.add.text(18, y + 6, `ADOPT NEXT PUP\n${msg}`, {
+    const info = scene.add.text(18, y + 6, `RESCUE A STRAY\n${msg}`, {
       fontFamily: "monospace",
       fontSize: "13px",
       color: "#2a2a3e",
@@ -247,7 +247,7 @@ export class DogPanel extends Panel {
     const btn = this.makeButton(
       GAME_WIDTH - 52, y + 26,
       80, 40,
-      `ADOPT\n\u2600\uFE0F${formatNumber(cost)}`,
+      `RESCUE\n\u2600\uFE0F${formatNumber(cost)}`,
       color
     );
     btn.bg.on("pointerdown", () => {
