@@ -5,6 +5,9 @@ import {
   ADOPTION_FEE_BASE_FRACTION,
   ADOPTION_FEE_FRACTION_PER_ADOPT,
   ADOPTION_FEE_MAX_FRACTION,
+  ADOPTION_LEVEL_REQ,
+  LV_UP_BASE,
+  LV_UP_MULT,
   MAX_OFFLINE_MS,
   NAMING_COST_JOY,
   SAVE_THROTTLE_MS,
@@ -36,6 +39,12 @@ export class Game {
   private startTime = Date.now();
   private pendingOffline: { joy: number; treats: number } | null = null;
   private wiping = false;
+
+  // PLAYTEST: speed + auto-play. Remove before shipping the final game.
+  public speedMultiplier = 1;
+  public autoPlay = false;
+  private autoplayAccumMs = 0;
+  private static readonly SPEED_OPTIONS = [1, 2, 4, 16, 64];
 
   static instance(): Game {
     if (!this._instance) this._instance = new Game();
@@ -97,19 +106,112 @@ export class Game {
   /** Main tick. Called from YardScene.update. */
   tick(deltaMs: number): void {
     try {
-      this.totalPlaytimeMs += deltaMs;
-      this.tickAccum += deltaMs;
-      this.events.tick(deltaMs);
+      const scaled = deltaMs * this.speedMultiplier;
+      this.totalPlaytimeMs += scaled;
+      this.tickAccum += scaled;
+      this.events.tick(scaled);
       while (this.tickAccum >= TICK_MS) {
         this.production.tick(TICK_MS);
         this.tickAccum -= TICK_MS;
       }
+      if (this.autoPlay) this.runAutoPlay(scaled);
       // Throttled save.
       this.save.save(this.snapshotSave(), SAVE_THROTTLE_MS);
     } catch (e) {
       console.error("[PupTown] tick error:", e);
       // Drop accumulated time so we don't re-hit the same error next frame.
       this.tickAccum = 0;
+    }
+  }
+
+  /** PLAYTEST: cycle through 1x → 2x → 4x → 16x → 64x → 1x. */
+  cycleSpeed(): number {
+    const opts = Game.SPEED_OPTIONS;
+    const idx = opts.indexOf(this.speedMultiplier);
+    this.speedMultiplier = opts[(idx + 1) % opts.length];
+    return this.speedMultiplier;
+  }
+
+  /** PLAYTEST: toggle greedy-AI autoplay. Returns the new state. */
+  toggleAutoPlay(): boolean {
+    this.autoPlay = !this.autoPlay;
+    return this.autoPlay;
+  }
+
+  /** PLAYTEST: one autoplay decision pass, throttled to ~4 Hz of scaled time. */
+  private runAutoPlay(scaledDeltaMs: number): void {
+    this.autoplayAccumMs += scaledDeltaMs;
+    if (this.autoplayAccumMs < 250) return;
+    this.autoplayAccumMs = 0;
+
+    // Passive tap on a random visible dog so level-ups happen even without
+    // the Auto-Walker building.
+    const visible = this.dogs.listCurrent();
+    if (visible.length > 0) {
+      const pick = visible[Math.floor(Math.random() * visible.length)];
+      this.handleTap(pick.id);
+    }
+
+    // 1. Send home any ready dog (always net-positive under the new fee).
+    for (const d of this.dogs.list()) {
+      if (this.dogs.isReady(d)) {
+        const fee = this.nextSendOffFee(d);
+        if (this.resources.snapshot.joy >= fee) {
+          this.handleGraduate(d.id);
+          return;
+        }
+      }
+    }
+
+    // 2. Name any stray the player has adopted in.
+    const stray = this.dogs.list().find((d) => !d.named);
+    if (stray && this.resources.snapshot.joy >= NAMING_COST_JOY) {
+      this.handleNameStray(stray.id);
+      return;
+    }
+
+    // 3. Level up the lowest-level named dog toward the adoption threshold.
+    const named = this.dogs
+      .list()
+      .filter((d) => d.named && d.level < ADOPTION_LEVEL_REQ)
+      .sort((a, b) => a.level - b.level);
+    if (named.length > 0) {
+      const d = named[0];
+      const cost = Math.ceil(LV_UP_BASE * Math.pow(LV_UP_MULT, d.level));
+      if (this.resources.snapshot.joy >= cost && this.resources.spend({ joy: cost })) {
+        this.dogs.levelUp(d.id);
+        return;
+      }
+    }
+
+    // 4. Rescue a new stray if there's room.
+    const rescueCost = this.dogs.nextUnlockCost();
+    const rescueRep = this.dogs.nextUnlockRep();
+    if (
+      rescueCost > 0 &&
+      this.resources.snapshot.joy >= rescueCost &&
+      this.resources.snapshot.reputation >= rescueRep
+    ) {
+      if (this.resources.spend({ joy: rescueCost })) {
+        this.dogs.adopt();
+        return;
+      }
+    }
+
+    // 5. Buy the cheapest affordable building upgrade once we have a 4x
+    // surplus, so progression keeps moving without draining the budget.
+    let best: { id: string; joy: number; treats: number } | null = null;
+    for (const b of this.buildings.list()) {
+      const c = this.buildings.costFor(b.typeId);
+      if (!c) continue;
+      if (c.treats > this.resources.snapshot.treats) continue;
+      if (c.reputation > this.resources.snapshot.reputation) continue;
+      if (!best || c.joy < best.joy) best = { id: b.typeId, joy: c.joy, treats: c.treats };
+    }
+    if (best && this.resources.snapshot.joy >= best.joy * 4) {
+      if (this.resources.spend({ joy: best.joy, treats: best.treats })) {
+        this.buildings.upgrade(best.id);
+      }
     }
   }
 
