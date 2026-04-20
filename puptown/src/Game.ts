@@ -11,6 +11,8 @@ import {
   MAX_OFFLINE_MS,
   NAMING_COST_JOY,
   SAVE_THROTTLE_MS,
+  TAP_HAPPINESS_COOLDOWN_MS,
+  TAP_HAPPINESS_GAIN,
   TICK_MS,
 } from "./config.js";
 import { BuildingManager } from "./managers/BuildingManager.js";
@@ -45,6 +47,10 @@ export class Game {
   public autoPlay = false;
   private autoplayAccumMs = 0;
   private static readonly SPEED_OPTIONS = [1, 2, 4, 16, 64];
+
+  // Per-dog cooldown for happiness-from-taps. Joy gain is uncapped; only the
+  // happiness buff is rate-limited so mood events stay meaningful.
+  private lastHappyTapAt: Map<string, number> = new Map();
 
   static instance(): Game {
     if (!this._instance) this._instance = new Game();
@@ -244,8 +250,15 @@ export class Game {
     const flat = this.buildings.tapBonusFlat();
     const joy = (dog.tapBonus + flat) * tapMult;
     this.resources.add({ joy });
-    // Small happiness boost from petting.
-    this.dogs.updateHappiness(dogId, dog.happiness + 0.8);
+    // Happiness bump is cooldown-limited per dog. Without this, autoplay's
+    // 4 Hz spam (or any fast manual tapping) would pin every dog at 100%
+    // and the random mood events wouldn't matter.
+    const now = Date.now();
+    const last = this.lastHappyTapAt.get(dogId) ?? 0;
+    if (now - last >= TAP_HAPPINESS_COOLDOWN_MS) {
+      this.lastHappyTapAt.set(dogId, now);
+      this.dogs.updateHappiness(dogId, dog.happiness + TAP_HAPPINESS_GAIN);
+    }
     return joy;
   }
 

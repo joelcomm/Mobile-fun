@@ -124,6 +124,13 @@ export class YardScene extends Phaser.Scene {
       for (const s of this.sprites.values()) s.setZoomies(zooming);
       if (active) this.flashBanner(active.event.name + " " + active.event.icon);
     });
+
+    // Mood events: pop a bubble over the affected dog so the player sees
+    // the happiness drop happen instead of just noticing the bar slid.
+    game.production.onMood((m) => {
+      const sprite = this.sprites.get(m.dogId);
+      if (sprite) sprite.playMoodBubble(m.icon);
+    });
   }
 
   update(_time: number, delta: number): void {
