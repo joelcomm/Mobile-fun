@@ -1,6 +1,6 @@
 // Game is the long-lived singleton that owns managers and systems.
 // Scenes talk to it via Game.instance().
-import { ADOPTION_FEE_BASE_FRACTION, ADOPTION_FEE_FRACTION_PER_ADOPT, ADOPTION_FEE_MAX_FRACTION, ADOPTION_LEVEL_REQ, LV_UP_BASE, LV_UP_MULT, MAX_OFFLINE_MS, NAMING_COST_JOY, SAVE_THROTTLE_MS, TICK_MS, } from "./config.js";
+import { ADOPTION_FEE_BASE_FRACTION, ADOPTION_FEE_FRACTION_PER_ADOPT, ADOPTION_FEE_MAX_FRACTION, ADOPTION_LEVEL_REQ, LV_UP_BASE, LV_UP_MULT, MAX_OFFLINE_MS, NAMING_COST_JOY, SAVE_THROTTLE_MS, TAP_HAPPINESS_COOLDOWN_MS, TAP_HAPPINESS_GAIN, TICK_MS, } from "./config.js";
 import { BuildingManager } from "./managers/BuildingManager.js";
 import { CenterManager } from "./managers/CenterManager.js";
 import { DogManager } from "./managers/DogManager.js";
@@ -22,6 +22,9 @@ export class Game {
         this.speedMultiplier = 1;
         this.autoPlay = false;
         this.autoplayAccumMs = 0;
+        // Per-dog cooldown for happiness-from-taps. Joy gain is uncapped; only the
+        // happiness buff is rate-limited so mood events stay meaningful.
+        this.lastHappyTapAt = new Map();
     }
     static instance() {
         if (!this._instance)
@@ -212,8 +215,15 @@ export class Game {
         const flat = this.buildings.tapBonusFlat();
         const joy = (dog.tapBonus + flat) * tapMult;
         this.resources.add({ joy });
-        // Small happiness boost from petting.
-        this.dogs.updateHappiness(dogId, dog.happiness + 0.8);
+        // Happiness bump is cooldown-limited per dog. Without this, autoplay's
+        // 4 Hz spam (or any fast manual tapping) would pin every dog at 100%
+        // and the random mood events wouldn't matter.
+        const now = Date.now();
+        const last = this.lastHappyTapAt.get(dogId) ?? 0;
+        if (now - last >= TAP_HAPPINESS_COOLDOWN_MS) {
+            this.lastHappyTapAt.set(dogId, now);
+            this.dogs.updateHappiness(dogId, dog.happiness + TAP_HAPPINESS_GAIN);
+        }
         return joy;
     }
     /**

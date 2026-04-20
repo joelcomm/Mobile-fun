@@ -137,40 +137,41 @@ export const BREED_LABELS: Record<BreedType, string> = {
   greatdane: "Great Dane",
 };
 
-// Real-world-ish size multipliers. Applied on top of the level growth
-// curve so a chihuahua puppy reads as tiny and a great dane veteran
-// reads as towering. Medium breeds sit at 1.0.
+// Real-world-ish size multipliers, compressed so every dog reads clearly
+// on screen. Smallest breeds sit near the old "medium" baseline and the
+// largest are only a hair bigger, so a chihuahua next to a great dane is
+// obviously different without the chihuahua looking invisible.
 export const BREED_SIZE: Record<BreedType, number> = {
-  chihuahua: 0.55,
-  dachshund: 0.72,
-  shiba:     0.84,
-  corgi:     0.82,
-  beagle:    0.92,
+  chihuahua: 0.90,
+  dachshund: 0.92,
+  shiba:     0.96,
+  corgi:     0.94,
+  beagle:    0.98,
   mutt:      1.00,
   poodle:    1.00,
-  bulldog:   0.95,
-  dalmatian: 1.08,
-  husky:     1.12,
-  goldie:    1.14,
-  greatdane: 1.40,
+  bulldog:   1.00,
+  dalmatian: 1.05,
+  husky:     1.08,
+  goldie:    1.08,
+  greatdane: 1.18,
 };
 
-// Some breeds have distinctive body aspect ratios (dachshund is long-low,
-// bulldog is squat-wide, greatdane is tall). We stretch the sprite along
-// one axis to sell the silhouette without redrawing each breed.
+// Silhouette stretch — kept so breeds read by shape (dachshund long-low,
+// bulldog squat-wide, great dane tall) but flattened toward 1.0 so the
+// compressed size range doesn't get undone.
 export const BREED_STRETCH: Record<BreedType, { x: number; y: number }> = {
-  chihuahua: { x: 0.95, y: 0.95 },
-  dachshund: { x: 1.35, y: 0.78 },
+  chihuahua: { x: 0.96, y: 0.96 },
+  dachshund: { x: 1.22, y: 0.85 },
   shiba:     { x: 1.00, y: 1.00 },
-  corgi:     { x: 1.18, y: 0.80 },
-  beagle:    { x: 1.08, y: 0.94 },
+  corgi:     { x: 1.14, y: 0.86 },
+  beagle:    { x: 1.06, y: 0.96 },
   mutt:      { x: 1.00, y: 1.00 },
-  poodle:    { x: 1.00, y: 1.05 },
-  bulldog:   { x: 1.12, y: 0.90 },
-  dalmatian: { x: 1.05, y: 1.00 },
-  husky:     { x: 1.05, y: 1.02 },
-  goldie:    { x: 1.08, y: 1.02 },
-  greatdane: { x: 1.15, y: 1.20 },
+  poodle:    { x: 1.00, y: 1.04 },
+  bulldog:   { x: 1.10, y: 0.92 },
+  dalmatian: { x: 1.04, y: 1.00 },
+  husky:     { x: 1.04, y: 1.02 },
+  goldie:    { x: 1.06, y: 1.02 },
+  greatdane: { x: 1.10, y: 1.10 },
 };
 
 export const ALL_BREEDS: BreedType[] = [
@@ -352,6 +353,35 @@ export const EVENT_ROLL_CHANCE = 0.45;
 // Reputation is rare and global; given when dogs max happiness or by rescue.
 export const REP_HAPPY_THRESHOLD = 95;
 export const REP_HAPPY_GAIN_INTERVAL_MS = 30_000;
+
+// ── Happiness / mood tuning ──────────────────────────────────────────────
+// Tapping a dog gives a small happiness bump, but only once per cooldown per
+// dog — otherwise autoplay's 4 Hz spam would pin every pup to 100% forever
+// and the bar would be decor. Joy gain is NOT cooldown-limited; only the
+// happiness boost is.
+export const TAP_HAPPINESS_COOLDOWN_MS = 1_400;
+export const TAP_HAPPINESS_GAIN = 3.2;
+
+// Random mood events: every so often a single dog in the active center gets
+// bored / spooked / frumpy and drops happiness, so the player has to pay
+// attention and intervene (tap, buy a Treat Bowl, etc). Intervals are in
+// wall-clock ms; the game picks a new interval after each event.
+export const MOOD_EVENT_MIN_MS = 35_000;
+export const MOOD_EVENT_MAX_MS = 95_000;
+export const MOOD_EVENT_DROP_MIN = 22;
+export const MOOD_EVENT_DROP_MAX = 42;
+
+// Flavor text shown on the dog's head when a mood event lands. Picked at
+// random per event.
+export const MOOD_EVENT_BUBBLES: { icon: string; label: string }[] = [
+  { icon: "\u{1F611}", label: "bored" },
+  { icon: "\u{1F628}", label: "spooked" },
+  { icon: "\u{1F4A4}", label: "sleepy" },
+  { icon: "\u{1F4A2}", label: "grumpy" },
+  { icon: "\u{1F327}\uFE0F", label: "thunder" },
+  { icon: "\u{1F41D}", label: "a bee!" },
+  { icon: "\u{1F5A4}", label: "lonely" },
+];
 
 // ── Adoption (graduation) thresholds and reward tuning ───────────────────
 // Tuned so a single adoption reward covers ~30% of the L1→L15 level-up

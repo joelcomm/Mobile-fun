@@ -20,7 +20,7 @@ export class DogSprite extends Phaser.GameObjects.Container {
         this.readyBob = 0;
         this.shownName = "";
         this.shownGrowth = 1;
-        this.baseScale = 1.35;
+        this.baseScale = 1.5;
         // Breed-specific aspect ratio (dachshund is long-low, great dane is tall).
         this.stretchX = 1;
         this.stretchY = 1;
@@ -31,7 +31,7 @@ export class DogSprite extends Phaser.GameObjects.Container {
         this.stretchY = stretch.y;
         this.buildVisual();
         this.shownGrowth = growthScaleForLevel(data.level);
-        this.baseScale = 1.35 * this.shownGrowth * (BREED_SIZE[data.breedType] ?? 1);
+        this.baseScale = 1.5 * this.shownGrowth * (BREED_SIZE[data.breedType] ?? 1);
         this.setScale(this.baseScale * this.stretchX, this.baseScale * this.stretchY);
         this.target = this.pickTarget();
         this.setInteractive(new Phaser.Geom.Rectangle(-20, -22, 40, 40), Phaser.Geom.Rectangle.Contains);
@@ -137,7 +137,7 @@ export class DogSprite extends Phaser.GameObjects.Container {
         const wantGrowth = growthScaleForLevel(this.dogData.level);
         if (wantGrowth !== this.shownGrowth) {
             this.shownGrowth = wantGrowth;
-            const nextBase = 1.35 * wantGrowth * (BREED_SIZE[this.dogData.breedType] ?? 1);
+            const nextBase = 1.5 * wantGrowth * (BREED_SIZE[this.dogData.breedType] ?? 1);
             const sign = this.scaleX < 0 ? -1 : 1;
             this.scene.tweens.add({
                 targets: this,
@@ -243,6 +243,33 @@ export class DogSprite extends Phaser.GameObjects.Container {
     needsNameRefresh() {
         const wantName = this.dogData.named ? this.dogData.name : "";
         return wantName !== this.shownName;
+    }
+    /** Pop a little "!" bubble above the dog when a mood event lands. */
+    playMoodBubble(icon) {
+        const sign = this.scaleX < 0 ? -1 : 1;
+        const bubble = this.scene.add.text(this.x, this.y - 34, icon, {
+            fontFamily: "sans-serif",
+            fontSize: "20px",
+        });
+        bubble.setOrigin(0.5);
+        bubble.setScale(sign, 1);
+        bubble.setDepth(80);
+        this.scene.tweens.add({
+            targets: bubble,
+            y: this.y - 60,
+            alpha: 0,
+            duration: 1400,
+            ease: "Cubic.easeOut",
+            onComplete: () => bubble.destroy(),
+        });
+        // A small sad-bounce on the sprite itself so the mood drop is felt.
+        const restY = this.baseScale * this.stretchY;
+        this.scene.tweens.add({
+            targets: this,
+            scaleY: { from: restY * 0.88, to: restY },
+            duration: 260,
+            ease: "Quad.easeOut",
+        });
     }
     /** Goodbye animation: float up, spin gently, fade out, then call onDone. */
     playGraduateAnimation(onDone) {
