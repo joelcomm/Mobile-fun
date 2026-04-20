@@ -63,7 +63,7 @@ export class Game {
         centerId: d.centerId ?? defaultCenterId,
       }));
       this.resources = new ResourceManager(loaded.resources);
-      this.dogs = new DogManager(migratedDogs);
+      this.dogs = new DogManager(migratedDogs, loaded.retiredNames);
       this.dogs.setCurrentCenter(this.centers.currentIdValue());
       this.buildings = new BuildingManager(loaded.buildings);
       this.events = new EventSystem();
@@ -152,6 +152,25 @@ export class Game {
       this.handleTap(pick.id);
     }
 
+    // 0. Empty-yard fast path. If the *visible* center has no dogs, refill
+    // it before doing anything else. Without this, autoplay would happily
+    // burn Joy leveling up dogs in other centers while the player stares
+    // at their empty current yard, looking like autoplay is stuck.
+    if (visible.length === 0) {
+      const rescueCost = this.dogs.nextUnlockCost();
+      const rescueRep = this.dogs.nextUnlockRep();
+      if (
+        this.dogs.countCurrent() < 10 &&
+        this.resources.snapshot.joy >= rescueCost &&
+        this.resources.snapshot.reputation >= rescueRep
+      ) {
+        if (rescueCost === 0 || this.resources.spend({ joy: rescueCost })) {
+          this.dogs.adopt();
+          return;
+        }
+      }
+    }
+
     // 1. Send home any ready dog (always net-positive under the new fee).
     for (const d of this.dogs.list()) {
       if (this.dogs.isReady(d)) {
@@ -184,15 +203,17 @@ export class Game {
       }
     }
 
-    // 4. Rescue a new stray if there's room.
+    // 4. Rescue a new stray if there's room. Slot 1 is free (rescueCost=0),
+    // which is exactly how we restart after the board has been cleared.
     const rescueCost = this.dogs.nextUnlockCost();
     const rescueRep = this.dogs.nextUnlockRep();
+    const hasSlot = this.dogs.countCurrent() < 10;
     if (
-      rescueCost > 0 &&
+      hasSlot &&
       this.resources.snapshot.joy >= rescueCost &&
       this.resources.snapshot.reputation >= rescueRep
     ) {
-      if (this.resources.spend({ joy: rescueCost })) {
+      if (rescueCost === 0 || this.resources.spend({ joy: rescueCost })) {
         this.dogs.adopt();
         return;
       }
@@ -276,6 +297,27 @@ export class Game {
     return true;
   }
 
+  /**
+   * Merge N source centers into one Mega Rescue. Any dogs living in the
+   * consumed centers are re-homed to the new one so the player never loses
+   * a pup. Returns true on success.
+   */
+  handleMergeCenters(sourceIds: string[]): boolean {
+    const result = this.centers.merge(sourceIds);
+    if (!result) return false;
+    // Re-parent dogs first — merge() has already flipped current to the
+    // new mega center, so the UI listener will refresh once we emit below.
+    for (const d of this.dogs.list()) {
+      if (d.centerId && result.absorbedIds.includes(d.centerId)) {
+        d.centerId = result.newId;
+      }
+    }
+    // Force a DogManager re-emit so listCurrent() returns the freshly
+    // re-parented dogs (setCurrentCenter short-circuits when the id matches).
+    this.dogs.emit();
+    return true;
+  }
+
   /** Pay to name a stray; returns chosen name or null on failure. */
   handleNameStray(dogId: string): string | null {
     const dog = this.dogs.get(dogId);
@@ -312,6 +354,7 @@ export class Game {
       totalAdoptions: this.totalAdoptions,
       centers: this.centers.toData(),
       currentCenterId: this.centers.currentIdValue(),
+      retiredNames: this.dogs.retiredNamesList(),
     };
   }
 }

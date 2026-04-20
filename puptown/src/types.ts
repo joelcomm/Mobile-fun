@@ -1,14 +1,18 @@
 // Shared domain types for Pup Town Idle.
 
 export type BreedType =
-  | "mutt"
+  | "chihuahua"
+  | "dachshund"
   | "shiba"
   | "corgi"
-  | "husky"
+  | "beagle"
+  | "mutt"
   | "poodle"
-  | "dachshund"
   | "bulldog"
-  | "goldie";
+  | "dalmatian"
+  | "husky"
+  | "goldie"
+  | "greatdane";
 
 export type Personality =
   | "playful"
@@ -45,10 +49,24 @@ export interface DogData {
   centerId?: string;             // which Rescue Center this pup lives in
 }
 
+export type BiomeId =
+  | "meadow"
+  | "harbor"
+  | "pine"
+  | "cloudtop"
+  | "moonlit"
+  | "wildflower"
+  | "coral"
+  | "evergreen"
+  | "starlight"
+  | "sunny";
+
 export interface Center {
   id: string;
   name: string;
   adoptions: number;             // pups sent home from this center
+  biome?: BiomeId;               // cosmetic theme; inferred from name if absent
+  mergeWeight?: number;          // 1 for a single center; higher after merging
 }
 
 export interface Resources {
@@ -105,6 +123,7 @@ export interface SaveState {
   totalAdoptions?: number;       // drives escalating send-off fees
   centers?: Center[];            // rescue centers owned; old saves default to one
   currentCenterId?: string;
+  retiredNames?: string[];       // names of adopted-out dogs — never reused
 }
 
 export const SAVE_VERSION = 1;

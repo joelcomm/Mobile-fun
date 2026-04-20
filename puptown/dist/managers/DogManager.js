@@ -5,11 +5,14 @@
 // active center and is what UI subscribers see.
 import { ADOPTION_BASE_REP, ADOPTION_HAPPINESS_REQ, ADOPTION_JOY_BASE, ADOPTION_LEVEL_EXP, ADOPTION_LEVEL_REQ, ALL_BREEDS, ALL_PERSONALITIES, DOG_NAMES, ROLE_INFO, UNLOCK_COSTS, UNLOCK_REP, YARD, } from "../config.js";
 export class DogManager {
-    constructor(initial) {
+    constructor(initial, retiredNames) {
         this.dogs = [];
         this.listeners = new Set();
         this.idCounter = 1;
         this.currentCenterId = "";
+        // Names of dogs that have been adopted out. We never reuse them so the
+        // player's pups always feel like individuals.
+        this.retiredNames = new Set();
         if (initial && initial.length) {
             this.dogs = initial.map((d) => ({ ...d, position: { ...d.position } }));
             // Make sure id counter stays ahead of anything loaded.
@@ -19,6 +22,13 @@ export class DogManager {
                     this.idCounter = n + 1;
             }
         }
+        if (retiredNames)
+            for (const n of retiredNames)
+                this.retiredNames.add(n);
+    }
+    /** Names that can never be reused (adopted-out dogs). */
+    retiredNamesList() {
+        return Array.from(this.retiredNames);
     }
     /** Bind this manager to a current center. UI subscribers see that center. */
     setCurrentCenter(id) {
@@ -116,15 +126,38 @@ export class DogManager {
             return true;
         return d.level >= ADOPTION_LEVEL_REQ && d.happiness >= ADOPTION_HAPPINESS_REQ;
     }
-    /** Assigns a random name to a stray; returns the chosen name. */
+    /**
+     * Assigns a random name to a stray, filtered against names already used
+     * by current dogs AND by dogs the player has previously adopted out.
+     * Falls back to a numbered variant only once every name has been used.
+     */
     nameStray(id) {
         const dog = this.get(id);
         if (!dog || dog.named)
             return null;
-        dog.name = DOG_NAMES[Math.floor(Math.random() * DOG_NAMES.length)];
+        dog.name = this.pickUnusedName();
         dog.named = true;
         this.emit();
         return dog.name;
+    }
+    pickUnusedName() {
+        const taken = new Set(this.retiredNames);
+        for (const d of this.dogs)
+            if (d.named)
+                taken.add(d.name);
+        const available = DOG_NAMES.filter((n) => !taken.has(n));
+        if (available.length > 0) {
+            return available[Math.floor(Math.random() * available.length)];
+        }
+        // Pool exhausted — append a Roman-numeral-ish suffix to the least-used
+        // prefix so the player always gets something human-readable.
+        const base = DOG_NAMES[Math.floor(Math.random() * DOG_NAMES.length)];
+        for (let n = 2; n < 999; n++) {
+            const candidate = `${base} ${romanNumeral(n)}`;
+            if (!taken.has(candidate))
+                return candidate;
+        }
+        return `${base} the ${this.dogs.length + 1}th`;
     }
     /** Mark any qualifying dogs as ready (sticky once true). */
     markReadyIfQualified() {
@@ -150,7 +183,10 @@ export class DogManager {
         const idx = this.dogs.findIndex((d) => d.id === id);
         if (idx < 0)
             return false;
-        this.dogs.splice(idx, 1);
+        const [gone] = this.dogs.splice(idx, 1);
+        // A named dog who has been sent home retires their name for good.
+        if (gone && gone.named && gone.name)
+            this.retiredNames.add(gone.name);
         this.emit();
         return true;
     }
@@ -205,4 +241,20 @@ function pickRole() {
 }
 function clamp(n, lo, hi) {
     return Math.max(lo, Math.min(hi, n));
+}
+function romanNumeral(n) {
+    const table = [
+        [1000, "M"], [900, "CM"], [500, "D"], [400, "CD"],
+        [100, "C"], [90, "XC"], [50, "L"], [40, "XL"],
+        [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"],
+    ];
+    let out = "";
+    let v = n;
+    for (const [val, sym] of table) {
+        while (v >= val) {
+            out += sym;
+            v -= val;
+        }
+    }
+    return out;
 }

@@ -3,14 +3,32 @@
 // Logical canvas is small on purpose. Phaser's FIT scale mode will upscale
 // to fill any phone/desktop viewport, which visually enlarges every pixel
 // (including text). ~9:16 mirrors common phone aspect ratios.
-export const GAME_WIDTH = 360;
-export const GAME_HEIGHT = 640;
+//
+// On tablets (iPad, Surface, Android tablets) we bump to a larger logical
+// canvas so the UI gets more horizontal breathing room — more info per row,
+// wider buttons, easier to tap.
+function detectIsTablet() {
+    if (typeof window === "undefined" || typeof navigator === "undefined")
+        return false;
+    const short = Math.min(window.innerWidth, window.innerHeight);
+    const long = Math.max(window.innerWidth, window.innerHeight);
+    // iPadOS 13+ reports MacIntel; fall back to touch + size checks.
+    const ua = navigator.userAgent || "";
+    const iPadLike = /iPad/i.test(ua) ||
+        (ua.includes("Macintosh") && typeof navigator.maxTouchPoints === "number" && navigator.maxTouchPoints > 1);
+    if (iPadLike)
+        return true;
+    return short >= 700 && long >= 1000;
+}
+export const IS_TABLET = detectIsTablet();
+export const GAME_WIDTH = IS_TABLET ? 480 : 360;
+export const GAME_HEIGHT = IS_TABLET ? 800 : 640;
 // Yard is the play area where dogs wander (inside the UI frame).
 export const YARD = {
     x: 16,
     y: 74,
     width: GAME_WIDTH - 32,
-    height: 250,
+    height: IS_TABLET ? 330 : 250,
 };
 // ── Economy / pacing ─────────────────────────────────────────────────────
 export const TICK_MS = 250; // main sim tick
@@ -71,38 +89,118 @@ export const ROLE_INFO = {
 // ── Palettes (breed body + accent) ───────────────────────────────────────
 // Each breed has an array of color variants: [bodyTop, bodyBottom, accent].
 export const BREED_PALETTES = {
-    mutt: [[0xd9b382, 0xb5895a, 0x5a3a22], [0xeadfb4, 0xb09472, 0x5a4222]],
+    chihuahua: [[0xe8c090, 0xb48860, 0x3a2a20], [0xf2d7a8, 0xcba77b, 0x3a2a20]],
+    dachshund: [[0x7a4a22, 0x4e2f15, 0xf3c373], [0x2a2a3e, 0x1a1a2e, 0xdfaa3c]],
     shiba: [[0xe6a752, 0xbf7a2b, 0xffffff], [0xf2d1a4, 0xc7996a, 0xffffff]],
     corgi: [[0xf0c070, 0xe69a3b, 0xffffff], [0xe8b48c, 0xbb7d4a, 0xffffff]],
-    husky: [[0xdfe6ee, 0x7f8ea3, 0x2a2a3e], [0xb8c8d8, 0x5d6d82, 0x2a2a3e]],
+    beagle: [[0xf0ddb4, 0x9a6636, 0x2a2a3e], [0xffffff, 0x8a5a2e, 0x2a2a3e]],
+    mutt: [[0xd9b382, 0xb5895a, 0x5a3a22], [0xeadfb4, 0xb09472, 0x5a4222]],
     poodle: [[0xf6ecd6, 0xd8c9a5, 0xff9ac1], [0x3d3d4a, 0x22222c, 0xff9ac1]],
-    dachshund: [[0x7a4a22, 0x4e2f15, 0xf3c373], [0x2a2a3e, 0x1a1a2e, 0xdfaa3c]],
     bulldog: [[0xeeeee6, 0xb8b0a2, 0x3a3a4a], [0xd8c2a4, 0xa68a68, 0x3a3a4a]],
+    dalmatian: [[0xfafafa, 0xeaeaea, 0x1a1a1a], [0xfff6d6, 0xe8e8e8, 0x1a1a1a]],
+    husky: [[0xdfe6ee, 0x7f8ea3, 0x2a2a3e], [0xb8c8d8, 0x5d6d82, 0x2a2a3e]],
     goldie: [[0xf2d79a, 0xd6a85a, 0xfff6d6], [0xf7e2b1, 0xc89a4c, 0xfff6d6]],
+    greatdane: [[0x8a8272, 0x5e5849, 0x2a2a3e], [0xc0b9a8, 0x726b5a, 0x2a2a3e]],
 };
 export const BREED_LABELS = {
-    mutt: "Mutt",
+    chihuahua: "Chihuahua",
+    dachshund: "Dachshund",
     shiba: "Shiba",
     corgi: "Corgi",
-    husky: "Husky",
+    beagle: "Beagle",
+    mutt: "Mutt",
     poodle: "Poodle",
-    dachshund: "Dachshund",
     bulldog: "Bulldog",
+    dalmatian: "Dalmatian",
+    husky: "Husky",
     goldie: "Golden",
+    greatdane: "Great Dane",
+};
+// Real-world-ish size multipliers. Applied on top of the level growth
+// curve so a chihuahua puppy reads as tiny and a great dane veteran
+// reads as towering. Medium breeds sit at 1.0.
+export const BREED_SIZE = {
+    chihuahua: 0.55,
+    dachshund: 0.72,
+    shiba: 0.84,
+    corgi: 0.82,
+    beagle: 0.92,
+    mutt: 1.00,
+    poodle: 1.00,
+    bulldog: 0.95,
+    dalmatian: 1.08,
+    husky: 1.12,
+    goldie: 1.14,
+    greatdane: 1.40,
+};
+// Some breeds have distinctive body aspect ratios (dachshund is long-low,
+// bulldog is squat-wide, greatdane is tall). We stretch the sprite along
+// one axis to sell the silhouette without redrawing each breed.
+export const BREED_STRETCH = {
+    chihuahua: { x: 0.95, y: 0.95 },
+    dachshund: { x: 1.35, y: 0.78 },
+    shiba: { x: 1.00, y: 1.00 },
+    corgi: { x: 1.18, y: 0.80 },
+    beagle: { x: 1.08, y: 0.94 },
+    mutt: { x: 1.00, y: 1.00 },
+    poodle: { x: 1.00, y: 1.05 },
+    bulldog: { x: 1.12, y: 0.90 },
+    dalmatian: { x: 1.05, y: 1.00 },
+    husky: { x: 1.05, y: 1.02 },
+    goldie: { x: 1.08, y: 1.02 },
+    greatdane: { x: 1.15, y: 1.20 },
 };
 export const ALL_BREEDS = [
-    "mutt", "shiba", "corgi", "husky", "poodle", "dachshund", "bulldog", "goldie",
+    "chihuahua", "dachshund", "shiba", "corgi", "beagle",
+    "mutt", "poodle", "bulldog", "dalmatian", "husky", "goldie", "greatdane",
 ];
 export const ALL_PERSONALITIES = [
     "playful", "calm", "brave", "shy", "clever", "zoomy",
 ];
 // ── Name pool ────────────────────────────────────────────────────────────
+// Cozy, food-ish, nature-ish pet names. DogManager.nameStray filters this
+// list against names already in use (current dogs + adopted-out history) so
+// no two pups ever share a name until the pool is exhausted.
 export const DOG_NAMES = [
+    // ── Originals (kept for save-game continuity) ─────────────────────────
     "Biscuit", "Mochi", "Pepper", "Waffle", "Nugget", "Cinnamon", "Olive",
     "Pumpkin", "Scout", "Finn", "Luna", "Bean", "Ziggy", "Pickle", "Clover",
     "Toast", "Taffy", "Sprinkle", "Hazel", "Rusty", "Juniper", "Poppy",
     "Dumpling", "Noodle", "Marble", "Pebble", "Kiwi", "Peanut", "Apollo",
     "Willow", "Comet", "Tofu", "Muffin", "Biscotti", "Sesame",
+    // ── Food & treats ─────────────────────────────────────────────────────
+    "Pretzel", "Cookie", "Cupcake", "Brownie", "Sprout", "Pickles", "Marshmallow",
+    "Butterscotch", "Caramel", "Truffle", "Churro", "Crumpet", "Gingersnap",
+    "Honey", "Jellybean", "Meatball", "Miso", "Pudding", "Ravioli", "Scone",
+    "Soba", "Sushi", "Tater", "Tortellini", "Twix", "Waffles", "Yogurt",
+    "Cheddar", "Brie", "Gouda", "Parmesan", "Ricotta", "Gnocchi", "Latte",
+    "Espresso", "Cocoa", "Pancake", "Popcorn", "Pringle", "Bagel",
+    "Dumplin", "Fig", "Plum", "Peaches", "Cherry", "Berry", "Melon",
+    // ── Nature & flora ────────────────────────────────────────────────────
+    "Daisy", "Rosie", "Violet", "Iris", "Fern", "Ivy", "Magnolia", "Maple",
+    "Cedar", "Birch", "Aspen", "Sage", "Basil", "Rosemary", "Thyme", "Mint",
+    "Cove", "Meadow", "Dune", "Brook", "River", "Sunny", "Misty", "Cloud",
+    "Breeze", "Rain", "Thunder", "Stormy", "Blaze", "Ember", "Ashes",
+    // ── Celestial & sparkly ───────────────────────────────────────────────
+    "Nova", "Stella", "Orion", "Milo", "Cosmo", "Galaxy", "Pixel", "Sparkle",
+    "Twinkle", "Aurora", "Celeste", "Solar", "Lunar", "Halo", "Nebula",
+    // ── Gem & metal ───────────────────────────────────────────────────────
+    "Opal", "Jade", "Pearl", "Amber", "Onyx", "Coral", "Copper",
+    "Quartz", "Topaz", "Sapphire", "Crystal",
+    // ── Classic-cute ──────────────────────────────────────────────────────
+    "Buddy", "Teddy", "Charlie", "Cooper", "Rocky", "Bear", "Loki", "Zeus",
+    "Max", "Duke", "Toby", "Murphy", "Oliver", "Winston", "Oscar", "Gus",
+    "Archie", "Walter", "Leo", "Chester", "Dexter", "Frankie", "Remy",
+    "Moose", "Beau", "Banjo", "Scooter", "Rascal", "Rufus", "Shadow",
+    // ── Girly-classic ─────────────────────────────────────────────────────
+    "Bella", "Lucy", "Ruby", "Molly", "Sadie", "Zoe", "Lily", "Penny",
+    "Ginger", "Ellie", "Nala", "Willa", "Tilly", "Millie", "Goldie",
+    "Piper", "Sassy", "Gracie", "Maggie", "Roxy", "Sophie",
+    // ── Quirky / whimsical ────────────────────────────────────────────────
+    "Mr Bean", "Pom", "Pip", "Yuki", "Bonsai", "Zuzu", "Koda",
+    "Taro", "Boba", "Chai", "Panko", "Ramen", "Pom Pom", "Noo Noo",
+    "Snickers", "Snoopy", "Doodle", "Button", "Bumble", "Bubbles", "Cricket",
+    "Puddle", "Pebbs", "Truffles", "Whiskers", "Peanut Butter", "Kibble",
 ];
 // ── Buildings / upgrades ─────────────────────────────────────────────────
 // Max levels are intentionally very high so the game keeps progressing into
@@ -272,3 +370,58 @@ export const CENTER_NAMES = [
 export function centerNameFor(index) {
     return CENTER_NAMES[index] ?? `Rescue Center ${index + 1}`;
 }
+export const BIOMES = {
+    meadow: { id: "meadow", label: "Meadow", grassTint: 0xffffff, skyTop: 0xbfe6ff, fenceKey: "fence", decor: "\u{1F33C}" },
+    harbor: { id: "harbor", label: "Harborside", grassTint: 0xcfe9f2, skyTop: 0xa8d7f5, fenceKey: "fence_rope", decor: "\u{1F41A}" },
+    pine: { id: "pine", label: "Pine Ridge", grassTint: 0x9fd49a, skyTop: 0xb8d4a8, fenceKey: "fence_log", decor: "\u{1F332}" },
+    cloudtop: { id: "cloudtop", label: "Cloudtop", grassTint: 0xe8d9ff, skyTop: 0xd7c4f7, fenceKey: "fence_iron", decor: "\u{2601}\uFE0F" },
+    moonlit: { id: "moonlit", label: "Moonlit", grassTint: 0xa5b4d8, skyTop: 0x4a4e7a, fenceKey: "fence_iron", decor: "\u{1F319}" },
+    wildflower: { id: "wildflower", label: "Wildflower", grassTint: 0xf6c5e4, skyTop: 0xffd9e0, fenceKey: "fence", decor: "\u{1F337}" },
+    coral: { id: "coral", label: "Coral Bay", grassTint: 0xffd7cc, skyTop: 0xffe8da, fenceKey: "fence_rope", decor: "\u{1F41A}" },
+    evergreen: { id: "evergreen", label: "Evergreen", grassTint: 0x8fc28a, skyTop: 0xcde8c6, fenceKey: "fence_log", decor: "\u{1F343}" },
+    starlight: { id: "starlight", label: "Starlight", grassTint: 0xb6b1e0, skyTop: 0x38406a, fenceKey: "fence_gold", decor: "\u{2B50}" },
+    sunny: { id: "sunny", label: "Sunny", grassTint: 0xfff0b8, skyTop: 0xfff6d6, fenceKey: "fence", decor: "\u{2600}\uFE0F" },
+};
+/** Pick a biome from a human-readable center name. */
+export function biomeForName(name) {
+    const n = name.toLowerCase();
+    if (n.includes("harbor"))
+        return "harbor";
+    if (n.includes("pine"))
+        return "pine";
+    if (n.includes("cloud"))
+        return "cloudtop";
+    if (n.includes("moon"))
+        return "moonlit";
+    if (n.includes("wildflower") || n.includes("woof"))
+        return "wildflower";
+    if (n.includes("coral"))
+        return "coral";
+    if (n.includes("evergreen") || n.includes("willow"))
+        return "evergreen";
+    if (n.includes("star"))
+        return "starlight";
+    if (n.includes("sun"))
+        return "sunny";
+    return "meadow";
+}
+// ── Yard decorations (appear at Kennel tier milestones) ──────────────────
+// Each entry renders once the kennel reaches `minLevel`. Coordinates are in
+// yard-local pixels (0..YARD.width, 0..YARD.height) so the same decor map
+// lands correctly even on the wider tablet canvas.
+export const YARD_DECOR = [
+    { minLevel: 2, emoji: "\u{1F33C}", x: 0.08, y: 0.88, size: 14 }, // daisy SW
+    { minLevel: 5, emoji: "\u{1F950}", x: 0.90, y: 0.10, size: 14 }, // croissant-ish (treat) NE
+    { minLevel: 10, emoji: "\u{1F3BE}", x: 0.14, y: 0.12, size: 14 }, // tennis ball NW
+    { minLevel: 18, emoji: "\u{1F332}", x: 0.93, y: 0.85, size: 18 }, // tree SE
+    { minLevel: 28, emoji: "\u{1F6B6}", x: 0.50, y: 0.12, size: 14 }, // walker N
+    { minLevel: 40, emoji: "\u{1F451}", x: 0.50, y: 0.92, size: 16 }, // crown S (late-game)
+];
+// ── Merge Centers (consolidation / prestige-lite) ────────────────────────
+// When the player owns at least MERGE_UNLOCK_COUNT centers, the option to
+// merge any MERGE_INPUT_COUNT into a single Mega Center appears. The new
+// center inherits the sum of the inputs' mergeWeight plus a synergy kicker.
+export const MERGE_UNLOCK_COUNT = 5;
+export const MERGE_INPUT_COUNT = 3;
+export const MERGE_SYNERGY_BONUS = 0.10; // +10% on top of the summed weight
+export const MERGE_MEGA_LABEL = "Mega Rescue";
