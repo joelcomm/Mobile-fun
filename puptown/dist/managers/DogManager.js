@@ -3,7 +3,7 @@
 // Multi-center aware: each dog carries a `centerId`. `list()` returns every
 // dog (used by production + save). `listCurrent()` returns only dogs in the
 // active center and is what UI subscribers see.
-import { ADOPTION_BASE_REP, ADOPTION_HAPPINESS_REQ, ADOPTION_JOY_BASE, ADOPTION_LEVEL_EXP, ADOPTION_LEVEL_REQ, ALL_BREEDS, ALL_PERSONALITIES, DOG_NAMES, ROLE_INFO, SIGNATURE_DOGS, SIGNATURE_SPAWN_CHANCE, UNLOCK_COSTS, UNLOCK_REP, YARD, } from "../config.js";
+import { ADOPTION_BASE_REP, ADOPTION_HAPPINESS_REQ, ADOPTION_JOY_BASE, ADOPTION_LEVEL_EXP, ADOPTION_LEVEL_REQ, ALL_BREEDS, ALL_PERSONALITIES, DOGS_PER_PEN, DOG_NAMES, ROLE_INFO, SIGNATURE_DOGS, SIGNATURE_SPAWN_CHANCE, UNLOCK_COSTS, UNLOCK_REP, YARD, } from "../config.js";
 export class DogManager {
     constructor(initial, retiredNames) {
         this.dogs = [];
@@ -64,14 +64,22 @@ export class DogManager {
         for (const l of this.listeners)
             l(visible);
     }
+    /** True while this center still has room for another dog. */
+    hasSlotOpen() {
+        return this.countCurrent() < DOGS_PER_PEN;
+    }
     /** Cost (in Joy) to unlock the next dog slot in the current center. */
     nextUnlockCost() {
         const i = this.countCurrent();
-        return UNLOCK_COSTS[i] ?? UNLOCK_COSTS[UNLOCK_COSTS.length - 1] * Math.pow(2.5, i - UNLOCK_COSTS.length + 1);
+        if (i >= DOGS_PER_PEN)
+            return Infinity;
+        return UNLOCK_COSTS[i] ?? UNLOCK_COSTS[UNLOCK_COSTS.length - 1];
     }
     /** Reputation needed before next slot can be unlocked. */
     nextUnlockRep() {
         const i = this.countCurrent();
+        if (i >= DOGS_PER_PEN)
+            return Infinity;
         return UNLOCK_REP[i] ?? UNLOCK_REP[UNLOCK_REP.length - 1];
     }
     spawnStarter() {

@@ -256,17 +256,17 @@ export class DogPanel extends Panel {
         const cost = game.dogs.nextUnlockCost();
         const repNeeded = game.dogs.nextUnlockRep();
         const repCurrent = game.resources.snapshot.reputation;
-        const slotsLeft = cost > 0;
+        const slotsLeft = game.dogs.hasSlotOpen();
         const repOk = repCurrent >= repNeeded;
         const bg = scene.add.rectangle(GAME_WIDTH / 2, y + 26, GAME_WIDTH - 24, 52, 0xe8e0cf);
         bg.setStrokeStyle(1, 0x2a2a3e, 0.15);
         bg.setOrigin(0.5);
-        const locked = !repOk;
-        const msg = slotsLeft
-            ? locked
+        const locked = !slotsLeft || !repOk;
+        const msg = !slotsLeft
+            ? `Pen full! Graduate a pup.`
+            : !repOk
                 ? `Needs \u2B50 ${repNeeded} Rep.`
-                : `Random role!`
-            : `All slots open!`;
+                : `Random role!`;
         const info = scene.add.text(18, y + 6, `RESCUE A STRAY\n${msg}`, {
             fontFamily: "monospace",
             fontSize: "13px",
@@ -279,7 +279,7 @@ export class DogPanel extends Panel {
             : canAfford
                 ? 0x7fc56b
                 : 0xff9ac1;
-        const btn = this.makeButton(GAME_WIDTH - 52, y + 26, 80, 40, `RESCUE\n\u2600\uFE0F${formatNumber(cost)}`, color);
+        const btn = this.makeButton(GAME_WIDTH - 52, y + 26, 80, 40, slotsLeft ? `RESCUE\n\u2600\uFE0F${formatNumber(cost)}` : `PEN\nFULL`, color);
         btn.bg.on("pointerdown", () => {
             if (locked)
                 return;
