@@ -219,14 +219,9 @@ export class DogManager {
     if (available.length > 0) {
       return available[Math.floor(Math.random() * available.length)];
     }
-    // Pool exhausted — append a Roman-numeral-ish suffix to the least-used
-    // prefix so the player always gets something human-readable.
-    const base = DOG_NAMES[Math.floor(Math.random() * DOG_NAMES.length)];
-    for (let n = 2; n < 999; n++) {
-      const candidate = `${base} ${romanNumeral(n)}`;
-      if (!taken.has(candidate)) return candidate;
-    }
-    return `${base} the ${this.dogs.length + 1}th`;
+    // Pool exhausted — fall back to any name. By the time the player has
+    // burned through every name a duplicate feels like a tribute.
+    return DOG_NAMES[Math.floor(Math.random() * DOG_NAMES.length)];
   }
 
   /** Mark any qualifying dogs as ready (sticky once true). */
@@ -316,18 +311,4 @@ function pickRole(): DogRole {
 
 function clamp(n: number, lo: number, hi: number): number {
   return Math.max(lo, Math.min(hi, n));
-}
-
-function romanNumeral(n: number): string {
-  const table: [number, string][] = [
-    [1000, "M"], [900, "CM"], [500, "D"], [400, "CD"],
-    [100, "C"], [90, "XC"], [50, "L"], [40, "XL"],
-    [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"],
-  ];
-  let out = "";
-  let v = n;
-  for (const [val, sym] of table) {
-    while (v >= val) { out += sym; v -= val; }
-  }
-  return out;
 }
