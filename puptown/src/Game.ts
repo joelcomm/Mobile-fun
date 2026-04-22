@@ -166,7 +166,7 @@ export class Game {
       const rescueCost = this.dogs.nextUnlockCost();
       const rescueRep = this.dogs.nextUnlockRep();
       if (
-        this.dogs.countCurrent() < 10 &&
+        this.dogs.hasSlotOpen() &&
         this.resources.snapshot.joy >= rescueCost &&
         this.resources.snapshot.reputation >= rescueRep
       ) {
@@ -213,7 +213,7 @@ export class Game {
     // which is exactly how we restart after the board has been cleared.
     const rescueCost = this.dogs.nextUnlockCost();
     const rescueRep = this.dogs.nextUnlockRep();
-    const hasSlot = this.dogs.countCurrent() < 10;
+    const hasSlot = this.dogs.hasSlotOpen();
     if (
       hasSlot &&
       this.resources.snapshot.joy >= rescueCost &&

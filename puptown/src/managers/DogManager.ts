@@ -12,6 +12,7 @@ import {
   ADOPTION_LEVEL_REQ,
   ALL_BREEDS,
   ALL_PERSONALITIES,
+  DOGS_PER_PEN,
   DOG_NAMES,
   ROLE_INFO,
   SIGNATURE_DOGS,
@@ -90,15 +91,22 @@ export class DogManager {
     for (const l of this.listeners) l(visible);
   }
 
+  /** True while this center still has room for another dog. */
+  hasSlotOpen(): boolean {
+    return this.countCurrent() < DOGS_PER_PEN;
+  }
+
   /** Cost (in Joy) to unlock the next dog slot in the current center. */
   nextUnlockCost(): number {
     const i = this.countCurrent();
-    return UNLOCK_COSTS[i] ?? UNLOCK_COSTS[UNLOCK_COSTS.length - 1] * Math.pow(2.5, i - UNLOCK_COSTS.length + 1);
+    if (i >= DOGS_PER_PEN) return Infinity;
+    return UNLOCK_COSTS[i] ?? UNLOCK_COSTS[UNLOCK_COSTS.length - 1];
   }
 
   /** Reputation needed before next slot can be unlocked. */
   nextUnlockRep(): number {
     const i = this.countCurrent();
+    if (i >= DOGS_PER_PEN) return Infinity;
     return UNLOCK_REP[i] ?? UNLOCK_REP[UNLOCK_REP.length - 1];
   }
 

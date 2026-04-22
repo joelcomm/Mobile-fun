@@ -48,6 +48,7 @@ export const SAVE_THROTTLE_MS = 5_000;      // don't save more than once per 5s
 export const MAX_OFFLINE_MS = 8 * 3600_000; // cap offline earnings at 8h
 
 // ── Dog unlock costs (joy cost for slot N, 1-indexed) ────────────────────
+export const DOGS_PER_PEN = 12;              // hard cap per center
 export const UNLOCK_COSTS: number[] = [
   0,        // slot 1 free at start
   50,
@@ -59,11 +60,13 @@ export const UNLOCK_COSTS: number[] = [
   50_000,
   120_000,
   300_000,
+  700_000,
+  1_500_000,
 ];
 
 // Reputation threshold needed to unlock the Nth dog slot.
 export const UNLOCK_REP: number[] = [
-  0, 0, 1, 3, 6, 10, 16, 25, 40, 60,
+  0, 0, 1, 3, 6, 10, 16, 25, 40, 60, 85, 115,
 ];
 
 // ── Role specializations ─────────────────────────────────────────────────
