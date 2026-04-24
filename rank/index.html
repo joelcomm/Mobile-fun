@@ -317,7 +317,7 @@
       // ── Share ─────────────────────────────────────────
       function share() {
         var grid = items.map(function (it, i) { return it.ci === i ? '\uD83D\uDFE9' : '\uD83D\uDFE5'; }).join('');
-        var txt = 'RANK #' + dn + ' ' + score + '/4\n' + grid + '\nawesomegames777.netlify.app/rank';
+        var txt = 'RANK #' + dn + ' ' + score + '/4\n' + grid + '\ngames.aiforeveryoneshow.com/rank';
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(txt).then(function () {
             setCopied(true);
