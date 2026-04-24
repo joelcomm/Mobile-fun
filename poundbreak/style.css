@@ -114,15 +114,22 @@ html, body {
   z-index: 5;
 }
 
-#stick-zone, #look-zone {
+#look-zone {
   position: absolute;
-  bottom: 0;
-  top: 60%;
-  width: 50%;
+  inset: 0;
   pointer-events: auto;
+  z-index: 1;
 }
-#stick-zone { left: 0; }
-#look-zone  { right: 0; }
+
+#stick-zone {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 180px;
+  height: 180px;
+  pointer-events: auto;
+  z-index: 2;
+}
 
 #stick-base {
   position: absolute;
