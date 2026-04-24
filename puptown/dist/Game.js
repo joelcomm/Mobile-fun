@@ -1,7 +1,8 @@
 // Game is the long-lived singleton that owns managers and systems.
 // Scenes talk to it via Game.instance().
-import { MAX_OFFLINE_MS, SAVE_THROTTLE_MS, TICK_MS, } from "./config.js";
+import { ADOPTION_FEE_BASE_FRACTION, ADOPTION_FEE_FRACTION_PER_ADOPT, ADOPTION_FEE_MAX_FRACTION, ADOPTION_LEVEL_REQ, LV_UP_BASE, LV_UP_MULT, MAX_OFFLINE_MS, NAMING_COST_JOY, SAVE_THROTTLE_MS, TAP_HAPPINESS_COOLDOWN_MS, TAP_HAPPINESS_GAIN, TICK_MS, } from "./config.js";
 import { BuildingManager } from "./managers/BuildingManager.js";
+import { CenterManager } from "./managers/CenterManager.js";
 import { DogManager } from "./managers/DogManager.js";
 import { ResourceManager } from "./managers/ResourceManager.js";
 import { SaveManager } from "./managers/SaveManager.js";
@@ -12,9 +13,18 @@ export class Game {
     constructor() {
         this.save = new SaveManager();
         this.totalPlaytimeMs = 0;
+        this.totalAdoptions = 0;
         this.tickAccum = 0;
         this.startTime = Date.now();
         this.pendingOffline = null;
+        this.wiping = false;
+        // PLAYTEST: speed + auto-play. Remove before shipping the final game.
+        this.speedMultiplier = 1;
+        this.autoPlay = false;
+        this.autoplayAccumMs = 0;
+        // Per-dog cooldown for happiness-from-taps. Joy gain is uncapped; only the
+        // happiness buff is rate-limited so mood events stay meaningful.
+        this.lastHappyTapAt = new Map();
     }
     static instance() {
         if (!this._instance)
@@ -24,12 +34,22 @@ export class Game {
     boot() {
         const loaded = this.save.load();
         if (loaded) {
+            this.centers = new CenterManager(loaded.centers, loaded.currentCenterId);
+            const defaultCenterId = this.centers.current().id;
+            // Migrate older saves: dogs default to named + the first center.
+            const migratedDogs = loaded.dogs.map((d) => ({
+                ...d,
+                named: d.named ?? true,
+                centerId: d.centerId ?? defaultCenterId,
+            }));
             this.resources = new ResourceManager(loaded.resources);
-            this.dogs = new DogManager(loaded.dogs);
+            this.dogs = new DogManager(migratedDogs, loaded.retiredNames);
+            this.dogs.setCurrentCenter(this.centers.currentIdValue());
             this.buildings = new BuildingManager(loaded.buildings);
             this.events = new EventSystem();
-            this.production = new ProductionSystem(this.dogs, this.buildings, this.resources, this.events);
+            this.production = new ProductionSystem(this.dogs, this.buildings, this.resources, this.events, this.centers);
             this.totalPlaytimeMs = loaded.totalPlaytimeMs ?? 0;
+            this.totalAdoptions = loaded.totalAdoptions ?? 0;
             // Offline earnings, capped.
             const elapsed = Math.min(Math.max(0, Date.now() - loaded.lastSavedAt), MAX_OFFLINE_MS);
             if (elapsed > 5000) {
@@ -38,30 +58,159 @@ export class Game {
         }
         else {
             this.resources = new ResourceManager({ joy: 0, treats: 0, reputation: 0 });
+            this.centers = new CenterManager();
             this.dogs = new DogManager();
+            this.dogs.setCurrentCenter(this.centers.currentIdValue());
             this.buildings = new BuildingManager();
             this.events = new EventSystem();
-            this.production = new ProductionSystem(this.dogs, this.buildings, this.resources, this.events);
+            this.production = new ProductionSystem(this.dogs, this.buildings, this.resources, this.events, this.centers);
             this.dogs.spawnStarter();
         }
-        // Autosave when tab hides / unloads.
+        // When the player switches centers, DogManager's view changes too —
+        // and the slot cap rebases to the new center's tier bonus.
+        this.centers.on((_, currentId) => {
+            this.dogs.setCurrentCenter(currentId);
+            this.dogs.setCapBonus(this.centers.dogCapBonus(currentId));
+        });
+        // Initial sync so the very first center applies its tier bonus too.
+        this.dogs.setCapBonus(this.centers.dogCapBonus(this.centers.currentIdValue()));
+        // Autosave when tab hides / unloads. Skip while wiping so the wipe sticks.
         window.addEventListener("visibilitychange", () => {
+            if (this.wiping)
+                return;
             if (document.visibilityState === "hidden")
                 this.forceSave();
         });
-        window.addEventListener("beforeunload", () => this.forceSave());
+        window.addEventListener("beforeunload", () => {
+            if (this.wiping)
+                return;
+            this.forceSave();
+        });
     }
     /** Main tick. Called from YardScene.update. */
     tick(deltaMs) {
-        this.totalPlaytimeMs += deltaMs;
-        this.tickAccum += deltaMs;
-        this.events.tick(deltaMs);
-        while (this.tickAccum >= TICK_MS) {
-            this.production.tick(TICK_MS);
-            this.tickAccum -= TICK_MS;
+        try {
+            const scaled = deltaMs * this.speedMultiplier;
+            this.totalPlaytimeMs += scaled;
+            this.tickAccum += scaled;
+            this.events.tick(scaled);
+            while (this.tickAccum >= TICK_MS) {
+                this.production.tick(TICK_MS);
+                this.tickAccum -= TICK_MS;
+            }
+            if (this.autoPlay)
+                this.runAutoPlay(scaled);
+            // Throttled save.
+            this.save.save(this.snapshotSave(), SAVE_THROTTLE_MS);
         }
-        // Throttled save.
-        this.save.save(this.snapshotSave(), SAVE_THROTTLE_MS);
+        catch (e) {
+            console.error("[PupTown] tick error:", e);
+            // Drop accumulated time so we don't re-hit the same error next frame.
+            this.tickAccum = 0;
+        }
+    }
+    /** PLAYTEST: cycle through 1x → 2x → 4x → 16x → 64x → 1x. */
+    cycleSpeed() {
+        const opts = Game.SPEED_OPTIONS;
+        const idx = opts.indexOf(this.speedMultiplier);
+        this.speedMultiplier = opts[(idx + 1) % opts.length];
+        return this.speedMultiplier;
+    }
+    /** PLAYTEST: toggle greedy-AI autoplay. Returns the new state. */
+    toggleAutoPlay() {
+        this.autoPlay = !this.autoPlay;
+        return this.autoPlay;
+    }
+    /** PLAYTEST: one autoplay decision pass, throttled to ~4 Hz of scaled time. */
+    runAutoPlay(scaledDeltaMs) {
+        this.autoplayAccumMs += scaledDeltaMs;
+        if (this.autoplayAccumMs < 250)
+            return;
+        this.autoplayAccumMs = 0;
+        // Passive tap on a random visible dog so level-ups happen even without
+        // the Auto-Walker building.
+        const visible = this.dogs.listCurrent();
+        if (visible.length > 0) {
+            const pick = visible[Math.floor(Math.random() * visible.length)];
+            this.handleTap(pick.id);
+        }
+        // 0. Empty-yard fast path. If the *visible* center has no dogs, refill
+        // it before doing anything else. Without this, autoplay would happily
+        // burn Joy leveling up dogs in other centers while the player stares
+        // at their empty current yard, looking like autoplay is stuck.
+        if (visible.length === 0) {
+            const rescueCost = this.dogs.nextUnlockCost();
+            const rescueRep = this.dogs.nextUnlockRep();
+            if (this.dogs.hasSlotOpen() &&
+                this.resources.snapshot.joy >= rescueCost &&
+                this.resources.snapshot.reputation >= rescueRep) {
+                if (rescueCost === 0 || this.resources.spend({ joy: rescueCost })) {
+                    this.dogs.adopt();
+                    return;
+                }
+            }
+        }
+        // 1. Send home any ready dog (always net-positive under the new fee).
+        for (const d of this.dogs.list()) {
+            if (this.dogs.isReady(d)) {
+                const fee = this.nextSendOffFee(d);
+                if (this.resources.snapshot.joy >= fee) {
+                    this.handleGraduate(d.id);
+                    return;
+                }
+            }
+        }
+        // 2. Name any stray the player has adopted in.
+        const stray = this.dogs.list().find((d) => !d.named);
+        if (stray && this.resources.snapshot.joy >= NAMING_COST_JOY) {
+            this.handleNameStray(stray.id);
+            return;
+        }
+        // 3. Level up the lowest-level named dog toward the adoption threshold.
+        const named = this.dogs
+            .list()
+            .filter((d) => d.named && d.level < ADOPTION_LEVEL_REQ)
+            .sort((a, b) => a.level - b.level);
+        if (named.length > 0) {
+            const d = named[0];
+            const cost = Math.ceil(LV_UP_BASE * Math.pow(LV_UP_MULT, d.level));
+            if (this.resources.snapshot.joy >= cost && this.resources.spend({ joy: cost })) {
+                this.dogs.levelUp(d.id);
+                return;
+            }
+        }
+        // 4. Rescue a new stray if there's room. Slot 1 is free (rescueCost=0),
+        // which is exactly how we restart after the board has been cleared.
+        const rescueCost = this.dogs.nextUnlockCost();
+        const rescueRep = this.dogs.nextUnlockRep();
+        const hasSlot = this.dogs.hasSlotOpen();
+        if (hasSlot &&
+            this.resources.snapshot.joy >= rescueCost &&
+            this.resources.snapshot.reputation >= rescueRep) {
+            if (rescueCost === 0 || this.resources.spend({ joy: rescueCost })) {
+                this.dogs.adopt();
+                return;
+            }
+        }
+        // 5. Buy the cheapest affordable building upgrade once we have a 4x
+        // surplus, so progression keeps moving without draining the budget.
+        let best = null;
+        for (const b of this.buildings.list()) {
+            const c = this.buildings.costFor(b.typeId);
+            if (!c)
+                continue;
+            if (c.treats > this.resources.snapshot.treats)
+                continue;
+            if (c.reputation > this.resources.snapshot.reputation)
+                continue;
+            if (!best || c.joy < best.joy)
+                best = { id: b.typeId, joy: c.joy, treats: c.treats };
+        }
+        if (best && this.resources.snapshot.joy >= best.joy * 4) {
+            if (this.resources.spend({ joy: best.joy, treats: best.treats })) {
+                this.buildings.upgrade(best.id);
+            }
+        }
     }
     /** Process a tap on a dog; returns the Joy awarded. */
     handleTap(dogId) {
@@ -72,27 +221,99 @@ export class Game {
         const flat = this.buildings.tapBonusFlat();
         const joy = (dog.tapBonus + flat) * tapMult;
         this.resources.add({ joy });
-        // Small happiness boost from petting.
-        this.dogs.updateHappiness(dogId, dog.happiness + 0.8);
+        // Happiness bump is cooldown-limited per dog. Without this, autoplay's
+        // 4 Hz spam (or any fast manual tapping) would pin every dog at 100%
+        // and the random mood events wouldn't matter.
+        const now = Date.now();
+        const last = this.lastHappyTapAt.get(dogId) ?? 0;
+        if (now - last >= TAP_HAPPINESS_COOLDOWN_MS) {
+            this.lastHappyTapAt.set(dogId, now);
+            this.dogs.updateHappiness(dogId, dog.happiness + TAP_HAPPINESS_GAIN);
+        }
         return joy;
     }
     /**
-     * Send a ready dog to a forever home. Awards Joy + Reputation, removes the
-     * dog. Returns the reward, or null if the dog isn't ready / doesn't exist.
+     * Send-off fee is a fraction of the dog's adoption reward so the net is
+     * always positive. The fraction creeps up with experience (veterans pay
+     * a larger share, capped at ADOPTION_FEE_MAX_FRACTION) so adoptions
+     * still feel costlier over time without ever turning net-negative.
+     */
+    nextSendOffFee(dog) {
+        const fraction = Math.min(ADOPTION_FEE_BASE_FRACTION + ADOPTION_FEE_FRACTION_PER_ADOPT * this.totalAdoptions, ADOPTION_FEE_MAX_FRACTION);
+        if (!dog) {
+            // Fallback preview when the caller doesn't have a specific dog in
+            // hand — approximate against a L15 companion baseline.
+            const previewReward = 50 * Math.pow(15, 2.1) * 0.72;
+            return Math.ceil(previewReward * fraction);
+        }
+        const reward = this.dogs.adoptionReward(dog);
+        return Math.ceil(reward.joy * fraction);
+    }
+    /**
+     * Send a ready dog to a forever home. Pays the send-off fee, awards
+     * Joy + Reputation, removes the dog. Returns net reward + fee paid, or
+     * null if not ready / can't pay the fee.
      */
     handleGraduate(dogId) {
         const dog = this.dogs.get(dogId);
         if (!dog || !this.dogs.isReady(dog))
             return null;
+        const fee = this.nextSendOffFee(dog);
+        if (!this.resources.spend({ joy: fee }))
+            return null;
         const reward = this.dogs.adoptionReward(dog);
         this.resources.add({ joy: reward.joy, reputation: reward.rep });
+        if (dog.centerId)
+            this.centers.recordAdoption(dog.centerId);
         this.dogs.remove(dogId);
-        return reward;
+        this.totalAdoptions += 1;
+        return { joy: reward.joy, rep: reward.rep, fee };
+    }
+    /** Try to buy the next rescue center; returns true on success. */
+    handleBuyCenter() {
+        if (!this.centers.canBuyMore())
+            return false;
+        const cost = this.centers.costNext();
+        if (this.totalAdoptions < cost.adoptions)
+            return false;
+        if (!this.resources.spend({ joy: cost.joy }))
+            return false;
+        this.centers.buyNext();
+        return true;
+    }
+    /** Pay to upgrade a center's tier; returns the new tier or null on failure. */
+    handleUpgradeCenterTier(centerId) {
+        const cost = this.centers.upgradeCost(centerId);
+        if (!cost)
+            return null;
+        const center = this.centers.list().find((c) => c.id === centerId);
+        if (!center)
+            return null;
+        if (center.adoptions < cost.adoptions)
+            return null;
+        if (!this.resources.spend({ joy: cost.joy }))
+            return null;
+        const newTier = this.centers.upgradeTier(centerId);
+        // Refresh the dog cap bonus if we just upgraded the active center.
+        if (centerId === this.centers.currentIdValue()) {
+            this.dogs.setCapBonus(this.centers.dogCapBonus(centerId));
+        }
+        return newTier;
+    }
+    /** Pay to name a stray; returns chosen name or null on failure. */
+    handleNameStray(dogId) {
+        const dog = this.dogs.get(dogId);
+        if (!dog || dog.named)
+            return null;
+        if (!this.resources.spend({ joy: NAMING_COST_JOY }))
+            return null;
+        return this.dogs.nameStray(dogId);
     }
     forceSave() {
         this.save.save(this.snapshotSave(), 0);
     }
     wipeAndReload() {
+        this.wiping = true;
         this.save.wipe();
         window.location.reload();
     }
@@ -110,7 +331,12 @@ export class Game {
             buildings: this.buildings.toData(),
             unlockedDogSlots: this.dogs.count(),
             totalPlaytimeMs: this.totalPlaytimeMs,
+            totalAdoptions: this.totalAdoptions,
+            centers: this.centers.toData(),
+            currentCenterId: this.centers.currentIdValue(),
+            retiredNames: this.dogs.retiredNamesList(),
         };
     }
 }
 Game._instance = null;
+Game.SPEED_OPTIONS = [1, 2, 4, 16, 64];

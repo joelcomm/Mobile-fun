@@ -1,9 +1,19 @@
 // Calculates passive Joy / Treats / Reputation per second and applies deltas.
 
 import { BuildingManager } from "../managers/BuildingManager.js";
+import { CenterManager } from "../managers/CenterManager.js";
 import { DogManager } from "../managers/DogManager.js";
 import { ResourceManager } from "../managers/ResourceManager.js";
-import { REP_HAPPY_GAIN_INTERVAL_MS, REP_HAPPY_THRESHOLD, ROLE_INFO } from "../config.js";
+import {
+  MOOD_EVENT_BUBBLES,
+  MOOD_EVENT_DROP_MAX,
+  MOOD_EVENT_DROP_MIN,
+  MOOD_EVENT_MAX_MS,
+  MOOD_EVENT_MIN_MS,
+  REP_HAPPY_GAIN_INTERVAL_MS,
+  REP_HAPPY_THRESHOLD,
+  ROLE_INFO,
+} from "../config.js";
 import { EventSystem } from "./EventSystem.js";
 
 export interface RateSummary {
@@ -12,19 +22,40 @@ export interface RateSummary {
   repPerMin: number;
 }
 
+export interface MoodEvent {
+  dogId: string;
+  icon: string;
+  label: string;
+  drop: number;
+}
+
+type MoodListener = (m: MoodEvent) => void;
+
 export class ProductionSystem {
   private repTickAccumMs = 0;
+  private nextMoodInMs: number = rollMoodInterval();
+  private moodListeners: Set<MoodListener> = new Set();
 
   constructor(
     private dogs: DogManager,
     private buildings: BuildingManager,
     private resources: ResourceManager,
-    private events: EventSystem
+    private events: EventSystem,
+    private centers: CenterManager
   ) {}
 
-  /** Current per-second rate (joy includes event multipliers). */
+  /** Subscribe for "a dog just got sad" events (UI bubbles etc.). */
+  onMood(listener: MoodListener): () => void {
+    this.moodListeners.add(listener);
+    return () => this.moodListeners.delete(listener);
+  }
+
+  /** Current per-second rate (joy includes event + center multipliers). */
   rates(): RateSummary {
-    const joyMult = this.buildings.productionMultiplier() * this.events.joyMultiplier();
+    const joyMult =
+      this.buildings.productionMultiplier() *
+      this.events.joyMultiplier() *
+      this.centers.productionMultiplier();
     let joy = 0;
     let repChancePerSec = 0;
     for (const d of this.dogs.list()) {
@@ -42,11 +73,14 @@ export class ProductionSystem {
     const dt = deltaMs / 1000;
     const r = this.rates();
 
-    // Happiness regen + slight drain pressure so bowls matter.
+    // Happiness regen + drain. Drain scales with level so a fussy L15
+    // veteran actually needs a Treat Bowl + attention to stay happy —
+    // otherwise every dog instantly pins to 100% and the bar is decor.
     const regen = this.buildings.happinessRegenPerSec();
     for (const d of this.dogs.list()) {
       const roleGain = ROLE_INFO[d.role].happyGain;
-      const drift = -0.35 + regen * roleGain;
+      const levelDrain = 0.55 + d.level * 0.06;
+      const drift = -levelDrain + regen * roleGain;
       this.dogs.updateHappiness(d.id, d.happiness + drift * dt);
     }
 
@@ -72,6 +106,34 @@ export class ProductionSystem {
       if (veryHappy > 0) this.resources.add({ reputation: veryHappy });
     }
 
+    // Random mood events. A single dog gets bored / spooked / sleepy and
+    // drops happiness, forcing the player to tap in or let a Treat Bowl
+    // catch them. Only picks from currently-visible dogs so the bubble is
+    // actually visible on screen.
+    this.nextMoodInMs -= deltaMs;
+    if (this.nextMoodInMs <= 0) {
+      this.nextMoodInMs = rollMoodInterval();
+      const candidates = this.dogs
+        .listCurrent()
+        .filter((d) => d.happiness > 35);
+      if (candidates.length > 0) {
+        const victim = candidates[Math.floor(Math.random() * candidates.length)];
+        const drop =
+          MOOD_EVENT_DROP_MIN +
+          Math.random() * (MOOD_EVENT_DROP_MAX - MOOD_EVENT_DROP_MIN);
+        this.dogs.updateHappiness(victim.id, victim.happiness - drop);
+        const flavor =
+          MOOD_EVENT_BUBBLES[Math.floor(Math.random() * MOOD_EVENT_BUBBLES.length)];
+        const evt: MoodEvent = {
+          dogId: victim.id,
+          icon: flavor.icon,
+          label: flavor.label,
+          drop,
+        };
+        for (const l of this.moodListeners) l(evt);
+      }
+    }
+
     this.dogs.markReadyIfQualified();
   }
 
@@ -84,4 +146,8 @@ export class ProductionSystem {
     this.resources.add({ joy, treats });
     return { joy, treats };
   }
+}
+
+function rollMoodInterval(): number {
+  return MOOD_EVENT_MIN_MS + Math.random() * (MOOD_EVENT_MAX_MS - MOOD_EVENT_MIN_MS);
 }

@@ -1,19 +1,27 @@
 // Owns the list of dogs and handles creation, leveling, and unlock logic.
+//
+// Multi-center aware: each dog carries a `centerId`. `list()` returns every
+// dog (used by production + save). `listCurrent()` returns only dogs in the
+// active center and is what UI subscribers see.
 
 import {
   ADOPTION_BASE_REP,
   ADOPTION_HAPPINESS_REQ,
   ADOPTION_JOY_BASE,
+  ADOPTION_LEVEL_EXP,
   ADOPTION_LEVEL_REQ,
   ALL_BREEDS,
   ALL_PERSONALITIES,
+  DOGS_PER_PEN,
   DOG_NAMES,
   ROLE_INFO,
+  SIGNATURE_DOGS,
+  SIGNATURE_SPAWN_CHANCE,
   UNLOCK_COSTS,
   UNLOCK_REP,
   YARD,
 } from "../config.js";
-import { DogData, DogRole } from "../types.js";
+import { BreedType, DogData, DogRole } from "../types.js";
 
 type Listener = (dogs: readonly DogData[]) => void;
 
@@ -21,8 +29,15 @@ export class DogManager {
   private dogs: DogData[] = [];
   private listeners: Set<Listener> = new Set();
   private idCounter = 1;
+  private currentCenterId: string = "";
+  // Extra slots granted by the current center's tier upgrade. Game.ts
+  // refreshes this whenever the center changes or its tier is bumped.
+  private capBonus = 0;
+  // Names of dogs that have been adopted out. We never reuse them so the
+  // player's pups always feel like individuals.
+  private retiredNames: Set<string> = new Set();
 
-  constructor(initial?: DogData[]) {
+  constructor(initial?: DogData[], retiredNames?: readonly string[]) {
     if (initial && initial.length) {
       this.dogs = initial.map((d) => ({ ...d, position: { ...d.position } }));
       // Make sure id counter stays ahead of anything loaded.
@@ -31,14 +46,37 @@ export class DogManager {
         if (!Number.isNaN(n) && n >= this.idCounter) this.idCounter = n + 1;
       }
     }
+    if (retiredNames) for (const n of retiredNames) this.retiredNames.add(n);
   }
 
+  /** Names that can never be reused (adopted-out dogs). */
+  retiredNamesList(): string[] {
+    return Array.from(this.retiredNames);
+  }
+
+  /** Bind this manager to a current center. UI subscribers see that center. */
+  setCurrentCenter(id: string): void {
+    if (this.currentCenterId === id) return;
+    this.currentCenterId = id;
+    this.emit();
+  }
+
+  /** All dogs across every center (used by production + save). */
   list(): readonly DogData[] {
     return this.dogs;
   }
 
+  /** Only dogs in the active center (used by the yard + dog panel). */
+  listCurrent(): readonly DogData[] {
+    return this.dogs.filter((d) => (d.centerId ?? this.currentCenterId) === this.currentCenterId);
+  }
+
   count(): number {
     return this.dogs.length;
+  }
+
+  countCurrent(): number {
+    return this.listCurrent().length;
   }
 
   get(id: string): DogData | undefined {
@@ -47,40 +85,94 @@ export class DogManager {
 
   on(listener: Listener): () => void {
     this.listeners.add(listener);
-    listener(this.dogs);
+    listener(this.listCurrent());
     return () => this.listeners.delete(listener);
   }
 
   emit(): void {
-    for (const l of this.listeners) l(this.dogs);
+    const visible = this.listCurrent();
+    for (const l of this.listeners) l(visible);
   }
 
-  /** Cost (in Joy) to unlock the next dog slot. */
+  /** Effective dog cap for the active center (base + tier bonus). */
+  effectiveCap(): number {
+    return DOGS_PER_PEN + this.capBonus;
+  }
+
+  /** True while this center still has room for another dog. */
+  hasSlotOpen(): boolean {
+    return this.countCurrent() < this.effectiveCap();
+  }
+
+  /** Update the tier-driven slot bonus for the current center. */
+  setCapBonus(n: number): void {
+    if (this.capBonus === n) return;
+    this.capBonus = Math.max(0, Math.floor(n));
+    this.emit();
+  }
+
+  /** Cost (in Joy) to unlock the next dog slot in the current center. */
   nextUnlockCost(): number {
-    const i = this.dogs.length;
-    return UNLOCK_COSTS[i] ?? UNLOCK_COSTS[UNLOCK_COSTS.length - 1] * Math.pow(2.5, i - UNLOCK_COSTS.length + 1);
+    const i = this.countCurrent();
+    if (i >= this.effectiveCap()) return Infinity;
+    return UNLOCK_COSTS[i] ?? UNLOCK_COSTS[UNLOCK_COSTS.length - 1];
   }
 
   /** Reputation needed before next slot can be unlocked. */
   nextUnlockRep(): number {
-    const i = this.dogs.length;
+    const i = this.countCurrent();
+    if (i >= this.effectiveCap()) return Infinity;
     return UNLOCK_REP[i] ?? UNLOCK_REP[UNLOCK_REP.length - 1];
   }
 
   spawnStarter(): DogData {
     const dog = this.makeDog("companion", 1);
-    dog.name = "Biscuit"; // starter always Biscuit for a familiar opener
+    dog.name = "Biscuit"; // starter always Biscuit, pre-named for the tutorial
+    dog.named = true;
+    dog.centerId = this.currentCenterId;
     this.dogs.push(dog);
     this.emit();
     return dog;
   }
 
-  /** Create & adopt a new dog with a given role at current happiness. */
+  /** Create & adopt a new stray in the active center; player must name it. */
   adopt(role: DogRole = pickRole()): DogData {
     const dog = this.makeDog(role, 1);
+    // Signature cameo: occasionally reroll this stray as a still-available
+    // signature dog (Penny, Rufus, Ferris). Their name is applied when the
+    // player pays to name them — we leave .named=false so the UX is the
+    // same as any other stray adoption.
+    const sig = this.pickAvailableSignature();
+    if (sig && Math.random() < SIGNATURE_SPAWN_CHANCE) {
+      dog.breedType = sig.breed;
+      dog.colorVariant = sig.colorVariant;
+    }
+    dog.name = "Stray";
+    dog.named = false;
+    dog.centerId = this.currentCenterId;
     this.dogs.push(dog);
     this.emit();
     return dog;
+  }
+
+  /** A signature dog is "available" if not currently owned and not retired,
+   *  and no un-named stray is already wearing that breed + color combo. */
+  private pickAvailableSignature() {
+    const namedTaken = new Set<string>();
+    for (const d of this.dogs) if (d.named) namedTaken.add(d.name);
+    const available = SIGNATURE_DOGS.filter((s) => {
+      if (namedTaken.has(s.name)) return false;
+      if (this.retiredNames.has(s.name)) return false;
+      // Block rerolling if a matching un-named stray is already awaiting naming.
+      for (const d of this.dogs) {
+        if (!d.named && d.breedType === s.breed && d.colorVariant === s.colorVariant) {
+          return false;
+        }
+      }
+      return true;
+    });
+    if (available.length === 0) return null;
+    return available[Math.floor(Math.random() * available.length)];
   }
 
   levelUp(id: string): boolean {
@@ -110,8 +202,49 @@ export class DogManager {
 
   /** Returns true if a dog has reached the threshold to graduate. */
   isReady(d: DogData): boolean {
+    if (!d.named) return false;
     if (d.readyForAdoption) return true;
     return d.level >= ADOPTION_LEVEL_REQ && d.happiness >= ADOPTION_HAPPINESS_REQ;
+  }
+
+  /**
+   * Assigns a random name to a stray, filtered against names already used
+   * by current dogs AND by dogs the player has previously adopted out.
+   * Falls back to a numbered variant only once every name has been used.
+   */
+  nameStray(id: string): string | null {
+    const dog = this.get(id);
+    if (!dog || dog.named) return null;
+    // If this stray matches a signature dog (breed + exact color variant)
+    // and that signature name is still available, claim the signature name.
+    // Otherwise fall back to the random pool.
+    const claimed = this.claimSignatureNameFor(dog.breedType, dog.colorVariant);
+    dog.name = claimed ?? this.pickUnusedName();
+    dog.named = true;
+    this.emit();
+    return dog.name;
+  }
+
+  private claimSignatureNameFor(breed: BreedType, variant: number): string | null {
+    const match = SIGNATURE_DOGS.find(
+      (s) => s.breed === breed && s.colorVariant === variant
+    );
+    if (!match) return null;
+    if (this.retiredNames.has(match.name)) return null;
+    for (const d of this.dogs) if (d.named && d.name === match.name) return null;
+    return match.name;
+  }
+
+  private pickUnusedName(): string {
+    const taken = new Set<string>(this.retiredNames);
+    for (const d of this.dogs) if (d.named) taken.add(d.name);
+    const available = DOG_NAMES.filter((n) => !taken.has(n));
+    if (available.length > 0) {
+      return available[Math.floor(Math.random() * available.length)];
+    }
+    // Pool exhausted — fall back to any name. By the time the player has
+    // burned through every name a duplicate feels like a tribute.
+    return DOG_NAMES[Math.floor(Math.random() * DOG_NAMES.length)];
   }
 
   /** Mark any qualifying dogs as ready (sticky once true). */
@@ -129,7 +262,7 @@ export class DogManager {
   /** Joy + Reputation reward for graduating a given dog. */
   adoptionReward(d: DogData): { joy: number; rep: number } {
     const roleMult = 0.6 + ROLE_INFO[d.role].repChance * 6; // rescue ~1.08, agility ~0.72
-    const joy = Math.floor(ADOPTION_JOY_BASE * Math.pow(d.level, 1.5) * roleMult);
+    const joy = Math.floor(ADOPTION_JOY_BASE * Math.pow(d.level, ADOPTION_LEVEL_EXP) * roleMult);
     const rep = ADOPTION_BASE_REP + Math.floor(d.level / 5);
     return { joy, rep };
   }
@@ -138,7 +271,9 @@ export class DogManager {
   remove(id: string): boolean {
     const idx = this.dogs.findIndex((d) => d.id === id);
     if (idx < 0) return false;
-    this.dogs.splice(idx, 1);
+    const [gone] = this.dogs.splice(idx, 1);
+    // A named dog who has been sent home retires their name for good.
+    if (gone && gone.named && gone.name) this.retiredNames.add(gone.name);
     this.emit();
     return true;
   }
