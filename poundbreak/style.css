@@ -1,0 +1,315 @@
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; user-select: none; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: #1a0f08;
+  color: #f3e9d2;
+  font-family: -apple-system, system-ui, sans-serif;
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+
+#game-root {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+}
+
+#view {
+  display: block;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  background: #000;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* ───── HUD ───── */
+#hud {
+  position: absolute;
+  top: env(safe-area-inset-top, 0);
+  left: 0;
+  right: 0;
+  padding: 10px 14px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.hud-panel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(30, 18, 10, 0.78);
+  border: 2px solid #8a5a2a;
+  border-radius: 10px;
+  padding: 8px 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5), inset 0 0 0 1px #d9a05c33;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.face {
+  font-size: 30px;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #3a1f10;
+  border: 2px solid #b87033;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.stat {
+  flex: 1;
+  text-align: center;
+  min-width: 0;
+}
+.stat-label {
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: #d9a05c;
+  font-weight: 700;
+}
+.stat-value {
+  font-size: 18px;
+  font-weight: 900;
+  color: #ffe9b6;
+  letter-spacing: 1px;
+}
+.key-slot .stat-value { color: #888; }
+.key-slot.has-key .stat-value { color: #ffd447; text-shadow: 0 0 8px #ffd44788; }
+
+#toast {
+  position: absolute;
+  left: 50%;
+  top: 64px;
+  transform: translateX(-50%);
+  background: rgba(15, 8, 4, 0.9);
+  border: 2px solid #d9a05c;
+  color: #ffe9b6;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  opacity: 0;
+  transition: opacity 0.25s;
+  white-space: nowrap;
+  pointer-events: none;
+}
+#toast.show { opacity: 1; }
+
+/* ───── Touch controls ───── */
+#touch-controls {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+#stick-zone, #look-zone {
+  position: absolute;
+  bottom: 0;
+  top: 60%;
+  width: 50%;
+  pointer-events: auto;
+}
+#stick-zone { left: 0; }
+#look-zone  { right: 0; }
+
+#stick-base {
+  position: absolute;
+  left: 24px;
+  bottom: calc(36px + env(safe-area-inset-bottom, 0));
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: rgba(40, 24, 14, 0.45);
+  border: 3px solid rgba(217, 160, 92, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+#stick-knob {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f3b566, #8a5a2a);
+  border: 2px solid #2a1609;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  transform: translate(0, 0);
+  transition: transform 0.05s;
+}
+
+#fire-btn {
+  position: absolute;
+  right: 24px;
+  bottom: calc(36px + env(safe-area-inset-bottom, 0));
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  border: 3px solid #4a90e2;
+  background: radial-gradient(circle at 35% 30%, #8ed0ff, #1e5799);
+  color: white;
+  font-size: 40px;
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  z-index: 6;
+}
+#fire-btn:active {
+  transform: scale(0.92);
+  background: radial-gradient(circle at 35% 30%, #b8e4ff, #2a7ac7);
+}
+
+/* Hide touch UI on desktop */
+@media (hover: hover) and (pointer: fine) {
+  #touch-controls { display: none; }
+}
+
+/* ───── Overlays ───── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 6, 3, 0.94);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 20;
+  padding-top: calc(20px + env(safe-area-inset-top, 0));
+  padding-bottom: calc(20px + env(safe-area-inset-bottom, 0));
+}
+.overlay.show { display: flex; }
+
+.overlay-card {
+  background: #2a1609;
+  border: 3px solid #d9a05c;
+  border-radius: 16px;
+  padding: 28px 24px;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6), inset 0 0 0 2px #8a5a2a66;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.overlay-card h1 {
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  color: #ffd447;
+  text-shadow: 0 2px 0 #4a2a10, 0 4px 12px rgba(255,212,71,0.3);
+  margin-bottom: 4px;
+}
+
+.tagline {
+  color: #d9a05c;
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.story {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #f3e9d2;
+  margin-bottom: 16px;
+}
+
+.objectives {
+  list-style: none;
+  text-align: left;
+  background: rgba(0,0,0,0.3);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+}
+.objectives li {
+  padding: 4px 0;
+  font-size: 14px;
+  color: #ffe9b6;
+  font-weight: 600;
+}
+
+.controls-help {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #d9a05c;
+  margin-bottom: 18px;
+}
+.pill {
+  display: inline-block;
+  padding: 1px 6px;
+  background: #1e5799;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 11px;
+}
+
+#start-btn, #retry-btn {
+  background: linear-gradient(180deg, #ffd447, #c89818);
+  border: 3px solid #4a2a10;
+  color: #2a1609;
+  font-weight: 900;
+  font-size: 18px;
+  letter-spacing: 3px;
+  padding: 14px 28px;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+  box-shadow: 0 4px 0 #4a2a10, 0 6px 12px rgba(0,0,0,0.4);
+  transition: transform 0.08s;
+}
+#start-btn:active, #retry-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #4a2a10, 0 3px 6px rgba(0,0,0,0.4);
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 14px;
+  color: #d9a05c;
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+.back-link:active { color: #ffd447; }
+
+#end-overlay .overlay-card h1 {
+  font-size: 44px;
+}
+#end-overlay.lose .overlay-card h1 {
+  color: #e24a4a;
+  text-shadow: 0 2px 0 #4a1010, 0 4px 12px rgba(226,74,74,0.3);
+}
+#end-body {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #f3e9d2;
+  margin-bottom: 20px;
+}
+
+/* Damage flash */
+#damage-flash {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 60, 60, 0.35);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s;
+  z-index: 9;
+}
+#damage-flash.show { opacity: 1; transition: opacity 0s; }

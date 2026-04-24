@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#2a1a10">
+  <title>Pound Break</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-root">
+    <canvas id="view"></canvas>
+
+    <div id="hud">
+      <div class="hud-panel">
+        <div class="face" id="face">&#x1F620;</div>
+        <div class="stat">
+          <div class="stat-label">HEALTH</div>
+          <div class="stat-value" id="stat-health">100</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">SOAKER</div>
+          <div class="stat-value" id="stat-ammo">20</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">PUPS</div>
+          <div class="stat-value" id="stat-pups">0/5</div>
+        </div>
+        <div class="stat key-slot" id="stat-key">
+          <div class="stat-label">KEY</div>
+          <div class="stat-value">&mdash;</div>
+        </div>
+      </div>
+      <div id="toast"></div>
+    </div>
+
+    <div id="touch-controls">
+      <div id="stick-zone">
+        <div id="stick-base">
+          <div id="stick-knob"></div>
+        </div>
+      </div>
+      <div id="look-zone"></div>
+      <button id="fire-btn" aria-label="Fire">&#x1F4A6;</button>
+    </div>
+
+    <div id="overlay" class="overlay show">
+      <div class="overlay-card">
+        <h1>POUND BREAK</h1>
+        <p class="tagline">A Pup Town rescue mission</p>
+        <p class="story">
+          Somebody's been snatching pups off the streets and stashing them in an old concrete kennel.
+          Grab your water pistol. Find the catchers. Splash 'em silly. Free every pup.
+        </p>
+        <ul class="objectives">
+          <li>&#x1F415; Rescue all 5 caged pups</li>
+          <li>&#x1F511; Find the collar key</li>
+          <li>&#x1F4A6; Soak the Boss Bulldog</li>
+          <li>&#x1F6AA; Escape out the back door</li>
+        </ul>
+        <div class="controls-help">
+          <strong>Phone:</strong> left thumb to move, right thumb to look, tap <span class="pill">&#x1F4A6;</span> to fire.<br>
+          <strong>Keys:</strong> WASD / arrows to move, mouse or Q/E to turn, SPACE to fire, E to open doors.
+        </div>
+        <button id="start-btn">LET'S GO</button>
+      </div>
+    </div>
+
+    <div id="end-overlay" class="overlay">
+      <div class="overlay-card">
+        <h1 id="end-title">WIN</h1>
+        <p id="end-body"></p>
+        <button id="retry-btn">PLAY AGAIN</button>
+        <a href="../hub.html" class="back-link">&larr; Back to hub</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
