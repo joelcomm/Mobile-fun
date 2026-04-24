@@ -39,7 +39,7 @@
 
   // ─── PLAYER ───────────────────────────────────────────
   const player = {
-    x: 2.5, y: 14.5, a: -Math.PI / 2,
+    x: 1.5, y: 14.5, a: -Math.PI / 2,
     hp: 100, ammo: 20, pups: 0, maxPups: 0, hasKey: false,
     fireCd: 0, hitFlash: 0, bob: 0,
     kick: 0,
@@ -60,12 +60,12 @@
       }
     }
   }
-  entities.push({ kind: "catcher", x: 7.5, y: 4.5, hp: 30, alive: true, vx: 0, vy: 0, fireCd: 1, wobble: 0 });
+  entities.push({ kind: "catcher", x: 10.5, y: 4.5, hp: 30, alive: true, vx: 0, vy: 0, fireCd: 1, wobble: 0 });
   entities.push({ kind: "catcher", x: 4.5, y: 8.5, hp: 30, alive: true, vx: 0, vy: 0, fireCd: 1, wobble: 0 });
   entities.push({ kind: "catcher", x: 11.5, y: 8.5, hp: 30, alive: true, vx: 0, vy: 0, fireCd: 1, wobble: 0 });
   entities.push({ kind: "mascot", x: 7.5, y: 10.5, hp: 55, alive: true, vx: 0, vy: 0, fireCd: 1.5, wobble: 0 });
   entities.push({ kind: "boss", x: 13.5, y: 10.5, hp: 180, alive: true, vx: 0, vy: 0, fireCd: 2, wobble: 0 });
-  entities.push({ kind: "toy", x: 3.5, y: 5.5, alive: true, bob: 0 });
+  entities.push({ kind: "toy", x: 13.5, y: 5.5, alive: true, bob: 0 });
   entities.push({ kind: "toy", x: 11.5, y: 13.5, alive: true, bob: 2 });
   entities.push({ kind: "ball", x: 10.5, y: 3.5, alive: true, bob: 0 });
   entities.push({ kind: "ball", x: 5.5, y: 10.5, alive: true, bob: 1 });
@@ -274,15 +274,23 @@
   }
 
   function drawSpriteBillboard(s, left, top, size, dist, l0, r0) {
-    // Use canvas drawing per sprite, with clipping and zbuffer
-    ctx.save();
+    // Build a single clipping path from visible columns (those passing zbuf)
+    let anyVisible = false;
+    let runStart = -1;
+    const runs = [];
     for (let x = l0; x < r0; x++) {
-      if (dist > zbuf[x]) continue;
-      // draw a vertical strip of this sprite at column x
-      ctx.beginPath(); ctx.rect(x, 0, 1, RH); ctx.clip();
-      drawSpriteShape(s, left, top, size);
-      ctx.restore(); ctx.save();
+      const vis = dist < zbuf[x];
+      if (vis && runStart < 0) runStart = x;
+      if (!vis && runStart >= 0) { runs.push([runStart, x]); runStart = -1; anyVisible = true; }
+      if (vis) anyVisible = true;
     }
+    if (runStart >= 0) runs.push([runStart, r0]);
+    if (!anyVisible) return;
+    ctx.save();
+    ctx.beginPath();
+    for (const r of runs) ctx.rect(r[0], 0, r[1] - r[0], RH);
+    ctx.clip();
+    drawSpriteShape(s, left, top, size);
     ctx.restore();
   }
 
@@ -577,9 +585,10 @@
     if (touch.look.active && touch.look.dxDelta) { turn += touch.look.dxDelta * 6; touch.look.dxDelta = 0; }
     player.a += turn * 2.6 * dt;
     const sp = 3.2 * dt;
-    const mag = Math.min(1, Math.hypot(fwd, strafe));
-    if (mag > 0.01) {
-      const fx = fwd / (mag || 1) * mag, sx = strafe / (mag || 1) * mag;
+    const mag = Math.hypot(fwd, strafe);
+    if (mag > 0.15) {
+      const norm = mag > 1 ? 1 / mag : 1;
+      const fx = fwd * norm, sx = strafe * norm;
       const nx = player.x + Math.cos(player.a) * fx * sp + Math.cos(player.a + Math.PI / 2) * sx * sp;
       const ny = player.y + Math.sin(player.a) * fx * sp + Math.sin(player.a + Math.PI / 2) * sx * sp;
       tryMove(nx, ny);
