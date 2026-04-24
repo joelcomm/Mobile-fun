@@ -1,14 +1,20 @@
 // Shared domain types for Pup Town Idle.
 
 export type BreedType =
-  | "mutt"
+  | "chihuahua"
+  | "dachshund"
   | "shiba"
   | "corgi"
-  | "husky"
+  | "beagle"
+  | "mutt"
   | "poodle"
-  | "dachshund"
   | "bulldog"
-  | "goldie";
+  | "dalmatian"
+  | "husky"
+  | "goldie"
+  | "greatdane"
+  | "yorkiepoo"
+  | "pomeranian";
 
 export type Personality =
   | "playful"
@@ -41,6 +47,29 @@ export interface DogData {
   position: Vec2;
   animState: AnimState;
   readyForAdoption?: boolean;
+  named?: boolean;
+  centerId?: string;             // which Rescue Center this pup lives in
+}
+
+export type BiomeId =
+  | "meadow"
+  | "harbor"
+  | "pine"
+  | "cloudtop"
+  | "moonlit"
+  | "wildflower"
+  | "coral"
+  | "evergreen"
+  | "starlight"
+  | "sunny";
+
+export interface Center {
+  id: string;
+  name: string;
+  adoptions: number;             // pups sent home from this center
+  biome?: BiomeId;               // cosmetic theme; inferred from name if absent
+  tier?: number;                 // 1..5 — drives joy bonus, dog cap, kennel visuals
+  mergeWeight?: number;          // legacy: kept on disk for old saves; unused now
 }
 
 export interface Resources {
@@ -94,6 +123,10 @@ export interface SaveState {
   buildings: BuildingData[];
   unlockedDogSlots: number;
   totalPlaytimeMs: number;
+  totalAdoptions?: number;       // drives escalating send-off fees
+  centers?: Center[];            // rescue centers owned; old saves default to one
+  currentCenterId?: string;
+  retiredNames?: string[];       // names of adopted-out dogs — never reused
 }
 
 export const SAVE_VERSION = 1;

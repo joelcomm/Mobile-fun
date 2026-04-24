@@ -2,6 +2,7 @@
 import { BUILDINGS, GAME_WIDTH } from "../config.js";
 import { Game } from "../Game.js";
 import { Panel } from "./Panel.js";
+import { formatNumber } from "../util/format.js";
 export class BuildMenu extends Panel {
     constructor(scene) {
         super(scene, "BUILD / UPGRADE");
@@ -80,11 +81,4 @@ export class BuildMenu extends Panel {
         btnLabel.setOrigin(0.5);
         this.content.add([bg, title, desc, btnBg, btnLabel]);
     }
-}
-function formatNumber(n) {
-    if (n < 1000)
-        return Math.floor(n).toString();
-    if (n < 1000000)
-        return (n / 1000).toFixed(1) + "k";
-    return (n / 1000000).toFixed(2) + "m";
 }

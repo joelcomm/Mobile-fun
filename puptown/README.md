@@ -2,14 +2,16 @@
 
 A cozy browser-based 2D idle game built with **Phaser 3** and **TypeScript**.
 Dogs wander a pixel-art yard generating Joy. Tap them for bonus Joy, build
-upgrades, adopt more pups, and watch for random events like Treat Rain,
-Zoomies, and the Golden Squeaky Toy.
+upgrades, adopt more pups, open new rescue centers, and watch for random
+events like Treat Rain, Zoomies, and the Golden Squeaky Toy.
 
 ## Play
 
-Open `index.html` in a browser, or serve the folder statically. The page
-loads Phaser from a CDN and `dist/main.js` as an ES module — no build step
-needed to play, so long as `dist/` is checked in.
+Live on GitHub Pages: https://joelcomm.github.io/puptown-idle/
+
+Or locally: open `index.html` in a browser, or serve the folder statically.
+The page loads Phaser from a CDN and `dist/main.js` as an ES module — no
+build step needed to play, so long as `dist/` is checked in.
 
 ## Develop
 

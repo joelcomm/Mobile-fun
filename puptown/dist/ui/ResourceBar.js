@@ -1,5 +1,6 @@
 // Top resource bar: Joy / Treats / Reputation + current Joy/s rate.
 import { GAME_WIDTH } from "../config.js";
+import { formatNumber } from "../util/format.js";
 export class ResourceBar extends Phaser.GameObjects.Container {
     constructor(scene) {
         super(scene, 0, 0);
@@ -41,15 +42,4 @@ export class ResourceBar extends Phaser.GameObjects.Container {
     updateRate(joyPerSec) {
         this.rateText.setText(`+${formatNumber(joyPerSec)}/s`);
     }
-}
-function formatNumber(n) {
-    if (n < 10)
-        return n.toFixed(1);
-    if (n < 1000)
-        return Math.floor(n).toString();
-    if (n < 1000000)
-        return (n / 1000).toFixed(2) + "k";
-    if (n < 1000000000)
-        return (n / 1000000).toFixed(2) + "m";
-    return (n / 1000000000).toFixed(2) + "b";
 }

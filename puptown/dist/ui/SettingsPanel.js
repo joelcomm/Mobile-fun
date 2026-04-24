@@ -1,31 +1,108 @@
 // Settings panel: manual save, wipe save, show playtime.
-import { GAME_WIDTH } from "../config.js";
+//
+// Unlike the other panels, we build the buttons once in the constructor and
+// only mutate the info text on refresh. Tearing the SAVE button down every
+// 600ms clobbered in-flight flashText tweens and felt like a lockup.
+import { GAME_HEIGHT, GAME_WIDTH } from "../config.js";
 import { Game } from "../Game.js";
 import { Panel } from "./Panel.js";
 export class SettingsPanel extends Panel {
     constructor(scene) {
         super(scene, "SETTINGS");
-        this.refresh();
+        this.buildOnce();
     }
-    refresh() {
-        this.clearContent();
+    buildOnce() {
         const game = Game.instance();
         const y = Panel.TOP + 34;
-        const info = this.scene.add.text(16, y, `Version 0.1.0\nPlaytime: ${formatDuration(game.totalPlaytimeMs)}\nDogs: ${game.dogs.count()}\nRep: ${Math.floor(game.resources.snapshot.reputation)}`, { fontFamily: "monospace", fontSize: "14px", color: "#2a2a3e", lineSpacing: 4 });
-        this.content.add(info);
+        this.infoText = this.scene.add.text(16, y, this.infoString(), {
+            fontFamily: "monospace",
+            fontSize: "14px",
+            color: "#2a2a3e",
+            lineSpacing: 4,
+        });
         const btnY = y + 108;
         const saveBtn = this.makeButton(GAME_WIDTH / 2 - 76, btnY, 140, 40, "\u{1F4BE} SAVE", 0x7fc56b);
+        this.saveLabel = saveBtn.label;
         saveBtn.bg.on("pointerdown", () => {
             Game.instance().forceSave();
-            this.flashText(saveBtn.label, "SAVED!");
+            this.flashSaveLabel();
         });
         const wipeBtn = this.makeButton(GAME_WIDTH / 2 + 76, btnY, 140, 40, "\u{1F5D1} WIPE", 0xff9ac1);
         wipeBtn.bg.on("pointerdown", () => {
-            if (confirm("Wipe your Pup Town save? This cannot be undone.")) {
-                Game.instance().wipeAndReload();
+            this.showConfirm("This will completely reset your progress. Are you sure?", () => Game.instance().wipeAndReload());
+        });
+        this.content.add([this.infoText, saveBtn.bg, saveBtn.label, wipeBtn.bg, wipeBtn.label]);
+        // ── PLAYTEST tools (remove before final release) ──────────────────────
+        const devY = btnY + 52;
+        const devLabel = this.scene.add.text(GAME_WIDTH / 2, devY - 12, "\u2014 PLAYTEST \u2014", {
+            fontFamily: "Inter, sans-serif",
+            fontSize: "11px",
+            fontStyle: "italic",
+            color: "#6b6b80",
+        });
+        devLabel.setOrigin(0.5);
+        const autoOn = game.autoPlay;
+        const autoBtn = this.makeButton(GAME_WIDTH / 2 - 76, devY + 18, 140, 38, `AUTO: ${autoOn ? "ON" : "OFF"}`, autoOn ? 0x7fc56b : 0xaaaaaa);
+        autoBtn.bg.on("pointerdown", () => {
+            const on = Game.instance().toggleAutoPlay();
+            autoBtn.label.setText(`AUTO: ${on ? "ON" : "OFF"}`);
+            autoBtn.bg.setFillStyle(on ? 0x7fc56b : 0xaaaaaa);
+        });
+        const speedBtn = this.makeButton(GAME_WIDTH / 2 + 76, devY + 18, 140, 38, `SPEED: ${game.speedMultiplier}x`, 0xffd86b);
+        speedBtn.bg.on("pointerdown", () => {
+            const s = Game.instance().cycleSpeed();
+            speedBtn.label.setText(`SPEED: ${s}x`);
+        });
+        this.content.add([devLabel, autoBtn.bg, autoBtn.label, speedBtn.bg, speedBtn.label]);
+        this.setContentBottom(devY + 50);
+    }
+    refresh() {
+        if (!this.infoText || !this.infoText.scene)
+            return;
+        this.infoText.setText(this.infoString());
+    }
+    infoString() {
+        const game = Game.instance();
+        return `Version 0.1.0\nPlaytime: ${formatDuration(game.totalPlaytimeMs)}\nDogs: ${game.dogs.count()}\nAdoptions: ${game.totalAdoptions}\nRep: ${Math.floor(game.resources.snapshot.reputation)}`;
+    }
+    flashSaveLabel() {
+        this.saveLabel.setText("SAVED!");
+        this.saveFlashTimer?.remove(false);
+        this.saveFlashTimer = this.scene.time.delayedCall(900, () => {
+            if (this.saveLabel && this.saveLabel.scene) {
+                this.saveLabel.setText("\u{1F4BE} SAVE");
             }
         });
-        this.content.add([saveBtn.bg, saveBtn.label, wipeBtn.bg, wipeBtn.label]);
+    }
+    showConfirm(message, onYes) {
+        const scene = this.scene;
+        const layer = scene.add.container(0, 0);
+        layer.setDepth(1000);
+        const dim = scene.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, 0x000000, 0.55);
+        dim.setInteractive();
+        dim.on("pointerdown", () => { });
+        const boxW = GAME_WIDTH - 48;
+        const boxH = 170;
+        const boxY = GAME_HEIGHT / 2;
+        const box = scene.add.rectangle(GAME_WIDTH / 2, boxY, boxW, boxH, 0xfff6d6);
+        box.setStrokeStyle(2, 0x2a2a3e, 0.7);
+        box.setInteractive();
+        box.on("pointerdown", () => { });
+        const msg = scene.add.text(GAME_WIDTH / 2, boxY - 30, message, {
+            fontFamily: "Inter, sans-serif",
+            fontSize: "15px",
+            color: "#2a2a3e",
+            align: "center",
+            wordWrap: { width: boxW - 28 },
+        });
+        msg.setOrigin(0.5);
+        const yesBtn = this.makeButton(GAME_WIDTH / 2 - 60, boxY + 42, 100, 42, "YES", 0xff5a7e);
+        yesBtn.label.setColor("#fff6d6");
+        const noBtn = this.makeButton(GAME_WIDTH / 2 + 60, boxY + 42, 100, 42, "NO", 0x7fc56b);
+        const close = () => layer.destroy();
+        yesBtn.bg.on("pointerdown", () => { close(); onYes(); });
+        noBtn.bg.on("pointerdown", close);
+        layer.add([dim, box, msg, yesBtn.bg, yesBtn.label, noBtn.bg, noBtn.label]);
     }
     makeButton(x, y, w, h, label, color) {
         const bg = this.scene.add.rectangle(x, y, w, h, color);
@@ -39,11 +116,6 @@ export class SettingsPanel extends Panel {
         });
         text.setOrigin(0.5);
         return { bg, label: text };
-    }
-    flashText(t, newText) {
-        const original = t.text;
-        t.setText(newText);
-        this.scene.time.delayedCall(900, () => t.setText(original));
     }
 }
 function formatDuration(ms) {

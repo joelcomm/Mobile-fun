@@ -2,6 +2,7 @@
 
 import { GAME_WIDTH } from "../config.js";
 import { Resources } from "../types.js";
+import { formatNumber } from "../util/format.js";
 
 declare const Phaser: typeof import("phaser");
 
@@ -60,12 +61,4 @@ export class ResourceBar extends Phaser.GameObjects.Container {
   updateRate(joyPerSec: number): void {
     this.rateText.setText(`+${formatNumber(joyPerSec)}/s`);
   }
-}
-
-function formatNumber(n: number): string {
-  if (n < 10) return n.toFixed(1);
-  if (n < 1000) return Math.floor(n).toString();
-  if (n < 1_000_000) return (n / 1000).toFixed(2) + "k";
-  if (n < 1_000_000_000) return (n / 1_000_000).toFixed(2) + "m";
-  return (n / 1_000_000_000).toFixed(2) + "b";
 }

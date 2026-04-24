@@ -156,8 +156,8 @@
           decodedEl.className = 'cipher-decoded';
           decodedEl.textContent = state.playerMap[coded] || state.lockedLetters[coded] || '';
 
-          charEl.appendChild(codedEl);
           charEl.appendChild(decodedEl);
+          charEl.appendChild(codedEl);
           wordEl.appendChild(charEl);
         } else {
           const punctEl = document.createElement('span');

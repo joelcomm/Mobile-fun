@@ -2,6 +2,13 @@
 
 import {
   BREED_LABELS,
+  CENTER_DOG_CAP_PER_TIER,
+  CENTER_JOY_BONUS_PER_TIER,
+  CENTER_TIER_LABELS,
+  LV_UP_BASE,
+  LV_UP_MULT,
+  MAX_CENTER_TIER,
+  NAMING_COST_JOY,
   ROLE_INFO,
   GAME_WIDTH,
 } from "../config.js";
@@ -9,6 +16,7 @@ import { Game } from "../Game.js";
 import { YardScene } from "../scenes/YardScene.js";
 import { DogData } from "../types.js";
 import { Panel } from "./Panel.js";
+import { formatNumber } from "../util/format.js";
 
 declare const Phaser: typeof import("phaser");
 
@@ -21,8 +29,12 @@ export class DogPanel extends Panel {
   refresh(): void {
     this.clearContent();
     const game = Game.instance();
-    const dogs = game.dogs.list();
+    const dogs = game.dogs.listCurrent();
     let y = Panel.TOP + 32;
+
+    // Current center header so the player always knows which yard they're
+    // managing, and a small ◀ ▶ shortcut when they own more than one.
+    y = this.drawCenterHeader(y);
 
     for (const d of dogs) {
       this.drawDogRow(d, y);
@@ -30,27 +42,172 @@ export class DogPanel extends Panel {
     }
 
     this.drawUnlockRow(y);
-    this.setContentBottom(y + 52);
+    y += 58;
+    this.drawTierUpgradeRow(y);
+    y += 58;
+    if (Game.instance().centers.canBuyMore()) {
+      this.drawBuyCenterRow(y);
+      y += 58;
+    }
+    this.setContentBottom(y);
+  }
+
+  private drawCenterHeader(y: number): number {
+    const scene = this.scene;
+    const game = Game.instance();
+    const centers = game.centers.list();
+    const current = game.centers.current();
+    const many = centers.length > 1;
+
+    const bg = scene.add.rectangle(GAME_WIDTH / 2, y + 16, GAME_WIDTH - 24, 32, 0xfff0b8);
+    bg.setStrokeStyle(1, 0xc89818, 0.5);
+    bg.setOrigin(0.5);
+    const label = scene.add.text(GAME_WIDTH / 2, y + 16,
+      `\u{1F3E1} ${current.name}  (${centers.length})`, {
+      fontFamily: "Inter, sans-serif",
+      fontSize: "13px",
+      fontStyle: "bold",
+      color: "#2a2a3e",
+    });
+    label.setOrigin(0.5);
+    this.content.add([bg, label]);
+
+    if (many) {
+      const left = this.makeButton(40, y + 16, 52, 28, "\u25C0", 0xffd86b);
+      left.bg.on("pointerdown", () => { game.centers.cycle(-1); this.refresh(); });
+      const right = this.makeButton(GAME_WIDTH - 40, y + 16, 52, 28, "\u25B6", 0xffd86b);
+      right.bg.on("pointerdown", () => { game.centers.cycle(1); this.refresh(); });
+      this.content.add([left.bg, left.label, right.bg, right.label]);
+    }
+    return y + 40;
+  }
+
+  private drawBuyCenterRow(y: number): void {
+    const scene = this.scene;
+    const game = Game.instance();
+    const cost = game.centers.costNext();
+    const needed = Math.max(0, cost.adoptions - game.totalAdoptions);
+    const canAfford = game.resources.canAfford({ joy: cost.joy });
+    const locked = needed > 0;
+
+    const bg = scene.add.rectangle(GAME_WIDTH / 2, y + 26, GAME_WIDTH - 24, 52, 0xeadff2);
+    bg.setStrokeStyle(1, 0x6b4aa2, 0.3);
+    bg.setOrigin(0.5);
+
+    const msg = locked
+      ? `Unlocks after ${needed} more adoption${needed === 1 ? "" : "s"}.`
+      : `Opens a new yard. +15% Joy/s globally!`;
+    const info = scene.add.text(18, y + 6, `OPEN NEW RESCUE CENTER\n${msg}`, {
+      fontFamily: "monospace",
+      fontSize: "12px",
+      color: "#2a2a3e",
+      lineSpacing: 3,
+    });
+
+    const color = locked ? 0xaaaaaa : canAfford ? 0x7fc56b : 0xff9ac1;
+    const btn = this.makeButton(
+      GAME_WIDTH - 52, y + 26, 80, 40,
+      `OPEN\n\u2600\uFE0F${formatNumber(cost.joy)}`,
+      color
+    );
+    btn.bg.on("pointerdown", () => {
+      if (locked) { this.flash(btn.bg, 0xff5a7e); return; }
+      if (Game.instance().handleBuyCenter()) {
+        this.refresh();
+      } else {
+        this.flash(btn.bg, 0xff5a7e);
+      }
+    });
+
+    this.content.add([bg, info, btn.bg, btn.label]);
+  }
+
+  private drawTierUpgradeRow(y: number): void {
+    const scene = this.scene;
+    const game = Game.instance();
+    const center = game.centers.current();
+    const tier = game.centers.tierOf(center.id);
+    const cost = game.centers.upgradeCost(center.id);
+    const tierLabel = CENTER_TIER_LABELS[tier] ?? `Tier ${tier}`;
+    const nextLabel = CENTER_TIER_LABELS[tier + 1] ?? `Tier ${tier + 1}`;
+    const bonusPct = Math.round(CENTER_JOY_BONUS_PER_TIER * 100);
+
+    const bg = scene.add.rectangle(GAME_WIDTH / 2, y + 26, GAME_WIDTH - 24, 52, 0xfff0b8);
+    bg.setStrokeStyle(1, 0xc89818, 0.5);
+    bg.setOrigin(0.5);
+
+    if (!cost) {
+      const info = scene.add.text(18, y + 6,
+        `${tierLabel.toUpperCase()} TIER (MAX)\nThis center is at full Tier ${MAX_CENTER_TIER}.`, {
+        fontFamily: "monospace",
+        fontSize: "12px",
+        color: "#2a2a3e",
+        lineSpacing: 3,
+      });
+      const btn = this.makeButton(GAME_WIDTH - 52, y + 26, 80, 40, "MAX\nTIER", 0xaaaaaa);
+      this.content.add([bg, info, btn.bg, btn.label]);
+      return;
+    }
+
+    const adoptionsHave = center.adoptions;
+    const adoptionsNeed = cost.adoptions;
+    const adoptionsOk = adoptionsHave >= adoptionsNeed;
+    const canAfford = game.resources.canAfford({ joy: cost.joy });
+    const locked = !adoptionsOk;
+    const need = adoptionsNeed - adoptionsHave;
+    const msg = locked
+      ? `Needs ${need} more grad${need === 1 ? "" : "s"} from this pen.`
+      : `→ ${nextLabel}: +${bonusPct}% Joy/s, +${CENTER_DOG_CAP_PER_TIER} pen slot.`;
+    const info = scene.add.text(18, y + 6,
+      `UPGRADE TIER (${tier}/${MAX_CENTER_TIER})\n${msg}`, {
+      fontFamily: "monospace",
+      fontSize: "12px",
+      color: "#2a2a3e",
+      lineSpacing: 3,
+    });
+    const color = locked ? 0xaaaaaa : canAfford ? 0xffd86b : 0xff9ac1;
+    const btn = this.makeButton(
+      GAME_WIDTH - 52, y + 26, 80, 40,
+      `TIER ${tier + 1}\n☀️${formatNumber(cost.joy)}`,
+      color
+    );
+    btn.bg.on("pointerdown", () => {
+      if (locked) { this.flash(btn.bg, 0xff5a7e); return; }
+      if (Game.instance().handleUpgradeCenterTier(center.id) !== null) {
+        this.refresh();
+      } else {
+        this.flash(btn.bg, 0xff5a7e);
+      }
+    });
+    this.content.add([bg, info, btn.bg, btn.label]);
   }
 
   private drawDogRow(d: DogData, y: number): void {
     const scene = this.scene;
     const game = Game.instance();
     const ready = game.dogs.isReady(d);
+    const isStray = !d.named;
     const rowBg = scene.add.rectangle(
       GAME_WIDTH / 2, y + 26, GAME_WIDTH - 24, 52,
-      ready ? 0xfff0b8 : 0xffffff
+      ready ? 0xfff0b8 : isStray ? 0xeae0d6 : 0xffffff
     );
-    rowBg.setStrokeStyle(1, ready ? 0xc89818 : 0x2a2a3e, ready ? 0.6 : 0.1);
+    rowBg.setStrokeStyle(
+      1,
+      ready ? 0xc89818 : isStray ? 0x6b6b80 : 0x2a2a3e,
+      ready ? 0.6 : isStray ? 0.4 : 0.1
+    );
     rowBg.setOrigin(0.5);
 
     const roleLabel = ROLE_INFO[d.role].label;
     const breed = BREED_LABELS[d.breedType];
-    const line1 = `${d.name}  Lv${d.level}${ready ? "  \u{1F393}" : ""}`;
+    const displayName = isStray ? "Stray pup" : d.name;
+    const line1 = `${displayName}  Lv${d.level}${ready ? "  \u{1F393}" : ""}`;
     const line2 = `${breed} / ${roleLabel}`;
-    const line3 = ready
-      ? `Ready for a forever home!`
-      : `\u{1F60A} ${Math.floor(d.happiness)}%  +${d.baseJoyPerSecond.toFixed(1)}/s  tap +${d.tapBonus.toFixed(1)}`;
+    const line3 = isStray
+      ? `Name them to make them yours.`
+      : ready
+        ? `Ready for a forever home!`
+        : `\u{1F60A} ${Math.floor(d.happiness)}%  +${d.baseJoyPerSecond.toFixed(1)}/s  tap +${d.tapBonus.toFixed(1)}`;
     const text = scene.add.text(18, y + 4, line1 + "\n" + line2 + "\n" + line3, {
       fontFamily: "monospace",
       fontSize: "13px",
@@ -58,13 +215,35 @@ export class DogPanel extends Panel {
       lineSpacing: 2,
     });
 
-    if (ready) {
-      const reward = game.dogs.adoptionReward(d);
+    // Stray: only NAME button is offered.
+    if (isStray) {
+      const canPay = game.resources.canAfford({ joy: NAMING_COST_JOY });
       const btn = this.makeButton(
         GAME_WIDTH - 52, y + 26, 80, 40,
-        `SEND HOME\n+${formatNumber(reward.joy)}`,
-        0xffd86b
+        `\u{1F3F7} NAME\n\u2600\uFE0F${NAMING_COST_JOY}`,
+        canPay ? 0x7fc56b : 0xff9ac1
       );
+      btn.bg.on("pointerdown", () => {
+        if (Game.instance().handleNameStray(d.id)) {
+          this.refresh();
+        } else {
+          this.flash(btn.bg, 0xff5a7e);
+        }
+      });
+      this.content.add([rowBg, text, btn.bg, btn.label]);
+      return;
+    }
+
+    if (ready) {
+      const reward = game.dogs.adoptionReward(d);
+      const fee = game.nextSendOffFee(d);
+      const canPayFee = game.resources.canAfford({ joy: fee });
+      const btn = this.makeButton(
+        GAME_WIDTH - 52, y + 26, 80, 40,
+        `SEND HOME\n+${formatNumber(reward.joy - fee)}\n(fee \u2600\uFE0F${formatNumber(fee)})`,
+        canPayFee ? 0xffd86b : 0xff9ac1
+      );
+      btn.label.setFontSize(11);
       btn.bg.on("pointerdown", () => {
         const yard = this.getYard();
         const sprite = yard?.getSprite(d.id);
@@ -72,13 +251,14 @@ export class DogPanel extends Panel {
         const yPos = sprite?.y ?? d.position.y;
         const got = Game.instance().handleGraduate(d.id);
         if (got && yard) yard.showRewardBurst(x, yPos, got);
-        this.refresh();
+        if (!got) this.flash(btn.bg, 0xff5a7e);
+        else this.refresh();
       });
       this.content.add([rowBg, text, btn.bg, btn.label]);
       return;
     }
 
-    const cost = Math.ceil(40 * Math.pow(2, d.level));
+    const cost = Math.ceil(LV_UP_BASE * Math.pow(LV_UP_MULT, d.level));
     const affordable = game.resources.canAfford({ joy: cost });
     const btn = this.makeButton(
       GAME_WIDTH - 52, y + 26, 80, 40,
@@ -107,20 +287,20 @@ export class DogPanel extends Panel {
     const cost = game.dogs.nextUnlockCost();
     const repNeeded = game.dogs.nextUnlockRep();
     const repCurrent = game.resources.snapshot.reputation;
-    const slotsLeft = cost > 0;
+    const slotsLeft = game.dogs.hasSlotOpen();
     const repOk = repCurrent >= repNeeded;
 
     const bg = scene.add.rectangle(GAME_WIDTH / 2, y + 26, GAME_WIDTH - 24, 52, 0xe8e0cf);
     bg.setStrokeStyle(1, 0x2a2a3e, 0.15);
     bg.setOrigin(0.5);
 
-    const locked = !repOk;
-    const msg = slotsLeft
-      ? locked
+    const locked = !slotsLeft || !repOk;
+    const msg = !slotsLeft
+      ? `Pen full! Graduate a pup.`
+      : !repOk
         ? `Needs \u2B50 ${repNeeded} Rep.`
-        : `Random role!`
-      : `All slots open!`;
-    const info = scene.add.text(18, y + 6, `ADOPT NEXT PUP\n${msg}`, {
+        : `Random role!`;
+    const info = scene.add.text(18, y + 6, `RESCUE A STRAY\n${msg}`, {
       fontFamily: "monospace",
       fontSize: "13px",
       color: "#2a2a3e",
@@ -136,7 +316,7 @@ export class DogPanel extends Panel {
     const btn = this.makeButton(
       GAME_WIDTH - 52, y + 26,
       80, 40,
-      `ADOPT\n\u2600\uFE0F${formatNumber(cost)}`,
+      slotsLeft ? `RESCUE\n\u2600\uFE0F${formatNumber(cost)}` : `PEN\nFULL`,
       color
     );
     btn.bg.on("pointerdown", () => {
@@ -177,8 +357,3 @@ export class DogPanel extends Panel {
   }
 }
 
-function formatNumber(n: number): string {
-  if (n < 1000) return Math.floor(n).toString();
-  if (n < 1_000_000) return (n / 1000).toFixed(1) + "k";
-  return (n / 1_000_000).toFixed(2) + "m";
-}
