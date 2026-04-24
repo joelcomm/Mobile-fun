@@ -10,6 +10,9 @@ export class DogManager {
         this.listeners = new Set();
         this.idCounter = 1;
         this.currentCenterId = "";
+        // Extra slots granted by the current center's tier upgrade. Game.ts
+        // refreshes this whenever the center changes or its tier is bumped.
+        this.capBonus = 0;
         // Names of dogs that have been adopted out. We never reuse them so the
         // player's pups always feel like individuals.
         this.retiredNames = new Set();
@@ -64,21 +67,32 @@ export class DogManager {
         for (const l of this.listeners)
             l(visible);
     }
+    /** Effective dog cap for the active center (base + tier bonus). */
+    effectiveCap() {
+        return DOGS_PER_PEN + this.capBonus;
+    }
     /** True while this center still has room for another dog. */
     hasSlotOpen() {
-        return this.countCurrent() < DOGS_PER_PEN;
+        return this.countCurrent() < this.effectiveCap();
+    }
+    /** Update the tier-driven slot bonus for the current center. */
+    setCapBonus(n) {
+        if (this.capBonus === n)
+            return;
+        this.capBonus = Math.max(0, Math.floor(n));
+        this.emit();
     }
     /** Cost (in Joy) to unlock the next dog slot in the current center. */
     nextUnlockCost() {
         const i = this.countCurrent();
-        if (i >= DOGS_PER_PEN)
+        if (i >= this.effectiveCap())
             return Infinity;
         return UNLOCK_COSTS[i] ?? UNLOCK_COSTS[UNLOCK_COSTS.length - 1];
     }
     /** Reputation needed before next slot can be unlocked. */
     nextUnlockRep() {
         const i = this.countCurrent();
-        if (i >= DOGS_PER_PEN)
+        if (i >= this.effectiveCap())
             return Infinity;
         return UNLOCK_REP[i] ?? UNLOCK_REP[UNLOCK_REP.length - 1];
     }

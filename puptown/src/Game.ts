@@ -95,8 +95,14 @@ export class Game {
       this.dogs.spawnStarter();
     }
 
-    // When the player switches centers, DogManager's view changes too.
-    this.centers.on((_, currentId) => this.dogs.setCurrentCenter(currentId));
+    // When the player switches centers, DogManager's view changes too —
+    // and the slot cap rebases to the new center's tier bonus.
+    this.centers.on((_, currentId) => {
+      this.dogs.setCurrentCenter(currentId);
+      this.dogs.setCapBonus(this.centers.dogCapBonus(currentId));
+    });
+    // Initial sync so the very first center applies its tier bonus too.
+    this.dogs.setCapBonus(this.centers.dogCapBonus(this.centers.currentIdValue()));
 
     // Autosave when tab hides / unloads. Skip while wiping so the wipe sticks.
     window.addEventListener("visibilitychange", () => {
@@ -303,6 +309,7 @@ export class Game {
 
   /** Try to buy the next rescue center; returns true on success. */
   handleBuyCenter(): boolean {
+    if (!this.centers.canBuyMore()) return false;
     const cost = this.centers.costNext();
     if (this.totalAdoptions < cost.adoptions) return false;
     if (!this.resources.spend({ joy: cost.joy })) return false;
@@ -310,25 +317,20 @@ export class Game {
     return true;
   }
 
-  /**
-   * Merge N source centers into one Mega Rescue. Any dogs living in the
-   * consumed centers are re-homed to the new one so the player never loses
-   * a pup. Returns true on success.
-   */
-  handleMergeCenters(sourceIds: string[]): boolean {
-    const result = this.centers.merge(sourceIds);
-    if (!result) return false;
-    // Re-parent dogs first — merge() has already flipped current to the
-    // new mega center, so the UI listener will refresh once we emit below.
-    for (const d of this.dogs.list()) {
-      if (d.centerId && result.absorbedIds.includes(d.centerId)) {
-        d.centerId = result.newId;
-      }
+  /** Pay to upgrade a center's tier; returns the new tier or null on failure. */
+  handleUpgradeCenterTier(centerId: string): number | null {
+    const cost = this.centers.upgradeCost(centerId);
+    if (!cost) return null;
+    const center = this.centers.list().find((c) => c.id === centerId);
+    if (!center) return null;
+    if (center.adoptions < cost.adoptions) return null;
+    if (!this.resources.spend({ joy: cost.joy })) return null;
+    const newTier = this.centers.upgradeTier(centerId);
+    // Refresh the dog cap bonus if we just upgraded the active center.
+    if (centerId === this.centers.currentIdValue()) {
+      this.dogs.setCapBonus(this.centers.dogCapBonus(centerId));
     }
-    // Force a DogManager re-emit so listCurrent() returns the freshly
-    // re-parented dogs (setCurrentCenter short-circuits when the id matches).
-    this.dogs.emit();
-    return true;
+    return newTier;
   }
 
   /** Pay to name a stray; returns chosen name or null on failure. */

@@ -68,7 +68,8 @@ export interface Center {
   name: string;
   adoptions: number;             // pups sent home from this center
   biome?: BiomeId;               // cosmetic theme; inferred from name if absent
-  mergeWeight?: number;          // 1 for a single center; higher after merging
+  tier?: number;                 // 1..5 — drives joy bonus, dog cap, kennel visuals
+  mergeWeight?: number;          // legacy: kept on disk for old saves; unused now
 }
 
 export interface Resources {

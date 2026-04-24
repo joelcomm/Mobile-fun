@@ -18,8 +18,121 @@ export class BootScene extends Phaser.Scene {
     this.makeGateIronTexture();
     this.makeGateGoldTexture();
     this.makeCloudTexture();
+    this.makeShadowTexture();
+    this.makePawTexture();
+    this.makeSkyGradient();
+    for (let t = 1; t <= 5; t++) this.makeKennelHouseTexture(t);
     this.scene.start("Yard");
     this.scene.launch("UI");
+  }
+
+  /** Soft drop-shadow oval rendered under each dog so they feel grounded. */
+  private makeShadowTexture(): void {
+    const g = this.make.graphics({ x: 0, y: 0 }, false);
+    g.fillStyle(0x000000, 0.05);
+    g.fillEllipse(16, 6, 32, 12);
+    g.fillStyle(0x000000, 0.08);
+    g.fillEllipse(16, 6, 24, 9);
+    g.fillStyle(0x000000, 0.14);
+    g.fillEllipse(16, 6, 16, 6);
+    g.generateTexture("shadow_oval", 32, 12);
+    g.destroy();
+  }
+
+  /** A tiny pixel paw print left as a particle on zoomies. */
+  private makePawTexture(): void {
+    const g = this.make.graphics({ x: 0, y: 0 }, false);
+    g.fillStyle(0x000000, 0);
+    g.fillRect(0, 0, 8, 8);
+    g.fillStyle(0x4a3a2a, 0.55);
+    g.fillEllipse(4, 5, 5, 4);
+    g.fillCircle(2, 2, 1);
+    g.fillCircle(4, 1, 1);
+    g.fillCircle(6, 2, 1);
+    g.fillCircle(7, 4, 1);
+    g.generateTexture("paw_print", 8, 8);
+    g.destroy();
+  }
+
+  /** Two-stop sky gradient. We tint per biome at draw time. */
+  private makeSkyGradient(): void {
+    const w = 32;
+    const h = 256;
+    const g = this.make.graphics({ x: 0, y: 0 }, false);
+    for (let y = 0; y < h; y++) {
+      const t = y / (h - 1);
+      const v = Math.round(255 - t * t * 80);
+      const color = (v << 16) | (v << 8) | 0xff;
+      g.fillStyle(color, 1);
+      g.fillRect(0, y, w, 1);
+    }
+    g.generateTexture("sky_gradient", w, h);
+    g.destroy();
+  }
+
+  /** Small kennel-house sprite that grows fancier with center tier. */
+  private makeKennelHouseTexture(tier: number): void {
+    const g = this.make.graphics({ x: 0, y: 0 }, false);
+    const W = 48;
+    const H = 44;
+    g.fillStyle(0x000000, 0);
+    g.fillRect(0, 0, W, H);
+
+    const palettes = [
+      { wall: 0xc59a6b, trim: 0x8a6a45, roof: 0x8b3a2e, roofHi: 0xc55a3a, door: 0x4a2a1a, flag: 0xff5a7e, accent: 0xfff6d6 },
+      { wall: 0xeacf9b, trim: 0x9a7a56, roof: 0x6a4a8a, roofHi: 0x9a7ac6, door: 0x4a2a1a, flag: 0xffd86b, accent: 0xfff6d6 },
+      { wall: 0xe8e0cf, trim: 0x6a4aa2, roof: 0x2a4a8e, roofHi: 0x4a7bd6, door: 0x2a2a3e, flag: 0x7fc56b, accent: 0xfff6d6 },
+      { wall: 0xfff0b8, trim: 0xc89818, roof: 0x6e3a8a, roofHi: 0xa86ad8, door: 0x2a2a3e, flag: 0xff5a7e, accent: 0xfff6d6 },
+      { wall: 0xfff6d6, trim: 0xcf9a1a, roof: 0xcf9a1a, roofHi: 0xffd86b, door: 0x2a2a3e, flag: 0xff5a7e, accent: 0xffd86b },
+    ];
+    const p = palettes[Math.max(0, Math.min(4, tier - 1))];
+
+    g.fillStyle(p.wall, 1);
+    g.fillRect(6, 18, W - 12, H - 18);
+    g.fillStyle(p.trim, 1);
+    g.fillRect(6, H - 6, W - 12, 3);
+    g.fillStyle(p.door, 1);
+    g.fillRect(W / 2 - 5, H - 16, 10, 12);
+    g.fillStyle(p.accent, 0.3);
+    g.fillEllipse(W / 2, H - 14, 8, 5);
+    if (tier >= 2) {
+      g.fillStyle(0xbfe6ff, 1);
+      g.fillRect(10, 24, 6, 6);
+      g.fillRect(W - 16, 24, 6, 6);
+      g.fillStyle(p.trim, 1);
+      g.fillRect(10, 27, 6, 1);
+      g.fillRect(13, 24, 1, 6);
+      g.fillRect(W - 16, 27, 6, 1);
+      g.fillRect(W - 13, 24, 1, 6);
+    }
+    g.fillStyle(p.roof, 1);
+    g.fillTriangle(2, 20, W - 2, 20, W / 2, 4);
+    g.fillStyle(p.roofHi, 1);
+    g.fillTriangle(W / 2 - 10, 12, W / 2 + 10, 12, W / 2, 4);
+    g.fillStyle(p.trim, 1);
+    g.fillRect(2, 18, W - 4, 2);
+    if (tier >= 2) {
+      g.fillStyle(0x6e522f, 1);
+      g.fillRect(W / 2 - 1, 4 - tier, 2, tier + 4);
+      g.fillStyle(p.flag, 1);
+      g.fillTriangle(W / 2 + 1, 4 - tier, W / 2 + 1, 4 - tier + 4, W / 2 + 7, 4 - tier + 2);
+    }
+    if (tier >= 5) {
+      g.fillStyle(p.trim, 1);
+      g.fillRect(6, 18, 4, 3);
+      g.fillRect(W - 10, 18, 4, 3);
+      g.fillRect(6, 16, 2, 2);
+      g.fillRect(10, 16, 2, 2);
+      g.fillRect(W - 10, 16, 2, 2);
+      g.fillRect(W - 14, 16, 2, 2);
+    }
+    g.fillStyle(0xff5a7e, 1);
+    g.fillCircle(W / 2 - 1.5, H - 19, 1.5);
+    g.fillCircle(W / 2 + 1.5, H - 19, 1.5);
+    g.fillTriangle(W / 2 - 3, H - 19, W / 2 + 3, H - 19, W / 2, H - 15);
+
+    g.generateTexture(`kennel_house_${tier}`, W, H);
+    g.destroy();
   }
 
   private makeGateWoodTexture(): void {

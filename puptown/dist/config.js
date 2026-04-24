@@ -35,7 +35,8 @@ export const TICK_MS = 250; // main sim tick
 export const SAVE_THROTTLE_MS = 5000; // don't save more than once per 5s
 export const MAX_OFFLINE_MS = 8 * 3600000; // cap offline earnings at 8h
 // ── Dog unlock costs (joy cost for slot N, 1-indexed) ────────────────────
-export const DOGS_PER_PEN = 12; // hard cap per center
+// Base cap is 12; tiered centers extend up to 16 (DOGS_PER_PEN + 4).
+export const DOGS_PER_PEN = 12; // base cap per center (tier 1)
 export const UNLOCK_COSTS = [
     0, // slot 1 free at start
     50,
@@ -49,10 +50,14 @@ export const UNLOCK_COSTS = [
     300000,
     700000,
     1500000,
+    3000000, // tier-2 slot
+    6000000, // tier-3 slot
+    12000000, // tier-4 slot
+    24000000, // tier-5 slot
 ];
 // Reputation threshold needed to unlock the Nth dog slot.
 export const UNLOCK_REP = [
-    0, 0, 1, 3, 6, 10, 16, 25, 40, 60, 85, 115,
+    0, 0, 1, 3, 6, 10, 16, 25, 40, 60, 85, 115, 150, 190, 235, 285,
 ];
 // ── Role specializations ─────────────────────────────────────────────────
 export const ROLE_INFO = {
@@ -403,13 +408,38 @@ export const NAMING_COST_JOY = 80;
 export const LV_UP_BASE = 30;
 export const LV_UP_MULT = 1.55;
 // ── Rescue Centers (multi-yard expansion) ────────────────────────────────
-// Players start with one center. Each additional center costs Joy and
-// requires a minimum number of lifetime adoptions, then gives a compounding
-// global Joy bonus. Use this to extend the game infinitely.
+// Players start with one center and may open up to CENTER_CAP total. Each
+// additional center costs Joy and requires lifetime adoptions. Centers no
+// longer compound infinitely; instead each center can be UPGRADED through
+// MAX_CENTER_TIER (see below) to earn the same global Joy bonus, plus a
+// growing dog-pen capacity and a fancier kennel visual.
+export const CENTER_CAP = 3;
 export const CENTER_BASE_JOY_COST = 500000;
 export const CENTER_JOY_MULT = 3; // cost for center N+1 = base * mult^(N-1)
 export const CENTER_ADOPTIONS_PER_TIER = 10; // center N unlocks after 10*(N-1) lifetime adoptions
-export const CENTER_JOY_BONUS_PER = 0.15; // +15% global Joy/s per extra center owned
+// ── Center Tier upgrades (replaces merge / infinite-centers) ─────────────
+// A center starts at tier 1. Upgrading one tier costs Joy + lifetime
+// adoptions from that center; each tier above 1 adds +15% global Joy and
+// +1 to that pen's dog cap, and bumps the kennel-house visual.
+export const MAX_CENTER_TIER = 5;
+export const CENTER_JOY_BONUS_PER_TIER = 0.15; // +15% global Joy/s per tier above 1
+export const CENTER_DOG_CAP_PER_TIER = 1; // +1 dog cap per tier above 1
+// Tier upgrade cost table — index = current tier (1..MAX-1) → cost to reach next.
+export const CENTER_TIER_JOY_COST = [
+    0, // tier 0 → unused
+    150000, // 1 → 2
+    600000, // 2 → 3
+    2000000, // 3 → 4
+    6000000, // 4 → 5
+];
+export const CENTER_TIER_ADOPTIONS_REQ = [
+    0, // 1 → 2
+    5, // 2 → 3 needs 5 lifetime adoptions in this center
+    15, // 3 → 4
+    30, // 4 → 5
+    60, // (unused — at MAX)
+];
+export const CENTER_TIER_LABELS = ["", "Cottage", "Kennel", "Manor", "Estate", "Castle"];
 export const CENTER_NAMES = [
     "Sunny Rescue",
     "Willow Haven",
@@ -472,11 +502,3 @@ export const YARD_DECOR = [
     { minLevel: 28, emoji: "\u{1F6B6}", x: 0.50, y: 0.12, size: 14 }, // walker N
     { minLevel: 40, emoji: "\u{1F451}", x: 0.50, y: 0.92, size: 16 }, // crown S (late-game)
 ];
-// ── Merge Centers (consolidation / prestige-lite) ────────────────────────
-// When the player owns at least MERGE_UNLOCK_COUNT centers, the option to
-// merge any MERGE_INPUT_COUNT into a single Mega Center appears. The new
-// center inherits the sum of the inputs' mergeWeight plus a synergy kicker.
-export const MERGE_UNLOCK_COUNT = 5;
-export const MERGE_INPUT_COUNT = 3;
-export const MERGE_SYNERGY_BONUS = 0.10; // +10% on top of the summed weight
-export const MERGE_MEGA_LABEL = "Mega Rescue";
