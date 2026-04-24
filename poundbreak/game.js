@@ -582,8 +582,11 @@
     if (keys["q"]) strafe -= 1;
     if (keys["e"]) strafe += 1;
     if (touch.move.active) { fwd += -touch.move.dy; strafe += touch.move.dx; }
-    if (touch.look.active && touch.look.dxDelta) { turn += touch.look.dxDelta * 6; touch.look.dxDelta = 0; }
-    player.a += turn * 2.6 * dt;
+    player.a += turn * 3.8 * dt;
+    if (touch.look.dxDelta) {
+      player.a += touch.look.dxDelta * (Math.PI / 220);
+      touch.look.dxDelta = 0;
+    }
     const sp = 3.2 * dt;
     const mag = Math.hypot(fwd, strafe);
     if (mag > 0.15) {
@@ -627,7 +630,7 @@
 
     let lookId = -1, lookX = 0;
     lookZone.addEventListener("pointerdown", e => { lookId = e.pointerId; lookZone.setPointerCapture(e.pointerId); touch.look.active = true; lookX = e.clientX; touch.look.dxDelta = 0; });
-    lookZone.addEventListener("pointermove", e => { if (e.pointerId !== lookId) return; const dx = e.clientX - lookX; lookX = e.clientX; touch.look.dxDelta = (touch.look.dxDelta || 0) + dx / 200; });
+    lookZone.addEventListener("pointermove", e => { if (e.pointerId !== lookId) return; const dx = e.clientX - lookX; lookX = e.clientX; touch.look.dxDelta = (touch.look.dxDelta || 0) + dx; });
     lookZone.addEventListener("pointerup", e => { if (e.pointerId === lookId) { lookId = -1; touch.look.active = false; } });
     lookZone.addEventListener("pointercancel", e => { if (e.pointerId === lookId) { lookId = -1; touch.look.active = false; } });
 
