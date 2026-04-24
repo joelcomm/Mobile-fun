@@ -2,11 +2,12 @@
 
 import {
   BREED_LABELS,
-  GAME_HEIGHT,
+  CENTER_DOG_CAP_PER_TIER,
+  CENTER_JOY_BONUS_PER_TIER,
+  CENTER_TIER_LABELS,
   LV_UP_BASE,
   LV_UP_MULT,
-  MERGE_INPUT_COUNT,
-  MERGE_SYNERGY_BONUS,
+  MAX_CENTER_TIER,
   NAMING_COST_JOY,
   ROLE_INFO,
   GAME_WIDTH,
@@ -42,10 +43,10 @@ export class DogPanel extends Panel {
 
     this.drawUnlockRow(y);
     y += 58;
-    this.drawBuyCenterRow(y);
+    this.drawTierUpgradeRow(y);
     y += 58;
-    if (Game.instance().centers.canMerge()) {
-      this.drawMergeCenterRow(y);
+    if (Game.instance().centers.canBuyMore()) {
+      this.drawBuyCenterRow(y);
       y += 58;
     }
     this.setContentBottom(y);
@@ -121,94 +122,64 @@ export class DogPanel extends Panel {
     this.content.add([bg, info, btn.bg, btn.label]);
   }
 
-  private drawMergeCenterRow(y: number): void {
+  private drawTierUpgradeRow(y: number): void {
     const scene = this.scene;
-    const bonus = Math.round(MERGE_SYNERGY_BONUS * 100);
+    const game = Game.instance();
+    const center = game.centers.current();
+    const tier = game.centers.tierOf(center.id);
+    const cost = game.centers.upgradeCost(center.id);
+    const tierLabel = CENTER_TIER_LABELS[tier] ?? `Tier ${tier}`;
+    const nextLabel = CENTER_TIER_LABELS[tier + 1] ?? `Tier ${tier + 1}`;
+    const bonusPct = Math.round(CENTER_JOY_BONUS_PER_TIER * 100);
+
     const bg = scene.add.rectangle(GAME_WIDTH / 2, y + 26, GAME_WIDTH - 24, 52, 0xfff0b8);
     bg.setStrokeStyle(1, 0xc89818, 0.5);
     bg.setOrigin(0.5);
+
+    if (!cost) {
+      const info = scene.add.text(18, y + 6,
+        `${tierLabel.toUpperCase()} TIER (MAX)\nThis center is at full Tier ${MAX_CENTER_TIER}.`, {
+        fontFamily: "monospace",
+        fontSize: "12px",
+        color: "#2a2a3e",
+        lineSpacing: 3,
+      });
+      const btn = this.makeButton(GAME_WIDTH - 52, y + 26, 80, 40, "MAX\nTIER", 0xaaaaaa);
+      this.content.add([bg, info, btn.bg, btn.label]);
+      return;
+    }
+
+    const adoptionsHave = center.adoptions;
+    const adoptionsNeed = cost.adoptions;
+    const adoptionsOk = adoptionsHave >= adoptionsNeed;
+    const canAfford = game.resources.canAfford({ joy: cost.joy });
+    const locked = !adoptionsOk;
+    const need = adoptionsNeed - adoptionsHave;
+    const msg = locked
+      ? `Needs ${need} more grad${need === 1 ? "" : "s"} from this pen.`
+      : `→ ${nextLabel}: +${bonusPct}% Joy/s, +${CENTER_DOG_CAP_PER_TIER} pen slot.`;
     const info = scene.add.text(18, y + 6,
-      `MERGE CENTERS\nFuse ${MERGE_INPUT_COUNT} into a Mega Rescue (+${bonus}% synergy).`, {
+      `UPGRADE TIER (${tier}/${MAX_CENTER_TIER})\n${msg}`, {
       fontFamily: "monospace",
       fontSize: "12px",
       color: "#2a2a3e",
       lineSpacing: 3,
     });
-    const btn = this.makeButton(GAME_WIDTH - 52, y + 26, 80, 40, "MERGE", 0xffd86b);
-    btn.bg.on("pointerdown", () => this.openMergePicker());
-    this.content.add([bg, info, btn.bg, btn.label]);
-  }
-
-  private openMergePicker(): void {
-    const scene = this.scene;
-    const game = Game.instance();
-    const centers = game.centers.list().slice();
-    const needed = game.centers.mergeInputCount();
-    const layer = scene.add.container(0, 0);
-    layer.setDepth(1000);
-    const dim = scene.add.rectangle(
-      GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, 0x000000, 0.55
+    const color = locked ? 0xaaaaaa : canAfford ? 0xffd86b : 0xff9ac1;
+    const btn = this.makeButton(
+      GAME_WIDTH - 52, y + 26, 80, 40,
+      `TIER ${tier + 1}\n☀️${formatNumber(cost.joy)}`,
+      color
     );
-    dim.setInteractive();
-
-    const boxH = Math.min(GAME_HEIGHT - 80, 120 + centers.length * 34);
-    const boxY = GAME_HEIGHT / 2;
-    const box = scene.add.rectangle(GAME_WIDTH / 2, boxY, GAME_WIDTH - 32, boxH, 0xfff6d6);
-    box.setStrokeStyle(2, 0x2a2a3e, 0.7);
-
-    const title = scene.add.text(GAME_WIDTH / 2, boxY - boxH / 2 + 12,
-      `Pick ${needed} centers to merge`, {
-      fontFamily: "Inter, sans-serif",
-      fontSize: "14px",
-      fontStyle: "bold",
-      color: "#2a2a3e",
-    });
-    title.setOrigin(0.5, 0);
-
-    const selection = new Set<string>();
-    const rowRefs: { id: string; bg: Phaser.GameObjects.Rectangle }[] = [];
-    const rowTop = boxY - boxH / 2 + 44;
-    centers.forEach((c, i) => {
-      const ry = rowTop + i * 30;
-      const rowBg = scene.add.rectangle(GAME_WIDTH / 2, ry, GAME_WIDTH - 56, 26, 0xffffff);
-      rowBg.setStrokeStyle(1, 0x2a2a3e, 0.4);
-      rowBg.setInteractive({ useHandCursor: true });
-      const label = scene.add.text(
-        GAME_WIDTH / 2 - (GAME_WIDTH - 56) / 2 + 8, ry - 8,
-        `${c.name}  \u00D7${(c.mergeWeight ?? 1).toFixed(2)}`, {
-          fontFamily: "monospace",
-          fontSize: "12px",
-          color: "#2a2a3e",
-        }
-      );
-      rowBg.on("pointerdown", () => {
-        if (selection.has(c.id)) {
-          selection.delete(c.id);
-          rowBg.setFillStyle(0xffffff);
-        } else if (selection.size < needed) {
-          selection.add(c.id);
-          rowBg.setFillStyle(0xffd86b);
-        }
-      });
-      rowRefs.push({ id: c.id, bg: rowBg });
-      layer.add([rowBg, label]);
-    });
-
-    const doBtn = this.makeButton(GAME_WIDTH / 2 - 60, boxY + boxH / 2 - 28, 100, 38, "MERGE", 0xff5a7e);
-    doBtn.label.setColor("#fff6d6");
-    const cancelBtn = this.makeButton(GAME_WIDTH / 2 + 60, boxY + boxH / 2 - 28, 100, 38, "CANCEL", 0x7fc56b);
-    doBtn.bg.on("pointerdown", () => {
-      if (selection.size !== needed) { this.flash(doBtn.bg, 0xffd86b); return; }
-      if (Game.instance().handleMergeCenters(Array.from(selection))) {
-        layer.destroy();
+    btn.bg.on("pointerdown", () => {
+      if (locked) { this.flash(btn.bg, 0xff5a7e); return; }
+      if (Game.instance().handleUpgradeCenterTier(center.id) !== null) {
         this.refresh();
       } else {
-        this.flash(doBtn.bg, 0xffd86b);
+        this.flash(btn.bg, 0xff5a7e);
       }
     });
-    cancelBtn.bg.on("pointerdown", () => layer.destroy());
-
-    layer.add([dim, box, title, doBtn.bg, doBtn.label, cancelBtn.bg, cancelBtn.label]);
+    this.content.add([bg, info, btn.bg, btn.label]);
   }
 
   private drawDogRow(d: DogData, y: number): void {

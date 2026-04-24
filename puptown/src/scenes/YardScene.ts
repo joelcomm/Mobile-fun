@@ -1,6 +1,6 @@
 // YardScene: renders the yard, spawns dogs, handles taps and floating Joy text.
 
-import { GAME_WIDTH, YARD, YARD_DECOR, kennelTierFor } from "../config.js";
+import { GAME_HEIGHT, GAME_WIDTH, YARD, YARD_DECOR, kennelTierFor } from "../config.js";
 import { DogSprite } from "../entities/Dog.js";
 import { Game } from "../Game.js";
 import { formatNumber } from "../util/format.js";
@@ -9,8 +9,12 @@ declare const Phaser: typeof import("phaser");
 
 export class YardScene extends Phaser.Scene {
   private sprites: Map<string, DogSprite> = new Map();
+  private shadows: Map<string, Phaser.GameObjects.Image> = new Map();
   private treatEmitterTimer = 0;
+  private pawTimer = 0;
   private grass!: Phaser.GameObjects.TileSprite;
+  private sky!: Phaser.GameObjects.Image;
+  private kennelHouse?: Phaser.GameObjects.Image;
   private kennelBanner!: Phaser.GameObjects.Text;
   private kennelVisualLevel = -1;
   private centerLabel!: Phaser.GameObjects.Text;
@@ -23,6 +27,7 @@ export class YardScene extends Phaser.Scene {
   private shownBiomeKey = "";
   private shownFenceKey = "";
   private shownGateKey = "";
+  private shownHouseTier = -1;
 
   constructor() {
     super("Yard");
@@ -31,8 +36,10 @@ export class YardScene extends Phaser.Scene {
   create(): void {
     const game = Game.instance();
 
-    // Canvas background is already sky-blue from the Phaser config; the
-    // yard layout is compressed on phones so we skip the cloud strip.
+    // Sky gradient sits behind everything else; biome tints it at draw time.
+    this.sky = this.add.image(GAME_WIDTH / 2, GAME_HEIGHT / 2, "sky_gradient");
+    this.sky.setDisplaySize(GAME_WIDTH, GAME_HEIGHT);
+    this.sky.setDepth(-10);
 
     // Grass yard. Tint and label come from the Kennel level.
     this.grass = this.add.tileSprite(
@@ -105,12 +112,14 @@ export class YardScene extends Phaser.Scene {
     game.centers.on((_list, _id) => {
       this.refreshCenterHeader();
       this.refreshBiome();
+      this.refreshKennelHouse();
     });
     this.refreshBiome();
+    this.refreshKennelHouse();
 
     // Spawn sprites for all current-center dogs.
     for (const d of game.dogs.listCurrent()) {
-      this.sprites.set(d.id, new DogSprite(this, d));
+      this.spawnDogSprite(d);
     }
     game.dogs.on((list) => this.syncDogs(list));
 
@@ -138,7 +147,17 @@ export class YardScene extends Phaser.Scene {
   update(_time: number, delta: number): void {
     Game.instance().tick(delta);
     for (const s of this.sprites.values()) s.tickUpdate(delta);
+    // Keep each shadow glued to its dog so the lift feels grounded.
+    for (const [id, shadow] of this.shadows) {
+      const sprite = this.sprites.get(id);
+      if (!sprite) continue;
+      shadow.x = sprite.x;
+      shadow.y = sprite.y + 14;
+      const sx = Math.abs(sprite.scaleX);
+      shadow.setScale(sx * 0.6, sx * 0.6);
+    }
     this.refreshKennelVisual();
+    this.refreshPawPrints(delta);
 
     // Auto-taps from Auto-Walker (targets the visible center's dogs).
     const game = Game.instance();
@@ -171,7 +190,7 @@ export class YardScene extends Phaser.Scene {
       seen.add(d.id);
       const existing = this.sprites.get(d.id);
       if (!existing) {
-        this.sprites.set(d.id, new DogSprite(this, d));
+        this.spawnDogSprite(d);
       } else if (existing.needsNameRefresh()) {
         existing.setDogName(d.name);
       }
@@ -183,12 +202,44 @@ export class YardScene extends Phaser.Scene {
     for (const [id, s] of this.sprites) {
       if (!seen.has(id)) {
         this.sprites.delete(id);
+        const shadow = this.shadows.get(id);
+        if (shadow) { shadow.destroy(); this.shadows.delete(id); }
         if (allIds.has(id)) {
           s.destroy();
         } else {
           s.playGraduateAnimation(() => s.destroy());
         }
       }
+    }
+  }
+
+  /** Construct the dog sprite + matching ground shadow in one place. */
+  private spawnDogSprite(d: import("../types.js").DogData): void {
+    const sprite = new DogSprite(this, d);
+    this.sprites.set(d.id, sprite);
+    const shadow = this.add.image(sprite.x, sprite.y + 14, "shadow_oval");
+    shadow.setDepth(-1);
+    shadow.setOrigin(0.5);
+    this.shadows.set(d.id, shadow);
+  }
+
+  /** Sprinkle paw-print particles whenever any dog is in zoomies state. */
+  private refreshPawPrints(delta: number): void {
+    this.pawTimer += delta;
+    if (this.pawTimer < 90) return;
+    this.pawTimer = 0;
+    for (const [, sprite] of this.sprites) {
+      if (sprite.dogData.animState !== "zoomies") continue;
+      const paw = this.add.image(sprite.x, sprite.y + 14, "paw_print");
+      paw.setDepth(-2);
+      paw.setAlpha(0.8);
+      this.tweens.add({
+        targets: paw,
+        alpha: 0,
+        duration: 700,
+        ease: "Cubic.easeOut",
+        onComplete: () => paw.destroy(),
+      });
     }
   }
 
@@ -295,17 +346,33 @@ export class YardScene extends Phaser.Scene {
     }
   }
 
-  /** Sync the biome-owned visuals (grass accent + corner decor). */
+  /** Sync the biome-owned visuals (grass accent + corner decor + sky). */
   private refreshBiome(): void {
     const game = Game.instance();
     const biome = game.centers.biomeFor(game.centers.currentIdValue());
     if (biome.id === this.shownBiomeKey) return;
     this.shownBiomeKey = biome.id;
     this.biomeDecor.setText(biome.decor);
+    this.sky.setTint(biome.skyTop);
     // Force a kennel-visual redraw so the fence + grass tint pick up the
     // new biome immediately (without this the cache short-circuits).
     this.kennelVisualLevel = -1;
     this.refreshKennelVisual(true);
+  }
+
+  /** Place / swap the kennel house sprite when center tier changes. */
+  private refreshKennelHouse(): void {
+    const game = Game.instance();
+    const tier = Math.max(1, Math.min(5, game.centers.tierOf(game.centers.currentIdValue())));
+    if (tier === this.shownHouseTier && this.kennelHouse) return;
+    if (this.kennelHouse) this.kennelHouse.destroy();
+    this.kennelHouse = this.add.image(
+      YARD.x + 36, YARD.y + 30,
+      `kennel_house_${tier}`
+    );
+    this.kennelHouse.setOrigin(0.5);
+    this.kennelHouse.setDepth(-2);
+    this.shownHouseTier = tier;
   }
 
   /** Floating reward text where a graduating pup stood. */
