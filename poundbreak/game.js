@@ -810,10 +810,10 @@
     let fwd = 0, strafe = 0, turn = 0;
     if (keys["w"] || keys["arrowup"]) fwd += 1;
     if (keys["s"] || keys["arrowdown"]) fwd -= 1;
-    if (keys["a"] || keys["arrowleft"]) turn -= 1;
-    if (keys["d"] || keys["arrowright"]) turn += 1;
-    if (keys["q"]) strafe -= 1;
-    if (keys["e"]) strafe += 1;
+    if (keys["a"] || keys["arrowleft"]) strafe -= 1;
+    if (keys["d"] || keys["arrowright"]) strafe += 1;
+    if (keys["q"]) turn -= 1;
+    if (keys["e"]) turn += 1;
     if (touch.move.active) { fwd += -touch.move.dy; strafe += touch.move.dx; }
     player.a += turn * 3.8 * dt;
     if (touch.look.dxDelta) {
@@ -951,10 +951,31 @@
 
   setupTouch();
 
+  // ─── DESKTOP MOUSE-LOOK (pointer lock) ────────────────
+  cvs.addEventListener("click", () => {
+    if (!running) return;
+    if (document.pointerLockElement !== cvs) cvs.requestPointerLock();
+  });
+  document.addEventListener("mousemove", e => {
+    if (document.pointerLockElement === cvs && running) {
+      player.a += e.movementX * 0.0028;
+    }
+  });
+  document.addEventListener("mousedown", e => {
+    if (document.pointerLockElement === cvs && running && e.button === 0) {
+      if (player.fireCd <= 0) fireWater();
+    }
+  });
+
   document.getElementById("start-btn").addEventListener("click", () => {
     overlay.classList.remove("show");
     running = true;
     try { actx().resume(); } catch (e) {}
+    // Auto-engage pointer lock on desktop so the user can immediately
+    // turn with the trackpad/mouse without an extra click.
+    if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      try { cvs.requestPointerLock(); } catch (e) {}
+    }
   });
   document.getElementById("retry-btn").addEventListener("click", () => {
     location.reload();
