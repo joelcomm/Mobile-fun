@@ -319,10 +319,9 @@ export class Game {
 
   /** Pay to upgrade a center's tier; returns the new tier or null on failure. */
   handleUpgradeCenterTier(centerId: string): number | null {
-    const cost = this.centers.upgradeCost(centerId);
-    if (!cost) return null;
     const center = this.centers.list().find((c) => c.id === centerId);
     if (!center) return null;
+    const cost = this.centers.upgradeCost(centerId);
     if (center.adoptions < cost.adoptions) return null;
     if (!this.resources.spend({ joy: cost.joy })) return null;
     const newTier = this.centers.upgradeTier(centerId);
