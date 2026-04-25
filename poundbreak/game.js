@@ -561,16 +561,19 @@
     for (let i = 0; i < 4; i++) { const a = (i / 4) * Math.PI * 2; ctx.beginPath(); ctx.moveTo(cx + Math.cos(a) * sz * 0.15, cy + Math.sin(a) * sz * 0.1); ctx.lineTo(cx, cy); ctx.stroke(); }
   }
 
-  // ─── WEAPON ───────────────────────────────────────────
-  // Persistent splash particles for the muzzle.
+  // ─── WEAPON (first-person) ────────────────────────────
+  // Splash particles emit upward from the muzzle (which sits near the
+  // top of the foreshortened barrel).
   const splashes = [];
   function spawnSplash() {
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 8; i++) {
+      const a = -Math.PI / 2 + (Math.random() - 0.5) * 1.4;
+      const sp = 70 + Math.random() * 80;
       splashes.push({
         x: 0, y: 0,
-        vx: 60 + Math.random() * 80,
-        vy: -30 + Math.random() * 60,
-        life: 0.25 + Math.random() * 0.15,
+        vx: Math.cos(a) * sp,
+        vy: Math.sin(a) * sp,
+        life: 0.3 + Math.random() * 0.2,
         size: 2 + Math.random() * 3,
       });
     }
@@ -578,101 +581,146 @@
   function updateSplashes(dt) {
     for (let i = splashes.length - 1; i >= 0; i--) {
       const p = splashes[i];
-      p.x += p.vx * dt; p.y += p.vy * dt; p.vy += 200 * dt; p.life -= dt;
+      p.x += p.vx * dt; p.y += p.vy * dt; p.vy += 220 * dt; p.life -= dt;
       if (p.life <= 0) splashes.splice(i, 1);
     }
   }
 
   function drawWeapon() {
-    const bob = Math.sin(player.bob) * 4;
-    const kick = player.kick * 22;
+    const bob = Math.sin(player.bob) * 3;
+    const kick = player.kick * 14;
     const sway = Math.cos(player.bob * 0.5) * 2;
-    // anchor weapon at lower-center
-    const bx = RW / 2 - 60 + sway, by = RH - 92 + bob + kick;
-    // ── HAND / ARM ──
-    ctx.fillStyle = "#3a1f10"; // sleeve cuff shadow
-    ctx.fillRect(bx + 24, by + 64, 30, 28);
-    ctx.fillStyle = "#5a3018"; // sleeve
-    ctx.fillRect(bx + 22, by + 60, 34, 30);
-    ctx.fillStyle = "#7a4528"; ctx.fillRect(bx + 22, by + 60, 34, 4); // sleeve highlight
-    ctx.strokeStyle = "#1a0a04"; ctx.lineWidth = 2; ctx.strokeRect(bx + 22, by + 60, 34, 30);
-    // hand
-    ctx.fillStyle = "#f3c99a"; ctx.fillRect(bx + 28, by + 50, 22, 18);
-    ctx.fillStyle = "#d9a878"; ctx.fillRect(bx + 28, by + 64, 22, 4);
-    ctx.strokeStyle = "#4a2a10"; ctx.lineWidth = 1.5; ctx.strokeRect(bx + 28, by + 50, 22, 18);
-    // thumb
-    ctx.fillStyle = "#f3c99a"; ctx.beginPath(); ctx.arc(bx + 50, by + 56, 5, -Math.PI / 2, Math.PI / 2); ctx.fill();
-    ctx.strokeStyle = "#4a2a10"; ctx.stroke();
-    // ── PISTOL BODY (super-soaker style) ──
-    // back grip
-    ctx.fillStyle = "#1e5799"; ctx.fillRect(bx + 26, by + 36, 22, 26);
-    ctx.fillStyle = "#3a78bb"; ctx.fillRect(bx + 26, by + 36, 6, 26); // highlight
-    ctx.strokeStyle = "#0a1a2a"; ctx.lineWidth = 2; ctx.strokeRect(bx + 26, by + 36, 22, 26);
-    // main barrel housing
-    ctx.fillStyle = "#4a90e2"; ctx.fillRect(bx + 18, by + 18, 100, 26);
-    // top highlight stripe
-    ctx.fillStyle = "#8ed0ff"; ctx.fillRect(bx + 18, by + 18, 100, 4);
-    ctx.fillStyle = "#1e5799"; ctx.fillRect(bx + 18, by + 38, 100, 6); // bottom shadow
-    ctx.strokeStyle = "#0a1a2a"; ctx.lineWidth = 2; ctx.strokeRect(bx + 18, by + 18, 100, 26);
-    // bolts
+    const cx = RW / 2 + sway;
+    const baseY = RH + bob + kick; // bottom of weapon
+    // Vertical layout (bottom→top): hand → grip → trigger area → body → barrel → muzzle.
+    // The barrel narrows toward the top to give a foreshortened, into-the-scene feel.
+    const muzzleY = baseY - 110;
+
+    // ── BARREL/BODY (trapezoid, wider at base, narrow at muzzle) ──
+    // back outline
     ctx.fillStyle = "#0a1a2a";
-    ctx.beginPath(); ctx.arc(bx + 26, by + 31, 2.5, 0, Math.PI * 2); ctx.fill();
-    ctx.beginPath(); ctx.arc(bx + 60, by + 31, 2.5, 0, Math.PI * 2); ctx.fill();
-    ctx.beginPath(); ctx.arc(bx + 95, by + 31, 2.5, 0, Math.PI * 2); ctx.fill();
-    // trigger guard
-    ctx.strokeStyle = "#0a1a2a"; ctx.lineWidth = 3;
-    ctx.beginPath(); ctx.arc(bx + 36, by + 56, 8, -0.2, Math.PI + 0.2); ctx.stroke();
-    // trigger
-    ctx.fillStyle = "#222"; ctx.fillRect(bx + 32, by + 48, 4, 12);
-    // RESERVOIR (top tank)
-    ctx.fillStyle = "#0a1a2a"; ctx.fillRect(bx + 38, by - 2, 64, 24);
-    ctx.fillStyle = "#a8d8ff"; ctx.fillRect(bx + 40, by, 60, 20);
-    // water level
+    ctx.beginPath();
+    ctx.moveTo(cx - 32, baseY - 36);
+    ctx.lineTo(cx + 32, baseY - 36);
+    ctx.lineTo(cx + 16, muzzleY + 4);
+    ctx.lineTo(cx - 16, muzzleY + 4);
+    ctx.closePath(); ctx.fill();
+    // main blue body
+    ctx.fillStyle = "#1e5799";
+    ctx.beginPath();
+    ctx.moveTo(cx - 30, baseY - 38);
+    ctx.lineTo(cx + 30, baseY - 38);
+    ctx.lineTo(cx + 14, muzzleY + 6);
+    ctx.lineTo(cx - 14, muzzleY + 6);
+    ctx.closePath(); ctx.fill();
+    // left highlight strip (perspective edge)
+    ctx.fillStyle = "#3a78bb";
+    ctx.beginPath();
+    ctx.moveTo(cx - 30, baseY - 38);
+    ctx.lineTo(cx - 22, baseY - 38);
+    ctx.lineTo(cx - 11, muzzleY + 6);
+    ctx.lineTo(cx - 14, muzzleY + 6);
+    ctx.closePath(); ctx.fill();
+    // top "shoulder" of the gun
+    ctx.fillStyle = "#4a90e2"; ctx.fillRect(cx - 30, baseY - 42, 60, 6);
+    ctx.strokeStyle = "#0a1a2a"; ctx.lineWidth = 2; ctx.strokeRect(cx - 30, baseY - 42, 60, 6);
+    // bolts running up the side
+    ctx.fillStyle = "#0a1a2a";
+    for (let i = 0; i < 3; i++) {
+      const t = i / 3;
+      const px = cx - 18 + t * 4;
+      const py = baseY - 50 - t * 50;
+      ctx.beginPath(); ctx.arc(px, py, 2.2, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx + 18 - t * 4, py, 2.2, 0, Math.PI * 2); ctx.fill();
+    }
+
+    // ── RESERVOIR (sitting on top, foreshortened oval shape) ──
+    const tankCx = cx + 4, tankCy = baseY - 70;
+    ctx.fillStyle = "#0a1a2a";
+    ctx.beginPath(); ctx.ellipse(tankCx, tankCy, 30, 18, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#a8d8ff";
+    ctx.beginPath(); ctx.ellipse(tankCx, tankCy, 27, 15, 0, 0, Math.PI * 2); ctx.fill();
+    // water level (clipped to tank ellipse)
     const waterPct = Math.max(0, Math.min(1, player.ammo / 30));
-    const waterY = by + (1 - waterPct) * 18;
-    ctx.fillStyle = "#1e7adc"; ctx.fillRect(bx + 40, waterY, 60, by + 20 - waterY);
-    // wave on top of water
+    ctx.save();
+    ctx.beginPath(); ctx.ellipse(tankCx, tankCy, 27, 15, 0, 0, Math.PI * 2); ctx.clip();
+    const waterY = tankCy + 15 - waterPct * 30;
+    ctx.fillStyle = "#1e7adc"; ctx.fillRect(tankCx - 30, waterY, 60, 60);
+    // wave
     ctx.fillStyle = "#3a90ec"; ctx.beginPath();
-    ctx.moveTo(bx + 40, waterY);
-    for (let i = 0; i <= 8; i++) {
-      const wx = bx + 40 + i * 7.5;
-      const wy = waterY + Math.sin(player.bob * 2 + i) * 1.5;
+    ctx.moveTo(tankCx - 30, waterY);
+    for (let i = 0; i <= 12; i++) {
+      const wx = tankCx - 30 + i * 5;
+      const wy = waterY + Math.sin(player.bob * 2 + i * 0.7) * 1.6;
       ctx.lineTo(wx, wy);
     }
-    ctx.lineTo(bx + 100, waterY); ctx.closePath(); ctx.fill();
+    ctx.lineTo(tankCx + 30, waterY + 60); ctx.lineTo(tankCx - 30, waterY + 60); ctx.closePath(); ctx.fill();
     // bubbles
-    ctx.fillStyle = "rgba(255,255,255,0.6)";
+    ctx.fillStyle = "rgba(255,255,255,0.65)";
     for (let i = 0; i < 3; i++) {
-      const t = (performance.now() / 600 + i * 0.33) % 1;
-      ctx.beginPath(); ctx.arc(bx + 50 + i * 16, waterY + (1 - t) * (by + 18 - waterY), 2 + i, 0, Math.PI * 2); ctx.fill();
+      const t = (performance.now() / 700 + i * 0.33) % 1;
+      ctx.beginPath(); ctx.arc(tankCx - 12 + i * 12, waterY + 12 + (1 - t) * 14, 1.8 + i * 0.5, 0, Math.PI * 2); ctx.fill();
     }
+    ctx.restore();
     // tank cap
-    ctx.fillStyle = "#ffd447"; ctx.fillRect(bx + 90, by - 8, 14, 8);
-    ctx.strokeStyle = "#7a5a10"; ctx.strokeRect(bx + 90, by - 8, 14, 8);
-    // hose connecting tank to barrel
-    ctx.strokeStyle = "#7090b0"; ctx.lineWidth = 5; ctx.beginPath();
-    ctx.moveTo(bx + 50, by + 22); ctx.bezierCurveTo(bx + 56, by + 14, bx + 60, by + 8, bx + 70, by + 8); ctx.stroke();
-    ctx.strokeStyle = "#4a6080"; ctx.lineWidth = 1; ctx.stroke();
-    // BARREL (long nozzle)
-    ctx.fillStyle = "#0a1a2a"; ctx.fillRect(bx + 116, by + 22, 16, 18);
-    ctx.fillStyle = "#1e5799"; ctx.fillRect(bx + 118, by + 24, 12, 14);
-    ctx.fillStyle = "#0a1a2a"; ctx.beginPath(); ctx.arc(bx + 130, by + 31, 5, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "#000"; ctx.beginPath(); ctx.arc(bx + 130, by + 31, 3.5, 0, Math.PI * 2); ctx.fill();
-    // PUMP HANDLE underneath barrel
-    ctx.fillStyle = "#3a1f10"; ctx.fillRect(bx + 50, by + 46, 60, 8);
-    ctx.fillStyle = "#5a3018"; ctx.fillRect(bx + 50, by + 46, 60, 3);
-    ctx.strokeStyle = "#1a0a04"; ctx.lineWidth = 1.5; ctx.strokeRect(bx + 50, by + 46, 60, 8);
-    // muzzle flash + splashes
+    ctx.fillStyle = "#ffd447"; ctx.fillRect(tankCx + 22, tankCy - 8, 10, 8);
+    ctx.strokeStyle = "#7a5a10"; ctx.strokeRect(tankCx + 22, tankCy - 8, 10, 8);
+    // hose feeding from tank into the gun body
+    ctx.strokeStyle = "#7090b0"; ctx.lineWidth = 4;
+    ctx.beginPath(); ctx.moveTo(tankCx - 18, tankCy + 6); ctx.bezierCurveTo(tankCx - 14, tankCy + 18, cx - 8, baseY - 56, cx - 4, baseY - 46); ctx.stroke();
+    ctx.strokeStyle = "#3a5070"; ctx.lineWidth = 1; ctx.stroke();
+
+    // ── MUZZLE (tip pointing into the scene) ──
+    ctx.fillStyle = "#0a1a2a"; ctx.beginPath(); ctx.arc(cx, muzzleY, 12, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#1e5799"; ctx.beginPath(); ctx.arc(cx, muzzleY, 9, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#4a90e2"; ctx.beginPath(); ctx.arc(cx - 2, muzzleY - 2, 2, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#000"; ctx.beginPath(); ctx.arc(cx, muzzleY, 4.5, 0, Math.PI * 2); ctx.fill();
+
+    // ── TRIGGER GUARD ──
+    ctx.strokeStyle = "#0a1a2a"; ctx.lineWidth = 4;
+    ctx.beginPath(); ctx.arc(cx, baseY - 26, 12, -0.2, Math.PI + 0.2); ctx.stroke();
+    // trigger
+    ctx.fillStyle = "#1a1a1a"; ctx.fillRect(cx - 2, baseY - 34, 4, 14);
+
+    // ── GRIP ──
+    ctx.fillStyle = "#3a1f10"; ctx.fillRect(cx - 16, baseY - 22, 32, 26);
+    ctx.fillStyle = "#5a3018"; ctx.fillRect(cx - 16, baseY - 22, 5, 26); // highlight
+    ctx.strokeStyle = "#1a0a04"; ctx.lineWidth = 2; ctx.strokeRect(cx - 16, baseY - 22, 32, 26);
+    // grip texture lines
+    ctx.strokeStyle = "#2a1408"; ctx.lineWidth = 1;
+    for (let i = 0; i < 3; i++) { const gy = baseY - 18 + i * 7; ctx.beginPath(); ctx.moveTo(cx - 14, gy); ctx.lineTo(cx + 14, gy); ctx.stroke(); }
+
+    // ── HAND wrapping the grip (closest to camera) ──
+    // sleeve cuff
+    ctx.fillStyle = "#5a3018"; ctx.fillRect(cx - 36, baseY - 4, 72, 16);
+    ctx.fillStyle = "#7a4528"; ctx.fillRect(cx - 36, baseY - 4, 72, 4);
+    ctx.strokeStyle = "#1a0a04"; ctx.lineWidth = 2; ctx.strokeRect(cx - 36, baseY - 4, 72, 16);
+    // back of hand wrapping grip
+    ctx.fillStyle = "#f3c99a"; ctx.fillRect(cx - 26, baseY - 16, 52, 16);
+    ctx.fillStyle = "#d9a878"; ctx.fillRect(cx - 26, baseY - 6, 52, 4);
+    ctx.strokeStyle = "#4a2a10"; ctx.lineWidth = 1.5; ctx.strokeRect(cx - 26, baseY - 16, 52, 16);
+    // fingers wrapping over grip
+    ctx.fillStyle = "#e0b88a";
+    for (let i = 0; i < 4; i++) {
+      const fx = cx - 22 + i * 11;
+      ctx.fillRect(fx, baseY - 22, 9, 8);
+      ctx.strokeStyle = "#4a2a10"; ctx.strokeRect(fx, baseY - 22, 9, 8);
+    }
+    // thumb peeking up the back
+    ctx.fillStyle = "#f3c99a"; ctx.fillRect(cx + 10, baseY - 28, 10, 14);
+    ctx.strokeStyle = "#4a2a10"; ctx.strokeRect(cx + 10, baseY - 28, 10, 14);
+
+    // ── MUZZLE FLASH + SPLASH PARTICLES ──
     if (player.kick > 0.05) {
       const k = player.kick;
       ctx.fillStyle = "rgba(170,220,255," + (0.5 + k * 0.5) + ")";
-      ctx.beginPath(); ctx.arc(bx + 138, by + 31, 4 + k * 14, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx, muzzleY - k * 4, 6 + k * 18, 0, Math.PI * 2); ctx.fill();
       ctx.fillStyle = "rgba(255,255,255," + (0.4 + k * 0.4) + ")";
-      ctx.beginPath(); ctx.arc(bx + 138, by + 31, 2 + k * 6, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx, muzzleY - k * 4, 3 + k * 8, 0, Math.PI * 2); ctx.fill();
     }
     for (const p of splashes) {
       ctx.fillStyle = "rgba(110,200,255," + Math.max(0, p.life * 3) + ")";
-      ctx.beginPath(); ctx.arc(bx + 138 + p.x, by + 31 + p.y, p.size, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx + p.x, muzzleY + p.y, p.size, 0, Math.PI * 2); ctx.fill();
     }
   }
 
@@ -805,6 +853,34 @@
     }
   }
 
+  // Anti-softlock: if the player is out of ammo and there are no
+  // tennis balls left in the level (yet enemies still alive), drop a
+  // fresh ball on a nearby floor tile.
+  let _ammoSpawnCooldown = 0;
+  function ensureAmmoAvailable() {
+    if (_ammoSpawnCooldown > 0) { _ammoSpawnCooldown--; return; }
+    if (player.ammo > 0) return;
+    const ballsLeft = entities.some(e => e.kind === "ball" && e.alive);
+    if (ballsLeft) return;
+    const enemiesLeft = entities.some(e => e.alive && e.hp != null);
+    if (!enemiesLeft) return;
+    const px = player.x | 0, py = player.y | 0;
+    for (let r = 1; r <= 6; r++) {
+      for (let dy = -r; dy <= r; dy++) {
+        for (let dx = -r; dx <= r; dx++) {
+          if (Math.max(Math.abs(dx), Math.abs(dy)) !== r) continue;
+          const tx = px + dx, ty = py + dy;
+          if (g(tx, ty) === "." && hasLOS(player.x, player.y, tx + 0.5, ty + 0.5)) {
+            entities.push({ kind: "ball", x: tx + 0.5, y: ty + 0.5, alive: true, bob: Math.random() * 6 });
+            showToast("A spare ball rolled out!");
+            _ammoSpawnCooldown = 30; // ~half-second debounce
+            return;
+          }
+        }
+      }
+    }
+  }
+
   // ─── INPUT ────────────────────────────────────────────
   function readInput(dt) {
     let fwd = 0, strafe = 0, turn = 0;
@@ -929,6 +1005,7 @@
       updateEntities(dt);
       updateShots(dt);
       updatePickupsAndPups();
+      ensureAmmoAvailable();
       updateSplashes(dt);
       if (toastTimer > 0) { toastTimer -= dt; if (toastTimer <= 0) toastEl.classList.remove("show"); }
       updateHud();
