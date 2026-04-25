@@ -475,25 +475,44 @@ export const CENTER_ADOPTIONS_PER_TIER = 10; // center N unlocks after 10*(N-1) 
 // A center starts at tier 1. Upgrading one tier costs Joy + lifetime
 // adoptions from that center; each tier above 1 adds +15% global Joy and
 // +1 to that pen's dog cap, and bumps the kennel-house visual.
-export const MAX_CENTER_TIER = 5;
+// ── Center Tier upgrades (replaces merge / infinite-centers) ─────────────
+// A center starts at tier 1. Upgrading one tier costs Joy + lifetime
+// adoptions from that center; each tier above 1 adds +15% global Joy and
+// +1 to that pen's dog cap (capped at +DOG_CAP_BONUS_MAX so visuals stay
+// sane), and bumps the kennel-house visual until it tops out at "Castle".
+// There is no max tier — costs and Joy bonus keep scaling forever.
 export const CENTER_JOY_BONUS_PER_TIER = 0.15;     // +15% global Joy/s per tier above 1
 export const CENTER_DOG_CAP_PER_TIER = 1;          // +1 dog cap per tier above 1
-// Tier upgrade cost table — index = current tier (1..MAX-1) → cost to reach next.
+export const CENTER_DOG_CAP_BONUS_MAX = 4;         // pen visual maxes at 12+4 = 16
+// Tier upgrade table for the early tiers; beyond the last entry we fall
+// back to a multiplicative scaling so progression keeps biting forever.
 export const CENTER_TIER_JOY_COST: number[] = [
   0,          // tier 0 → unused
   150_000,    // 1 → 2
   600_000,    // 2 → 3
   2_000_000,  // 3 → 4
   6_000_000,  // 4 → 5
+  18_000_000, // 5 → 6
 ];
+export const CENTER_TIER_JOY_MULT = 3.2;           // cost multiplier past the table
 export const CENTER_TIER_ADOPTIONS_REQ: number[] = [
   0,   // 1 → 2
   5,   // 2 → 3 needs 5 lifetime adoptions in this center
   15,  // 3 → 4
   30,  // 4 → 5
-  60,  // (unused — at MAX)
+  60,  // 5 → 6
 ];
+export const CENTER_TIER_ADOPTIONS_STEP = 60;      // +60 lifetime adoptions/tier past the table
+// Names for the first few tiers; everything beyond gets "Castle Lv N".
 export const CENTER_TIER_LABELS = ["", "Cottage", "Kennel", "Manor", "Estate", "Castle"];
+
+/** Display name for a tier (e.g. tier 7 → "Castle Lv 3"). */
+export function centerTierLabel(tier: number): string {
+  if (tier <= 0) return "";
+  if (tier < CENTER_TIER_LABELS.length) return CENTER_TIER_LABELS[tier];
+  const beyond = tier - (CENTER_TIER_LABELS.length - 1);
+  return `${CENTER_TIER_LABELS[CENTER_TIER_LABELS.length - 1]} Lv ${beyond + 1}`;
+}
 
 export const CENTER_NAMES = [
   "Sunny Rescue",

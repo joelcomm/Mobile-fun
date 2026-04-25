@@ -2,12 +2,12 @@
 
 import {
   BREED_LABELS,
+  CENTER_DOG_CAP_BONUS_MAX,
   CENTER_DOG_CAP_PER_TIER,
   CENTER_JOY_BONUS_PER_TIER,
-  CENTER_TIER_LABELS,
+  centerTierLabel,
   LV_UP_BASE,
   LV_UP_MULT,
-  MAX_CENTER_TIER,
   NAMING_COST_JOY,
   ROLE_INFO,
   GAME_WIDTH,
@@ -128,26 +128,12 @@ export class DogPanel extends Panel {
     const center = game.centers.current();
     const tier = game.centers.tierOf(center.id);
     const cost = game.centers.upgradeCost(center.id);
-    const tierLabel = CENTER_TIER_LABELS[tier] ?? `Tier ${tier}`;
-    const nextLabel = CENTER_TIER_LABELS[tier + 1] ?? `Tier ${tier + 1}`;
+    const nextLabel = centerTierLabel(tier + 1);
     const bonusPct = Math.round(CENTER_JOY_BONUS_PER_TIER * 100);
 
     const bg = scene.add.rectangle(GAME_WIDTH / 2, y + 26, GAME_WIDTH - 24, 52, 0xfff0b8);
     bg.setStrokeStyle(1, 0xc89818, 0.5);
     bg.setOrigin(0.5);
-
-    if (!cost) {
-      const info = scene.add.text(18, y + 6,
-        `${tierLabel.toUpperCase()} TIER (MAX)\nThis center is at full Tier ${MAX_CENTER_TIER}.`, {
-        fontFamily: "monospace",
-        fontSize: "12px",
-        color: "#2a2a3e",
-        lineSpacing: 3,
-      });
-      const btn = this.makeButton(GAME_WIDTH - 52, y + 26, 80, 40, "MAX\nTIER", 0xaaaaaa);
-      this.content.add([bg, info, btn.bg, btn.label]);
-      return;
-    }
 
     const adoptionsHave = center.adoptions;
     const adoptionsNeed = cost.adoptions;
@@ -155,11 +141,15 @@ export class DogPanel extends Panel {
     const canAfford = game.resources.canAfford({ joy: cost.joy });
     const locked = !adoptionsOk;
     const need = adoptionsNeed - adoptionsHave;
+    // Pen-slot bonus stops growing once we hit the visual cap; the Joy
+    // bonus keeps stacking forever so the ladder still feels worth climbing.
+    const slotsRoom = game.centers.dogCapBonus(center.id) < CENTER_DOG_CAP_BONUS_MAX;
+    const slotPart = slotsRoom ? `, +${CENTER_DOG_CAP_PER_TIER} pen slot` : ``;
     const msg = locked
       ? `Needs ${need} more grad${need === 1 ? "" : "s"} from this pen.`
-      : `→ ${nextLabel}: +${bonusPct}% Joy/s, +${CENTER_DOG_CAP_PER_TIER} pen slot.`;
+      : `→ ${nextLabel}: +${bonusPct}% Joy/s${slotPart}.`;
     const info = scene.add.text(18, y + 6,
-      `UPGRADE TIER (${tier}/${MAX_CENTER_TIER})\n${msg}`, {
+      `UPGRADE TIER ${tier}\n${msg}`, {
       fontFamily: "monospace",
       fontSize: "12px",
       color: "#2a2a3e",
