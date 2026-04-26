@@ -417,11 +417,6 @@
     ctx.fillStyle = "#1a1a1a"; ctx.fillRect(cx - sz * 0.4, y + sz * 0.2, sz * 0.8, sz * 0.78);
     ctx.fillStyle = "#3a3a3a"; ctx.fillRect(cx - sz * 0.4, y + sz * 0.2, sz * 0.8, sz * 0.06);
     ctx.fillRect(cx - sz * 0.4, y + sz * 0.92, sz * 0.8, sz * 0.06);
-    // bars (thick + highlight)
-    ctx.lineWidth = Math.max(1.5, sz * 0.035); ctx.strokeStyle = "#888";
-    for (let i = 0; i < 5; i++) { const bx = cx - sz * 0.36 + i * sz * 0.18; ctx.beginPath(); ctx.moveTo(bx, y + sz * 0.22); ctx.lineTo(bx, y + sz * 0.96); ctx.stroke(); }
-    ctx.lineWidth = Math.max(0.8, sz * 0.012); ctx.strokeStyle = "#cfcfcf";
-    for (let i = 0; i < 5; i++) { const bx = cx - sz * 0.36 + i * sz * 0.18 - sz * 0.008; ctx.beginPath(); ctx.moveTo(bx, y + sz * 0.22); ctx.lineTo(bx, y + sz * 0.96); ctx.stroke(); }
     // pup body (tan with cream belly)
     ctx.fillStyle = "#c08040"; ctx.beginPath(); ctx.ellipse(cx, y + sz * 0.78, sz * 0.22, sz * 0.16, 0, 0, Math.PI * 2); ctx.fill();
     ctx.fillStyle = "#f3d8a8"; ctx.beginPath(); ctx.ellipse(cx, y + sz * 0.83, sz * 0.13, sz * 0.09, 0, 0, Math.PI * 2); ctx.fill();
@@ -448,6 +443,14 @@
     // nose + tongue
     ctx.fillStyle = "#222"; ctx.beginPath(); ctx.ellipse(cx, y + sz * 0.65, sz * 0.022, sz * 0.016, 0, 0, Math.PI * 2); ctx.fill();
     ctx.fillStyle = "#ff8a8a"; ctx.beginPath(); ctx.ellipse(cx, y + sz * 0.7, sz * 0.025, sz * 0.012, 0, 0, Math.PI * 2); ctx.fill();
+    // ── BARS drawn LAST so the pup sits behind them ──
+    ctx.lineWidth = Math.max(1.5, sz * 0.035); ctx.strokeStyle = "#888";
+    for (let i = 0; i < 5; i++) { const bx = cx - sz * 0.36 + i * sz * 0.18; ctx.beginPath(); ctx.moveTo(bx, y + sz * 0.22); ctx.lineTo(bx, y + sz * 0.96); ctx.stroke(); }
+    ctx.lineWidth = Math.max(0.8, sz * 0.012); ctx.strokeStyle = "#cfcfcf";
+    for (let i = 0; i < 5; i++) { const bx = cx - sz * 0.36 + i * sz * 0.18 - sz * 0.008; ctx.beginPath(); ctx.moveTo(bx, y + sz * 0.22); ctx.lineTo(bx, y + sz * 0.96); ctx.stroke(); }
+    // horizontal cross-bar across the middle
+    ctx.lineWidth = Math.max(1, sz * 0.025); ctx.strokeStyle = "#888";
+    ctx.beginPath(); ctx.moveTo(cx - sz * 0.4, y + sz * 0.6); ctx.lineTo(cx + sz * 0.4, y + sz * 0.6); ctx.stroke();
   }
   function drawKey(cx, y, sz) {
     const yy = y + sz * 0.45;
