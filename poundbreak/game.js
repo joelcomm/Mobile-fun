@@ -1317,7 +1317,10 @@
     hudPups.textContent = player.pups + "/" + player.maxPups;
     hudKey.classList.toggle("has-key", player.hasKey);
     hudKey.querySelector(".stat-value").textContent = player.hasKey ? "YES" : "—";
-    if (hudLevel) hudLevel.textContent = (currentLevel + 1) + "/" + LEVELS.length;
+    if (hudLevel) {
+      hudLevel.textContent = (currentLevel + 1) + "/" + LEVELS.length;
+      hudLevel.classList.toggle("ready", exitReady());
+    }
     let face = "😠";
     if (player.hp < 30) face = "😱";
     else if (player.hp < 60) face = "😖";
@@ -1378,6 +1381,17 @@
   resizeCanvas();
 
   setupTouch();
+
+  // Tapping the LEVEL pill in the HUD toggles the minimap (mobile-friendly
+  // equivalent of the Q key on desktop).
+  if (hudLevel) {
+    const toggleMap = (e) => {
+      showMap = !showMap;
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+    };
+    hudLevel.addEventListener("click", toggleMap);
+    hudLevel.addEventListener("touchstart", toggleMap, { passive: false });
+  }
 
   // ─── DESKTOP MOUSE-LOOK (pointer lock) ────────────────
   cvs.addEventListener("click", () => {
