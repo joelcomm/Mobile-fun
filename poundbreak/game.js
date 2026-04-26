@@ -172,6 +172,7 @@
       "111111111111111111111111", // 23
     ],
     playerStart: { x: 1.5, y: 22.5, a: -Math.PI / 2 },
+    theme: "ship",
     damageMul: 1.6,
     enemies: [
       { kind: "catcher", x: 10.5, y: 22.5, hp: 30, fireCd: 1 },
@@ -197,18 +198,18 @@
   };
 
   const LEVELS = [
-    // Level 1 — concentric arena, single door, gentle intro
-    { map: L1_MAP, playerStart: { x: 1.5, y: 12.5, a: 0 }, damageMul: 1.0, enemies: [
+    // Level 1 — kennel concentric arena, single door, gentle intro
+    { map: L1_MAP, theme: "kennel", playerStart: { x: 1.5, y: 12.5, a: 0 }, damageMul: 1.0, enemies: [
         { kind: "catcher", x: 16.5, y: 7.5,  hp: 30, fireCd: 1.5 },
         { kind: "catcher", x: 16.5, y: 17.5, hp: 30, fireCd: 1.5 },
       ], pickups: [
-        { kind: "toy",  x: 5.5,  y: 12.5 },
-        { kind: "ball", x: 9.5,  y: 12.5 },
+        { kind: "ball", x: 13.5, y: 12.5 },
+        { kind: "toy",  x: 18.5, y: 12.5 },
         { kind: "ball", x: 21.5, y: 5.5  },
         { kind: "toy",  x: 21.5, y: 19.5 },
       ] },
-    // Level 2 — winding maze, no key/lock
-    { map: L2_MAP, playerStart: { x: 1.5, y: 11.5, a: 0 }, damageMul: 1.15, enemies: [
+    // Level 2 — winding garden hedge maze, no key/lock
+    { map: L2_MAP, theme: "garden", playerStart: { x: 1.5, y: 11.5, a: 0 }, damageMul: 1.15, enemies: [
         { kind: "catcher", x: 16.5, y: 9.5,  hp: 30, fireCd: 1.3 },
         { kind: "catcher", x: 1.5,  y: 16.5, hp: 30, fireCd: 1.3 },
         { kind: "catcher", x: 10.5, y: 17.5, hp: 30, fireCd: 1.3 },
@@ -220,8 +221,8 @@
         { kind: "ball", x: 6.5,  y: 9.5  },
         { kind: "ball", x: 21.5, y: 6.5  },
       ] },
-    // Level 3 — winding maze, key tucked into a NW alcove, locked exit
-    { map: L3_MAP, playerStart: { x: 1.5, y: 11.5, a: 0 }, damageMul: 1.3, enemies: [
+    // Level 3 — crystal cavern maze, key in NE alcove, locked exit
+    { map: L3_MAP, theme: "cavern", playerStart: { x: 1.5, y: 11.5, a: 0 }, damageMul: 1.3, enemies: [
         { kind: "catcher", x: 1.5,  y: 14.5, hp: 30, fireCd: 1.2 },
         { kind: "catcher", x: 18.5, y: 13.5, hp: 30, fireCd: 1.2 },
         { kind: "catcher", x: 2.5,  y: 15.5, hp: 30, fireCd: 1.2 },
@@ -234,8 +235,8 @@
         { kind: "ball", x: 21.5, y: 14.5 },
         { kind: "ball", x: 7.5,  y: 17.5 },
       ] },
-    // Level 4 — denser maze with key near south, locked exit
-    { map: L4_MAP, playerStart: { x: 1.5, y: 11.5, a: 0 }, damageMul: 1.45, enemies: [
+    // Level 4 — abandoned theme park, key in S alcove, locked exit
+    { map: L4_MAP, theme: "park", playerStart: { x: 1.5, y: 11.5, a: 0 }, damageMul: 1.45, enemies: [
         { kind: "catcher", x: 5.5,  y: 2.5,  hp: 30, fireCd: 1.0 },
         { kind: "catcher", x: 20.5, y: 1.5,  hp: 30, fireCd: 1.0 },
         { kind: "catcher", x: 8.5,  y: 5.5,  hp: 30, fireCd: 1.0 },
@@ -261,6 +262,9 @@
   function loadLevel(idx) {
     currentLevel = idx;
     const L = LEVELS[idx];
+    // Switch theme (textures + floor/ceiling colors)
+    currentTheme = THEMES[L.theme] || THEMES.kennel;
+    textures = currentTheme.textures;
     // Reset grid from level map
     for (let y = 0; y < MH; y++) {
       for (let x = 0; x < MW; x++) {
@@ -300,7 +304,7 @@
     for (const p of L.pickups || []) {
       entities.push(Object.assign({ alive: true, bob: Math.random() * 6 }, p));
     }
-    showToast("LEVEL " + (idx + 1) + " of " + LEVELS.length);
+    showToast("FLOOR " + (idx + 1) + " — " + currentTheme.name);
     if (typeof updateHud === "function") updateHud();
   }
 
@@ -357,82 +361,292 @@
   function sfxDoor() { beep(140, 0.2, "square", 0.08); }
   function sfxWin() { [523, 659, 784, 1046].forEach((f, i) => setTimeout(() => beep(f, 0.15, "triangle", 0.12), i * 120)); }
 
-  // ─── TEXTURES (procedural, 64x64) ─────────────────────
+  // ─── TEXTURES (procedural, per-theme) ─────────────────
   const TEX_SIZE = 64;
-  const textures = {};
   function mkTex(drawFn) {
     const c = document.createElement("canvas"); c.width = c.height = TEX_SIZE;
     const x = c.getContext("2d"); drawFn(x); return x.getImageData(0, 0, TEX_SIZE, TEX_SIZE);
   }
-  textures["1"] = mkTex(x => { // concrete
-    x.fillStyle = "#6a5a4a"; x.fillRect(0, 0, 64, 64);
-    for (let i = 0; i < 120; i++) { x.fillStyle = "rgba(0,0,0," + (Math.random() * 0.25) + ")"; x.fillRect(Math.random() * 64 | 0, Math.random() * 64 | 0, 2, 2); }
-    x.strokeStyle = "#3a2e24"; x.lineWidth = 2;
-    for (let y = 0; y <= 64; y += 16) { x.beginPath(); x.moveTo(0, y); x.lineTo(64, y); x.stroke(); }
-    for (let yy = 0; yy < 4; yy++) for (let xx = 0; xx < 2; xx++) { x.beginPath(); x.moveTo(xx * 32 + (yy & 1 ? 16 : 0), yy * 16); x.lineTo(xx * 32 + (yy & 1 ? 16 : 0), yy * 16 + 16); x.stroke(); }
-  });
-  textures["2"] = mkTex(x => { // kibble sacks
-    x.fillStyle = "#8a5a2a"; x.fillRect(0, 0, 64, 64);
-    for (let row = 0; row < 2; row++) {
-      const yo = row * 32;
-      for (let col = 0; col < 2; col++) {
-        const xo = col * 32 + (row & 1 ? 16 : 0);
+
+  // Helper for the EXIT sign: pre-mirror so east-facing wall reads right.
+  function paintExitText(x, bgFill, panelFill, textFill) {
+    x.fillStyle = bgFill; x.fillRect(0, 0, 64, 64);
+    x.fillStyle = panelFill; x.fillRect(4, 4, 56, 56);
+    x.save(); x.translate(64, 0); x.scale(-1, 1);
+    x.fillStyle = textFill; x.font = "bold 14px sans-serif"; x.textAlign = "center";
+    x.fillText("EXIT", 32, 30);
+    x.beginPath(); x.moveTo(20, 42); x.lineTo(36, 42); x.lineTo(36, 38); x.lineTo(46, 46); x.lineTo(36, 54); x.lineTo(36, 50); x.lineTo(20, 50); x.closePath(); x.fill();
+    x.restore();
+  }
+
+  // Each theme: textures keyed by wall char, plus floor/ceiling colors
+  // (the floor/ceiling gradient base RGB triple).
+  const THEMES = {};
+
+  // ── THEME: KENNEL — original concrete + paw-print door
+  THEMES.kennel = (function () {
+    const t = {};
+    t["1"] = mkTex(x => {
+      x.fillStyle = "#6a5a4a"; x.fillRect(0, 0, 64, 64);
+      for (let i = 0; i < 120; i++) { x.fillStyle = "rgba(0,0,0," + (Math.random() * 0.25) + ")"; x.fillRect(Math.random() * 64 | 0, Math.random() * 64 | 0, 2, 2); }
+      x.strokeStyle = "#3a2e24"; x.lineWidth = 2;
+      for (let y = 0; y <= 64; y += 16) { x.beginPath(); x.moveTo(0, y); x.lineTo(64, y); x.stroke(); }
+      for (let yy = 0; yy < 4; yy++) for (let xx = 0; xx < 2; xx++) { x.beginPath(); x.moveTo(xx * 32 + (yy & 1 ? 16 : 0), yy * 16); x.lineTo(xx * 32 + (yy & 1 ? 16 : 0), yy * 16 + 16); x.stroke(); }
+    });
+    t["2"] = mkTex(x => {
+      x.fillStyle = "#8a5a2a"; x.fillRect(0, 0, 64, 64);
+      for (let row = 0; row < 2; row++) for (let col = 0; col < 2; col++) {
+        const xo = col * 32 + (row & 1 ? 16 : 0), yo = row * 32;
         x.fillStyle = "#6a3e18"; x.fillRect(xo + 1, yo + 1, 30, 30);
         x.fillStyle = "#a06a34"; x.beginPath(); x.ellipse(xo + 16, yo + 16, 12, 12, 0, 0, Math.PI * 2); x.fill();
-        x.fillStyle = "#3a2210"; // paw print
+        x.fillStyle = "#3a2210";
         x.beginPath(); x.arc(xo + 16, yo + 18, 3, 0, Math.PI * 2); x.fill();
         x.beginPath(); x.arc(xo + 12, yo + 14, 1.5, 0, Math.PI * 2); x.fill();
         x.beginPath(); x.arc(xo + 20, yo + 14, 1.5, 0, Math.PI * 2); x.fill();
         x.beginPath(); x.arc(xo + 14, yo + 11, 1.5, 0, Math.PI * 2); x.fill();
         x.beginPath(); x.arc(xo + 18, yo + 11, 1.5, 0, Math.PI * 2); x.fill();
       }
+    });
+    t["D"] = mkTex(x => {
+      x.fillStyle = "#a06030"; x.fillRect(0, 0, 64, 64);
+      x.fillStyle = "#7a4520"; x.fillRect(4, 4, 56, 56);
+      x.strokeStyle = "#4a2a10"; x.lineWidth = 2; x.strokeRect(4, 4, 56, 56);
+      x.fillStyle = "#f3e9d2";
+      x.beginPath(); x.arc(32, 38, 6, 0, Math.PI * 2); x.fill();
+      for (let i = 0; i < 4; i++) { const a = -Math.PI / 2 + (i - 1.5) * 0.6; x.beginPath(); x.arc(32 + Math.cos(a) * 10, 38 + Math.sin(a) * 10, 3, 0, Math.PI * 2); x.fill(); }
+      x.fillStyle = "#ffd447"; x.fillRect(52, 30, 4, 6);
+    });
+    t["L"] = mkTex(x => {
+      x.fillStyle = "#c09040"; x.fillRect(0, 0, 64, 64);
+      x.fillStyle = "#8a6020"; x.fillRect(4, 4, 56, 56);
+      x.strokeStyle = "#4a2a10"; x.lineWidth = 2; x.strokeRect(4, 4, 56, 56);
+      x.strokeStyle = "#222"; x.lineWidth = 4; x.beginPath(); x.arc(32, 28, 8, Math.PI, 0); x.stroke();
+      x.fillStyle = "#ffd447"; x.fillRect(22, 26, 20, 18);
+      x.fillStyle = "#4a2a10"; x.fillRect(30, 32, 4, 6);
+    });
+    t["X"] = mkTex(x => paintExitText(x, "#4aa050", "#2a6030", "#ffe9b6"));
+    return { textures: t, ceilRGB: [30, 20, 14], floorRGB: [90, 68, 42], name: "Kennel" };
+  })();
+
+  // ── THEME: GARDEN — green hedges, sky ceiling, dirt floor
+  THEMES.garden = (function () {
+    const t = {};
+    t["1"] = mkTex(x => {
+      x.fillStyle = "#2a5a2a"; x.fillRect(0, 0, 64, 64);
+      // leaf clusters
+      for (let i = 0; i < 80; i++) {
+        const cx = Math.random() * 64, cy = Math.random() * 64;
+        x.fillStyle = ["#3a7a3a", "#4a8a3a", "#5a9a4a", "#1a4a1a"][i & 3];
+        x.beginPath(); x.ellipse(cx, cy, 3 + Math.random() * 2, 2 + Math.random() * 2, Math.random() * Math.PI, 0, Math.PI * 2); x.fill();
+      }
+      // small flower accents
+      for (let i = 0; i < 5; i++) {
+        const cx = Math.random() * 60 + 2, cy = Math.random() * 60 + 2;
+        x.fillStyle = ["#ffd447", "#ff8acc", "#fff", "#ff6a6a"][i & 3];
+        x.beginPath(); x.arc(cx, cy, 1.6, 0, Math.PI * 2); x.fill();
+      }
+    });
+    t["D"] = mkTex(x => {
+      x.fillStyle = "#2a5a2a"; x.fillRect(0, 0, 64, 64);
+      // hedge gate frame
+      x.fillStyle = "#5a3018"; x.fillRect(8, 6, 4, 56);
+      x.fillRect(52, 6, 4, 56);
+      x.fillRect(8, 6, 48, 4);
+      // arched gate top
+      x.strokeStyle = "#5a3018"; x.lineWidth = 4; x.beginPath(); x.arc(32, 12, 22, Math.PI, 0); x.stroke();
+      // wood slats
+      x.fillStyle = "#a06030";
+      for (let i = 0; i < 4; i++) x.fillRect(14 + i * 11, 14, 8, 46);
+      x.strokeStyle = "#4a2a10"; x.lineWidth = 1;
+      for (let i = 0; i < 4; i++) x.strokeRect(14 + i * 11, 14, 8, 46);
+      // small flower on top
+      x.fillStyle = "#ffd447"; x.beginPath(); x.arc(32, 12, 3, 0, Math.PI * 2); x.fill();
+    });
+    t["L"] = mkTex(x => {
+      x.fillStyle = "#2a5a2a"; x.fillRect(0, 0, 64, 64);
+      x.fillStyle = "#5a3018"; x.fillRect(8, 6, 48, 52);
+      x.fillStyle = "#3a1f10"; x.fillRect(10, 8, 44, 48);
+      x.fillStyle = "#a06030"; x.fillRect(14, 12, 36, 40);
+      // chain across the door
+      x.strokeStyle = "#888"; x.lineWidth = 3;
+      for (let i = 0; i < 6; i++) { x.beginPath(); x.arc(14 + i * 7, 32, 3, 0, Math.PI * 2); x.stroke(); }
+      // padlock center
+      x.fillStyle = "#ffd447"; x.fillRect(26, 28, 12, 10);
+      x.strokeStyle = "#222"; x.lineWidth = 3; x.beginPath(); x.arc(32, 26, 5, Math.PI, 0); x.stroke();
+    });
+    t["X"] = mkTex(x => paintExitText(x, "#3a7a3a", "#1a4a1a", "#ffe9b6"));
+    return { textures: t, ceilRGB: [120, 170, 220], floorRGB: [70, 90, 50], name: "Garden Maze" };
+  })();
+
+  // ── THEME: CAVERN — rough rock with glowing crystals
+  THEMES.cavern = (function () {
+    const t = {};
+    t["1"] = mkTex(x => {
+      x.fillStyle = "#3a3530"; x.fillRect(0, 0, 64, 64);
+      // mottled rock
+      for (let i = 0; i < 200; i++) {
+        x.fillStyle = ["#2a2520", "#4a4540", "#5a5550", "#1a1815"][i & 3];
+        x.fillRect(Math.random() * 64 | 0, Math.random() * 64 | 0, 1 + Math.random() * 2 | 0, 1 + Math.random() * 2 | 0);
+      }
+      // crystal cluster (1-2 per tile)
+      for (let i = 0; i < 2; i++) {
+        const cx = 12 + Math.random() * 40, cy = 32 + Math.random() * 24;
+        const col = ["#a070ff", "#70a0ff", "#9a70ff"][i & 2];
+        x.fillStyle = col;
+        x.beginPath();
+        x.moveTo(cx, cy);
+        x.lineTo(cx - 4, cy + 6);
+        x.lineTo(cx, cy + 12);
+        x.lineTo(cx + 4, cy + 6);
+        x.closePath(); x.fill();
+        // shine
+        x.fillStyle = "rgba(255,255,255,0.6)"; x.fillRect(cx - 1, cy + 2, 1.5, 4);
+      }
+      // crack lines
+      x.strokeStyle = "#1a1815"; x.lineWidth = 1.5;
+      x.beginPath(); x.moveTo(0, 22); x.bezierCurveTo(20, 18, 40, 26, 64, 20); x.stroke();
+      x.beginPath(); x.moveTo(0, 50); x.bezierCurveTo(15, 46, 35, 54, 64, 48); x.stroke();
+    });
+    t["D"] = mkTex(x => {
+      x.fillStyle = "#2a2520"; x.fillRect(0, 0, 64, 64);
+      // iron-banded wood door
+      x.fillStyle = "#5a3018"; x.fillRect(6, 6, 52, 52);
+      x.fillStyle = "#7a4528";
+      for (let i = 0; i < 5; i++) x.fillRect(8 + i * 10, 8, 8, 48);
+      x.fillStyle = "#1a1a1a"; x.fillRect(6, 16, 52, 4); x.fillRect(6, 44, 52, 4);
+      x.fillStyle = "#888"; for (let i = 0; i < 5; i++) { x.beginPath(); x.arc(10 + i * 11, 18, 1.5, 0, Math.PI * 2); x.fill(); x.beginPath(); x.arc(10 + i * 11, 46, 1.5, 0, Math.PI * 2); x.fill(); }
+      x.fillStyle = "#cfcfcf"; x.fillRect(46, 30, 6, 6);
+    });
+    t["L"] = mkTex(x => {
+      x.fillStyle = "#2a2520"; x.fillRect(0, 0, 64, 64);
+      x.fillStyle = "#3a3a44"; x.fillRect(6, 6, 52, 52);
+      x.fillStyle = "#5a5a64"; x.fillRect(8, 8, 48, 48);
+      x.strokeStyle = "#1a1a1a"; x.lineWidth = 2; x.strokeRect(8, 8, 48, 48);
+      // iron bars
+      x.fillStyle = "#1a1a1a";
+      for (let i = 0; i < 4; i++) x.fillRect(12 + i * 10, 8, 4, 48);
+      // padlock with crystal
+      x.fillStyle = "#a070ff"; x.beginPath(); x.arc(32, 32, 8, 0, Math.PI * 2); x.fill();
+      x.fillStyle = "#fff"; x.beginPath(); x.arc(30, 30, 2, 0, Math.PI * 2); x.fill();
+    });
+    t["X"] = mkTex(x => paintExitText(x, "#3a3a44", "#1a1a24", "#a070ff"));
+    return { textures: t, ceilRGB: [20, 12, 25], floorRGB: [38, 28, 22], name: "Crystal Cavern" };
+  })();
+
+  // ── THEME: PARK — candy-stripe walls, neon floor
+  THEMES.park = (function () {
+    const t = {};
+    t["1"] = mkTex(x => {
+      // diagonal candy stripes
+      x.fillStyle = "#d22020"; x.fillRect(0, 0, 64, 64);
+      x.fillStyle = "#ffffff";
+      for (let i = -8; i < 16; i++) {
+        x.beginPath();
+        x.moveTo(i * 8, 0);
+        x.lineTo((i + 1) * 8, 0);
+        x.lineTo((i + 1) * 8 + 64, 64);
+        x.lineTo(i * 8 + 64, 64);
+        x.closePath(); x.fill();
+      }
+      // bunting/lights along top
+      x.fillStyle = "#ffd447";
+      for (let i = 0; i < 6; i++) { x.beginPath(); x.arc(6 + i * 11, 4, 2, 0, Math.PI * 2); x.fill(); }
+      x.fillStyle = "#3aa0ff";
+      for (let i = 0; i < 5; i++) { x.beginPath(); x.arc(12 + i * 11, 60, 2, 0, Math.PI * 2); x.fill(); }
+    });
+    t["D"] = mkTex(x => {
+      x.fillStyle = "#1a0030"; x.fillRect(0, 0, 64, 64);
+      // ticket-booth gate
+      x.fillStyle = "#ffd447"; x.fillRect(6, 6, 52, 52);
+      x.fillStyle = "#d22020"; x.fillRect(8, 8, 48, 12);
+      x.fillStyle = "#fff"; x.font = "bold 8px sans-serif"; x.textAlign = "center";
+      x.save(); x.translate(64, 0); x.scale(-1, 1);
+      x.fillText("ENTER", 32, 17);
+      x.restore();
+      // door body with stars
+      x.fillStyle = "#3aa0ff"; x.fillRect(8, 22, 48, 32);
+      x.fillStyle = "#ffd447";
+      for (let i = 0; i < 6; i++) { const cx = 14 + (i % 3) * 18, cy = 28 + (i / 3 | 0) * 12; star(x, cx, cy, 3, 5); }
+    });
+    function star(x, cx, cy, r, n) {
+      x.beginPath();
+      for (let i = 0; i < n * 2; i++) {
+        const a = -Math.PI / 2 + i * Math.PI / n;
+        const rr = i % 2 === 0 ? r : r * 0.45;
+        const px = cx + Math.cos(a) * rr, py = cy + Math.sin(a) * rr;
+        if (i === 0) x.moveTo(px, py); else x.lineTo(px, py);
+      }
+      x.closePath(); x.fill();
     }
-  });
-  textures["3"] = mkTex(x => { // cage bars
-    x.fillStyle = "#1a1a1a"; x.fillRect(0, 0, 64, 64);
-    x.fillStyle = "#5a5a5a";
-    for (let i = 0; i < 5; i++) x.fillRect(4 + i * 12, 0, 4, 64);
-    x.fillStyle = "#8a8a8a";
-    for (let i = 0; i < 5; i++) x.fillRect(5 + i * 12, 0, 1, 64);
-    x.fillStyle = "#3a3a3a"; x.fillRect(0, 30, 64, 4);
-  });
-  textures["4"] = mkTex(x => { // wood plank
-    x.fillStyle = "#6b3f1a"; x.fillRect(0, 0, 64, 64);
-    x.strokeStyle = "#3a2210"; x.lineWidth = 2;
-    for (let y = 0; y < 64; y += 16) { x.beginPath(); x.moveTo(0, y); x.lineTo(64, y); x.stroke(); }
-    x.strokeStyle = "#4a2a10"; x.lineWidth = 1;
-    for (let y = 0; y < 64; y += 4) { x.beginPath(); x.moveTo(0, y + Math.random() * 2); x.bezierCurveTo(20, y, 40, y + 2, 64, y); x.stroke(); }
-  });
-  textures["D"] = mkTex(x => { // wood door with paw
-    x.fillStyle = "#a06030"; x.fillRect(0, 0, 64, 64);
-    x.fillStyle = "#7a4520"; x.fillRect(4, 4, 56, 56);
-    x.strokeStyle = "#4a2a10"; x.lineWidth = 2; x.strokeRect(4, 4, 56, 56);
-    x.fillStyle = "#f3e9d2"; // paw
-    x.beginPath(); x.arc(32, 38, 6, 0, Math.PI * 2); x.fill();
-    for (let i = 0; i < 4; i++) { const a = -Math.PI / 2 + (i - 1.5) * 0.6; x.beginPath(); x.arc(32 + Math.cos(a) * 10, 38 + Math.sin(a) * 10, 3, 0, Math.PI * 2); x.fill(); }
-    x.fillStyle = "#ffd447"; x.fillRect(52, 30, 4, 6); // knob
-  });
-  textures["L"] = mkTex(x => { // locked door
-    x.fillStyle = "#c09040"; x.fillRect(0, 0, 64, 64);
-    x.fillStyle = "#8a6020"; x.fillRect(4, 4, 56, 56);
-    x.strokeStyle = "#4a2a10"; x.lineWidth = 2; x.strokeRect(4, 4, 56, 56);
-    // padlock
-    x.strokeStyle = "#222"; x.lineWidth = 4; x.beginPath(); x.arc(32, 28, 8, Math.PI, 0); x.stroke();
-    x.fillStyle = "#ffd447"; x.fillRect(22, 26, 20, 18);
-    x.fillStyle = "#4a2a10"; x.fillRect(30, 32, 4, 6);
-  });
-  textures["X"] = mkTex(x => { // exit
-    x.fillStyle = "#4aa050"; x.fillRect(0, 0, 64, 64);
-    x.fillStyle = "#2a6030"; x.fillRect(4, 4, 56, 56);
-    // East-facing wall textures get u-mirrored by the raycaster, so
-    // pre-mirror the sign content here so it reads correctly to the
-    // player approaching from the west.
-    x.save(); x.translate(64, 0); x.scale(-1, 1);
-    x.fillStyle = "#ffe9b6"; x.font = "bold 14px sans-serif"; x.textAlign = "center";
-    x.fillText("EXIT", 32, 30);
-    x.beginPath(); x.moveTo(20, 42); x.lineTo(36, 42); x.lineTo(36, 38); x.lineTo(46, 46); x.lineTo(36, 54); x.lineTo(36, 50); x.lineTo(20, 50); x.closePath(); x.fill();
-    x.restore();
-  });
+    t["L"] = mkTex(x => {
+      x.fillStyle = "#1a0030"; x.fillRect(0, 0, 64, 64);
+      x.fillStyle = "#444"; x.fillRect(6, 6, 52, 52);
+      // CLOSED diagonal banner
+      x.fillStyle = "#d22020"; x.fillRect(6, 26, 52, 14);
+      x.fillStyle = "#fff"; x.font = "bold 9px sans-serif"; x.textAlign = "center";
+      x.save(); x.translate(64, 0); x.scale(-1, 1);
+      x.fillText("CLOSED", 32, 36);
+      x.restore();
+      // padlock
+      x.fillStyle = "#ffd447"; x.fillRect(28, 44, 8, 10);
+      x.strokeStyle = "#222"; x.lineWidth = 2; x.beginPath(); x.arc(32, 44, 4, Math.PI, 0); x.stroke();
+    });
+    t["X"] = mkTex(x => paintExitText(x, "#3aa0ff", "#1a3a60", "#ffd447"));
+    return { textures: t, ceilRGB: [20, 0, 40], floorRGB: [50, 30, 60], name: "Theme Park" };
+  })();
+
+  // ── THEME: SHIP — metal panels with viewports
+  THEMES.ship = (function () {
+    const t = {};
+    t["1"] = mkTex(x => {
+      x.fillStyle = "#3a4050"; x.fillRect(0, 0, 64, 64);
+      // panel halves
+      x.fillStyle = "#4a5060"; x.fillRect(0, 0, 64, 32);
+      x.fillStyle = "#2a3040"; x.fillRect(0, 32, 64, 32);
+      // panel seams
+      x.strokeStyle = "#1a1a24"; x.lineWidth = 2;
+      x.strokeRect(2, 2, 60, 60);
+      x.beginPath(); x.moveTo(0, 32); x.lineTo(64, 32); x.stroke();
+      x.beginPath(); x.moveTo(32, 0); x.lineTo(32, 64); x.stroke();
+      // rivets
+      x.fillStyle = "#1a1a24";
+      for (let yy = 8; yy < 64; yy += 16) for (let xx = 8; xx < 64; xx += 16) { x.beginPath(); x.arc(xx, yy, 1.5, 0, Math.PI * 2); x.fill(); }
+      // small status light (varies by tile)
+      x.fillStyle = ["#3aff66", "#3aa0ff", "#ff6a6a"][Math.random() * 3 | 0];
+      x.beginPath(); x.arc(54, 10, 2, 0, Math.PI * 2); x.fill();
+    });
+    t["D"] = mkTex(x => {
+      x.fillStyle = "#1a1a24"; x.fillRect(0, 0, 64, 64);
+      // sliding door, two halves with center seam
+      x.fillStyle = "#3a4a6a"; x.fillRect(4, 4, 28, 56);
+      x.fillStyle = "#3a4a6a"; x.fillRect(32, 4, 28, 56);
+      // panel highlights
+      x.fillStyle = "#5a6a8a"; x.fillRect(4, 4, 28, 4); x.fillRect(32, 4, 28, 4);
+      x.fillStyle = "#1a1a24"; x.fillRect(30, 0, 4, 64);
+      // status panel + green light
+      x.fillStyle = "#0a1020"; x.fillRect(26, 26, 12, 12);
+      x.fillStyle = "#3aff66"; x.beginPath(); x.arc(32, 32, 3, 0, Math.PI * 2); x.fill();
+      x.fillStyle = "rgba(58,255,102,0.5)"; x.beginPath(); x.arc(32, 32, 6, 0, Math.PI * 2); x.fill();
+    });
+    t["L"] = mkTex(x => {
+      x.fillStyle = "#1a1a24"; x.fillRect(0, 0, 64, 64);
+      x.fillStyle = "#4a3a3a"; x.fillRect(4, 4, 56, 56);
+      // airlock pattern
+      x.fillStyle = "#1a1a24"; x.fillRect(4, 4, 56, 6); x.fillRect(4, 54, 56, 6);
+      x.fillStyle = "#ff6a6a"; x.beginPath(); x.arc(32, 32, 8, 0, Math.PI * 2); x.fill();
+      x.fillStyle = "rgba(255,106,106,0.5)"; x.beginPath(); x.arc(32, 32, 14, 0, Math.PI * 2); x.fill();
+      x.fillStyle = "#fff"; x.font = "bold 6px sans-serif"; x.textAlign = "center";
+      x.save(); x.translate(64, 0); x.scale(-1, 1);
+      x.fillText("LOCKED", 32, 50);
+      x.restore();
+    });
+    t["X"] = mkTex(x => paintExitText(x, "#1a1a24", "#0a1020", "#3aff66"));
+    return { textures: t, ceilRGB: [10, 12, 24], floorRGB: [14, 22, 40], name: "Mothership" };
+  })();
+
+  // Active textures (mutable; loadLevel swaps to the level's theme).
+  let textures = THEMES.kennel.textures;
+  let currentTheme = THEMES.kennel;
 
   // ─── RAYCASTER ────────────────────────────────────────
   const zbuf = new Float32Array(RW);
@@ -465,13 +679,15 @@
   }
 
   function renderFrame() {
-    // Fill ceiling and floor
+    // Fill ceiling and floor (theme-aware base RGB)
+    const cR = currentTheme.ceilRGB[0], cG = currentTheme.ceilRGB[1], cB = currentTheme.ceilRGB[2];
+    const fR = currentTheme.floorRGB[0], fG = currentTheme.floorRGB[1], fB = currentTheme.floorRGB[2];
     for (let y = 0; y < RH; y++) {
       const isCeil = y < RH / 2;
       const shade = isCeil ? 0.3 + (y / (RH / 2)) * 0.35 : 0.65 - ((y - RH / 2) / (RH / 2)) * 0.35;
-      let r, g2, b;
-      if (isCeil) { r = 30 * shade; g2 = 20 * shade; b = 14 * shade; }
-      else { r = 90 * shade; g2 = 68 * shade; b = 42 * shade; }
+      const r = (isCeil ? cR : fR) * shade;
+      const g2 = (isCeil ? cG : fG) * shade;
+      const b = (isCeil ? cB : fB) * shade;
       for (let x = 0; x < RW; x++) {
         const i = (y * RW + x) * 4;
         fbuf[i] = r | 0; fbuf[i + 1] = g2 | 0; fbuf[i + 2] = b | 0; fbuf[i + 3] = 255;
