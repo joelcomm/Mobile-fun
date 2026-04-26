@@ -22,13 +22,13 @@
     "111D111.1.111111L1111111", //  6  D bridges to key area; L locks boss arena
     "1.....1.1.1...........11", //  7
     "1.111.1.1.1.111111111..1", //  8
-    "1.1...1...1.1.......1.D1", //  9  D door into right corridor
+    "1.1...1...1.1.......1..1", //  9  open corridor (former dead-end door removed)
     "1.1.111.111.1.11111.1..1", // 10
     "1.1.1.P...1.1.1.P.1.1..1", // 11  P pups in middle alcoves
     "1...1.111.1.1.1...1.1.11", // 12
     "111.1.1...1.1.111.1.1..1", // 13
     "1...1.1.1.1.1.1...1.1..1", // 14
-    "1.111.1.1.1.D.1.1.111..1", // 15  D door at center crossroads
+    "1.111.1.1.1...1.1.111..1", // 15  open T-junction (door removed)
     "1.....1.1.1...1.1......1", // 16
     "1.1111.1.111111.111111.1", // 17
     "1.1..P.1........1...P1.1", // 18  P pups in lower rooms
@@ -98,7 +98,13 @@
   // ─── INPUT ────────────────────────────────────────────
   const keys = {};
   const touch = { move: { active: false, dx: 0, dy: 0 }, look: { active: false, id: -1, lastX: 0 }, fire: false };
-  addEventListener("keydown", e => { keys[e.key.toLowerCase()] = true; if ([" ", "arrowup", "arrowdown", "arrowleft", "arrowright"].includes(e.key.toLowerCase())) e.preventDefault(); });
+  let showMap = false;
+  addEventListener("keydown", e => {
+    const k = e.key.toLowerCase();
+    keys[k] = true;
+    if (k === "q") { showMap = !showMap; e.preventDefault(); return; }
+    if ([" ", "arrowup", "arrowdown", "arrowleft", "arrowright"].includes(k)) e.preventDefault();
+  });
   addEventListener("keyup", e => { keys[e.key.toLowerCase()] = false; });
 
   // ─── SOUND (WebAudio) ─────────────────────────────────
@@ -267,6 +273,78 @@
       ctx.fillStyle = "rgba(255,60,60," + (player.hitFlash * 0.5) + ")";
       ctx.fillRect(0, 0, RW, RH);
     }
+    if (showMap) drawMinimap();
+  }
+
+  // ─── MINIMAP OVERLAY ──────────────────────────────────
+  function drawMinimap() {
+    const cell = 7;
+    const w = MW * cell, h = MH * cell;
+    const ox = ((RW - w) >> 1), oy = ((RH - h) >> 1);
+    // dim the scene
+    ctx.fillStyle = "rgba(0,0,0,0.7)"; ctx.fillRect(0, 0, RW, RH);
+    // panel border
+    ctx.fillStyle = "#2a1609"; ctx.fillRect(ox - 6, oy - 18, w + 12, h + 26);
+    ctx.strokeStyle = "#d9a05c"; ctx.lineWidth = 2; ctx.strokeRect(ox - 6, oy - 18, w + 12, h + 26);
+    // title
+    ctx.fillStyle = "#ffd447"; ctx.font = "bold 8px sans-serif"; ctx.textAlign = "center";
+    ctx.fillText("MAP — press Q to close", ox + w / 2, oy - 6);
+    // tiles
+    for (let y = 0; y < MH; y++) {
+      for (let x = 0; x < MW; x++) {
+        const c = GRID[y][x];
+        let fill = null;
+        if (c === "1" || c === "2" || c === "3" || c === "4") fill = "#5a4030";
+        else if (c === "D") fill = "#a06030";
+        else if (c === "L") fill = "#ffd447";
+        else if (c === "X") fill = "#4aa050";
+        else fill = "#1a0e07";
+        ctx.fillStyle = fill;
+        ctx.fillRect(ox + x * cell, oy + y * cell, cell, cell);
+      }
+    }
+    // grid lines (subtle)
+    ctx.strokeStyle = "rgba(0,0,0,0.25)"; ctx.lineWidth = 0.5;
+    for (let i = 0; i <= MH; i++) { ctx.beginPath(); ctx.moveTo(ox, oy + i * cell); ctx.lineTo(ox + w, oy + i * cell); ctx.stroke(); }
+    for (let i = 0; i <= MW; i++) { ctx.beginPath(); ctx.moveTo(ox + i * cell, oy); ctx.lineTo(ox + i * cell, oy + h); ctx.stroke(); }
+    // entities
+    for (const e of entities) {
+      if (!e.alive) continue;
+      const ex = ox + e.x * cell, ey = oy + e.y * cell;
+      if (e.kind === "pup") {
+        ctx.fillStyle = "#d9a05c"; ctx.beginPath(); ctx.arc(ex, ey, cell * 0.32, 0, Math.PI * 2); ctx.fill();
+        ctx.strokeStyle = "#3a2010"; ctx.lineWidth = 1; ctx.stroke();
+      } else if (e.kind === "key") {
+        ctx.fillStyle = "#ffd447"; ctx.beginPath(); ctx.arc(ex, ey, cell * 0.35, 0, Math.PI * 2); ctx.fill();
+        ctx.strokeStyle = "#7a5a10"; ctx.lineWidth = 1; ctx.stroke();
+      } else if (e.kind === "boss") {
+        ctx.fillStyle = "#e24a4a"; ctx.beginPath(); ctx.arc(ex, ey, cell * 0.45, 0, Math.PI * 2); ctx.fill();
+        ctx.strokeStyle = "#3a0808"; ctx.lineWidth = 1; ctx.stroke();
+      }
+    }
+    // player (arrow showing facing)
+    const px = ox + player.x * cell, py = oy + player.y * cell;
+    const dx = Math.cos(player.a), dy = Math.sin(player.a);
+    ctx.fillStyle = "#6fd8ff";
+    ctx.beginPath();
+    ctx.moveTo(px + dx * cell * 0.7, py + dy * cell * 0.7);
+    ctx.lineTo(px + (-dy - dx * 0.5) * cell * 0.5, py + (dx - dy * 0.5) * cell * 0.5);
+    ctx.lineTo(px + (dy - dx * 0.5) * cell * 0.5, py + (-dx - dy * 0.5) * cell * 0.5);
+    ctx.closePath(); ctx.fill();
+    ctx.strokeStyle = "#0a3a5a"; ctx.lineWidth = 1; ctx.stroke();
+    // legend (bottom)
+    ctx.font = "bold 6px sans-serif"; ctx.textAlign = "left";
+    const ly = oy + h + 6;
+    ctx.fillStyle = "#d9a05c"; ctx.fillRect(ox, ly - 4, 5, 5);
+    ctx.fillStyle = "#fff"; ctx.fillText("PUP", ox + 7, ly);
+    ctx.fillStyle = "#ffd447"; ctx.fillRect(ox + 30, ly - 4, 5, 5);
+    ctx.fillStyle = "#fff"; ctx.fillText("KEY/LOCK", ox + 37, ly);
+    ctx.fillStyle = "#e24a4a"; ctx.fillRect(ox + 84, ly - 4, 5, 5);
+    ctx.fillStyle = "#fff"; ctx.fillText("BOSS", ox + 91, ly);
+    ctx.fillStyle = "#4aa050"; ctx.fillRect(ox + 120, ly - 4, 5, 5);
+    ctx.fillStyle = "#fff"; ctx.fillText("EXIT", ox + 127, ly);
+    ctx.fillStyle = "#6fd8ff"; ctx.fillRect(ox + 150, ly - 4, 5, 5);
+    ctx.fillStyle = "#fff"; ctx.fillText("YOU", ox + 157, ly);
   }
 
   // ─── SPRITES ──────────────────────────────────────────
@@ -882,10 +960,10 @@
     let fwd = 0, strafe = 0, turn = 0;
     if (keys["w"] || keys["arrowup"]) fwd += 1;
     if (keys["s"] || keys["arrowdown"]) fwd -= 1;
-    if (keys["a"] || keys["arrowleft"]) strafe -= 1;
-    if (keys["d"] || keys["arrowright"]) strafe += 1;
-    if (keys["q"]) turn -= 1;
-    if (keys["e"]) turn += 1;
+    if (keys["a"]) strafe -= 1;
+    if (keys["d"]) strafe += 1;
+    if (keys["arrowleft"]) turn -= 1;
+    if (keys["arrowright"]) turn += 1;
     if (touch.move.active) { fwd += -touch.move.dy; strafe += touch.move.dx; }
     player.a += turn * 3.8 * dt;
     if (touch.look.dxDelta) {
