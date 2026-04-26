@@ -331,6 +331,25 @@
   }
   function sfxSquirt() { beep(220 + Math.random() * 80, 0.08, "sawtooth", 0.07); }
   function sfxSqueak() { beep(900, 0.05, "square", 0.1); setTimeout(() => beep(1400, 0.07, "square", 0.1), 50); }
+  function sfxBark() {
+    // Cartoon "yip yip!" — two short descending square-wave chirps.
+    try {
+      const a = actx();
+      const yip = (start, f0, f1, dur) => {
+        const o = a.createOscillator(); const g = a.createGain();
+        o.type = "square";
+        const t = a.currentTime + start;
+        o.frequency.setValueAtTime(f0, t);
+        o.frequency.exponentialRampToValueAtTime(f1, t + dur);
+        g.gain.setValueAtTime(0.18, t);
+        g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+        o.connect(g).connect(a.destination);
+        o.start(t); o.stop(t + dur + 0.02);
+      };
+      yip(0,    900, 500, 0.09);
+      yip(0.13, 1100, 600, 0.09);
+    } catch (e) {}
+  }
   function sfxYelp() { beep(700, 0.08, "triangle", 0.12); setTimeout(() => beep(400, 0.12, "triangle", 0.1), 60); }
   function sfxPickup() { beep(660, 0.06, "triangle", 0.1); setTimeout(() => beep(990, 0.08, "triangle", 0.1), 50); }
   function sfxHurt() { beep(180, 0.15, "sawtooth", 0.14); }
@@ -1137,13 +1156,14 @@
       const d = Math.hypot(dx, dy) || 0.0001;
       const los = hasLOS(e.x, e.y, player.x, player.y);
       if (los && d < 14) {
-        const maxSp = e.kind === "mascot" ? 1.8 : e.kind === "boss" ? 1.3 : 1.1;
+        const maxSp = e.kind === "mascot" ? 2.2 : e.kind === "boss" ? 1.8 : 1.6;
         const desired = e.kind === "boss" ? 3 : 2;
         const pull = d > desired ? 1 : -0.3;
         const nx = e.x + (dx / d) * maxSp * pull * dt;
         const ny = e.y + (dy / d) * maxSp * pull * dt;
         if (!isWall(g(nx | 0, e.y | 0))) e.x = nx;
         if (!isWall(g(e.x | 0, ny | 0))) e.y = ny;
+        e.wanderT = 0; // reset wander cooldown
         e.fireCd = (e.fireCd || 0) - dt;
         if (e.fireCd <= 0 && d < 11) {
           const sp = 5.5;
@@ -1151,6 +1171,18 @@
           shots.push({ kind: "net", x: e.x, y: e.y, dx: (dx / d) * sp, dy: (dy / d) * sp, ttl: 2, fromPlayer: false, dmg, bob: 0 });
           e.fireCd = e.kind === "boss" ? 1 : e.kind === "mascot" ? 1.3 : 1.9;
         }
+      } else {
+        // No line-of-sight: gentle wander so enemies don't feel frozen.
+        e.wanderT = (e.wanderT || 0) - dt;
+        if (e.wanderT <= 0) {
+          e.wanderA = Math.random() * Math.PI * 2;
+          e.wanderT = 1.5 + Math.random() * 2;
+        }
+        const sp = 0.6;
+        const wx = e.x + Math.cos(e.wanderA) * sp * dt;
+        const wy = e.y + Math.sin(e.wanderA) * sp * dt;
+        if (!isWall(g(wx | 0, e.y | 0))) e.x = wx;
+        if (!isWall(g(e.x | 0, wy | 0))) e.y = wy;
       }
     }
   }
@@ -1193,7 +1225,7 @@
       if (!e.alive || e.hp != null) continue;
       const dx = e.x - player.x, dy = e.y - player.y;
       if (dx * dx + dy * dy < 0.42 * 0.42) {
-        if (e.kind === "pup") { player.pups++; sfxSqueak(); showToast("Pup rescued! " + player.pups + "/" + player.maxPups); }
+        if (e.kind === "pup") { player.pups++; sfxBark(); showToast("Pup rescued! " + player.pups + "/" + player.maxPups); }
         else if (e.kind === "key") { player.hasKey = true; sfxPickup(); showToast("Collar key!"); }
         else if (e.kind === "toy") { player.hp = Math.min(100, player.hp + 25); sfxPickup(); showToast("Med kit  +25 HP"); }
         else if (e.kind === "ball") { player.ammo = Math.min(60, player.ammo + 10); sfxPickup(); showToast("Water mag  +10"); }
