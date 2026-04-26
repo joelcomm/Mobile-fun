@@ -464,7 +464,9 @@
       const h = Math.min(RH * 4, (RH / Math.max(0.0001, r.dist)) | 0);
       const y0 = Math.max(0, (RH - h) >> 1);
       const y1 = Math.min(RH, y0 + h);
-      const tex = textures[r.hit] || textures["1"];
+      // Hide the EXIT sign until the level is complete; show as wall.
+      const hitChar = (r.hit === "X" && !exitReady()) ? "1" : r.hit;
+      const tex = textures[hitChar] || textures["1"];
       const td = tex.data;
       const texX = Math.min(TEX_SIZE - 1, (r.wallX * TEX_SIZE) | 0);
       const startY = (RH - h) >> 1;
@@ -510,7 +512,7 @@
         if (c === "1" || c === "2" || c === "3" || c === "4") fill = "#5a4030";
         else if (c === "D") fill = "#a06030";
         else if (c === "L") fill = "#ffd447";
-        else if (c === "X") fill = "#4aa050";
+        else if (c === "X") fill = exitReady() ? "#4aa050" : "#5a4030";
         else fill = "#1a0e07";
         ctx.fillStyle = fill;
         ctx.fillRect(ox + x * cell, oy + y * cell, cell, cell);
@@ -674,16 +676,64 @@
     ctx.strokeStyle = "#4a2a10"; ctx.lineWidth = Math.max(1, sz * 0.02); ctx.stroke();
   }
   function drawToy(cx, y, sz) {
-    const yy = y + sz * 0.55;
-    ctx.fillStyle = "#e24a4a"; ctx.beginPath(); ctx.ellipse(cx, yy, sz * 0.15, sz * 0.1, 0, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "#ff8080"; ctx.beginPath(); ctx.ellipse(cx - sz * 0.05, yy - sz * 0.03, sz * 0.04, sz * 0.03, 0, 0, Math.PI * 2); ctx.fill();
-    ctx.strokeStyle = "#4a2a10"; ctx.lineWidth = Math.max(1, sz * 0.02); ctx.stroke();
+    // Med kit — white case with bold red cross.
+    const w = sz * 0.34, h = sz * 0.24;
+    const x0 = cx - w / 2, y0 = y + sz * 0.55;
+    // shadow
+    ctx.fillStyle = "rgba(0,0,0,0.3)";
+    ctx.beginPath(); ctx.ellipse(cx, y + sz * 0.82, w * 0.55, sz * 0.04, 0, 0, Math.PI * 2); ctx.fill();
+    // case body
+    ctx.fillStyle = "#f3f3f3"; ctx.fillRect(x0, y0, w, h);
+    ctx.fillStyle = "#dcdcdc"; ctx.fillRect(x0, y0 + h * 0.7, w, h * 0.3);
+    ctx.fillStyle = "#fff"; ctx.fillRect(x0, y0, w, h * 0.18);
+    ctx.strokeStyle = "#1a1a1a"; ctx.lineWidth = Math.max(1, sz * 0.018); ctx.strokeRect(x0, y0, w, h);
+    // handle
+    ctx.strokeStyle = "#1a1a1a"; ctx.lineWidth = Math.max(1.2, sz * 0.02);
+    ctx.beginPath(); ctx.arc(cx, y0, w * 0.18, Math.PI, 0); ctx.stroke();
+    // red cross
+    const cw = w * 0.4, ch = h * 0.55;
+    ctx.fillStyle = "#e22020";
+    ctx.fillRect(cx - cw * 0.12, y0 + (h - ch) / 2, cw * 0.24, ch);
+    ctx.fillRect(cx - cw / 2, y0 + h / 2 - ch * 0.12, cw, ch * 0.24);
+    ctx.strokeStyle = "#7a0000"; ctx.lineWidth = Math.max(0.8, sz * 0.01);
+    ctx.strokeRect(cx - cw * 0.12, y0 + (h - ch) / 2, cw * 0.24, ch);
+    ctx.strokeRect(cx - cw / 2, y0 + h / 2 - ch * 0.12, cw, ch * 0.24);
+    // latch
+    ctx.fillStyle = "#a8a8a8"; ctx.fillRect(cx - sz * 0.02, y0 + h - sz * 0.04, sz * 0.04, sz * 0.04);
   }
   function drawBall(cx, y, sz) {
-    const yy = y + sz * 0.55;
-    ctx.fillStyle = "#cbd96a"; ctx.beginPath(); ctx.arc(cx, yy, sz * 0.12, 0, Math.PI * 2); ctx.fill();
-    ctx.strokeStyle = "#fff"; ctx.lineWidth = Math.max(1, sz * 0.015); ctx.beginPath(); ctx.arc(cx, yy, sz * 0.12, -0.3, 0.3); ctx.stroke();
-    ctx.beginPath(); ctx.arc(cx, yy, sz * 0.12, Math.PI - 0.3, Math.PI + 0.3); ctx.stroke();
+    // Soaker magazine — translucent clip with stacked water drops.
+    const w = sz * 0.18, h = sz * 0.36;
+    const x0 = cx - w / 2, y0 = y + sz * 0.5;
+    // shadow
+    ctx.fillStyle = "rgba(0,0,0,0.3)";
+    ctx.beginPath(); ctx.ellipse(cx, y0 + h + sz * 0.02, w * 0.6, sz * 0.04, 0, 0, Math.PI * 2); ctx.fill();
+    // dark backing
+    ctx.fillStyle = "#0a1a2a"; ctx.fillRect(x0 - 1, y0 - 1, w + 2, h + 2);
+    // translucent body
+    ctx.fillStyle = "rgba(190,225,255,0.85)"; ctx.fillRect(x0, y0, w, h);
+    // top opening
+    ctx.fillStyle = "#1a3a5a"; ctx.fillRect(x0 - 1, y0 - sz * 0.03, w + 2, sz * 0.04);
+    ctx.fillStyle = "#3a78bb"; ctx.fillRect(x0, y0 - sz * 0.025, w, sz * 0.025);
+    // baseplate
+    ctx.fillStyle = "#1a3a5a"; ctx.fillRect(x0 - sz * 0.02, y0 + h, w + sz * 0.04, sz * 0.04);
+    // water drops stacked inside
+    const dropRows = 4;
+    for (let i = 0; i < dropRows; i++) {
+      const dy = y0 + sz * 0.04 + i * (h - sz * 0.06) / (dropRows - 0.4);
+      ctx.fillStyle = "#1e7adc";
+      // teardrop shape
+      ctx.beginPath();
+      ctx.moveTo(cx, dy);
+      ctx.bezierCurveTo(cx + w * 0.4, dy + sz * 0.02, cx + w * 0.3, dy + sz * 0.06, cx, dy + sz * 0.07);
+      ctx.bezierCurveTo(cx - w * 0.3, dy + sz * 0.06, cx - w * 0.4, dy + sz * 0.02, cx, dy);
+      ctx.closePath(); ctx.fill();
+      // highlight
+      ctx.fillStyle = "rgba(255,255,255,0.7)";
+      ctx.beginPath(); ctx.arc(cx - w * 0.1, dy + sz * 0.025, sz * 0.008, 0, Math.PI * 2); ctx.fill();
+    }
+    // outer outline
+    ctx.strokeStyle = "#0a1a2a"; ctx.lineWidth = Math.max(1, sz * 0.015); ctx.strokeRect(x0, y0, w, h);
   }
   function drawCatcher(cx, y, sz, s) {
     const t = performance.now() / 200;
@@ -1066,6 +1116,7 @@
   }
 
   function aliveBoss() { return entities.some(e => e.kind === "boss" && e.alive); }
+  function exitReady() { return player.pups >= player.maxPups && !aliveBoss(); }
 
   function fireWater() {
     if (player.ammo <= 0) return;
@@ -1144,8 +1195,8 @@
       if (dx * dx + dy * dy < 0.42 * 0.42) {
         if (e.kind === "pup") { player.pups++; sfxSqueak(); showToast("Pup rescued! " + player.pups + "/" + player.maxPups); }
         else if (e.kind === "key") { player.hasKey = true; sfxPickup(); showToast("Collar key!"); }
-        else if (e.kind === "toy") { player.hp = Math.min(100, player.hp + 25); sfxPickup(); showToast("+25 health"); }
-        else if (e.kind === "ball") { player.ammo = Math.min(60, player.ammo + 10); sfxPickup(); showToast("+10 soaker"); }
+        else if (e.kind === "toy") { player.hp = Math.min(100, player.hp + 25); sfxPickup(); showToast("Med kit  +25 HP"); }
+        else if (e.kind === "ball") { player.ammo = Math.min(60, player.ammo + 10); sfxPickup(); showToast("Water mag  +10"); }
         e.alive = false;
         updateHud();
       }
