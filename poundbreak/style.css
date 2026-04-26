@@ -86,6 +86,31 @@ html, body {
 .key-slot .stat-value { color: #888; }
 .key-slot.has-key .stat-value { color: #ffd447; text-shadow: 0 0 8px #ffd44788; }
 
+/* Make the LEVEL pill tappable so phone players can open the minimap. */
+#stat-level {
+  pointer-events: auto;
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 2px 6px;
+  margin: -2px -6px;
+  transition: background 0.15s;
+}
+#stat-level:active { background: rgba(255, 212, 71, 0.18); }
+#stat-level::after {
+  content: "🗺";
+  display: block;
+  font-size: 8px;
+  margin-top: -2px;
+  opacity: 0.7;
+}
+#stat-level.ready::after {
+  animation: levelReadyPulse 1.4s ease-in-out infinite;
+}
+@keyframes levelReadyPulse {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
 #toast {
   position: absolute;
   left: 50%;
