@@ -12,35 +12,9 @@
   // and dead-end alcoves hiding pups. Boss arena top-right behind locked
   // door; key tucked into a side room reachable without the key. Player
   // starts bottom-left and works north through the kennel.
-  const MAP = [
-    "111111111111111111111111", //  0
-    "1.....1...1............1", //  1  boss arena (cols 11-22, rows 1-5)
-    "1.111.1.K.1............1", //  2  K = collar key in side alcove
-    "1.1.1.1...1............X", //  3  X = exit on east edge of boss arena
-    "1.1.1.111.1............1", //  4
-    "1...1...1.1............1", //  5
-    "111D111.1.111111L1111111", //  6  D bridges to key area; L locks boss arena
-    "1.....1.1.1...........11", //  7
-    "1.111.1.1.1.111111111..1", //  8
-    "1.1...1...1.1.......1..1", //  9  open corridor (former dead-end door removed)
-    "1.1.111.111.1.11111.1..1", // 10
-    "1.1.1.P...1.1.1.P.1.1..1", // 11  P pups in middle alcoves
-    "1...1.111.1.1.1...1.1.11", // 12
-    "111.1.1...1.1.111.1.1..1", // 13
-    "1...1.1.1.1.1.1...1.1..1", // 14
-    "1.111.1.1.1...1.1.111..1", // 15  open T-junction (door removed)
-    "1.....1.1.1...1.1......1", // 16
-    "1.1111.1.111111.111111.1", // 17
-    "1.1..P.1........1...P1.1", // 18  P pups in lower rooms
-    "1.1.1111.111111.1.1..1.1", // 19
-    "1.1......1...P1.1.111..1", // 20  P pup in dead-end
-    "1.111111.1.111.1.....1D1", // 21  D door into right column
-    "1.P............1.......1", // 22  P pup; player starts (1,22)
-    "111111111111111111111111", // 23
-  ];
-  const MH = MAP.length, MW = MAP[0].length;
-  // Mutable wall grid so doors can open (become '.').
-  const GRID = MAP.map(r => r.split(""));
+  // Fixed-size grid; loadLevel() rewrites it for each level.
+  const MW = 24, MH = 24;
+  const GRID = Array.from({ length: MH }, () => new Array(MW).fill("1"));
   function g(x, y) {
     if (x < 0 || y < 0 || x >= MW || y >= MH) return "1";
     return GRID[y][x];
@@ -57,43 +31,201 @@
     kick: 0,
   };
 
-  // ─── ENTITIES ─────────────────────────────────────────
+  // ─── LEVELS ───────────────────────────────────────────
+  // L1-L4 are the early maze runs (no boss). L5 is the boss finale.
+  // Each level: { map: 24 strings of 24 chars, playerStart, enemies[], pickups[] }.
+  // Shared early-level map: small concentric arena reached through
+  // a single door from the west corridor. Verified: door at (12,12)
+  // has walls N/S and floor E/W; all 3 pups + exit reachable from
+  // player start at (1.5, 12.5).
+  const EARLY_MAP = [
+    "111111111111111111111111", //  0
+    "111111111111111111111111", //  1
+    "111111111111111111111111", //  2
+    "111111111111111111111111", //  3
+    "111111111111111111111111", //  4
+    "11111111111............1", //  5
+    "11111111111.1111.1111.11", //  6
+    "11111111111.1..P.1..P.11", //  7
+    "11111111111.1.11.1.11..1", //  8
+    "11111111111.1.1..1.1...1", //  9
+    "11111111111.1.1111.1.111", // 10
+    "11111111111.1......1...1", // 11
+    "............D..........X", // 12
+    "11111111111.1......1...1", // 13
+    "11111111111.1.1111.1.111", // 14
+    "11111111111.1.1..1.1...1", // 15
+    "11111111111.1.11.1.11..1", // 16
+    "11111111111.1..P.1....11", // 17
+    "11111111111.1111.1111.11", // 18
+    "11111111111............1", // 19
+    "111111111111111111111111", // 20
+    "111111111111111111111111", // 21
+    "111111111111111111111111", // 22
+    "111111111111111111111111", // 23
+  ];
+  // L3/L4 variant: key in a 1-cell alcove off the player corridor (row
+  // 11 col 5) and the entry door at (12,12) becomes a locked door.
+  const KEYED_MAP = EARLY_MAP.slice();
+  KEYED_MAP[11] = "11111K11111.1......1...1";
+  KEYED_MAP[12] = "............L..........X";
+
+  const LEVEL_5 = {
+    map: [
+      "111111111111111111111111", //  0
+      "1.....1...1............1", //  1
+      "1.111.1.K.1............1", //  2
+      "1.1.1.1...1............X", //  3  X = exit
+      "1.1.1.111.1............1", //  4
+      "1...1...1.1............1", //  5
+      "111D111.1.111111L1111111", //  6  L = locked boss arena door
+      "1.....1.1.1...........11", //  7
+      "1.111.1.1.1.111111111..1", //  8
+      "1.1...1...1.1.......1..1", //  9
+      "1.1.111.111.1.11111.1..1", // 10
+      "1.1.1.P...1.1.1.P.1.1..1", // 11
+      "1...1.111.1.1.1...1.1.11", // 12
+      "111.1.1...1.1.111.1.1..1", // 13
+      "1...1.1.1.1.1.1...1.1..1", // 14
+      "1.111.1.1.1...1.1.111..1", // 15
+      "1.....1.1.1...1.1......1", // 16
+      "1.1111.1.111111.111111.1", // 17
+      "1.1..P.1........1...P1.1", // 18
+      "1.1.1111.111111.1.1..1.1", // 19
+      "1.1......1...P1.1.111..1", // 20
+      "1.111111.1.111.1.....1D1", // 21
+      "1.P............1.......1", // 22
+      "111111111111111111111111", // 23
+    ],
+    playerStart: { x: 1.5, y: 22.5, a: -Math.PI / 2 },
+    enemies: [
+      { kind: "catcher", x: 10.5, y: 22.5, hp: 30, fireCd: 1 },
+      { kind: "catcher", x: 5.5,  y: 16.5, hp: 30, fireCd: 1.2 },
+      { kind: "catcher", x: 14.5, y: 18.5, hp: 30, fireCd: 1.4 },
+      { kind: "catcher", x: 3.5,  y: 12.5, hp: 30, fireCd: 1 },
+      { kind: "catcher", x: 17.5, y: 13.5, hp: 30, fireCd: 1.3 },
+      { kind: "mascot",  x: 4.5,  y: 7.5,  hp: 55, fireCd: 1.5 },
+      { kind: "mascot",  x: 13.5, y: 11.5, hp: 55, fireCd: 1.5 },
+      { kind: "boss",    x: 17.5, y: 3.5,  hp: 220, fireCd: 2 },
+    ],
+    pickups: [
+      { kind: "toy",  x: 1.5,  y: 19.5 },
+      { kind: "toy",  x: 22.5, y: 17.5 },
+      { kind: "toy",  x: 9.5,  y: 7.5  },
+      { kind: "toy",  x: 13.5, y: 16.5 },
+      { kind: "ball", x: 3.5,  y: 22.5 },
+      { kind: "ball", x: 16.5, y: 22.5 },
+      { kind: "ball", x: 22.5, y: 11.5 },
+      { kind: "ball", x: 5.5,  y: 11.5 },
+      { kind: "ball", x: 22.5, y: 22.5 },
+    ],
+  };
+
+  const LEVELS = [
+    // Level 1 — gentle intro
+    { map: EARLY_MAP, playerStart: { x: 1.5, y: 12.5, a: 0 }, enemies: [
+        { kind: "catcher", x: 16.5, y: 7.5,  hp: 30, fireCd: 1.5 },
+        { kind: "catcher", x: 16.5, y: 17.5, hp: 30, fireCd: 1.5 },
+      ], pickups: [
+        { kind: "toy",  x: 5.5,  y: 12.5 },
+        { kind: "ball", x: 9.5,  y: 12.5 },
+        { kind: "ball", x: 21.5, y: 5.5  },
+        { kind: "toy",  x: 21.5, y: 19.5 },
+      ] },
+    // Level 2 — adds a mascot and a third catcher
+    { map: EARLY_MAP, playerStart: { x: 1.5, y: 12.5, a: 0 }, enemies: [
+        { kind: "catcher", x: 16.5, y: 7.5,  hp: 30, fireCd: 1.3 },
+        { kind: "catcher", x: 16.5, y: 17.5, hp: 30, fireCd: 1.3 },
+        { kind: "catcher", x: 21.5, y: 12.5, hp: 30, fireCd: 1.4 },
+        { kind: "mascot",  x: 13.5, y: 12.5, hp: 55, fireCd: 1.6 },
+      ], pickups: [
+        { kind: "toy",  x: 5.5,  y: 12.5 },
+        { kind: "ball", x: 9.5,  y: 12.5 },
+        { kind: "ball", x: 21.5, y: 5.5  },
+        { kind: "toy",  x: 21.5, y: 19.5 },
+      ] },
+    // Level 3 — locked door + side-alcove key, more enemies
+    { map: KEYED_MAP, playerStart: { x: 1.5, y: 12.5, a: 0 }, enemies: [
+        { kind: "catcher", x: 16.5, y: 7.5,  hp: 30, fireCd: 1.2 },
+        { kind: "catcher", x: 16.5, y: 17.5, hp: 30, fireCd: 1.2 },
+        { kind: "catcher", x: 21.5, y: 12.5, hp: 30, fireCd: 1.3 },
+        { kind: "catcher", x: 13.5, y: 5.5,  hp: 30, fireCd: 1.4 },
+        { kind: "mascot",  x: 13.5, y: 19.5, hp: 55, fireCd: 1.5 },
+      ], pickups: [
+        { kind: "toy",  x: 9.5,  y: 12.5 },
+        { kind: "ball", x: 13.5, y: 12.5 },
+        { kind: "ball", x: 21.5, y: 5.5  },
+        { kind: "toy",  x: 21.5, y: 19.5 },
+      ] },
+    // Level 4 — same locked-door layout, max early-level pressure
+    { map: KEYED_MAP, playerStart: { x: 1.5, y: 12.5, a: 0 }, enemies: [
+        { kind: "catcher", x: 16.5, y: 7.5,  hp: 30, fireCd: 1.0 },
+        { kind: "catcher", x: 16.5, y: 17.5, hp: 30, fireCd: 1.0 },
+        { kind: "catcher", x: 21.5, y: 12.5, hp: 30, fireCd: 1.1 },
+        { kind: "catcher", x: 13.5, y: 5.5,  hp: 30, fireCd: 1.2 },
+        { kind: "catcher", x: 13.5, y: 19.5, hp: 30, fireCd: 1.2 },
+        { kind: "mascot",  x: 18.5, y: 12.5, hp: 55, fireCd: 1.3 },
+        { kind: "mascot",  x: 14.5, y: 12.5, hp: 55, fireCd: 1.3 },
+      ], pickups: [
+        { kind: "toy",  x: 9.5,  y: 12.5 },
+        { kind: "ball", x: 13.5, y: 12.5 },
+        { kind: "ball", x: 21.5, y: 5.5  },
+        { kind: "toy",  x: 21.5, y: 19.5 },
+        { kind: "toy",  x: 5.5,  y: 12.5 },
+      ] },
+    // Level 5 — original full maze with the boss
+    LEVEL_5,
+  ];
+
   const entities = [];
-  for (let y = 0; y < MH; y++) {
-    for (let x = 0; x < MW; x++) {
-      const c = MAP[y][x];
-      if (c === "P") {
-        entities.push({ kind: "pup", x: x + 0.5, y: y + 0.5, alive: true, bob: Math.random() * 6 });
-        player.maxPups++;
-        setCell(x, y, "."); // item on floor
-      } else if (c === "K") {
-        entities.push({ kind: "key", x: x + 0.5, y: y + 0.5, alive: true, bob: Math.random() * 6 });
-        setCell(x, y, ".");
+  const shots = []; // { x, y, dx, dy, fromPlayer, ttl }
+  let currentLevel = 0;
+
+  function loadLevel(idx) {
+    currentLevel = idx;
+    const L = LEVELS[idx];
+    // Reset grid from level map
+    for (let y = 0; y < MH; y++) {
+      for (let x = 0; x < MW; x++) {
+        const c = L.map[y].charAt(x);
+        GRID[y][x] = c;
       }
     }
+    // Reset player position; carry hp/ammo with a small heal + topup
+    player.x = L.playerStart.x;
+    player.y = L.playerStart.y;
+    player.a = L.playerStart.a;
+    player.pups = 0; player.maxPups = 0; player.hasKey = false;
+    player.hp = Math.min(100, player.hp + 25);
+    player.ammo = Math.max(player.ammo, 18);
+    // Clear runtime arrays
+    entities.length = 0;
+    shots.length = 0;
+    if (typeof splashes !== "undefined") splashes.length = 0;
+    // Scan grid for P/K and turn them into entities + floor
+    for (let y = 0; y < MH; y++) {
+      for (let x = 0; x < MW; x++) {
+        const c = GRID[y][x];
+        if (c === "P") {
+          entities.push({ kind: "pup", x: x + 0.5, y: y + 0.5, alive: true, bob: Math.random() * 6 });
+          player.maxPups++;
+          GRID[y][x] = ".";
+        } else if (c === "K") {
+          entities.push({ kind: "key", x: x + 0.5, y: y + 0.5, alive: true, bob: Math.random() * 6 });
+          GRID[y][x] = ".";
+        }
+      }
+    }
+    // Enemies + pickups from level config
+    for (const e of L.enemies || []) {
+      entities.push(Object.assign({ alive: true, vx: 0, vy: 0, wobble: 0 }, e));
+    }
+    for (const p of L.pickups || []) {
+      entities.push(Object.assign({ alive: true, bob: Math.random() * 6 }, p));
+    }
+    showToast("LEVEL " + (idx + 1) + " of " + LEVELS.length);
+    if (typeof updateHud === "function") updateHud();
   }
-  // Enemies — scattered through the maze corridors and rooms.
-  entities.push({ kind: "catcher", x: 10.5, y: 22.5, hp: 30, alive: true, vx: 0, vy: 0, fireCd: 1,   wobble: 0 });
-  entities.push({ kind: "catcher", x: 5.5,  y: 16.5, hp: 30, alive: true, vx: 0, vy: 0, fireCd: 1.2, wobble: 0 });
-  entities.push({ kind: "catcher", x: 14.5, y: 18.5, hp: 30, alive: true, vx: 0, vy: 0, fireCd: 1.4, wobble: 0 });
-  entities.push({ kind: "catcher", x: 3.5,  y: 12.5, hp: 30, alive: true, vx: 0, vy: 0, fireCd: 1,   wobble: 0 });
-  entities.push({ kind: "catcher", x: 17.5, y: 13.5, hp: 30, alive: true, vx: 0, vy: 0, fireCd: 1.3, wobble: 0 });
-  entities.push({ kind: "mascot",  x: 4.5,  y: 7.5,  hp: 55, alive: true, vx: 0, vy: 0, fireCd: 1.5, wobble: 0 });
-  entities.push({ kind: "mascot",  x: 13.5, y: 11.5, hp: 55, alive: true, vx: 0, vy: 0, fireCd: 1.5, wobble: 0 });
-  entities.push({ kind: "boss",    x: 17.5, y: 3.5,  hp: 200, alive: true, vx: 0, vy: 0, fireCd: 2, wobble: 0 });
-
-  // Pickups
-  entities.push({ kind: "toy",  x: 1.5,  y: 19.5, alive: true, bob: 0 });
-  entities.push({ kind: "toy",  x: 22.5, y: 17.5, alive: true, bob: 1 });
-  entities.push({ kind: "toy",  x: 9.5,  y: 7.5,  alive: true, bob: 2 });
-  entities.push({ kind: "toy",  x: 13.5, y: 16.5, alive: true, bob: 3 });
-  entities.push({ kind: "ball", x: 3.5,  y: 22.5, alive: true, bob: 0 });
-  entities.push({ kind: "ball", x: 16.5, y: 22.5, alive: true, bob: 1 });
-  entities.push({ kind: "ball", x: 22.5, y: 11.5, alive: true, bob: 2 });
-  entities.push({ kind: "ball", x: 5.5,  y: 11.5, alive: true, bob: 3 });
-  entities.push({ kind: "ball", x: 22.5, y: 22.5, alive: true, bob: 0 });
-
-  const shots = []; // { x, y, dx, dy, fromPlayer, ttl }
 
   // ─── INPUT ────────────────────────────────────────────
   const keys = {};
@@ -196,9 +328,14 @@
   textures["X"] = mkTex(x => { // exit
     x.fillStyle = "#4aa050"; x.fillRect(0, 0, 64, 64);
     x.fillStyle = "#2a6030"; x.fillRect(4, 4, 56, 56);
+    // East-facing wall textures get u-mirrored by the raycaster, so
+    // pre-mirror the sign content here so it reads correctly to the
+    // player approaching from the west.
+    x.save(); x.translate(64, 0); x.scale(-1, 1);
     x.fillStyle = "#ffe9b6"; x.font = "bold 14px sans-serif"; x.textAlign = "center";
     x.fillText("EXIT", 32, 30);
     x.beginPath(); x.moveTo(20, 42); x.lineTo(36, 42); x.lineTo(36, 38); x.lineTo(46, 46); x.lineTo(36, 54); x.lineTo(36, 50); x.lineTo(20, 50); x.closePath(); x.fill();
+    x.restore();
   });
 
   // ─── RAYCASTER ────────────────────────────────────────
@@ -837,9 +974,18 @@
       if (player.hasKey) { setCell(cx, cy, "."); sfxDoor(); showToast("Locked door unlocked!"); player.hasKey = false; updateHud(); }
       else showToast("Need a collar key");
     } else if (c === "X") {
-      if (player.pups >= player.maxPups && !aliveBoss()) triggerWin();
-      else if (player.pups < player.maxPups) showToast("Free all pups first (" + player.pups + "/" + player.maxPups + ")");
-      else showToast("The Boss Bulldog still prowls...");
+      if (player.pups < player.maxPups) showToast("Free all pups first (" + player.pups + "/" + player.maxPups + ")");
+      else if (aliveBoss()) showToast("The Boss Bulldog still prowls...");
+      else exitLevel();
+    }
+  }
+
+  function exitLevel() {
+    if (currentLevel >= LEVELS.length - 1) {
+      triggerWin();
+    } else {
+      sfxDoor();
+      loadLevel(currentLevel + 1);
     }
   }
 
@@ -874,7 +1020,7 @@
         e.fireCd = (e.fireCd || 0) - dt;
         if (e.fireCd <= 0 && d < 11) {
           const sp = 5.5;
-          const dmg = e.kind === "boss" ? 10 : e.kind === "mascot" ? 7 : 5;
+          const dmg = e.kind === "boss" ? 14 : e.kind === "mascot" ? 10 : 7;
           shots.push({ kind: "net", x: e.x, y: e.y, dx: (dx / d) * sp, dy: (dy / d) * sp, ttl: 2, fromPlayer: false, dmg, bob: 0 });
           e.fireCd = e.kind === "boss" ? 1 : e.kind === "mascot" ? 1.3 : 1.9;
         }
@@ -1030,6 +1176,7 @@
   const hudAmmo = document.getElementById("stat-ammo");
   const hudPups = document.getElementById("stat-pups");
   const hudKey = document.getElementById("stat-key");
+  const hudLevel = document.getElementById("stat-level");
   const faceEl = document.getElementById("face");
   const toastEl = document.getElementById("toast");
   const overlay = document.getElementById("overlay");
@@ -1043,6 +1190,7 @@
     hudPups.textContent = player.pups + "/" + player.maxPups;
     hudKey.classList.toggle("has-key", player.hasKey);
     hudKey.querySelector(".stat-value").textContent = player.hasKey ? "YES" : "—";
+    if (hudLevel) hudLevel.textContent = (currentLevel + 1) + "/" + LEVELS.length;
     let face = "😠";
     if (player.hp < 30) face = "😱";
     else if (player.hp < 60) face = "😖";
@@ -1056,9 +1204,8 @@
 
   function triggerWin() {
     sfxWin();
-    endTitle.textContent = "PUPS FREE!";
-    endBody.innerHTML = "Every pup's safe, the boss is soaked, and you walked out the back door like a hero.<br><br>" +
-      "Pups rescued: <strong>" + player.pups + "/" + player.maxPups + "</strong><br>" +
+    endTitle.textContent = "ALL PUPS FREE!";
+    endBody.innerHTML = "Five kennels cleared. The Boss Bulldog soaked. Every last pup loaded into the rescue van.<br><br>" +
       "Health remaining: <strong>" + Math.max(0, player.hp | 0) + "</strong>";
     endOverlay.classList.remove("lose");
     endOverlay.classList.add("show");
@@ -1135,6 +1282,7 @@
     location.reload();
   });
 
+  loadLevel(0);
   updateHud();
   requestAnimationFrame(loop);
 
