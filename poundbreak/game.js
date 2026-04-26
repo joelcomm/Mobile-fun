@@ -175,6 +175,7 @@
     theme: "ship",
     damageMul: 1.6,
     enemies: [
+      { kind: "catcher", x: 5.5,  y: 22.5, hp: 30, fireCd: 1.1 },
       { kind: "catcher", x: 10.5, y: 22.5, hp: 30, fireCd: 1 },
       { kind: "catcher", x: 5.5,  y: 16.5, hp: 30, fireCd: 1.2 },
       { kind: "catcher", x: 14.5, y: 18.5, hp: 30, fireCd: 1.4 },
@@ -208,7 +209,10 @@
 
   const LEVELS = [
     // Level 1 — kennel concentric arena, single door, gentle intro
-    { map: L1_MAP, theme: "kennel", playerStart: { x: 1.5, y: 12.5, a: 0 }, damageMul: 1.0, enemies: [
+    { map: L1_MAP, theme: "kennel", playerStart: { x: 1.5, y: 12.5, a: 0 }, damageMul: 1.0,
+      extraPups: [ { x: 5.5, y: 12.5 } ],
+      enemies: [
+        { kind: "catcher", x: 8.5,  y: 12.5, hp: 30, fireCd: 1.6 },
         { kind: "catcher", x: 16.5, y: 7.5,  hp: 30, fireCd: 1.5 },
         { kind: "catcher", x: 16.5, y: 17.5, hp: 30, fireCd: 1.5 },
         { kind: "catcher", x: 21.5, y: 7.5,  hp: 30, fireCd: 1.5 },
@@ -220,7 +224,10 @@
         { kind: "toy",  x: 21.5, y: 19.5 },
       ] },
     // Level 2 — winding garden hedge maze, no key/lock
-    { map: L2_MAP, theme: "garden", playerStart: { x: 1.5, y: 11.5, a: 0 }, damageMul: 1.15, enemies: [
+    { map: L2_MAP, theme: "garden", playerStart: { x: 1.5, y: 11.5, a: 0 }, damageMul: 1.15,
+      extraPups: [ { x: 1.5, y: 9.5 } ],
+      enemies: [
+        { kind: "catcher", x: 1.5,  y: 13.5, hp: 30, fireCd: 1.4 },
         { kind: "catcher", x: 16.5, y: 9.5,  hp: 30, fireCd: 1.3 },
         { kind: "catcher", x: 1.5,  y: 16.5, hp: 30, fireCd: 1.3 },
         { kind: "catcher", x: 10.5, y: 17.5, hp: 30, fireCd: 1.3 },
@@ -237,7 +244,10 @@
         { kind: "ball", x: 21.5, y: 6.5  },
       ] },
     // Level 3 — crystal cavern maze, key in NE alcove, locked exit
-    { map: L3_MAP, theme: "cavern", playerStart: { x: 1.5, y: 11.5, a: 0 }, damageMul: 1.3, enemies: [
+    { map: L3_MAP, theme: "cavern", playerStart: { x: 1.5, y: 11.5, a: 0 }, damageMul: 1.3,
+      extraPups: [ { x: 3.5, y: 11.5 } ],
+      enemies: [
+        { kind: "catcher", x: 1.5,  y: 9.5,  hp: 30, fireCd: 1.3 },
         { kind: "catcher", x: 1.5,  y: 14.5, hp: 30, fireCd: 1.2 },
         { kind: "catcher", x: 18.5, y: 13.5, hp: 30, fireCd: 1.2 },
         { kind: "catcher", x: 2.5,  y: 15.5, hp: 30, fireCd: 1.2 },
@@ -261,7 +271,10 @@
         { kind: "ball", x: 17.5, y: 7.5  },
       ] },
     // Level 4 — abandoned theme park, key in S alcove, locked exit
-    { map: L4_MAP, theme: "park", playerStart: { x: 1.5, y: 11.5, a: 0 }, damageMul: 1.45, enemies: [
+    { map: L4_MAP, theme: "park", playerStart: { x: 1.5, y: 11.5, a: 0 }, damageMul: 1.45,
+      extraPups: [ { x: 1.5, y: 9.5 } ],
+      enemies: [
+        { kind: "catcher", x: 1.5,  y: 13.5, hp: 30, fireCd: 1.1 },
         { kind: "catcher", x: 5.5,  y: 2.5,  hp: 30, fireCd: 1.0 },
         { kind: "catcher", x: 20.5, y: 1.5,  hp: 30, fireCd: 1.0 },
         { kind: "catcher", x: 8.5,  y: 5.5,  hp: 30, fireCd: 1.0 },
@@ -341,6 +354,13 @@
     }
     for (const p of L.pickups || []) {
       entities.push(Object.assign({ alive: true, bob: Math.random() * 6 }, p));
+    }
+    // Extra pups spawned via config (in addition to map P cells) — used
+    // to seed at least one pup near the start so players see the goal
+    // before fully exploring the maze.
+    for (const p of L.extraPups || []) {
+      entities.push({ kind: "pup", x: p.x, y: p.y, alive: true, bob: Math.random() * 6 });
+      player.maxPups++;
     }
     showToast("FLOOR " + (idx + 1) + " — " + currentTheme.name);
     if (typeof updateHud === "function") updateHud();
@@ -1402,6 +1422,19 @@
     updateHud();
   }
 
+  // Move an enemy along an axis with a small radius so its body
+  // doesn't poke into adjacent walls.
+  function moveEnemyX(e, nx) {
+    const r = 0.32;
+    const tx = nx > e.x ? nx + r : nx - r;
+    if (!isWall(g(tx | 0, e.y | 0))) e.x = nx;
+  }
+  function moveEnemyY(e, ny) {
+    const r = 0.32;
+    const ty = ny > e.y ? ny + r : ny - r;
+    if (!isWall(g(e.x | 0, ty | 0))) e.y = ny;
+  }
+
   function updateEntities(dt) {
     for (const e of entities) {
       if (!e.alive) continue;
@@ -1416,8 +1449,8 @@
         const pull = d > desired ? 1 : -0.3;
         const nx = e.x + (dx / d) * maxSp * pull * dt;
         const ny = e.y + (dy / d) * maxSp * pull * dt;
-        if (!isWall(g(nx | 0, e.y | 0))) e.x = nx;
-        if (!isWall(g(e.x | 0, ny | 0))) e.y = ny;
+        moveEnemyX(e, nx);
+        moveEnemyY(e, ny);
         e.wanderT = 0; // reset wander cooldown
         e.fireCd = (e.fireCd || 0) - dt;
         if (e.fireCd <= 0 && d < 11) {
@@ -1437,8 +1470,8 @@
         const sp = 0.6;
         const wx = e.x + Math.cos(e.wanderA) * sp * dt;
         const wy = e.y + Math.sin(e.wanderA) * sp * dt;
-        if (!isWall(g(wx | 0, e.y | 0))) e.x = wx;
-        if (!isWall(g(e.x | 0, wy | 0))) e.y = wy;
+        moveEnemyX(e, wx);
+        moveEnemyY(e, wy);
       }
     }
   }
