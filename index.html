@@ -34,7 +34,7 @@
     }
 
     #app {
-      max-width: 480px;
+      max-width: 960px;
       margin: 0 auto;
       padding: 24px 20px;
       padding-top: calc(24px + var(--safe-top));
@@ -66,10 +66,17 @@
     }
 
     .games {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr;
       gap: 16px;
       flex: 1;
+    }
+
+    @media (min-width: 768px) {
+      .games {
+        grid-template-columns: repeat(3, 1fr);
+        align-content: start;
+      }
     }
 
     .game-card {
@@ -87,6 +94,14 @@
     .game-card:active {
       background: var(--card-hover);
       transform: scale(0.98);
+    }
+
+    @media (hover: hover) {
+      .game-card:hover {
+        background: var(--card-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      }
     }
 
     .card-top {
@@ -150,10 +165,6 @@
     .echo .card-icon { background: rgba(126, 78, 184, 0.08); }
     .echo .card-title { color: #7e4eb8; }
     .echo .card-tag { background: rgba(126, 78, 184, 0.06); color: #7e4eb8; }
-
-    .drift .card-icon { background: rgba(24, 144, 168, 0.08); }
-    .drift .card-title { color: #1890a8; }
-    .drift .card-tag { background: rgba(24, 144, 168, 0.06); color: #1890a8; }
 
     .cipher .card-icon { background: rgba(26, 152, 80, 0.08); }
     .cipher .card-title { color: #1a9850; }
@@ -345,15 +356,6 @@
         <span class="card-tag">Memory &amp; Reflexes</span>
       </a>
 
-      <a href="drift/" class="game-card drift">
-        <div class="card-top">
-          <div class="card-icon">&#x1F4A8;</div>
-          <div class="card-title">Drift</div>
-        </div>
-        <div class="card-desc">Letters appear one at a time. Guess the word before it's fully revealed — fewer letters, more points.</div>
-        <span class="card-tag">Word Guess</span>
-      </a>
-
       <a href="cipher/" class="game-card cipher">
         <div class="card-top">
           <div class="card-icon">&#x1F510;</div>
@@ -425,8 +427,8 @@
 
       // Completion tracking
       (function () {
-        var DAILY_KEYS = ['threads','alibi','bluff','lineup','echo','drift','cipher','reflex','vanish','sequence','rank'];
-        var DAILY_CSS = ['threads','alibi','bluff','lineup','echo','drift','cipher','reflex','vanish','sequence','rank'];
+        var DAILY_KEYS = ['threads','alibi','bluff','lineup','echo','cipher','reflex','vanish','sequence','rank'];
+        var DAILY_CSS = ['threads','alibi','bluff','lineup','echo','cipher','reflex','vanish','sequence','rank'];
         var done = 0;
         var cards = document.querySelectorAll('.game-card');
 
@@ -454,12 +456,12 @@
         // Progress bar
         var prog = document.getElementById('hub-progress');
         var dots = '';
-        for (var i = 0; i < 11; i++) {
+        for (var i = 0; i < 10; i++) {
           dots += '<div class="pdot' + (i < done ? ' filled' : '') + '"></div>';
         }
         prog.innerHTML =
           '<div class="progress-ring">' +
-            '<div class="progress-count"><strong>' + done + '</strong>/11 today</div>' +
+            '<div class="progress-count"><strong>' + done + '</strong>/10 today</div>' +
             '<div class="progress-dots">' + dots + '</div>' +
           '</div>' +
           '<a href="stats.html" class="stats-link">VIEW STATS \u2192</a>';

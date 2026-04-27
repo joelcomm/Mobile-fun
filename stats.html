@@ -224,7 +224,7 @@
 
     .streak-grid {
       display: grid;
-      grid-template-columns: repeat(11, 1fr);
+      grid-template-columns: repeat(10, 1fr);
       gap: 6px;
     }
 
@@ -281,10 +281,7 @@
     .gs-echo .gs-icon { background: rgba(126,78,184,.08); }
     .gs-echo .gs-name { color: #7e4eb8; }
 
-    .gs-drift .gs-icon { background: rgba(24,144,168,.08); }
-    .gs-drift .gs-name { color: #1890a8; }
-
-    .gs-cipher .gs-icon { background: rgba(26,152,80,.08); }
+.gs-cipher .gs-icon { background: rgba(26,152,80,.08); }
     .gs-cipher .gs-name { color: #1a9850; }
 
     .gs-reflex .gs-icon { background: rgba(200,152,24,.08); }
@@ -327,7 +324,7 @@
   </style>
 </head>
 <body>
-  <a href="hub.html" class="back-link">&larr; GAMES</a>
+  <a href="/" class="back-link">&larr; GAMES</a>
   <div id="app">
     <header>
       <h1>YOUR STATS</h1>
@@ -378,7 +375,6 @@
       { key: 'bluff',    name: 'Bluff',    icon: '\uD83C\uDCCF', href: 'bluff/',    abbr: 'BLF' },
       { key: 'lineup',   name: 'Lineup',   icon: '\uD83D\uDCCA', href: 'lineup/',   abbr: 'LIN' },
       { key: 'echo',     name: 'Echo',     icon: '\uD83D\uDD19', href: 'echo/',     abbr: 'ECH' },
-      { key: 'drift',    name: 'Drift',    icon: '\uD83D\uDCA8', href: 'drift/',    abbr: 'DRI' },
       { key: 'cipher',   name: 'Cipher',   icon: '\uD83D\uDD10', href: 'cipher/',   abbr: 'CIP' },
       { key: 'reflex',   name: 'Reflex',   icon: '\u26A1',       href: 'reflex/',   abbr: 'RFX' },
       { key: 'vanish',   name: 'Vanish',   icon: '\uD83D\uDFE9', href: 'vanish/',   abbr: 'VAN' },
@@ -413,7 +409,7 @@
     });
 
     // Summary cards
-    document.getElementById('sum-today').textContent = todayCount + '/11';
+    document.getElementById('sum-today').textContent = todayCount + '/10';
     document.getElementById('sum-streak').textContent = bestStreak;
     document.getElementById('sum-total').textContent = totalPlayed;
 
@@ -468,7 +464,7 @@
       var colors = {
         threads: '#8a6d00', alibi: '#c89018',
         bluff: '#d05035', lineup: '#4a6ee0', echo: '#7e4eb8',
-        drift: '#1890a8', cipher: '#1a9850', reflex: '#c89818',
+        cipher: '#1a9850', reflex: '#c89818',
         vanish: '#009878',
         sequence: '#4a6ee0',
         rank: '#b8960a'

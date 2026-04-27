@@ -125,7 +125,7 @@ const Daily = (function () {
         '<p class="daily-done-lbl">COMPLETED TODAY</p>' +
         '<p class="daily-done-score">' + res.score + '</p>' +
         '<p class="daily-cd" id="daily-cd"></p>' +
-        '<a href="../hub.html" class="daily-hub-link">ALL GAMES</a>';
+        '<a href="../" class="daily-hub-link">ALL GAMES</a>';
       var btn = el.querySelector('.btn-main');
       if (btn) {
         btn.style.display = 'none';
