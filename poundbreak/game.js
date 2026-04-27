@@ -727,6 +727,31 @@
   let textures = THEMES.kennel.textures;
   let currentTheme = THEMES.kennel;
 
+  // Replace the procedural "1" wall in a theme with a downscaled
+  // version of an external PNG when it loads. Keeps the procedural
+  // tile as a fallback if the file is missing.
+  function loadThemeWall(themeKey, url) {
+    const img = new Image();
+    img.onload = () => {
+      const c = document.createElement("canvas");
+      c.width = c.height = TEX_SIZE;
+      const cx = c.getContext("2d");
+      cx.imageSmoothingEnabled = true;
+      cx.drawImage(img, 0, 0, TEX_SIZE, TEX_SIZE);
+      const data = cx.getImageData(0, 0, TEX_SIZE, TEX_SIZE);
+      THEMES[themeKey].textures["1"] = data;
+      // If this is the active theme, update the live ref too.
+      if (currentTheme === THEMES[themeKey]) textures = THEMES[themeKey].textures;
+    };
+    img.onerror = () => { /* keep procedural fallback */ };
+    img.src = url;
+  }
+  loadThemeWall("kennel", "textures/wall_kennel.png");
+  loadThemeWall("garden", "textures/wall_garden.png");
+  loadThemeWall("cavern", "textures/wall_cavern.png");
+  loadThemeWall("park",   "textures/wall_park.png");
+  loadThemeWall("ship",   "textures/wall_ship.png");
+
   // ─── RAYCASTER ────────────────────────────────────────
   const zbuf = new Float32Array(RW);
   const frame = ctx.createImageData(RW, RH);
