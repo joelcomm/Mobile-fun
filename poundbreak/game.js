@@ -310,6 +310,15 @@
   const shots = []; // { x, y, dx, dy, fromPlayer, ttl }
   let currentLevel = 0;
 
+  // Difficulty: chosen from the start screen. Easy = current behavior;
+  // Normal = +50% enemies; Hard = ×2 enemies AND ×2 damage.
+  const DIFFICULTIES = {
+    easy:   { name: "Easy",   enemyMul: 1.0, dmgMul: 1.0 },
+    normal: { name: "Normal", enemyMul: 1.5, dmgMul: 1.0 },
+    hard:   { name: "Hard",   enemyMul: 2.0, dmgMul: 2.0 },
+  };
+  let currentDifficulty = "normal";
+
   function loadLevel(idx) {
     currentLevel = idx;
     const L = LEVELS[idx];
@@ -348,9 +357,21 @@
         }
       }
     }
-    // Enemies + pickups from level config
-    for (const e of L.enemies || []) {
-      entities.push(Object.assign({ alive: true, vx: 0, vy: 0, wobble: 0 }, e));
+    // Enemies + pickups from level config. Difficulty multiplies the
+    // count: 1.5× rounds up by adding half the list, 2× duplicates the
+    // whole list. Copies spawn at the same cell with a tiny offset so
+    // they read as separate sprites once they wander apart.
+    const baseEnemies = L.enemies || [];
+    const enemyMul = (DIFFICULTIES[currentDifficulty] || DIFFICULTIES.easy).enemyMul;
+    const totalEnemies = Math.ceil(baseEnemies.length * enemyMul);
+    for (let i = 0; i < totalEnemies; i++) {
+      const src = baseEnemies[i % baseEnemies.length];
+      const isCopy = i >= baseEnemies.length;
+      entities.push(Object.assign(
+        { alive: true, vx: 0, vy: 0, wobble: 0 },
+        src,
+        isCopy ? { x: src.x + (Math.random() - 0.5) * 0.4, y: src.y + (Math.random() - 0.5) * 0.4 } : {},
+      ));
     }
     for (const p of L.pickups || []) {
       entities.push(Object.assign({ alive: true, bob: Math.random() * 6 }, p));
@@ -1456,7 +1477,7 @@
         if (e.fireCd <= 0 && d < 11) {
           const sp = 5.5;
           const baseDmg = e.kind === "boss" ? 14 : e.kind === "mascot" ? 10 : 7;
-          const dmg = Math.round(baseDmg * (LEVELS[currentLevel].damageMul || 1));
+          const dmg = Math.round(baseDmg * (LEVELS[currentLevel].damageMul || 1) * (DIFFICULTIES[currentDifficulty]?.dmgMul || 1));
           shots.push({ kind: "net", x: e.x, y: e.y, dx: (dx / d) * sp, dy: (dy / d) * sp, ttl: 2, fromPlayer: false, dmg, bob: 0 });
           e.fireCd = e.kind === "boss" ? 1 : e.kind === "mascot" ? 1.3 : 1.9;
         }
@@ -1730,9 +1751,21 @@
     }
   });
 
+  // Difficulty button selection (default to Normal).
+  const diffButtons = document.querySelectorAll(".diff-btn");
+  function selectDifficulty(d) {
+    currentDifficulty = d;
+    diffButtons.forEach(b => b.classList.toggle("selected", b.dataset.diff === d));
+  }
+  diffButtons.forEach(b => b.addEventListener("click", () => selectDifficulty(b.dataset.diff)));
+  selectDifficulty("normal");
+
   document.getElementById("start-btn").addEventListener("click", () => {
     overlay.classList.remove("show");
     running = true;
+    // Reload level 1 so the chosen difficulty applies (loadLevel reads
+    // currentDifficulty when spawning enemies).
+    loadLevel(0);
     try { actx().resume(); } catch (e) {}
     // Auto-engage pointer lock on desktop so the user can immediately
     // turn with the trackpad/mouse without an extra click.
