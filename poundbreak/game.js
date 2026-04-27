@@ -554,7 +554,24 @@
       x.strokeStyle = "#222"; x.lineWidth = 3; x.beginPath(); x.arc(32, 26, 5, Math.PI, 0); x.stroke();
     });
     t["X"] = mkTex(x => paintExitText(x, "#3a7a3a", "#1a4a1a", "#ffe9b6"));
-    return { textures: t, ceilRGB: [120, 170, 220], floorRGB: [70, 90, 50], name: "Garden Maze" };
+    return { textures: t, ceilRGB: [120, 170, 220], floorRGB: [70, 90, 50], name: "Garden Maze",
+      paintSky: (g, w, h) => {
+        // Sky-blue gradient with white drifting clouds.
+        const grad = g.createLinearGradient(0, 0, 0, h);
+        grad.addColorStop(0, "#5896d4");
+        grad.addColorStop(1, "#a9d2f3");
+        g.fillStyle = grad; g.fillRect(0, 0, w, h);
+        for (let i = 0; i < 14; i++) {
+          const cx = (i * 137 + 23) % w;
+          const cy = 8 + ((i * 53) % (h - 14));
+          const rx = 22 + (i % 3) * 8, ry = 9 + (i % 2) * 4;
+          g.fillStyle = "rgba(255,255,255,0.85)";
+          g.beginPath(); g.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2); g.fill();
+          g.fillStyle = "rgba(255,255,255,0.45)";
+          g.beginPath(); g.ellipse(cx + rx * 0.5, cy + 2, rx * 0.7, ry * 0.7, 0, 0, Math.PI * 2); g.fill();
+          g.beginPath(); g.ellipse(cx - rx * 0.4, cy + 1, rx * 0.6, ry * 0.7, 0, 0, Math.PI * 2); g.fill();
+        }
+      } };
   })();
 
   // ── THEME: CAVERN — rough rock with glowing crystals
@@ -609,7 +626,20 @@
       x.fillStyle = "#fff"; x.beginPath(); x.arc(30, 30, 2, 0, Math.PI * 2); x.fill();
     });
     t["X"] = mkTex(x => paintExitText(x, "#3a3a44", "#1a1a24", "#a070ff"));
-    return { textures: t, ceilRGB: [20, 12, 25], floorRGB: [38, 28, 22], name: "Crystal Cavern" };
+    return { textures: t, ceilRGB: [20, 12, 25], floorRGB: [38, 28, 22], name: "Crystal Cavern",
+      paintSky: (g, w, h) => {
+        // Near-black with subtle purple haze and a few crystal sparkles.
+        const grad = g.createLinearGradient(0, 0, 0, h);
+        grad.addColorStop(0, "#070510");
+        grad.addColorStop(1, "#1a0f24");
+        g.fillStyle = grad; g.fillRect(0, 0, w, h);
+        for (let i = 0; i < 30; i++) {
+          const sx = (i * 211 + 17) % w;
+          const sy = (i * 71) % h;
+          g.fillStyle = "rgba(160,90,255,0.6)";
+          g.beginPath(); g.arc(sx, sy, 0.6 + (i & 1) * 0.6, 0, Math.PI * 2); g.fill();
+        }
+      } };
   })();
 
   // ── THEME: PARK — candy-stripe walls, neon floor
@@ -671,7 +701,30 @@
       x.strokeStyle = "#222"; x.lineWidth = 2; x.beginPath(); x.arc(32, 44, 4, Math.PI, 0); x.stroke();
     });
     t["X"] = mkTex(x => paintExitText(x, "#3aa0ff", "#1a3a60", "#ffd447"));
-    return { textures: t, ceilRGB: [20, 0, 40], floorRGB: [50, 30, 60], name: "Theme Park" };
+    return { textures: t, ceilRGB: [20, 0, 40], floorRGB: [50, 30, 60], name: "Theme Park",
+      paintSky: (g, w, h) => {
+        // White-ish sky bursting with colorful confetti.
+        g.fillStyle = "#ffffff"; g.fillRect(0, 0, w, h);
+        const colors = ["#e22020", "#ffd447", "#3aa0ff", "#3acc60", "#d04dc8", "#ff8a3a"];
+        for (let i = 0; i < 220; i++) {
+          const x = (i * 71 + 13) % w;
+          const y = (i * 113 + 7) % h;
+          const col = colors[i % colors.length];
+          g.fillStyle = col;
+          // Alternate confetti shapes: rect, rotated rect, triangle.
+          const shape = i % 3;
+          g.save(); g.translate(x, y); g.rotate((i * 0.37) % Math.PI);
+          if (shape === 0) g.fillRect(-2, -1, 5, 2);
+          else if (shape === 1) g.fillRect(-1, -3, 2, 6);
+          else { g.beginPath(); g.moveTo(0, -3); g.lineTo(3, 2); g.lineTo(-3, 2); g.closePath(); g.fill(); }
+          g.restore();
+        }
+        // A faint string of bunting along the horizon line for fairground vibe.
+        for (let x = 0; x < w; x += 24) {
+          g.fillStyle = colors[(x / 24 | 0) % colors.length];
+          g.beginPath(); g.moveTo(x, h - 8); g.lineTo(x + 12, h - 8); g.lineTo(x + 6, h); g.closePath(); g.fill();
+        }
+      } };
   })();
 
   // ── THEME: SHIP — metal panels with viewports
@@ -720,12 +773,71 @@
       x.restore();
     });
     t["X"] = mkTex(x => paintExitText(x, "#1a1a24", "#0a1020", "#3aff66"));
-    return { textures: t, ceilRGB: [10, 12, 24], floorRGB: [14, 22, 40], name: "Mothership" };
+    return { textures: t, ceilRGB: [10, 12, 24], floorRGB: [14, 22, 40], name: "Mothership",
+      paintSky: (g, w, h) => {
+        // Deep-space starfield with the occasional warmer giant.
+        g.fillStyle = "#02030a"; g.fillRect(0, 0, w, h);
+        for (let i = 0; i < 220; i++) {
+          const x = (i * 91 + 13) % w;
+          const y = (i * 53 + 5) % h;
+          const r = (i % 17 === 0) ? 1.6 : (i % 5 === 0 ? 1.0 : 0.6);
+          g.fillStyle = (i % 23 === 0) ? "#ffd06a" : (i % 11 === 0 ? "#aac8ff" : "#ffffff");
+          g.beginPath(); g.arc(x, y, r, 0, Math.PI * 2); g.fill();
+          if (r > 1.2) {
+            g.fillStyle = "rgba(255,255,255,0.25)";
+            g.beginPath(); g.arc(x, y, r * 2.2, 0, Math.PI * 2); g.fill();
+          }
+        }
+        // Faint nebula band
+        const grad = g.createLinearGradient(0, h * 0.4, 0, h);
+        grad.addColorStop(0, "rgba(60,80,160,0)");
+        grad.addColorStop(0.5, "rgba(60,80,160,0.18)");
+        grad.addColorStop(1, "rgba(80,40,140,0.20)");
+        g.fillStyle = grad; g.fillRect(0, h * 0.4, w, h * 0.6);
+      } };
   })();
+
+  // Bake any per-theme sky into an ImageData buffer (RW*2 wide so it
+  // parallaxes as the player rotates a full circle without seams).
+  const SKY_W = RW * 2;
+  const SKY_H = (RH / 2) | 0;
+  for (const key of Object.keys(THEMES)) {
+    const th = THEMES[key];
+    if (!th.paintSky) continue;
+    const c = document.createElement("canvas");
+    c.width = SKY_W; c.height = SKY_H;
+    th.paintSky(c.getContext("2d"), SKY_W, SKY_H);
+    th.skyImg = c.getContext("2d").getImageData(0, 0, SKY_W, SKY_H);
+  }
 
   // Active textures (mutable; loadLevel swaps to the level's theme).
   let textures = THEMES.kennel.textures;
   let currentTheme = THEMES.kennel;
+
+  // Replace the procedural "1" wall in a theme with a downscaled
+  // version of an external PNG when it loads. Keeps the procedural
+  // tile as a fallback if the file is missing.
+  function loadThemeWall(themeKey, url) {
+    const img = new Image();
+    img.onload = () => {
+      const c = document.createElement("canvas");
+      c.width = c.height = TEX_SIZE;
+      const cx = c.getContext("2d");
+      cx.imageSmoothingEnabled = true;
+      cx.drawImage(img, 0, 0, TEX_SIZE, TEX_SIZE);
+      const data = cx.getImageData(0, 0, TEX_SIZE, TEX_SIZE);
+      THEMES[themeKey].textures["1"] = data;
+      // If this is the active theme, update the live ref too.
+      if (currentTheme === THEMES[themeKey]) textures = THEMES[themeKey].textures;
+    };
+    img.onerror = () => { /* keep procedural fallback */ };
+    img.src = url;
+  }
+  loadThemeWall("kennel", "textures/wall_kennel.png");
+  loadThemeWall("garden", "textures/wall_garden.png");
+  loadThemeWall("cavern", "textures/wall_cavern.png");
+  loadThemeWall("park",   "textures/wall_park.png");
+  loadThemeWall("ship",   "textures/wall_ship.png");
 
   // ─── RAYCASTER ────────────────────────────────────────
   const zbuf = new Float32Array(RW);
@@ -758,15 +870,43 @@
   }
 
   function renderFrame() {
-    // Fill ceiling and floor (theme-aware base RGB)
+    // Theme base colors (used when there's no sky image)
     const cR = currentTheme.ceilRGB[0], cG = currentTheme.ceilRGB[1], cB = currentTheme.ceilRGB[2];
     const fR = currentTheme.floorRGB[0], fG = currentTheme.floorRGB[1], fB = currentTheme.floorRGB[2];
-    for (let y = 0; y < RH; y++) {
-      const isCeil = y < RH / 2;
-      const shade = isCeil ? 0.3 + (y / (RH / 2)) * 0.35 : 0.65 - ((y - RH / 2) / (RH / 2)) * 0.35;
-      const r = (isCeil ? cR : fR) * shade;
-      const g2 = (isCeil ? cG : fG) * shade;
-      const b = (isCeil ? cB : fB) * shade;
+    const half = RH / 2 | 0;
+    // Ceiling
+    if (currentTheme.skyImg) {
+      const sky = currentTheme.skyImg.data;
+      // Parallax: full circle of view sweeps a full SKY_W tile.
+      const offX = ((player.a / (Math.PI * 2)) * SKY_W) | 0;
+      for (let y = 0; y < half; y++) {
+        // Hold sky almost full brightness, fade slightly toward zenith.
+        const shade = 0.65 + (y / half) * 0.35;
+        const rowBase = y * SKY_W;
+        for (let x = 0; x < RW; x++) {
+          const sx = (((x + offX) % SKY_W) + SKY_W) % SKY_W;
+          const si = (rowBase + sx) * 4;
+          const di = (y * RW + x) * 4;
+          fbuf[di]     = sky[si]     * shade | 0;
+          fbuf[di + 1] = sky[si + 1] * shade | 0;
+          fbuf[di + 2] = sky[si + 2] * shade | 0;
+          fbuf[di + 3] = 255;
+        }
+      }
+    } else {
+      for (let y = 0; y < half; y++) {
+        const shade = 0.3 + (y / half) * 0.35;
+        const r = cR * shade, g2 = cG * shade, b = cB * shade;
+        for (let x = 0; x < RW; x++) {
+          const i = (y * RW + x) * 4;
+          fbuf[i] = r | 0; fbuf[i + 1] = g2 | 0; fbuf[i + 2] = b | 0; fbuf[i + 3] = 255;
+        }
+      }
+    }
+    // Floor (always procedural shade)
+    for (let y = half; y < RH; y++) {
+      const shade = 0.65 - ((y - half) / half) * 0.35;
+      const r = fR * shade, g2 = fG * shade, b = fB * shade;
       for (let x = 0; x < RW; x++) {
         const i = (y * RW + x) * 4;
         fbuf[i] = r | 0; fbuf[i + 1] = g2 | 0; fbuf[i + 2] = b | 0; fbuf[i + 3] = 255;
