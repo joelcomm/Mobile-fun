@@ -350,7 +350,7 @@ btnDeselect.addEventListener("click", () => {
   updateButtons();
 });
 btnSubmit.addEventListener("click", submitGuess);
-btnShare.addEventListener("click", shareResults);
+if (btnShare) btnShare.addEventListener("click", shareResults);
 
 btnPrevPuzzle.addEventListener("click", () => {
   if (currentPuzzleIndex > 0) {
