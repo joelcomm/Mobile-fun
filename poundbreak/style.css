@@ -290,6 +290,38 @@ html, body {
   font-size: 11px;
 }
 
+.diff-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.diff-btn {
+  flex: 1;
+  padding: 10px 8px;
+  border: 2px solid #5a3018;
+  border-radius: 8px;
+  background: #2a1609;
+  color: #d9a05c;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: all 0.12s;
+}
+.diff-btn[data-diff="easy"]:active,
+.diff-btn[data-diff="easy"].selected { background: #1a4a1a; color: #a0e0a0; border-color: #6acc6a; }
+.diff-btn[data-diff="normal"]:active,
+.diff-btn[data-diff="normal"].selected { background: #3a3a10; color: #ffd447; border-color: #ffd447; }
+.diff-btn[data-diff="hard"]:active,
+.diff-btn[data-diff="hard"].selected { background: #4a1010; color: #ff8a8a; border-color: #e24a4a; }
+.diff-recommended { box-shadow: 0 0 0 2px rgba(255, 212, 71, 0.18); }
+.diff-help {
+  font-size: 11px;
+  color: #d9a05c;
+  margin-bottom: 14px;
+  letter-spacing: 0.5px;
+}
+
 #start-btn, #retry-btn {
   background: linear-gradient(180deg, #ffd447, #c89818);
   border: 3px solid #4a2a10;
