@@ -48,7 +48,7 @@
     "11111111111.1.1..1.1...1",
     "11111111111.1.1111.1.111",
     "11111111111.1......1...1",
-    "............D..........X",
+    ".......................X",
     "11111111111.1......1...1",
     "11111111111.1.1111.1.111",
     "11111111111.1.1..1.1...1",
@@ -225,16 +225,21 @@
       ] },
     // Level 2 — winding garden hedge maze, no key/lock
     { map: L2_MAP, theme: "garden", playerStart: { x: 1.5, y: 11.5, a: 0 }, damageMul: 1.15,
-      extraPups: [ { x: 1.5, y: 9.5 } ],
+      extraPups: [
+        { x: 1.5,  y: 9.5  }, // near start
+        { x: 10.5, y: 3.5  }, // northern hedge cluster
+        { x: 16.5, y: 5.5  }, // northeast hedge cluster
+      ],
       enemies: [
         { kind: "catcher", x: 1.5,  y: 13.5, hp: 30, fireCd: 1.4 },
         { kind: "catcher", x: 16.5, y: 9.5,  hp: 30, fireCd: 1.3 },
         { kind: "catcher", x: 1.5,  y: 16.5, hp: 30, fireCd: 1.3 },
-        { kind: "catcher", x: 10.5, y: 17.5, hp: 30, fireCd: 1.3 },
+        { kind: "catcher", x: 7.5,  y: 17.5, hp: 30, fireCd: 1.3 },
         { kind: "catcher", x: 7.5,  y: 1.5,  hp: 30, fireCd: 1.3 },
         { kind: "catcher", x: 5.5,  y: 7.5,  hp: 30, fireCd: 1.3 },
         { kind: "catcher", x: 1.5,  y: 19.5, hp: 30, fireCd: 1.3 },
-        { kind: "mascot",  x: 6.5,  y: 19.5, hp: 55, fireCd: 1.5 },
+        { kind: "catcher", x: 15.5, y: 1.5,  hp: 30, fireCd: 1.3 },
+        { kind: "mascot",  x: 3.5,  y: 19.5, hp: 55, fireCd: 1.5 },
         { kind: "mascot",  x: 22.5, y: 11.5, hp: 55, fireCd: 1.5 },
       ], pickups: [
         { kind: "toy",  x: 12.5, y: 13.5 },
@@ -1685,17 +1690,17 @@
     }
   }
 
-  // Anti-softlock: if the player is out of ammo and there are no
-  // tennis balls left in the level (yet enemies still alive), drop a
-  // fresh ball on a nearby floor tile.
-  let _ammoSpawnCooldown = 0;
-  function ensureAmmoAvailable() {
-    if (_ammoSpawnCooldown > 0) { _ammoSpawnCooldown--; return; }
-    if (player.ammo > 0) return;
-    const ballsLeft = entities.some(e => e.kind === "ball" && e.alive);
-    if (ballsLeft) return;
+  // Anti-softlock: while the player has zero ammo and there are still
+  // enemies alive, count up; after 15s of empty ammo, drop a fresh
+  // ball on a nearby visible floor tile and reset the timer so the
+  // next 15s window can fire.
+  let _ammoEmptyTimer = 0;
+  function ensureAmmoAvailable(dt) {
+    if (player.ammo > 0) { _ammoEmptyTimer = 0; return; }
     const enemiesLeft = entities.some(e => e.alive && e.hp != null);
-    if (!enemiesLeft) return;
+    if (!enemiesLeft) { _ammoEmptyTimer = 0; return; }
+    _ammoEmptyTimer += dt || 0.016;
+    if (_ammoEmptyTimer < 15) return;
     const px = player.x | 0, py = player.y | 0;
     for (let r = 1; r <= 6; r++) {
       for (let dy = -r; dy <= r; dy++) {
@@ -1704,8 +1709,8 @@
           const tx = px + dx, ty = py + dy;
           if (g(tx, ty) === "." && hasLOS(player.x, player.y, tx + 0.5, ty + 0.5)) {
             entities.push({ kind: "ball", x: tx + 0.5, y: ty + 0.5, alive: true, bob: Math.random() * 6 });
-            showToast("A spare ball rolled out!");
-            _ammoSpawnCooldown = 30; // ~half-second debounce
+            showToast("A spare water mag rolled out!");
+            _ammoEmptyTimer = 0;
             return;
           }
         }
@@ -1841,7 +1846,7 @@
       updateEntities(dt);
       updateShots(dt);
       updatePickupsAndPups();
-      ensureAmmoAvailable();
+      ensureAmmoAvailable(dt);
       updateSplashes(dt);
       if (toastTimer > 0) { toastTimer -= dt; if (toastTimer <= 0) toastEl.classList.remove("show"); }
       updateHud();
