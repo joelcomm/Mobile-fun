@@ -75,6 +75,7 @@
     dom.categoryLabel.textContent = puzzle.category;
     dom.instructionLabel.textContent = puzzle.instruction;
     dom.roundFeedback.classList.add('hidden');
+    dom.sortableList.classList.remove('hidden');
     dom.btnLock.classList.remove('hidden');
     dom.btnLock.disabled = false;
     updateAttempts();
@@ -159,6 +160,7 @@
   function finishRound(solved, pts) {
     state.locked = true;
     dom.btnLock.classList.add('hidden');
+    dom.sortableList.classList.add('hidden');
 
     if (solved) {
       const label = state.attempts === 1 ? 'PERFECT!' : 'SOLVED!';
