@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0f1220">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <title>Oracle — Prediction Market</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a href="../" class="back-link">&larr; ALL GAMES</a>
+
+  <header class="app-header">
+    <div class="brand">
+      <span class="brand-icon">🔮</span>
+      <span class="brand-name">ORACLE</span>
+    </div>
+    <div class="cash-box">
+      <span class="cash-lbl">BALANCE</span>
+      <span id="cash-amount" class="cash-amount">$0.00</span>
+    </div>
+  </header>
+
+  <main id="app">
+    <!-- Markets -->
+    <section id="markets-view">
+      <div id="cat-filter" class="cat-filter"></div>
+      <div id="market-list" class="market-list"></div>
+    </section>
+
+    <!-- Market detail -->
+    <section id="detail-view" class="hidden">
+      <div id="detail-body"></div>
+    </section>
+
+    <!-- Portfolio -->
+    <section id="portfolio-view" class="hidden">
+      <div id="portfolio-body"></div>
+    </section>
+  </main>
+
+  <nav class="tabbar">
+    <button id="tab-markets" class="tab active">
+      <span class="tab-icon">📊</span><span>Markets</span>
+    </button>
+    <button id="tab-portfolio" class="tab">
+      <span class="tab-icon">💼</span><span>Portfolio</span>
+    </button>
+  </nav>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="markets.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
