@@ -159,7 +159,7 @@ const PUZZLES = [
     items: [
       { label: "H\u2082 (Hydrogen gas)", value: 2 },
       { label: "H\u2082O (Water)", value: 3 },
-      { label: "CO\u2082 (Carbon dioxide)", value: 3 },
+      { label: "CO\u2082 (Carbon dioxide)", value: 3.1 },
       { label: "C\u2082H\u2086O (Ethanol)", value: 9 },
       { label: "C\u2086H\u2081\u2082O\u2086 (Glucose)", value: 24 }
     ]
@@ -302,7 +302,7 @@ const PUZZLES = [
     category: "Tennis Players by Grand Slams",
     items: [
       { label: "Andre Agassi", value: 8 },
-      { label: "Jimmy Connors", value: 8 },
+      { label: "Jimmy Connors", value: 8.1 },
       { label: "Pete Sampras", value: 14 },
       { label: "Rafael Nadal", value: 22 },
       { label: "Novak Djokovic", value: 24 }
