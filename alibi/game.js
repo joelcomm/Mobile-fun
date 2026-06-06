@@ -47,7 +47,7 @@
   function startGame() {
     var rng = Daily.createRng(Daily.getDayNumber() * 9091);
     state = {
-      rounds: Daily.pick(ALIBI_PUZZLES, TOTAL_ROUNDS, rng),
+      rounds: Daily.dealFromDeck(ALIBI_PUZZLES, TOTAL_ROUNDS),
       rng: rng,
       current: 0,
       score: 0,
