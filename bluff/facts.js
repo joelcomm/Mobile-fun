@@ -592,5 +592,761 @@ const FACTS = [
       { text: "The Nile is the longest river in the world by a wide margin.", real: false }
     ],
     explanation: "The Nile and Amazon are extremely close in length, and depending on the measurement method, the Amazon may actually be longer. The difference is under 200 miles."
+  },
+  {
+    topic: "Bees",
+    statements: [
+      { text: "Honey bees can recognize human faces.", real: true },
+      { text: "A single bee can visit up to 5,000 flowers in a day.", real: true },
+      { text: "All bees die immediately after stinging.", real: false }
+    ],
+    explanation: "Only honey bees die after stinging because their barbed stingers tear from their bodies. Bumblebees and most other bee species can sting multiple times."
+  },
+  {
+    topic: "The Sun",
+    statements: [
+      { text: "The Sun accounts for 99.86% of the total mass of the solar system.", real: true },
+      { text: "Light from the Sun takes about 8 minutes to reach Earth.", real: true },
+      { text: "The Sun is a yellow star.", real: false }
+    ],
+    explanation: "The Sun is actually a white star. It appears yellow from Earth because the atmosphere scatters blue light. From space, the Sun looks white."
+  },
+  {
+    topic: "Cats",
+    statements: [
+      { text: "Cats spend about 70% of their lives sleeping.", real: true },
+      { text: "A group of cats is called a 'clowder.'", real: true },
+      { text: "Cats always land on their feet no matter the height.", real: false }
+    ],
+    explanation: "While cats have a righting reflex, very short falls don't give them time to rotate, and very high falls can still cause serious injuries despite landing feet-first."
+  },
+  {
+    topic: "Mars",
+    statements: [
+      { text: "Mars has the tallest known mountain in the solar system — Olympus Mons.", real: true },
+      { text: "A day on Mars is about 24 hours and 37 minutes.", real: true },
+      { text: "Mars has a thick atmosphere similar to Earth's.", real: false }
+    ],
+    explanation: "Mars has an extremely thin atmosphere — about 1% the density of Earth's — composed mostly of carbon dioxide."
+  },
+  {
+    topic: "Spiders",
+    statements: [
+      { text: "Spider silk is stronger than steel of the same thickness.", real: true },
+      { text: "Most spiders have eight eyes.", real: true },
+      { text: "The average person swallows 8 spiders per year in their sleep.", real: false }
+    ],
+    explanation: "This statistic was fabricated in 1993 by a columnist to demonstrate how quickly misinformation spreads. Spiders avoid sleeping humans."
+  },
+  {
+    topic: "Antarctica",
+    statements: [
+      { text: "Antarctica has an active volcano called Mount Erebus.", real: true },
+      { text: "Antarctica is the driest continent on Earth.", real: true },
+      { text: "Polar bears live in Antarctica.", real: false }
+    ],
+    explanation: "Polar bears live only in the Arctic (North Pole region). Antarctica (South Pole) has penguins but no polar bears."
+  },
+  {
+    topic: "Bones",
+    statements: [
+      { text: "Babies are born with about 300 bones, but adults have only 206.", real: true },
+      { text: "The smallest bone in the body is in the ear.", real: true },
+      { text: "Bones are the hardest material in the human body.", real: false }
+    ],
+    explanation: "Tooth enamel is actually harder than bone. Bones are strong and flexible, but enamel is the hardest substance in the human body."
+  },
+  {
+    topic: "Satellites",
+    statements: [
+      { text: "There are over 7,000 active satellites orbiting Earth.", real: true },
+      { text: "The International Space Station travels at about 17,500 mph.", real: true },
+      { text: "GPS satellites are in geostationary orbit directly above the equator.", real: false }
+    ],
+    explanation: "GPS satellites orbit in medium Earth orbit at about 12,550 miles altitude with inclined orbits — not geostationary orbit, which is at 22,236 miles."
+  },
+  {
+    topic: "Dogs",
+    statements: [
+      { text: "Dogs can smell certain diseases, including some cancers.", real: true },
+      { text: "A dog's nose print is unique, like a human fingerprint.", real: true },
+      { text: "Dogs see the world entirely in black and white.", real: false }
+    ],
+    explanation: "Dogs see in color, but their range is limited compared to humans. They see blues and yellows well but cannot distinguish red from green."
+  },
+  {
+    topic: "Calendars",
+    statements: [
+      { text: "The month of September was originally the 7th month on the Roman calendar.", real: true },
+      { text: "Julius Caesar introduced the leap year system.", real: true },
+      { text: "A year is exactly 365 days long.", real: false }
+    ],
+    explanation: "A year is approximately 365.2422 days long. This is why we need leap years — to account for the extra roughly 6 hours per year."
+  },
+  {
+    topic: "Frogs",
+    statements: [
+      { text: "Some frogs can freeze solid in winter and thaw back to life in spring.", real: true },
+      { text: "The golden poison dart frog has enough toxin to kill 10 adult humans.", real: true },
+      { text: "Frogs must drink water to stay hydrated.", real: false }
+    ],
+    explanation: "Frogs absorb water through their skin rather than drinking it. They have a special patch of skin on their belly called a 'drinking patch.'"
+  },
+  {
+    topic: "Ice Cream",
+    statements: [
+      { text: "The ice cream cone was popularized at the 1904 World's Fair in St. Louis.", real: true },
+      { text: "It takes about 50 licks to finish a single scoop of ice cream.", real: true },
+      { text: "Vanilla is the least popular ice cream flavor worldwide.", real: false }
+    ],
+    explanation: "Vanilla is consistently the most popular ice cream flavor worldwide, not the least popular."
+  },
+  {
+    topic: "Mountains",
+    statements: [
+      { text: "Mount Everest grows about 4 millimeters taller every year.", real: true },
+      { text: "Mauna Kea in Hawaii is taller than Everest when measured from base to peak.", real: true },
+      { text: "K2 has never been summited in winter.", real: false }
+    ],
+    explanation: "K2 was first summited in winter in January 2021 by a team of Nepalese climbers."
+  },
+  {
+    topic: "Snakes",
+    statements: [
+      { text: "Snakes can sense vibrations through their jawbone.", real: true },
+      { text: "Some snakes can fly — they glide through the air between trees.", real: true },
+      { text: "Snakes dislocate their jaws to swallow large prey.", real: false }
+    ],
+    explanation: "Snakes don't dislocate their jaws. Their lower jaw consists of two separate bones connected by elastic ligaments, allowing them to stretch without any dislocation."
+  },
+  {
+    topic: "Clouds",
+    statements: [
+      { text: "The average cumulus cloud weighs about 1.1 million pounds.", real: true },
+      { text: "Clouds can form at ground level — that's what fog is.", real: true },
+      { text: "Clouds are made of water vapor, which is why they look white.", real: false }
+    ],
+    explanation: "Clouds are made of tiny water droplets or ice crystals, not water vapor. Water vapor is invisible — the visible cloud forms when vapor condenses into droplets."
+  },
+  {
+    topic: "Horses",
+    statements: [
+      { text: "Horses can sleep standing up.", real: true },
+      { text: "A horse's hoof is essentially a single large toenail.", real: true },
+      { text: "Horses can breathe through their mouths when running.", real: false }
+    ],
+    explanation: "Horses are obligate nasal breathers — they can only breathe through their noses. Unlike humans, they cannot breathe through their mouths."
+  },
+  {
+    topic: "Salt",
+    statements: [
+      { text: "Roman soldiers were sometimes paid in salt, giving us the word 'salary.'", real: true },
+      { text: "The human body contains about 250 grams of salt.", real: true },
+      { text: "Sea salt is significantly healthier than table salt.", real: false }
+    ],
+    explanation: "Sea salt and table salt have the same basic nutritional value and sodium content. Sea salt may have trace minerals, but not in amounts that provide meaningful health benefits."
+  },
+  {
+    topic: "Submarines",
+    statements: [
+      { text: "The first military submarine was used during the American Civil War.", real: true },
+      { text: "Nuclear submarines can operate for over 20 years without refueling.", real: true },
+      { text: "Submarines navigate primarily using sonar bounced off the ocean floor.", real: false }
+    ],
+    explanation: "Military submarines primarily use passive sonar (listening) to avoid detection. Active sonar (sending pings) reveals the submarine's position and is used sparingly."
+  },
+  {
+    topic: "Castles",
+    statements: [
+      { text: "Japan has over 100 castles still standing today.", real: true },
+      { text: "Medieval castle staircases spiraled clockwise to disadvantage right-handed attackers.", real: true },
+      { text: "Moats around castles were always filled with water.", real: false }
+    ],
+    explanation: "Many moats were dry ditches rather than water-filled. Dry moats were still effective defensive barriers and were easier to maintain."
+  },
+  {
+    topic: "Elephants",
+    statements: [
+      { text: "Elephants are the only animals that can't jump.", real: true },
+      { text: "Elephants can hear through their feet via seismic vibrations.", real: true },
+      { text: "Elephants have the best memory of any animal.", real: false }
+    ],
+    explanation: "While elephants have excellent memories, studies have shown that dolphins, chimpanzees, and Clark's nutcrackers may have equally impressive or superior memory in certain tasks."
+  },
+  {
+    topic: "Diamonds",
+    statements: [
+      { text: "It rains diamonds on Jupiter and Saturn.", real: true },
+      { text: "Diamonds can be burned and destroyed by fire.", real: true },
+      { text: "Diamonds are the rarest gemstone on Earth.", real: false }
+    ],
+    explanation: "Diamonds are not particularly rare. Gemstones like tanzanite, alexandrite, and painite are far rarer. Diamond prices are largely controlled by supply management."
+  },
+  {
+    topic: "Bacteria",
+    statements: [
+      { text: "There are more bacteria in your mouth than people on Earth.", real: true },
+      { text: "Some bacteria can survive in space.", real: true },
+      { text: "Antibacterial soap is significantly more effective than regular soap.", real: false }
+    ],
+    explanation: "Studies show regular soap is just as effective as antibacterial soap for everyday handwashing. The FDA banned certain antibacterial chemicals from consumer soaps in 2016."
+  },
+  {
+    topic: "Bridges",
+    statements: [
+      { text: "The Golden Gate Bridge's color is officially called 'International Orange.'", real: true },
+      { text: "London Bridge was sold and moved to Arizona in 1968.", real: true },
+      { text: "The Brooklyn Bridge was the first bridge ever built using steel cables.", real: false }
+    ],
+    explanation: "While the Brooklyn Bridge was a pioneering steel-cable suspension bridge, earlier bridges had used steel wire, including the bridge at Niagara Falls designed by John Roebling's predecessor."
+  },
+  {
+    topic: "Eyes",
+    statements: [
+      { text: "Your eyes can distinguish approximately 500 shades of gray.", real: true },
+      { text: "Newborn babies can only see about 8-12 inches in front of them.", real: true },
+      { text: "Brown eyes are actually blue underneath the brown pigment.", real: false }
+    ],
+    explanation: "While all eyes have melanin affecting color, brown eyes don't have a blue layer underneath. Laser procedures that claim to reveal blue beneath brown are altering the iris structure, not uncovering hidden blue pigment."
+  },
+  {
+    topic: "Turtles",
+    statements: [
+      { text: "Some turtles can breathe through their butts.", real: true },
+      { text: "Sea turtles can navigate using Earth's magnetic field.", real: true },
+      { text: "Turtles can leave their shells if they outgrow them.", real: false }
+    ],
+    explanation: "A turtle's shell is fused to its spine and ribcage — it's part of their skeleton. They can never leave it or outgrow it."
+  },
+  {
+    topic: "Airports",
+    statements: [
+      { text: "Denver International Airport is larger than the city of San Francisco.", real: true },
+      { text: "Singapore's Changi Airport has a butterfly garden with over 1,000 butterflies.", real: true },
+      { text: "The busiest airport in the world by passenger count is London Heathrow.", real: false }
+    ],
+    explanation: "Hartsfield-Jackson Atlanta International Airport has been the busiest airport by passenger count for over two decades, not London Heathrow."
+  },
+  {
+    topic: "Ears",
+    statements: [
+      { text: "Your ears never stop growing throughout your life.", real: true },
+      { text: "The inner ear contains the smallest muscles in the body.", real: true },
+      { text: "Humans can only hear sounds between 20 Hz and 20,000 Hz from birth to death.", real: false }
+    ],
+    explanation: "While 20 Hz to 20,000 Hz is the typical range, the upper limit decreases significantly with age. Most adults over 50 can't hear above 12,000-14,000 Hz."
+  },
+  {
+    topic: "Glaciers",
+    statements: [
+      { text: "Glaciers store about 69% of the world's fresh water.", real: true },
+      { text: "Glacial ice can appear blue because it absorbs red light.", real: true },
+      { text: "Glaciers only exist near the North and South Poles.", real: false }
+    ],
+    explanation: "Glaciers exist on every continent except Australia, including near the equator on high mountains like Mount Kilimanjaro in Tanzania and in the Andes in South America."
+  },
+  {
+    topic: "Mushrooms",
+    statements: [
+      { text: "The largest living organism on Earth is a honey fungus in Oregon spanning 2,385 acres.", real: true },
+      { text: "Mushrooms are more closely related to animals than to plants.", real: true },
+      { text: "All brightly colored mushrooms are poisonous.", real: false }
+    ],
+    explanation: "Color is not a reliable indicator of toxicity. Many brightly colored mushrooms like chanterelles are edible, while the deadly destroying angel mushroom is plain white."
+  },
+  {
+    topic: "Oceans Creatures",
+    statements: [
+      { text: "The giant squid has the largest eyes of any living creature.", real: true },
+      { text: "Jellyfish have been around for over 500 million years — predating dinosaurs.", real: true },
+      { text: "Starfish have a brain located in the center of their body.", real: false }
+    ],
+    explanation: "Starfish have no brain at all. They have a decentralized nervous system with a nerve ring and radial nerves, but no central brain."
+  },
+  {
+    topic: "Clocks",
+    statements: [
+      { text: "Big Ben is actually the name of the bell, not the clock tower.", real: true },
+      { text: "The first mechanical clocks had no minute hands — only hour hands.", real: true },
+      { text: "Sundials work the same way in both hemispheres.", real: false }
+    ],
+    explanation: "Sundials must be designed differently for each hemisphere. In the Northern Hemisphere shadows move clockwise, but in the Southern Hemisphere they move counterclockwise."
+  },
+  {
+    topic: "Skin",
+    statements: [
+      { text: "Your skin is the largest organ of your body.", real: true },
+      { text: "Humans shed about 1.5 million skin cells every hour.", real: true },
+      { text: "Fingerprints provide improved grip — that's their primary function.", real: false }
+    ],
+    explanation: "Research shows fingerprints actually reduce friction in many cases. Their primary function appears to be enhancing touch sensitivity by amplifying vibrations."
+  },
+  {
+    topic: "Railroads",
+    statements: [
+      { text: "The Trans-Siberian Railway crosses 8 time zones.", real: true },
+      { text: "The first underground railway opened in London in 1863.", real: true },
+      { text: "Standard railroad gauge was based on the width of Roman chariot wheels.", real: false }
+    ],
+    explanation: "This is a popular myth. Standard gauge (4 feet 8.5 inches) was based on the width used by early colliery tramways in England, not Roman chariots."
+  },
+  {
+    topic: "Coral Reefs",
+    statements: [
+      { text: "Coral reefs support about 25% of all marine species.", real: true },
+      { text: "Coral is an animal, not a plant.", real: true },
+      { text: "The Great Barrier Reef can be seen from the Moon.", real: false }
+    ],
+    explanation: "The Great Barrier Reef is visible from low Earth orbit (e.g., the ISS) but cannot be seen from the Moon, which is about 240,000 miles away."
+  },
+  {
+    topic: "Penguins",
+    statements: [
+      { text: "Emperor penguins can dive to depths of over 1,800 feet.", real: true },
+      { text: "Male emperor penguins incubate the eggs while females hunt.", real: true },
+      { text: "Penguins mate for life without exception.", real: false }
+    ],
+    explanation: "While some penguin species show high partner fidelity, many penguins change partners between breeding seasons. Emperor penguins have only about an 85% reunion rate."
+  },
+  {
+    topic: "Metals",
+    statements: [
+      { text: "Gallium metal will melt in your hand because its melting point is 85.6°F.", real: true },
+      { text: "Titanium is as strong as steel but nearly 45% lighter.", real: true },
+      { text: "Mercury is the only metal that is liquid at room temperature.", real: false }
+    ],
+    explanation: "Gallium also melts at near room temperature (85.6°F / 29.8°C), and francium and cesium are also liquid at slightly above room temperature."
+  },
+  {
+    topic: "Astronauts",
+    statements: [
+      { text: "Astronauts can grow up to 2 inches taller in space.", real: true },
+      { text: "Astronauts report that space smells like seared steak and gunpowder.", real: true },
+      { text: "Astronauts must be under 40 years old to be selected by NASA.", real: false }
+    ],
+    explanation: "NASA has no age limit for astronaut candidates. John Glenn flew on the Space Shuttle at age 77, and many astronauts have been selected well over 40."
+  },
+  {
+    topic: "Wine",
+    statements: [
+      { text: "The oldest known wine cellar is about 6,000 years old, found in Armenia.", real: true },
+      { text: "There are more than 10,000 grape varieties used for winemaking worldwide.", real: true },
+      { text: "Red wine should always be served at room temperature.", real: false }
+    ],
+    explanation: "'Room temperature' for red wine originally meant 60-65°F in European cellars, not modern heated rooms. Most red wines benefit from slight chilling below today's typical room temperature."
+  },
+  {
+    topic: "Tornadoes",
+    statements: [
+      { text: "Tornadoes can occur on every continent except Antarctica.", real: false },
+      { text: "The United States experiences more tornadoes than any other country.", real: true },
+      { text: "A tornado's wind speed can exceed 300 mph.", real: true }
+    ],
+    explanation: "Tornadoes have been documented on every continent, including Antarctica. A tornado was recorded at a British research station in Antarctica in 2009."
+  },
+  {
+    topic: "Batteries",
+    statements: [
+      { text: "The Baghdad Battery, dating to around 250 BC, may be an ancient electrochemical cell.", real: true },
+      { text: "Lithium-ion batteries can catch fire if punctured or overcharged.", real: true },
+      { text: "Storing batteries in the refrigerator significantly extends their life.", real: false }
+    ],
+    explanation: "Modern alkaline and lithium batteries do not benefit significantly from refrigeration. Cold temperatures can actually reduce their performance temporarily."
+  },
+  {
+    topic: "Tigers",
+    statements: [
+      { text: "Every tiger has a unique pattern of stripes, like fingerprints.", real: true },
+      { text: "A tiger's skin is also striped, not just its fur.", real: true },
+      { text: "There are more wild tigers than captive tigers.", real: false }
+    ],
+    explanation: "There are estimated to be around 4,500 wild tigers but approximately 8,000 or more in captivity worldwide, with a large number in the United States alone."
+  },
+  {
+    topic: "The Vatican",
+    statements: [
+      { text: "Vatican City is the smallest country in the world.", real: true },
+      { text: "The Vatican has its own telescope and astronomical observatory.", real: true },
+      { text: "The Vatican has the highest crime rate per capita of any country.", real: false }
+    ],
+    explanation: "While raw statistics might suggest this due to its tiny population and large tourist numbers, the 'crimes' are mostly petty theft by visitors — it's statistically misleading to call it the highest crime rate."
+  },
+  {
+    topic: "Hair",
+    statements: [
+      { text: "A single strand of hair can support about 3.5 ounces of weight.", real: true },
+      { text: "Hair grows faster in warm weather than in cold weather.", real: true },
+      { text: "Shaving makes hair grow back thicker and darker.", real: false }
+    ],
+    explanation: "Shaving has no effect on hair thickness, color, or rate of growth. Stubble feels coarser because the blunt cut tip is more noticeable than a natural tapered end."
+  },
+  {
+    topic: "Tea",
+    statements: [
+      { text: "Tea is the most consumed beverage in the world after water.", real: true },
+      { text: "All types of tea (black, green, white, oolong) come from the same plant.", real: true },
+      { text: "Herbal tea is technically a type of tea.", real: false }
+    ],
+    explanation: "Herbal 'tea' is not true tea — it's an infusion (tisane) of herbs, spices, or other plants. True tea comes only from the Camellia sinensis plant."
+  },
+  {
+    topic: "Radio",
+    statements: [
+      { text: "The first radio broadcast of a presidential election was in 1920.", real: true },
+      { text: "Radio signals travel at the speed of light.", real: true },
+      { text: "FM radio was invented before AM radio.", real: false }
+    ],
+    explanation: "AM (amplitude modulation) radio came first, with regular broadcasts starting in the early 1920s. FM (frequency modulation) was developed later by Edwin Armstrong in the 1930s."
+  },
+  {
+    topic: "Caves",
+    statements: [
+      { text: "The longest known cave system is Mammoth Cave in Kentucky at over 420 miles.", real: true },
+      { text: "Cave-dwelling creatures can lose their eyesight over generations.", real: true },
+      { text: "Stalactites grow from the ground up in caves.", real: false }
+    ],
+    explanation: "Stalactites grow from the ceiling down. Stalagmites grow from the ground up. A helpful mnemonic: stalactites hold 'tight' to the ceiling."
+  },
+  {
+    topic: "Crocodiles",
+    statements: [
+      { text: "Crocodiles can go over a year without eating.", real: true },
+      { text: "Crocodiles have the strongest bite force of any living animal.", real: true },
+      { text: "Crocodiles can gallop at speeds over 30 mph on land.", real: false }
+    ],
+    explanation: "While some crocodile species can gallop briefly, their top speed on land is about 11 mph. They are ambush predators that rely on short bursts, not sustained speed."
+  },
+  {
+    topic: "Oil",
+    statements: [
+      { text: "Crude oil is used to make aspirin and many other medications.", real: true },
+      { text: "The first commercial oil well was drilled in Pennsylvania in 1859.", real: true },
+      { text: "Oil is made from decomposed dinosaur remains.", real: false }
+    ],
+    explanation: "Oil is primarily formed from ancient marine organisms like plankton and algae, not dinosaurs. These organisms died and were buried on ocean floors millions of years before many dinosaurs existed."
+  },
+  {
+    topic: "Eggs",
+    statements: [
+      { text: "The color of a chicken's egg is determined by the breed of the hen.", real: true },
+      { text: "China produces more eggs than any other country in the world.", real: true },
+      { text: "Brown eggs are more nutritious than white eggs.", real: false }
+    ],
+    explanation: "Brown and white eggs have virtually identical nutritional profiles. Shell color is determined by the hen's breed and has no effect on taste or nutrition."
+  },
+  {
+    topic: "Migration",
+    statements: [
+      { text: "Arctic terns migrate from pole to pole, traveling about 44,000 miles annually.", real: true },
+      { text: "Monarch butterflies migrate up to 3,000 miles each fall.", real: true },
+      { text: "All birds migrate south for the winter.", real: false }
+    ],
+    explanation: "Many bird species are non-migratory (resident birds) and stay in the same area year-round. Examples include cardinals, chickadees, and many owl species."
+  },
+  {
+    topic: "Potatoes",
+    statements: [
+      { text: "Potatoes were the first food grown in space.", real: true },
+      { text: "There are over 4,000 varieties of potatoes worldwide.", real: true },
+      { text: "Potatoes are root vegetables like carrots.", real: false }
+    ],
+    explanation: "Potatoes are tubers (modified stems that grow underground), not true roots. Carrots and sweet potatoes are root vegetables, but regular potatoes are stem tubers."
+  },
+  {
+    topic: "Atoms",
+    statements: [
+      { text: "Atoms are 99.9999% empty space.", real: true },
+      { text: "There are more atoms in a glass of water than glasses of water in all Earth's oceans.", real: true },
+      { text: "Atoms are the smallest possible unit of matter — nothing is smaller.", real: false }
+    ],
+    explanation: "Atoms are made of smaller subatomic particles: protons, neutrons, and electrons. Protons and neutrons are further composed of quarks."
+  },
+  {
+    topic: "Board Games",
+    statements: [
+      { text: "Chess originated in India around the 6th century.", real: true },
+      { text: "The game of Monopoly was originally designed to teach about the dangers of monopolies.", real: true },
+      { text: "Scrabble was invented in France in the 1800s.", real: false }
+    ],
+    explanation: "Scrabble was invented in the United States by Alfred Mosher Butts during the Great Depression in the 1930s, not in France."
+  },
+  {
+    topic: "Rainforests",
+    statements: [
+      { text: "The Amazon Rainforest produces about 6% of the world's oxygen.", real: true },
+      { text: "One-quarter of all modern medicines originated from rainforest plants.", real: true },
+      { text: "The Amazon Rainforest produces 20% of the world's oxygen, called 'the lungs of the Earth.'", real: false }
+    ],
+    explanation: "The '20% of the world's oxygen' claim is a popular misconception. The Amazon produces roughly 6% — and it also consumes nearly the same amount through decomposition."
+  },
+  {
+    topic: "Maps",
+    statements: [
+      { text: "Africa appears much smaller on most world maps than it actually is.", real: true },
+      { text: "Greenland is shown on Mercator maps as roughly the size of Africa, though Africa is 14 times larger.", real: true },
+      { text: "North is always at the top of maps because of a natural law of geography.", real: false }
+    ],
+    explanation: "Placing north at the top is a convention, not a rule. Many historical maps placed south or east at the top. The convention became standard largely because of European mapmakers."
+  },
+  {
+    topic: "Vaccines",
+    statements: [
+      { text: "The first vaccine was developed for smallpox by Edward Jenner in 1796.", real: true },
+      { text: "Vaccines have led to the complete eradication of smallpox.", real: true },
+      { text: "Vaccines work by injecting a full-strength version of the disease.", real: false }
+    ],
+    explanation: "Vaccines use weakened, inactivated, or partial versions of pathogens — or just their proteins/mRNA — to train the immune system without causing the actual disease."
+  },
+  {
+    topic: "Bamboo",
+    statements: [
+      { text: "Some bamboo species can grow up to 35 inches in a single day.", real: true },
+      { text: "Bamboo is actually a type of grass, not a tree.", real: true },
+      { text: "Bamboo only grows in tropical climates.", real: false }
+    ],
+    explanation: "While many bamboo species thrive in tropical climates, some species grow in cold regions, surviving temperatures below -20°F. Hardy bamboo grows in parts of the northern US and Europe."
+  },
+  {
+    topic: "Magnets",
+    statements: [
+      { text: "Earth is essentially a giant magnet with a magnetic field.", real: true },
+      { text: "If you break a magnet in half, you get two smaller magnets, each with a north and south pole.", real: true },
+      { text: "Magnets lose their magnetism permanently when dropped.", real: false }
+    ],
+    explanation: "While dropping a magnet can weaken it slightly, it doesn't permanently demagnetize it. Magnets lose magnetism primarily through high heat (above their Curie temperature) or strong opposing magnetic fields."
+  },
+  {
+    topic: "Languages of the World",
+    statements: [
+      { text: "Papua New Guinea has over 840 languages — the most of any country.", real: true },
+      { text: "Mandarin Chinese has more native speakers than any other language.", real: true },
+      { text: "English is the official language of the United States.", real: false }
+    ],
+    explanation: "The United States has no official language at the federal level. While English is the most widely spoken language, it has never been designated as the official language by law."
+  },
+  {
+    topic: "Glass",
+    statements: [
+      { text: "Glass is 100% recyclable and can be recycled endlessly without loss of quality.", real: true },
+      { text: "Lightning can create natural glass tubes called fulgurites when it strikes sand.", real: true },
+      { text: "Glass is a liquid that flows very slowly over centuries.", real: false }
+    ],
+    explanation: "Glass is an amorphous solid, not a slow-moving liquid. The myth arose from old windowpanes being thicker at the bottom, but that's due to the manufacturing process, not flow."
+  },
+  {
+    topic: "Perfume",
+    statements: [
+      { text: "Ambergris, a key perfume ingredient, comes from sperm whale intestines.", real: true },
+      { text: "Chanel No. 5 was one of the first perfumes to use synthetic ingredients.", real: true },
+      { text: "Perfume lasts longer when applied to clothing rather than skin.", real: false }
+    ],
+    explanation: "Perfume actually develops and diffuses better on skin because body heat activates the fragrance oils. On clothing, the scent doesn't evolve through its notes as intended."
+  },
+  {
+    topic: "Sign Language",
+    statements: [
+      { text: "American Sign Language and British Sign Language are completely different languages.", real: true },
+      { text: "Sign languages have their own grammar, which differs from spoken languages.", real: true },
+      { text: "There is one universal sign language used by deaf people worldwide.", real: false }
+    ],
+    explanation: "There are over 300 different sign languages around the world. Each has its own vocabulary and grammar. Even countries sharing a spoken language often have different sign languages."
+  },
+  {
+    topic: "Honey",
+    statements: [
+      { text: "A single bee produces only about 1/12 of a teaspoon of honey in its lifetime.", real: true },
+      { text: "Bees must visit about 2 million flowers to make one pound of honey.", real: true },
+      { text: "Honey is safe for infants under one year old.", real: false }
+    ],
+    explanation: "Honey can contain Clostridium botulinum spores, which can cause infant botulism in babies under 12 months whose digestive systems aren't mature enough to handle them."
+  },
+  {
+    topic: "Black Holes",
+    statements: [
+      { text: "The first image of a black hole was captured in 2019.", real: true },
+      { text: "Time slows down near a black hole due to gravitational time dilation.", real: true },
+      { text: "Black holes suck in everything around them like cosmic vacuum cleaners.", real: false }
+    ],
+    explanation: "Black holes don't actively suck things in. Objects must cross the event horizon to be trapped. At a distance, a black hole's gravitational pull is the same as any object of equal mass."
+  },
+  {
+    topic: "Martial Arts",
+    statements: [
+      { text: "Judo became the first martial art included in the Olympic Games in 1964.", real: true },
+      { text: "Bruce Lee was so fast that they had to slow down film to capture his moves.", real: true },
+      { text: "Karate originated in China.", real: false }
+    ],
+    explanation: "Karate originated in Okinawa, which is now part of Japan. While it was influenced by Chinese martial arts, karate itself developed in the Ryukyu Kingdom (Okinawa)."
+  },
+  {
+    topic: "Waterfalls",
+    statements: [
+      { text: "Angel Falls in Venezuela is the tallest uninterrupted waterfall in the world.", real: true },
+      { text: "Niagara Falls has been artificially turned off twice for engineering studies.", real: true },
+      { text: "Victoria Falls is the widest waterfall in the world.", real: false }
+    ],
+    explanation: "Khone Phapheng Falls in Laos is the widest waterfall in the world at about 35,376 feet wide. Victoria Falls, while very wide at 5,604 feet, is not the widest."
+  },
+  {
+    topic: "Printing",
+    statements: [
+      { text: "The Gutenberg Bible was the first major book printed with movable type in Europe.", real: true },
+      { text: "Printer ink is one of the most expensive liquids in the world by volume.", real: true },
+      { text: "Gutenberg invented the concept of movable type printing.", real: false }
+    ],
+    explanation: "Movable type was invented in China by Bi Sheng around 1040, about 400 years before Gutenberg. Gutenberg independently developed his system for the Latin alphabet."
+  },
+  {
+    topic: "Wolves",
+    statements: [
+      { text: "Wolves can hear sounds up to 10 miles away in open terrain.", real: true },
+      { text: "The reintroduction of wolves to Yellowstone changed the course of rivers.", real: true },
+      { text: "Wolf packs are led by an 'alpha' male through dominance fights.", real: false }
+    ],
+    explanation: "The 'alpha wolf' concept was debunked by the same researcher who originally proposed it. Wild wolf packs are family units led by the breeding parents, not by dominance hierarchies."
+  },
+  {
+    topic: "Cotton",
+    statements: [
+      { text: "Cotton has been cultivated for over 7,000 years.", real: true },
+      { text: "It takes about 700 gallons of water to produce one cotton T-shirt.", real: true },
+      { text: "Cotton is the most widely used fabric in the world because it's the strongest natural fiber.", real: false }
+    ],
+    explanation: "Cotton is popular for comfort and breathability, but it's not the strongest natural fiber. Silk, hemp, and flax (linen) are all stronger than cotton."
+  },
+  {
+    topic: "Pollution",
+    statements: [
+      { text: "The Great Pacific Garbage Patch is roughly twice the size of Texas.", real: true },
+      { text: "Air pollution kills more people annually than car accidents worldwide.", real: true },
+      { text: "The ozone hole has been getting steadily larger since the 1990s.", real: false }
+    ],
+    explanation: "The ozone hole has actually been shrinking since the Montreal Protocol banned CFCs in 1987. Scientists expect it to recover to 1980 levels by around 2060-2070."
+  },
+  {
+    topic: "Oranges",
+    statements: [
+      { text: "Brazil produces more oranges than any other country in the world.", real: true },
+      { text: "Oranges are a hybrid between pomelos and mandarins.", real: true },
+      { text: "Florida produces more oranges than California because it has better soil for citrus.", real: false }
+    ],
+    explanation: "Florida produces more oranges primarily because of its warm, humid climate — not better soil. California's drier climate is actually better suited for other citrus varieties."
+  },
+  {
+    topic: "Sound",
+    statements: [
+      { text: "Sound travels about 4 times faster in water than in air.", real: true },
+      { text: "The loudest natural sound ever recorded was the eruption of Krakatoa in 1883.", real: true },
+      { text: "The speed of sound is constant regardless of temperature.", real: false }
+    ],
+    explanation: "The speed of sound varies with temperature. In air, it increases by about 0.6 m/s for every degree Celsius rise. At 0°C it's 331 m/s; at 20°C it's 343 m/s."
+  },
+  {
+    topic: "Owls",
+    statements: [
+      { text: "Owls cannot move their eyeballs — they must turn their entire head to look around.", real: true },
+      { text: "Owls can rotate their heads up to 270 degrees.", real: true },
+      { text: "Owls are the wisest of all birds.", real: false }
+    ],
+    explanation: "Despite their reputation, owls are not particularly intelligent compared to other birds. Crows, ravens, and parrots consistently outperform owls in cognitive tests."
+  },
+  {
+    topic: "Soap",
+    statements: [
+      { text: "The ancient Babylonians were making soap around 2800 BC.", real: true },
+      { text: "Soap works by breaking apart the lipid membranes of bacteria and viruses.", real: true },
+      { text: "Bar soap harbors bacteria and can spread germs between users.", real: false }
+    ],
+    explanation: "Studies show that bacteria on bar soap do not transfer to users. The mechanical action of washing rinses bacteria away, making bar soap safe for shared use."
+  },
+  {
+    topic: "Lakes",
+    statements: [
+      { text: "Lake Baikal in Russia holds about 20% of the world's unfrozen fresh surface water.", real: true },
+      { text: "The Dead Sea is actually a lake, not a sea.", real: true },
+      { text: "The Great Lakes contain half of the world's fresh water.", real: false }
+    ],
+    explanation: "The Great Lakes hold about 21% of the world's surface fresh water, not half. Ice caps and glaciers hold far more fresh water overall."
+  },
+  {
+    topic: "Camels",
+    statements: [
+      { text: "Camels store fat in their humps, not water.", real: true },
+      { text: "Camels can drink up to 40 gallons of water in one sitting.", real: true },
+      { text: "Camels originated in the Middle East.", real: false }
+    ],
+    explanation: "Camels actually originated in North America about 45 million years ago. They migrated to Asia and Africa via land bridges and later went extinct in North America."
+  },
+  {
+    topic: "Nails",
+    statements: [
+      { text: "Fingernails grow faster on your dominant hand.", real: true },
+      { text: "Nails are made of the same protein (keratin) as hair.", real: true },
+      { text: "Nails continue to grow after death.", real: false }
+    ],
+    explanation: "Nails do not grow after death. The skin around them dehydrates and retracts, which makes the nails appear longer — creating the illusion of growth."
+  },
+  {
+    topic: "Compass",
+    statements: [
+      { text: "The magnetic north pole moves and is currently drifting toward Siberia.", real: true },
+      { text: "The Chinese invented the first compass around 200 BC for feng shui.", real: true },
+      { text: "A compass needle points to true geographic north.", real: false }
+    ],
+    explanation: "A compass points to magnetic north, not true geographic north. The two are different locations, and the angular difference between them is called magnetic declination."
+  },
+  {
+    topic: "Fireworks",
+    statements: [
+      { text: "Fireworks were invented in China over 2,000 years ago.", real: true },
+      { text: "The different colors in fireworks come from different metal compounds.", real: true },
+      { text: "Italy invented modern aerial firework displays in the 15th century.", real: false }
+    ],
+    explanation: "While Italy contributed to the development of aerial fireworks, modern pyrotechnics were developed over centuries across multiple cultures. The Chinese were creating aerial displays centuries before Europeans."
+  },
+  {
+    topic: "Vitamins",
+    statements: [
+      { text: "Vitamin D is technically a hormone, not a vitamin.", real: true },
+      { text: "Sailors used to get scurvy from a lack of vitamin C.", real: true },
+      { text: "Taking extra vitamin C will prevent you from catching a cold.", real: false }
+    ],
+    explanation: "Studies show that extra vitamin C does not prevent colds. It may slightly reduce the duration of a cold once you have one, but it won't stop you from getting sick."
+  },
+  {
+    topic: "Kites",
+    statements: [
+      { text: "Kites have been used for over 2,800 years, originating in China.", real: true },
+      { text: "Kites were used in World War II for anti-aircraft target practice.", real: true },
+      { text: "The Wright Brothers got the idea for airplane wings by watching kites fly.", real: false }
+    ],
+    explanation: "The Wright Brothers studied birds in flight, not kites, as inspiration for wing design. While they did use kite-like models for testing, the wing concept came from observing bird flight."
+  },
+  {
+    topic: "Sloths",
+    statements: [
+      { text: "Sloths can hold their breath underwater for up to 40 minutes.", real: true },
+      { text: "Sloths only go to the ground to defecate, roughly once a week.", real: true },
+      { text: "Sloths are slow because they are lazy and have low energy.", real: false }
+    ],
+    explanation: "Sloths are slow due to their extremely low-calorie leaf diet and efficient energy conservation — not laziness. Their slow metabolism is an adaptation, not a character flaw."
+  },
+  {
+    topic: "Cloning",
+    statements: [
+      { text: "Dolly the Sheep, the first cloned mammal, was born in 1996.", real: true },
+      { text: "Scientists have successfully cloned endangered species like the black-footed ferret.", real: true },
+      { text: "Cloned animals are always perfect genetic copies with no differences from the original.", real: false }
+    ],
+    explanation: "Cloned animals can differ due to epigenetic changes, mitochondrial DNA from the egg cell, and environmental factors during development. Even Dolly aged faster than normal sheep."
+  },
+  {
+    topic: "Wonders of the World",
+    statements: [
+      { text: "The Great Pyramid of Giza is the only ancient wonder still standing.", real: true },
+      { text: "The Colossus of Rhodes stood for only 54 years before being destroyed by an earthquake.", real: true },
+      { text: "The Hanging Gardens of Babylon have been confirmed by archaeological evidence.", real: false }
+    ],
+    explanation: "The Hanging Gardens of Babylon have never been definitively located or confirmed by archaeology. Some historians even doubt they existed at all, or suggest they were in Nineveh instead."
   }
 ];
