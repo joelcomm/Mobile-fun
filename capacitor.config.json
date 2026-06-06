@@ -1,0 +1,18 @@
+{
+  "appId": "com.aiforeveryoneshow.games",
+  "appName": "AI for Everyone Games",
+  "webDir": "www",
+  "ios": {
+    "contentInset": "always",
+    "allowsLinkPreview": false,
+    "scrollEnabled": true
+  },
+  "server": {
+    "allowNavigation": [
+      "fonts.googleapis.com",
+      "fonts.gstatic.com",
+      "cdn.tailwindcss.com",
+      "unpkg.com"
+    ]
+  }
+}

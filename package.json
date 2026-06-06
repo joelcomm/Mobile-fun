@@ -1,0 +1,24 @@
+{
+  "name": "ai-for-everyone-games",
+  "version": "1.0.0",
+  "description": "Free original daily games to challenge your brain",
+  "scripts": {
+    "build": "bash build.sh",
+    "cap:sync": "npm run build && npx cap sync ios",
+    "cap:open": "npx cap open ios",
+    "cap:run": "npm run build && npx cap sync ios && npx cap open ios"
+  },
+  "author": "Joel Comm",
+  "license": "ISC",
+  "private": true,
+  "dependencies": {
+    "@capacitor/cli": "^8.4.0",
+    "@capacitor/core": "^8.4.0",
+    "@capacitor/ios": "^8.4.0",
+    "@capacitor/splash-screen": "^8.0.1",
+    "@capacitor/status-bar": "^8.0.2"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.5"
+  }
+}
