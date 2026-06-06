@@ -642,7 +642,7 @@ var SEQUENCES = [
 
   // ── Multiply-and-add patterns ───────────────────────────
   { seq: [1, 5, 21, 85, 341, '?'], answer: 1365, choices: [682, 1024, 1365, 1706], hint: '×4 + 1' },
-  { seq: [2, 9, 29, 89, '?'], answer: 269, choices: [178, 224, 269, 356], hint: '×3 + 3' },
+  { seq: [2, 9, 30, 93, '?'], answer: 282, choices: [188, 234, 282, 376], hint: '×3 + 3' },
   { seq: [1, 4, 14, 46, '?'], answer: 142, choices: [92, 118, 142, 184], hint: '×3 + 1, then ×3 + 2 pattern' },
   { seq: [1, 7, 25, 79, '?'], answer: 241, choices: [158, 200, 241, 316], hint: '×3 + 4' },
   { seq: [3, 10, 31, 94, '?'], answer: 283, choices: [188, 236, 283, 376], hint: '×3 + 1' },
@@ -1140,7 +1140,7 @@ var SEQUENCES = [
   { seq: [2, 11, 56, 281, '?'], answer: 1406, choices: [562, 1000, 1406, 2810], hint: '×5 + 1' },
   { seq: [3, 13, 53, 213, '?'], answer: 853, choices: [426, 640, 853, 1066], hint: '×4 + 1' },
   { seq: [1, 6, 31, 156, '?'], answer: 781, choices: [312, 500, 781, 1560], hint: '×5 + 1' },
-  { seq: [2, 7, 23, 70, '?'], answer: 211, choices: [140, 176, 211, 280], hint: '×3 + 1 from 2' },
+  { seq: [2, 7, 22, 67, '?'], answer: 202, choices: [134, 168, 202, 270], hint: '×3 + 1 from 2' },
   { seq: [5, 11, 23, 47, 95, '?'], answer: 191, choices: [143, 167, 191, 190], hint: '×2 + 1 from 5' },
   { seq: [4, 10, 22, 46, '?'], answer: 94, choices: [70, 82, 94, 92], hint: '×2 + 2' },
   { seq: [3, 9, 21, 45, '?'], answer: 93, choices: [69, 81, 93, 90], hint: '×2 + 3' },
@@ -1226,7 +1226,7 @@ var SEQUENCES = [
   { seq: [2, 3, 5, 8, 13, 21, 34, '?'], answer: 55, choices: [42, 48, 55, 68], hint: 'Fibonacci from 2, 3' },
   { seq: [1, 4, 27, 256, '?'], answer: 3125, choices: [625, 1024, 3125, 4096], hint: 'n^n: 1¹, 2², 3³, 4⁴, 5⁵' },
   { seq: [4, 27, 256, 3125, '?'], answer: 46656, choices: [15625, 32768, 46656, 78125], hint: 'n^n: 2², 3³, 4⁴, 5⁵, 6⁶' },
-  { seq: [1, 2, 3, 5, 7, 11, '?'], answer: 15, choices: [13, 15, 17, 19], hint: 'Sum of previous 2 (shifted Fibonacci-Lucas)' },
+  { seq: [1, 2, 3, 5, 7, 11, '?'], answer: 15, choices: [13, 15, 17, 19], hint: 'Differences double in pairs: +1,+1,+2,+2,+4,+4' },
   { seq: [3, 6, 11, 20, 37, '?'], answer: 70, choices: [54, 62, 70, 74], hint: 'Almost doubling: ×2−0, ×2−1, ×2−2...' },
   { seq: [2, 5, 12, 29, 70, '?'], answer: 169, choices: [99, 140, 169, 198], hint: 'Pell numbers' },
   { seq: [1, 2, 5, 13, 34, '?'], answer: 89, choices: [55, 72, 89, 100], hint: 'Every other Fibonacci number' },
@@ -1330,7 +1330,7 @@ var SEQUENCES = [
   { seq: [7, 17, 37, 77, '?'], answer: 157, choices: [117, 137, 157, 154], hint: '×2 + 3' },
   { seq: [4, 14, 44, 134, '?'], answer: 404, choices: [268, 336, 404, 536], hint: '×3 + 2' },
   { seq: [6, 19, 58, 175, '?'], answer: 526, choices: [350, 438, 526, 700], hint: '×3 + 1' },
-  { seq: [2, 9, 30, 91, '?'], answer: 274, choices: [182, 228, 274, 364], hint: '×3 + 3' },
+  { seq: [2, 9, 30, 93, '?'], answer: 282, choices: [188, 234, 282, 376], hint: '×3 + 3' },
   { seq: [1, 6, 21, 66, '?'], answer: 201, choices: [132, 168, 201, 264], hint: '×3 + 3' },
 
   // ── Batch 2: More n(n+1)(n+2)/6 related ─────────────────
@@ -1758,7 +1758,7 @@ var SEQUENCES = [
   { seq: [1, 4, 9, 25, 49, '?'], answer: 121, choices: [81, 100, 121, 144], hint: 'Squares of primes: 1², 2², 3², 5², 7², 11²' },
   { seq: [8, 11, 17, 26, 38, '?'], answer: 53, choices: [47, 50, 53, 60], hint: 'Differences: 3, 6, 9, 12, 15' },
   { seq: [2, 10, 30, 68, 130, '?'], answer: 222, choices: [190, 210, 222, 250], hint: 'n³ + n for n=1,2,3,4,5,6' },
-  { seq: [12, 36, 80, 150, '?'], answer: 252, choices: [220, 240, 252, 280], hint: 'n³ + n² + n + 1 pattern' },
+  { seq: [12, 36, 80, 150, '?'], answer: 252, choices: [220, 240, 252, 280], hint: 'n²(n+1) for n = 2, 3, 4, 5, 6' },
   { seq: [1, 2, 3, 4, 5, 6, 7, 8, '?'], answer: 9, choices: [9, 10, 11, 12], hint: 'Count up by 1' },
   { seq: [2, 4, 6, 8, 10, 12, 14, '?'], answer: 16, choices: [15, 16, 17, 18], hint: 'Even numbers' },
   { seq: [3, 6, 9, 12, 15, 18, 21, '?'], answer: 24, choices: [22, 23, 24, 27], hint: 'Multiples of 3' },
@@ -2352,7 +2352,7 @@ var SEQUENCES = [
   { seq: [1, 2, 5, 15, 52, 203, '?'], answer: 877, choices: [406, 650, 877, 1015], hint: 'Bell numbers' },
   { seq: [5, 12, 29, 70, 169, 408, '?'], answer: 985, choices: [577, 816, 985, 1154], hint: 'Pell numbers' },
   { seq: [0, 1, 1, 3, 5, 11, 21, '?'], answer: 43, choices: [32, 37, 43, 48], hint: 'Jacobsthal' },
-  { seq: [1, 1, 1, 2, 3, 4, 6, 9, '?'], answer: 13, choices: [11, 12, 13, 15], hint: 'Padovan' },
+  { seq: [1, 1, 1, 2, 3, 4, 6, 9, '?'], answer: 13, choices: [11, 12, 13, 15], hint: 'Each = prev + 3rd-prev' },
   { seq: [2, 3, 4, 6, 9, 13, 19, '?'], answer: 28, choices: [24, 26, 28, 32], hint: 'Each = prev + 3rd-prev' },
   { seq: [3, 4, 6, 9, 13, 19, 28, '?'], answer: 41, choices: [35, 38, 41, 46], hint: 'Each = prev + 3rd-prev' },
   { seq: [4, 6, 9, 13, 19, 28, 41, '?'], answer: 60, choices: [52, 56, 60, 68], hint: 'Each = prev + 3rd-prev' },
