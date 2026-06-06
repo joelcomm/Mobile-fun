@@ -1,6 +1,6 @@
 {
-  "appId": "com.aiforeveryoneshow.games",
-  "appName": "AI for Everyone Games",
+  "appId": "com.bestdailygames.app",
+  "appName": "Best Daily Games",
   "webDir": "www",
   "ios": {
     "contentInset": "always",
