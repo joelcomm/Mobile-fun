@@ -16093,5 +16093,3712 @@ const PUZZLES = [
       { label: "United States", value: 120 },
       { label: "China", value: 400 }
     ]
+  },
+  {
+    instruction: "Lightest to heaviest dog breed (average weight in lbs)",
+    category: "Dog Breeds by Average Weight",
+    items: [
+      { label: "Chihuahua", value: 5 },
+      { label: "Pomeranian", value: 6 },
+      { label: "Beagle", value: 25 },
+      { label: "Labrador Retriever", value: 70 },
+      { label: "English Mastiff", value: 200 }
+    ]
+  },
+  {
+    instruction: "Shortest to tallest dog breed (shoulder height in inches)",
+    category: "Dog Breeds by Shoulder Height",
+    items: [
+      { label: "Yorkshire Terrier", value: 8 },
+      { label: "Dachshund", value: 9 },
+      { label: "Cocker Spaniel", value: 15 },
+      { label: "Golden Retriever", value: 23 },
+      { label: "Great Dane", value: 32 }
+    ]
+  },
+  {
+    instruction: "Shortest to longest average lifespan for dog breeds (years)",
+    category: "Dog Breeds by Average Lifespan",
+    items: [
+      { label: "Bernese Mountain Dog", value: 7 },
+      { label: "Great Dane", value: 8 },
+      { label: "Bulldog", value: 9 },
+      { label: "Golden Retriever", value: 11 },
+      { label: "Chihuahua", value: 16 }
+    ]
+  },
+  {
+    instruction: "Lightest to heaviest cat breed (average weight in lbs)",
+    category: "Cat Breeds by Average Weight",
+    items: [
+      { label: "Singapura", value: 5 },
+      { label: "Siamese", value: 8 },
+      { label: "British Shorthair", value: 12 },
+      { label: "Ragdoll", value: 15 },
+      { label: "Maine Coon", value: 18 }
+    ]
+  },
+  {
+    instruction: "Shortest to longest average lifespan for cat breeds (years)",
+    category: "Cat Breeds by Average Lifespan",
+    items: [
+      { label: "Sphynx", value: 10 },
+      { label: "Maine Coon", value: 12 },
+      { label: "Persian", value: 14 },
+      { label: "Siamese", value: 17 },
+      { label: "Burmese", value: 20 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest horsepower for sports cars",
+    category: "Sports Cars by Horsepower",
+    items: [
+      { label: "Mazda MX-5 Miata", value: 181 },
+      { label: "Toyota GR86", value: 228 },
+      { label: "Ford Mustang GT", value: 480 },
+      { label: "Chevrolet Corvette Z06", value: 670 },
+      { label: "Dodge Challenger SRT Hellcat", value: 717 }
+    ]
+  },
+  {
+    instruction: "Slowest to fastest 0-60 mph time for production cars (seconds, lower is faster)",
+    category: "Production Cars by 0-60 Time",
+    items: [
+      { label: "Toyota Corolla", value: 8.5 },
+      { label: "Volkswagen Golf GTI", value: 5.5 },
+      { label: "BMW M3", value: 3.8 },
+      { label: "Porsche 911 Turbo S", value: 2.6 },
+      { label: "Tesla Model S Plaid", value: 1.99 }
+    ]
+  },
+  {
+    instruction: "Cheapest to most expensive car model (base MSRP in USD)",
+    category: "Cars by Base MSRP",
+    items: [
+      { label: "Nissan Versa", value: 16900 },
+      { label: "Honda Civic", value: 24650 },
+      { label: "BMW 3 Series", value: 44400 },
+      { label: "Porsche 911", value: 116500 },
+      { label: "Lamborghini Huracán", value: 211321 }
+    ]
+  },
+  {
+    instruction: "Lightest to heaviest full-size SUV (curb weight in lbs)",
+    category: "Full-Size SUVs by Curb Weight",
+    items: [
+      { label: "Toyota 4Runner", value: 4400 },
+      { label: "Ford Explorer", value: 4690 },
+      { label: "Chevrolet Tahoe", value: 5680 },
+      { label: "Ford Expedition", value: 5720 },
+      { label: "Cadillac Escalade ESV", value: 6050 }
+    ]
+  },
+  {
+    instruction: "Shortest to tallest building (height in meters)",
+    category: "Skyscrapers by Height",
+    items: [
+      { label: "The Shard (London)", value: 310 },
+      { label: "Empire State Building (NYC)", value: 443 },
+      { label: "Lotte World Tower (Seoul)", value: 555 },
+      { label: "Shanghai Tower", value: 632 },
+      { label: "Burj Khalifa (Dubai)", value: 828 }
+    ]
+  },
+  {
+    instruction: "Fewest to most floors in a supertall building",
+    category: "Supertall Buildings by Floor Count",
+    items: [
+      { label: "One World Trade Center (NYC)", value: 94 },
+      { label: "Willis Tower (Chicago)", value: 108 },
+      { label: "Ping An Finance Centre (Shenzhen)", value: 115 },
+      { label: "Merdeka 118 (Kuala Lumpur)", value: 118 },
+      { label: "Burj Khalifa (Dubai)", value: 163 }
+    ]
+  },
+  {
+    instruction: "Most recent to oldest famous building (year completed)",
+    category: "Famous Buildings by Year Completed",
+    items: [
+      { label: "Great Pyramid of Giza", value: -2560 },
+      { label: "Hagia Sophia (Istanbul)", value: 537 },
+      { label: "Leaning Tower of Pisa", value: 1372 },
+      { label: "Taj Mahal", value: 1653 },
+      { label: "Eiffel Tower", value: 1889 }
+    ]
+  },
+  {
+    instruction: "Shortest to longest river (length in km)",
+    category: "Major Rivers by Length",
+    items: [
+      { label: "Rhine", value: 1230 },
+      { label: "Danube", value: 2850 },
+      { label: "Mississippi", value: 3766 },
+      { label: "Yangtze", value: 6300 },
+      { label: "Nile", value: 6650 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest river discharge (cubic meters per second)",
+    category: "Rivers by Average Discharge",
+    items: [
+      { label: "Colorado River", value: 640 },
+      { label: "Danube", value: 6500 },
+      { label: "Mississippi", value: 16800 },
+      { label: "Congo River", value: 41000 },
+      { label: "Amazon River", value: 209000 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest river drainage basin (million sq km)",
+    category: "Rivers by Drainage Basin Area",
+    items: [
+      { label: "Mekong", value: 0.81 },
+      { label: "Ganges", value: 1.08 },
+      { label: "Mississippi", value: 2.98 },
+      { label: "Congo River", value: 3.68 },
+      { label: "Amazon River", value: 6.3 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest mountain peak (elevation in meters)",
+    category: "Famous Peaks by Elevation",
+    items: [
+      { label: "Mount Fuji (Japan)", value: 3776 },
+      { label: "Mont Blanc (Alps)", value: 4809 },
+      { label: "Mount Elbrus (Russia)", value: 5642 },
+      { label: "Denali (Alaska)", value: 6190 },
+      { label: "Mount Everest", value: 8849 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest Himalayan peak (elevation in meters)",
+    category: "Himalayan Eight-Thousanders by Elevation",
+    items: [
+      { label: "Annapurna I", value: 8091 },
+      { label: "Dhaulagiri I", value: 8167 },
+      { label: "Makalu", value: 8485 },
+      { label: "Kangchenjunga", value: 8586 },
+      { label: "K2", value: 8611 }
+    ]
+  },
+  {
+    instruction: "Shallowest to deepest lake (maximum depth in meters)",
+    category: "Lakes by Maximum Depth",
+    items: [
+      { label: "Lake Erie", value: 64 },
+      { label: "Lake Victoria", value: 84 },
+      { label: "Lake Superior", value: 406 },
+      { label: "Lake Tanganyika", value: 1470 },
+      { label: "Lake Baikal", value: 1642 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest lake by surface area (sq km)",
+    category: "Lakes by Surface Area",
+    items: [
+      { label: "Lake Titicaca", value: 8372 },
+      { label: "Lake Baikal", value: 31722 },
+      { label: "Lake Michigan", value: 57757 },
+      { label: "Lake Superior", value: 82100 },
+      { label: "Caspian Sea", value: 371000 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest lake by water volume (cubic km)",
+    category: "Lakes by Water Volume",
+    items: [
+      { label: "Lake Erie", value: 484 },
+      { label: "Lake Victoria", value: 2680 },
+      { label: "Lake Superior", value: 12100 },
+      { label: "Lake Tanganyika", value: 18900 },
+      { label: "Lake Baikal", value: 23615 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest per capita coffee consumption (kg per year)",
+    category: "Countries by Coffee Consumption Per Capita",
+    items: [
+      { label: "United States", value: 4.4 },
+      { label: "Italy", value: 5.8 },
+      { label: "Sweden", value: 7.6 },
+      { label: "Norway", value: 9.0 },
+      { label: "Finland", value: 12.0 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest cheese production (thousand tonnes per year)",
+    category: "Countries by Cheese Production",
+    items: [
+      { label: "Netherlands", value: 900 },
+      { label: "Italy", value: 1300 },
+      { label: "France", value: 1900 },
+      { label: "Germany", value: 2400 },
+      { label: "United States", value: 6200 }
+    ]
+  },
+  {
+    instruction: "Fewest to most Nobel Prize laureates per million people",
+    category: "Countries by Nobel Prizes Per Capita",
+    items: [
+      { label: "Japan", value: 0.2 },
+      { label: "United Kingdom", value: 1.8 },
+      { label: "Sweden", value: 3.2 },
+      { label: "Switzerland", value: 3.3 },
+      { label: "Saint Lucia", value: 5.5 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual beer consumption per capita (liters)",
+    category: "Countries by Beer Consumption Per Capita",
+    items: [
+      { label: "United States", value: 76 },
+      { label: "Ireland", value: 98 },
+      { label: "Germany", value: 100 },
+      { label: "Austria", value: 107 },
+      { label: "Czech Republic", value: 142 }
+    ]
+  },
+  {
+    instruction: "Fewest to most active volcanoes by country",
+    category: "Countries by Number of Active Volcanoes",
+    items: [
+      { label: "Italy", value: 3 },
+      { label: "Iceland", value: 30 },
+      { label: "Japan", value: 100 },
+      { label: "United States", value: 161 },
+      { label: "Indonesia", value: 127 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest chocolate consumption per capita (kg/year)",
+    category: "Countries by Chocolate Consumption Per Capita",
+    items: [
+      { label: "United States", value: 4.4 },
+      { label: "Belgium", value: 6.8 },
+      { label: "Austria", value: 8.1 },
+      { label: "Germany", value: 8.4 },
+      { label: "Switzerland", value: 10.3 }
+    ]
+  },
+  {
+    instruction: "Fewest to most UNESCO World Heritage Sites by country",
+    category: "Countries by UNESCO World Heritage Sites Count",
+    items: [
+      { label: "United Kingdom", value: 33 },
+      { label: "France", value: 52 },
+      { label: "Germany", value: 52 },
+      { label: "China", value: 57 },
+      { label: "Italy", value: 59 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest calories per 100g for common fruits",
+    category: "Fruits by Calories Per 100g",
+    items: [
+      { label: "Watermelon", value: 30 },
+      { label: "Strawberry", value: 33 },
+      { label: "Apple", value: 52 },
+      { label: "Banana", value: 89 },
+      { label: "Avocado", value: 160 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest protein content per 100g for common foods",
+    category: "Foods by Protein Per 100g",
+    items: [
+      { label: "White Rice (cooked)", value: 2.7 },
+      { label: "Egg", value: 13 },
+      { label: "Salmon", value: 20 },
+      { label: "Chicken Breast", value: 31 },
+      { label: "Parmesan Cheese", value: 38 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest fiber content per 100g",
+    category: "Foods by Fiber Per 100g",
+    items: [
+      { label: "White Bread", value: 2.7 },
+      { label: "Brown Rice", value: 3.5 },
+      { label: "Almonds", value: 12.5 },
+      { label: "Flaxseed", value: 27.3 },
+      { label: "Wheat Bran", value: 42.8 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest vitamin C content per 100g (mg)",
+    category: "Foods by Vitamin C Content",
+    items: [
+      { label: "Apple", value: 4.6 },
+      { label: "Lemon", value: 53 },
+      { label: "Kiwi", value: 93 },
+      { label: "Red Bell Pepper", value: 128 },
+      { label: "Acerola Cherry", value: 1678 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest sodium content per 100g (mg)",
+    category: "Foods by Sodium Content",
+    items: [
+      { label: "Fresh Cucumber", value: 2 },
+      { label: "Chicken Breast (raw)", value: 74 },
+      { label: "Cheddar Cheese", value: 621 },
+      { label: "Soy Sauce", value: 5493 },
+      { label: "Table Salt", value: 38758 }
+    ]
+  },
+  {
+    instruction: "Earliest to latest major historical event",
+    category: "Historical Events Before Common Era",
+    items: [
+      { label: "Construction of Stonehenge", value: -3000 },
+      { label: "Founding of Rome", value: -753 },
+      { label: "Battle of Marathon", value: -490 },
+      { label: "Alexander the Great conquers Persia", value: -331 },
+      { label: "Julius Caesar assassinated", value: -44 }
+    ]
+  },
+  {
+    instruction: "Earliest to latest Renaissance/Enlightenment event",
+    category: "Renaissance and Enlightenment Events by Date",
+    items: [
+      { label: "Gutenberg prints first Bible", value: 1455 },
+      { label: "Columbus reaches the Americas", value: 1492 },
+      { label: "Martin Luther's 95 Theses", value: 1517 },
+      { label: "Galileo's telescope observations", value: 1610 },
+      { label: "Newton publishes Principia", value: 1687 }
+    ]
+  },
+  {
+    instruction: "Earliest to latest 20th century turning point",
+    category: "20th Century Turning Points by Date",
+    items: [
+      { label: "Sinking of the Titanic", value: 1912 },
+      { label: "Stock Market Crash (Great Depression)", value: 1929 },
+      { label: "D-Day Normandy Invasion", value: 1944 },
+      { label: "Moon Landing (Apollo 11)", value: 1969 },
+      { label: "Fall of the Berlin Wall", value: 1989 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest worldwide box office gross (billion USD)",
+    category: "Movies by Worldwide Box Office",
+    items: [
+      { label: "Frozen", value: 1.28 },
+      { label: "The Lion King (2019)", value: 1.66 },
+      { label: "Titanic", value: 2.26 },
+      { label: "Avengers: Endgame", value: 2.80 },
+      { label: "Avatar", value: 2.92 }
+    ]
+  },
+  {
+    instruction: "Shortest to longest movie runtime (minutes)",
+    category: "Long Movies by Runtime",
+    items: [
+      { label: "The Godfather", value: 175 },
+      { label: "Schindler's List", value: 195 },
+      { label: "The Lord of the Rings: Return of the King", value: 201 },
+      { label: "Ben-Hur (1959)", value: 212 },
+      { label: "Gone with the Wind", value: 238 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest movie production budget (million USD)",
+    category: "Movies by Production Budget",
+    items: [
+      { label: "Get Out", value: 4.5 },
+      { label: "Joker (2019)", value: 55 },
+      { label: "Inception", value: 160 },
+      { label: "Avengers: Age of Ultron", value: 365 },
+      { label: "Pirates of the Caribbean: On Stranger Tides", value: 379 }
+    ]
+  },
+  {
+    instruction: "Fewest to most pages in a famous novel",
+    category: "Classic Novels by Page Count",
+    items: [
+      { label: "The Great Gatsby (F. Scott Fitzgerald)", value: 180 },
+      { label: "To Kill a Mockingbird (Harper Lee)", value: 281 },
+      { label: "Moby-Dick (Herman Melville)", value: 585 },
+      { label: "Anna Karenina (Leo Tolstoy)", value: 864 },
+      { label: "War and Peace (Leo Tolstoy)", value: 1225 }
+    ]
+  },
+  {
+    instruction: "Earliest to latest publication of a famous novel",
+    category: "Famous Novels by Publication Year",
+    items: [
+      { label: "Don Quixote (Cervantes)", value: 1605 },
+      { label: "Pride and Prejudice (Austen)", value: 1813 },
+      { label: "Crime and Punishment (Dostoevsky)", value: 1866 },
+      { label: "The Great Gatsby (Fitzgerald)", value: 1925 },
+      { label: "One Hundred Years of Solitude (Márquez)", value: 1967 }
+    ]
+  },
+  {
+    instruction: "Softest to hardest gemstone (Mohs scale)",
+    category: "Gemstones by Mohs Hardness",
+    items: [
+      { label: "Talc", value: 1 },
+      { label: "Pearl (Aragonite)", value: 3 },
+      { label: "Opal", value: 6 },
+      { label: "Topaz", value: 8 },
+      { label: "Diamond", value: 10 }
+    ]
+  },
+  {
+    instruction: "Least to most expensive gemstone per carat (typical USD)",
+    category: "Gemstones by Price Per Carat",
+    items: [
+      { label: "Amethyst", value: 20 },
+      { label: "Aquamarine", value: 300 },
+      { label: "Emerald", value: 3000 },
+      { label: "Ruby", value: 10000 },
+      { label: "Alexandrite", value: 30000 }
+    ]
+  },
+  {
+    instruction: "Fewest to most album sales worldwide (million copies)",
+    category: "Best-Selling Albums of All Time",
+    items: [
+      { label: "Rumours (Fleetwood Mac)", value: 40 },
+      { label: "The Bodyguard Soundtrack (Whitney Houston)", value: 45 },
+      { label: "Back in Black (AC/DC)", value: 50 },
+      { label: "Thriller (Michael Jackson)", value: 70 },
+      { label: "N/A — Thriller holds record", value: 70 }
+    ]
+  },
+  {
+    instruction: "Shortest to longest suspension bridge (main span in meters)",
+    category: "Suspension Bridges by Main Span",
+    items: [
+      { label: "Brooklyn Bridge (NYC)", value: 486 },
+      { label: "Golden Gate Bridge (San Francisco)", value: 1280 },
+      { label: "Humber Bridge (UK)", value: 1410 },
+      { label: "Akashi Kaikyo Bridge (Japan)", value: 1991 },
+      { label: "1915 Çanakkale Bridge (Turkey)", value: 2023 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest bridge deck height (meters above water)",
+    category: "Bridges by Deck Height Above Water",
+    items: [
+      { label: "Brooklyn Bridge", value: 40 },
+      { label: "Golden Gate Bridge", value: 67 },
+      { label: "Royal Gorge Bridge (Colorado)", value: 291 },
+      { label: "Beipanjiang Bridge (China)", value: 565 },
+      { label: "Beipanjiang Duge Bridge (China)", value: 565 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest desert by area (thousand sq km)",
+    category: "Deserts by Area",
+    items: [
+      { label: "Mojave Desert", value: 124 },
+      { label: "Kalahari Desert", value: 900 },
+      { label: "Gobi Desert", value: 1295 },
+      { label: "Sahara Desert", value: 9200 },
+      { label: "Antarctic Desert", value: 14200 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest forest by area (million sq km)",
+    category: "Forests by Area",
+    items: [
+      { label: "Black Forest (Germany)", value: 0.006 },
+      { label: "Tongass National Forest (Alaska)", value: 0.069 },
+      { label: "Daintree Rainforest (Australia)", value: 0.0012 },
+      { label: "Congo Rainforest", value: 2.0 },
+      { label: "Amazon Rainforest", value: 5.5 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest island by area (thousand sq km)",
+    category: "Islands by Area",
+    items: [
+      { label: "Bali (Indonesia)", value: 5.8 },
+      { label: "Jamaica", value: 11 },
+      { label: "Iceland", value: 103 },
+      { label: "Madagascar", value: 587 },
+      { label: "Greenland", value: 2166 }
+    ]
+  },
+  {
+    instruction: "Lightest to heaviest horse breed (average weight in kg)",
+    category: "Horse Breeds by Average Weight",
+    items: [
+      { label: "Falabella", value: 75 },
+      { label: "Arabian", value: 450 },
+      { label: "Thoroughbred", value: 500 },
+      { label: "Clydesdale", value: 820 },
+      { label: "Shire", value: 1000 }
+    ]
+  },
+  {
+    instruction: "Least to most expensive coffee variety per pound (USD)",
+    category: "Coffee Varieties by Price Per Pound",
+    items: [
+      { label: "Folgers Classic Roast", value: 8 },
+      { label: "Colombian Supremo", value: 15 },
+      { label: "Blue Mountain (Jamaica)", value: 65 },
+      { label: "Hawaiian Kona", value: 50 },
+      { label: "Kopi Luwak", value: 300 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest average annual rainfall by city (mm)",
+    category: "Cities by Average Annual Rainfall",
+    items: [
+      { label: "Cairo (Egypt)", value: 25 },
+      { label: "Los Angeles (USA)", value: 380 },
+      { label: "London (UK)", value: 602 },
+      { label: "Tokyo (Japan)", value: 1530 },
+      { label: "Cherrapunji (India)", value: 11430 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest Scoville heat units for peppers",
+    category: "Peppers by Scoville Heat Units",
+    items: [
+      { label: "Bell Pepper", value: 0 },
+      { label: "Jalapeño", value: 5000 },
+      { label: "Cayenne", value: 40000 },
+      { label: "Habanero", value: 300000 },
+      { label: "Carolina Reaper", value: 2200000 }
+    ]
+  },
+  {
+    instruction: "Fewest to most teeth in an adult animal",
+    category: "Animals by Adult Tooth Count",
+    items: [
+      { label: "Anteater", value: 0 },
+      { label: "Human", value: 32 },
+      { label: "Dog", value: 42 },
+      { label: "Opossum", value: 50 },
+      { label: "Great White Shark", value: 300 }
+    ]
+  },
+  {
+    instruction: "Shortest to longest gestation period for primates (days)",
+    category: "Primates by Gestation Period",
+    items: [
+      { label: "Mouse Lemur", value: 60 },
+      { label: "Squirrel Monkey", value: 150 },
+      { label: "Baboon", value: 187 },
+      { label: "Chimpanzee", value: 237 },
+      { label: "Human", value: 270 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest cruising altitude for birds (meters)",
+    category: "Birds by Typical Flying Altitude",
+    items: [
+      { label: "Hummingbird", value: 50 },
+      { label: "Sparrow", value: 100 },
+      { label: "Mallard Duck", value: 1200 },
+      { label: "Bald Eagle", value: 3000 },
+      { label: "Bar-headed Goose", value: 9000 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest wingspan for birds (meters)",
+    category: "Birds by Wingspan",
+    items: [
+      { label: "Bee Hummingbird", value: 0.06 },
+      { label: "House Sparrow", value: 0.24 },
+      { label: "Bald Eagle", value: 2.0 },
+      { label: "Andean Condor", value: 3.2 },
+      { label: "Wandering Albatross", value: 3.5 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest top speed for fish (km/h)",
+    category: "Fish by Top Speed",
+    items: [
+      { label: "Seahorse", value: 1.5 },
+      { label: "Tuna", value: 75 },
+      { label: "Swordfish", value: 97 },
+      { label: "Marlin", value: 105 },
+      { label: "Sailfish", value: 110 }
+    ]
+  },
+  {
+    instruction: "Shortest to tallest cactus species (typical height in meters)",
+    category: "Cactus Species by Height",
+    items: [
+      { label: "Blossfeldia liliputana", value: 0.01 },
+      { label: "Peyote", value: 0.05 },
+      { label: "Barrel Cactus", value: 1.5 },
+      { label: "Saguaro", value: 12 },
+      { label: "Pachycereus pringlei (Cardón)", value: 18 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest melting point for metals (°C)",
+    category: "Metals by Melting Point",
+    items: [
+      { label: "Mercury", value: -39 },
+      { label: "Tin", value: 232 },
+      { label: "Aluminum", value: 660 },
+      { label: "Iron", value: 1538 },
+      { label: "Tungsten", value: 3422 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest density of common metals (g/cm³)",
+    category: "Metals by Density",
+    items: [
+      { label: "Lithium", value: 0.534 },
+      { label: "Aluminum", value: 2.7 },
+      { label: "Iron", value: 7.87 },
+      { label: "Lead", value: 11.34 },
+      { label: "Osmium", value: 22.59 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest thermal conductivity (W/m·K)",
+    category: "Materials by Thermal Conductivity",
+    items: [
+      { label: "Wood (Oak)", value: 0.17 },
+      { label: "Glass", value: 1.0 },
+      { label: "Stainless Steel", value: 16 },
+      { label: "Aluminum", value: 237 },
+      { label: "Diamond", value: 2200 }
+    ]
+  },
+  {
+    instruction: "Fewest to most annual visitors at a museum (millions)",
+    category: "Museums by Annual Visitors",
+    items: [
+      { label: "Uffizi Gallery (Florence)", value: 4.4 },
+      { label: "British Museum (London)", value: 5.8 },
+      { label: "Vatican Museums (Rome)", value: 6.8 },
+      { label: "National Museum of China (Beijing)", value: 7.6 },
+      { label: "Louvre (Paris)", value: 8.9 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest ocean by area (million sq km)",
+    category: "Oceans by Surface Area",
+    items: [
+      { label: "Arctic Ocean", value: 14.06 },
+      { label: "Southern Ocean", value: 20.33 },
+      { label: "Indian Ocean", value: 70.56 },
+      { label: "Atlantic Ocean", value: 85.13 },
+      { label: "Pacific Ocean", value: 168.72 }
+    ]
+  },
+  {
+    instruction: "Least to most populated capital city in Europe (millions)",
+    category: "European Capitals by Population",
+    items: [
+      { label: "Reykjavik (Iceland)", value: 0.13 },
+      { label: "Lisbon (Portugal)", value: 0.55 },
+      { label: "Berlin (Germany)", value: 3.65 },
+      { label: "Paris (France)", value: 2.16 },
+      { label: "London (UK)", value: 8.98 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest average life expectancy by country (years)",
+    category: "Countries by Life Expectancy",
+    items: [
+      { label: "Central African Republic", value: 54 },
+      { label: "Nigeria", value: 55 },
+      { label: "India", value: 70 },
+      { label: "United States", value: 77 },
+      { label: "Japan", value: 84 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest literacy rate by country (%)",
+    category: "Countries by Literacy Rate",
+    items: [
+      { label: "Niger", value: 35 },
+      { label: "Afghanistan", value: 43 },
+      { label: "Ethiopia", value: 52 },
+      { label: "India", value: 74 },
+      { label: "South Korea", value: 98 }
+    ]
+  },
+  {
+    instruction: "Fewest to most languages spoken in a country",
+    category: "Countries by Number of Living Languages",
+    items: [
+      { label: "Iceland", value: 2 },
+      { label: "Japan", value: 15 },
+      { label: "Mexico", value: 290 },
+      { label: "India", value: 453 },
+      { label: "Papua New Guinea", value: 840 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest country by road network length (thousand km)",
+    category: "Countries by Total Road Network",
+    items: [
+      { label: "Iceland", value: 13 },
+      { label: "Australia", value: 877 },
+      { label: "Brazil", value: 1720 },
+      { label: "China", value: 5280 },
+      { label: "United States", value: 6744 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest wine production by country (million hectoliters)",
+    category: "Countries by Wine Production",
+    items: [
+      { label: "Argentina", value: 10.5 },
+      { label: "United States", value: 23.6 },
+      { label: "Spain", value: 35.7 },
+      { label: "France", value: 46.0 },
+      { label: "Italy", value: 49.5 }
+    ]
+  },
+  {
+    instruction: "Fewest to most Olympic gold medals won by a country (all-time Summer)",
+    category: "Countries by Summer Olympic Gold Medals",
+    items: [
+      { label: "Australia", value: 167 },
+      { label: "China", value: 263 },
+      { label: "France", value: 254 },
+      { label: "Great Britain", value: 285 },
+      { label: "United States", value: 1066 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest olive oil production (thousand tonnes)",
+    category: "Countries by Olive Oil Production",
+    items: [
+      { label: "Portugal", value: 140 },
+      { label: "Turkey", value: 230 },
+      { label: "Italy", value: 270 },
+      { label: "Greece", value: 275 },
+      { label: "Spain", value: 1400 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest glacier by area (sq km)",
+    category: "Glaciers by Area",
+    items: [
+      { label: "Aletsch Glacier (Switzerland)", value: 81 },
+      { label: "Siachen Glacier (Himalayas)", value: 700 },
+      { label: "Vatnajökull (Iceland)", value: 7900 },
+      { label: "Greenland Ice Sheet", value: 1710000 },
+      { label: "Antarctic Ice Sheet", value: 14000000 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest boiling point for common liquids (°C)",
+    category: "Liquids by Boiling Point",
+    items: [
+      { label: "Liquid Nitrogen", value: -196 },
+      { label: "Diethyl Ether", value: 34.6 },
+      { label: "Ethanol", value: 78.4 },
+      { label: "Water", value: 100 },
+      { label: "Mercury", value: 357 }
+    ]
+  },
+  {
+    instruction: "Slowest to fastest data transfer standard (Mbps)",
+    category: "Data Transfer Standards by Speed",
+    items: [
+      { label: "Bluetooth 4.0", value: 3 },
+      { label: "USB 2.0", value: 480 },
+      { label: "USB 3.0", value: 5000 },
+      { label: "Thunderbolt 3", value: 40000 },
+      { label: "Thunderbolt 5", value: 80000 }
+    ]
+  },
+  {
+    instruction: "Earliest to latest invention of a musical instrument",
+    category: "Musical Instruments by Invention Date",
+    items: [
+      { label: "Bone Flute", value: -40000 },
+      { label: "Harp", value: -3500 },
+      { label: "Trumpet (natural)", value: -1500 },
+      { label: "Piano", value: 1700 },
+      { label: "Electric Guitar", value: 1931 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest recorded temperature on a planet (°C, surface)",
+    category: "Planets by Surface Temperature",
+    items: [
+      { label: "Neptune", value: -214 },
+      { label: "Uranus", value: -205 },
+      { label: "Mars", value: -65 },
+      { label: "Earth", value: 15 },
+      { label: "Venus", value: 464 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest moon in the solar system (diameter in km)",
+    category: "Moons by Diameter",
+    items: [
+      { label: "Deimos (Mars)", value: 12 },
+      { label: "Phobos (Mars)", value: 22 },
+      { label: "Europa (Jupiter)", value: 3122 },
+      { label: "Titan (Saturn)", value: 5150 },
+      { label: "Ganymede (Jupiter)", value: 5268 }
+    ]
+  },
+  {
+    instruction: "Least to most caffeine per serving (mg)",
+    category: "Beverages by Caffeine Content",
+    items: [
+      { label: "Decaf Coffee (8 oz)", value: 5 },
+      { label: "Green Tea (8 oz)", value: 30 },
+      { label: "Coca-Cola (12 oz)", value: 34 },
+      { label: "Red Bull (8.4 oz)", value: 80 },
+      { label: "Death Wish Coffee (8 oz)", value: 472 }
+    ]
+  },
+  {
+    instruction: "Shortest to tallest statue (height in meters, including pedestal)",
+    category: "Statues by Total Height",
+    items: [
+      { label: "Little Mermaid (Copenhagen)", value: 1.25 },
+      { label: "Christ the Redeemer (Rio)", value: 38 },
+      { label: "Statue of Liberty (NYC)", value: 93 },
+      { label: "Spring Temple Buddha (China)", value: 153 },
+      { label: "Statue of Unity (India)", value: 240 }
+    ]
+  },
+  {
+    instruction: "Fewest to most keys on a keyboard instrument",
+    category: "Keyboard Instruments by Number of Keys",
+    items: [
+      { label: "Melodica", value: 32 },
+      { label: "Harpsichord (single manual)", value: 61 },
+      { label: "Standard Synthesizer", value: 61 },
+      { label: "Standard Piano", value: 88 },
+      { label: "Imperial Bösendorfer Piano", value: 97 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual tea consumption per capita (kg)",
+    category: "Countries by Tea Consumption Per Capita",
+    items: [
+      { label: "Japan", value: 1.0 },
+      { label: "United Kingdom", value: 1.5 },
+      { label: "Morocco", value: 1.9 },
+      { label: "Ireland", value: 2.1 },
+      { label: "Turkey", value: 3.5 }
+    ]
+  },
+  {
+    instruction: "Fewest to most known moons for planets",
+    category: "Planets by Number of Known Moons",
+    items: [
+      { label: "Mercury", value: 0 },
+      { label: "Earth", value: 1 },
+      { label: "Mars", value: 2 },
+      { label: "Neptune", value: 16 },
+      { label: "Saturn", value: 146 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest tensile strength (MPa) for common materials",
+    category: "Materials by Tensile Strength",
+    items: [
+      { label: "Rubber", value: 15 },
+      { label: "Copper", value: 220 },
+      { label: "Structural Steel", value: 400 },
+      { label: "Titanium Alloy", value: 1100 },
+      { label: "Carbon Fiber (CFRP)", value: 3500 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest national park in the USA (sq km)",
+    category: "US National Parks by Area",
+    items: [
+      { label: "Hot Springs (Arkansas)", value: 22 },
+      { label: "Zion (Utah)", value: 596 },
+      { label: "Yellowstone (Wyoming)", value: 8983 },
+      { label: "Denali (Alaska)", value: 24585 },
+      { label: "Wrangell–St. Elias (Alaska)", value: 53321 }
+    ]
+  },
+  {
+    instruction: "Shallowest to deepest ocean trench (meters)",
+    category: "Ocean Trenches by Depth",
+    items: [
+      { label: "Puerto Rico Trench", value: 8376 },
+      { label: "Philippine Trench", value: 10540 },
+      { label: "Kuril–Kamchatka Trench", value: 10542 },
+      { label: "Tonga Trench", value: 10882 },
+      { label: "Mariana Trench", value: 10994 }
+    ]
+  },
+  {
+    instruction: "Least to most expensive spice per kg (USD)",
+    category: "Spices by Price Per Kg",
+    items: [
+      { label: "Black Pepper", value: 15 },
+      { label: "Cinnamon", value: 25 },
+      { label: "Cardamom", value: 60 },
+      { label: "Vanilla", value: 600 },
+      { label: "Saffron", value: 5000 }
+    ]
+  },
+  {
+    instruction: "Fewest to most bones in the human body by region",
+    category: "Human Body Regions by Bone Count",
+    items: [
+      { label: "Skull (cranium)", value: 8 },
+      { label: "Spine (vertebrae)", value: 26 },
+      { label: "Rib Cage (ribs + sternum)", value: 25 },
+      { label: "Arms and Hands (both)", value: 60 },
+      { label: "Legs and Feet (both)", value: 60 }
+    ]
+  },
+  {
+    instruction: "Slowest to fastest wind speed by weather classification (km/h)",
+    category: "Weather Classifications by Wind Speed",
+    items: [
+      { label: "Calm (Beaufort 0)", value: 1 },
+      { label: "Moderate Breeze (Beaufort 4)", value: 28 },
+      { label: "Strong Gale (Beaufort 9)", value: 85 },
+      { label: "Category 1 Hurricane", value: 120 },
+      { label: "Category 5 Hurricane", value: 252 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest pH of common substances",
+    category: "Common Substances by pH",
+    items: [
+      { label: "Battery Acid", value: 0.5 },
+      { label: "Lemon Juice", value: 2.0 },
+      { label: "Coffee", value: 5.0 },
+      { label: "Pure Water", value: 7.0 },
+      { label: "Bleach", value: 12.5 }
+    ]
+  },
+  {
+    instruction: "Shortest to longest coastline by country (thousand km)",
+    category: "Countries by Coastline Length",
+    items: [
+      { label: "South Africa", value: 2.8 },
+      { label: "Brazil", value: 7.5 },
+      { label: "Australia", value: 25.8 },
+      { label: "Indonesia", value: 54.7 },
+      { label: "Canada", value: 202.1 }
+    ]
+  },
+  {
+    instruction: "Fewest to most chess grandmasters by country",
+    category: "Countries by Number of Chess Grandmasters",
+    items: [
+      { label: "China", value: 57 },
+      { label: "India", value: 83 },
+      { label: "Ukraine", value: 95 },
+      { label: "United States", value: 104 },
+      { label: "Russia", value: 256 }
+    ]
+  },
+  {
+    instruction: "Shortest to longest average commute time in cities (minutes one-way)",
+    category: "Cities by Average Commute Time",
+    items: [
+      { label: "Copenhagen", value: 21 },
+      { label: "Berlin", value: 29 },
+      { label: "New York City", value: 37 },
+      { label: "Mumbai", value: 47 },
+      { label: "Istanbul", value: 53 }
+    ]
+  },
+  {
+    instruction: "Least to most expensive city to live in (cost of living index)",
+    category: "Cities by Cost of Living Index",
+    items: [
+      { label: "Mexico City", value: 35 },
+      { label: "Bangkok", value: 44 },
+      { label: "Berlin", value: 70 },
+      { label: "New York City", value: 100 },
+      { label: "Zurich", value: 131 }
+    ]
+  },
+  {
+    instruction: "Fewest to most roller coasters at a single theme park",
+    category: "Theme Parks by Number of Roller Coasters",
+    items: [
+      { label: "Universal Studios Hollywood", value: 4 },
+      { label: "Walt Disney World Magic Kingdom", value: 6 },
+      { label: "Busch Gardens Tampa Bay", value: 10 },
+      { label: "Cedar Point (Ohio)", value: 16 },
+      { label: "Six Flags Magic Mountain", value: 20 }
+    ]
+  },
+  {
+    instruction: "Oldest to newest major world religion (founding date)",
+    category: "World Religions by Founding Date",
+    items: [
+      { label: "Hinduism", value: -1500 },
+      { label: "Judaism", value: -1200 },
+      { label: "Buddhism", value: -500 },
+      { label: "Christianity", value: 30 },
+      { label: "Islam", value: 610 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest average snowfall for cities (cm per year)",
+    category: "Cities by Average Annual Snowfall",
+    items: [
+      { label: "London (UK)", value: 5 },
+      { label: "New York City", value: 72 },
+      { label: "Moscow (Russia)", value: 152 },
+      { label: "Sapporo (Japan)", value: 485 },
+      { label: "Aomori (Japan)", value: 792 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest population density (people per sq km)",
+    category: "Countries by Population Density",
+    items: [
+      { label: "Mongolia", value: 2 },
+      { label: "Australia", value: 3 },
+      { label: "Brazil", value: 25 },
+      { label: "India", value: 464 },
+      { label: "Monaco", value: 26150 }
+    ]
+  },
+  {
+    instruction: "Fewest to most daily calories burned by activity per hour",
+    category: "Physical Activities by Calories Per Hour",
+    items: [
+      { label: "Yoga (Hatha)", value: 200 },
+      { label: "Walking (3.5 mph)", value: 300 },
+      { label: "Cycling (moderate)", value: 500 },
+      { label: "Running (6 mph)", value: 600 },
+      { label: "Swimming (vigorous)", value: 700 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest iron content per 100g (mg)",
+    category: "Foods by Iron Content",
+    items: [
+      { label: "Chicken Breast", value: 0.4 },
+      { label: "Egg", value: 1.8 },
+      { label: "Beef Steak", value: 3.5 },
+      { label: "Spinach (cooked)", value: 3.6 },
+      { label: "Dark Chocolate (70%)", value: 11.9 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest potassium content per 100g (mg)",
+    category: "Foods by Potassium Content",
+    items: [
+      { label: "White Rice (cooked)", value: 35 },
+      { label: "Chicken Breast", value: 256 },
+      { label: "Banana", value: 358 },
+      { label: "Sweet Potato", value: 475 },
+      { label: "White Beans", value: 561 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest omega-3 fatty acid content per 100g (grams)",
+    category: "Foods by Omega-3 Content",
+    items: [
+      { label: "Chicken Breast", value: 0.02 },
+      { label: "Shrimp", value: 0.3 },
+      { label: "Sardines", value: 1.5 },
+      { label: "Salmon", value: 2.3 },
+      { label: "Chia Seeds", value: 17.8 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest sugar content per 100g for common fruits (grams)",
+    category: "Fruits by Sugar Content",
+    items: [
+      { label: "Avocado", value: 0.7 },
+      { label: "Lemon", value: 2.5 },
+      { label: "Strawberry", value: 4.9 },
+      { label: "Apple", value: 10.4 },
+      { label: "Date (dried)", value: 63.4 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career Grand Slam titles (tennis, men)",
+    category: "Male Tennis Players by Grand Slam Titles",
+    items: [
+      { label: "Andy Murray", value: 3 },
+      { label: "Pete Sampras", value: 14 },
+      { label: "Roger Federer", value: 20 },
+      { label: "Rafael Nadal", value: 22 },
+      { label: "Novak Djokovic", value: 24 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career Grand Slam titles (tennis, women)",
+    category: "Female Tennis Players by Grand Slam Titles",
+    items: [
+      { label: "Venus Williams", value: 7 },
+      { label: "Monica Seles", value: 9 },
+      { label: "Billie Jean King", value: 12 },
+      { label: "Serena Williams", value: 23 },
+      { label: "Margaret Court", value: 24 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career goals in soccer (official matches)",
+    category: "Soccer Players by Career Goals",
+    items: [
+      { label: "Diego Maradona", value: 345 },
+      { label: "Ronaldo (R9)", value: 414 },
+      { label: "Lionel Messi", value: 838 },
+      { label: "Cristiano Ronaldo", value: 899 },
+      { label: "Josef Bican", value: 805 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest marathon world record pace per mile (minutes)",
+    category: "Marathon Records by Era (time in minutes)",
+    items: [
+      { label: "1908 Olympic (Johnny Hayes)", value: 165 },
+      { label: "1960s Record (Abebe Bikila)", value: 135 },
+      { label: "1998 Record (Ronaldo da Costa)", value: 126 },
+      { label: "2018 Record (Eliud Kipchoge)", value: 122 },
+      { label: "2023 Record (Kelvin Kiptum)", value: 121 }
+    ]
+  },
+  {
+    instruction: "Earliest to latest discovery of a chemical element",
+    category: "Chemical Elements by Discovery Year",
+    items: [
+      { label: "Carbon (prehistoric)", value: -3000 },
+      { label: "Phosphorus", value: 1669 },
+      { label: "Oxygen", value: 1774 },
+      { label: "Radium", value: 1898 },
+      { label: "Oganesson", value: 2006 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest electrical resistivity (Ω·m at 20°C, log scale)",
+    category: "Materials by Electrical Resistivity",
+    items: [
+      { label: "Silver", value: 1.59e-8 },
+      { label: "Copper", value: 1.68e-8 },
+      { label: "Iron", value: 9.7e-8 },
+      { label: "Silicon (pure)", value: 2300 },
+      { label: "Glass", value: 1e11 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest speed of sound in a material (m/s)",
+    category: "Materials by Speed of Sound",
+    items: [
+      { label: "Air (20°C)", value: 343 },
+      { label: "Water", value: 1480 },
+      { label: "Wood (Oak)", value: 3850 },
+      { label: "Steel", value: 5960 },
+      { label: "Diamond", value: 12000 }
+    ]
+  },
+  {
+    instruction: "Fewest to most number of bones in animals",
+    category: "Animals by Total Bone Count",
+    items: [
+      { label: "Slug", value: 0 },
+      { label: "Frog", value: 159 },
+      { label: "Human", value: 206 },
+      { label: "Horse", value: 205 },
+      { label: "Snake (Python)", value: 600 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest seed (diameter in mm)",
+    category: "Plant Seeds by Size",
+    items: [
+      { label: "Orchid Seed", value: 0.05 },
+      { label: "Poppy Seed", value: 1 },
+      { label: "Sunflower Seed", value: 12 },
+      { label: "Avocado Pit", value: 50 },
+      { label: "Coco de Mer (Seychelles)", value: 300 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual rice production by country (million tonnes)",
+    category: "Countries by Rice Production",
+    items: [
+      { label: "Japan", value: 10 },
+      { label: "Vietnam", value: 42 },
+      { label: "Bangladesh", value: 56 },
+      { label: "India", value: 195 },
+      { label: "China", value: 212 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual wheat production by country (million tonnes)",
+    category: "Countries by Wheat Production",
+    items: [
+      { label: "Australia", value: 30 },
+      { label: "France", value: 36 },
+      { label: "Russia", value: 92 },
+      { label: "India", value: 109 },
+      { label: "China", value: 137 }
+    ]
+  },
+  {
+    instruction: "Shortest to tallest cathedral (height of tallest spire in meters)",
+    category: "Cathedrals by Spire Height",
+    items: [
+      { label: "Notre-Dame de Paris", value: 69 },
+      { label: "St. Patrick's Cathedral (NYC)", value: 101 },
+      { label: "Cologne Cathedral", value: 157 },
+      { label: "Rouen Cathedral", value: 151 },
+      { label: "Ulm Minster", value: 162 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest average depth of an ocean (meters)",
+    category: "Oceans by Average Depth",
+    items: [
+      { label: "Arctic Ocean", value: 1205 },
+      { label: "Indian Ocean", value: 3741 },
+      { label: "Atlantic Ocean", value: 3646 },
+      { label: "Southern Ocean", value: 3270 },
+      { label: "Pacific Ocean", value: 4280 }
+    ]
+  },
+  {
+    instruction: "Fewest to most satellites launched into orbit by country (all-time)",
+    category: "Countries by Satellites Launched",
+    items: [
+      { label: "India", value: 130 },
+      { label: "Japan", value: 210 },
+      { label: "Russia/USSR", value: 3600 },
+      { label: "China", value: 730 },
+      { label: "United States", value: 6000 }
+    ]
+  },
+  {
+    instruction: "Lightest to heaviest element naturally found on Earth (atomic mass)",
+    category: "Naturally Occurring Elements by Atomic Mass",
+    items: [
+      { label: "Hydrogen", value: 1.008 },
+      { label: "Carbon", value: 12.011 },
+      { label: "Iron", value: 55.845 },
+      { label: "Gold", value: 196.97 },
+      { label: "Uranium", value: 238.03 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest volcano by base area (sq km)",
+    category: "Volcanoes by Base Area",
+    items: [
+      { label: "Mount Vesuvius (Italy)", value: 30 },
+      { label: "Mount Fuji (Japan)", value: 100 },
+      { label: "Mount Etna (Sicily)", value: 1190 },
+      { label: "Mauna Loa (Hawaii)", value: 5271 },
+      { label: "Tamu Massif (Pacific Ocean floor)", value: 310000 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest waterfall total drop (meters)",
+    category: "Waterfalls by Total Drop",
+    items: [
+      { label: "Niagara Falls", value: 51 },
+      { label: "Victoria Falls", value: 108 },
+      { label: "Yosemite Falls", value: 739 },
+      { label: "Tugela Falls (South Africa)", value: 948 },
+      { label: "Angel Falls (Venezuela)", value: 979 }
+    ]
+  },
+  {
+    instruction: "Shortest to longest railway line (km)",
+    category: "Railway Lines by Length",
+    items: [
+      { label: "Eurostar (London–Paris)", value: 495 },
+      { label: "Shinkansen Tōkaidō Line (Tokyo–Osaka)", value: 515 },
+      { label: "California Zephyr (Chicago–San Francisco)", value: 3924 },
+      { label: "Trans-Siberian Railway", value: 9289 },
+      { label: "N/A – Trans-Siberian is longest", value: 9289 }
+    ]
+  },
+  {
+    instruction: "Fewest to most annual passenger boardings at an airport (millions)",
+    category: "Airports by Annual Passenger Boardings",
+    items: [
+      { label: "Changi Airport (Singapore)", value: 32 },
+      { label: "London Heathrow", value: 39 },
+      { label: "Los Angeles (LAX)", value: 48 },
+      { label: "Dubai International (DXB)", value: 52 },
+      { label: "Hartsfield-Jackson Atlanta (ATL)", value: 93 }
+    ]
+  },
+  {
+    instruction: "Earliest to latest first manned spaceflight milestone",
+    category: "Manned Spaceflight Milestones by Date",
+    items: [
+      { label: "First human in space (Gagarin)", value: 1961 },
+      { label: "First spacewalk (Leonov)", value: 1965 },
+      { label: "First Moon landing (Apollo 11)", value: 1969 },
+      { label: "First space station (Salyut 1)", value: 1971 },
+      { label: "First Space Shuttle flight", value: 1981 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career victories in Formula 1",
+    category: "F1 Drivers by Career Race Wins",
+    items: [
+      { label: "Ayrton Senna", value: 41 },
+      { label: "Alain Prost", value: 51 },
+      { label: "Sebastian Vettel", value: 53 },
+      { label: "Michael Schumacher", value: 91 },
+      { label: "Lewis Hamilton", value: 103 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest average rent for a 1-bedroom apartment (USD/month)",
+    category: "Cities by Average 1-Bedroom Rent",
+    items: [
+      { label: "Buenos Aires", value: 400 },
+      { label: "Berlin", value: 1000 },
+      { label: "Tokyo", value: 1100 },
+      { label: "London", value: 2200 },
+      { label: "New York City (Manhattan)", value: 3800 }
+    ]
+  },
+  {
+    instruction: "Shortest to longest tunnel (length in km)",
+    category: "Tunnels by Length (km) – Extended",
+    items: [
+      { label: "Lincoln Tunnel (NYC)", value: 2.4 },
+      { label: "Mont Blanc Tunnel (France-Italy)", value: 11.6 },
+      { label: "Lötschberg Base Tunnel (Switzerland)", value: 34.6 },
+      { label: "Channel Tunnel (UK-France)", value: 50.5 },
+      { label: "Gotthard Base Tunnel (Switzerland)", value: 57.1 }
+    ]
+  },
+  {
+    instruction: "Fewest to most total career points in NBA history",
+    category: "NBA Players by Career Points",
+    items: [
+      { label: "Shaquille O'Neal", value: 28596 },
+      { label: "Kobe Bryant", value: 33643 },
+      { label: "Karl Malone", value: 36928 },
+      { label: "Kareem Abdul-Jabbar", value: 38387 },
+      { label: "LeBron James", value: 40474 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career assists in NBA history",
+    category: "NBA Players by Career Assists",
+    items: [
+      { label: "Magic Johnson", value: 10141 },
+      { label: "Steve Nash", value: 10335 },
+      { label: "Mark Jackson", value: 10334 },
+      { label: "Jason Kidd", value: 12091 },
+      { label: "John Stockton", value: 15806 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career rebounds in NBA history",
+    category: "NBA Players by Career Rebounds",
+    items: [
+      { label: "Karl Malone", value: 14968 },
+      { label: "Moses Malone", value: 16212 },
+      { label: "Kareem Abdul-Jabbar", value: 17440 },
+      { label: "Bill Russell", value: 21620 },
+      { label: "Wilt Chamberlain", value: 23924 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest average internet speed by country (Mbps download)",
+    category: "Countries by Average Internet Speed",
+    items: [
+      { label: "India", value: 50 },
+      { label: "Brazil", value: 80 },
+      { label: "United States", value: 120 },
+      { label: "South Korea", value: 200 },
+      { label: "Singapore", value: 250 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest penguin species (height in cm)",
+    category: "Penguin Species by Height",
+    items: [
+      { label: "Little Blue Penguin", value: 33 },
+      { label: "Galápagos Penguin", value: 50 },
+      { label: "African Penguin", value: 60 },
+      { label: "King Penguin", value: 95 },
+      { label: "Emperor Penguin", value: 115 }
+    ]
+  },
+  {
+    instruction: "Lightest to heaviest bear species (average weight in kg)",
+    category: "Bear Species by Average Weight",
+    items: [
+      { label: "Sun Bear", value: 50 },
+      { label: "Giant Panda", value: 100 },
+      { label: "American Black Bear", value: 130 },
+      { label: "Grizzly Bear", value: 340 },
+      { label: "Polar Bear", value: 500 }
+    ]
+  },
+  {
+    instruction: "Shortest to longest snake species (average length in meters)",
+    category: "Snake Species by Average Length",
+    items: [
+      { label: "Barbados Threadsnake", value: 0.1 },
+      { label: "Corn Snake", value: 1.2 },
+      { label: "King Cobra", value: 3.7 },
+      { label: "Burmese Python", value: 5.0 },
+      { label: "Reticulated Python", value: 6.5 }
+    ]
+  },
+  {
+    instruction: "Shortest to longest whale species (average length in meters)",
+    category: "Whale Species by Length",
+    items: [
+      { label: "Dwarf Sperm Whale", value: 2.7 },
+      { label: "Beluga Whale", value: 4.5 },
+      { label: "Humpback Whale", value: 14 },
+      { label: "Sperm Whale", value: 18 },
+      { label: "Blue Whale", value: 30 }
+    ]
+  },
+  {
+    instruction: "Least to most venomous spider (toxicity ranking)",
+    category: "Spiders by Venom Toxicity",
+    items: [
+      { label: "Tarantula", value: 1 },
+      { label: "Wolf Spider", value: 2 },
+      { label: "Brown Recluse", value: 3 },
+      { label: "Black Widow", value: 4 },
+      { label: "Sydney Funnel-web Spider", value: 5 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest eagle species by wingspan (meters)",
+    category: "Eagle Species by Wingspan",
+    items: [
+      { label: "Little Eagle (Australia)", value: 1.1 },
+      { label: "Bald Eagle", value: 2.0 },
+      { label: "Golden Eagle", value: 2.2 },
+      { label: "Martial Eagle", value: 2.6 },
+      { label: "Steller's Sea Eagle", value: 2.5 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest GDP per capita in Asia (USD, nominal)",
+    category: "Asian Countries by GDP Per Capita",
+    items: [
+      { label: "Afghanistan", value: 380 },
+      { label: "India", value: 2500 },
+      { label: "China", value: 12700 },
+      { label: "Japan", value: 34000 },
+      { label: "Singapore", value: 82800 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest latitude of a national capital (degrees, absolute)",
+    category: "National Capitals by Latitude",
+    items: [
+      { label: "Quito (Ecuador)", value: 0.2 },
+      { label: "New Delhi (India)", value: 28.6 },
+      { label: "Washington D.C. (USA)", value: 38.9 },
+      { label: "London (UK)", value: 51.5 },
+      { label: "Reykjavik (Iceland)", value: 64.1 }
+    ]
+  },
+  {
+    instruction: "Oldest to newest programming language",
+    category: "Programming Languages by Year Created",
+    items: [
+      { label: "Fortran", value: 1957 },
+      { label: "C", value: 1972 },
+      { label: "Python", value: 1991 },
+      { label: "Java", value: 1995 },
+      { label: "Rust", value: 2010 }
+    ]
+  },
+  {
+    instruction: "Fewest to most lines of code in the Linux kernel (millions, approximate)",
+    category: "Linux Kernel Versions by Lines of Code",
+    items: [
+      { label: "Linux 1.0 (1994)", value: 0.17 },
+      { label: "Linux 2.0 (1996)", value: 0.78 },
+      { label: "Linux 2.6 (2003)", value: 5.9 },
+      { label: "Linux 4.0 (2015)", value: 19.5 },
+      { label: "Linux 6.0 (2022)", value: 30 }
+    ]
+  },
+  {
+    instruction: "Fewest to most words in the King James Bible by book",
+    category: "Bible Books by Word Count (KJV)",
+    items: [
+      { label: "3 John", value: 299 },
+      { label: "Obadiah", value: 670 },
+      { label: "Revelation", value: 11995 },
+      { label: "Isaiah", value: 37044 },
+      { label: "Psalms", value: 43743 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest global production of a fruit (million tonnes/year)",
+    category: "Fruits by Global Production Volume",
+    items: [
+      { label: "Kiwifruit", value: 4.4 },
+      { label: "Mango", value: 57 },
+      { label: "Apple", value: 86 },
+      { label: "Banana", value: 119 },
+      { label: "Watermelon", value: 100 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest global CO₂ emissions by country (billion tonnes/year)",
+    category: "Countries by Annual CO2 Emissions",
+    items: [
+      { label: "France", value: 0.3 },
+      { label: "Japan", value: 1.08 },
+      { label: "Russia", value: 1.76 },
+      { label: "United States", value: 4.7 },
+      { label: "China", value: 11.4 }
+    ]
+  },
+  {
+    instruction: "Fewest to most active military personnel by country (thousands)",
+    category: "Countries by Active Military Personnel",
+    items: [
+      { label: "Australia", value: 60 },
+      { label: "South Korea", value: 555 },
+      { label: "Russia", value: 900 },
+      { label: "United States", value: 1390 },
+      { label: "China", value: 2035 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest percentage of renewable energy by country",
+    category: "Countries by Renewable Energy Share",
+    items: [
+      { label: "Saudi Arabia", value: 0.4 },
+      { label: "Russia", value: 3 },
+      { label: "United States", value: 21 },
+      { label: "Germany", value: 46 },
+      { label: "Norway", value: 98 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest dam by reservoir volume (cubic km)",
+    category: "Dams by Reservoir Volume",
+    items: [
+      { label: "Three Gorges Dam (China)", value: 39.3 },
+      { label: "Guri Dam (Venezuela)", value: 135 },
+      { label: "Aswan High Dam (Egypt)", value: 132 },
+      { label: "Daniel-Johnson Dam (Canada)", value: 141.8 },
+      { label: "Kariba Dam (Zambia/Zimbabwe)", value: 180 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest average wind speed by city (km/h)",
+    category: "Cities by Average Wind Speed",
+    items: [
+      { label: "Mexico City", value: 7 },
+      { label: "Tokyo", value: 12 },
+      { label: "London", value: 17 },
+      { label: "Chicago", value: 17 },
+      { label: "Wellington (New Zealand)", value: 29 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career home runs in MLB (left-handed batters)",
+    category: "Left-Handed MLB Batters by Career Home Runs",
+    items: [
+      { label: "Ken Griffey Jr.", value: 630 },
+      { label: "Ted Williams", value: 521 },
+      { label: "Babe Ruth", value: 714 },
+      { label: "Jim Thome", value: 612 },
+      { label: "Barry Bonds", value: 762 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest melting point of a food fat/oil (°C)",
+    category: "Fats and Oils by Melting Point",
+    items: [
+      { label: "Olive Oil", value: -6 },
+      { label: "Coconut Oil", value: 24 },
+      { label: "Butter", value: 32 },
+      { label: "Lard", value: 36 },
+      { label: "Cocoa Butter", value: 34 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest viscosity of common liquids (mPa·s at 20°C)",
+    category: "Liquids by Viscosity",
+    items: [
+      { label: "Acetone", value: 0.32 },
+      { label: "Water", value: 1.0 },
+      { label: "Olive Oil", value: 84 },
+      { label: "Glycerin", value: 1412 },
+      { label: "Honey", value: 10000 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career touchdowns in NFL history",
+    category: "NFL Players by Career Touchdowns",
+    items: [
+      { label: "Peyton Manning", value: 539 },
+      { label: "Drew Brees", value: 571 },
+      { label: "Brett Favre", value: 508 },
+      { label: "Tom Brady", value: 649 },
+      { label: "Jerry Rice (receiving TDs)", value: 197 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career strikeouts by an MLB pitcher",
+    category: "MLB Pitchers by Career Strikeouts",
+    items: [
+      { label: "Bob Gibson", value: 3117 },
+      { label: "Roger Clemens", value: 4672 },
+      { label: "Steve Carlton", value: 4136 },
+      { label: "Randy Johnson", value: 4875 },
+      { label: "Nolan Ryan", value: 5714 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest crater diameter on the Moon (km)",
+    category: "Lunar Craters by Diameter",
+    items: [
+      { label: "Tycho", value: 85 },
+      { label: "Copernicus", value: 93 },
+      { label: "Clavius", value: 225 },
+      { label: "Imbrium (basin)", value: 1145 },
+      { label: "South Pole-Aitken Basin", value: 2500 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest global annual production of a metal (million tonnes)",
+    category: "Metals by Annual Global Production",
+    items: [
+      { label: "Gold", value: 0.003 },
+      { label: "Copper", value: 22 },
+      { label: "Zinc", value: 13 },
+      { label: "Aluminum", value: 69 },
+      { label: "Iron/Steel", value: 1900 }
+    ]
+  },
+  {
+    instruction: "Oldest to newest stock exchange (founding year)",
+    category: "Stock Exchanges by Founding Year",
+    items: [
+      { label: "Amsterdam Stock Exchange", value: 1602 },
+      { label: "London Stock Exchange", value: 1801 },
+      { label: "New York Stock Exchange", value: 1817 },
+      { label: "Tokyo Stock Exchange", value: 1878 },
+      { label: "NASDAQ", value: 1971 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest market capitalization of a stock exchange (trillion USD)",
+    category: "Stock Exchanges by Market Cap",
+    items: [
+      { label: "Hong Kong Stock Exchange", value: 4.1 },
+      { label: "London Stock Exchange", value: 3.5 },
+      { label: "Shanghai Stock Exchange", value: 6.5 },
+      { label: "NASDAQ", value: 22.0 },
+      { label: "New York Stock Exchange", value: 27.0 }
+    ]
+  },
+  {
+    instruction: "Fewest to most Academy Awards won by a single film",
+    category: "Films by Most Academy Awards Won",
+    items: [
+      { label: "Forrest Gump", value: 6 },
+      { label: "Schindler's List", value: 7 },
+      { label: "The Last Emperor", value: 9 },
+      { label: "Titanic", value: 11 },
+      { label: "Ben-Hur / Lord of the Rings: RotK", value: 11 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career points in NHL history",
+    category: "NHL Players by Career Points",
+    items: [
+      { label: "Mario Lemieux", value: 1723 },
+      { label: "Steve Yzerman", value: 1755 },
+      { label: "Gordie Howe", value: 1850 },
+      { label: "Jaromír Jágr", value: 1921 },
+      { label: "Wayne Gretzky", value: 2857 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual milk production by country (million tonnes)",
+    category: "Countries by Milk Production",
+    items: [
+      { label: "Australia", value: 9 },
+      { label: "Brazil", value: 35 },
+      { label: "Pakistan", value: 62 },
+      { label: "European Union", value: 155 },
+      { label: "India", value: 221 }
+    ]
+  },
+  {
+    instruction: "Fewest to most bridges in a city",
+    category: "Cities by Number of Bridges",
+    items: [
+      { label: "London", value: 35 },
+      { label: "Paris", value: 37 },
+      { label: "St. Petersburg (Russia)", value: 342 },
+      { label: "Venice (Italy)", value: 391 },
+      { label: "Hamburg (Germany)", value: 2496 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest altitude capital city (meters above sea level)",
+    category: "Capital Cities by Altitude",
+    items: [
+      { label: "Jakarta (Indonesia)", value: 8 },
+      { label: "Madrid (Spain)", value: 667 },
+      { label: "Mexico City (Mexico)", value: 2240 },
+      { label: "Bogotá (Colombia)", value: 2640 },
+      { label: "La Paz (Bolivia)", value: 3640 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest coral reef by area (sq km)",
+    category: "Coral Reefs by Area",
+    items: [
+      { label: "Tubbataha Reef (Philippines)", value: 97 },
+      { label: "Belize Barrier Reef", value: 960 },
+      { label: "Red Sea Coral Reef", value: 3800 },
+      { label: "New Caledonia Barrier Reef", value: 1500 },
+      { label: "Great Barrier Reef (Australia)", value: 348000 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest average elevation of a country (meters)",
+    category: "Countries by Average Elevation",
+    items: [
+      { label: "Maldives", value: 2 },
+      { label: "Netherlands", value: 30 },
+      { label: "United States", value: 760 },
+      { label: "Ethiopia", value: 1330 },
+      { label: "Bhutan", value: 3280 }
+    ]
+  },
+  {
+    instruction: "Fewest to most UNESCO Intangible Cultural Heritage items by country",
+    category: "Countries by Intangible Cultural Heritage Items",
+    items: [
+      { label: "Mexico", value: 15 },
+      { label: "South Korea", value: 22 },
+      { label: "Turkey", value: 25 },
+      { label: "Japan", value: 22 },
+      { label: "China", value: 43 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest coffee production by country (thousand tonnes/year)",
+    category: "Countries by Coffee Production",
+    items: [
+      { label: "Mexico", value: 240 },
+      { label: "Ethiopia", value: 470 },
+      { label: "Colombia", value: 810 },
+      { label: "Vietnam", value: 1700 },
+      { label: "Brazil", value: 3800 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest man-made lake by surface area (sq km)",
+    category: "Man-Made Lakes by Surface Area",
+    items: [
+      { label: "Lake Mead (USA)", value: 640 },
+      { label: "Lake Nasser (Egypt)", value: 5250 },
+      { label: "Lake Kariba (Zambia/Zimbabwe)", value: 5580 },
+      { label: "Lake Volta (Ghana)", value: 8502 },
+      { label: "Lake Volta (Ghana) – largest", value: 8502 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career goals in women's international soccer",
+    category: "Women's Soccer Players by International Goals",
+    items: [
+      { label: "Mia Hamm", value: 158 },
+      { label: "Marta (Brazil)", value: 120 },
+      { label: "Abby Wambach", value: 184 },
+      { label: "Sam Kerr (Australia)", value: 69 },
+      { label: "Christine Sinclair (Canada)", value: 190 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest tidal range at famous locations (meters)",
+    category: "Locations by Tidal Range",
+    items: [
+      { label: "Mediterranean Sea (average)", value: 0.3 },
+      { label: "Hawaii", value: 0.6 },
+      { label: "San Francisco Bay", value: 1.8 },
+      { label: "Bristol Channel (UK)", value: 12 },
+      { label: "Bay of Fundy (Canada)", value: 16 }
+    ]
+  },
+  {
+    instruction: "Shortest to longest canal (km)",
+    category: "Canals by Length",
+    items: [
+      { label: "Corinth Canal (Greece)", value: 6.4 },
+      { label: "Suez Canal (Egypt)", value: 193 },
+      { label: "Panama Canal", value: 82 },
+      { label: "Erie Canal (USA)", value: 584 },
+      { label: "Grand Canal (China)", value: 1776 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest global annual fish catch by country (million tonnes)",
+    category: "Countries by Annual Fish Catch",
+    items: [
+      { label: "Japan", value: 3.2 },
+      { label: "United States", value: 4.8 },
+      { label: "Russia", value: 5.0 },
+      { label: "Indonesia", value: 7.7 },
+      { label: "China", value: 15 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career wins on PGA Tour (golf)",
+    category: "Golfers by PGA Tour Wins",
+    items: [
+      { label: "Phil Mickelson", value: 45 },
+      { label: "Arnold Palmer", value: 62 },
+      { label: "Jack Nicklaus", value: 73 },
+      { label: "Tiger Woods", value: 82 },
+      { label: "Sam Snead", value: 82 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual banana production by country (million tonnes)",
+    category: "Countries by Banana Production",
+    items: [
+      { label: "Colombia", value: 4.0 },
+      { label: "Ecuador", value: 6.5 },
+      { label: "Philippines", value: 9.0 },
+      { label: "China", value: 12 },
+      { label: "India", value: 31 }
+    ]
+  },
+  {
+    instruction: "Shortest to longest average lifespan for dog size categories (years)",
+    category: "Dog Size Categories by Lifespan",
+    items: [
+      { label: "Giant breeds (over 100 lbs)", value: 7 },
+      { label: "Large breeds (50-100 lbs)", value: 10 },
+      { label: "Medium breeds (25-50 lbs)", value: 12 },
+      { label: "Small breeds (10-25 lbs)", value: 14 },
+      { label: "Toy breeds (under 10 lbs)", value: 16 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual sugar production by country (million tonnes)",
+    category: "Countries by Sugar Production",
+    items: [
+      { label: "Australia", value: 4.5 },
+      { label: "United States", value: 8 },
+      { label: "Thailand", value: 10 },
+      { label: "China", value: 11 },
+      { label: "Brazil", value: 38 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career Olympic medals in swimming",
+    category: "Swimmers by Career Olympic Medals",
+    items: [
+      { label: "Ian Thorpe", value: 5 },
+      { label: "Mark Spitz", value: 9 },
+      { label: "Jenny Thompson", value: 12 },
+      { label: "Ryan Lochte", value: 12 },
+      { label: "Michael Phelps", value: 28 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest specific gravity of gemstones",
+    category: "Gemstones by Specific Gravity",
+    items: [
+      { label: "Amber", value: 1.08 },
+      { label: "Opal", value: 2.1 },
+      { label: "Quartz", value: 2.65 },
+      { label: "Diamond", value: 3.52 },
+      { label: "Zircon", value: 4.7 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest semiconductor fabrication node (nanometers)",
+    category: "Semiconductor Process Nodes by Size",
+    items: [
+      { label: "TSMC 3nm (2022)", value: 3 },
+      { label: "Samsung 5nm (2020)", value: 5 },
+      { label: "Intel 10nm (2019)", value: 10 },
+      { label: "TSMC 28nm (2011)", value: 28 },
+      { label: "Early MOSFET (1970s)", value: 10000 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual egg production by country (billion eggs)",
+    category: "Countries by Egg Production",
+    items: [
+      { label: "Japan", value: 43 },
+      { label: "Mexico", value: 60 },
+      { label: "India", value: 130 },
+      { label: "United States", value: 113 },
+      { label: "China", value: 550 }
+    ]
+  },
+  {
+    instruction: "Lightest to heaviest breed of rabbit (average weight in kg)",
+    category: "Rabbit Breeds by Weight",
+    items: [
+      { label: "Netherland Dwarf", value: 1.1 },
+      { label: "Holland Lop", value: 1.8 },
+      { label: "Rex", value: 4 },
+      { label: "New Zealand White", value: 5 },
+      { label: "Flemish Giant", value: 8 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual soybean production by country (million tonnes)",
+    category: "Countries by Soybean Production",
+    items: [
+      { label: "India", value: 12 },
+      { label: "China", value: 16 },
+      { label: "Argentina", value: 44 },
+      { label: "United States", value: 114 },
+      { label: "Brazil", value: 154 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual natural gas production by country (billion cubic meters)",
+    category: "Countries by Natural Gas Production",
+    items: [
+      { label: "Australia", value: 140 },
+      { label: "China", value: 210 },
+      { label: "Iran", value: 260 },
+      { label: "Russia", value: 700 },
+      { label: "United States", value: 1000 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career wins in women's tennis (WTA era)",
+    category: "Women's Tennis Players by WTA Career Wins",
+    items: [
+      { label: "Venus Williams", value: 815 },
+      { label: "Serena Williams", value: 858 },
+      { label: "Steffi Graf", value: 900 },
+      { label: "Chris Evert", value: 1309 },
+      { label: "Martina Navratilova", value: 1442 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest daily newspaper circulation by country (millions)",
+    category: "Countries by Daily Newspaper Circulation",
+    items: [
+      { label: "United Kingdom", value: 7 },
+      { label: "United States", value: 24 },
+      { label: "China", value: 100 },
+      { label: "Japan", value: 45 },
+      { label: "India", value: 240 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest butterfly wingspan (cm)",
+    category: "Butterfly Species by Wingspan",
+    items: [
+      { label: "Western Pygmy Blue", value: 1.2 },
+      { label: "Monarch Butterfly", value: 10 },
+      { label: "Common Birdwing", value: 16 },
+      { label: "Goliath Birdwing", value: 28 },
+      { label: "Queen Alexandra's Birdwing", value: 31 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest calcium content per 100g (mg)",
+    category: "Foods by Calcium Content",
+    items: [
+      { label: "Chicken Breast", value: 11 },
+      { label: "Broccoli", value: 47 },
+      { label: "Yogurt", value: 110 },
+      { label: "Sardines (canned)", value: 382 },
+      { label: "Parmesan Cheese", value: 1184 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest career batting average in MLB (minimum 3000 at-bats)",
+    category: "MLB Players by Career Batting Average",
+    items: [
+      { label: "Babe Ruth", value: 0.342 },
+      { label: "Ted Williams", value: 0.344 },
+      { label: "Rogers Hornsby", value: 0.358 },
+      { label: "Shoeless Joe Jackson", value: 0.356 },
+      { label: "Ty Cobb", value: 0.366 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career centuries in international cricket",
+    category: "Cricketers by International Centuries",
+    items: [
+      { label: "Brian Lara", value: 34 },
+      { label: "Kumar Sangakkara", value: 63 },
+      { label: "Ricky Ponting", value: 71 },
+      { label: "Virat Kohli", value: 80 },
+      { label: "Sachin Tendulkar", value: 100 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest turtle species by shell length (cm)",
+    category: "Turtle Species by Shell Length",
+    items: [
+      { label: "Speckled Padloper Tortoise", value: 8 },
+      { label: "Box Turtle", value: 18 },
+      { label: "Red-eared Slider", value: 30 },
+      { label: "Aldabra Giant Tortoise", value: 120 },
+      { label: "Leatherback Sea Turtle", value: 200 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest average annual humidity by city (%)",
+    category: "Cities by Average Annual Humidity",
+    items: [
+      { label: "Phoenix (Arizona)", value: 31 },
+      { label: "Cairo (Egypt)", value: 44 },
+      { label: "Los Angeles", value: 57 },
+      { label: "Tokyo", value: 63 },
+      { label: "Singapore", value: 84 }
+    ]
+  },
+  {
+    instruction: "Fewest to most pages in a Harry Potter book",
+    category: "Harry Potter Books by Page Count (US Edition)",
+    items: [
+      { label: "Sorcerer's Stone", value: 309 },
+      { label: "Chamber of Secrets", value: 341 },
+      { label: "Prisoner of Azkaban", value: 435 },
+      { label: "Half-Blood Prince", value: 652 },
+      { label: "Order of the Phoenix", value: 870 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual gold production by country (tonnes)",
+    category: "Countries by Gold Production",
+    items: [
+      { label: "United States", value: 170 },
+      { label: "Canada", value: 200 },
+      { label: "Russia", value: 340 },
+      { label: "Australia", value: 350 },
+      { label: "China", value: 370 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career major championship wins (golf)",
+    category: "Golfers by Major Championship Wins",
+    items: [
+      { label: "Arnold Palmer", value: 7 },
+      { label: "Tom Watson", value: 8 },
+      { label: "Gary Player", value: 9 },
+      { label: "Tiger Woods", value: 15 },
+      { label: "Jack Nicklaus", value: 18 }
+    ]
+  },
+  {
+    instruction: "Shortest to longest Great Wall of China section (km)",
+    category: "Great Wall Sections by Length",
+    items: [
+      { label: "Badaling Section", value: 4 },
+      { label: "Mutianyu Section", value: 5.4 },
+      { label: "Jinshanling Section", value: 10.5 },
+      { label: "Simatai Section", value: 5.4 },
+      { label: "Jiankou Section", value: 20 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual olive consumption per capita (kg)",
+    category: "Countries by Olive Consumption Per Capita",
+    items: [
+      { label: "United States", value: 0.9 },
+      { label: "Italy", value: 3.5 },
+      { label: "Spain", value: 4.0 },
+      { label: "Turkey", value: 4.5 },
+      { label: "Greece", value: 7.5 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest frog species by length (cm)",
+    category: "Frog Species by Body Length",
+    items: [
+      { label: "Paedophryne amauensis (Papua New Guinea)", value: 0.77 },
+      { label: "Poison Dart Frog", value: 2.5 },
+      { label: "American Bullfrog", value: 15 },
+      { label: "African Bullfrog", value: 23 },
+      { label: "Goliath Frog (Cameroon)", value: 32 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual tomato production by country (million tonnes)",
+    category: "Countries by Tomato Production",
+    items: [
+      { label: "Mexico", value: 4.3 },
+      { label: "Egypt", value: 6.7 },
+      { label: "Turkey", value: 13 },
+      { label: "India", value: 21 },
+      { label: "China", value: 65 }
+    ]
+  },
+  {
+    instruction: "Fewest to most UNESCO biosphere reserves by country",
+    category: "Countries by Biosphere Reserves",
+    items: [
+      { label: "Australia", value: 16 },
+      { label: "China", value: 34 },
+      { label: "Russia", value: 48 },
+      { label: "Mexico", value: 42 },
+      { label: "Spain", value: 53 }
+    ]
+  },
+  {
+    instruction: "Slowest to fastest commercial aircraft by cruise speed (km/h)",
+    category: "Commercial Aircraft by Cruise Speed",
+    items: [
+      { label: "ATR 72 (turboprop)", value: 510 },
+      { label: "Embraer E175", value: 870 },
+      { label: "Airbus A320", value: 840 },
+      { label: "Boeing 787 Dreamliner", value: 903 },
+      { label: "Concorde", value: 2180 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest average temperature in January for Northern Hemisphere cities (°C)",
+    category: "Northern Hemisphere Cities by January Temperature",
+    items: [
+      { label: "Yakutsk (Russia)", value: -40 },
+      { label: "Moscow (Russia)", value: -10 },
+      { label: "New York City", value: 0 },
+      { label: "Rome (Italy)", value: 8 },
+      { label: "Dubai (UAE)", value: 19 }
+    ]
+  },
+  {
+    instruction: "Fewest to most episodes of a TV series",
+    category: "TV Series by Episode Count",
+    items: [
+      { label: "Breaking Bad", value: 62 },
+      { label: "Friends", value: 236 },
+      { label: "The Simpsons", value: 760 },
+      { label: "Gunsmoke", value: 635 },
+      { label: "General Hospital", value: 15000 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest taxicab fare per km (USD)",
+    category: "Cities by Taxicab Fare Per Km",
+    items: [
+      { label: "Cairo (Egypt)", value: 0.30 },
+      { label: "Bangkok (Thailand)", value: 0.50 },
+      { label: "New York City", value: 2.50 },
+      { label: "Tokyo (Japan)", value: 3.50 },
+      { label: "Zurich (Switzerland)", value: 4.30 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest number of time zones by country",
+    category: "Countries by Number of Time Zones",
+    items: [
+      { label: "China", value: 1 },
+      { label: "India", value: 1 },
+      { label: "Australia", value: 5 },
+      { label: "Russia", value: 11 },
+      { label: "France (including territories)", value: 12 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career Test match wickets (cricket)",
+    category: "Cricketers by Career Test Wickets",
+    items: [
+      { label: "Dennis Lillee", value: 355 },
+      { label: "Glenn McGrath", value: 563 },
+      { label: "James Anderson", value: 700 },
+      { label: "Shane Warne", value: 708 },
+      { label: "Muttiah Muralitharan", value: 800 }
+    ]
+  },
+  {
+    instruction: "Shortest to longest border between two countries (km)",
+    category: "International Borders by Length",
+    items: [
+      { label: "Vatican City–Italy", value: 3.4 },
+      { label: "Spain–Gibraltar", value: 1.2 },
+      { label: "USA–Mexico", value: 3145 },
+      { label: "USA–Canada", value: 8891 },
+      { label: "Russia–Kazakhstan", value: 7644 }
+    ]
+  },
+  {
+    instruction: "Fewest to most letters in the alphabet of a language",
+    category: "Languages by Alphabet Size",
+    items: [
+      { label: "Hawaiian", value: 13 },
+      { label: "Italian", value: 21 },
+      { label: "English", value: 26 },
+      { label: "Russian (Cyrillic)", value: 33 },
+      { label: "Khmer (Cambodian)", value: 74 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest global steel production by country (million tonnes)",
+    category: "Countries by Steel Production",
+    items: [
+      { label: "Germany", value: 36 },
+      { label: "South Korea", value: 67 },
+      { label: "Japan", value: 87 },
+      { label: "India", value: 125 },
+      { label: "China", value: 1013 }
+    ]
+  },
+  {
+    instruction: "Fewest to most volcanos on a planet/moon in our solar system",
+    category: "Planetary Bodies by Volcanic Activity",
+    items: [
+      { label: "Moon (Earth)", value: 0 },
+      { label: "Mars", value: 5 },
+      { label: "Earth", value: 1350 },
+      { label: "Venus", value: 1600 },
+      { label: "Io (Jupiter's moon)", value: 400 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest average price of a Big Mac by country (USD)",
+    category: "Countries by Big Mac Price",
+    items: [
+      { label: "Egypt", value: 1.90 },
+      { label: "India (Maharaja Mac)", value: 2.50 },
+      { label: "Japan", value: 3.20 },
+      { label: "United States", value: 5.70 },
+      { label: "Switzerland", value: 7.30 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest percentage of forest cover by country",
+    category: "Countries by Forest Cover Percentage",
+    items: [
+      { label: "Egypt", value: 0.1 },
+      { label: "Australia", value: 17 },
+      { label: "United States", value: 34 },
+      { label: "Japan", value: 67 },
+      { label: "Suriname", value: 98 }
+    ]
+  },
+  {
+    instruction: "Fewest to most UNESCO Global Geoparks by country",
+    category: "Countries by UNESCO Global Geoparks",
+    items: [
+      { label: "Brazil", value: 5 },
+      { label: "Japan", value: 10 },
+      { label: "Italy", value: 11 },
+      { label: "Spain", value: 16 },
+      { label: "China", value: 41 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest concentration of salt in bodies of water (g/L)",
+    category: "Bodies of Water by Salinity",
+    items: [
+      { label: "Lake Michigan (fresh)", value: 0.1 },
+      { label: "Baltic Sea", value: 8 },
+      { label: "Atlantic Ocean", value: 35 },
+      { label: "Red Sea", value: 40 },
+      { label: "Dead Sea", value: 340 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career Olympic gold medals (track and field)",
+    category: "Track Athletes by Olympic Gold Medals",
+    items: [
+      { label: "Jesse Owens", value: 4 },
+      { label: "Mo Farah", value: 4 },
+      { label: "Carl Lewis", value: 9 },
+      { label: "Usain Bolt", value: 8 },
+      { label: "Paavo Nurmi", value: 9 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual potato production by country (million tonnes)",
+    category: "Countries by Potato Production",
+    items: [
+      { label: "Bangladesh", value: 10 },
+      { label: "Germany", value: 11 },
+      { label: "Russia", value: 19 },
+      { label: "India", value: 56 },
+      { label: "China", value: 94 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest species of shark by length (meters)",
+    category: "Shark Species by Length",
+    items: [
+      { label: "Dwarf Lanternshark", value: 0.21 },
+      { label: "Bonnethead Shark", value: 1.5 },
+      { label: "Great Hammerhead Shark", value: 6 },
+      { label: "Great White Shark", value: 6.4 },
+      { label: "Whale Shark", value: 12 }
+    ]
+  },
+  {
+    instruction: "Fewest to most annual visitors at a national park (millions)",
+    category: "World National Parks by Annual Visitors",
+    items: [
+      { label: "Torres del Paine (Chile)", value: 0.3 },
+      { label: "Banff (Canada)", value: 4.1 },
+      { label: "Yellowstone (USA)", value: 4.9 },
+      { label: "Peak District (UK)", value: 13 },
+      { label: "Fuji-Hakone-Izu (Japan)", value: 20 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest vitamin A content per 100g (mcg RAE)",
+    category: "Foods by Vitamin A Content",
+    items: [
+      { label: "Apple", value: 3 },
+      { label: "Egg", value: 160 },
+      { label: "Mango", value: 54 },
+      { label: "Carrot", value: 835 },
+      { label: "Beef Liver", value: 9442 }
+    ]
+  },
+  {
+    instruction: "Fewest to most active submarine volcanoes in an ocean",
+    category: "Oceans by Submarine Volcano Count",
+    items: [
+      { label: "Indian Ocean", value: 30 },
+      { label: "Arctic Ocean", value: 10 },
+      { label: "Atlantic Ocean", value: 100 },
+      { label: "Southern Ocean", value: 20 },
+      { label: "Pacific Ocean", value: 300 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest global honey production by country (thousand tonnes)",
+    category: "Countries by Honey Production",
+    items: [
+      { label: "Mexico", value: 55 },
+      { label: "Argentina", value: 75 },
+      { label: "Ukraine", value: 65 },
+      { label: "Turkey", value: 105 },
+      { label: "China", value: 470 }
+    ]
+  },
+  {
+    instruction: "Slowest to fastest bird in level flight (km/h)",
+    category: "Birds by Flight Speed",
+    items: [
+      { label: "American Woodcock", value: 8 },
+      { label: "Hummingbird (forward flight)", value: 48 },
+      { label: "Common Swift", value: 111 },
+      { label: "Frigatebird", value: 153 },
+      { label: "Peregrine Falcon (level)", value: 110 }
+    ]
+  },
+  {
+    instruction: "Fewest to most Michelin 3-star restaurants by country",
+    category: "Countries by Michelin 3-Star Restaurants",
+    items: [
+      { label: "United Kingdom", value: 5 },
+      { label: "United States", value: 14 },
+      { label: "Germany", value: 10 },
+      { label: "Japan", value: 14 },
+      { label: "France", value: 29 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest bat species by wingspan (cm)",
+    category: "Bat Species by Wingspan",
+    items: [
+      { label: "Kitti's Hog-nosed Bat", value: 13 },
+      { label: "Common Pipistrelle", value: 22 },
+      { label: "Common Vampire Bat", value: 35 },
+      { label: "Spectacled Flying Fox", value: 100 },
+      { label: "Large Flying Fox", value: 170 }
+    ]
+  },
+  {
+    instruction: "Fewest to most annual patent applications by country (thousands)",
+    category: "Countries by Patent Applications",
+    items: [
+      { label: "Germany", value: 58 },
+      { label: "South Korea", value: 240 },
+      { label: "Japan", value: 290 },
+      { label: "United States", value: 650 },
+      { label: "China", value: 1600 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest elevation of a ski resort (base elevation in meters)",
+    category: "Ski Resorts by Base Elevation",
+    items: [
+      { label: "Whistler Blackcomb (Canada)", value: 675 },
+      { label: "Chamonix (France)", value: 1035 },
+      { label: "Zermatt (Switzerland)", value: 1620 },
+      { label: "Breckenridge (Colorado)", value: 2926 },
+      { label: "Chacaltaya (Bolivia)", value: 5300 }
+    ]
+  },
+  {
+    instruction: "Fewest to most countries in a continent",
+    category: "Continents by Number of Countries",
+    items: [
+      { label: "Australia/Oceania", value: 14 },
+      { label: "South America", value: 12 },
+      { label: "North America", value: 23 },
+      { label: "Europe", value: 44 },
+      { label: "Africa", value: 54 }
+    ]
+  },
+  {
+    instruction: "Lightest to heaviest parrot species (average weight in grams)",
+    category: "Parrot Species by Weight",
+    items: [
+      { label: "Budgerigar (Budgie)", value: 30 },
+      { label: "Cockatiel", value: 90 },
+      { label: "African Grey Parrot", value: 400 },
+      { label: "Blue-and-yellow Macaw", value: 1100 },
+      { label: "Hyacinth Macaw", value: 1400 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual avocado production by country (million tonnes)",
+    category: "Countries by Avocado Production",
+    items: [
+      { label: "Chile", value: 0.18 },
+      { label: "Kenya", value: 0.32 },
+      { label: "Colombia", value: 0.98 },
+      { label: "Dominican Republic", value: 0.72 },
+      { label: "Mexico", value: 2.4 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest global diamond production by country (million carats)",
+    category: "Countries by Diamond Production",
+    items: [
+      { label: "South Africa", value: 9.7 },
+      { label: "Canada", value: 16.2 },
+      { label: "Angola", value: 8.8 },
+      { label: "Botswana", value: 24.8 },
+      { label: "Russia", value: 41.9 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career Super Bowl rings (NFL players)",
+    category: "NFL Players by Super Bowl Rings",
+    items: [
+      { label: "Joe Montana", value: 4 },
+      { label: "Terry Bradshaw", value: 4 },
+      { label: "Peyton Manning", value: 2 },
+      { label: "Tom Brady", value: 7 },
+      { label: "Charles Haley", value: 5 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest global pineapple production by country (million tonnes)",
+    category: "Countries by Pineapple Production",
+    items: [
+      { label: "Mexico", value: 1.0 },
+      { label: "India", value: 1.7 },
+      { label: "Brazil", value: 2.7 },
+      { label: "Philippines", value: 2.8 },
+      { label: "Costa Rica", value: 3.4 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual rainfall in an African city (mm)",
+    category: "African Cities by Annual Rainfall",
+    items: [
+      { label: "Cairo (Egypt)", value: 25 },
+      { label: "Johannesburg (South Africa)", value: 713 },
+      { label: "Nairobi (Kenya)", value: 900 },
+      { label: "Lagos (Nigeria)", value: 1425 },
+      { label: "Douala (Cameroon)", value: 3600 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career World Cup goals (FIFA men's)",
+    category: "Men's FIFA World Cup Top Scorers",
+    items: [
+      { label: "Pelé", value: 12 },
+      { label: "Gerd Müller", value: 14 },
+      { label: "Just Fontaine", value: 13 },
+      { label: "Ronaldo (R9)", value: 15 },
+      { label: "Miroslav Klose", value: 16 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest caffeine content in a tea type per cup (mg)",
+    category: "Tea Types by Caffeine Content",
+    items: [
+      { label: "Herbal Tea (caffeine-free)", value: 0 },
+      { label: "White Tea", value: 15 },
+      { label: "Green Tea", value: 30 },
+      { label: "Oolong Tea", value: 40 },
+      { label: "Black Tea", value: 55 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest escape velocity for planets (km/s)",
+    category: "Planets by Escape Velocity",
+    items: [
+      { label: "Mars", value: 5.0 },
+      { label: "Earth", value: 11.2 },
+      { label: "Neptune", value: 23.5 },
+      { label: "Saturn", value: 35.5 },
+      { label: "Jupiter", value: 59.5 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual crude oil production by country (million barrels/day)",
+    category: "Countries by Crude Oil Production",
+    items: [
+      { label: "Brazil", value: 3.1 },
+      { label: "Iraq", value: 4.4 },
+      { label: "Saudi Arabia", value: 10.8 },
+      { label: "Russia", value: 10.5 },
+      { label: "United States", value: 12.9 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career century breaks in snooker",
+    category: "Snooker Players by Career Century Breaks",
+    items: [
+      { label: "Steve Davis", value: 365 },
+      { label: "John Higgins", value: 950 },
+      { label: "Judd Trump", value: 1100 },
+      { label: "Ronnie O'Sullivan", value: 1200 },
+      { label: "Stephen Hendry", value: 775 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest global palm oil production by country (million tonnes)",
+    category: "Countries by Palm Oil Production",
+    items: [
+      { label: "Colombia", value: 1.8 },
+      { label: "Thailand", value: 3.0 },
+      { label: "Nigeria", value: 1.4 },
+      { label: "Malaysia", value: 18.5 },
+      { label: "Indonesia", value: 46 }
+    ]
+  },
+  {
+    instruction: "Fewest to most World Series wins (MLB franchises)",
+    category: "MLB Franchises by World Series Wins",
+    items: [
+      { label: "Philadelphia Phillies", value: 2 },
+      { label: "San Francisco Giants", value: 8 },
+      { label: "Boston Red Sox", value: 9 },
+      { label: "St. Louis Cardinals", value: 11 },
+      { label: "New York Yankees", value: 27 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest salary cap for major sports leagues (million USD)",
+    category: "Sports Leagues by Salary Cap (per team)",
+    items: [
+      { label: "MLS (Soccer)", value: 5 },
+      { label: "NHL (Hockey)", value: 83 },
+      { label: "NFL (Football)", value: 224 },
+      { label: "NBA (Basketball)", value: 136 },
+      { label: "MLB (Baseball, luxury tax threshold)", value: 237 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest magnesium content per 100g (mg)",
+    category: "Foods by Magnesium Content",
+    items: [
+      { label: "White Rice (cooked)", value: 12 },
+      { label: "Banana", value: 27 },
+      { label: "Spinach (cooked)", value: 87 },
+      { label: "Almonds", value: 270 },
+      { label: "Pumpkin Seeds", value: 550 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career goals in ice hockey (all leagues)",
+    category: "Ice Hockey Players by Career Goals (All Leagues)",
+    items: [
+      { label: "Mario Lemieux", value: 690 },
+      { label: "Alexander Ovechkin", value: 830 },
+      { label: "Gordie Howe", value: 801 },
+      { label: "Wayne Gretzky", value: 894 },
+      { label: "Jaromír Jágr (all leagues)", value: 810 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest planet by mass (relative to Earth = 1)",
+    category: "Solar System Planets by Mass",
+    items: [
+      { label: "Mercury", value: 0.055 },
+      { label: "Mars", value: 0.107 },
+      { label: "Earth", value: 1 },
+      { label: "Neptune", value: 17.1 },
+      { label: "Jupiter", value: 317.8 }
+    ]
+  },
+  {
+    instruction: "Shortest to longest day on a planet (Earth hours)",
+    category: "Planets by Day Length",
+    items: [
+      { label: "Jupiter", value: 9.9 },
+      { label: "Saturn", value: 10.7 },
+      { label: "Earth", value: 24 },
+      { label: "Mars", value: 24.6 },
+      { label: "Venus", value: 5832 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest zinc content per 100g (mg)",
+    category: "Foods by Zinc Content",
+    items: [
+      { label: "White Rice (cooked)", value: 0.5 },
+      { label: "Chicken Breast", value: 0.9 },
+      { label: "Beef Steak", value: 5.5 },
+      { label: "Pumpkin Seeds", value: 7.8 },
+      { label: "Oysters", value: 78 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual cocoa production by country (thousand tonnes)",
+    category: "Countries by Cocoa Production",
+    items: [
+      { label: "Nigeria", value: 340 },
+      { label: "Cameroon", value: 280 },
+      { label: "Ecuador", value: 340 },
+      { label: "Ghana", value: 700 },
+      { label: "Ivory Coast", value: 2200 }
+    ]
+  },
+  {
+    instruction: "Fewest to most islands in a country",
+    category: "Countries by Total Number of Islands",
+    items: [
+      { label: "Japan", value: 6852 },
+      { label: "Philippines", value: 7641 },
+      { label: "Indonesia", value: 17508 },
+      { label: "Finland", value: 178947 },
+      { label: "Sweden", value: 267570 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career appearances in the English Premier League",
+    category: "Premier League Players by Career Appearances",
+    items: [
+      { label: "Steven Gerrard", value: 504 },
+      { label: "Frank Lampard", value: 609 },
+      { label: "David James", value: 572 },
+      { label: "Ryan Giggs", value: 632 },
+      { label: "Gareth Barry", value: 653 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest species of crocodilian by length (meters)",
+    category: "Crocodilian Species by Length",
+    items: [
+      { label: "Cuvier's Dwarf Caiman", value: 1.5 },
+      { label: "American Alligator", value: 4 },
+      { label: "Nile Crocodile", value: 5 },
+      { label: "American Crocodile", value: 5.5 },
+      { label: "Saltwater Crocodile", value: 6.3 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual cork production by country (thousand tonnes)",
+    category: "Countries by Cork Production",
+    items: [
+      { label: "Tunisia", value: 8 },
+      { label: "Italy", value: 11 },
+      { label: "Spain", value: 30 },
+      { label: "Morocco", value: 12 },
+      { label: "Portugal", value: 100 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest dragonfly species by wingspan (cm)",
+    category: "Dragonfly Species by Wingspan",
+    items: [
+      { label: "Scarlet Dwarf (Nannophya pygmaea)", value: 2 },
+      { label: "Common Darter", value: 5.5 },
+      { label: "Emperor Dragonfly", value: 10.5 },
+      { label: "Giant Petaltail (Australia)", value: 16 },
+      { label: "Megaloprepus caerulatus (damselfly)", value: 19 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest average depth of a sea (meters)",
+    category: "Seas by Average Depth",
+    items: [
+      { label: "Baltic Sea", value: 55 },
+      { label: "North Sea", value: 95 },
+      { label: "Mediterranean Sea", value: 1500 },
+      { label: "Caribbean Sea", value: 2200 },
+      { label: "Philippine Sea", value: 5000 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual peanut production by country (million tonnes)",
+    category: "Countries by Peanut Production",
+    items: [
+      { label: "Myanmar", value: 1.6 },
+      { label: "United States", value: 2.5 },
+      { label: "Nigeria", value: 3.0 },
+      { label: "India", value: 6.7 },
+      { label: "China", value: 17.5 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career goals for a single club in soccer",
+    category: "Soccer Players by Goals for One Club",
+    items: [
+      { label: "Thierry Henry (Arsenal)", value: 228 },
+      { label: "Gerd Müller (Bayern Munich)", value: 564 },
+      { label: "Pelé (Santos)", value: 643 },
+      { label: "Lionel Messi (Barcelona)", value: 672 },
+      { label: "Josef Bican (Slavia Prague)", value: 534 }
+    ]
+  },
+  {
+    instruction: "Shortest to longest play by Shakespeare (word count)",
+    category: "Shakespeare Plays by Word Count",
+    items: [
+      { label: "The Comedy of Errors", value: 14701 },
+      { label: "A Midsummer Night's Dream", value: 16511 },
+      { label: "Romeo and Juliet", value: 24545 },
+      { label: "Othello", value: 26450 },
+      { label: "Hamlet", value: 30557 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career Tour de France stage wins",
+    category: "Cyclists by Tour de France Stage Wins",
+    items: [
+      { label: "Miguel Indurain", value: 12 },
+      { label: "Bernard Hinault", value: 28 },
+      { label: "André Leducq", value: 25 },
+      { label: "Mark Cavendish", value: 35 },
+      { label: "Eddy Merckx", value: 34 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest folate content per 100g (mcg)",
+    category: "Foods by Folate Content",
+    items: [
+      { label: "Apple", value: 3 },
+      { label: "Broccoli", value: 63 },
+      { label: "Asparagus", value: 149 },
+      { label: "Lentils (cooked)", value: 181 },
+      { label: "Chicken Liver", value: 578 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual tea production by country (thousand tonnes)",
+    category: "Countries by Tea Production",
+    items: [
+      { label: "Japan", value: 80 },
+      { label: "Turkey", value: 280 },
+      { label: "Kenya", value: 540 },
+      { label: "India", value: 1390 },
+      { label: "China", value: 3100 }
+    ]
+  },
+  {
+    instruction: "Lightest to heaviest breed of domestic pig (average weight in kg)",
+    category: "Pig Breeds by Average Weight",
+    items: [
+      { label: "Miniature Pig (Kunekune)", value: 70 },
+      { label: "Tamworth", value: 250 },
+      { label: "Berkshire", value: 280 },
+      { label: "Duroc", value: 340 },
+      { label: "Large White (Yorkshire)", value: 360 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest number of official languages by country",
+    category: "Countries by Number of Official Languages",
+    items: [
+      { label: "Japan", value: 1 },
+      { label: "Canada", value: 2 },
+      { label: "Belgium", value: 3 },
+      { label: "Switzerland", value: 4 },
+      { label: "South Africa", value: 11 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual apple production by country (million tonnes)",
+    category: "Countries by Apple Production",
+    items: [
+      { label: "France", value: 1.7 },
+      { label: "Italy", value: 2.2 },
+      { label: "United States", value: 4.6 },
+      { label: "Turkey", value: 4.4 },
+      { label: "China", value: 46 }
+    ]
+  },
+  {
+    instruction: "Shortest to longest opera by typical performance time (minutes)",
+    category: "Operas by Duration",
+    items: [
+      { label: "Cavalleria rusticana (Mascagni)", value: 70 },
+      { label: "La Bohème (Puccini)", value: 110 },
+      { label: "Carmen (Bizet)", value: 150 },
+      { label: "Don Giovanni (Mozart)", value: 175 },
+      { label: "Wagner's Ring Cycle (full)", value: 900 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career holes-in-one on PGA Tour",
+    category: "PGA Tour Players by Career Holes-in-One",
+    items: [
+      { label: "Jack Nicklaus", value: 20 },
+      { label: "Tiger Woods", value: 20 },
+      { label: "Robert Allenby", value: 10 },
+      { label: "Hal Sutton", value: 9 },
+      { label: "Mancil Davis (all-time amateur/pro record)", value: 51 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest number of lakes by country (over 0.01 sq km)",
+    category: "Countries by Number of Lakes",
+    items: [
+      { label: "United States", value: 102500 },
+      { label: "Norway", value: 450000 },
+      { label: "Sweden", value: 97500 },
+      { label: "Finland", value: 187888 },
+      { label: "Canada", value: 879800 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual rubber tire production by country (million units)",
+    category: "Countries by Tire Production",
+    items: [
+      { label: "Germany", value: 60 },
+      { label: "Japan", value: 150 },
+      { label: "India", value: 170 },
+      { label: "United States", value: 200 },
+      { label: "China", value: 820 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest orbital period of planets (Earth years)",
+    category: "Planets by Orbital Period",
+    items: [
+      { label: "Mercury", value: 0.24 },
+      { label: "Venus", value: 0.62 },
+      { label: "Earth", value: 1 },
+      { label: "Jupiter", value: 11.86 },
+      { label: "Neptune", value: 164.8 }
+    ]
+  },
+  {
+    instruction: "Fewest to most venomous marine animals (toxicity ranking)",
+    category: "Marine Animals by Venom Toxicity",
+    items: [
+      { label: "Lionfish", value: 1 },
+      { label: "Stonefish", value: 2 },
+      { label: "Blue-ringed Octopus", value: 3 },
+      { label: "Cone Snail (Conus geographus)", value: 4 },
+      { label: "Box Jellyfish (Chironex fleckeri)", value: 5 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest number of earthquakes per year by country (magnitude 4+)",
+    category: "Countries by Annual Earthquake Frequency",
+    items: [
+      { label: "United Kingdom", value: 1 },
+      { label: "Turkey", value: 40 },
+      { label: "Chile", value: 60 },
+      { label: "Japan", value: 150 },
+      { label: "Indonesia", value: 200 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career grand prix wins (motorcycle, MotoGP/500cc)",
+    category: "Motorcycle Racers by Grand Prix Wins",
+    items: [
+      { label: "Mike Hailwood", value: 76 },
+      { label: "Mick Doohan", value: 54 },
+      { label: "Marc Márquez", value: 85 },
+      { label: "Valentino Rossi", value: 115 },
+      { label: "Giacomo Agostini", value: 122 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual cement production by country (million tonnes)",
+    category: "Countries by Cement Production",
+    items: [
+      { label: "Brazil", value: 55 },
+      { label: "Turkey", value: 55 },
+      { label: "United States", value: 92 },
+      { label: "India", value: 370 },
+      { label: "China", value: 2100 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest jellyfish species by bell diameter (cm)",
+    category: "Jellyfish Species by Bell Diameter",
+    items: [
+      { label: "Irukandji Jellyfish", value: 2 },
+      { label: "Moon Jellyfish", value: 40 },
+      { label: "Sea Nettle", value: 50 },
+      { label: "Portuguese Man o' War (float)", value: 30 },
+      { label: "Lion's Mane Jellyfish", value: 200 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest number of native orchid species by country",
+    category: "Countries by Native Orchid Species",
+    items: [
+      { label: "United Kingdom", value: 56 },
+      { label: "United States", value: 200 },
+      { label: "Brazil", value: 3500 },
+      { label: "Colombia", value: 4270 },
+      { label: "Ecuador", value: 4300 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual electricity consumption per capita (kWh)",
+    category: "Countries by Electricity Consumption Per Capita",
+    items: [
+      { label: "India", value: 1200 },
+      { label: "Brazil", value: 2700 },
+      { label: "United Kingdom", value: 4500 },
+      { label: "United States", value: 12700 },
+      { label: "Iceland", value: 53500 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career goals in Australian Rules Football (VFL/AFL)",
+    category: "AFL Players by Career Goals",
+    items: [
+      { label: "Jason Dunstall", value: 1254 },
+      { label: "Gary Ablett Sr.", value: 1031 },
+      { label: "Doug Wade", value: 1057 },
+      { label: "Gordon Coventry", value: 1299 },
+      { label: "Tony Lockett", value: 1360 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest breed of cattle by weight (average in kg)",
+    category: "Cattle Breeds by Average Weight",
+    items: [
+      { label: "Dexter", value: 350 },
+      { label: "Jersey", value: 450 },
+      { label: "Angus", value: 600 },
+      { label: "Holstein", value: 680 },
+      { label: "Chianina", value: 1200 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest number of botanical gardens by country",
+    category: "Countries by Number of Botanical Gardens",
+    items: [
+      { label: "Australia", value: 100 },
+      { label: "Japan", value: 150 },
+      { label: "Russia", value: 120 },
+      { label: "United States", value: 600 },
+      { label: "China", value: 200 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual tobacco production by country (thousand tonnes)",
+    category: "Countries by Tobacco Production",
+    items: [
+      { label: "United States", value: 180 },
+      { label: "Indonesia", value: 190 },
+      { label: "Brazil", value: 650 },
+      { label: "India", value: 800 },
+      { label: "China", value: 2400 }
+    ]
+  },
+  {
+    instruction: "Fewest to most pages in a Tolkien novel",
+    category: "Tolkien Novels by Page Count",
+    items: [
+      { label: "The Hobbit", value: 310 },
+      { label: "The Fellowship of the Ring", value: 423 },
+      { label: "The Two Towers", value: 352 },
+      { label: "The Return of the King", value: 416 },
+      { label: "The Silmarillion", value: 365 }
+    ]
+  },
+  {
+    instruction: "Lightest to heaviest breed of goat (average weight in kg)",
+    category: "Goat Breeds by Average Weight",
+    items: [
+      { label: "Nigerian Dwarf", value: 30 },
+      { label: "Pygmy Goat", value: 35 },
+      { label: "Nubian", value: 75 },
+      { label: "Saanen", value: 80 },
+      { label: "Boer", value: 110 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual copper production by country (million tonnes)",
+    category: "Countries by Copper Production",
+    items: [
+      { label: "Russia", value: 0.85 },
+      { label: "Australia", value: 0.85 },
+      { label: "Congo (DRC)", value: 2.5 },
+      { label: "Peru", value: 2.4 },
+      { label: "Chile", value: 5.6 }
+    ]
+  },
+  {
+    instruction: "Shortest to tallest species of bamboo (mature height in meters)",
+    category: "Bamboo Species by Height",
+    items: [
+      { label: "Pleioblastus pygmaeus (Pygmy Bamboo)", value: 0.3 },
+      { label: "Fargesia murielae (Umbrella Bamboo)", value: 4 },
+      { label: "Phyllostachys nigra (Black Bamboo)", value: 10 },
+      { label: "Bambusa vulgaris (Common Bamboo)", value: 20 },
+      { label: "Dendrocalamus giganteus (Giant Bamboo)", value: 35 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest number of amphibian species by country",
+    category: "Countries by Amphibian Species Count",
+    items: [
+      { label: "United Kingdom", value: 14 },
+      { label: "United States", value: 311 },
+      { label: "Mexico", value: 376 },
+      { label: "Colombia", value: 803 },
+      { label: "Brazil", value: 1136 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest saltwater fish by weight (kg, typical adult)",
+    category: "Saltwater Fish by Weight",
+    items: [
+      { label: "Clownfish", value: 0.25 },
+      { label: "Atlantic Cod", value: 25 },
+      { label: "Atlantic Bluefin Tuna", value: 250 },
+      { label: "Great White Shark", value: 1100 },
+      { label: "Ocean Sunfish (Mola mola)", value: 1000 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual garlic production by country (million tonnes)",
+    category: "Countries by Garlic Production",
+    items: [
+      { label: "South Korea", value: 0.3 },
+      { label: "Egypt", value: 0.35 },
+      { label: "Spain", value: 0.2 },
+      { label: "India", value: 3.2 },
+      { label: "China", value: 24 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest refractive index of gemstones",
+    category: "Gemstones by Refractive Index",
+    items: [
+      { label: "Fluorite", value: 1.43 },
+      { label: "Quartz", value: 1.54 },
+      { label: "Topaz", value: 1.63 },
+      { label: "Sapphire", value: 1.77 },
+      { label: "Diamond", value: 2.42 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest global annual production of a cereal (million tonnes)",
+    category: "Cereal Grains by Global Production",
+    items: [
+      { label: "Oats", value: 24 },
+      { label: "Barley", value: 150 },
+      { label: "Rice", value: 520 },
+      { label: "Wheat", value: 780 },
+      { label: "Maize (Corn)", value: 1150 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career wickets in ODI cricket",
+    category: "Cricketers by Career ODI Wickets",
+    items: [
+      { label: "Chaminda Vaas", value: 400 },
+      { label: "Brett Lee", value: 380 },
+      { label: "Wasim Akram", value: 502 },
+      { label: "Muttiah Muralitharan", value: 534 },
+      { label: "N/A – Muralitharan holds record", value: 534 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest species of octopus by arm span (cm)",
+    category: "Octopus Species by Arm Span",
+    items: [
+      { label: "Star-sucker Pygmy Octopus", value: 2.5 },
+      { label: "Blue-ringed Octopus", value: 20 },
+      { label: "Common Octopus", value: 90 },
+      { label: "North Pacific Giant Octopus", value: 500 },
+      { label: "Seven-arm Octopus", value: 350 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual cranberry production by country (thousand tonnes)",
+    category: "Countries by Cranberry Production",
+    items: [
+      { label: "Chile", value: 100 },
+      { label: "Azerbaijan", value: 2 },
+      { label: "Belarus", value: 8 },
+      { label: "Canada", value: 175 },
+      { label: "United States", value: 410 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career goals in international field hockey (men)",
+    category: "Men's Field Hockey Players by International Goals",
+    items: [
+      { label: "Jamie Dwyer (Australia)", value: 78 },
+      { label: "Sohail Abbas (Pakistan)", value: 348 },
+      { label: "Teun de Nooijer (Netherlands)", value: 217 },
+      { label: "Florian Fuchs (Germany)", value: 95 },
+      { label: "Paul Litjens (Netherlands)", value: 268 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest speed of a glacier (meters per year)",
+    category: "Glaciers by Speed",
+    items: [
+      { label: "Aletsch Glacier (Switzerland)", value: 100 },
+      { label: "Mendenhall Glacier (Alaska)", value: 600 },
+      { label: "Columbia Glacier (Alaska)", value: 7300 },
+      { label: "Jakobshavn Glacier (Greenland)", value: 12600 },
+      { label: "Pine Island Glacier (Antarctica)", value: 4000 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual lavender production by country (tonnes of essential oil)",
+    category: "Countries by Lavender Essential Oil Production",
+    items: [
+      { label: "Spain", value: 10 },
+      { label: "United Kingdom", value: 15 },
+      { label: "China", value: 200 },
+      { label: "France", value: 100 },
+      { label: "Bulgaria", value: 350 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest number of bird species by country",
+    category: "Countries by Bird Species Count",
+    items: [
+      { label: "United Kingdom", value: 622 },
+      { label: "Australia", value: 898 },
+      { label: "United States", value: 900 },
+      { label: "Peru", value: 1879 },
+      { label: "Colombia", value: 1952 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest deer species by shoulder height (cm)",
+    category: "Deer Species by Shoulder Height",
+    items: [
+      { label: "Southern Pudu", value: 35 },
+      { label: "Muntjac", value: 50 },
+      { label: "White-tailed Deer", value: 100 },
+      { label: "Red Deer", value: 130 },
+      { label: "Moose", value: 200 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual sunflower seed production by country (million tonnes)",
+    category: "Countries by Sunflower Seed Production",
+    items: [
+      { label: "Bulgaria", value: 2.0 },
+      { label: "Argentina", value: 3.5 },
+      { label: "Russia", value: 16.0 },
+      { label: "Ukraine", value: 15.5 },
+      { label: "N/A — Russia leads", value: 16.0 }
+    ]
+  },
+  {
+    instruction: "Shortest to longest river in Europe (km)",
+    category: "European Rivers by Length",
+    items: [
+      { label: "Thames (UK)", value: 346 },
+      { label: "Seine (France)", value: 775 },
+      { label: "Rhine (Germany/Netherlands)", value: 1230 },
+      { label: "Danube (Central/Eastern Europe)", value: 2850 },
+      { label: "Volga (Russia)", value: 3531 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest speed record for a sailboat (knots)",
+    category: "Sailing Speed Records by Vessel Type",
+    items: [
+      { label: "Optimist Dinghy (typical)", value: 5 },
+      { label: "Laser/ILCA Dinghy (typical)", value: 12 },
+      { label: "America's Cup AC75", value: 55 },
+      { label: "Kitesurf Speed Record", value: 55 },
+      { label: "Vestas Sailrocket 2 (world record)", value: 65.45 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career sixes in international cricket",
+    category: "Cricketers by Career International Sixes",
+    items: [
+      { label: "Adam Gilchrist", value: 149 },
+      { label: "MS Dhoni", value: 250 },
+      { label: "Brendon McCullum", value: 200 },
+      { label: "Chris Gayle", value: 553 },
+      { label: "Rohit Sharma", value: 530 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual cotton production by country (million bales)",
+    category: "Countries by Cotton Production",
+    items: [
+      { label: "Australia", value: 5 },
+      { label: "Pakistan", value: 5 },
+      { label: "Brazil", value: 14 },
+      { label: "United States", value: 15 },
+      { label: "India", value: 27 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career Champions League goals (soccer)",
+    category: "Soccer Players by Champions League Goals",
+    items: [
+      { label: "Raúl", value: 71 },
+      { label: "Karim Benzema", value: 90 },
+      { label: "Robert Lewandowski", value: 94 },
+      { label: "Lionel Messi", value: 129 },
+      { label: "Cristiano Ronaldo", value: 140 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest global lithium production by country (thousand tonnes)",
+    category: "Countries by Lithium Production",
+    items: [
+      { label: "Zimbabwe", value: 1.8 },
+      { label: "China", value: 19 },
+      { label: "Argentina", value: 6.2 },
+      { label: "Chile", value: 44 },
+      { label: "Australia", value: 86 }
+    ]
+  },
+  {
+    instruction: "Lightest to heaviest flightless bird (kg)",
+    category: "Flightless Birds by Weight",
+    items: [
+      { label: "Kiwi (North Island Brown)", value: 2.8 },
+      { label: "Galápagos Cormorant", value: 4 },
+      { label: "King Penguin", value: 14 },
+      { label: "Cassowary", value: 60 },
+      { label: "Ostrich", value: 130 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual shrimp production by country (million tonnes)",
+    category: "Countries by Shrimp Production",
+    items: [
+      { label: "Bangladesh", value: 0.2 },
+      { label: "Thailand", value: 0.3 },
+      { label: "Indonesia", value: 0.65 },
+      { label: "Vietnam", value: 0.9 },
+      { label: "China", value: 2.2 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career Test match runs in cricket",
+    category: "Cricketers by Career Test Runs",
+    items: [
+      { label: "Brian Lara", value: 11953 },
+      { label: "Allan Border", value: 11174 },
+      { label: "Steve Waugh", value: 10927 },
+      { label: "Ricky Ponting", value: 13378 },
+      { label: "Sachin Tendulkar", value: 15921 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest density of a planet (g/cm³)",
+    category: "Planets by Density",
+    items: [
+      { label: "Saturn", value: 0.69 },
+      { label: "Jupiter", value: 1.33 },
+      { label: "Uranus", value: 1.27 },
+      { label: "Mars", value: 3.93 },
+      { label: "Earth", value: 5.51 }
+    ]
+  },
+  {
+    instruction: "Shortest to longest highway in the world (km)",
+    category: "Highways by Length",
+    items: [
+      { label: "Autobahn A7 (Germany)", value: 962 },
+      { label: "US Route 20 (USA)", value: 5415 },
+      { label: "Trans-Canada Highway", value: 7821 },
+      { label: "Pan-American Highway", value: 30000 },
+      { label: "Asian Highway 1 (AH1)", value: 20557 }
+    ]
+  },
+  {
+    instruction: "Fewest to most annual meteorite impacts detected (per year, estimate)",
+    category: "Decades by Detected Meteorite Falls",
+    items: [
+      { label: "1800s (per decade avg)", value: 30 },
+      { label: "1900-1950 (per decade avg)", value: 50 },
+      { label: "1950-1980 (per decade avg)", value: 60 },
+      { label: "1980-2010 (per decade avg)", value: 40 },
+      { label: "2010s (bolide detections per decade)", value: 250 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest domestic cat breed by body length (cm, nose to tail tip)",
+    category: "Cat Breeds by Body Length",
+    items: [
+      { label: "Singapura", value: 50 },
+      { label: "Munchkin", value: 55 },
+      { label: "Siamese", value: 60 },
+      { label: "Savannah Cat (F1)", value: 90 },
+      { label: "Maine Coon", value: 100 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest number of annual earthquakes globally by magnitude range",
+    category: "Earthquake Magnitude Ranges by Annual Frequency",
+    items: [
+      { label: "Magnitude 8.0+ (Great)", value: 1 },
+      { label: "Magnitude 7.0-7.9 (Major)", value: 15 },
+      { label: "Magnitude 6.0-6.9 (Strong)", value: 120 },
+      { label: "Magnitude 5.0-5.9 (Moderate)", value: 1300 },
+      { label: "Magnitude 4.0-4.9 (Light)", value: 13000 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career Olympic medals in gymnastics",
+    category: "Gymnasts by Career Olympic Medals",
+    items: [
+      { label: "Nadia Comăneci", value: 5 },
+      { label: "Kohei Uchimura", value: 7 },
+      { label: "Nikolai Andrianov", value: 12 },
+      { label: "Boris Shakhlin", value: 13 },
+      { label: "Larisa Latynina", value: 18 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual cinnamon production by country (thousand tonnes)",
+    category: "Countries by Cinnamon Production",
+    items: [
+      { label: "Madagascar", value: 3 },
+      { label: "Seychelles", value: 0.5 },
+      { label: "Vietnam", value: 40 },
+      { label: "Sri Lanka", value: 22 },
+      { label: "Indonesia", value: 90 }
+    ]
+  },
+  {
+    instruction: "Fewest to most FIFA Women's World Cup titles by country",
+    category: "Countries by FIFA Women's World Cup Titles",
+    items: [
+      { label: "Japan", value: 1 },
+      { label: "Norway", value: 1 },
+      { label: "Germany", value: 2 },
+      { label: "Spain", value: 1 },
+      { label: "United States", value: 4 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual maple syrup production by region (million gallons)",
+    category: "Regions by Maple Syrup Production",
+    items: [
+      { label: "New York (USA)", value: 0.8 },
+      { label: "Vermont (USA)", value: 2.5 },
+      { label: "Ontario (Canada)", value: 1.5 },
+      { label: "New Brunswick (Canada)", value: 0.6 },
+      { label: "Quebec (Canada)", value: 13 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest number of mammal species by country",
+    category: "Countries by Mammal Species Count",
+    items: [
+      { label: "United Kingdom", value: 107 },
+      { label: "Australia", value: 379 },
+      { label: "Mexico", value: 564 },
+      { label: "Indonesia", value: 670 },
+      { label: "Brazil", value: 751 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career MMA wins (mixed martial arts)",
+    category: "MMA Fighters by Career Wins",
+    items: [
+      { label: "Conor McGregor", value: 22 },
+      { label: "Jon Jones", value: 27 },
+      { label: "Georges St-Pierre", value: 26 },
+      { label: "Anderson Silva", value: 34 },
+      { label: "Travis Fulton", value: 255 }
+    ]
+  },
+  {
+    instruction: "Fewest to most subscribers for a YouTube channel (millions)",
+    category: "YouTube Channels by Subscriber Count",
+    items: [
+      { label: "PewDiePie", value: 111 },
+      { label: "Cocomelon", value: 175 },
+      { label: "SET India", value: 170 },
+      { label: "MrBeast", value: 280 },
+      { label: "T-Series", value: 270 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest concentration of CO₂ in a planet's atmosphere (%)",
+    category: "Planets by Atmospheric CO2 Concentration",
+    items: [
+      { label: "Earth", value: 0.04 },
+      { label: "Jupiter (trace)", value: 0.001 },
+      { label: "Saturn (trace)", value: 0.001 },
+      { label: "Mars", value: 95 },
+      { label: "Venus", value: 96 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest domestic dog breed by head circumference (cm)",
+    category: "Dog Breeds by Head Circumference",
+    items: [
+      { label: "Chihuahua", value: 30 },
+      { label: "Jack Russell Terrier", value: 37 },
+      { label: "Labrador Retriever", value: 55 },
+      { label: "Rottweiler", value: 60 },
+      { label: "English Mastiff", value: 76 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest global production of a nut (thousand tonnes/year)",
+    category: "Nuts by Global Production Volume",
+    items: [
+      { label: "Macadamia", value: 240 },
+      { label: "Pistachio", value: 1100 },
+      { label: "Walnut", value: 3800 },
+      { label: "Cashew", value: 3900 },
+      { label: "Almond", value: 3800 }
+    ]
+  },
+  {
+    instruction: "Fewest to most car models sold annually by manufacturer (million vehicles)",
+    category: "Automakers by Annual Vehicle Sales",
+    items: [
+      { label: "Tesla", value: 1.3 },
+      { label: "BMW", value: 2.4 },
+      { label: "Hyundai-Kia", value: 7.3 },
+      { label: "Volkswagen Group", value: 9.2 },
+      { label: "Toyota", value: 10.5 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest number of reptile species by country",
+    category: "Countries by Reptile Species Count",
+    items: [
+      { label: "United Kingdom", value: 12 },
+      { label: "United States", value: 371 },
+      { label: "India", value: 550 },
+      { label: "Mexico", value: 957 },
+      { label: "Australia", value: 1078 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest global annual production of a vegetable oil (million tonnes)",
+    category: "Vegetable Oils by Global Production",
+    items: [
+      { label: "Olive Oil", value: 3.3 },
+      { label: "Coconut Oil", value: 3.6 },
+      { label: "Sunflower Oil", value: 21 },
+      { label: "Soybean Oil", value: 58 },
+      { label: "Palm Oil", value: 76 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career hat tricks in international soccer (men)",
+    category: "Men's Soccer Players by International Hat Tricks",
+    items: [
+      { label: "Neymar (Brazil)", value: 8 },
+      { label: "Robert Lewandowski (Poland)", value: 9 },
+      { label: "Lionel Messi (Argentina)", value: 10 },
+      { label: "Sven Rydell (Sweden)", value: 12 },
+      { label: "Cristiano Ronaldo (Portugal)", value: 10 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual amount of e-waste generated by country (million tonnes)",
+    category: "Countries by E-Waste Generation",
+    items: [
+      { label: "Germany", value: 1.6 },
+      { label: "Japan", value: 2.6 },
+      { label: "India", value: 3.2 },
+      { label: "United States", value: 6.9 },
+      { label: "China", value: 10.1 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual olive harvest by country (million tonnes)",
+    category: "Countries by Olive Harvest Volume",
+    items: [
+      { label: "Tunisia", value: 0.7 },
+      { label: "Morocco", value: 1.4 },
+      { label: "Turkey", value: 1.8 },
+      { label: "Greece", value: 2.2 },
+      { label: "Spain", value: 8.0 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest latitude of a city on the equator or near it (absolute degrees)",
+    category: "Equatorial Cities by Latitude",
+    items: [
+      { label: "Quito (Ecuador)", value: 0.18 },
+      { label: "Kampala (Uganda)", value: 0.35 },
+      { label: "Singapore", value: 1.35 },
+      { label: "Bogotá (Colombia)", value: 4.71 },
+      { label: "Caracas (Venezuela)", value: 10.5 }
+    ]
+  },
+  {
+    instruction: "Shortest to longest gestation period for marine mammals (months)",
+    category: "Marine Mammals by Gestation Period",
+    items: [
+      { label: "Sea Otter", value: 4 },
+      { label: "Harbor Seal", value: 9 },
+      { label: "Bottlenose Dolphin", value: 12 },
+      { label: "Beluga Whale", value: 14.5 },
+      { label: "Sperm Whale", value: 16 }
+    ]
+  },
+  {
+    instruction: "Lightest to heaviest domestic sheep breed (average weight in kg)",
+    category: "Sheep Breeds by Average Weight",
+    items: [
+      { label: "Ouessant (Breton Dwarf)", value: 16 },
+      { label: "Shetland", value: 40 },
+      { label: "Merino", value: 70 },
+      { label: "Dorset", value: 90 },
+      { label: "Suffolk", value: 120 }
+    ]
+  },
+  {
+    instruction: "Fewest to most annual international tourist arrivals by country (millions)",
+    category: "Countries by International Tourist Arrivals",
+    items: [
+      { label: "Japan", value: 32 },
+      { label: "Mexico", value: 45 },
+      { label: "United States", value: 66 },
+      { label: "Spain", value: 85 },
+      { label: "France", value: 90 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest percentage of global internet users by country",
+    category: "Countries by Share of Global Internet Users",
+    items: [
+      { label: "Japan", value: 2.2 },
+      { label: "Brazil", value: 3.3 },
+      { label: "United States", value: 5.6 },
+      { label: "India", value: 14.8 },
+      { label: "China", value: 21.1 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest global annual production of a precious metal (tonnes)",
+    category: "Precious Metals by Annual Production",
+    items: [
+      { label: "Rhodium", value: 30 },
+      { label: "Platinum", value: 190 },
+      { label: "Palladium", value: 210 },
+      { label: "Gold", value: 3300 },
+      { label: "Silver", value: 26000 }
+    ]
+  },
+  {
+    instruction: "Shortest to longest river in Africa (km)",
+    category: "African Rivers by Length",
+    items: [
+      { label: "Orange River (South Africa)", value: 2200 },
+      { label: "Zambezi", value: 2574 },
+      { label: "Niger", value: 4180 },
+      { label: "Congo", value: 4700 },
+      { label: "Nile", value: 6650 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career international rugby test tries",
+    category: "Rugby Players by International Test Tries",
+    items: [
+      { label: "Jonah Lomu (New Zealand)", value: 37 },
+      { label: "Bryan Habana (South Africa)", value: 67 },
+      { label: "Shane Williams (Wales)", value: 58 },
+      { label: "David Campese (Australia)", value: 64 },
+      { label: "Daisuke Ohata (Japan)", value: 69 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual bauxite production by country (million tonnes)",
+    category: "Countries by Bauxite Production",
+    items: [
+      { label: "Jamaica", value: 8 },
+      { label: "Indonesia", value: 21 },
+      { label: "India", value: 26 },
+      { label: "China", value: 90 },
+      { label: "Australia", value: 100 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career home runs in Japanese professional baseball (NPB)",
+    category: "NPB Players by Career Home Runs",
+    items: [
+      { label: "Hiromitsu Ochiai", value: 510 },
+      { label: "Tuffy Rhodes", value: 464 },
+      { label: "Koji Akiyama", value: 437 },
+      { label: "Katsuya Nomura", value: 657 },
+      { label: "Sadaharu Oh", value: 868 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest annual silk production by country (thousand tonnes)",
+    category: "Countries by Silk Production",
+    items: [
+      { label: "Thailand", value: 0.7 },
+      { label: "Vietnam", value: 4 },
+      { label: "Uzbekistan", value: 1.2 },
+      { label: "India", value: 36 },
+      { label: "China", value: 146 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest number of airports by country",
+    category: "Countries by Number of Airports",
+    items: [
+      { label: "United Kingdom", value: 460 },
+      { label: "Australia", value: 480 },
+      { label: "Mexico", value: 1714 },
+      { label: "Brazil", value: 4093 },
+      { label: "United States", value: 13513 }
+    ]
+  },
+  {
+    instruction: "Fewest to most career centuries in one-day international cricket",
+    category: "Cricketers by ODI Centuries",
+    items: [
+      { label: "Brian Lara", value: 19 },
+      { label: "Hashim Amla", value: 27 },
+      { label: "Virat Kohli", value: 50 },
+      { label: "Ricky Ponting", value: 30 },
+      { label: "Sachin Tendulkar", value: 49 }
+    ]
+  },
+  {
+    instruction: "Lowest to highest global annual zinc production by country (thousand tonnes)",
+    category: "Countries by Zinc Production",
+    items: [
+      { label: "Mexico", value: 620 },
+      { label: "India", value: 800 },
+      { label: "Peru", value: 1500 },
+      { label: "Australia", value: 1400 },
+      { label: "China", value: 4200 }
+    ]
+  },
+  {
+    instruction: "Smallest to largest wetland by area (sq km)",
+    category: "Wetlands by Area (Extended)",
+    items: [
+      { label: "Everglades (USA)", value: 6100 },
+      { label: "Okavango Delta (Botswana)", value: 15000 },
+      { label: "Sudd (South Sudan)", value: 30000 },
+      { label: "Pantanal (Brazil)", value: 150000 },
+      { label: "West Siberian Lowland (Russia)", value: 2745000 }
+    ]
   }
 ];
