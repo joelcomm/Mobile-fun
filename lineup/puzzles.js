@@ -157,11 +157,11 @@ const PUZZLES = [
     instruction: "Least to most elements",
     category: "Chemical Compounds by Atoms",
     items: [
-      { label: "H\u2082 (Hydrogen gas)", value: 2 },
-      { label: "H\u2082O (Water)", value: 3 },
-      { label: "CO\u2082 (Carbon dioxide)", value: 3.1 },
-      { label: "C\u2082H\u2086O (Ethanol)", value: 9 },
-      { label: "C\u2086H\u2081\u2082O\u2086 (Glucose)", value: 24 }
+      { label: "H₂ (Hydrogen gas)", value: 2 },
+      { label: "H₂O (Water)", value: 3 },
+      { label: "CO₂ (Carbon dioxide)", value: 3.1 },
+      { label: "C₂H₆O (Ethanol)", value: 9 },
+      { label: "C₆H₁₂O₆ (Glucose)", value: 24 }
     ]
   },
   {
@@ -264,7 +264,7 @@ const PUZZLES = [
     ]
   },
   {
-    instruction: "Lowest to highest boiling point (\u00b0C)",
+    instruction: "Lowest to highest boiling point (°C)",
     category: "Substances by Boiling Point",
     items: [
       { label: "Nitrogen", value: -196 },
@@ -274,7 +274,6 @@ const PUZZLES = [
       { label: "Iron", value: 2862 }
     ]
   },
-  // ---- NEW PUZZLES START HERE ----
   {
     instruction: "Smallest to largest diameter",
     category: "Planets by Diameter (km)",
@@ -529,7 +528,7 @@ const PUZZLES = [
     ]
   },
   {
-    instruction: "Lowest to highest melting point (\u00b0C)",
+    instruction: "Lowest to highest melting point (°C)",
     category: "Metals by Melting Point",
     items: [
       { label: "Mercury", value: -39 },
@@ -613,7 +612,7 @@ const PUZZLES = [
       { label: "Billie Jean (Michael Jackson)", value: 4.9 },
       { label: "Bohemian Rhapsody (Queen)", value: 5.9 },
       { label: "Hotel California (Eagles)", value: 6.5 },
-      { label: "Stairway to Heaven (Led Zeppelin)", value: 8.0 }
+      { label: "Stairway to Heaven (Led Zeppelin)", value: 8 }
     ]
   },
   {
@@ -1426,7 +1425,7 @@ const PUZZLES = [
       { label: "Frozen II", value: 1.45 },
       { label: "The Lion King (2019)", value: 1.66 },
       { label: "Titanic", value: 2.26 },
-      { label: "Avengers: Endgame", value: 2.80 },
+      { label: "Avengers: Endgame", value: 2.8 },
       { label: "Avatar", value: 2.92 }
     ]
   },
@@ -1650,7 +1649,6 @@ const PUZZLES = [
       { label: "Microwave Oven", value: 1945 }
     ]
   },
-  // ---- EXPANDED PUZZLE POOL (151–305) ----
   {
     instruction: "Shortest to longest coastline (km)",
     category: "Countries by Coastline Length",
@@ -1831,11 +1829,11 @@ const PUZZLES = [
     instruction: "Earliest to most recent eruption",
     category: "Hawaiian Volcanoes by Last Major Eruption",
     items: [
-      { label: "Kohala", value: 120000 },
-      { label: "Mauna Kea", value: 4600 },
       { label: "Haleakalā", value: 1600 },
       { label: "Mauna Loa", value: 2022 },
-      { label: "Kilauea", value: 2023 }
+      { label: "Kilauea", value: 2023 },
+      { label: "Mauna Kea", value: 4600 },
+      { label: "Kohala", value: 120000 }
     ]
   },
   {
@@ -1867,8 +1865,8 @@ const PUZZLES = [
       { label: "Blue Whale", value: 0.01 },
       { label: "Elephant", value: 0.1 },
       { label: "Dog", value: 0.6 },
-      { label: "Human", value: 2.0 },
-      { label: "Shrew", value: 3.0 }
+      { label: "Human", value: 2 },
+      { label: "Shrew", value: 3 }
     ]
   },
   {
@@ -1963,11 +1961,11 @@ const PUZZLES = [
     instruction: "Least to most venomous (LD50, lower = more toxic)",
     category: "Spiders by Venom Toxicity",
     items: [
-      { label: "Common House Spider", value: 5000 },
-      { label: "Wolf Spider", value: 1000 },
-      { label: "Black Widow", value: 90 },
+      { label: "Sydney Funnel-Web", value: 10 },
       { label: "Redback Spider", value: 50 },
-      { label: "Sydney Funnel-Web", value: 10 }
+      { label: "Black Widow", value: 90 },
+      { label: "Wolf Spider", value: 1000 },
+      { label: "Common House Spider", value: 5000 }
     ]
   },
   {
@@ -2030,8 +2028,8 @@ const PUZZLES = [
     category: "Rugby Players by Career Points",
     items: [
       { label: "Michael Lynagh", value: 911 },
-      { label: "Neil Jenkins", value: 1090 },
       { label: "Ronan O'Gara", value: 1083 },
+      { label: "Neil Jenkins", value: 1090 },
       { label: "Jonny Wilkinson", value: 1246 },
       { label: "Dan Carter", value: 1598 }
     ]
@@ -2129,10 +2127,10 @@ const PUZZLES = [
     category: "TV Shows by First Season Episode Count",
     items: [
       { label: "Chernobyl", value: 5 },
-      { label: "Stranger Things", value: 8 },
       { label: "The Office (US)", value: 6 },
-      { label: "Friends", value: 24 },
-      { label: "Grey's Anatomy", value: 9 }
+      { label: "Stranger Things", value: 8 },
+      { label: "Grey's Anatomy", value: 9 },
+      { label: "Friends", value: 24 }
     ]
   },
   {
@@ -2150,8 +2148,8 @@ const PUZZLES = [
     instruction: "Least to most career rebounds",
     category: "NBA Players by Career Rebounds",
     items: [
-      { label: "Tim Duncan", value: 15091 },
       { label: "Karl Malone", value: 14968 },
+      { label: "Tim Duncan", value: 15091 },
       { label: "Moses Malone", value: 16212 },
       { label: "Kareem Abdul-Jabbar", value: 17440 },
       { label: "Wilt Chamberlain", value: 23924 }
@@ -2173,9 +2171,9 @@ const PUZZLES = [
     category: "National Parks by Area",
     items: [
       { label: "Hot Springs (Arkansas, USA)", value: 22 },
-      { label: "Kruger (South Africa)", value: 19485 },
       { label: "Yellowstone (USA)", value: 8983 },
       { label: "Serengeti (Tanzania)", value: 14763 },
+      { label: "Kruger (South Africa)", value: 19485 },
       { label: "Northeast Greenland National Park", value: 972000 }
     ]
   },
@@ -2229,8 +2227,8 @@ const PUZZLES = [
     items: [
       { label: "Australia", value: 800 },
       { label: "Brazil", value: 3000 },
-      { label: "United States", value: 102500 },
       { label: "Sweden", value: 100000 },
+      { label: "United States", value: 102500 },
       { label: "Canada", value: 879800 }
     ]
   },
@@ -2436,11 +2434,11 @@ const PUZZLES = [
     instruction: "Fewest to most career doubles (tennis, Grand Slam titles)",
     category: "Tennis Players by Grand Slam Doubles Titles",
     items: [
-      { label: "Venus Williams", value: 14 },
-      { label: "Pam Shriver", value: 21 },
       { label: "John McEnroe", value: 9 },
+      { label: "Venus Williams", value: 14 },
       { label: "Bob Bryan", value: 16 },
-      { label: "Mike Bryan", value: 18 }
+      { label: "Mike Bryan", value: 18 },
+      { label: "Pam Shriver", value: 21 }
     ]
   },
   {
@@ -2502,11 +2500,11 @@ const PUZZLES = [
     instruction: "Fewest to most teeth replaced in a lifetime",
     category: "Animals by Tooth Replacement Rate (lifetime teeth)",
     items: [
-      { label: "Human", value: 52 },
       { label: "Elephant", value: 24 },
+      { label: "Human", value: 52 },
+      { label: "Spinner Dolphin", value: 252 },
       { label: "Crocodile", value: 4000 },
-      { label: "Shark", value: 30000 },
-      { label: "Spinner Dolphin", value: 252 }
+      { label: "Shark", value: 30000 }
     ]
   },
   {
@@ -2525,9 +2523,9 @@ const PUZZLES = [
     category: "NHL Players by Career Goals",
     items: [
       { label: "Mario Lemieux", value: 690 },
-      { label: "Alex Ovechkin", value: 853 },
-      { label: "Gordie Howe", value: 801 },
       { label: "Jaromír Jágr", value: 766 },
+      { label: "Gordie Howe", value: 801 },
+      { label: "Alex Ovechkin", value: 853 },
       { label: "Wayne Gretzky", value: 894 }
     ]
   },
@@ -2613,9 +2611,9 @@ const PUZZLES = [
     category: "MLB Closers by Career Saves",
     items: [
       { label: "Dennis Eckersley", value: 390 },
-      { label: "Trevor Hoffman", value: 601 },
-      { label: "Lee Smith", value: 478 },
       { label: "Francisco Rodriguez", value: 437 },
+      { label: "Lee Smith", value: 478 },
+      { label: "Trevor Hoffman", value: 601 },
       { label: "Mariano Rivera", value: 652 }
     ]
   },
@@ -2625,9 +2623,9 @@ const PUZZLES = [
     items: [
       { label: "Indiana Dunes (USA)", value: 60 },
       { label: "Dune of Pilat (France)", value: 110 },
-      { label: "Cerro Blanco (Peru)", value: 1176 },
+      { label: "Star Dune (Sahara)", value: 450 },
       { label: "Badain Jaran Dunes (China)", value: 500 },
-      { label: "Star Dune (Sahara)", value: 450 }
+      { label: "Cerro Blanco (Peru)", value: 1176 }
     ]
   },
   {
@@ -2747,8 +2745,8 @@ const PUZZLES = [
       { label: "Bobby Fischer", value: 1 },
       { label: "Boris Spassky", value: 1.1 },
       { label: "Viswanathan Anand", value: 5 },
-      { label: "Garry Kasparov", value: 6 },
-      { label: "Emanuel Lasker", value: 5.1 }
+      { label: "Emanuel Lasker", value: 5.1 },
+      { label: "Garry Kasparov", value: 6 }
     ]
   },
   {
@@ -2768,20 +2766,20 @@ const PUZZLES = [
     items: [
       { label: "Haile Gebrselassie", value: 7 },
       { label: "Paula Radcliffe", value: 7.1 },
+      { label: "Clarence DeMar", value: 7.2 },
       { label: "Eliud Kipchoge", value: 15 },
-      { label: "Bill Rodgers", value: 22 },
-      { label: "Clarence DeMar", value: 7.2 }
+      { label: "Bill Rodgers", value: 22 }
     ]
   },
   {
     instruction: "Least to most venomous sea creature (LD50 scale, lower = more toxic)",
     category: "Marine Animals by Venom Toxicity",
     items: [
-      { label: "Lionfish", value: 5000 },
-      { label: "Portuguese Man o' War", value: 1000 },
-      { label: "Stonefish", value: 200 },
+      { label: "Box Jellyfish", value: 5 },
       { label: "Blue-Ringed Octopus", value: 25 },
-      { label: "Box Jellyfish", value: 5 }
+      { label: "Stonefish", value: 200 },
+      { label: "Portuguese Man o' War", value: 1000 },
+      { label: "Lionfish", value: 5000 }
     ]
   },
   {
@@ -2791,8 +2789,8 @@ const PUZZLES = [
       { label: "Deimos (Mars)", value: 0.003 },
       { label: "Phobos (Mars)", value: 0.006 },
       { label: "Europa (Jupiter)", value: 1.31 },
-      { label: "Moon (Earth)", value: 1.62 },
-      { label: "Titan (Saturn)", value: 1.35 }
+      { label: "Titan (Saturn)", value: 1.35 },
+      { label: "Moon (Earth)", value: 1.62 }
     ]
   },
   {
@@ -2890,8 +2888,8 @@ const PUZZLES = [
       { label: "Japan", value: 1 },
       { label: "Canada", value: 2 },
       { label: "Switzerland", value: 4 },
-      { label: "India", value: 22 },
-      { label: "South Africa", value: 11 }
+      { label: "South Africa", value: 11 },
+      { label: "India", value: 22 }
     ]
   },
   {
@@ -2911,8 +2909,8 @@ const PUZZLES = [
     items: [
       { label: "Hoover Dam (USA)", value: 221 },
       { label: "Grand Dixence Dam (Switzerland)", value: 285 },
-      { label: "Jinping-I Dam (China)", value: 305 },
       { label: "Nurek Dam (Tajikistan)", value: 300 },
+      { label: "Jinping-I Dam (China)", value: 305 },
       { label: "Rogun Dam (Tajikistan)", value: 335 }
     ]
   },
@@ -2921,10 +2919,10 @@ const PUZZLES = [
     category: "Rugby Union Players by International Points",
     items: [
       { label: "Jonah Lomu", value: 185 },
-      { label: "Jonny Wilkinson", value: 1246 },
-      { label: "Dan Carter", value: 1598 },
       { label: "Ronan O'Gara", value: 1083 },
-      { label: "Neil Jenkins", value: 1090 }
+      { label: "Neil Jenkins", value: 1090 },
+      { label: "Jonny Wilkinson", value: 1246 },
+      { label: "Dan Carter", value: 1598 }
     ]
   },
   {
@@ -2942,11 +2940,11 @@ const PUZZLES = [
     instruction: "Fewest to most career wins (NASCAR)",
     category: "NASCAR Drivers by Career Wins",
     items: [
+      { label: "Kyle Busch", value: 63 },
       { label: "Dale Earnhardt", value: 76 },
       { label: "Jeff Gordon", value: 93 },
       { label: "David Pearson", value: 105 },
-      { label: "Richard Petty", value: 200 },
-      { label: "Kyle Busch", value: 63 }
+      { label: "Richard Petty", value: 200 }
     ]
   },
   {
@@ -2964,8 +2962,8 @@ const PUZZLES = [
     instruction: "Fewest to most countries in a continent",
     category: "Continents by Number of Countries",
     items: [
-      { label: "Australia/Oceania", value: 14 },
       { label: "South America", value: 12 },
+      { label: "Australia/Oceania", value: 14 },
       { label: "North America", value: 23 },
       { label: "Europe", value: 44 },
       { label: "Africa", value: 54 }
@@ -2999,8 +2997,8 @@ const PUZZLES = [
     items: [
       { label: "David Robinson", value: 2954 },
       { label: "Tim Duncan", value: 3020 },
-      { label: "Dikembe Mutombo", value: 3289 },
       { label: "Kareem Abdul-Jabbar", value: 3189 },
+      { label: "Dikembe Mutombo", value: 3289 },
       { label: "Hakeem Olajuwon", value: 3830 }
     ]
   },
@@ -3009,8 +3007,8 @@ const PUZZLES = [
     category: "Canals by Length",
     items: [
       { label: "Corinth Canal (Greece)", value: 6 },
-      { label: "Suez Canal (Egypt)", value: 193 },
       { label: "Panama Canal", value: 82 },
+      { label: "Suez Canal (Egypt)", value: 193 },
       { label: "Erie Canal (USA)", value: 584 },
       { label: "Grand Canal (China)", value: 1776 }
     ]
@@ -3097,10 +3095,10 @@ const PUZZLES = [
     category: "Cyclists by Tour de France Stage Wins",
     items: [
       { label: "Jacques Anquetil", value: 16 },
-      { label: "Bernard Hinault", value: 28 },
       { label: "André Leducq", value: 25 },
-      { label: "Mark Cavendish", value: 35 },
-      { label: "Eddy Merckx", value: 34 }
+      { label: "Bernard Hinault", value: 28 },
+      { label: "Eddy Merckx", value: 34 },
+      { label: "Mark Cavendish", value: 35 }
     ]
   },
   {
@@ -3162,10 +3160,10 @@ const PUZZLES = [
     instruction: "Fewest to most career sacks (NFL)",
     category: "NFL Players by Career Sacks",
     items: [
-      { label: "Michael Strahan", value: 141 },
-      { label: "Reggie White", value: 198 },
-      { label: "Kevin Greene", value: 160 },
       { label: "T.J. Watt", value: 102 },
+      { label: "Michael Strahan", value: 141 },
+      { label: "Kevin Greene", value: 160 },
+      { label: "Reggie White", value: 198 },
       { label: "Bruce Smith", value: 200 }
     ]
   },
@@ -3198,8 +3196,8 @@ const PUZZLES = [
       { label: "Ramones (Ramones)", value: 2.1 },
       { label: "Nevermind (Nirvana)", value: 3.5 },
       { label: "Abbey Road (Beatles)", value: 3.7 },
-      { label: "The Dark Side of the Moon (Pink Floyd)", value: 5.3 },
-      { label: "OK Computer (Radiohead)", value: 5.0 }
+      { label: "OK Computer (Radiohead)", value: 5 },
+      { label: "The Dark Side of the Moon (Pink Floyd)", value: 5.3 }
     ]
   },
   {
@@ -3240,10 +3238,10 @@ const PUZZLES = [
     category: "MLB Players by World Series MVP Awards",
     items: [
       { label: "Derek Jeter", value: 1 },
+      { label: "Mariano Rivera", value: 1.1 },
       { label: "Sandy Koufax", value: 2 },
       { label: "Bob Gibson", value: 2.1 },
-      { label: "Reggie Jackson", value: 2.2 },
-      { label: "Mariano Rivera", value: 1.1 }
+      { label: "Reggie Jackson", value: 2.2 }
     ]
   },
   {
@@ -3792,8 +3790,8 @@ const PUZZLES = [
       { label: "Intel Pentium 4 (2000)", value: 0.042 },
       { label: "Intel Core i7 (2008)", value: 0.731 },
       { label: "Apple A14 (2020)", value: 11.8 },
-      { label: "Apple M2 Ultra (2023)", value: 134 },
-      { label: "NVIDIA H100 (2022)", value: 80 }
+      { label: "NVIDIA H100 (2022)", value: 80 },
+      { label: "Apple M2 Ultra (2023)", value: 134 }
     ]
   },
   {
@@ -3802,9 +3800,9 @@ const PUZZLES = [
     items: [
       { label: "Twitter/X", value: 0.37 },
       { label: "TikTok", value: 1.2 },
-      { label: "Instagram", value: 2.0 },
+      { label: "Instagram", value: 2 },
       { label: "YouTube", value: 2.5 },
-      { label: "Facebook", value: 3.0 }
+      { label: "Facebook", value: 3 }
     ]
   },
   {
@@ -3814,8 +3812,8 @@ const PUZZLES = [
       { label: "Netflix", value: 34 },
       { label: "Meta", value: 135 },
       { label: "Alphabet (Google)", value: 307 },
-      { label: "Amazon", value: 575 },
-      { label: "Apple", value: 383 }
+      { label: "Apple", value: 383 },
+      { label: "Amazon", value: 575 }
     ]
   },
   {
@@ -3833,7 +3831,7 @@ const PUZZLES = [
     instruction: "Smallest to largest screen size (inches, flagship)",
     category: "Smartphones by Screen Size",
     items: [
-      { label: "iPhone 5 (2012)", value: 4.0 },
+      { label: "iPhone 5 (2012)", value: 4 },
       { label: "iPhone 8 (2017)", value: 4.7 },
       { label: "Galaxy S21 (2021)", value: 6.2 },
       { label: "iPhone 15 Pro Max", value: 6.7 },
@@ -3889,7 +3887,7 @@ const PUZZLES = [
     category: "Materials by Thermal Conductivity",
     items: [
       { label: "Wood", value: 0.12 },
-      { label: "Glass", value: 1.0 },
+      { label: "Glass", value: 1 },
       { label: "Steel", value: 50 },
       { label: "Aluminum", value: 237 },
       { label: "Diamond", value: 2000 }
@@ -3966,10 +3964,10 @@ const PUZZLES = [
     category: "Songs by Billboard Chart Duration",
     items: [
       { label: "Bohemian Rhapsody (Queen)", value: 17 },
+      { label: "Old Town Road (Lil Nas X)", value: 19 },
       { label: "Shape of You (Ed Sheeran)", value: 59 },
       { label: "Radioactive (Imagine Dragons)", value: 87 },
-      { label: "Blinding Lights (The Weeknd)", value: 90 },
-      { label: "Old Town Road (Lil Nas X)", value: 19 }
+      { label: "Blinding Lights (The Weeknd)", value: 90 }
     ]
   },
   {
@@ -4009,9 +4007,9 @@ const PUZZLES = [
     instruction: "Shallowest to deepest ocean trench (m)",
     category: "Ocean Trenches by Depth",
     items: [
+      { label: "Java Trench", value: 7450 },
       { label: "Aleutian Trench", value: 7679 },
       { label: "Puerto Rico Trench", value: 8376 },
-      { label: "Java Trench", value: 7450 },
       { label: "Tonga Trench", value: 10823 },
       { label: "Mariana Trench", value: 10994 }
     ]
@@ -4064,11 +4062,11 @@ const PUZZLES = [
     instruction: "Lowest to highest mountain pass (meters)",
     category: "Mountain Passes by Elevation",
     items: [
+      { label: "Khyber Pass (Pakistan)", value: 1070 },
       { label: "Brenner Pass (Alps)", value: 1370 },
       { label: "Gotthard Pass (Alps)", value: 2106 },
-      { label: "Khyber Pass (Pakistan)", value: 1070 },
-      { label: "Khardung La (India)", value: 5359 },
-      { label: "Tanglang La (India)", value: 5328 }
+      { label: "Tanglang La (India)", value: 5328 },
+      { label: "Khardung La (India)", value: 5359 }
     ]
   },
   {
@@ -4100,8 +4098,8 @@ const PUZZLES = [
       { label: "Falklands War", value: 0.001 },
       { label: "Korean War", value: 2.5 },
       { label: "World War I", value: 17 },
-      { label: "World War II", value: 70 },
-      { label: "Mongol Conquests", value: 40 }
+      { label: "Mongol Conquests", value: 40 },
+      { label: "World War II", value: 70 }
     ]
   },
   {
@@ -4165,7 +4163,7 @@ const PUZZLES = [
     items: [
       { label: "Hummingbird", value: 0.1 },
       { label: "Robin", value: 0.21 },
-      { label: "Eagle", value: 2.0 },
+      { label: "Eagle", value: 2 },
       { label: "Condor", value: 3.2 },
       { label: "Wandering Albatross", value: 3.5 }
     ]
@@ -4219,8 +4217,8 @@ const PUZZLES = [
     category: "Common Substances by pH",
     items: [
       { label: "Battery Acid", value: 0.5 },
-      { label: "Lemon Juice", value: 2.0 },
-      { label: "Coffee", value: 5.0 },
+      { label: "Lemon Juice", value: 2 },
+      { label: "Coffee", value: 5 },
       { label: "Blood", value: 7.4 },
       { label: "Bleach", value: 12.5 }
     ]
@@ -4295,8 +4293,8 @@ const PUZZLES = [
     instruction: "Smallest to largest economy in Africa (GDP, billion USD)",
     category: "African Countries by GDP",
     items: [
-      { label: "Ethiopia", value: 127 },
       { label: "Kenya", value: 113 },
+      { label: "Ethiopia", value: 127 },
       { label: "Algeria", value: 195 },
       { label: "Egypt", value: 387 },
       { label: "Nigeria", value: 477 }
@@ -4308,7 +4306,7 @@ const PUZZLES = [
     items: [
       { label: "India", value: 0.28 },
       { label: "Mexico", value: 1.54 },
-      { label: "Brazil", value: 1.60 },
+      { label: "Brazil", value: 1.6 },
       { label: "United Kingdom", value: 13.07 },
       { label: "Australia", value: 14.68 }
     ]
@@ -4325,7 +4323,7 @@ const PUZZLES = [
     ]
   },
   {
-    instruction: "Lowest to highest average IQ score (national estimate)",
+    instruction: "Lowest to highest glycemic index",
     category: "Foods by Glycemic Index",
     items: [
       { label: "Peanuts", value: 13 },
@@ -4340,8 +4338,8 @@ const PUZZLES = [
     category: "Animal Classes by Number of Species",
     items: [
       { label: "Mammals", value: 6400 },
-      { label: "Reptiles", value: 11700 },
       { label: "Birds", value: 11000 },
+      { label: "Reptiles", value: 11700 },
       { label: "Fish", value: 35000 },
       { label: "Insects", value: 1000000 }
     ]
@@ -4373,7 +4371,7 @@ const PUZZLES = [
     category: "Stars by Mass",
     items: [
       { label: "Proxima Centauri", value: 0.12 },
-      { label: "Sun", value: 1.0 },
+      { label: "Sun", value: 1 },
       { label: "Sirius A", value: 2.06 },
       { label: "Rigel", value: 21 },
       { label: "R136a1", value: 196 }
@@ -4539,8 +4537,8 @@ const PUZZLES = [
     items: [
       { label: "Lincoln Tunnel (NYC)", value: 2.4 },
       { label: "Channel Tunnel (UK–France)", value: 50.5 },
-      { label: "Gotthard Base Tunnel (Switzerland)", value: 57.1 },
       { label: "Seikan Tunnel (Japan)", value: 53.9 },
+      { label: "Gotthard Base Tunnel (Switzerland)", value: 57.1 },
       { label: "Delaware Aqueduct (NYC water)", value: 137 }
     ]
   },
@@ -4549,7 +4547,7 @@ const PUZZLES = [
     category: "Precious Metals by Density",
     items: [
       { label: "Silver", value: 10.5 },
-      { label: "Palladium", value: 12.0 },
+      { label: "Palladium", value: 12 },
       { label: "Rhodium", value: 12.4 },
       { label: "Gold", value: 19.3 },
       { label: "Platinum", value: 21.5 }
@@ -4584,8 +4582,8 @@ const PUZZLES = [
       { label: "Egg", value: 87 },
       { label: "Canned Tuna", value: 236 },
       { label: "Salmon", value: 526 },
-      { label: "Cod Liver Oil", value: 10000 },
-      { label: "Dried Shiitake Mushroom", value: 1660 }
+      { label: "Dried Shiitake Mushroom", value: 1660 },
+      { label: "Cod Liver Oil", value: 10000 }
     ]
   },
   {
@@ -4650,8 +4648,8 @@ const PUZZLES = [
       { label: "Singapore Changi", value: 59 },
       { label: "London Heathrow", value: 79 },
       { label: "Dubai International", value: 87 },
-      { label: "Atlanta Hartsfield-Jackson", value: 104 },
-      { label: "Istanbul Airport", value: 93 }
+      { label: "Istanbul Airport", value: 93 },
+      { label: "Atlanta Hartsfield-Jackson", value: 104 }
     ]
   },
   {
@@ -4670,8 +4668,8 @@ const PUZZLES = [
     category: "Paintings by Auction Price",
     items: [
       { label: "The Scream (Munch)", value: 120 },
-      { label: "Shot Sage Blue Marilyn (Warhol)", value: 195 },
       { label: "Les Femmes d'Alger (Picasso)", value: 179 },
+      { label: "Shot Sage Blue Marilyn (Warhol)", value: 195 },
       { label: "Interchange (de Kooning)", value: 300 },
       { label: "Salvator Mundi (da Vinci)", value: 450 }
     ]
@@ -4692,7 +4690,7 @@ const PUZZLES = [
     category: "Human Bones by Length",
     items: [
       { label: "Stapes (ear)", value: 0.3 },
-      { label: "Distal Phalanx (pinky toe)", value: 1.0 },
+      { label: "Distal Phalanx (pinky toe)", value: 1 },
       { label: "Radius", value: 24 },
       { label: "Humerus", value: 36 },
       { label: "Femur", value: 48 }
@@ -4770,9 +4768,9 @@ const PUZZLES = [
     items: [
       { label: "Zinedine Zidane", value: 156 },
       { label: "Thierry Henry", value: 411 },
+      { label: "Josef Bican", value: 805 },
       { label: "Lionel Messi", value: 838 },
-      { label: "Cristiano Ronaldo", value: 899 },
-      { label: "Josef Bican", value: 805 }
+      { label: "Cristiano Ronaldo", value: 899 }
     ]
   },
   {
@@ -4825,8 +4823,8 @@ const PUZZLES = [
     items: [
       { label: "See You Again (Wiz Khalifa)", value: 5.9 },
       { label: "Shape of You (Ed Sheeran)", value: 6.1 },
-      { label: "Despacito (Luis Fonsi)", value: 8.3 },
       { label: "Johny Johny Yes Papa", value: 6.7 },
+      { label: "Despacito (Luis Fonsi)", value: 8.3 },
       { label: "Baby Shark Dance", value: 14.2 }
     ]
   },
@@ -4835,9 +4833,9 @@ const PUZZLES = [
     category: "Movies by Box Office Gross",
     items: [
       { label: "The Lion King (2019)", value: 1.66 },
-      { label: "Titanic", value: 2.26 },
       { label: "Star Wars: The Force Awakens", value: 2.07 },
-      { label: "Avengers: Endgame", value: 2.80 },
+      { label: "Titanic", value: 2.26 },
+      { label: "Avengers: Endgame", value: 2.8 },
       { label: "Avatar (2009)", value: 2.92 }
     ]
   },
@@ -4868,9 +4866,9 @@ const PUZZLES = [
     category: "Music Albums by Sales",
     items: [
       { label: "Rumours (Fleetwood Mac)", value: 40 },
-      { label: "Back in Black (AC/DC)", value: 50 },
       { label: "The Dark Side of the Moon (Pink Floyd)", value: 45 },
-      { label: "The Bodyguard Soundtrack", value: 45 },
+      { label: "The Bodyguard Soundtrack", value: 45.1 },
+      { label: "Back in Black (AC/DC)", value: 50 },
       { label: "Thriller (Michael Jackson)", value: 70 }
     ]
   },
@@ -4991,7 +4989,7 @@ const PUZZLES = [
       { label: "Moon", value: 0.17 },
       { label: "Mars", value: 0.38 },
       { label: "Venus", value: 0.9 },
-      { label: "Earth", value: 1.0 },
+      { label: "Earth", value: 1 },
       { label: "Jupiter", value: 2.53 }
     ]
   },
@@ -5001,9 +4999,9 @@ const PUZZLES = [
     items: [
       { label: "Super Bowl", value: 0.11 },
       { label: "Champions League Final", value: 0.38 },
-      { label: "Olympics Opening Ceremony", value: 1.0 },
-      { label: "FIFA World Cup Final", value: 1.5 },
-      { label: "Cricket World Cup Final (2023)", value: 1.3 }
+      { label: "Olympics Opening Ceremony", value: 1 },
+      { label: "Cricket World Cup Final (2023)", value: 1.3 },
+      { label: "FIFA World Cup Final", value: 1.5 }
     ]
   },
   {
@@ -5022,8 +5020,8 @@ const PUZZLES = [
     category: "Languages by Alphabet Size",
     items: [
       { label: "Hawaiian", value: 13 },
-      { label: "Arabic", value: 28 },
       { label: "English", value: 26 },
+      { label: "Arabic", value: 28 },
       { label: "Russian (Cyrillic)", value: 33 },
       { label: "Khmer (Cambodian)", value: 74 }
     ]
@@ -5055,10 +5053,10 @@ const PUZZLES = [
     category: "Foods by Melting Point of Main Fat",
     items: [
       { label: "Olive Oil", value: -6 },
-      { label: "Butter", value: 32 },
       { label: "Coconut Oil", value: 24 },
-      { label: "Lard", value: 36 },
-      { label: "Cocoa Butter", value: 34 }
+      { label: "Butter", value: 32 },
+      { label: "Cocoa Butter", value: 34 },
+      { label: "Lard", value: 36 }
     ]
   },
   {
@@ -5122,8 +5120,8 @@ const PUZZLES = [
     items: [
       { label: "Silver", value: 24 },
       { label: "Platinum", value: 950 },
-      { label: "Gold", value: 2000 },
       { label: "Palladium", value: 1100 },
+      { label: "Gold", value: 2000 },
       { label: "Rhodium", value: 4500 }
     ]
   },
@@ -5178,8 +5176,8 @@ const PUZZLES = [
       { label: "Italy", value: 14 },
       { label: "Chile", value: 90 },
       { label: "Japan", value: 111 },
-      { label: "United States", value: 161 },
-      { label: "Indonesia", value: 139 }
+      { label: "Indonesia", value: 139 },
+      { label: "United States", value: 161 }
     ]
   },
   {
@@ -5253,8 +5251,8 @@ const PUZZLES = [
     category: "Energy Conversion by Efficiency",
     items: [
       { label: "Incandescent Light Bulb", value: 5 },
-      { label: "Car Engine (gasoline)", value: 25 },
       { label: "Solar Panel", value: 22 },
+      { label: "Car Engine (gasoline)", value: 25 },
       { label: "Wind Turbine", value: 45 },
       { label: "Hydroelectric Dam", value: 90 }
     ]
@@ -5286,8 +5284,8 @@ const PUZZLES = [
     category: "Domestic Animals by Gestation Period",
     items: [
       { label: "Hamster", value: 16 },
-      { label: "Cat", value: 65 },
       { label: "Dog", value: 63 },
+      { label: "Cat", value: 65 },
       { label: "Cow", value: 283 },
       { label: "Horse", value: 340 }
     ]
@@ -5342,8 +5340,8 @@ const PUZZLES = [
     items: [
       { label: "Cavalleria Rusticana (Mascagni)", value: 1.2 },
       { label: "La Bohème (Puccini)", value: 1.8 },
-      { label: "Carmen (Bizet)", value: 2.7 },
       { label: "Aida (Verdi)", value: 2.5 },
+      { label: "Carmen (Bizet)", value: 2.7 },
       { label: "Der Ring des Nibelungen (Wagner)", value: 15 }
     ]
   },
@@ -5364,9 +5362,9 @@ const PUZZLES = [
     items: [
       { label: "Adult (fully fused)", value: 206 },
       { label: "Teenager (partially fused)", value: 250 },
+      { label: "Newborn", value: 270 },
       { label: "Child (age 5)", value: 280 },
-      { label: "Toddler", value: 300 },
-      { label: "Newborn", value: 270 }
+      { label: "Toddler", value: 300 }
     ]
   },
   {
@@ -5399,7 +5397,7 @@ const PUZZLES = [
       { label: "United States", value: 4.4 },
       { label: "Italy", value: 5.9 },
       { label: "Norway", value: 9.9 },
-      { label: "Finland", value: 12.0 }
+      { label: "Finland", value: 12 }
     ]
   },
   {
@@ -5518,7 +5516,7 @@ const PUZZLES = [
     items: [
       { label: "Lettuce", value: 0.3 },
       { label: "Wheat", value: 1.5 },
-      { label: "Corn", value: 2.0 },
+      { label: "Corn", value: 2 },
       { label: "Oak Tree", value: 5 },
       { label: "Shepherd's Tree (South Africa)", value: 68 }
     ]
@@ -5616,8 +5614,8 @@ const PUZZLES = [
     category: "Board Games by Number of Starting Pieces",
     items: [
       { label: "Checkers", value: 24 },
-      { label: "Chess", value: 32 },
       { label: "Backgammon", value: 30 },
+      { label: "Chess", value: 32 },
       { label: "Shogi (Japanese chess)", value: 40 },
       { label: "Go (typical game uses ~250)", value: 361 }
     ]
@@ -5627,9 +5625,9 @@ const PUZZLES = [
     category: "Board Games by Board Size",
     items: [
       { label: "Tic-Tac-Toe", value: 9 },
+      { label: "Monopoly (spaces around board)", value: 40 },
       { label: "Checkers/Chess", value: 64 },
       { label: "Scrabble", value: 225 },
-      { label: "Monopoly (spaces around board)", value: 40 },
       { label: "Go (19x19)", value: 361 }
     ]
   },
@@ -5638,9 +5636,9 @@ const PUZZLES = [
     category: "Card Games by Deck Size",
     items: [
       { label: "Spanish Baraja (stripped)", value: 40 },
+      { label: "Hanafuda (Japanese)", value: 48 },
       { label: "Standard Poker Deck", value: 52 },
       { label: "Tarot (Major + Minor Arcana)", value: 78 },
-      { label: "Hanafuda (Japanese)", value: 48 },
       { label: "UNO (full deck)", value: 108 }
     ]
   },
@@ -5672,9 +5670,9 @@ const PUZZLES = [
     items: [
       { label: "Apple", value: 0.16 },
       { label: "Microsoft", value: 0.22 },
+      { label: "Indian Railways", value: 1.3 },
       { label: "Amazon", value: 1.54 },
-      { label: "Walmart", value: 2.1 },
-      { label: "Indian Railways", value: 1.3 }
+      { label: "Walmart", value: 2.1 }
     ]
   },
   {
@@ -5749,8 +5747,8 @@ const PUZZLES = [
     items: [
       { label: "Hot Springs (USA)", value: 22 },
       { label: "Yosemite (USA)", value: 3083 },
-      { label: "Serengeti (Tanzania)", value: 14763 },
       { label: "Yellowstone (USA)", value: 8983 },
+      { label: "Serengeti (Tanzania)", value: 14763 },
       { label: "Northeast Greenland", value: 972000 }
     ]
   },
@@ -5759,9 +5757,9 @@ const PUZZLES = [
     category: "Animal Groups by Number of Endangered Species",
     items: [
       { label: "Insects", value: 1200 },
-      { label: "Reptiles", value: 1700 },
-      { label: "Birds", value: 1500 },
       { label: "Mammals", value: 1300 },
+      { label: "Birds", value: 1500 },
+      { label: "Reptiles", value: 1700 },
       { label: "Amphibians", value: 2600 }
     ]
   },
@@ -5915,8 +5913,8 @@ const PUZZLES = [
       { label: "The Guardian (UK)", value: 0.1 },
       { label: "The New York Times (USA)", value: 0.37 },
       { label: "The Times of India", value: 2.5 },
-      { label: "Yomiuri Shimbun (Japan)", value: 6.9 },
-      { label: "People's Daily (China)", value: 3.0 }
+      { label: "People's Daily (China)", value: 3 },
+      { label: "Yomiuri Shimbun (Japan)", value: 6.9 }
     ]
   },
   {
@@ -5926,8 +5924,8 @@ const PUZZLES = [
       { label: "Wendy's", value: 2.1 },
       { label: "Burger King", value: 5.6 },
       { label: "Subway", value: 9.4 },
-      { label: "Starbucks", value: 32.3 },
-      { label: "McDonald's", value: 23.2 }
+      { label: "McDonald's", value: 23.2 },
+      { label: "Starbucks", value: 32.3 }
     ]
   },
   {
@@ -5947,7 +5945,7 @@ const PUZZLES = [
     items: [
       { label: "Cairo", value: 1.95 },
       { label: "New Delhi", value: 2.39 },
-      { label: "Beijing", value: 3.80 },
+      { label: "Beijing", value: 3.8 },
       { label: "New York", value: 5.58 },
       { label: "Zurich", value: 7.73 }
     ]
@@ -5981,8 +5979,8 @@ const PUZZLES = [
       { label: "Strong Breeze (Beaufort 6)", value: 50 },
       { label: "Category 1 Hurricane", value: 120 },
       { label: "Category 5 Hurricane", value: 280 },
-      { label: "Strongest Tornado (F5)", value: 482 },
-      { label: "Mt. Washington Record (1934)", value: 372 }
+      { label: "Mt. Washington Record (1934)", value: 372 },
+      { label: "Strongest Tornado (F5)", value: 482 }
     ]
   },
   {
@@ -6033,8 +6031,8 @@ const PUZZLES = [
     instruction: "Fewest to most countries on a continent",
     category: "Continents by Number of Countries",
     items: [
-      { label: "Australia/Oceania", value: 14 },
       { label: "South America", value: 12 },
+      { label: "Australia/Oceania", value: 14 },
       { label: "North America", value: 23 },
       { label: "Europe", value: 44 },
       { label: "Africa", value: 54 }
@@ -6078,10 +6076,10 @@ const PUZZLES = [
     category: "Classical Composers by Number of Works",
     items: [
       { label: "Ravel", value: 86 },
-      { label: "Beethoven", value: 722 },
-      { label: "Bach", value: 1128 },
       { label: "Mozart", value: 626 },
-      { label: "Schubert", value: 998 }
+      { label: "Beethoven", value: 722 },
+      { label: "Schubert", value: 998 },
+      { label: "Bach", value: 1128 }
     ]
   },
   {
@@ -6099,8 +6097,8 @@ const PUZZLES = [
     instruction: "Shortest to longest wingspan for a plane (meters)",
     category: "Aircraft by Wingspan",
     items: [
-      { label: "Cessna 172", value: 11 },
       { label: "F-16 Fighting Falcon", value: 10 },
+      { label: "Cessna 172", value: 11 },
       { label: "Boeing 737", value: 36 },
       { label: "Boeing 747", value: 64 },
       { label: "Stratolaunch", value: 117 }
@@ -6132,11 +6130,11 @@ const PUZZLES = [
     instruction: "Fewest to most number of plays by Shakespeare",
     category: "Shakespeare's Play Categories by Count",
     items: [
-      { label: "Romances", value: 4 },
       { label: "Problem Plays", value: 3 },
+      { label: "Romances", value: 4 },
       { label: "Tragedies", value: 10 },
-      { label: "Comedies", value: 14 },
-      { label: "Histories", value: 10 }
+      { label: "Histories", value: 10.1 },
+      { label: "Comedies", value: 14 }
     ]
   },
   {
@@ -6177,8 +6175,8 @@ const PUZZLES = [
     category: "Religious Texts by Length (pages, typical edition)",
     items: [
       { label: "Tao Te Ching", value: 81 },
-      { label: "Quran", value: 604 },
       { label: "Torah (Five Books of Moses)", value: 304 },
+      { label: "Quran", value: 604 },
       { label: "Bible (King James)", value: 1189 },
       { label: "Mahabharata", value: 5000 }
     ]
@@ -6198,8 +6196,8 @@ const PUZZLES = [
     instruction: "Lowest to highest Richter scale magnitude of major earthquakes",
     category: "Famous Earthquakes by Magnitude",
     items: [
+      { label: "Haiti 2010", value: 7 },
       { label: "San Francisco 1906", value: 7.9 },
-      { label: "Haiti 2010", value: 7.0 },
       { label: "Sumatra 2004", value: 9.1 },
       { label: "Japan 2011 (Tōhoku)", value: 9.1 },
       { label: "Chile 1960 (Valdivia)", value: 9.5 }
@@ -6223,17 +6221,17 @@ const PUZZLES = [
       { label: "Parvovirus", value: 22 },
       { label: "Influenza", value: 100 },
       { label: "HIV", value: 120 },
-      { label: "Ebola", value: 970 },
-      { label: "Mimivirus", value: 500 }
+      { label: "Mimivirus", value: 500 },
+      { label: "Ebola", value: 970 }
     ]
   },
   {
     instruction: "Fewest to most crewed spaceflights by country",
     category: "Countries by Number of Crewed Spaceflights",
     items: [
-      { label: "China", value: 12 },
       { label: "Japan (via NASA/ESA)", value: 0 },
       { label: "Europe (via ESA/NASA)", value: 0 },
+      { label: "China", value: 12 },
       { label: "Russia/USSR", value: 135 },
       { label: "United States", value: 200 }
     ]
@@ -6243,7 +6241,7 @@ const PUZZLES = [
     category: "Foods by Carbon Footprint",
     items: [
       { label: "Lentils", value: 0.9 },
-      { label: "Tofu", value: 2.0 },
+      { label: "Tofu", value: 2 },
       { label: "Chicken", value: 6.9 },
       { label: "Pork", value: 7.2 },
       { label: "Beef", value: 27 }
@@ -6254,8 +6252,8 @@ const PUZZLES = [
     category: "Olympic Games by Cost",
     items: [
       { label: "Barcelona 1992", value: 9.4 },
-      { label: "London 2012", value: 15 },
       { label: "Rio 2016", value: 13.1 },
+      { label: "London 2012", value: 15 },
       { label: "Tokyo 2020", value: 15.4 },
       { label: "Beijing 2008", value: 40 }
     ]
@@ -6286,10 +6284,10 @@ const PUZZLES = [
     instruction: "Lightest to heaviest Nobel Prize medal (grams)",
     category: "Award Trophies/Medals by Weight",
     items: [
-      { label: "Olympic Gold Medal (2020)", value: 556 },
       { label: "Nobel Prize Medal", value: 185 },
-      { label: "FIFA World Cup Trophy", value: 6175 },
+      { label: "Olympic Gold Medal (2020)", value: 556 },
       { label: "Vince Lombardi Trophy (Super Bowl)", value: 3200 },
+      { label: "FIFA World Cup Trophy", value: 6175 },
       { label: "Stanley Cup (NHL)", value: 15500 }
     ]
   },
@@ -6310,9 +6308,9 @@ const PUZZLES = [
     items: [
       { label: "Japan (standard)", value: 24 },
       { label: "United Kingdom", value: 32 },
-      { label: "United States", value: 52 },
       { label: "India", value: 36 },
-      { label: "South Africa", value: 48 }
+      { label: "South Africa", value: 48 },
+      { label: "United States", value: 52 }
     ]
   },
   {
@@ -6330,10 +6328,10 @@ const PUZZLES = [
     instruction: "Fewest to most floors in famous buildings",
     category: "Buildings by Number of Floors",
     items: [
-      { label: "White House (Washington D.C.)", value: 6 },
       { label: "Taj Mahal", value: 1 },
-      { label: "Empire State Building", value: 102 },
+      { label: "White House (Washington D.C.)", value: 6 },
       { label: "Taipei 101", value: 101 },
+      { label: "Empire State Building", value: 102 },
       { label: "Burj Khalifa", value: 163 }
     ]
   },
@@ -6375,7 +6373,7 @@ const PUZZLES = [
     category: "Celestial Bodies by Escape Velocity",
     items: [
       { label: "Moon", value: 2.4 },
-      { label: "Mars", value: 5.0 },
+      { label: "Mars", value: 5 },
       { label: "Earth", value: 11.2 },
       { label: "Saturn", value: 36.1 },
       { label: "Jupiter", value: 60.2 }
@@ -6444,7 +6442,7 @@ const PUZZLES = [
       { label: "John Lennon's Steinway Piano", value: 2.37 },
       { label: "Hammer Stradivarius (violin)", value: 3.54 },
       { label: "Lady Blunt Stradivarius", value: 15.9 },
-      { label: "Vieuxtemps Guarneri (viola)", value: 16.0 }
+      { label: "Vieuxtemps Guarneri (viola)", value: 16 }
     ]
   },
   {
@@ -6485,10 +6483,10 @@ const PUZZLES = [
     category: "Pop Song Length by Decade",
     items: [
       { label: "1960s", value: 2.5 },
+      { label: "2020s", value: 3.2 },
       { label: "1970s", value: 3.5 },
-      { label: "1980s", value: 4.0 },
-      { label: "1990s", value: 4.2 },
-      { label: "2020s", value: 3.2 }
+      { label: "1980s", value: 4 },
+      { label: "1990s", value: 4.2 }
     ]
   },
   {
@@ -6498,8 +6496,8 @@ const PUZZLES = [
       { label: "Japan", value: 150 },
       { label: "Germany", value: 200 },
       { label: "United Kingdom", value: 280 },
-      { label: "United States", value: 415 },
-      { label: "Australia", value: 361 }
+      { label: "Australia", value: 361 },
+      { label: "United States", value: 415 }
     ]
   },
   {
@@ -6509,8 +6507,8 @@ const PUZZLES = [
       { label: "Brazil", value: 50 },
       { label: "France", value: 150 },
       { label: "United Kingdom", value: 197 },
-      { label: "Japan", value: 3300 },
-      { label: "United States", value: 700 }
+      { label: "United States", value: 700 },
+      { label: "Japan", value: 3300 }
     ]
   },
   {
@@ -6518,8 +6516,8 @@ const PUZZLES = [
     category: "Nuts by Protein Content",
     items: [
       { label: "Macadamia", value: 8 },
-      { label: "Cashew", value: 18 },
       { label: "Walnut", value: 15 },
+      { label: "Cashew", value: 18 },
       { label: "Almond", value: 21 },
       { label: "Peanut", value: 26 }
     ]
@@ -6575,8 +6573,8 @@ const PUZZLES = [
       { label: "The Legend of Zelda: BotW", value: 31 },
       { label: "Wii Sports", value: 82 },
       { label: "Grand Theft Auto V", value: 190 },
-      { label: "Tetris (all platforms)", value: 520 },
-      { label: "Minecraft", value: 300 }
+      { label: "Minecraft", value: 300 },
+      { label: "Tetris (all platforms)", value: 520 }
     ]
   },
   {
@@ -6672,10 +6670,10 @@ const PUZZLES = [
     category: "Countries by Biosphere Reserves",
     items: [
       { label: "India", value: 12 },
+      { label: "United States", value: 28 },
       { label: "China", value: 34 },
       { label: "Mexico", value: 42 },
-      { label: "Russia", value: 47 },
-      { label: "United States", value: 28 }
+      { label: "Russia", value: 47 }
     ]
   },
   {
@@ -6685,8 +6683,8 @@ const PUZZLES = [
       { label: "Boris Becker", value: 3 },
       { label: "Bjorn Borg", value: 5 },
       { label: "Pete Sampras", value: 7 },
-      { label: "Roger Federer", value: 8 },
-      { label: "Novak Djokovic", value: 7 }
+      { label: "Novak Djokovic", value: 7 },
+      { label: "Roger Federer", value: 8 }
     ]
   },
   {
@@ -6696,7 +6694,7 @@ const PUZZLES = [
       { label: "Opal", value: 2.1 },
       { label: "Quartz", value: 2.65 },
       { label: "Diamond", value: 3.52 },
-      { label: "Ruby/Sapphire", value: 4.0 },
+      { label: "Ruby/Sapphire", value: 4 },
       { label: "Zircon", value: 4.7 }
     ]
   },
@@ -6706,8 +6704,8 @@ const PUZZLES = [
     items: [
       { label: "Japan", value: 10 },
       { label: "United Kingdom", value: 15 },
-      { label: "Germany", value: 17 },
       { label: "Australia", value: 16 },
+      { label: "Germany", value: 17 },
       { label: "United States", value: 25 }
     ]
   },
@@ -6715,10 +6713,10 @@ const PUZZLES = [
     instruction: "Fewest to most goals in a single NHL season (player)",
     category: "NHL Players by Single-Season Goals",
     items: [
-      { label: "Mario Lemieux (1988-89)", value: 85 },
-      { label: "Phil Esposito (1970-71)", value: 76 },
-      { label: "Teemu Selanne (1992-93)", value: 76 },
       { label: "Alexander Ovechkin (2007-08)", value: 65 },
+      { label: "Phil Esposito (1970-71)", value: 76 },
+      { label: "Teemu Selanne (1992-93)", value: 76.1 },
+      { label: "Mario Lemieux (1988-89)", value: 85 },
       { label: "Wayne Gretzky (1981-82)", value: 92 }
     ]
   },
@@ -6859,10 +6857,10 @@ const PUZZLES = [
     category: "Milks by Lactose Content",
     items: [
       { label: "Buffalo Milk", value: 4.5 },
-      { label: "Cow Milk", value: 4.8 },
       { label: "Goat Milk", value: 4.7 },
-      { label: "Human Breast Milk", value: 7.0 },
-      { label: "Horse Milk", value: 6.2 }
+      { label: "Cow Milk", value: 4.8 },
+      { label: "Horse Milk", value: 6.2 },
+      { label: "Human Breast Milk", value: 7 }
     ]
   },
   {
@@ -6904,7 +6902,7 @@ const PUZZLES = [
     items: [
       { label: "Watch Battery (LR44)", value: 1.5 },
       { label: "AA Battery", value: 1.5 },
-      { label: "Lithium Cell (CR2032)", value: 3.0 },
+      { label: "Lithium Cell (CR2032)", value: 3 },
       { label: "9V Battery", value: 9 },
       { label: "Car Battery", value: 12 }
     ]
@@ -6914,8 +6912,8 @@ const PUZZLES = [
     category: "NBA Players by Career Assists",
     items: [
       { label: "Magic Johnson", value: 10141 },
-      { label: "Steve Nash", value: 10335 },
       { label: "Mark Jackson", value: 10334 },
+      { label: "Steve Nash", value: 10335 },
       { label: "Jason Kidd", value: 12091 },
       { label: "John Stockton", value: 15806 }
     ]
@@ -6960,8 +6958,8 @@ const PUZZLES = [
       { label: "India", value: 4 },
       { label: "Japan", value: 52 },
       { label: "Germany", value: 78 },
-      { label: "United States", value: 124 },
-      { label: "Australia", value: 116 }
+      { label: "Australia", value: 116 },
+      { label: "United States", value: 124 }
     ]
   },
   {
@@ -6970,8 +6968,8 @@ const PUZZLES = [
     items: [
       { label: "Thames (England)", value: 346 },
       { label: "Rhine", value: 1230 },
-      { label: "Danube", value: 2860 },
       { label: "Ural", value: 2428 },
+      { label: "Danube", value: 2860 },
       { label: "Volga", value: 3530 }
     ]
   },
@@ -6983,7 +6981,7 @@ const PUZZLES = [
       { label: "Russia", value: 3.5 },
       { label: "India", value: 5.5 },
       { label: "China", value: 16.2 },
-      { label: "United States", value: 20.0 }
+      { label: "United States", value: 20 }
     ]
   },
   {
@@ -7013,8 +7011,8 @@ const PUZZLES = [
     category: "Foods by Vitamin A Content",
     items: [
       { label: "Apple", value: 3 },
-      { label: "Egg", value: 140 },
       { label: "Mango", value: 54 },
+      { label: "Egg", value: 140 },
       { label: "Carrot", value: 835 },
       { label: "Beef Liver", value: 9442 }
     ]
@@ -7024,8 +7022,8 @@ const PUZZLES = [
     category: "NFL Players by Career Touchdowns",
     items: [
       { label: "Joe Montana", value: 273 },
-      { label: "Peyton Manning", value: 539 },
       { label: "Brett Favre", value: 508 },
+      { label: "Peyton Manning", value: 539 },
       { label: "Drew Brees", value: 571 },
       { label: "Tom Brady", value: 649 }
     ]
@@ -7034,11 +7032,11 @@ const PUZZLES = [
     instruction: "Fewest to most career points in rugby union (international)",
     category: "Rugby Players by International Career Points",
     items: [
-      { label: "Jonny Wilkinson (England)", value: 1246 },
-      { label: "Dan Carter (NZ)", value: 1598 },
       { label: "Handré Pollard (SA)", value: 742 },
+      { label: "Ronan O'Gara (Ireland)", value: 1083 },
       { label: "Owen Farrell (England)", value: 1178 },
-      { label: "Ronan O'Gara (Ireland)", value: 1083 }
+      { label: "Jonny Wilkinson (England)", value: 1246 },
+      { label: "Dan Carter (NZ)", value: 1598 }
     ]
   },
   {
@@ -7058,9 +7056,9 @@ const PUZZLES = [
     items: [
       { label: "Americas (left-driving)", value: 4 },
       { label: "Europe (left-driving)", value: 4 },
+      { label: "Oceania (left-driving)", value: 7 },
       { label: "Africa (left-driving)", value: 15 },
-      { label: "Asia (left-driving)", value: 18 },
-      { label: "Oceania (left-driving)", value: 7 }
+      { label: "Asia (left-driving)", value: 18 }
     ]
   },
   {
@@ -7081,8 +7079,8 @@ const PUZZLES = [
       { label: "Jamaica (Beijing 2008)", value: 11 },
       { label: "Australia (Sydney 2000)", value: 58 },
       { label: "China (Beijing 2008)", value: 100 },
-      { label: "Soviet Union (Moscow 1980)", value: 195 },
-      { label: "United States (Los Angeles 1984)", value: 174 }
+      { label: "United States (Los Angeles 1984)", value: 174 },
+      { label: "Soviet Union (Moscow 1980)", value: 195 }
     ]
   },
   {
@@ -7125,8 +7123,8 @@ const PUZZLES = [
       { label: "Mouse Lemur", value: 60 },
       { label: "Capuchin Monkey", value: 160 },
       { label: "Chimpanzee", value: 237 },
-      { label: "Human", value: 270 },
-      { label: "Gorilla", value: 257 }
+      { label: "Gorilla", value: 257 },
+      { label: "Human", value: 270 }
     ]
   },
   {
@@ -7134,9 +7132,9 @@ const PUZZLES = [
     category: "Cricket Players by International Centuries",
     items: [
       { label: "Brian Lara", value: 34 },
-      { label: "Ricky Ponting", value: 71 },
-      { label: "Kumar Sangakkara", value: 63 },
       { label: "Jacques Kallis", value: 62 },
+      { label: "Kumar Sangakkara", value: 63 },
+      { label: "Ricky Ponting", value: 71 },
       { label: "Sachin Tendulkar", value: 100 }
     ]
   },
@@ -7144,11 +7142,11 @@ const PUZZLES = [
     instruction: "Lowest to highest average wave height (meters)",
     category: "Surfing Spots by Average Wave Height",
     items: [
-      { label: "Waikiki Beach (Hawaii)", value: 1.0 },
+      { label: "Waikiki Beach (Hawaii)", value: 1 },
       { label: "Bondi Beach (Australia)", value: 1.5 },
-      { label: "Pipeline (Hawaii)", value: 3.0 },
+      { label: "Pipeline (Hawaii)", value: 3 },
       { label: "Teahupo'o (Tahiti)", value: 4.5 },
-      { label: "Nazaré (Portugal)", value: 8.0 }
+      { label: "Nazaré (Portugal)", value: 8 }
     ]
   },
   {
@@ -7158,8 +7156,8 @@ const PUZZLES = [
       { label: "Apple TV+", value: 25 },
       { label: "Paramount+", value: 63 },
       { label: "Disney+", value: 150 },
-      { label: "Netflix", value: 260 },
-      { label: "Amazon Prime Video", value: 200 }
+      { label: "Amazon Prime Video", value: 200 },
+      { label: "Netflix", value: 260 }
     ]
   },
   {
@@ -7167,9 +7165,9 @@ const PUZZLES = [
     category: "Cooking Oils by Calories Per Tablespoon",
     items: [
       { label: "Cooking Spray (PAM)", value: 7 },
+      { label: "Butter", value: 102 },
       { label: "Coconut Oil", value: 117 },
       { label: "Olive Oil", value: 119 },
-      { label: "Butter", value: 102 },
       { label: "Avocado Oil", value: 124 }
     ]
   },
@@ -7224,8 +7222,8 @@ const PUZZLES = [
       { label: "France", value: 200 },
       { label: "Iceland", value: 269 },
       { label: "Chile", value: 3500 },
-      { label: "Canada", value: 8700 },
-      { label: "Russia", value: 8600 }
+      { label: "Russia", value: 8600 },
+      { label: "Canada", value: 8700 }
     ]
   },
   {
@@ -7267,8 +7265,8 @@ const PUZZLES = [
     items: [
       { label: "Rolex Daytona 'Paul Newman'", value: 17.8 },
       { label: "Patek Philippe Henry Graves", value: 24 },
-      { label: "Patek Philippe Grandmaster Chime", value: 31.2 },
       { label: "Breguet Marie Antoinette", value: 30 },
+      { label: "Patek Philippe Grandmaster Chime", value: 31.2 },
       { label: "Graff Hallucination", value: 55 }
     ]
   },
@@ -7278,9 +7276,9 @@ const PUZZLES = [
     items: [
       { label: "Sea Horse", value: 14 },
       { label: "Octopus (egg incubation)", value: 50 },
+      { label: "Elephant Seal", value: 350 },
       { label: "Dolphin", value: 360 },
-      { label: "Sperm Whale", value: 480 },
-      { label: "Elephant Seal", value: 350 }
+      { label: "Sperm Whale", value: 480 }
     ]
   },
   {
@@ -7310,8 +7308,8 @@ const PUZZLES = [
     category: "Cricket Bowlers by Career Wickets",
     items: [
       { label: "Glenn McGrath (Australia)", value: 563 },
-      { label: "James Anderson (England)", value: 700 },
       { label: "Anil Kumble (India)", value: 619 },
+      { label: "James Anderson (England)", value: 700 },
       { label: "Shane Warne (Australia)", value: 708 },
       { label: "Muttiah Muralitharan (Sri Lanka)", value: 800 }
     ]
@@ -7343,10 +7341,10 @@ const PUZZLES = [
     category: "Planets/Moons by Atmospheric Density",
     items: [
       { label: "Mars", value: 0.02 },
+      { label: "Jupiter (1 bar level)", value: 0.16 },
       { label: "Earth", value: 1.22 },
       { label: "Titan (Saturn moon)", value: 5.3 },
-      { label: "Venus", value: 65 },
-      { label: "Jupiter (1 bar level)", value: 0.16 }
+      { label: "Venus", value: 65 }
     ]
   },
   {
@@ -7388,8 +7386,8 @@ const PUZZLES = [
     items: [
       { label: "Fresh Bread", value: 400 },
       { label: "Canned Soup", value: 600 },
-      { label: "Parmesan Cheese", value: 1529 },
       { label: "Salted Butter", value: 643 },
+      { label: "Parmesan Cheese", value: 1529 },
       { label: "Soy Sauce", value: 5493 }
     ]
   },
@@ -7408,10 +7406,10 @@ const PUZZLES = [
     instruction: "Smallest to largest national flag ratio (width:height)",
     category: "Flags by Aspect Ratio (width÷height)",
     items: [
-      { label: "Switzerland (1:1)", value: 1.0 },
-      { label: "United Kingdom (2:1)", value: 2.0 },
-      { label: "United States (19:10)", value: 1.9 },
+      { label: "Switzerland (1:1)", value: 1 },
       { label: "Japan (3:2)", value: 1.5 },
+      { label: "United States (19:10)", value: 1.9 },
+      { label: "United Kingdom (2:1)", value: 2 },
       { label: "Qatar (11:28)", value: 2.55 }
     ]
   },
@@ -7452,11 +7450,11 @@ const PUZZLES = [
     instruction: "Slowest to fastest 0-60 mph time (seconds)",
     category: "Cars by Acceleration (lower is faster)",
     items: [
-      { label: "Toyota Camry", value: 7.6 },
-      { label: "BMW M3", value: 3.8 },
-      { label: "Porsche 911 Turbo S", value: 2.6 },
+      { label: "Rimac Nevera", value: 1.85 },
       { label: "Tesla Model S Plaid", value: 1.99 },
-      { label: "Rimac Nevera", value: 1.85 }
+      { label: "Porsche 911 Turbo S", value: 2.6 },
+      { label: "BMW M3", value: 3.8 },
+      { label: "Toyota Camry", value: 7.6 }
     ]
   },
   {
@@ -7475,8 +7473,8 @@ const PUZZLES = [
     category: "Electric Cars by Home Charging Time",
     items: [
       { label: "Nissan Leaf (40 kWh)", value: 6 },
-      { label: "Chevrolet Bolt", value: 10 },
       { label: "Tesla Model 3 (Standard)", value: 8 },
+      { label: "Chevrolet Bolt", value: 10 },
       { label: "Ford Mustang Mach-E", value: 11 },
       { label: "Mercedes EQS", value: 14 }
     ]
@@ -7518,10 +7516,10 @@ const PUZZLES = [
     instruction: "Fewest to most career rebounds in NBA",
     category: "NBA Players by Career Rebounds",
     items: [
+      { label: "Karl Malone", value: 14968 },
       { label: "Tim Duncan", value: 15091 },
       { label: "Moses Malone", value: 16212 },
       { label: "Kareem Abdul-Jabbar", value: 17440 },
-      { label: "Karl Malone", value: 14968 },
       { label: "Wilt Chamberlain", value: 23924 }
     ]
   },
@@ -7529,8 +7527,8 @@ const PUZZLES = [
     instruction: "Fewest to most career wins in horse racing (jockey)",
     category: "Jockeys by Career Wins",
     items: [
-      { label: "Lester Piggott", value: 4493 },
       { label: "Frankie Dettori", value: 3500 },
+      { label: "Lester Piggott", value: 4493 },
       { label: "Laffit Pincay Jr.", value: 9530 },
       { label: "Russell Baze", value: 12842 },
       { label: "Jorge Ricardo", value: 13062 }
@@ -7543,8 +7541,8 @@ const PUZZLES = [
       { label: "Low Carbon (Mild) Steel", value: 0.15 },
       { label: "Medium Carbon Steel", value: 0.35 },
       { label: "High Carbon Steel", value: 0.65 },
-      { label: "Tool Steel", value: 1.0 },
-      { label: "Cast Iron", value: 3.0 }
+      { label: "Tool Steel", value: 1 },
+      { label: "Cast Iron", value: 3 }
     ]
   },
   {
@@ -7564,9 +7562,9 @@ const PUZZLES = [
     items: [
       { label: "Mick Doohan", value: 54 },
       { label: "Mike Hailwood", value: 76 },
-      { label: "Giacomo Agostini", value: 122 },
       { label: "Marc Márquez", value: 85 },
-      { label: "Valentino Rossi", value: 115 }
+      { label: "Valentino Rossi", value: 115 },
+      { label: "Giacomo Agostini", value: 122 }
     ]
   },
   {
@@ -7575,8 +7573,8 @@ const PUZZLES = [
     items: [
       { label: "Luxembourg", value: 2586 },
       { label: "Switzerland", value: 41285 },
-      { label: "Mongolia", value: 1564116 },
       { label: "Chad", value: 1284000 },
+      { label: "Mongolia", value: 1564116 },
       { label: "Kazakhstan", value: 2724900 }
     ]
   },
@@ -7629,9 +7627,9 @@ const PUZZLES = [
     category: "Chess Players by World Championship Titles",
     items: [
       { label: "Bobby Fischer", value: 1 },
-      { label: "Viswanathan Anand", value: 5 },
       { label: "Mikhail Botvinnik", value: 3 },
-      { label: "Magnus Carlsen", value: 5 },
+      { label: "Viswanathan Anand", value: 5 },
+      { label: "Magnus Carlsen", value: 5.1 },
       { label: "Garry Kasparov", value: 6 }
     ]
   },
@@ -7650,11 +7648,11 @@ const PUZZLES = [
     instruction: "Fewest to most career strikeouts (MLB pitcher)",
     category: "MLB Pitchers by Career Strikeouts",
     items: [
-      { label: "Roger Clemens", value: 4672 },
+      { label: "Justin Verlander", value: 3416 },
       { label: "Steve Carlton", value: 4136 },
+      { label: "Roger Clemens", value: 4672 },
       { label: "Randy Johnson", value: 4875 },
-      { label: "Nolan Ryan", value: 5714 },
-      { label: "Justin Verlander", value: 3416 }
+      { label: "Nolan Ryan", value: 5714 }
     ]
   },
   {
@@ -7672,8 +7670,8 @@ const PUZZLES = [
     instruction: "Lowest to highest global annual CO₂ emissions by sector (%)",
     category: "Sectors by CO₂ Emissions Share",
     items: [
-      { label: "Residential Buildings", value: 6 },
       { label: "Aviation", value: 3 },
+      { label: "Residential Buildings", value: 6 },
       { label: "Road Transport", value: 12 },
       { label: "Industry", value: 21 },
       { label: "Electricity & Heat", value: 42 }
@@ -7683,9 +7681,9 @@ const PUZZLES = [
     instruction: "Shortest to longest wall (km)",
     category: "Walls by Length",
     items: [
-      { label: "Berlin Wall (former)", value: 155 },
-      { label: "Hadrian's Wall (UK)", value: 117 },
       { label: "Western Wall (Jerusalem)", value: 0.5 },
+      { label: "Hadrian's Wall (UK)", value: 117 },
+      { label: "Berlin Wall (former)", value: 155 },
       { label: "US-Mexico Border Barrier", value: 1050 },
       { label: "Great Wall of China", value: 21196 }
     ]
@@ -7696,8 +7694,8 @@ const PUZZLES = [
     items: [
       { label: "Usain Bolt", value: 8 },
       { label: "Carl Lewis", value: 10 },
-      { label: "Larisa Latynina (gymnastics)", value: 18 },
       { label: "Nikolai Andrianov (gymnastics)", value: 15 },
+      { label: "Larisa Latynina (gymnastics)", value: 18 },
       { label: "Michael Phelps", value: 28 }
     ]
   },
@@ -7705,8 +7703,8 @@ const PUZZLES = [
     instruction: "Lowest to highest average typing speed by method (WPM)",
     category: "Typing Methods by Average Speed",
     items: [
-      { label: "Smartphone (two thumbs)", value: 38 },
       { label: "Hunt and Peck", value: 30 },
+      { label: "Smartphone (two thumbs)", value: 38 },
       { label: "Average Touch Typist", value: 50 },
       { label: "Professional Typist", value: 75 },
       { label: "Speed Typing Champion", value: 216 }
@@ -7730,7 +7728,7 @@ const PUZZLES = [
       { label: "Gold", value: 0.13 },
       { label: "Copper", value: 0.39 },
       { label: "Iron", value: 0.45 },
-      { label: "Aluminum", value: 0.90 },
+      { label: "Aluminum", value: 0.9 },
       { label: "Water", value: 4.18 }
     ]
   },
@@ -7738,11 +7736,11 @@ const PUZZLES = [
     instruction: "Fewest to most bones in vertebrate skeletons",
     category: "Vertebrates by Skeleton Bone Count",
     items: [
+      { label: "Chicken", value: 120 },
       { label: "Frog", value: 159 },
-      { label: "Cat", value: 230 },
-      { label: "Human", value: 206 },
       { label: "Horse", value: 205 },
-      { label: "Chicken", value: 120 }
+      { label: "Human", value: 206 },
+      { label: "Cat", value: 230 }
     ]
   },
   {
@@ -7793,8 +7791,8 @@ const PUZZLES = [
     instruction: "Fewest to most apps available in an app store (thousands)",
     category: "App Stores by Number of Apps",
     items: [
-      { label: "Amazon Appstore", value: 460 },
       { label: "Samsung Galaxy Store", value: 450 },
+      { label: "Amazon Appstore", value: 460 },
       { label: "Huawei AppGallery", value: 530 },
       { label: "Apple App Store", value: 1800 },
       { label: "Google Play Store", value: 2870 }
@@ -7806,8 +7804,8 @@ const PUZZLES = [
     items: [
       { label: "Apple", value: 12 },
       { label: "Facebook/Meta", value: 21 },
-      { label: "Microsoft", value: 60 },
       { label: "Google", value: 40 },
+      { label: "Microsoft", value: 60 },
       { label: "Amazon (AWS)", value: 100 }
     ]
   },
@@ -7838,10 +7836,10 @@ const PUZZLES = [
     category: "Athletes by Career World Records Set",
     items: [
       { label: "Carl Lewis", value: 1 },
-      { label: "Jesse Owens", value: 4 },
       { label: "Usain Bolt", value: 3 },
-      { label: "Sergey Bubka (pole vault)", value: 35 },
-      { label: "Paavo Nurmi", value: 22 }
+      { label: "Jesse Owens", value: 4 },
+      { label: "Paavo Nurmi", value: 22 },
+      { label: "Sergey Bubka (pole vault)", value: 35 }
     ]
   },
   {
@@ -7883,8 +7881,8 @@ const PUZZLES = [
     items: [
       { label: "Netherlands", value: 30 },
       { label: "Switzerland", value: 450 },
-      { label: "United Kingdom", value: 700 },
       { label: "Italy", value: 487 },
+      { label: "United Kingdom", value: 700 },
       { label: "France", value: 1200 }
     ]
   },
@@ -7893,9 +7891,9 @@ const PUZZLES = [
     category: "Oceans by Maximum Depth",
     items: [
       { label: "Arctic Ocean", value: 5450 },
+      { label: "Southern Ocean", value: 7236 },
       { label: "Indian Ocean", value: 7258 },
       { label: "Atlantic Ocean", value: 8376 },
-      { label: "Southern Ocean", value: 7236 },
       { label: "Pacific Ocean", value: 10994 }
     ]
   },
@@ -7925,11 +7923,11 @@ const PUZZLES = [
     instruction: "Fewest to most national football (soccer) league teams",
     category: "Football Leagues by Number of Teams",
     items: [
+      { label: "Indian Super League", value: 11 },
       { label: "Scottish Premiership", value: 12 },
       { label: "Bundesliga (Germany)", value: 18 },
       { label: "Premier League (England)", value: 20 },
-      { label: "Major League Soccer (USA)", value: 29 },
-      { label: "Indian Super League", value: 11 }
+      { label: "Major League Soccer (USA)", value: 29 }
     ]
   },
   {
@@ -7938,9 +7936,9 @@ const PUZZLES = [
     items: [
       { label: "Fluorinated Gases", value: 2 },
       { label: "Nitrous Oxide (N₂O)", value: 6 },
+      { label: "CO₂ (land use)", value: 11 },
       { label: "Methane (CH₄)", value: 16 },
-      { label: "CO₂ (fossil fuels)", value: 65 },
-      { label: "CO₂ (land use)", value: 11 }
+      { label: "CO₂ (fossil fuels)", value: 65 }
     ]
   },
   {
@@ -7960,9 +7958,9 @@ const PUZZLES = [
     items: [
       { label: "Deimos", value: 0.003 },
       { label: "Phobos", value: 0.006 },
-      { label: "Earth's Moon", value: 1.62 },
       { label: "Europa", value: 1.31 },
-      { label: "Titan", value: 1.35 }
+      { label: "Titan", value: 1.35 },
+      { label: "Earth's Moon", value: 1.62 }
     ]
   },
   {
@@ -7992,10 +7990,10 @@ const PUZZLES = [
     category: "Car Manufacturers by Le Mans Wins",
     items: [
       { label: "Ford", value: 4 },
+      { label: "Toyota", value: 6 },
       { label: "Ferrari", value: 9 },
       { label: "Audi", value: 13 },
-      { label: "Porsche", value: 19 },
-      { label: "Toyota", value: 6 }
+      { label: "Porsche", value: 19 }
     ]
   },
   {
@@ -8004,7 +8002,7 @@ const PUZZLES = [
     items: [
       { label: "South Korea", value: 1.5 },
       { label: "United Kingdom", value: 1.8 },
-      { label: "Japan", value: 2.0 },
+      { label: "Japan", value: 2 },
       { label: "China", value: 7.8 },
       { label: "United States/Canada", value: 9.1 }
     ]
@@ -8015,8 +8013,8 @@ const PUZZLES = [
     items: [
       { label: "Australia", value: 25 },
       { label: "Japan", value: 68 },
-      { label: "United States", value: 300 },
       { label: "United Kingdom", value: 184 },
+      { label: "United States", value: 300 },
       { label: "China", value: 510 }
     ]
   },
@@ -8037,8 +8035,8 @@ const PUZZLES = [
     items: [
       { label: "Surface", value: 1 },
       { label: "Scuba Diving Limit (40m)", value: 5 },
-      { label: "Titanic Wreck (3800m)", value: 380 },
       { label: "Average Ocean Floor (3700m)", value: 370 },
+      { label: "Titanic Wreck (3800m)", value: 380 },
       { label: "Mariana Trench (10994m)", value: 1100 }
     ]
   },
@@ -8060,7 +8058,7 @@ const PUZZLES = [
       { label: "Compsognathus", value: 0.003 },
       { label: "Velociraptor", value: 0.015 },
       { label: "Stegosaurus", value: 3.5 },
-      { label: "Tyrannosaurus Rex", value: 8.0 },
+      { label: "Tyrannosaurus Rex", value: 8 },
       { label: "Argentinosaurus", value: 80 }
     ]
   },
@@ -8070,9 +8068,9 @@ const PUZZLES = [
     items: [
       { label: "Gallimimus (beaked, toothless)", value: 0 },
       { label: "Tyrannosaurus Rex", value: 60 },
+      { label: "Nigersaurus", value: 500 },
       { label: "Triceratops", value: 800 },
-      { label: "Hadrosaur (duck-billed)", value: 1400 },
-      { label: "Nigersaurus", value: 500 }
+      { label: "Hadrosaur (duck-billed)", value: 1400 }
     ]
   },
   {
@@ -8092,9 +8090,9 @@ const PUZZLES = [
     items: [
       { label: "Michael Jordan", value: 800 },
       { label: "LeBron James", value: 1200 },
+      { label: "DeAndre Jordan", value: 2500 },
       { label: "Shaquille O'Neal", value: 2800 },
-      { label: "Dwight Howard", value: 2900 },
-      { label: "DeAndre Jordan", value: 2500 }
+      { label: "Dwight Howard", value: 2900 }
     ]
   },
   {
@@ -8102,8 +8100,8 @@ const PUZZLES = [
     category: "Soccer Players by Career Hat Tricks",
     items: [
       { label: "Neymar", value: 28 },
-      { label: "Robert Lewandowski", value: 33 },
       { label: "Luis Suárez", value: 29 },
+      { label: "Robert Lewandowski", value: 33 },
       { label: "Lionel Messi", value: 57 },
       { label: "Cristiano Ronaldo", value: 63 }
     ]
@@ -8125,9 +8123,9 @@ const PUZZLES = [
     items: [
       { label: "Architecture", value: 0.06 },
       { label: "Harry Potter", value: 0.15 },
+      { label: "Technic", value: 0.7 },
       { label: "Star Wars", value: 0.9 },
-      { label: "City", value: 1.3 },
-      { label: "Technic", value: 0.7 }
+      { label: "City", value: 1.3 }
     ]
   },
   {
@@ -8157,8 +8155,8 @@ const PUZZLES = [
     category: "Websites by Daily Page Views",
     items: [
       { label: "Reddit", value: 57 },
-      { label: "Wikipedia", value: 270 },
       { label: "Twitter/X", value: 175 },
+      { label: "Wikipedia", value: 270 },
       { label: "YouTube", value: 2000 },
       { label: "Google Search", value: 8500 }
     ]
@@ -8211,11 +8209,11 @@ const PUZZLES = [
     instruction: "Fewest to most known exoplanets discovered by telescope/mission",
     category: "Space Missions by Exoplanets Discovered",
     items: [
-      { label: "Hubble Space Telescope", value: 52 },
       { label: "CoRoT", value: 32 },
+      { label: "Hubble Space Telescope", value: 52 },
       { label: "TESS", value: 400 },
-      { label: "Kepler", value: 2780 },
-      { label: "Ground-based (total)", value: 900 }
+      { label: "Ground-based (total)", value: 900 },
+      { label: "Kepler", value: 2780 }
     ]
   },
   {
@@ -8289,9 +8287,9 @@ const PUZZLES = [
     category: "Composers by Number of Piano Concertos",
     items: [
       { label: "Tchaikovsky", value: 3 },
-      { label: "Beethoven", value: 5 },
+      { label: "Liszt", value: 3.1 },
       { label: "Rachmaninoff", value: 4 },
-      { label: "Liszt", value: 3 },
+      { label: "Beethoven", value: 5 },
       { label: "Mozart", value: 27 }
     ]
   },
@@ -8332,9 +8330,9 @@ const PUZZLES = [
     instruction: "Smallest to largest mangrove forest (km²)",
     category: "Mangrove Forests by Area",
     items: [
-      { label: "Everglades (Florida)", value: 2000 },
       { label: "Pichavaram (India)", value: 1100 },
-      { label: "Mekong Delta (Vietnam)", value: 2000 },
+      { label: "Everglades (Florida)", value: 2000 },
+      { label: "Mekong Delta (Vietnam)", value: 2000.1 },
       { label: "Niger Delta (Nigeria)", value: 7000 },
       { label: "Sundarbans (Bangladesh/India)", value: 10000 }
     ]
@@ -8355,8 +8353,8 @@ const PUZZLES = [
     category: "Countries by Public Library Count",
     items: [
       { label: "Japan", value: 3.3 },
-      { label: "Germany", value: 9.2 },
       { label: "United Kingdom", value: 3.6 },
+      { label: "Germany", value: 9.2 },
       { label: "Russia", value: 46 },
       { label: "China", value: 58 }
     ]
@@ -8365,10 +8363,10 @@ const PUZZLES = [
     instruction: "Lowest to highest maple syrup production (thousand tonnes, 2022)",
     category: "Regions by Maple Syrup Production",
     items: [
-      { label: "Vermont (USA)", value: 2.7 },
       { label: "New York (USA)", value: 0.8 },
-      { label: "Ontario (Canada)", value: 5 },
+      { label: "Vermont (USA)", value: 2.7 },
       { label: "New Brunswick (Canada)", value: 3 },
+      { label: "Ontario (Canada)", value: 5 },
       { label: "Quebec (Canada)", value: 58 }
     ]
   },
@@ -8453,8 +8451,8 @@ const PUZZLES = [
     instruction: "Fewest to most active submarines by country (2023)",
     category: "Countries by Submarine Fleet Size",
     items: [
-      { label: "Japan", value: 22 },
       { label: "India", value: 18 },
+      { label: "Japan", value: 22 },
       { label: "Russia", value: 58 },
       { label: "United States", value: 68 },
       { label: "China", value: 78 }
@@ -8466,18 +8464,18 @@ const PUZZLES = [
     items: [
       { label: "Coca-Cola", value: 2.5 },
       { label: "Orange Juice", value: 3.5 },
-      { label: "Beer", value: 4.0 },
-      { label: "Coffee", value: 5.0 },
-      { label: "Green Tea", value: 7.0 }
+      { label: "Beer", value: 4 },
+      { label: "Coffee", value: 5 },
+      { label: "Green Tea", value: 7 }
     ]
   },
   {
     instruction: "Fewest to most satellites in a constellation (2023)",
     category: "Satellite Constellations by Size",
     items: [
+      { label: "GLONASS (Russia)", value: 24 },
       { label: "Galileo (EU GPS)", value: 30 },
       { label: "GPS (US)", value: 31 },
-      { label: "GLONASS (Russia)", value: 24 },
       { label: "Iridium", value: 66 },
       { label: "Starlink (SpaceX)", value: 5400 }
     ]
@@ -8486,9 +8484,9 @@ const PUZZLES = [
     instruction: "Least to most annual saffron production (tonnes)",
     category: "Countries by Saffron Production",
     items: [
+      { label: "Spain", value: 1 },
       { label: "Greece", value: 6 },
       { label: "Morocco", value: 8 },
-      { label: "Spain", value: 1 },
       { label: "India (Kashmir)", value: 22 },
       { label: "Iran", value: 430 }
     ]
@@ -8497,8 +8495,8 @@ const PUZZLES = [
     instruction: "Fewest to most billionaire cities (number of billionaires in city, 2023)",
     category: "Cities by Number of Billionaires",
     items: [
-      { label: "London", value: 37 },
       { label: "Singapore", value: 34 },
+      { label: "London", value: 37 },
       { label: "Mumbai", value: 54 },
       { label: "Moscow", value: 76 },
       { label: "New York City", value: 101 }
@@ -8553,10 +8551,10 @@ const PUZZLES = [
     category: "MLB Closers by Career Saves",
     items: [
       { label: "Dennis Eckersley", value: 390 },
+      { label: "Kenley Jansen", value: 430 },
       { label: "Lee Smith", value: 478 },
       { label: "Trevor Hoffman", value: 601 },
-      { label: "Mariano Rivera", value: 652 },
-      { label: "Kenley Jansen", value: 430 }
+      { label: "Mariano Rivera", value: 652 }
     ]
   },
   {
@@ -8576,8 +8574,8 @@ const PUZZLES = [
     items: [
       { label: "France", value: 1 },
       { label: "Russia", value: 1 },
-      { label: "China", value: 3 },
       { label: "India", value: 2 },
+      { label: "China", value: 3 },
       { label: "United States", value: 11 }
     ]
   },
@@ -8586,8 +8584,8 @@ const PUZZLES = [
     category: "Smartphone Brands by Market Share",
     items: [
       { label: "Google Pixel", value: 2 },
-      { label: "Xiaomi", value: 13 },
       { label: "Oppo", value: 9 },
+      { label: "Xiaomi", value: 13 },
       { label: "Apple", value: 20 },
       { label: "Samsung", value: 20 }
     ]
@@ -8609,8 +8607,8 @@ const PUZZLES = [
     items: [
       { label: "Japan", value: 0.1 },
       { label: "United Kingdom", value: 0.3 },
-      { label: "United States", value: 1.4 },
       { label: "Germany", value: 0.7 },
+      { label: "United States", value: 1.4 },
       { label: "China", value: 8.1 }
     ]
   },
@@ -8654,17 +8652,17 @@ const PUZZLES = [
       { label: "South Korea", value: 70 },
       { label: "France", value: 139 },
       { label: "United States", value: 330 },
-      { label: "Germany (incl. unified)", value: 408 },
-      { label: "Norway", value: 405 }
+      { label: "Norway", value: 405 },
+      { label: "Germany (incl. unified)", value: 408 }
     ]
   },
   {
     instruction: "Fewest to most amusement parks by country",
     category: "Countries by Number of Amusement Parks",
     items: [
+      { label: "Japan", value: 200 },
       { label: "France", value: 300 },
       { label: "Germany", value: 400 },
-      { label: "Japan", value: 200 },
       { label: "China", value: 2500 },
       { label: "United States", value: 3000 }
     ]
@@ -8685,8 +8683,8 @@ const PUZZLES = [
     category: "Countries by Steel Production",
     items: [
       { label: "Germany", value: 37 },
-      { label: "Japan", value: 89 },
       { label: "United States", value: 80 },
+      { label: "Japan", value: 89 },
       { label: "India", value: 125 },
       { label: "China", value: 1013 }
     ]
@@ -8696,9 +8694,9 @@ const PUZZLES = [
     category: "Countries by UNESCO Creative Cities",
     items: [
       { label: "South Korea", value: 8 },
-      { label: "Italy", value: 15 },
       { label: "France", value: 12 },
       { label: "Spain", value: 14 },
+      { label: "Italy", value: 15 },
       { label: "China", value: 20 }
     ]
   },
@@ -8717,9 +8715,9 @@ const PUZZLES = [
     instruction: "Fewest to most pages in famous graphic novels",
     category: "Graphic Novels by Page Count",
     items: [
-      { label: "Watchmen (Alan Moore)", value: 416 },
       { label: "Maus (Art Spiegelman)", value: 296 },
       { label: "Persepolis (Marjane Satrapi)", value: 341 },
+      { label: "Watchmen (Alan Moore)", value: 416 },
       { label: "Sandman (Gaiman, omnibus)", value: 2000 },
       { label: "One Piece (Oda, total)", value: 25000 }
     ]
@@ -8729,9 +8727,9 @@ const PUZZLES = [
     category: "Countries by Diamond Production",
     items: [
       { label: "South Africa", value: 7 },
-      { label: "Canada", value: 16 },
       { label: "Angola", value: 9 },
       { label: "DR Congo", value: 12 },
+      { label: "Canada", value: 16 },
       { label: "Russia", value: 42 }
     ]
   },
@@ -8762,8 +8760,8 @@ const PUZZLES = [
     category: "Rainforests by Annual Precipitation",
     items: [
       { label: "Atlantic Forest (Brazil)", value: 1500 },
-      { label: "Daintree (Australia)", value: 2000 },
       { label: "Congo Rainforest", value: 1800 },
+      { label: "Daintree (Australia)", value: 2000 },
       { label: "Amazon Rainforest", value: 2300 },
       { label: "Chocó (Colombia)", value: 10000 }
     ]
@@ -8783,9 +8781,9 @@ const PUZZLES = [
     instruction: "Lowest to highest global rubber production (thousand tonnes, 2022)",
     category: "Countries by Rubber Production",
     items: [
-      { label: "Vietnam", value: 1200 },
       { label: "Malaysia", value: 570 },
       { label: "India", value: 775 },
+      { label: "Vietnam", value: 1200 },
       { label: "Indonesia", value: 3100 },
       { label: "Thailand", value: 4700 }
     ]
@@ -8796,8 +8794,8 @@ const PUZZLES = [
     items: [
       { label: "Jaromír Jágr", value: 12 },
       { label: "Brett Hull", value: 14 },
-      { label: "Mario Lemieux", value: 40 },
       { label: "Mike Bossy", value: 39 },
+      { label: "Mario Lemieux", value: 40 },
       { label: "Wayne Gretzky", value: 50 }
     ]
   },
@@ -8805,11 +8803,11 @@ const PUZZLES = [
     instruction: "Shortest to longest opera house history (years since founding)",
     category: "Opera Houses by Age (founded)",
     items: [
-      { label: "Sydney Opera House (1973)", value: 1973 },
-      { label: "Metropolitan Opera NYC (1883)", value: 1883 },
       { label: "Royal Opera House London (1732)", value: 1732 },
+      { label: "Teatro di San Carlo Naples (1737)", value: 1737 },
       { label: "La Scala Milan (1778)", value: 1778 },
-      { label: "Teatro di San Carlo Naples (1737)", value: 1737 }
+      { label: "Metropolitan Opera NYC (1883)", value: 1883 },
+      { label: "Sydney Opera House (1973)", value: 1973 }
     ]
   },
   {
@@ -8818,8 +8816,8 @@ const PUZZLES = [
     items: [
       { label: "Pelé", value: 92 },
       { label: "Lionel Messi", value: 187 },
-      { label: "Cristiano Ronaldo", value: 212 },
       { label: "Bader Al-Mutawa (Kuwait)", value: 196 },
+      { label: "Cristiano Ronaldo", value: 212 },
       { label: "Soh Chin Ann (Malaysia)", value: 219 }
     ]
   },
@@ -8860,9 +8858,9 @@ const PUZZLES = [
     instruction: "Lowest to highest cocoa production (thousand tonnes, 2022)",
     category: "Countries by Cocoa Production",
     items: [
-      { label: "Indonesia", value: 660 },
-      { label: "Ecuador", value: 365 },
       { label: "Nigeria", value: 280 },
+      { label: "Ecuador", value: 365 },
+      { label: "Indonesia", value: 660 },
       { label: "Ghana", value: 700 },
       { label: "Ivory Coast", value: 2200 }
     ]
@@ -8872,10 +8870,10 @@ const PUZZLES = [
     category: "Countries by Breweries Per Capita",
     items: [
       { label: "Japan", value: 4 },
-      { label: "Australia", value: 28 },
       { label: "Germany", value: 18 },
-      { label: "United Kingdom", value: 32 },
-      { label: "Belgium", value: 30 }
+      { label: "Australia", value: 28 },
+      { label: "Belgium", value: 30 },
+      { label: "United Kingdom", value: 32 }
     ]
   },
   {
@@ -8928,9 +8926,9 @@ const PUZZLES = [
     items: [
       { label: "Thierry Henry", value: 28 },
       { label: "Frank Lampard", value: 56 },
+      { label: "Robert Lewandowski", value: 100 },
       { label: "Lionel Messi", value: 110 },
-      { label: "Cristiano Ronaldo", value: 160 },
-      { label: "Robert Lewandowski", value: 100 }
+      { label: "Cristiano Ronaldo", value: 160 }
     ]
   },
   {
@@ -8959,19 +8957,19 @@ const PUZZLES = [
     instruction: "Fewest to most Michelin 3-star restaurants by country (2023)",
     category: "Countries by 3-Star Michelin Restaurants",
     items: [
-      { label: "United States", value: 14 },
       { label: "Germany", value: 11 },
+      { label: "United States", value: 14 },
       { label: "Spain", value: 14 },
-      { label: "France", value: 30 },
-      { label: "Japan", value: 14 }
+      { label: "Japan", value: 14 },
+      { label: "France", value: 30 }
     ]
   },
   {
     instruction: "Lowest to highest average depth of major seas (meters)",
     category: "Seas by Average Depth",
     items: [
-      { label: "North Sea", value: 95 },
       { label: "Baltic Sea", value: 55 },
+      { label: "North Sea", value: 95 },
       { label: "Black Sea", value: 1253 },
       { label: "Caribbean Sea", value: 2200 },
       { label: "Philippine Sea", value: 4108 }
@@ -8993,10 +8991,10 @@ const PUZZLES = [
     category: "Rocky Planets/Moons by Surface Pressure",
     items: [
       { label: "Mars", value: 0.6 },
+      { label: "Jupiter (1 bar reference)", value: 100 },
       { label: "Earth", value: 101 },
       { label: "Titan", value: 147 },
-      { label: "Venus", value: 9200 },
-      { label: "Jupiter (1 bar reference)", value: 100 }
+      { label: "Venus", value: 9200 }
     ]
   },
   {
@@ -9037,10 +9035,10 @@ const PUZZLES = [
     category: "Telescopes by Mirror Size",
     items: [
       { label: "Hubble Space Telescope", value: 2.4 },
+      { label: "James Webb Space Telescope", value: 6.5 },
       { label: "Keck Observatory", value: 10 },
       { label: "Gran Telescopio Canarias", value: 10.4 },
-      { label: "Extremely Large Telescope (under construction)", value: 39.3 },
-      { label: "James Webb Space Telescope", value: 6.5 }
+      { label: "Extremely Large Telescope (under construction)", value: 39.3 }
     ]
   },
   {
@@ -9049,8 +9047,8 @@ const PUZZLES = [
     items: [
       { label: "Luxembourg", value: 1 },
       { label: "Switzerland", value: 6 },
-      { label: "Italy", value: 44 },
       { label: "Germany", value: 36 },
+      { label: "Italy", value: 44 },
       { label: "United Kingdom", value: 46 }
     ]
   },
@@ -9062,7 +9060,7 @@ const PUZZLES = [
       { label: "Pakistan", value: 1.1 },
       { label: "Brazil", value: 2.8 },
       { label: "United States", value: 3.1 },
-      { label: "India", value: 6.0 }
+      { label: "India", value: 6 }
     ]
   },
   {
@@ -9082,8 +9080,8 @@ const PUZZLES = [
     items: [
       { label: "Dwayne Johnson", value: 395 },
       { label: "Kylie Jenner", value: 400 },
-      { label: "Lionel Messi", value: 496 },
       { label: "Selena Gomez", value: 430 },
+      { label: "Lionel Messi", value: 496 },
       { label: "Cristiano Ronaldo", value: 614 }
     ]
   },
@@ -9115,17 +9113,17 @@ const PUZZLES = [
     items: [
       { label: "Earth's Moon", value: 0 },
       { label: "Mars", value: 24 },
+      { label: "Io (Jupiter's moon)", value: 400 },
       { label: "Earth", value: 1350 },
-      { label: "Venus", value: 1600 },
-      { label: "Io (Jupiter's moon)", value: 400 }
+      { label: "Venus", value: 1600 }
     ]
   },
   {
     instruction: "Fewest to most Nobel Prizes in Physics by country",
     category: "Countries by Physics Nobel Prizes",
     items: [
-      { label: "France", value: 13 },
       { label: "Japan", value: 12 },
+      { label: "France", value: 13 },
       { label: "Germany", value: 25 },
       { label: "United Kingdom", value: 29 },
       { label: "United States", value: 99 }
@@ -9137,8 +9135,8 @@ const PUZZLES = [
     items: [
       { label: "Japan", value: 2 },
       { label: "Germany", value: 8 },
-      { label: "United States", value: 13 },
       { label: "United Kingdom", value: 12 },
+      { label: "United States", value: 13 },
       { label: "France", value: 16 }
     ]
   },
@@ -9147,7 +9145,7 @@ const PUZZLES = [
     category: "Countries by Education Spending (% of GDP)",
     items: [
       { label: "Japan", value: 3.3 },
-      { label: "United States", value: 5.0 },
+      { label: "United States", value: 5 },
       { label: "United Kingdom", value: 5.5 },
       { label: "Sweden", value: 7.7 },
       { label: "Cuba", value: 13 }
@@ -9169,10 +9167,10 @@ const PUZZLES = [
     category: "Tennis Players by Grand Slam Doubles Titles",
     items: [
       { label: "Venus Williams", value: 14 },
-      { label: "Martina Navratilova", value: 31 },
-      { label: "Margaret Court", value: 19 },
       { label: "Todd Woodbridge", value: 16 },
-      { label: "Bob Bryan / Mike Bryan", value: 16 }
+      { label: "Bob Bryan / Mike Bryan", value: 16 },
+      { label: "Margaret Court", value: 19 },
+      { label: "Martina Navratilova", value: 31 }
     ]
   },
   {
@@ -9213,8 +9211,8 @@ const PUZZLES = [
     category: "Disaster Types by Annual Frequency (average)",
     items: [
       { label: "Volcanic Eruptions", value: 50 },
-      { label: "Earthquakes (M6+)", value: 150 },
       { label: "Tropical Cyclones", value: 80 },
+      { label: "Earthquakes (M6+)", value: 150 },
       { label: "Floods", value: 175 },
       { label: "Storms (all types)", value: 250 }
     ]
@@ -9225,8 +9223,8 @@ const PUZZLES = [
     items: [
       { label: "Rhode Island", value: 35 },
       { label: "New York", value: 50 },
-      { label: "Florida", value: 4500 },
       { label: "Michigan", value: 3200 },
+      { label: "Florida", value: 4500 },
       { label: "Alaska", value: 33904 }
     ]
   },
@@ -9247,8 +9245,8 @@ const PUZZLES = [
     items: [
       { label: "Mer de Glace (France)", value: 30 },
       { label: "Aletsch Glacier (Switzerland)", value: 86 },
-      { label: "Vatnajökull (Iceland)", value: 7700 },
       { label: "Malaspina Glacier (Alaska)", value: 3880 },
+      { label: "Vatnajökull (Iceland)", value: 7700 },
       { label: "Antarctic Ice Sheet", value: 14000000 }
     ]
   },
@@ -9268,8 +9266,8 @@ const PUZZLES = [
     category: "Countries by Nuclear Electricity Share (%)",
     items: [
       { label: "Japan", value: 7 },
-      { label: "United States", value: 19 },
       { label: "United Kingdom", value: 15 },
+      { label: "United States", value: 19 },
       { label: "South Korea", value: 29 },
       { label: "France", value: 69 }
     ]
@@ -9280,8 +9278,8 @@ const PUZZLES = [
     items: [
       { label: "Japan", value: 100 },
       { label: "Italy", value: 200 },
-      { label: "United States", value: 580 },
       { label: "Switzerland", value: 200 },
+      { label: "United States", value: 580 },
       { label: "Germany", value: 1300 }
     ]
   },
@@ -9289,10 +9287,10 @@ const PUZZLES = [
     instruction: "Fewest to most paintings in a museum collection",
     category: "Museums by Painting Collection Size",
     items: [
-      { label: "Uffizi Gallery (Florence)", value: 2500 },
       { label: "National Gallery (London)", value: 2300 },
-      { label: "Prado (Madrid)", value: 7600 },
+      { label: "Uffizi Gallery (Florence)", value: 2500 },
       { label: "Louvre (Paris)", value: 7500 },
+      { label: "Prado (Madrid)", value: 7600 },
       { label: "Hermitage (St. Petersburg)", value: 17000 }
     ]
   },
@@ -9302,9 +9300,9 @@ const PUZZLES = [
     items: [
       { label: "Australia", value: 60 },
       { label: "Japan", value: 160 },
-      { label: "Germany", value: 400 },
       { label: "China", value: 200 },
-      { label: "United States", value: 350 }
+      { label: "United States", value: 350 },
+      { label: "Germany", value: 400 }
     ]
   },
   {
@@ -9336,8 +9334,8 @@ const PUZZLES = [
       { label: "Ian Thorpe", value: 13 },
       { label: "Katie Ledecky", value: 16 },
       { label: "Mark Spitz", value: 26 },
-      { label: "Michael Phelps", value: 39 },
-      { label: "Arne Borg (1920s-30s)", value: 32 }
+      { label: "Arne Borg (1920s-30s)", value: 32 },
+      { label: "Michael Phelps", value: 39 }
     ]
   },
   {
@@ -9346,7 +9344,7 @@ const PUZZLES = [
     items: [
       { label: "Australia", value: 0.11 },
       { label: "United States", value: 0.69 },
-      { label: "Germany", value: 1.80 },
+      { label: "Germany", value: 1.8 },
       { label: "Japan", value: 3.23 },
       { label: "Belgium", value: 5.06 }
     ]
@@ -9389,10 +9387,10 @@ const PUZZLES = [
     category: "Centuries by Total Solar Eclipses",
     items: [
       { label: "19th Century (1801-1900)", value: 63 },
-      { label: "20th Century (1901-2000)", value: 72 },
       { label: "21st Century (2001-2100)", value: 68 },
-      { label: "22nd Century (2101-2200)", value: 73 },
-      { label: "23rd Century (2201-2300)", value: 71 }
+      { label: "23rd Century (2201-2300)", value: 71 },
+      { label: "20th Century (1901-2000)", value: 72 },
+      { label: "22nd Century (2101-2200)", value: 73 }
     ]
   },
   {
@@ -9422,8 +9420,8 @@ const PUZZLES = [
     category: "Cricket Batsmen by Test Centuries",
     items: [
       { label: "Virat Kohli", value: 29 },
-      { label: "Ricky Ponting", value: 41 },
       { label: "Steve Smith (Australia)", value: 32 },
+      { label: "Ricky Ponting", value: 41 },
       { label: "Jacques Kallis", value: 45 },
       { label: "Sachin Tendulkar", value: 51 }
     ]
@@ -9435,8 +9433,8 @@ const PUZZLES = [
       { label: "Mini Cooper SE", value: 183 },
       { label: "Nissan Leaf (standard)", value: 240 },
       { label: "Chevrolet Bolt EV", value: 416 },
-      { label: "Tesla Model S Long Range", value: 634 },
-      { label: "Mercedes EQS 450+ (2023)", value: 560 }
+      { label: "Mercedes EQS 450+ (2023)", value: 560 },
+      { label: "Tesla Model S Long Range", value: 634 }
     ]
   },
   {
@@ -9455,8 +9453,8 @@ const PUZZLES = [
     category: "Famous Long Books by Word Count",
     items: [
       { label: "The Great Gatsby", value: 47094 },
-      { label: "The Bible (KJV)", value: 783137 },
       { label: "War and Peace", value: 580000 },
+      { label: "The Bible (KJV)", value: 783137 },
       { label: "In Search of Lost Time (Proust)", value: 1267069 },
       { label: "Artamène (longest novel ever)", value: 2100000 }
     ]
@@ -9466,8 +9464,8 @@ const PUZZLES = [
     category: "Coral Types by Species Count",
     items: [
       { label: "Fire Corals", value: 50 },
-      { label: "Soft Corals", value: 800 },
       { label: "Black Corals", value: 280 },
+      { label: "Soft Corals", value: 800 },
       { label: "Hard (Stony) Corals", value: 1500 },
       { label: "All Coral Species (total)", value: 6000 }
     ]
@@ -9476,10 +9474,10 @@ const PUZZLES = [
     instruction: "Fewest to most career wins in women's tennis (Open Era)",
     category: "Women's Tennis Players by Career Wins",
     items: [
+      { label: "Billie Jean King", value: 695 },
       { label: "Serena Williams", value: 856 },
       { label: "Steffi Graf", value: 900 },
       { label: "Chris Evert", value: 1309 },
-      { label: "Billie Jean King", value: 695 },
       { label: "Martina Navratilova", value: 1442 }
     ]
   },
@@ -9521,8 +9519,8 @@ const PUZZLES = [
     category: "Countries by UNESCO Global Geoparks",
     items: [
       { label: "United Kingdom", value: 8 },
-      { label: "Italy", value: 11 },
       { label: "Japan", value: 10 },
+      { label: "Italy", value: 11 },
       { label: "Spain", value: 16 },
       { label: "China", value: 41 }
     ]
@@ -9533,8 +9531,8 @@ const PUZZLES = [
     items: [
       { label: "India", value: 50 },
       { label: "Brazil", value: 100 },
-      { label: "United States", value: 200 },
       { label: "Japan", value: 180 },
+      { label: "United States", value: 200 },
       { label: "Singapore", value: 280 }
     ]
   },
@@ -9543,8 +9541,8 @@ const PUZZLES = [
     category: "Tennis Players by Career Aces",
     items: [
       { label: "Rafael Nadal", value: 4500 },
-      { label: "Roger Federer", value: 11478 },
       { label: "Novak Djokovic", value: 9500 },
+      { label: "Roger Federer", value: 11478 },
       { label: "Ivo Karlovic", value: 13728 },
       { label: "John Isner", value: 14470 }
     ]
@@ -9564,8 +9562,8 @@ const PUZZLES = [
     instruction: "Lowest to highest cocoa butter content in chocolate (%)",
     category: "Chocolate Types by Cocoa Butter Content",
     items: [
-      { label: "White Chocolate", value: 20 },
       { label: "Milk Chocolate", value: 15 },
+      { label: "White Chocolate", value: 20 },
       { label: "Semi-Sweet Chocolate", value: 27 },
       { label: "Bittersweet Chocolate", value: 35 },
       { label: "Dark Chocolate (90%+ cacao)", value: 45 }
@@ -9610,8 +9608,8 @@ const PUZZLES = [
     items: [
       { label: "Japan", value: 55 },
       { label: "Australia", value: 84 },
-      { label: "United States", value: 200 },
       { label: "Germany", value: 100 },
+      { label: "United States", value: 200 },
       { label: "China", value: 250 }
     ]
   },
@@ -9644,8 +9642,8 @@ const PUZZLES = [
       { label: "Japan", value: 10 },
       { label: "Germany", value: 16 },
       { label: "China", value: 34 },
-      { label: "Spain", value: 53 },
-      { label: "Mexico", value: 42 }
+      { label: "Mexico", value: 42 },
+      { label: "Spain", value: 53 }
     ]
   },
   {
@@ -9653,9 +9651,9 @@ const PUZZLES = [
     category: "MLB Pitchers by Career Shutouts",
     items: [
       { label: "Roger Clemens", value: 46 },
-      { label: "Christy Mathewson", value: 79 },
       { label: "Nolan Ryan", value: 61 },
       { label: "Tom Seaver", value: 61 },
+      { label: "Christy Mathewson", value: 79 },
       { label: "Walter Johnson", value: 110 }
     ]
   },
@@ -9663,8 +9661,8 @@ const PUZZLES = [
     instruction: "Shortest to longest coastline of US states (km)",
     category: "US States by Coastline Length",
     items: [
-      { label: "New Hampshire", value: 21 },
       { label: "Connecticut", value: 0 },
+      { label: "New Hampshire", value: 21 },
       { label: "California", value: 1352 },
       { label: "Florida", value: 2170 },
       { label: "Alaska", value: 10690 }
@@ -9708,8 +9706,8 @@ const PUZZLES = [
     category: "Snooker Players by World Championship Titles",
     items: [
       { label: "Mark Williams", value: 3 },
-      { label: "Ronnie O'Sullivan", value: 7 },
       { label: "Steve Davis", value: 6 },
+      { label: "Ronnie O'Sullivan", value: 7 },
       { label: "Stephen Hendry", value: 7 },
       { label: "Joe Davis", value: 15 }
     ]
@@ -9740,9 +9738,9 @@ const PUZZLES = [
     instruction: "Fewest to most career triple-doubles in NBA",
     category: "NBA Players by Career Triple-Doubles",
     items: [
+      { label: "Jason Kidd", value: 107 },
       { label: "LeBron James", value: 112 },
       { label: "Magic Johnson", value: 138 },
-      { label: "Jason Kidd", value: 107 },
       { label: "Oscar Robertson", value: 181 },
       { label: "Russell Westbrook", value: 199 }
     ]
@@ -9773,11 +9771,11 @@ const PUZZLES = [
     instruction: "Fewest to most national football teams in a confederation (FIFA)",
     category: "FIFA Confederations by Number of Members",
     items: [
-      { label: "OFC (Oceania)", value: 11 },
       { label: "CONMEBOL (South America)", value: 10 },
+      { label: "OFC (Oceania)", value: 11 },
       { label: "CONCACAF (North/Central America)", value: 35 },
-      { label: "UEFA (Europe)", value: 55 },
-      { label: "CAF (Africa)", value: 54 }
+      { label: "CAF (Africa)", value: 54 },
+      { label: "UEFA (Europe)", value: 55 }
     ]
   },
   {
@@ -9785,8 +9783,8 @@ const PUZZLES = [
     category: "Human Activities by Peak Power Output",
     items: [
       { label: "Sleeping", value: 80 },
-      { label: "Walking", value: 300 },
       { label: "Cycling (recreational)", value: 200 },
+      { label: "Walking", value: 300 },
       { label: "Sprinting", value: 2000 },
       { label: "Olympic Weightlifting (snatch)", value: 5000 }
     ]
@@ -9806,9 +9804,9 @@ const PUZZLES = [
     instruction: "Fewest to most annual olive production (thousand tonnes)",
     category: "Countries by Olive Production",
     items: [
-      { label: "Italy", value: 2000 },
       { label: "Turkey", value: 1700 },
       { label: "Greece", value: 1900 },
+      { label: "Italy", value: 2000 },
       { label: "Morocco", value: 2000 },
       { label: "Spain", value: 6500 }
     ]
@@ -9829,10 +9827,10 @@ const PUZZLES = [
     category: "Badminton Players by All England Titles",
     items: [
       { label: "Taufik Hidayat", value: 1 },
-      { label: "Lin Dan", value: 6 },
+      { label: "Viktor Axelsen", value: 3 },
       { label: "Lee Chong Wei", value: 4 },
-      { label: "Rudy Hartono", value: 8 },
-      { label: "Viktor Axelsen", value: 3 }
+      { label: "Lin Dan", value: 6 },
+      { label: "Rudy Hartono", value: 8 }
     ]
   },
   {
@@ -9851,18 +9849,18 @@ const PUZZLES = [
     category: "Rugby League Players by International Points",
     items: [
       { label: "Billy Slater (Australia)", value: 104 },
+      { label: "Stacey Jones (NZ)", value: 136 },
       { label: "Darren Lockyer (Australia)", value: 170 },
       { label: "Cameron Smith (Australia)", value: 256 },
-      { label: "Johnathan Thurston (Australia)", value: 382 },
-      { label: "Stacey Jones (NZ)", value: 136 }
+      { label: "Johnathan Thurston (Australia)", value: 382 }
     ]
   },
   {
     instruction: "Lowest to highest rare earth element production (thousand tonnes, 2022)",
     category: "Countries by Rare Earth Production",
     items: [
-      { label: "India", value: 2.9 },
       { label: "Russia", value: 2.6 },
+      { label: "India", value: 2.9 },
       { label: "Australia", value: 18 },
       { label: "United States", value: 43 },
       { label: "China", value: 210 }
@@ -9883,9 +9881,9 @@ const PUZZLES = [
     instruction: "Fewest to most windmills historically (not modern turbines)",
     category: "Countries by Historic Windmill Count",
     items: [
+      { label: "Spain", value: 500 },
       { label: "Germany", value: 2000 },
       { label: "United Kingdom", value: 3000 },
-      { label: "Spain", value: 500 },
       { label: "Denmark", value: 3000 },
       { label: "Netherlands", value: 9000 }
     ]
@@ -9896,8 +9894,8 @@ const PUZZLES = [
     items: [
       { label: "Renault/Alpine", value: 35 },
       { label: "Williams", value: 114 },
-      { label: "McLaren", value: 183 },
       { label: "Mercedes", value: 128 },
+      { label: "McLaren", value: 183 },
       { label: "Ferrari", value: 243 }
     ]
   },
@@ -9928,9 +9926,9 @@ const PUZZLES = [
     category: "Ryder Cup by Wins (through 2023)",
     items: [
       { label: "Tie results", value: 2 },
+      { label: "Great Britain (pre-1973)", value: 3 },
       { label: "Great Britain & Ireland", value: 4 },
       { label: "Europe (from 1979)", value: 12 },
-      { label: "Great Britain (pre-1973)", value: 3 },
       { label: "United States", value: 27 }
     ]
   },
@@ -10037,10 +10035,10 @@ const PUZZLES = [
     instruction: "Lowest to highest global lithium production (thousand tonnes, 2022)",
     category: "Countries by Lithium Production",
     items: [
-      { label: "China", value: 19 },
       { label: "Argentina", value: 6.2 },
-      { label: "Chile", value: 39 },
       { label: "China", value: 19 },
+      { label: "China", value: 19 },
+      { label: "Chile", value: 39 },
       { label: "Australia", value: 61 }
     ]
   },
@@ -10048,9 +10046,9 @@ const PUZZLES = [
     instruction: "Fewest to most horse racing tracks by country",
     category: "Countries by Number of Racecourses",
     items: [
+      { label: "Japan", value: 25 },
       { label: "Germany", value: 40 },
       { label: "France", value: 250 },
-      { label: "Japan", value: 25 },
       { label: "Australia", value: 300 },
       { label: "United States", value: 350 }
     ]
@@ -10081,10 +10079,10 @@ const PUZZLES = [
     instruction: "Fewest to most heritage railways/preserved railways",
     category: "Countries by Number of Heritage Railways",
     items: [
+      { label: "India", value: 30 },
       { label: "Australia", value: 60 },
       { label: "Germany", value: 120 },
       { label: "United States", value: 200 },
-      { label: "India", value: 30 },
       { label: "United Kingdom", value: 300 }
     ]
   },
@@ -10092,9 +10090,9 @@ const PUZZLES = [
     instruction: "Lowest to highest average household size (people per household)",
     category: "Countries by Average Household Size",
     items: [
-      { label: "Germany", value: 2.0 },
+      { label: "Germany", value: 2 },
       { label: "United States", value: 2.5 },
-      { label: "Brazil", value: 3.0 },
+      { label: "Brazil", value: 3 },
       { label: "India", value: 4.5 },
       { label: "Senegal", value: 8.5 }
     ]
@@ -10104,9 +10102,9 @@ const PUZZLES = [
     category: "Women Tennis Players by Wimbledon Titles",
     items: [
       { label: "Venus Williams", value: 5 },
+      { label: "Billie Jean King", value: 6 },
       { label: "Serena Williams", value: 7 },
       { label: "Steffi Graf", value: 7 },
-      { label: "Billie Jean King", value: 6 },
       { label: "Martina Navratilova", value: 9 }
     ]
   },
@@ -10116,8 +10114,8 @@ const PUZZLES = [
     items: [
       { label: "Switzerland", value: 70 },
       { label: "United Kingdom", value: 100 },
-      { label: "United States", value: 250 },
       { label: "India", value: 200 },
+      { label: "United States", value: 250 },
       { label: "Norway", value: 300 }
     ]
   },
@@ -10125,7 +10123,7 @@ const PUZZLES = [
     instruction: "Lowest to highest orbital velocity (km/s)",
     category: "Space Objects by Orbital Velocity",
     items: [
-      { label: "Moon (around Earth)", value: 1.0 },
+      { label: "Moon (around Earth)", value: 1 },
       { label: "ISS", value: 7.7 },
       { label: "Earth (around Sun)", value: 29.8 },
       { label: "Mercury (around Sun)", value: 47.4 },
@@ -10138,9 +10136,9 @@ const PUZZLES = [
     items: [
       { label: "AB de Villiers (South Africa)", value: 25 },
       { label: "Hashim Amla (South Africa)", value: 27 },
-      { label: "Virat Kohli (India)", value: 50 },
       { label: "Rohit Sharma (India)", value: 31 },
-      { label: "Sachin Tendulkar (India)", value: 49 }
+      { label: "Sachin Tendulkar (India)", value: 49 },
+      { label: "Virat Kohli (India)", value: 50 }
     ]
   },
   {
@@ -10161,8 +10159,8 @@ const PUZZLES = [
       { label: "Europe", value: 20 },
       { label: "North America", value: 30 },
       { label: "Africa", value: 100 },
-      { label: "Asia", value: 200 },
-      { label: "Australia", value: 140 }
+      { label: "Australia", value: 140 },
+      { label: "Asia", value: 200 }
     ]
   },
   {
@@ -10171,8 +10169,8 @@ const PUZZLES = [
     items: [
       { label: "Canada", value: 2 },
       { label: "Germany", value: 3 },
-      { label: "United Kingdom", value: 10 },
       { label: "Ukraine", value: 3 },
+      { label: "United Kingdom", value: 10 },
       { label: "United States", value: 40 }
     ]
   },
@@ -10182,9 +10180,9 @@ const PUZZLES = [
     items: [
       { label: "Universal Studios Hollywood", value: 9 },
       { label: "Tokyo DisneySea", value: 12 },
-      { label: "Tokyo Disneyland", value: 18 },
+      { label: "Disneyland (Anaheim)", value: 16 },
       { label: "Walt Disney World Magic Kingdom", value: 17 },
-      { label: "Disneyland (Anaheim)", value: 16 }
+      { label: "Tokyo Disneyland", value: 18 }
     ]
   },
   {
@@ -10193,8 +10191,8 @@ const PUZZLES = [
     items: [
       { label: "Japan", value: 200 },
       { label: "United States", value: 1000 },
-      { label: "India", value: 2500 },
       { label: "China", value: 1400 },
+      { label: "India", value: 2500 },
       { label: "Brazil", value: 3500 }
     ]
   },
@@ -10247,8 +10245,8 @@ const PUZZLES = [
     category: "Snooker Players by 147 Breaks in Competition",
     items: [
       { label: "Stephen Hendry", value: 1 },
-      { label: "John Higgins", value: 3 },
       { label: "Stephen Maguire", value: 2 },
+      { label: "John Higgins", value: 3 },
       { label: "Ronnie O'Sullivan", value: 4 },
       { label: "Ronnie O'Sullivan (all comps)", value: 15 }
     ]
@@ -10260,8 +10258,8 @@ const PUZZLES = [
       { label: "Australia", value: 350 },
       { label: "France", value: 1880 },
       { label: "Germany", value: 2400 },
-      { label: "European Union (total)", value: 10200 },
-      { label: "United States", value: 6300 }
+      { label: "United States", value: 6300 },
+      { label: "European Union (total)", value: 10200 }
     ]
   },
   {
@@ -10280,8 +10278,8 @@ const PUZZLES = [
     category: "MotoGP Riders by Career Podiums",
     items: [
       { label: "Casey Stoner", value: 69 },
-      { label: "Jorge Lorenzo", value: 114 },
       { label: "Marc Márquez", value: 100 },
+      { label: "Jorge Lorenzo", value: 114 },
       { label: "Giacomo Agostini", value: 159 },
       { label: "Valentino Rossi", value: 235 }
     ]
@@ -10291,9 +10289,9 @@ const PUZZLES = [
     category: "Countries by Banana Exports",
     items: [
       { label: "Colombia", value: 1.8 },
-      { label: "Guatemala", value: 2.5 },
       { label: "Costa Rica", value: 2.4 },
-      { label: "Philippines", value: 3.0 },
+      { label: "Guatemala", value: 2.5 },
+      { label: "Philippines", value: 3 },
       { label: "Ecuador", value: 6.5 }
     ]
   },
@@ -10302,8 +10300,8 @@ const PUZZLES = [
     category: "NASCAR Drivers by Career Wins",
     items: [
       { label: "Dale Earnhardt", value: 76 },
-      { label: "Jeff Gordon", value: 93 },
       { label: "Jimmie Johnson", value: 83 },
+      { label: "Jeff Gordon", value: 93 },
       { label: "David Pearson", value: 105 },
       { label: "Richard Petty", value: 200 }
     ]
@@ -10323,9 +10321,9 @@ const PUZZLES = [
     instruction: "Lowest to highest global peanut production (million tonnes)",
     category: "Countries by Peanut Production",
     items: [
+      { label: "Sudan", value: 2.8 },
       { label: "United States", value: 3 },
       { label: "Nigeria", value: 4.5 },
-      { label: "Sudan", value: 2.8 },
       { label: "India", value: 7 },
       { label: "China", value: 18 }
     ]
@@ -10359,8 +10357,8 @@ const PUZZLES = [
       { label: "Andre Agassi", value: 60 },
       { label: "Pete Sampras", value: 64 },
       { label: "Rafael Nadal", value: 92 },
-      { label: "Roger Federer", value: 103 },
-      { label: "Novak Djokovic", value: 99 }
+      { label: "Novak Djokovic", value: 99 },
+      { label: "Roger Federer", value: 103 }
     ]
   },
   {
@@ -10379,10 +10377,10 @@ const PUZZLES = [
     category: "Cable Cars by Length",
     items: [
       { label: "Roosevelt Island Tramway (NYC)", value: 0.9 },
-      { label: "Palm Springs Aerial Tramway", value: 4 },
       { label: "Vanoise Express (France)", value: 1.8 },
-      { label: "Mérida Cable Car (Venezuela)", value: 12.5 },
-      { label: "NP Bi-O Cable Car (Vietnam)", value: 7.9 }
+      { label: "Palm Springs Aerial Tramway", value: 4 },
+      { label: "NP Bi-O Cable Car (Vietnam)", value: 7.9 },
+      { label: "Mérida Cable Car (Venezuela)", value: 12.5 }
     ]
   },
   {
@@ -10456,9 +10454,9 @@ const PUZZLES = [
     category: "Countries by Cherry Blossom Festival Count",
     items: [
       { label: "United States (DC + others)", value: 5 },
+      { label: "Germany", value: 8 },
       { label: "South Korea", value: 15 },
       { label: "China", value: 30 },
-      { label: "Germany", value: 8 },
       { label: "Japan", value: 100 }
     ]
   },
@@ -10466,11 +10464,11 @@ const PUZZLES = [
     instruction: "Fewest to most career stumpings in cricket (wicket-keepers)",
     category: "Cricket Wicket-Keepers by Career Stumpings",
     items: [
+      { label: "Mark Boucher (South Africa)", value: 22 },
+      { label: "Bert Oldfield (Australia)", value: 52 },
       { label: "Adam Gilchrist (Australia)", value: 55 },
       { label: "Kumar Sangakkara (Sri Lanka)", value: 139 },
-      { label: "MS Dhoni (India)", value: 195 },
-      { label: "Mark Boucher (South Africa)", value: 22 },
-      { label: "Bert Oldfield (Australia)", value: 52 }
+      { label: "MS Dhoni (India)", value: 195 }
     ]
   },
   {
@@ -10489,10 +10487,10 @@ const PUZZLES = [
     category: "Women Cricketers by Career Centuries (international)",
     items: [
       { label: "Tammy Beaumont (England)", value: 6 },
-      { label: "Meg Lanning (Australia)", value: 15 },
       { label: "Suzie Bates (NZ)", value: 7 },
       { label: "Smriti Mandhana (India)", value: 7 },
-      { label: "Mithali Raj (India)", value: 10 }
+      { label: "Mithali Raj (India)", value: 10 },
+      { label: "Meg Lanning (Australia)", value: 15 }
     ]
   },
   {
@@ -10501,8 +10499,8 @@ const PUZZLES = [
     items: [
       { label: "Ethiopia", value: 1.4 },
       { label: "Honduras", value: 1.6 },
-      { label: "Vietnam", value: 3.5 },
       { label: "Colombia", value: 3.1 },
+      { label: "Vietnam", value: 3.5 },
       { label: "Brazil", value: 7.8 }
     ]
   },
@@ -10522,8 +10520,8 @@ const PUZZLES = [
     category: "Ski Resorts by Number of Lifts",
     items: [
       { label: "Niseko (Japan)", value: 30 },
-      { label: "Zermatt (Switzerland)", value: 52 },
       { label: "Whistler Blackcomb (Canada)", value: 37 },
+      { label: "Zermatt (Switzerland)", value: 52 },
       { label: "Val Thorens (France)", value: 68 },
       { label: "Les 3 Vallées (France, combined)", value: 166 }
     ]
@@ -10534,8 +10532,8 @@ const PUZZLES = [
     items: [
       { label: "Jonny Wilkinson (England)", value: 7 },
       { label: "Brian O'Driscoll (Ireland)", value: 46 },
-      { label: "Bryan Habana (South Africa)", value: 67 },
       { label: "Shane Williams (Wales)", value: 60 },
+      { label: "Bryan Habana (South Africa)", value: 67 },
       { label: "Daisuke Ohata (Japan)", value: 69 }
     ]
   },
@@ -10554,9 +10552,9 @@ const PUZZLES = [
     instruction: "Fewest to most craters on the Moon visible with naked eye",
     category: "Lunar Features by Size (km diameter)",
     items: [
+      { label: "Kepler", value: 32 },
       { label: "Tycho", value: 85 },
       { label: "Copernicus", value: 93 },
-      { label: "Kepler", value: 32 },
       { label: "Plato", value: 101 },
       { label: "Clavius", value: 225 }
     ]
@@ -10568,7 +10566,7 @@ const PUZZLES = [
       { label: "Peat Bog", value: 3.5 },
       { label: "Tropical Forest Soil", value: 4.5 },
       { label: "Grassland Soil", value: 6.5 },
-      { label: "Agricultural Soil (limed)", value: 7.0 },
+      { label: "Agricultural Soil (limed)", value: 7 },
       { label: "Desert Soil", value: 8.5 }
     ]
   },
@@ -10576,11 +10574,11 @@ const PUZZLES = [
     instruction: "Fewest to most career yellow cards in soccer (club + international)",
     category: "Soccer Players by Career Yellow Cards",
     items: [
+      { label: "Gerardo Bedoya (Colombia)", value: 46 },
       { label: "Lionel Messi", value: 90 },
       { label: "Cristiano Ronaldo", value: 130 },
-      { label: "Sergio Ramos", value: 260 },
-      { label: "Gerardo Bedoya (Colombia)", value: 46 },
-      { label: "Rafael Márquez (Mexico)", value: 150 }
+      { label: "Rafael Márquez (Mexico)", value: 150 },
+      { label: "Sergio Ramos", value: 260 }
     ]
   },
   {
@@ -10588,10 +10586,10 @@ const PUZZLES = [
     category: "Goalkeepers by Career Clean Sheets",
     items: [
       { label: "Manuel Neuer", value: 300 },
-      { label: "Iker Casillas", value: 440 },
+      { label: "Peter Shilton", value: 390 },
       { label: "Petr Čech", value: 395 },
-      { label: "Gianluigi Buffon", value: 500 },
-      { label: "Peter Shilton", value: 390 }
+      { label: "Iker Casillas", value: 440 },
+      { label: "Gianluigi Buffon", value: 500 }
     ]
   },
   {
@@ -10609,10 +10607,10 @@ const PUZZLES = [
     instruction: "Fewest to most career wins in women's golf (LPGA)",
     category: "Women Golfers by LPGA Tour Wins",
     items: [
-      { label: "Annika Sörenstam", value: 72 },
-      { label: "Mickey Wright", value: 82 },
       { label: "Patty Berg", value: 60 },
       { label: "Louise Suggs", value: 61 },
+      { label: "Annika Sörenstam", value: 72 },
+      { label: "Mickey Wright", value: 82 },
       { label: "Kathy Whitworth", value: 88 }
     ]
   },
@@ -10665,9 +10663,9 @@ const PUZZLES = [
     category: "Snooker Players by Career Ranking Event Titles",
     items: [
       { label: "Mark Williams", value: 24 },
+      { label: "Steve Davis", value: 28 },
       { label: "John Higgins", value: 31 },
       { label: "Stephen Hendry", value: 36 },
-      { label: "Steve Davis", value: 28 },
       { label: "Ronnie O'Sullivan", value: 40 }
     ]
   },
@@ -10676,10 +10674,10 @@ const PUZZLES = [
     category: "Countries by Annual Wildfire Count (thousands)",
     items: [
       { label: "Japan", value: 1 },
-      { label: "Australia", value: 55 },
       { label: "Russia", value: 35 },
-      { label: "Brazil", value: 200 },
-      { label: "United States", value: 70 }
+      { label: "Australia", value: 55 },
+      { label: "United States", value: 70 },
+      { label: "Brazil", value: 200 }
     ]
   },
   {
@@ -10697,10 +10695,10 @@ const PUZZLES = [
     instruction: "Smallest to largest sand island (km²)",
     category: "Sand Islands by Area",
     items: [
-      { label: "Padre Island (Texas)", value: 455 },
-      { label: "Bazaruto Island (Mozambique)", value: 300 },
       { label: "Moreton Island (Australia)", value: 186 },
       { label: "North Stradbroke Island (Australia)", value: 275 },
+      { label: "Bazaruto Island (Mozambique)", value: 300 },
+      { label: "Padre Island (Texas)", value: 455 },
       { label: "Fraser Island (Australia)", value: 1840 }
     ]
   },
@@ -10709,9 +10707,9 @@ const PUZZLES = [
     category: "Countries by Athletics Olympic Medals",
     items: [
       { label: "Jamaica", value: 78 },
-      { label: "Germany (incl. unified)", value: 210 },
       { label: "Kenya", value: 108 },
       { label: "United Kingdom", value: 190 },
+      { label: "Germany (incl. unified)", value: 210 },
       { label: "United States", value: 810 }
     ]
   },
@@ -10752,9 +10750,9 @@ const PUZZLES = [
     instruction: "Fewest to most total Grand Slam titles won by a country (tennis)",
     category: "Countries by Grand Slam Tennis Titles (all time, singles)",
     items: [
+      { label: "Sweden", value: 17 },
       { label: "Germany", value: 18 },
       { label: "Spain", value: 31 },
-      { label: "Sweden", value: 17 },
       { label: "Australia", value: 55 },
       { label: "United States", value: 130 }
     ]
@@ -10765,8 +10763,8 @@ const PUZZLES = [
     items: [
       { label: "Chris Froome", value: 8 },
       { label: "Alberto Contador", value: 8 },
-      { label: "Bernard Hinault", value: 13 },
       { label: "Fausto Coppi", value: 10 },
+      { label: "Bernard Hinault", value: 13 },
       { label: "Eddy Merckx", value: 17 }
     ]
   },
@@ -10774,8 +10772,8 @@ const PUZZLES = [
     instruction: "Fewest to most total career Grand Tour stage wins (cycling)",
     category: "Cyclists by Grand Tour Stage Wins",
     items: [
-      { label: "Bernard Hinault", value: 52 },
       { label: "Alberto Contador", value: 25 },
+      { label: "Bernard Hinault", value: 52 },
       { label: "Mark Cavendish", value: 53 },
       { label: "Mario Cipollini", value: 57 },
       { label: "Eddy Merckx", value: 64 }
@@ -10786,8 +10784,8 @@ const PUZZLES = [
     category: "Countries by Tomato Production",
     items: [
       { label: "Egypt", value: 6.7 },
-      { label: "Turkey", value: 13 },
       { label: "United States", value: 10.5 },
+      { label: "Turkey", value: 13 },
       { label: "India", value: 21 },
       { label: "China", value: 67 }
     ]
@@ -10807,9 +10805,9 @@ const PUZZLES = [
     instruction: "Fewest to most career red cards in soccer",
     category: "Soccer Players by Career Red Cards",
     items: [
+      { label: "Pepe", value: 13 },
       { label: "Zinedine Zidane", value: 14 },
       { label: "Sergio Ramos", value: 27 },
-      { label: "Pepe", value: 13 },
       { label: "Cyril Rool (France)", value: 27 },
       { label: "Gerardo Bedoya (Colombia)", value: 46 }
     ]
@@ -10821,19 +10819,19 @@ const PUZZLES = [
       { label: "Tokyo Metro", value: 195 },
       { label: "New York City Subway", value: 380 },
       { label: "London Underground", value: 402 },
-      { label: "Beijing Subway", value: 836 },
-      { label: "Shanghai Metro", value: 831 }
+      { label: "Shanghai Metro", value: 831 },
+      { label: "Beijing Subway", value: 836 }
     ]
   },
   {
     instruction: "Fewest to most UNESCO Memory of the World inscriptions",
     category: "Countries by Memory of the World Inscriptions",
     items: [
-      { label: "Japan", value: 8 },
       { label: "Australia", value: 7 },
+      { label: "Japan", value: 8 },
+      { label: "South Korea", value: 18 },
       { label: "United Kingdom", value: 22 },
-      { label: "Germany", value: 24 },
-      { label: "South Korea", value: 18 }
+      { label: "Germany", value: 24 }
     ]
   },
   {
@@ -10875,8 +10873,8 @@ const PUZZLES = [
     items: [
       { label: "Japan", value: 8 },
       { label: "United States", value: 20 },
-      { label: "Germany", value: 60 },
       { label: "France", value: 50 },
+      { label: "Germany", value: 60 },
       { label: "Turkey", value: 104 }
     ]
   },
@@ -10884,8 +10882,8 @@ const PUZZLES = [
     instruction: "Fewest to most career laps led in F1",
     category: "F1 Drivers by Career Laps Led",
     items: [
-      { label: "Ayrton Senna", value: 2979 },
       { label: "Alain Prost", value: 2683 },
+      { label: "Ayrton Senna", value: 2979 },
       { label: "Sebastian Vettel", value: 3501 },
       { label: "Michael Schumacher", value: 5111 },
       { label: "Lewis Hamilton", value: 5568 }
@@ -10896,10 +10894,10 @@ const PUZZLES = [
     category: "Soccer Players by Career Assists",
     items: [
       { label: "Cristiano Ronaldo", value: 250 },
-      { label: "Thomas Müller", value: 300 },
+      { label: "Ryan Giggs", value: 271 },
       { label: "Xavi", value: 280 },
-      { label: "Lionel Messi", value: 380 },
-      { label: "Ryan Giggs", value: 271 }
+      { label: "Thomas Müller", value: 300 },
+      { label: "Lionel Messi", value: 380 }
     ]
   },
   {
@@ -10918,8 +10916,8 @@ const PUZZLES = [
     category: "Countries by Monthly Mobile Data Usage",
     items: [
       { label: "Japan", value: 6 },
-      { label: "United States", value: 17 },
       { label: "Germany", value: 7 },
+      { label: "United States", value: 17 },
       { label: "India", value: 25 },
       { label: "Finland", value: 42 }
     ]
@@ -10939,10 +10937,10 @@ const PUZZLES = [
     instruction: "Fewest to most career centuries in first-class cricket",
     category: "Cricket Batsmen by First-Class Centuries",
     items: [
-      { label: "Sachin Tendulkar", value: 81 },
       { label: "Brian Lara", value: 65 },
-      { label: "Wally Hammond", value: 167 },
+      { label: "Sachin Tendulkar", value: 81 },
       { label: "Don Bradman", value: 117 },
+      { label: "Wally Hammond", value: 167 },
       { label: "Jack Hobbs", value: 199 }
     ]
   },
@@ -10962,8 +10960,8 @@ const PUZZLES = [
     category: "F1 Drivers by Career Race Starts",
     items: [
       { label: "Ayrton Senna", value: 161 },
-      { label: "Michael Schumacher", value: 306 },
       { label: "Sebastian Vettel", value: 300 },
+      { label: "Michael Schumacher", value: 306 },
       { label: "Kimi Räikkönen", value: 349 },
       { label: "Fernando Alonso", value: 400 }
     ]
@@ -10974,8 +10972,8 @@ const PUZZLES = [
     items: [
       { label: "India", value: 0.1 },
       { label: "Germany", value: 3 },
-      { label: "United States", value: 9 },
       { label: "Brazil", value: 3.5 },
+      { label: "United States", value: 9 },
       { label: "Japan", value: 30 }
     ]
   },
@@ -10983,9 +10981,9 @@ const PUZZLES = [
     instruction: "Fewest to most total marathon world records set (career)",
     category: "Marathon Runners by World Records Held",
     items: [
-      { label: "Haile Gebrselassie", value: 2 },
       { label: "Paul Tergat", value: 1 },
       { label: "Dennis Kimetto", value: 1 },
+      { label: "Haile Gebrselassie", value: 2 },
       { label: "Eliud Kipchoge", value: 2 },
       { label: "Khalid Khannouchi", value: 2 }
     ]
@@ -10997,8 +10995,8 @@ const PUZZLES = [
       { label: "ANA (Japan)", value: 5 },
       { label: "Scandinavian Airlines", value: 12 },
       { label: "Delta Air Lines", value: 15 },
-      { label: "Spirit Airlines", value: 25 },
-      { label: "Frontier Airlines", value: 22 }
+      { label: "Frontier Airlines", value: 22 },
+      { label: "Spirit Airlines", value: 25 }
     ]
   },
   {
@@ -11016,10 +11014,10 @@ const PUZZLES = [
     instruction: "Fewest to most global registered trademarks (thousands, 2022)",
     category: "Countries by Trademark Registrations",
     items: [
-      { label: "Japan", value: 170 },
       { label: "Germany", value: 82 },
-      { label: "United States", value: 580 },
+      { label: "Japan", value: 170 },
       { label: "India", value: 390 },
+      { label: "United States", value: 580 },
       { label: "China", value: 6170 }
     ]
   },
@@ -11027,10 +11025,10 @@ const PUZZLES = [
     instruction: "Lowest to highest annual avocado production (thousand tonnes)",
     category: "Countries by Avocado Production",
     items: [
-      { label: "Colombia", value: 980 },
-      { label: "Peru", value: 910 },
       { label: "Indonesia", value: 670 },
       { label: "Dominican Republic", value: 700 },
+      { label: "Peru", value: 910 },
+      { label: "Colombia", value: 980 },
       { label: "Mexico", value: 2500 }
     ]
   },
@@ -11039,9 +11037,9 @@ const PUZZLES = [
     category: "NBA Players by Career Games Played",
     items: [
       { label: "Michael Jordan", value: 1072 },
-      { label: "Kareem Abdul-Jabbar", value: 1560 },
       { label: "LeBron James", value: 1492 },
       { label: "Vince Carter", value: 1541 },
+      { label: "Kareem Abdul-Jabbar", value: 1560 },
       { label: "Robert Parish", value: 1611 }
     ]
   },
@@ -11061,8 +11059,8 @@ const PUZZLES = [
     category: "Countries by Corn Production",
     items: [
       { label: "Argentina", value: 50 },
-      { label: "Brazil", value: 109 },
       { label: "European Union (total)", value: 52 },
+      { label: "Brazil", value: 109 },
       { label: "China", value: 277 },
       { label: "United States", value: 349 }
     ]
@@ -11072,10 +11070,10 @@ const PUZZLES = [
     category: "Rugby League Players by Career Tries",
     items: [
       { label: "Andrew Johns (Australia)", value: 88 },
-      { label: "Darren Lockyer (Australia)", value: 167 },
       { label: "Steve Renouf (Australia)", value: 142 },
-      { label: "Ken Irvine (Australia)", value: 212 },
-      { label: "Billy Slater (Australia)", value: 190 }
+      { label: "Darren Lockyer (Australia)", value: 167 },
+      { label: "Billy Slater (Australia)", value: 190 },
+      { label: "Ken Irvine (Australia)", value: 212 }
     ]
   },
   {
@@ -11084,9 +11082,9 @@ const PUZZLES = [
     items: [
       { label: "Paula Radcliffe", value: 3 },
       { label: "Catherine Ndereba", value: 4 },
+      { label: "Mary Keitany", value: 4 },
       { label: "Ingrid Kristiansen", value: 5 },
-      { label: "Grete Waitz", value: 9 },
-      { label: "Mary Keitany", value: 4 }
+      { label: "Grete Waitz", value: 9 }
     ]
   },
   {
@@ -11095,8 +11093,8 @@ const PUZZLES = [
     items: [
       { label: "Babe Ruth (1927)", value: 60 },
       { label: "Roger Maris (1961)", value: 61 },
-      { label: "Mark McGwire (1998)", value: 70 },
       { label: "Sammy Sosa (1998)", value: 66 },
+      { label: "Mark McGwire (1998)", value: 70 },
       { label: "Barry Bonds (2001)", value: 73 }
     ]
   },
@@ -11104,11 +11102,11 @@ const PUZZLES = [
     instruction: "Fewest to most passengers per year on a ferry route (millions)",
     category: "Ferry Routes by Annual Passengers",
     items: [
+      { label: "Tokyo Bay Ferry (all routes)", value: 3 },
       { label: "English Channel (Dover-Calais)", value: 9 },
       { label: "Staten Island Ferry (NYC)", value: 22 },
       { label: "Star Ferry (Hong Kong)", value: 26 },
-      { label: "Bosphorus Ferries (Istanbul)", value: 75 },
-      { label: "Tokyo Bay Ferry (all routes)", value: 3 }
+      { label: "Bosphorus Ferries (Istanbul)", value: 75 }
     ]
   },
   {
@@ -11140,8 +11138,8 @@ const PUZZLES = [
       { label: "Paraguay", value: 10 },
       { label: "India", value: 12 },
       { label: "Argentina", value: 44 },
-      { label: "Brazil", value: 154 },
-      { label: "United States", value: 117 }
+      { label: "United States", value: 117 },
+      { label: "Brazil", value: 154 }
     ]
   },
   {
@@ -11149,8 +11147,8 @@ const PUZZLES = [
     category: "Countries by Olympic Fencing Medals",
     items: [
       { label: "Germany", value: 30 },
-      { label: "Hungary", value: 87 },
       { label: "Russia/USSR", value: 55 },
+      { label: "Hungary", value: 87 },
       { label: "France", value: 120 },
       { label: "Italy", value: 130 }
     ]
@@ -11159,10 +11157,10 @@ const PUZZLES = [
     instruction: "Fewest to most career Olympic medals in table tennis",
     category: "Countries by Olympic Table Tennis Medals",
     items: [
+      { label: "Sweden", value: 5 },
       { label: "Germany", value: 10 },
       { label: "Japan", value: 12 },
       { label: "South Korea", value: 18 },
-      { label: "Sweden", value: 5 },
       { label: "China", value: 60 }
     ]
   },
@@ -11182,10 +11180,10 @@ const PUZZLES = [
     category: "Tennis Players by Australian Open Titles",
     items: [
       { label: "Rafael Nadal", value: 2 },
-      { label: "Roger Federer", value: 6 },
       { label: "Andre Agassi", value: 4 },
-      { label: "Novak Djokovic", value: 10 },
-      { label: "Roy Emerson (Australia)", value: 6 }
+      { label: "Roger Federer", value: 6 },
+      { label: "Roy Emerson (Australia)", value: 6 },
+      { label: "Novak Djokovic", value: 10 }
     ]
   },
   {
@@ -11195,18 +11193,18 @@ const PUZZLES = [
       { label: "Japan", value: 6 },
       { label: "Cuba", value: 8 },
       { label: "United States", value: 11 },
-      { label: "Russia/USSR", value: 16 },
-      { label: "Brazil", value: 12 }
+      { label: "Brazil", value: 12 },
+      { label: "Russia/USSR", value: 16 }
     ]
   },
   {
     instruction: "Fewest to most career appearances in La Liga (soccer)",
     category: "Soccer Players by La Liga Appearances",
     items: [
-      { label: "Iker Casillas", value: 510 },
-      { label: "Raúl", value: 550 },
       { label: "Sergio Ramos", value: 470 },
+      { label: "Iker Casillas", value: 510 },
       { label: "Eusebio Sacristán", value: 543 },
+      { label: "Raúl", value: 550 },
       { label: "Andoni Zubizarreta", value: 622 }
     ]
   },
@@ -11216,8 +11214,8 @@ const PUZZLES = [
     items: [
       { label: "Italy", value: 40 },
       { label: "Australia", value: 43 },
-      { label: "East Germany/Germany", value: 85 },
       { label: "Great Britain", value: 71 },
+      { label: "East Germany/Germany", value: 85 },
       { label: "United States", value: 89 }
     ]
   },
@@ -11237,8 +11235,8 @@ const PUZZLES = [
     category: "Countries by Olympic Weightlifting Medals",
     items: [
       { label: "Iran", value: 19 },
-      { label: "Germany", value: 39 },
       { label: "Bulgaria", value: 38 },
+      { label: "Germany", value: 39 },
       { label: "China", value: 62 },
       { label: "Russia/USSR", value: 62 }
     ]
@@ -11247,11 +11245,11 @@ const PUZZLES = [
     instruction: "Fewest to most career test match appearances (cricket captains)",
     category: "Cricket Captains by Tests as Captain",
     items: [
-      { label: "Ricky Ponting (Australia)", value: 77 },
-      { label: "Graeme Smith (South Africa)", value: 109 },
-      { label: "Stephen Fleming (NZ)", value: 80 },
       { label: "Virat Kohli (India)", value: 68 },
-      { label: "Allan Border (Australia)", value: 93 }
+      { label: "Ricky Ponting (Australia)", value: 77 },
+      { label: "Stephen Fleming (NZ)", value: 80 },
+      { label: "Allan Border (Australia)", value: 93 },
+      { label: "Graeme Smith (South Africa)", value: 109 }
     ]
   },
   {
@@ -11280,8 +11278,8 @@ const PUZZLES = [
     instruction: "Fewest to most total Olympic medals in cycling",
     category: "Countries by Olympic Cycling Medals",
     items: [
-      { label: "Germany (unified)", value: 60 },
       { label: "Australia", value: 52 },
+      { label: "Germany (unified)", value: 60 },
       { label: "Italy", value: 90 },
       { label: "United Kingdom", value: 95 },
       { label: "France", value: 100 }
@@ -11293,8 +11291,8 @@ const PUZZLES = [
     items: [
       { label: "United Kingdom", value: 3200 },
       { label: "United States", value: 40000 },
-      { label: "Russia", value: 102000 },
       { label: "Brazil", value: 50000 },
+      { label: "Russia", value: 102000 },
       { label: "China", value: 110000 }
     ]
   },
@@ -11302,7 +11300,7 @@ const PUZZLES = [
     instruction: "Lowest to highest annual olive oil consumption per capita (kg)",
     category: "Countries by Olive Oil Consumption Per Capita",
     items: [
-      { label: "United States", value: 1.0 },
+      { label: "United States", value: 1 },
       { label: "France", value: 1.5 },
       { label: "Italy", value: 8 },
       { label: "Spain", value: 10 },
@@ -11324,11 +11322,11 @@ const PUZZLES = [
     instruction: "Fewest to most career doubles titles in tennis (men's)",
     category: "Male Tennis Players by Career Doubles Titles",
     items: [
-      { label: "John McEnroe", value: 78 },
       { label: "Mark Woodforde", value: 67 },
-      { label: "Daniel Nestor", value: 91 },
+      { label: "John McEnroe", value: 78 },
       { label: "Todd Woodbridge", value: 83 },
-      { label: "Bob Bryan", value: 86 }
+      { label: "Bob Bryan", value: 86 },
+      { label: "Daniel Nestor", value: 91 }
     ]
   },
   {
@@ -11338,16 +11336,16 @@ const PUZZLES = [
       { label: "Germany", value: 3 },
       { label: "Japan", value: 7 },
       { label: "China", value: 15 },
-      { label: "Greece", value: 17 },
-      { label: "Panama (flag state)", value: 15 }
+      { label: "Panama (flag state)", value: 15 },
+      { label: "Greece", value: 17 }
     ]
   },
   {
     instruction: "Fewest to most career wins at Roland Garros (men's singles)",
     category: "Tennis Players by French Open Titles",
     items: [
-      { label: "Novak Djokovic", value: 3 },
       { label: "Roger Federer", value: 1 },
+      { label: "Novak Djokovic", value: 3 },
       { label: "Bjorn Borg", value: 6 },
       { label: "Max Decugis (France)", value: 8 },
       { label: "Rafael Nadal", value: 14 }
@@ -11379,8 +11377,8 @@ const PUZZLES = [
     instruction: "Fewest to most career goals in ice hockey (NHL, regular season)",
     category: "NHL Players by Career Regular-Season Goals",
     items: [
-      { label: "Brett Hull", value: 741 },
       { label: "Marcel Dionne", value: 731 },
+      { label: "Brett Hull", value: 741 },
       { label: "Jaromír Jágr", value: 766 },
       { label: "Gordie Howe", value: 801 },
       { label: "Wayne Gretzky", value: 894 }
@@ -11412,10 +11410,10 @@ const PUZZLES = [
     instruction: "Fewest to most total Olympic medals in gymnastics by country",
     category: "Countries by Olympic Gymnastics Medals",
     items: [
-      { label: "China", value: 60 },
-      { label: "Japan", value: 98 },
-      { label: "Romania", value: 73 },
       { label: "United States", value: 51 },
+      { label: "China", value: 60 },
+      { label: "Romania", value: 73 },
+      { label: "Japan", value: 98 },
       { label: "Russia/USSR", value: 182 }
     ]
   },
@@ -11423,10 +11421,10 @@ const PUZZLES = [
     instruction: "Lowest to highest annual flower export value (billion USD)",
     category: "Countries by Flower Exports",
     items: [
+      { label: "Ethiopia", value: 0.5 },
       { label: "Kenya", value: 0.8 },
       { label: "Ecuador", value: 0.9 },
       { label: "Colombia", value: 1.8 },
-      { label: "Ethiopia", value: 0.5 },
       { label: "Netherlands", value: 7 }
     ]
   },
@@ -11434,10 +11432,10 @@ const PUZZLES = [
     instruction: "Fewest to most career points in AFL (Australian Rules Football)",
     category: "AFL Players by Career Points (goals × 6)",
     items: [
-      { label: "Jason Dunstall", value: 4482 },
-      { label: "Gary Ablett Sr.", value: 5736 },
-      { label: "Doug Wade", value: 4536 },
       { label: "Gordon Coventry", value: 4260 },
+      { label: "Jason Dunstall", value: 4482 },
+      { label: "Doug Wade", value: 4536 },
+      { label: "Gary Ablett Sr.", value: 5736 },
       { label: "Tony Lockett", value: 7836 }
     ]
   },
@@ -11445,8 +11443,8 @@ const PUZZLES = [
     instruction: "Fewest to most annual music festival attendees (thousands, single event)",
     category: "Music Festivals by Attendance",
     items: [
-      { label: "Coachella (California)", value: 250 },
       { label: "Glastonbury (UK)", value: 210 },
+      { label: "Coachella (California)", value: 250 },
       { label: "Rock in Rio (Brazil)", value: 700 },
       { label: "Summerfest (Milwaukee)", value: 800 },
       { label: "Donauinselfest (Vienna)", value: 3000 }
@@ -11456,9 +11454,9 @@ const PUZZLES = [
     instruction: "Fewest to most total Olympic medals in tennis",
     category: "Countries by Olympic Tennis Medals",
     items: [
-      { label: "Spain", value: 11 },
       { label: "Switzerland", value: 5 },
       { label: "Russia", value: 10 },
+      { label: "Spain", value: 11 },
       { label: "Great Britain", value: 15 },
       { label: "United States", value: 21 }
     ]
@@ -11467,10 +11465,10 @@ const PUZZLES = [
     instruction: "Lowest to highest global fisheries production (million tonnes, aquaculture)",
     category: "Countries by Aquaculture Production",
     items: [
-      { label: "Vietnam", value: 4.6 },
       { label: "Bangladesh", value: 2.6 },
-      { label: "Indonesia", value: 14.8 },
+      { label: "Vietnam", value: 4.6 },
       { label: "India", value: 8.6 },
+      { label: "Indonesia", value: 14.8 },
       { label: "China", value: 72 }
     ]
   },
@@ -11478,9 +11476,9 @@ const PUZZLES = [
     instruction: "Fewest to most career assists in hockey (NHL regular season)",
     category: "NHL Players by Career Assists",
     items: [
-      { label: "Steve Yzerman", value: 1063 },
       { label: "Mario Lemieux", value: 1033 },
       { label: "Gordie Howe", value: 1049 },
+      { label: "Steve Yzerman", value: 1063 },
       { label: "Jaromír Jágr", value: 1155 },
       { label: "Wayne Gretzky", value: 1963 }
     ]
@@ -11491,8 +11489,8 @@ const PUZZLES = [
     items: [
       { label: "Dorothea Wierer", value: 15 },
       { label: "Laura Dahlmeier", value: 17 },
-      { label: "Kaisa Mäkäräinen", value: 26 },
       { label: "Tora Berger", value: 18 },
+      { label: "Kaisa Mäkäräinen", value: 26 },
       { label: "Magdalena Forsberg", value: 42 }
     ]
   },
@@ -11500,11 +11498,11 @@ const PUZZLES = [
     instruction: "Fewest to most career appearances in the English Premier League",
     category: "Premier League Players by Career Appearances",
     items: [
-      { label: "Frank Lampard", value: 609 },
       { label: "David James", value: 572 },
+      { label: "Frank Lampard", value: 609 },
+      { label: "James Milner", value: 612 },
       { label: "Ryan Giggs", value: 632 },
-      { label: "Gareth Barry", value: 653 },
-      { label: "James Milner", value: 612 }
+      { label: "Gareth Barry", value: 653 }
     ]
   },
   {
@@ -11533,10 +11531,10 @@ const PUZZLES = [
     instruction: "Fewest to most total Olympic medals in archery",
     category: "Countries by Olympic Archery Medals",
     items: [
-      { label: "China", value: 9 },
-      { label: "United States", value: 14 },
       { label: "Japan", value: 6 },
+      { label: "China", value: 9 },
       { label: "Italy", value: 10 },
+      { label: "United States", value: 14 },
       { label: "South Korea", value: 43 }
     ]
   },
@@ -11555,9 +11553,9 @@ const PUZZLES = [
     instruction: "Fewest to most total Olympic medals in shooting",
     category: "Countries by Olympic Shooting Medals",
     items: [
+      { label: "Sweden", value: 44 },
       { label: "Germany", value: 45 },
       { label: "Russia/USSR", value: 50 },
-      { label: "Sweden", value: 44 },
       { label: "China", value: 60 },
       { label: "United States", value: 112 }
     ]
@@ -11567,9 +11565,9 @@ const PUZZLES = [
     category: "Serie A Players by Career Goals",
     items: [
       { label: "Alessandro Del Piero", value: 188 },
-      { label: "Francesco Totti", value: 250 },
       { label: "Giuseppe Meazza", value: 216 },
       { label: "Gunnar Nordahl", value: 225 },
+      { label: "Francesco Totti", value: 250 },
       { label: "Silvio Piola", value: 274 }
     ]
   },
@@ -11577,8 +11575,8 @@ const PUZZLES = [
     instruction: "Fewest to most career Premier League goals",
     category: "Premier League Players by Career Goals",
     items: [
-      { label: "Frank Lampard", value: 177 },
       { label: "Thierry Henry", value: 175 },
+      { label: "Frank Lampard", value: 177 },
       { label: "Sergio Agüero", value: 184 },
       { label: "Wayne Rooney", value: 208 },
       { label: "Alan Shearer", value: 260 }
@@ -11588,11 +11586,11 @@ const PUZZLES = [
     instruction: "Fewest to most annual shipbuilding output (million gross tonnes, 2022)",
     category: "Countries by Shipbuilding Output",
     items: [
-      { label: "Japan", value: 6 },
-      { label: "China", value: 24 },
-      { label: "South Korea", value: 15 },
+      { label: "Italy", value: 0.5 },
       { label: "Philippines", value: 1 },
-      { label: "Italy", value: 0.5 }
+      { label: "Japan", value: 6 },
+      { label: "South Korea", value: 15 },
+      { label: "China", value: 24 }
     ]
   },
   {
@@ -11610,8 +11608,8 @@ const PUZZLES = [
     instruction: "Fewest to most total career points in NHL (regular season)",
     category: "NHL Players by Career Points",
     items: [
-      { label: "Steve Yzerman", value: 1755 },
       { label: "Mario Lemieux", value: 1723 },
+      { label: "Steve Yzerman", value: 1755 },
       { label: "Gordie Howe", value: 1850 },
       { label: "Jaromír Jágr", value: 1921 },
       { label: "Wayne Gretzky", value: 2857 }
@@ -11632,8 +11630,8 @@ const PUZZLES = [
     instruction: "Lowest to highest global cement production (million tonnes, 2022)",
     category: "Countries by Cement Production",
     items: [
-      { label: "United States", value: 93 },
       { label: "Turkey", value: 65 },
+      { label: "United States", value: 93 },
       { label: "Vietnam", value: 100 },
       { label: "India", value: 370 },
       { label: "China", value: 2100 }
@@ -11643,19 +11641,19 @@ const PUZZLES = [
     instruction: "Fewest to most career goals in Ligue 1 (French soccer)",
     category: "Ligue 1 Players by Career Goals",
     items: [
-      { label: "Kylian Mbappé", value: 170 },
+      { label: "Bernard Lacombe", value: 149 },
       { label: "Jean-Pierre Papin", value: 156 },
+      { label: "Kylian Mbappé", value: 170 },
       { label: "Hervé Revelli", value: 180 },
-      { label: "Delio Onnis", value: 299 },
-      { label: "Bernard Lacombe", value: 149 }
+      { label: "Delio Onnis", value: 299 }
     ]
   },
   {
     instruction: "Fewest to most total Olympic medals in badminton",
     category: "Countries by Olympic Badminton Medals",
     items: [
-      { label: "Japan", value: 10 },
       { label: "Denmark", value: 7 },
+      { label: "Japan", value: 10 },
       { label: "South Korea", value: 19 },
       { label: "Indonesia", value: 19 },
       { label: "China", value: 47 }
@@ -11689,9 +11687,9 @@ const PUZZLES = [
     items: [
       { label: "Emil Hegle Svendsen", value: 29 },
       { label: "Raphaël Poirée", value: 44 },
+      { label: "Johannes Thingnes Bø", value: 80 },
       { label: "Martin Fourcade", value: 83 },
-      { label: "Ole Einar Bjørndalen", value: 95 },
-      { label: "Johannes Thingnes Bø", value: 80 }
+      { label: "Ole Einar Bjørndalen", value: 95 }
     ]
   },
   {
@@ -11701,8 +11699,8 @@ const PUZZLES = [
       { label: "Australia", value: 20 },
       { label: "Germany", value: 26 },
       { label: "France", value: 49 },
-      { label: "Great Britain", value: 63 },
-      { label: "United States", value: 61 }
+      { label: "United States", value: 61 },
+      { label: "Great Britain", value: 63 }
     ]
   },
   {
@@ -11712,17 +11710,17 @@ const PUZZLES = [
       { label: "Vreni Schneider", value: 55 },
       { label: "Annemarie Moser-Pröll", value: 62 },
       { label: "Lindsey Vonn", value: 82 },
-      { label: "Mikaela Shiffrin", value: 97 },
-      { label: "Ingemar Stenmark (men's, for comparison)", value: 86 }
+      { label: "Ingemar Stenmark (men's, for comparison)", value: 86 },
+      { label: "Mikaela Shiffrin", value: 97 }
     ]
   },
   {
     instruction: "Fewest to most career centuries in BBL (Big Bash League)",
     category: "BBL Players by Centuries",
     items: [
-      { label: "Chris Lynn", value: 3 },
       { label: "Marcus Stoinis", value: 2 },
       { label: "D'Arcy Short", value: 2 },
+      { label: "Chris Lynn", value: 3 },
       { label: "Aaron Finch", value: 4 },
       { label: "Chris Gayle (all T20 leagues)", value: 22 }
     ]
@@ -11810,7 +11808,7 @@ const PUZZLES = [
     items: [
       { label: "Ceres", value: 0.5 },
       { label: "Moon", value: 2.4 },
-      { label: "Mars", value: 5.0 },
+      { label: "Mars", value: 5 },
       { label: "Earth", value: 11.2 },
       { label: "Sun", value: 618 }
     ]
@@ -11852,10 +11850,10 @@ const PUZZLES = [
     instruction: "Lowest to highest global mushroom production (million tonnes)",
     category: "Countries by Mushroom Production",
     items: [
-      { label: "Japan", value: 0.5 },
+      { label: "India", value: 0.2 },
       { label: "United States", value: 0.4 },
       { label: "Poland", value: 0.4 },
-      { label: "India", value: 0.2 },
+      { label: "Japan", value: 0.5 },
       { label: "China", value: 39 }
     ]
   },
@@ -11874,10 +11872,10 @@ const PUZZLES = [
     instruction: "Fewest to most career marathon finishes under 2:10 (men's)",
     category: "Marathon Runners by Sub-2:10 Finishes",
     items: [
-      { label: "Haile Gebrselassie", value: 7 },
-      { label: "Kenenisa Bekele", value: 6 },
-      { label: "Wilson Kipsang", value: 11 },
       { label: "Dennis Kimetto", value: 5 },
+      { label: "Kenenisa Bekele", value: 6 },
+      { label: "Haile Gebrselassie", value: 7 },
+      { label: "Wilson Kipsang", value: 11 },
       { label: "Eliud Kipchoge", value: 14 }
     ]
   },
@@ -11921,16 +11919,16 @@ const PUZZLES = [
       { label: "Seychelles", value: 2 },
       { label: "Tuvalu", value: 6 },
       { label: "Kiribati", value: 21 },
-      { label: "Marshall Islands", value: 29 },
-      { label: "Maldives", value: 26 }
+      { label: "Maldives", value: 26 },
+      { label: "Marshall Islands", value: 29 }
     ]
   },
   {
     instruction: "Lowest to highest electrical resistivity (Ω·m)",
     category: "Materials by Electrical Resistivity",
     items: [
-      { label: "Silver", value: 0.0000000159 },
-      { label: "Copper", value: 0.0000000168 },
+      { label: "Silver", value: 1.59e-8 },
+      { label: "Copper", value: 1.68e-8 },
       { label: "Silicon", value: 640 },
       { label: "Glass", value: 10000000000 },
       { label: "Teflon", value: 1e+23 }
@@ -11942,8 +11940,8 @@ const PUZZLES = [
     items: [
       { label: "Pete Sampras", value: 11 },
       { label: "Andre Agassi", value: 17 },
-      { label: "Rafael Nadal", value: 36 },
       { label: "Roger Federer", value: 28 },
+      { label: "Rafael Nadal", value: 36 },
       { label: "Novak Djokovic", value: 40 }
     ]
   },
@@ -11963,8 +11961,8 @@ const PUZZLES = [
     category: "Countries by Number of Hot Springs",
     items: [
       { label: "Italy", value: 100 },
-      { label: "United States", value: 1600 },
       { label: "Iceland", value: 800 },
+      { label: "United States", value: 1600 },
       { label: "China", value: 3000 },
       { label: "Japan", value: 27000 }
     ]
@@ -11976,8 +11974,8 @@ const PUZZLES = [
       { label: "Dan Jansen (USA)", value: 4 },
       { label: "Bonnie Blair (USA)", value: 5 },
       { label: "Eric Heiden (USA)", value: 6 },
-      { label: "Ard Schenk (Netherlands)", value: 18 },
-      { label: "Ireen Wüst (Netherlands)", value: 10 }
+      { label: "Ireen Wüst (Netherlands)", value: 10 },
+      { label: "Ard Schenk (Netherlands)", value: 18 }
     ]
   },
   {
@@ -11997,8 +11995,8 @@ const PUZZLES = [
     items: [
       { label: "Antarctic Ozone Hole (min)", value: 100 },
       { label: "Tropics (equator)", value: 260 },
-      { label: "Mid-latitudes (45°N)", value: 350 },
       { label: "Arctic (spring)", value: 300 },
+      { label: "Mid-latitudes (45°N)", value: 350 },
       { label: "Northern Hemisphere (peak)", value: 400 }
     ]
   },
@@ -12006,10 +12004,10 @@ const PUZZLES = [
     instruction: "Fewest to most career goals in women's soccer (international)",
     category: "Women Soccer Players by International Goals",
     items: [
-      { label: "Mia Hamm (USA)", value: 158 },
-      { label: "Marta (Brazil)", value: 115 },
-      { label: "Abby Wambach (USA)", value: 184 },
       { label: "Sam Kerr (Australia)", value: 67 },
+      { label: "Marta (Brazil)", value: 115 },
+      { label: "Mia Hamm (USA)", value: 158 },
+      { label: "Abby Wambach (USA)", value: 184 },
       { label: "Christine Sinclair (Canada)", value: 190 }
     ]
   },
@@ -12017,8 +12015,8 @@ const PUZZLES = [
     instruction: "Fewest to most total Olympic medals in shooting sports",
     category: "Countries by Olympic Shooting Medals (Rifle/Pistol/Shotgun)",
     items: [
-      { label: "Italy", value: 40 },
       { label: "France", value: 35 },
+      { label: "Italy", value: 40 },
       { label: "Russia/USSR", value: 55 },
       { label: "China", value: 58 },
       { label: "United States", value: 110 }
@@ -12029,9 +12027,9 @@ const PUZZLES = [
     category: "Countries by Apple Production",
     items: [
       { label: "France", value: 1.8 },
-      { label: "United States", value: 4.5 },
-      { label: "Turkey", value: 4.3 },
       { label: "Poland", value: 4 },
+      { label: "Turkey", value: 4.3 },
+      { label: "United States", value: 4.5 },
       { label: "China", value: 46 }
     ]
   },
@@ -12052,8 +12050,8 @@ const PUZZLES = [
     items: [
       { label: "Caribou (North America)", value: 0.5 },
       { label: "Wildebeest (Serengeti)", value: 1.5 },
-      { label: "Monarch Butterflies", value: 300 },
       { label: "Christmas Island Red Crabs", value: 50 },
+      { label: "Monarch Butterflies", value: 300 },
       { label: "Sardines (South Africa)", value: 5000 }
     ]
   },
@@ -12061,10 +12059,10 @@ const PUZZLES = [
     instruction: "Fewest to most total career assists in Bundesliga",
     category: "Bundesliga Players by Career Assists",
     items: [
-      { label: "Franck Ribéry", value: 85 },
-      { label: "Mesut Özil", value: 54 },
-      { label: "Arjen Robben", value: 51 },
       { label: "Kevin De Bruyne", value: 40 },
+      { label: "Arjen Robben", value: 51 },
+      { label: "Mesut Özil", value: 54 },
+      { label: "Franck Ribéry", value: 85 },
       { label: "Thomas Müller", value: 151 }
     ]
   },
@@ -12072,10 +12070,10 @@ const PUZZLES = [
     instruction: "Fewest to most career wickets in T20 cricket (all formats)",
     category: "T20 Cricket Bowlers by Career Wickets",
     items: [
-      { label: "Rashid Khan", value: 500 },
-      { label: "Sunil Narine", value: 480 },
-      { label: "Imran Tahir", value: 470 },
       { label: "Lasith Malinga", value: 390 },
+      { label: "Imran Tahir", value: 470 },
+      { label: "Sunil Narine", value: 480 },
+      { label: "Rashid Khan", value: 500 },
       { label: "Dwayne Bravo", value: 600 }
     ]
   },
@@ -12085,9 +12083,9 @@ const PUZZLES = [
     items: [
       { label: "Typical Alpine Glacier", value: 10 },
       { label: "Hubbard Glacier (Alaska)", value: 25 },
+      { label: "Pine Island Glacier (Antarctica)", value: 4000 },
       { label: "Columbia Glacier (Alaska)", value: 8000 },
-      { label: "Jakobshavn Glacier (Greenland)", value: 20000 },
-      { label: "Pine Island Glacier (Antarctica)", value: 4000 }
+      { label: "Jakobshavn Glacier (Greenland)", value: 20000 }
     ]
   },
   {
@@ -12096,8 +12094,8 @@ const PUZZLES = [
     items: [
       { label: "Cincinnati Reds", value: 3 },
       { label: "Oakland Athletics", value: 4 },
-      { label: "Los Angeles Dodgers", value: 8 },
       { label: "St. Louis Cardinals", value: 6 },
+      { label: "Los Angeles Dodgers", value: 8 },
       { label: "New York Yankees", value: 13 }
     ]
   },
@@ -12138,9 +12136,9 @@ const PUZZLES = [
     instruction: "Lowest to highest annual rainfall in a rainforest (mm)",
     category: "Rainforests by Annual Rainfall",
     items: [
+      { label: "Congo Basin", value: 1800 },
       { label: "Temperate Rainforest (Pacific NW)", value: 2000 },
       { label: "Amazon (average)", value: 2300 },
-      { label: "Congo Basin", value: 1800 },
       { label: "Daintree (Australia)", value: 3000 },
       { label: "Chocó Region (Colombia)", value: 10000 }
     ]
@@ -12149,9 +12147,9 @@ const PUZZLES = [
     instruction: "Fewest to most species of cactus native to a country",
     category: "Countries by Native Cactus Species",
     items: [
-      { label: "Argentina", value: 200 },
       { label: "Bolivia", value: 100 },
       { label: "United States", value: 150 },
+      { label: "Argentina", value: 200 },
       { label: "Brazil", value: 270 },
       { label: "Mexico", value: 669 }
     ]
@@ -12174,8 +12172,8 @@ const PUZZLES = [
       { label: "Gunde Svan (Sweden)", value: 4 },
       { label: "Vegard Ulvang (Norway)", value: 4 },
       { label: "Bjørn Dæhlie (Norway)", value: 12 },
-      { label: "Marit Bjørgen (Norway)", value: 15 },
-      { label: "Ole Einar Bjørndalen (biathlon/xc)", value: 13 }
+      { label: "Ole Einar Bjørndalen (biathlon/xc)", value: 13 },
+      { label: "Marit Bjørgen (Norway)", value: 15 }
     ]
   },
   {
@@ -12183,8 +12181,8 @@ const PUZZLES = [
     category: "Darts Players by Total World Titles",
     items: [
       { label: "John Lowe", value: 1 },
-      { label: "Raymond van Barneveld", value: 5 },
       { label: "Michael van Gerwen", value: 3 },
+      { label: "Raymond van Barneveld", value: 5 },
       { label: "Eric Bristow", value: 5 },
       { label: "Phil Taylor", value: 16 }
     ]
@@ -12204,10 +12202,10 @@ const PUZZLES = [
     instruction: "Fewest to most total career yellow jersey days in Tour de France",
     category: "Cyclists by Days in Yellow Jersey",
     items: [
-      { label: "Chris Froome", value: 59 },
-      { label: "Bernard Hinault", value: 79 },
-      { label: "Miguel Indurain", value: 60 },
       { label: "Jacques Anquetil", value: 50 },
+      { label: "Chris Froome", value: 59 },
+      { label: "Miguel Indurain", value: 60 },
+      { label: "Bernard Hinault", value: 79 },
       { label: "Eddy Merckx", value: 96 }
     ]
   },
@@ -12226,11 +12224,11 @@ const PUZZLES = [
     instruction: "Fewest to most career wins in cross-country skiing World Cup",
     category: "Cross-Country Skiers by World Cup Wins",
     items: [
-      { label: "Gunde Svan (Sweden)", value: 30 },
       { label: "Dario Cologna (Switzerland)", value: 15 },
-      { label: "Marit Bjørgen (Norway)", value: 85 },
+      { label: "Gunde Svan (Sweden)", value: 30 },
       { label: "Bjørn Dæhlie (Norway)", value: 46 },
-      { label: "Johaug (Norway)", value: 80 }
+      { label: "Johaug (Norway)", value: 80 },
+      { label: "Marit Bjørgen (Norway)", value: 85 }
     ]
   },
   {
@@ -12238,9 +12236,9 @@ const PUZZLES = [
     category: "Countries by Olympic Wrestling Medals",
     items: [
       { label: "Iran", value: 43 },
+      { label: "United States", value: 54 },
       { label: "Turkey", value: 60 },
       { label: "Japan", value: 69 },
-      { label: "United States", value: 54 },
       { label: "Russia/USSR", value: 116 }
     ]
   },
@@ -12259,11 +12257,11 @@ const PUZZLES = [
     instruction: "Fewest to most total Olympic medals in canoeing/kayaking",
     category: "Countries by Olympic Canoeing Medals",
     items: [
-      { label: "France", value: 24 },
       { label: "Australia", value: 13 },
-      { label: "Hungary", value: 80 },
+      { label: "France", value: 24 },
+      { label: "Russia/USSR", value: 30 },
       { label: "Germany (unified)", value: 70 },
-      { label: "Russia/USSR", value: 30 }
+      { label: "Hungary", value: 80 }
     ]
   },
   {
@@ -12271,9 +12269,9 @@ const PUZZLES = [
     category: "Women Soccer Players by Champions League Goals",
     items: [
       { label: "Marta (Brazil)", value: 20 },
+      { label: "Cristiane (Brazil)", value: 44 },
       { label: "Eugénie Le Sommer (France)", value: 46 },
       { label: "Anja Mittag (Germany)", value: 51 },
-      { label: "Cristiane (Brazil)", value: 44 },
       { label: "Ada Hegerberg (Norway)", value: 59 }
     ]
   },
@@ -12282,9 +12280,9 @@ const PUZZLES = [
     category: "Soccer Players by World Cup Goals",
     items: [
       { label: "Pelé", value: 12 },
-      { label: "Ronaldo Nazário", value: 15 },
-      { label: "Gerd Müller", value: 14 },
       { label: "Just Fontaine", value: 13 },
+      { label: "Gerd Müller", value: 14 },
+      { label: "Ronaldo Nazário", value: 15 },
       { label: "Miroslav Klose", value: 16 }
     ]
   },
@@ -12292,10 +12290,10 @@ const PUZZLES = [
     instruction: "Fewest to most total Olympic medals in taekwondo",
     category: "Countries by Olympic Taekwondo Medals",
     items: [
-      { label: "Iran", value: 12 },
+      { label: "United States", value: 5 },
       { label: "Turkey", value: 8 },
       { label: "China", value: 10 },
-      { label: "United States", value: 5 },
+      { label: "Iran", value: 12 },
       { label: "South Korea", value: 22 }
     ]
   },
@@ -12315,8 +12313,8 @@ const PUZZLES = [
     category: "Cricket Fielders by Test Catches",
     items: [
       { label: "Brian Lara (West Indies)", value: 164 },
-      { label: "Jacques Kallis (South Africa)", value: 200 },
       { label: "Ricky Ponting (Australia)", value: 196 },
+      { label: "Jacques Kallis (South Africa)", value: 200 },
       { label: "Mahela Jayawardene (Sri Lanka)", value: 205 },
       { label: "Rahul Dravid (India)", value: 210 }
     ]
@@ -12336,11 +12334,11 @@ const PUZZLES = [
     instruction: "Fewest to most career World Championship medals in athletics",
     category: "Athletes by World Championship Medals",
     items: [
-      { label: "Carl Lewis", value: 10 },
       { label: "Mo Farah", value: 6 },
+      { label: "Carl Lewis", value: 10 },
       { label: "Shelly-Ann Fraser-Pryce", value: 10 },
-      { label: "Allyson Felix", value: 20 },
-      { label: "Usain Bolt", value: 14 }
+      { label: "Usain Bolt", value: 14 },
+      { label: "Allyson Felix", value: 20 }
     ]
   },
   {
@@ -12350,8 +12348,8 @@ const PUZZLES = [
       { label: "Armin Zöggeler (Italy)", value: 10 },
       { label: "Georg Hackl (Germany)", value: 18 },
       { label: "Felix Loch (Germany)", value: 45 },
-      { label: "Natalie Geisenberger (Germany)", value: 55 },
-      { label: "Tobias Wendl/Tobias Arlt", value: 50 }
+      { label: "Tobias Wendl/Tobias Arlt", value: 50 },
+      { label: "Natalie Geisenberger (Germany)", value: 55 }
     ]
   },
   {
@@ -12370,20 +12368,20 @@ const PUZZLES = [
     category: "Countries by Pistachio Production",
     items: [
       { label: "Syria", value: 20 },
+      { label: "China", value: 80 },
       { label: "Turkey", value: 240 },
       { label: "United States", value: 450 },
-      { label: "Iran", value: 580 },
-      { label: "China", value: 80 }
+      { label: "Iran", value: 580 }
     ]
   },
   {
     instruction: "Lowest to highest annual pork consumption per capita (kg)",
     category: "Countries by Pork Consumption Per Capita",
     items: [
-      { label: "United States", value: 28 },
       { label: "Brazil", value: 14 },
-      { label: "Germany", value: 38 },
+      { label: "United States", value: 28 },
       { label: "China", value: 32 },
+      { label: "Germany", value: 38 },
       { label: "Austria", value: 56 }
     ]
   },
@@ -12413,11 +12411,11 @@ const PUZZLES = [
     instruction: "Fewest to most total Olympic medals in handball",
     category: "Countries by Olympic Handball Medals",
     items: [
-      { label: "Germany", value: 6 },
-      { label: "Sweden", value: 8 },
       { label: "Croatia", value: 5 },
-      { label: "France", value: 10 },
-      { label: "Denmark", value: 7 }
+      { label: "Germany", value: 6 },
+      { label: "Denmark", value: 7 },
+      { label: "Sweden", value: 8 },
+      { label: "France", value: 10 }
     ]
   },
   {
@@ -12427,8 +12425,8 @@ const PUZZLES = [
       { label: "Colin McRae", value: 1 },
       { label: "Walter Röhrl", value: 2 },
       { label: "Tommi Mäkinen", value: 4 },
-      { label: "Sébastien Loeb", value: 9 },
-      { label: "Sébastien Ogier", value: 8 }
+      { label: "Sébastien Ogier", value: 8 },
+      { label: "Sébastien Loeb", value: 9 }
     ]
   },
   {
@@ -12458,8 +12456,8 @@ const PUZZLES = [
     category: "F1 Drivers by Career Laps Completed",
     items: [
       { label: "Ayrton Senna", value: 8397 },
-      { label: "Michael Schumacher", value: 16825 },
       { label: "Sebastian Vettel", value: 16232 },
+      { label: "Michael Schumacher", value: 16825 },
       { label: "Kimi Räikkönen", value: 18622 },
       { label: "Lewis Hamilton", value: 19500 }
     ]
@@ -12469,10 +12467,10 @@ const PUZZLES = [
     category: "Actors by Oscar Nominations",
     items: [
       { label: "Leonardo DiCaprio", value: 7 },
-      { label: "Jack Nicholson", value: 12 },
       { label: "Cate Blanchett", value: 8 },
-      { label: "Meryl Streep", value: 21 },
-      { label: "Katharine Hepburn", value: 12 }
+      { label: "Jack Nicholson", value: 12 },
+      { label: "Katharine Hepburn", value: 12 },
+      { label: "Meryl Streep", value: 21 }
     ]
   },
   {
@@ -12491,8 +12489,8 @@ const PUZZLES = [
     category: "Musicians by Grammy Awards",
     items: [
       { label: "Adele", value: 16 },
-      { label: "Stevie Wonder", value: 25 },
       { label: "Jay-Z", value: 24 },
+      { label: "Stevie Wonder", value: 25 },
       { label: "Quincy Jones", value: 28 },
       { label: "Beyoncé", value: 32 }
     ]
@@ -12501,22 +12499,22 @@ const PUZZLES = [
     instruction: "Fewest to most Tony Awards won (career, individual)",
     category: "Theater Performers by Tony Awards",
     items: [
-      { label: "Audra McDonald", value: 6 },
+      { label: "Bob Fosse", value: 4 },
       { label: "Angela Lansbury", value: 5 },
       { label: "Julie Harris", value: 5 },
-      { label: "Harold Prince (producer/director)", value: 21 },
-      { label: "Bob Fosse", value: 4 }
+      { label: "Audra McDonald", value: 6 },
+      { label: "Harold Prince (producer/director)", value: 21 }
     ]
   },
   {
     instruction: "Fewest to most career Emmy Awards won (individual)",
     category: "TV Personalities by Emmy Awards",
     items: [
-      { label: "Jon Stewart", value: 20 },
-      { label: "Julia Louis-Dreyfus", value: 11 },
-      { label: "Sheila Nevins", value: 26 },
       { label: "Bill Maher", value: 1 },
-      { label: "Dwight Hemion (director)", value: 18 }
+      { label: "Julia Louis-Dreyfus", value: 11 },
+      { label: "Dwight Hemion (director)", value: 18 },
+      { label: "Jon Stewart", value: 20 },
+      { label: "Sheila Nevins", value: 26 }
     ]
   },
   {
@@ -12545,10 +12543,10 @@ const PUZZLES = [
     instruction: "Fewest to most career WTA titles in tennis",
     category: "Women Tennis Players by Career WTA Titles",
     items: [
+      { label: "Billie Jean King", value: 67 },
       { label: "Serena Williams", value: 73 },
       { label: "Steffi Graf", value: 107 },
       { label: "Chris Evert", value: 157 },
-      { label: "Billie Jean King", value: 67 },
       { label: "Martina Navratilova", value: 167 }
     ]
   },
@@ -12556,11 +12554,11 @@ const PUZZLES = [
     instruction: "Fewest to most career World Cup downhill wins (Alpine skiing)",
     category: "Alpine Skiers by Downhill World Cup Wins",
     items: [
-      { label: "Michael Walchhofer", value: 12 },
       { label: "Luc Alphand", value: 9 },
+      { label: "Michael Walchhofer", value: 12 },
       { label: "Didier Cuche", value: 14 },
-      { label: "Lindsey Vonn", value: 43 },
-      { label: "Franz Klammer", value: 25 }
+      { label: "Franz Klammer", value: 25 },
+      { label: "Lindsey Vonn", value: 43 }
     ]
   },
   {
@@ -12569,19 +12567,19 @@ const PUZZLES = [
     items: [
       { label: "J.R.R. Tolkien", value: 300 },
       { label: "J.K. Rowling", value: 600 },
+      { label: "Barbara Cartland", value: 750 },
       { label: "Agatha Christie", value: 2000 },
-      { label: "William Shakespeare (print)", value: 4000 },
-      { label: "Barbara Cartland", value: 750 }
+      { label: "William Shakespeare (print)", value: 4000 }
     ]
   },
   {
     instruction: "Fewest to most volcanoes in a US state",
     category: "US States by Volcano Count",
     items: [
-      { label: "Oregon", value: 22 },
-      { label: "California", value: 20 },
-      { label: "Washington", value: 7 },
       { label: "Hawaii", value: 6 },
+      { label: "Washington", value: 7 },
+      { label: "California", value: 20 },
+      { label: "Oregon", value: 22 },
       { label: "Alaska", value: 141 }
     ]
   },
@@ -12589,9 +12587,9 @@ const PUZZLES = [
     instruction: "Fewest to most career La Liga assists (soccer)",
     category: "La Liga Players by Career Assists",
     items: [
+      { label: "Luis Suárez", value: 56 },
       { label: "Cristiano Ronaldo", value: 63 },
       { label: "Karim Benzema", value: 97 },
-      { label: "Luis Suárez", value: 56 },
       { label: "Xavi", value: 120 },
       { label: "Lionel Messi", value: 192 }
     ]
@@ -12603,8 +12601,8 @@ const PUZZLES = [
       { label: "Africa", value: 1 },
       { label: "Galápagos Islands", value: 1 },
       { label: "New Zealand", value: 6 },
-      { label: "South America", value: 8 },
-      { label: "Antarctica/Sub-Antarctic", value: 7 }
+      { label: "Antarctica/Sub-Antarctic", value: 7 },
+      { label: "South America", value: 8 }
     ]
   },
   {
@@ -12623,10 +12621,10 @@ const PUZZLES = [
     category: "Eredivisie Players by Career Goals",
     items: [
       { label: "Marco van Basten", value: 128 },
-      { label: "Johan Cruyff", value: 215 },
       { label: "Ruud Geels", value: 195 },
-      { label: "Willy van der Kuijlen", value: 311 },
-      { label: "Abe Lenstra", value: 306 }
+      { label: "Johan Cruyff", value: 215 },
+      { label: "Abe Lenstra", value: 306 },
+      { label: "Willy van der Kuijlen", value: 311 }
     ]
   },
   {
@@ -12635,8 +12633,8 @@ const PUZZLES = [
     items: [
       { label: "Honda", value: 90 },
       { label: "Renault", value: 168 },
-      { label: "Mercedes", value: 210 },
       { label: "Ford (Cosworth)", value: 176 },
+      { label: "Mercedes", value: 210 },
       { label: "Ferrari", value: 243 }
     ]
   },
@@ -12644,19 +12642,19 @@ const PUZZLES = [
     instruction: "Fewest to most career Olympic medals in alpine skiing",
     category: "Alpine Skiers by Olympic Medals",
     items: [
-      { label: "Alberto Tomba (Italy)", value: 5 },
       { label: "Jean-Claude Killy (France)", value: 3 },
+      { label: "Marcel Hirscher (Austria)", value: 3 },
+      { label: "Alberto Tomba (Italy)", value: 5 },
       { label: "Bode Miller (USA)", value: 6 },
-      { label: "Kjetil André Aamodt (Norway)", value: 8 },
-      { label: "Marcel Hirscher (Austria)", value: 3 }
+      { label: "Kjetil André Aamodt (Norway)", value: 8 }
     ]
   },
   {
     instruction: "Lowest to highest annual hazelnut production (thousand tonnes)",
     category: "Countries by Hazelnut Production",
     items: [
-      { label: "United States", value: 50 },
       { label: "Georgia", value: 40 },
+      { label: "United States", value: 50 },
       { label: "Chile", value: 60 },
       { label: "Italy", value: 100 },
       { label: "Turkey", value: 700 }
@@ -12667,8 +12665,8 @@ const PUZZLES = [
     category: "Ligue 1 Players by Career Assists",
     items: [
       { label: "Neymar", value: 50 },
-      { label: "Kylian Mbappé", value: 70 },
       { label: "Juninho Pernambucano", value: 61 },
+      { label: "Kylian Mbappé", value: 70 },
       { label: "Ángel Di María", value: 79 },
       { label: "Dimitri Payet", value: 100 }
     ]
@@ -12688,11 +12686,11 @@ const PUZZLES = [
     instruction: "Lowest to highest annual cashew production (thousand tonnes)",
     category: "Countries by Cashew Production",
     items: [
-      { label: "Ivory Coast", value: 1000 },
-      { label: "Tanzania", value: 290 },
-      { label: "India", value: 790 },
       { label: "Mozambique", value: 180 },
-      { label: "Vietnam", value: 380 }
+      { label: "Tanzania", value: 290 },
+      { label: "Vietnam", value: 380 },
+      { label: "India", value: 790 },
+      { label: "Ivory Coast", value: 1000 }
     ]
   },
   {
@@ -12700,10 +12698,10 @@ const PUZZLES = [
     category: "Premier League Players by Hat Tricks",
     items: [
       { label: "Thierry Henry", value: 8 },
-      { label: "Robbie Fowler", value: 9 },
       { label: "Michael Owen", value: 8 },
-      { label: "Wayne Rooney", value: 12 },
-      { label: "Alan Shearer", value: 11 }
+      { label: "Robbie Fowler", value: 9 },
+      { label: "Alan Shearer", value: 11 },
+      { label: "Wayne Rooney", value: 12 }
     ]
   },
   {
@@ -12711,19 +12709,19 @@ const PUZZLES = [
     category: "Countries by Olympic Diving Medals",
     items: [
       { label: "Mexico", value: 14 },
-      { label: "Germany", value: 22 },
       { label: "Australia", value: 14 },
-      { label: "China", value: 82 },
-      { label: "United States", value: 49 }
+      { label: "Germany", value: 22 },
+      { label: "United States", value: 49 },
+      { label: "China", value: 82 }
     ]
   },
   {
     instruction: "Lowest to highest annual production of oranges (million tonnes)",
     category: "Countries by Orange Production",
     items: [
+      { label: "Egypt", value: 3.5 },
       { label: "United States", value: 4 },
       { label: "Mexico", value: 4.5 },
-      { label: "Egypt", value: 3.5 },
       { label: "China", value: 7.5 },
       { label: "Brazil", value: 17 }
     ]
@@ -12733,9 +12731,9 @@ const PUZZLES = [
     category: "Serie A Players by Career Assists",
     items: [
       { label: "Cristiano Ronaldo", value: 22 },
-      { label: "Alessandro Del Piero", value: 100 },
-      { label: "Roberto Baggio", value: 70 },
       { label: "Andrea Pirlo", value: 63 },
+      { label: "Roberto Baggio", value: 70 },
+      { label: "Alessandro Del Piero", value: 100 },
       { label: "Francesco Totti", value: 138 }
     ]
   },
@@ -12744,10 +12742,10 @@ const PUZZLES = [
     category: "Countries by Olympic Field Hockey Medals",
     items: [
       { label: "South Korea", value: 5 },
-      { label: "Australia", value: 12 },
       { label: "Pakistan", value: 8 },
-      { label: "Netherlands", value: 15 },
-      { label: "India", value: 12 }
+      { label: "Australia", value: 12 },
+      { label: "India", value: 12 },
+      { label: "Netherlands", value: 15 }
     ]
   },
   {
@@ -12755,8 +12753,8 @@ const PUZZLES = [
     category: "Countries by Mango Production",
     items: [
       { label: "Brazil", value: 1.5 },
-      { label: "Thailand", value: 3.6 },
       { label: "Indonesia", value: 3 },
+      { label: "Thailand", value: 3.6 },
       { label: "China", value: 5 },
       { label: "India", value: 21 }
     ]
@@ -12766,10 +12764,10 @@ const PUZZLES = [
     category: "Serie A Players by Career Appearances",
     items: [
       { label: "Alessandro Del Piero", value: 478 },
+      { label: "Javier Zanetti", value: 615 },
       { label: "Francesco Totti", value: 619 },
-      { label: "Gianluigi Buffon", value: 657 },
       { label: "Paolo Maldini", value: 647 },
-      { label: "Javier Zanetti", value: 615 }
+      { label: "Gianluigi Buffon", value: 657 }
     ]
   },
   {
@@ -12790,19 +12788,19 @@ const PUZZLES = [
       { label: "Franck Ribéry", value: 273 },
       { label: "Thomas Müller", value: 430 },
       { label: "Mirko Votava", value: 445 },
-      { label: "Karl-Heinz Körbel", value: 602 },
-      { label: "Claudio Pizarro", value: 490 }
+      { label: "Claudio Pizarro", value: 490 },
+      { label: "Karl-Heinz Körbel", value: 602 }
     ]
   },
   {
     instruction: "Lowest to highest global coconut production (million tonnes, 2022)",
     category: "Countries by Coconut Production",
     items: [
+      { label: "Brazil", value: 2.3 },
       { label: "Sri Lanka", value: 2.5 },
       { label: "India", value: 14.7 },
       { label: "Philippines", value: 14.8 },
-      { label: "Indonesia", value: 17 },
-      { label: "Brazil", value: 2.3 }
+      { label: "Indonesia", value: 17 }
     ]
   },
   {
@@ -12810,8 +12808,8 @@ const PUZZLES = [
     category: "Countries by Olympic Karate Medals (2020)",
     items: [
       { label: "Egypt", value: 1 },
-      { label: "Italy", value: 3 },
       { label: "Turkey", value: 2 },
+      { label: "Italy", value: 3 },
       { label: "France", value: 3 },
       { label: "Japan", value: 4 }
     ]
@@ -12821,9 +12819,9 @@ const PUZZLES = [
     category: "Bundesliga Goalkeepers by Clean Sheets",
     items: [
       { label: "Jens Lehmann", value: 77 },
+      { label: "Toni Schumacher", value: 100 },
       { label: "Oliver Kahn", value: 119 },
       { label: "Sepp Maier", value: 146 },
-      { label: "Toni Schumacher", value: 100 },
       { label: "Manuel Neuer", value: 210 }
     ]
   },
@@ -12831,11 +12829,11 @@ const PUZZLES = [
     instruction: "Fewest to most total Olympic medals in triathlon",
     category: "Countries by Olympic Triathlon Medals",
     items: [
-      { label: "Australia", value: 7 },
-      { label: "Great Britain", value: 9 },
       { label: "New Zealand", value: 3 },
+      { label: "Germany", value: 3 },
       { label: "Switzerland", value: 5 },
-      { label: "Germany", value: 3 }
+      { label: "Australia", value: 7 },
+      { label: "Great Britain", value: 9 }
     ]
   },
   {
@@ -12854,8 +12852,8 @@ const PUZZLES = [
     category: "Countries by Olympic Modern Pentathlon Medals",
     items: [
       { label: "United States", value: 5 },
-      { label: "Germany", value: 9 },
       { label: "Great Britain", value: 7 },
+      { label: "Germany", value: 9 },
       { label: "Russia/USSR", value: 15 },
       { label: "Hungary", value: 23 }
     ]
@@ -12865,9 +12863,9 @@ const PUZZLES = [
     category: "Countries by Large Stadium Count (80K+)",
     items: [
       { label: "Germany", value: 1 },
-      { label: "India", value: 3 },
       { label: "Brazil", value: 2 },
       { label: "United Kingdom", value: 2 },
+      { label: "India", value: 3 },
       { label: "United States", value: 10 }
     ]
   },
@@ -12875,11 +12873,11 @@ const PUZZLES = [
     instruction: "Fewest to most career Premier League clean sheets (goalkeepers)",
     category: "Premier League Goalkeepers by Clean Sheets",
     items: [
-      { label: "David James", value: 169 },
-      { label: "Mark Schwarzer", value: 151 },
+      { label: "Peter Schmeichel", value: 128 },
       { label: "David Seaman", value: 141 },
-      { label: "Petr Čech", value: 202 },
-      { label: "Peter Schmeichel", value: 128 }
+      { label: "Mark Schwarzer", value: 151 },
+      { label: "David James", value: 169 },
+      { label: "Petr Čech", value: 202 }
     ]
   },
   {
@@ -12887,9 +12885,9 @@ const PUZZLES = [
     category: "Heavyweight Boxers by Title Defenses",
     items: [
       { label: "Mike Tyson", value: 9 },
+      { label: "Lennox Lewis", value: 14 },
       { label: "Muhammad Ali", value: 19 },
       { label: "Larry Holmes", value: 20 },
-      { label: "Lennox Lewis", value: 14 },
       { label: "Joe Louis", value: 25 }
     ]
   },
@@ -12897,11 +12895,11 @@ const PUZZLES = [
     instruction: "Fewest to most career aces in women's tennis",
     category: "Women Tennis Players by Career Aces",
     items: [
+      { label: "Sabine Lisicki", value: 2000 },
+      { label: "Sam Stosur", value: 2200 },
       { label: "Venus Williams", value: 3800 },
       { label: "Karolina Plíšková", value: 4500 },
-      { label: "Serena Williams", value: 4800 },
-      { label: "Sam Stosur", value: 2200 },
-      { label: "Sabine Lisicki", value: 2000 }
+      { label: "Serena Williams", value: 4800 }
     ]
   },
   {
@@ -12919,10 +12917,10 @@ const PUZZLES = [
     instruction: "Fewest to most Indy 500 starts by a driver",
     category: "IndyCar Drivers by Indy 500 Starts",
     items: [
-      { label: "Mario Andretti", value: 29 },
       { label: "Graham Hill", value: 9 },
       { label: "Scott Dixon", value: 23 },
       { label: "Hélio Castroneves", value: 24 },
+      { label: "Mario Andretti", value: 29 },
       { label: "A.J. Foyt", value: 35 }
     ]
   },
@@ -12931,9 +12929,9 @@ const PUZZLES = [
     category: "Soccer Players by Champions League Appearances",
     items: [
       { label: "Raúl", value: 142 },
-      { label: "Iker Casillas", value: 177 },
-      { label: "Lionel Messi", value: 163 },
       { label: "Xavi", value: 151 },
+      { label: "Lionel Messi", value: 163 },
+      { label: "Iker Casillas", value: 177 },
       { label: "Cristiano Ronaldo", value: 183 }
     ]
   },
@@ -12942,9 +12940,9 @@ const PUZZLES = [
     category: "Countries by Date Production",
     items: [
       { label: "Tunisia", value: 345 },
-      { label: "Saudi Arabia", value: 1540 },
-      { label: "Iran", value: 1300 },
       { label: "Iraq", value: 620 },
+      { label: "Iran", value: 1300 },
+      { label: "Saudi Arabia", value: 1540 },
       { label: "Egypt", value: 1690 }
     ]
   },
@@ -12953,10 +12951,10 @@ const PUZZLES = [
     category: "Marathon Runners by Major Marathon Victories",
     items: [
       { label: "Dennis Kimetto", value: 1 },
-      { label: "Haile Gebrselassie", value: 4 },
       { label: "Kenenisa Bekele", value: 2 },
-      { label: "Eliud Kipchoge", value: 10 },
-      { label: "Bill Rodgers", value: 8 }
+      { label: "Haile Gebrselassie", value: 4 },
+      { label: "Bill Rodgers", value: 8 },
+      { label: "Eliud Kipchoge", value: 10 }
     ]
   },
   {
@@ -12974,11 +12972,11 @@ const PUZZLES = [
     instruction: "Fewest to most career World Cup appearances (individual soccer player)",
     category: "Soccer Players by World Cup Appearances (matches played)",
     items: [
-      { label: "Diego Maradona", value: 21 },
       { label: "Pelé", value: 14 },
+      { label: "Diego Maradona", value: 21 },
       { label: "Miroslav Klose", value: 24 },
-      { label: "Lionel Messi", value: 26 },
-      { label: "Lothar Matthäus", value: 25 }
+      { label: "Lothar Matthäus", value: 25 },
+      { label: "Lionel Messi", value: 26 }
     ]
   },
   {
@@ -12986,9 +12984,9 @@ const PUZZLES = [
     category: "Countries by Pineapple Production",
     items: [
       { label: "India", value: 1.7 },
+      { label: "Brazil", value: 2.4 },
       { label: "Indonesia", value: 2.7 },
       { label: "Philippines", value: 2.7 },
-      { label: "Brazil", value: 2.4 },
       { label: "Costa Rica", value: 3.4 }
     ]
   },
@@ -12996,8 +12994,8 @@ const PUZZLES = [
     instruction: "Fewest to most career Bundesliga goals in a single season",
     category: "Bundesliga Single-Season Goal Records",
     items: [
-      { label: "Pierre-Emerick Aubameyang (2016-17)", value: 31 },
       { label: "Jupp Heynckes (1973-74)", value: 30 },
+      { label: "Pierre-Emerick Aubameyang (2016-17)", value: 31 },
       { label: "Lothar Emmerich (1965-66)", value: 31 },
       { label: "Dieter Müller (1976-77)", value: 34 },
       { label: "Robert Lewandowski (2020-21)", value: 41 }
@@ -13009,8 +13007,8 @@ const PUZZLES = [
     items: [
       { label: "Portuguese Primeira Liga", value: 4 },
       { label: "Bundesliga (Germany)", value: 8 },
-      { label: "Premier League (England)", value: 15 },
       { label: "Serie A (Italy)", value: 12 },
+      { label: "Premier League (England)", value: 15 },
       { label: "La Liga (Spain)", value: 20 }
     ]
   },
@@ -13018,10 +13016,10 @@ const PUZZLES = [
     instruction: "Fewest to most career Olympic medals in biathlon",
     category: "Biathletes by Olympic Medals",
     items: [
-      { label: "Martin Fourcade (France)", value: 5 },
-      { label: "Uschi Disl (Germany)", value: 9 },
-      { label: "Darya Domracheva (Belarus)", value: 6 },
       { label: "Raphaël Poirée (France)", value: 4 },
+      { label: "Martin Fourcade (France)", value: 5 },
+      { label: "Darya Domracheva (Belarus)", value: 6 },
+      { label: "Uschi Disl (Germany)", value: 9 },
       { label: "Ole Einar Bjørndalen (Norway)", value: 13 }
     ]
   },
@@ -13029,10 +13027,10 @@ const PUZZLES = [
     instruction: "Fewest to most career wins at the World Athletics Championships (individual)",
     category: "Athletes by World Athletics Championship Golds",
     items: [
-      { label: "Carl Lewis (USA)", value: 8 },
-      { label: "Mo Farah (UK)", value: 6 },
-      { label: "Usain Bolt (Jamaica)", value: 11 },
       { label: "Shelly-Ann Fraser-Pryce (Jamaica)", value: 5 },
+      { label: "Mo Farah (UK)", value: 6 },
+      { label: "Carl Lewis (USA)", value: 8 },
+      { label: "Usain Bolt (Jamaica)", value: 11 },
       { label: "Allyson Felix (USA)", value: 14 }
     ]
   },
@@ -13040,11 +13038,11 @@ const PUZZLES = [
     instruction: "Fewest to most career total points in Premier League (team, single season)",
     category: "Premier League Teams by Single-Season Points Record",
     items: [
-      { label: "Chelsea (2004-05)", value: 95 },
       { label: "Arsenal (2003-04 Invincibles)", value: 90 },
+      { label: "Chelsea (2004-05)", value: 95 },
+      { label: "Manchester City (2018-19)", value: 98 },
       { label: "Liverpool (2019-20)", value: 99 },
-      { label: "Manchester City (2017-18)", value: 100 },
-      { label: "Manchester City (2018-19)", value: 98 }
+      { label: "Manchester City (2017-18)", value: 100 }
     ]
   },
   {
@@ -13088,7 +13086,7 @@ const PUZZLES = [
       { label: "China", value: 0.17 },
       { label: "United States", value: 0.66 },
       { label: "Germany", value: 0.93 },
-      { label: "Switzerland", value: 1.10 }
+      { label: "Switzerland", value: 1.1 }
     ]
   },
   {
@@ -13107,9 +13105,9 @@ const PUZZLES = [
     category: "Foods by Selenium Content",
     items: [
       { label: "Apple", value: 0.1 },
+      { label: "Chicken", value: 27 },
       { label: "Egg", value: 30 },
       { label: "Tuna", value: 80 },
-      { label: "Chicken", value: 27 },
       { label: "Brazil Nuts", value: 1917 }
     ]
   },
@@ -13140,8 +13138,8 @@ const PUZZLES = [
     category: "Religious Sites by Annual Visitors",
     items: [
       { label: "Western Wall (Jerusalem)", value: 10 },
-      { label: "Golden Temple (Amritsar, India)", value: 30 },
       { label: "St. Peter's Basilica (Vatican)", value: 11 },
+      { label: "Golden Temple (Amritsar, India)", value: 30 },
       { label: "Meiji Shrine (Tokyo)", value: 30 },
       { label: "Tirupati Temple (India)", value: 50 }
     ]
@@ -13172,10 +13170,10 @@ const PUZZLES = [
     instruction: "Fewest to most craters visible with binoculars on the Moon",
     category: "Lunar Craters by Prominence (km diameter, most notable)",
     items: [
-      { label: "Aristarchus", value: 40 },
       { label: "Kepler", value: 32 },
-      { label: "Copernicus", value: 93 },
+      { label: "Aristarchus", value: 40 },
       { label: "Tycho", value: 85 },
+      { label: "Copernicus", value: 93 },
       { label: "Clavius", value: 225 }
     ]
   },
@@ -13218,8 +13216,8 @@ const PUZZLES = [
     items: [
       { label: "David Beckham", value: 18 },
       { label: "Josef Martínez", value: 90 },
-      { label: "Landon Donovan", value: 144 },
       { label: "Jeff Cunningham", value: 134 },
+      { label: "Landon Donovan", value: 144 },
       { label: "Chris Wondolowski", value: 171 }
     ]
   },
@@ -13228,8 +13226,8 @@ const PUZZLES = [
     category: "Premier League Players by Career Assists",
     items: [
       { label: "David Beckham", value: 80 },
-      { label: "Frank Lampard", value: 102 },
       { label: "Dennis Bergkamp", value: 94 },
+      { label: "Frank Lampard", value: 102 },
       { label: "Cesc Fàbregas", value: 111 },
       { label: "Ryan Giggs", value: 162 }
     ]
@@ -13238,8 +13236,8 @@ const PUZZLES = [
     instruction: "Lowest to highest annual cherry production (thousand tonnes)",
     category: "Countries by Cherry Production",
     items: [
-      { label: "Italy", value: 100 },
       { label: "Spain", value: 80 },
+      { label: "Italy", value: 100 },
       { label: "Chile", value: 230 },
       { label: "United States", value: 350 },
       { label: "Turkey", value: 840 }
@@ -13260,10 +13258,10 @@ const PUZZLES = [
     instruction: "Fewest to most annual visitors to beaches (millions, estimated)",
     category: "Beaches by Annual Visitors",
     items: [
-      { label: "Waikiki Beach (Hawaii)", value: 5 },
       { label: "Bondi Beach (Australia)", value: 3 },
-      { label: "Copacabana (Brazil)", value: 10 },
+      { label: "Waikiki Beach (Hawaii)", value: 5 },
       { label: "Playa del Carmen (Mexico)", value: 6 },
+      { label: "Copacabana (Brazil)", value: 10 },
       { label: "Miami Beach (USA)", value: 15 }
     ]
   },
@@ -13305,8 +13303,8 @@ const PUZZLES = [
     category: "Bundesliga Clubs by League Titles",
     items: [
       { label: "Werder Bremen", value: 4 },
-      { label: "Hamburger SV", value: 6 },
       { label: "Borussia Mönchengladbach", value: 5 },
+      { label: "Hamburger SV", value: 6 },
       { label: "Borussia Dortmund", value: 8 },
       { label: "Bayern Munich", value: 33 }
     ]
@@ -13316,9 +13314,9 @@ const PUZZLES = [
     category: "English Football Clubs by League Titles",
     items: [
       { label: "Chelsea", value: 6 },
+      { label: "Manchester City", value: 10 },
       { label: "Arsenal", value: 13 },
       { label: "Liverpool", value: 19 },
-      { label: "Manchester City", value: 10 },
       { label: "Manchester United", value: 20 }
     ]
   },
@@ -13348,10 +13346,10 @@ const PUZZLES = [
     instruction: "Lowest to highest annual strawberry production (thousand tonnes)",
     category: "Countries by Strawberry Production",
     items: [
-      { label: "Mexico", value: 860 },
-      { label: "Egypt", value: 470 },
       { label: "Spain", value: 290 },
+      { label: "Egypt", value: 470 },
       { label: "Turkey", value: 575 },
+      { label: "Mexico", value: 860 },
       { label: "China", value: 3350 }
     ]
   },
@@ -13381,9 +13379,9 @@ const PUZZLES = [
     instruction: "Fewest to most total NBA Finals appearances (player)",
     category: "NBA Players by Finals Appearances",
     items: [
-      { label: "Magic Johnson", value: 9 },
-      { label: "Kobe Bryant", value: 7 },
       { label: "Michael Jordan", value: 6 },
+      { label: "Kobe Bryant", value: 7 },
+      { label: "Magic Johnson", value: 9 },
       { label: "LeBron James", value: 10 },
       { label: "Bill Russell", value: 12 }
     ]
@@ -13394,9 +13392,9 @@ const PUZZLES = [
     items: [
       { label: "AB de Villiers", value: 4 },
       { label: "Kumar Sangakkara", value: 5 },
-      { label: "Virat Kohli", value: 8 },
       { label: "Steve Smith", value: 5 },
-      { label: "Sachin Tendulkar", value: 6 }
+      { label: "Sachin Tendulkar", value: 6 },
+      { label: "Virat Kohli", value: 8 }
     ]
   },
   {
@@ -13405,9 +13403,9 @@ const PUZZLES = [
     items: [
       { label: "Andre Agassi", value: 4 },
       { label: "Pete Sampras", value: 7 },
-      { label: "Roger Federer", value: 24 },
+      { label: "Novak Djokovic", value: 20 },
       { label: "Rafael Nadal", value: 23 },
-      { label: "Novak Djokovic", value: 20 }
+      { label: "Roger Federer", value: 24 }
     ]
   },
   {
@@ -13448,20 +13446,20 @@ const PUZZLES = [
     category: "Eredivisie Clubs by League Titles",
     items: [
       { label: "AZ Alkmaar", value: 2 },
+      { label: "HVV Den Haag (historical)", value: 10 },
       { label: "Feyenoord", value: 16 },
       { label: "Eindhoven (PSV)", value: 24 },
-      { label: "Ajax", value: 36 },
-      { label: "HVV Den Haag (historical)", value: 10 }
+      { label: "Ajax", value: 36 }
     ]
   },
   {
     instruction: "Fewest to most career Club World Cup titles (soccer)",
     category: "Soccer Clubs by Club World Cup/Intercontinental Titles",
     items: [
-      { label: "Barcelona", value: 3 },
       { label: "Manchester United", value: 1 },
-      { label: "AC Milan", value: 4 },
       { label: "Bayern Munich", value: 2 },
+      { label: "Barcelona", value: 3 },
+      { label: "AC Milan", value: 4 },
       { label: "Real Madrid", value: 8 }
     ]
   },
@@ -13469,11 +13467,11 @@ const PUZZLES = [
     instruction: "Lowest to highest annual cranberry production (thousand tonnes)",
     category: "Countries by Cranberry Production",
     items: [
+      { label: "Latvia", value: 3 },
+      { label: "Belarus", value: 5 },
       { label: "Chile", value: 15 },
       { label: "Canada", value: 180 },
-      { label: "United States", value: 400 },
-      { label: "Belarus", value: 5 },
-      { label: "Latvia", value: 3 }
+      { label: "United States", value: 400 }
     ]
   },
   {
@@ -13481,10 +13479,10 @@ const PUZZLES = [
     category: "Premier League Goalkeepers by Penalty Saves",
     items: [
       { label: "Edwin van der Sar", value: 6 },
-      { label: "David James", value: 13 },
-      { label: "Petr Čech", value: 8 },
       { label: "Paul Robinson", value: 7 },
-      { label: "David de Gea", value: 7 }
+      { label: "David de Gea", value: 7 },
+      { label: "Petr Čech", value: 8 },
+      { label: "David James", value: 13 }
     ]
   },
   {
@@ -13502,32 +13500,32 @@ const PUZZLES = [
     instruction: "Fewest to most career consecutive Premier League appearances",
     category: "Premier League Players by Consecutive Appearances",
     items: [
+      { label: "Aaron Cresswell", value: 100 },
+      { label: "Mark Schwarzer", value: 107 },
       { label: "David James", value: 159 },
       { label: "Frank Lampard", value: 164 },
-      { label: "Mark Schwarzer", value: 107 },
-      { label: "Brad Friedel", value: 310 },
-      { label: "Aaron Cresswell", value: 100 }
+      { label: "Brad Friedel", value: 310 }
     ]
   },
   {
     instruction: "Fewest to most career Olympic appearances (individual athlete)",
     category: "Athletes by Number of Olympic Games Attended",
     items: [
-      { label: "Carl Lewis", value: 4 },
       { label: "Nadia Comaneci", value: 2 },
-      { label: "Ian Millar (equestrian, Canada)", value: 10 },
+      { label: "Carl Lewis", value: 4 },
+      { label: "Oksana Chusovitina (gymnastics, Uzbekistan)", value: 8 },
       { label: "Hubert Raudaschl (sailing, Austria)", value: 9 },
-      { label: "Oksana Chusovitina (gymnastics, Uzbekistan)", value: 8 }
+      { label: "Ian Millar (equestrian, Canada)", value: 10 }
     ]
   },
   {
     instruction: "Fewest to most career league titles won (soccer managers)",
     category: "Soccer Managers by League Titles",
     items: [
-      { label: "Carlo Ancelotti", value: 5 },
-      { label: "Pep Guardiola", value: 12 },
-      { label: "José Mourinho", value: 8 },
       { label: "Arsène Wenger", value: 3 },
+      { label: "Carlo Ancelotti", value: 5 },
+      { label: "José Mourinho", value: 8 },
+      { label: "Pep Guardiola", value: 12 },
       { label: "Alex Ferguson", value: 13 }
     ]
   },
@@ -13548,9 +13546,9 @@ const PUZZLES = [
     items: [
       { label: "Marta (Brazil)", value: 180 },
       { label: "Abby Wambach (USA)", value: 256 },
-      { label: "Kristine Lilly (USA)", value: 354 },
       { label: "Carli Lloyd (USA)", value: 316 },
-      { label: "Christine Sinclair (Canada)", value: 331 }
+      { label: "Christine Sinclair (Canada)", value: 331 },
+      { label: "Kristine Lilly (USA)", value: 354 }
     ]
   },
   {
@@ -13572,7 +13570,7 @@ const PUZZLES = [
       { label: "United States", value: 0.4 },
       { label: "Germany", value: 1.4 },
       { label: "United Kingdom", value: 1.8 },
-      { label: "Denmark", value: 3.0 }
+      { label: "Denmark", value: 3 }
     ]
   },
   {
@@ -13591,10 +13589,10 @@ const PUZZLES = [
     category: "Soccer Players by Appearances for One Club",
     items: [
       { label: "Steven Gerrard (Liverpool)", value: 710 },
-      { label: "Ryan Giggs (Manchester United)", value: 963 },
+      { label: "Xavi (Barcelona)", value: 767 },
       { label: "Paolo Maldini (AC Milan)", value: 902 },
-      { label: "Rogério Ceni (São Paulo)", value: 1237 },
-      { label: "Xavi (Barcelona)", value: 767 }
+      { label: "Ryan Giggs (Manchester United)", value: 963 },
+      { label: "Rogério Ceni (São Paulo)", value: 1237 }
     ]
   },
   {
@@ -13612,10 +13610,10 @@ const PUZZLES = [
     instruction: "Fewest to most career total Serie A assists in a single season",
     category: "Serie A Single-Season Assist Records",
     items: [
-      { label: "Luis Alberto (2017-18)", value: 14 },
-      { label: "Papu Gómez (2019-20)", value: 16 },
-      { label: "Milinkovic-Savic (2017-18)", value: 14 },
       { label: "Marek Hamšík (2016-17)", value: 13 },
+      { label: "Luis Alberto (2017-18)", value: 14 },
+      { label: "Milinkovic-Savic (2017-18)", value: 14 },
+      { label: "Papu Gómez (2019-20)", value: 16 },
       { label: "Neymar/Mbappé (Ligue 1 reference)", value: 18 }
     ]
   },
@@ -13626,8 +13624,8 @@ const PUZZLES = [
       { label: "Colombia", value: 1 },
       { label: "Peru", value: 2 },
       { label: "Brazil", value: 9 },
-      { label: "Argentina", value: 16 },
-      { label: "Uruguay", value: 15 }
+      { label: "Uruguay", value: 15 },
+      { label: "Argentina", value: 16 }
     ]
   },
   {
@@ -13656,8 +13654,8 @@ const PUZZLES = [
     instruction: "Fewest to most career total CONCACAF Gold Cup titles",
     category: "Countries by Gold Cup Titles",
     items: [
-      { label: "Canada", value: 2 },
       { label: "Guatemala", value: 1 },
+      { label: "Canada", value: 2 },
       { label: "Costa Rica", value: 3 },
       { label: "United States", value: 7 },
       { label: "Mexico", value: 12 }
@@ -13667,11 +13665,11 @@ const PUZZLES = [
     instruction: "Fewest to most career total UEFA European Championship titles",
     category: "Countries by European Championship Titles",
     items: [
+      { label: "Soviet Union/Russia", value: 1 },
       { label: "Italy", value: 2 },
       { label: "France", value: 2 },
-      { label: "Spain", value: 4 },
       { label: "Germany", value: 3 },
-      { label: "Soviet Union/Russia", value: 1 }
+      { label: "Spain", value: 4 }
     ]
   },
   {
@@ -13680,9 +13678,9 @@ const PUZZLES = [
     items: [
       { label: "England", value: 1 },
       { label: "Australia", value: 2 },
-      { label: "South Africa", value: 4 },
+      { label: "Fiji (Sevens World Cup)", value: 2 },
       { label: "New Zealand", value: 3 },
-      { label: "Fiji (Sevens World Cup)", value: 2 }
+      { label: "South Africa", value: 4 }
     ]
   },
   {
@@ -13690,8 +13688,8 @@ const PUZZLES = [
     category: "Cricket Teams by World Cup Final Appearances",
     items: [
       { label: "Pakistan", value: 1 },
-      { label: "West Indies", value: 3 },
       { label: "New Zealand", value: 2 },
+      { label: "West Indies", value: 3 },
       { label: "India", value: 3 },
       { label: "Australia", value: 8 }
     ]
@@ -13702,8 +13700,8 @@ const PUZZLES = [
     items: [
       { label: "Turkey", value: 1100 },
       { label: "Spain", value: 1200 },
-      { label: "Mexico", value: 3100 },
       { label: "Argentina", value: 1800 },
+      { label: "Mexico", value: 3100 },
       { label: "India", value: 3500 }
     ]
   },
@@ -13711,10 +13709,10 @@ const PUZZLES = [
     instruction: "Fewest to most total career assists in La Liga (single season)",
     category: "La Liga Single-Season Assist Records",
     items: [
+      { label: "Karim Benzema (2021-22)", value: 12 },
+      { label: "Dani Alves (2008-09)", value: 15 },
       { label: "Luis Suárez (2015-16)", value: 16 },
       { label: "Xavi (2008-09)", value: 20 },
-      { label: "Dani Alves (2008-09)", value: 15 },
-      { label: "Karim Benzema (2021-22)", value: 12 },
       { label: "Lionel Messi (2019-20)", value: 21 }
     ]
   },
@@ -13722,11 +13720,11 @@ const PUZZLES = [
     instruction: "Fewest to most career total Ballon d'Or nominations",
     category: "Soccer Players by Ballon d'Or Nominations (top 30)",
     items: [
-      { label: "Neymar", value: 10 },
       { label: "Robert Lewandowski", value: 6 },
+      { label: "Neymar", value: 10 },
       { label: "Andrés Iniesta", value: 10 },
-      { label: "Cristiano Ronaldo", value: 17 },
-      { label: "Lionel Messi", value: 16 }
+      { label: "Lionel Messi", value: 16 },
+      { label: "Cristiano Ronaldo", value: 17 }
     ]
   },
   {
@@ -13734,32 +13732,32 @@ const PUZZLES = [
     category: "NBA Players by All-Star Selections",
     items: [
       { label: "Michael Jordan", value: 14 },
-      { label: "Kobe Bryant", value: 18 },
       { label: "Tim Duncan", value: 15 },
-      { label: "LeBron James", value: 20 },
-      { label: "Kareem Abdul-Jabbar", value: 19 }
+      { label: "Kobe Bryant", value: 18 },
+      { label: "Kareem Abdul-Jabbar", value: 19 },
+      { label: "LeBron James", value: 20 }
     ]
   },
   {
     instruction: "Fewest to most career total MLB All-Star selections",
     category: "MLB Players by All-Star Selections",
     items: [
-      { label: "Derek Jeter", value: 14 },
       { label: "Mike Trout", value: 11 },
+      { label: "Derek Jeter", value: 14 },
       { label: "Cal Ripken Jr.", value: 19 },
-      { label: "Hank Aaron", value: 25 },
-      { label: "Stan Musial", value: 24 }
+      { label: "Stan Musial", value: 24 },
+      { label: "Hank Aaron", value: 25 }
     ]
   },
   {
     instruction: "Fewest to most career total NFL Pro Bowl selections",
     category: "NFL Players by Pro Bowl Selections",
     items: [
-      { label: "Tom Brady", value: 15 },
-      { label: "Peyton Manning", value: 14 },
       { label: "Jerry Rice", value: 13 },
+      { label: "Peyton Manning", value: 14 },
       { label: "Tony Gonzalez", value: 14 },
-      { label: "Merlin Olsen", value: 14 }
+      { label: "Merlin Olsen", value: 14 },
+      { label: "Tom Brady", value: 15 }
     ]
   },
   {
@@ -13767,8 +13765,8 @@ const PUZZLES = [
     category: "NHL Players by All-Star Selections",
     items: [
       { label: "Mario Lemieux", value: 10 },
-      { label: "Wayne Gretzky", value: 18 },
       { label: "Mark Messier", value: 15 },
+      { label: "Wayne Gretzky", value: 18 },
       { label: "Ray Bourque", value: 19 },
       { label: "Gordie Howe", value: 23 }
     ]
@@ -13780,8 +13778,8 @@ const PUZZLES = [
       { label: "Ruud van Nistelrooy (2004-05)", value: 12 },
       { label: "Lionel Messi (2011-12)", value: 14 },
       { label: "José Altafini (1962-63)", value: 14 },
-      { label: "Cristiano Ronaldo (2013-14)", value: 17 },
-      { label: "Cristiano Ronaldo (2017-18)", value: 15 }
+      { label: "Cristiano Ronaldo (2017-18)", value: 15 },
+      { label: "Cristiano Ronaldo (2013-14)", value: 17 }
     ]
   },
   {
@@ -13800,8 +13798,8 @@ const PUZZLES = [
     category: "Soccer Players by World Cup Assists",
     items: [
       { label: "Zinedine Zidane", value: 5 },
-      { label: "Diego Maradona", value: 8 },
       { label: "David Beckham", value: 6 },
+      { label: "Diego Maradona", value: 8 },
       { label: "Lionel Messi", value: 8 },
       { label: "Pelé", value: 10 }
     ]
@@ -13833,8 +13831,8 @@ const PUZZLES = [
     category: "Countries by Peach Production",
     items: [
       { label: "France", value: 200 },
-      { label: "Italy", value: 1000 },
       { label: "United States", value: 640 },
+      { label: "Italy", value: 1000 },
       { label: "Spain", value: 1500 },
       { label: "China", value: 16000 }
     ]
@@ -13844,19 +13842,19 @@ const PUZZLES = [
     category: "Tennis Players by Grand Slam Appearances",
     items: [
       { label: "Pete Sampras", value: 52 },
-      { label: "Roger Federer", value: 81 },
       { label: "Rafael Nadal", value: 72 },
       { label: "Novak Djokovic", value: 77 },
-      { label: "Feliciano López", value: 79 }
+      { label: "Feliciano López", value: 79 },
+      { label: "Roger Federer", value: 81 }
     ]
   },
   {
     instruction: "Fewest to most career total Premier League assists in a single season",
     category: "Premier League Single-Season Assist Records",
     items: [
-      { label: "Cesc Fàbregas (2014-15)", value: 18 },
-      { label: "Frank Lampard (2004-05)", value: 16 },
       { label: "David Beckham (2000-01)", value: 15 },
+      { label: "Frank Lampard (2004-05)", value: 16 },
+      { label: "Cesc Fàbregas (2014-15)", value: 18 },
       { label: "Thierry Henry (2002-03)", value: 20 },
       { label: "Kevin De Bruyne (2019-20)", value: 20 }
     ]
@@ -13865,11 +13863,11 @@ const PUZZLES = [
     instruction: "Fewest to most total career World Cup clean sheets (goalkeepers)",
     category: "Goalkeepers by World Cup Clean Sheets",
     items: [
-      { label: "Peter Shilton", value: 10 },
+      { label: "Emiliano Martínez", value: 5 },
       { label: "Fabien Barthez", value: 7 },
       { label: "Gianluigi Buffon", value: 7 },
-      { label: "Emiliano Martínez", value: 5 },
-      { label: "Manuel Neuer", value: 7 }
+      { label: "Manuel Neuer", value: 7 },
+      { label: "Peter Shilton", value: 10 }
     ]
   },
   {
@@ -13877,10 +13875,10 @@ const PUZZLES = [
     category: "Goalkeepers by World Cup Penalty Shootout Saves",
     items: [
       { label: "Thibaut Courtois", value: 1 },
-      { label: "Sergio Goycochea (Argentina)", value: 4 },
-      { label: "Danijel Subašić (Croatia)", value: 3 },
       { label: "Harald Schumacher (Germany)", value: 2 },
-      { label: "Emiliano Martínez (Argentina)", value: 3 }
+      { label: "Danijel Subašić (Croatia)", value: 3 },
+      { label: "Emiliano Martínez (Argentina)", value: 3 },
+      { label: "Sergio Goycochea (Argentina)", value: 4 }
     ]
   },
   {
@@ -13931,10 +13929,10 @@ const PUZZLES = [
     instruction: "Fewest to most career total Coupe de France titles (French Cup)",
     category: "French Football Clubs by Coupe de France Titles",
     items: [
-      { label: "Lille", value: 6 },
       { label: "Lyon", value: 5 },
-      { label: "Marseille", value: 10 },
+      { label: "Lille", value: 6 },
       { label: "Saint-Étienne", value: 6 },
+      { label: "Marseille", value: 10 },
       { label: "Paris Saint-Germain", value: 15 }
     ]
   },
@@ -13942,11 +13940,11 @@ const PUZZLES = [
     instruction: "Fewest to most career total KNVB Cup titles (Dutch Cup)",
     category: "Dutch Football Clubs by KNVB Cup Titles",
     items: [
-      { label: "PSV", value: 10 },
+      { label: "Utrecht", value: 3 },
       { label: "AZ", value: 4 },
+      { label: "PSV", value: 10 },
       { label: "Feyenoord", value: 14 },
-      { label: "Ajax", value: 20 },
-      { label: "Utrecht", value: 3 }
+      { label: "Ajax", value: 20 }
     ]
   },
   {
@@ -13955,8 +13953,8 @@ const PUZZLES = [
     items: [
       { label: "Poland", value: 50 },
       { label: "Chile", value: 120 },
-      { label: "Peru", value: 280 },
       { label: "Canada", value: 180 },
+      { label: "Peru", value: 280 },
       { label: "United States", value: 320 }
     ]
   },
@@ -13964,10 +13962,10 @@ const PUZZLES = [
     instruction: "Fewest to most career total domestic cup titles (soccer managers)",
     category: "Soccer Managers by Domestic Cup Titles",
     items: [
-      { label: "Arsène Wenger", value: 7 },
-      { label: "Pep Guardiola", value: 9 },
-      { label: "José Mourinho", value: 7 },
       { label: "Carlo Ancelotti", value: 6 },
+      { label: "Arsène Wenger", value: 7 },
+      { label: "José Mourinho", value: 7 },
+      { label: "Pep Guardiola", value: 9 },
       { label: "Alex Ferguson", value: 10 }
     ]
   },
@@ -13987,8 +13985,8 @@ const PUZZLES = [
     category: "Countries by Raspberry Production",
     items: [
       { label: "Chile", value: 60 },
-      { label: "Poland", value: 130 },
       { label: "United States", value: 125 },
+      { label: "Poland", value: 130 },
       { label: "Serbia", value: 140 },
       { label: "Russia", value: 200 }
     ]
@@ -14020,9 +14018,9 @@ const PUZZLES = [
     category: "Soccer Clubs by FIFA Club World Cup Titles (since 2000)",
     items: [
       { label: "Manchester United", value: 1 },
-      { label: "Barcelona", value: 3 },
       { label: "Bayern Munich", value: 2 },
       { label: "Corinthians (Brazil)", value: 2 },
+      { label: "Barcelona", value: 3 },
       { label: "Real Madrid", value: 5 }
     ]
   },
@@ -14043,20 +14041,20 @@ const PUZZLES = [
     items: [
       { label: "Atlético Madrid (2020-21)", value: 67 },
       { label: "Valencia (1999-00)", value: 67 },
-      { label: "Real Madrid (2011-12)", value: 121 },
+      { label: "Barcelona (2014-15)", value: 110 },
       { label: "Barcelona (2011-12)", value: 114 },
-      { label: "Barcelona (2014-15)", value: 110 }
+      { label: "Real Madrid (2011-12)", value: 121 }
     ]
   },
   {
     instruction: "Fewest to most career total Bundesliga assists in a single season",
     category: "Bundesliga Single-Season Assist Records",
     items: [
+      { label: "Franck Ribéry (2013-14)", value: 16 },
       { label: "Mesut Özil (2009-10)", value: 17 },
       { label: "Kevin De Bruyne (2014-15)", value: 21 },
-      { label: "Emil Forsberg (2016-17)", value: 22 },
-      { label: "Franck Ribéry (2013-14)", value: 16 },
-      { label: "Thomas Müller (2019-20)", value: 21 }
+      { label: "Thomas Müller (2019-20)", value: 21 },
+      { label: "Emil Forsberg (2016-17)", value: 22 }
     ]
   },
   {
@@ -14064,8 +14062,8 @@ const PUZZLES = [
     category: "Countries by Fig Production",
     items: [
       { label: "Spain", value: 30 },
-      { label: "Morocco", value: 80 },
       { label: "Iran", value: 70 },
+      { label: "Morocco", value: 80 },
       { label: "Egypt", value: 190 },
       { label: "Turkey", value: 310 }
     ]
@@ -14074,11 +14072,11 @@ const PUZZLES = [
     instruction: "Lowest to highest density of water at different temperatures (kg/m³)",
     category: "Water Density by Temperature",
     items: [
+      { label: "0°C (ice)", value: 917 },
       { label: "100°C (steam transition)", value: 958 },
       { label: "50°C", value: 988 },
       { label: "25°C", value: 997 },
-      { label: "4°C (maximum density)", value: 1000 },
-      { label: "0°C (ice)", value: 917 }
+      { label: "4°C (maximum density)", value: 1000 }
     ]
   },
   {
@@ -14098,8 +14096,8 @@ const PUZZLES = [
     items: [
       { label: "Italy", value: 190 },
       { label: "United States", value: 290 },
-      { label: "Romania", value: 850 },
       { label: "Serbia", value: 430 },
+      { label: "Romania", value: 850 },
       { label: "China", value: 6900 }
     ]
   },
@@ -14109,9 +14107,9 @@ const PUZZLES = [
     items: [
       { label: "Ethanol", value: -114 },
       { label: "Mercury", value: -39 },
+      { label: "Olive Oil", value: -6 },
       { label: "Seawater", value: -2 },
-      { label: "Water", value: 0 },
-      { label: "Olive Oil", value: -6 }
+      { label: "Water", value: 0 }
     ]
   },
   {
@@ -14129,10 +14127,10 @@ const PUZZLES = [
     instruction: "Fewest to most career total Coppa Italia goals (top scorer, all time)",
     category: "Coppa Italia Top Scorers",
     items: [
-      { label: "Roberto Baggio", value: 27 },
       { label: "Gonzalo Higuaín", value: 18 },
-      { label: "Alessandro Del Piero", value: 26 },
       { label: "Luca Toni", value: 21 },
+      { label: "Alessandro Del Piero", value: 26 },
+      { label: "Roberto Baggio", value: 27 },
       { label: "Giuseppe Meazza", value: 29 }
     ]
   },
@@ -14140,10 +14138,10 @@ const PUZZLES = [
     instruction: "Fewest to most annual pomegranate production (thousand tonnes)",
     category: "Countries by Pomegranate Production",
     items: [
-      { label: "Turkey", value: 600 },
       { label: "Spain", value: 70 },
-      { label: "Iran", value: 1100 },
+      { label: "Turkey", value: 600 },
       { label: "China", value: 1000 },
+      { label: "Iran", value: 1100 },
       { label: "India", value: 3000 }
     ]
   },
@@ -14163,10 +14161,10 @@ const PUZZLES = [
     category: "Countries by Artichoke Production",
     items: [
       { label: "France", value: 38 },
+      { label: "China", value: 80 },
       { label: "Spain", value: 200 },
       { label: "Egypt", value: 320 },
-      { label: "Italy", value: 370 },
-      { label: "China", value: 80 }
+      { label: "Italy", value: 370 }
     ]
   },
   {
@@ -14206,9 +14204,9 @@ const PUZZLES = [
     instruction: "Lowest to highest annual onion production (million tonnes)",
     category: "Countries by Onion Production",
     items: [
+      { label: "Turkey", value: 2.5 },
       { label: "United States", value: 3.2 },
       { label: "Egypt", value: 3.5 },
-      { label: "Turkey", value: 2.5 },
       { label: "China", value: 25 },
       { label: "India", value: 27 }
     ]
@@ -14219,9 +14217,9 @@ const PUZZLES = [
     items: [
       { label: "United States", value: 1.3 },
       { label: "Russia", value: 1.6 },
+      { label: "India", value: 1.9 },
       { label: "Uzbekistan", value: 2.1 },
-      { label: "China", value: 22 },
-      { label: "India", value: 1.9 }
+      { label: "China", value: 22 }
     ]
   },
   {
@@ -14239,10 +14237,10 @@ const PUZZLES = [
     instruction: "Fewest to most annual spinach production (thousand tonnes)",
     category: "Countries by Spinach Production",
     items: [
+      { label: "Indonesia", value: 150 },
       { label: "Turkey", value: 200 },
       { label: "Japan", value: 240 },
       { label: "United States", value: 350 },
-      { label: "Indonesia", value: 150 },
       { label: "China", value: 25000 }
     ]
   },
@@ -14250,9 +14248,9 @@ const PUZZLES = [
     instruction: "Lowest to highest annual lettuce production (million tonnes)",
     category: "Countries by Lettuce Production",
     items: [
+      { label: "Italy", value: 0.8 },
       { label: "Spain", value: 1 },
       { label: "India", value: 1.2 },
-      { label: "Italy", value: 0.8 },
       { label: "United States", value: 3.5 },
       { label: "China", value: 16 }
     ]
@@ -14263,8 +14261,8 @@ const PUZZLES = [
     items: [
       { label: "United States", value: 0.7 },
       { label: "Mexico", value: 1 },
-      { label: "Iran", value: 2 },
       { label: "Turkey", value: 1.9 },
+      { label: "Iran", value: 2 },
       { label: "China", value: 80 }
     ]
   },
@@ -14274,8 +14272,8 @@ const PUZZLES = [
     items: [
       { label: "United States", value: 1 },
       { label: "Turkey", value: 2.7 },
-      { label: "Mexico", value: 3.8 },
       { label: "Indonesia", value: 2.8 },
+      { label: "Mexico", value: 3.8 },
       { label: "China", value: 19 }
     ]
   },
@@ -14283,8 +14281,8 @@ const PUZZLES = [
     instruction: "Lowest to highest annual broccoli production (thousand tonnes)",
     category: "Countries by Broccoli Production",
     items: [
-      { label: "Spain", value: 500 },
       { label: "Italy", value: 400 },
+      { label: "Spain", value: 500 },
       { label: "United States", value: 900 },
       { label: "India", value: 8500 },
       { label: "China", value: 10000 }
@@ -14295,18 +14293,18 @@ const PUZZLES = [
     category: "Countries by Cauliflower Production",
     items: [
       { label: "France", value: 0.3 },
-      { label: "Spain", value: 0.5 },
       { label: "United States", value: 0.3 },
-      { label: "China", value: 11 },
-      { label: "India", value: 9.5 }
+      { label: "Spain", value: 0.5 },
+      { label: "India", value: 9.5 },
+      { label: "China", value: 11 }
     ]
   },
   {
     instruction: "Lowest to highest annual eggplant production (million tonnes)",
     category: "Countries by Eggplant Production",
     items: [
-      { label: "Turkey", value: 0.8 },
       { label: "Indonesia", value: 0.5 },
+      { label: "Turkey", value: 0.8 },
       { label: "Egypt", value: 1.3 },
       { label: "India", value: 13 },
       { label: "China", value: 37 }
@@ -14316,8 +14314,8 @@ const PUZZLES = [
     instruction: "Fewest to most annual pumpkin production (million tonnes)",
     category: "Countries by Pumpkin Production",
     items: [
-      { label: "United States", value: 1 },
       { label: "Mexico", value: 0.7 },
+      { label: "United States", value: 1 },
       { label: "Russia", value: 1.2 },
       { label: "India", value: 5.6 },
       { label: "China", value: 8.4 }
@@ -14329,8 +14327,8 @@ const PUZZLES = [
     items: [
       { label: "United States", value: 1.6 },
       { label: "Brazil", value: 2.3 },
-      { label: "Iran", value: 4 },
       { label: "Turkey", value: 3.5 },
+      { label: "Iran", value: 4 },
       { label: "China", value: 60 }
     ]
   },
@@ -14338,10 +14336,10 @@ const PUZZLES = [
     instruction: "Lowest to highest annual melon production (million tonnes)",
     category: "Countries by Melon Production",
     items: [
-      { label: "United States", value: 1.1 },
-      { label: "Iran", value: 1.8 },
       { label: "Spain", value: 0.8 },
+      { label: "United States", value: 1.1 },
       { label: "Turkey", value: 1.7 },
+      { label: "Iran", value: 1.8 },
       { label: "China", value: 13 }
     ]
   },
@@ -14349,8 +14347,8 @@ const PUZZLES = [
     instruction: "Lowest to highest annual ginger production (million tonnes)",
     category: "Countries by Ginger Production",
     items: [
-      { label: "Nepal", value: 0.3 },
       { label: "Thailand", value: 0.2 },
+      { label: "Nepal", value: 0.3 },
       { label: "China", value: 0.6 },
       { label: "Nigeria", value: 0.7 },
       { label: "India", value: 2.1 }
@@ -14360,10 +14358,10 @@ const PUZZLES = [
     instruction: "Lowest to highest annual turmeric production (thousand tonnes)",
     category: "Countries by Turmeric Production",
     items: [
-      { label: "Myanmar", value: 50 },
-      { label: "Nigeria", value: 40 },
-      { label: "Bangladesh", value: 85 },
       { label: "China", value: 30 },
+      { label: "Nigeria", value: 40 },
+      { label: "Myanmar", value: 50 },
+      { label: "Bangladesh", value: 85 },
       { label: "India", value: 1100 }
     ]
   },
@@ -14383,9 +14381,9 @@ const PUZZLES = [
     category: "Countries by Chickpea Production",
     items: [
       { label: "Mexico", value: 0.3 },
+      { label: "Ethiopia", value: 0.5 },
       { label: "Turkey", value: 0.6 },
       { label: "Australia", value: 1 },
-      { label: "Ethiopia", value: 0.5 },
       { label: "India", value: 12 }
     ]
   },
@@ -14396,16 +14394,16 @@ const PUZZLES = [
       { label: "France", value: 1.6 },
       { label: "Turkey", value: 2 },
       { label: "Argentina", value: 3.4 },
-      { label: "Russia", value: 16 },
-      { label: "Ukraine", value: 11 }
+      { label: "Ukraine", value: 11 },
+      { label: "Russia", value: 16 }
     ]
   },
   {
     instruction: "Lowest to highest annual barley production (million tonnes)",
     category: "Countries by Barley Production",
     items: [
-      { label: "Germany", value: 11 },
       { label: "United Kingdom", value: 8 },
+      { label: "Germany", value: 11 },
       { label: "France", value: 12 },
       { label: "Australia", value: 14 },
       { label: "Russia", value: 21 }
@@ -14419,26 +14417,26 @@ const PUZZLES = [
       { label: "Poland", value: 1.4 },
       { label: "Australia", value: 1.5 },
       { label: "Canada", value: 4.5 },
-      { label: "Russia", value: 5.0 }
+      { label: "Russia", value: 5 }
     ]
   },
   {
     instruction: "Lowest to highest annual rye production (million tonnes)",
     category: "Countries by Rye Production",
     items: [
-      { label: "Belarus", value: 0.6 },
       { label: "Denmark", value: 0.4 },
-      { label: "Poland", value: 3.0 },
+      { label: "Belarus", value: 0.6 },
       { label: "Russia", value: 2.1 },
-      { label: "Germany", value: 4.0 }
+      { label: "Poland", value: 3 },
+      { label: "Germany", value: 4 }
     ]
   },
   {
     instruction: "Lowest to highest annual millet production (million tonnes)",
     category: "Countries by Millet Production",
     items: [
-      { label: "Mali", value: 2 },
       { label: "Burkina Faso", value: 1.2 },
+      { label: "Mali", value: 2 },
       { label: "China", value: 2.3 },
       { label: "Niger", value: 3.8 },
       { label: "India", value: 11 }
@@ -14459,10 +14457,10 @@ const PUZZLES = [
     instruction: "Lowest to highest annual yam production (million tonnes)",
     category: "Countries by Yam Production",
     items: [
-      { label: "Ivory Coast", value: 7 },
-      { label: "Benin", value: 3.5 },
-      { label: "Ghana", value: 9 },
       { label: "Colombia", value: 0.4 },
+      { label: "Benin", value: 3.5 },
+      { label: "Ivory Coast", value: 7 },
+      { label: "Ghana", value: 9 },
       { label: "Nigeria", value: 52 }
     ]
   },
@@ -14492,9 +14490,9 @@ const PUZZLES = [
     instruction: "Lowest to highest annual palm oil production (million tonnes)",
     category: "Countries by Palm Oil Production",
     items: [
+      { label: "Nigeria", value: 1.4 },
       { label: "Colombia", value: 1.7 },
       { label: "Thailand", value: 3.2 },
-      { label: "Nigeria", value: 1.4 },
       { label: "Malaysia", value: 18 },
       { label: "Indonesia", value: 46 }
     ]
@@ -14503,11 +14501,11 @@ const PUZZLES = [
     instruction: "Lowest to highest annual rapeseed/canola production (million tonnes)",
     category: "Countries by Rapeseed Production",
     items: [
-      { label: "Australia", value: 6 },
       { label: "Germany", value: 4 },
+      { label: "Australia", value: 6 },
       { label: "India", value: 11 },
-      { label: "Canada", value: 20 },
-      { label: "China", value: 14 }
+      { label: "China", value: 14 },
+      { label: "Canada", value: 20 }
     ]
   },
   {
@@ -14516,8 +14514,8 @@ const PUZZLES = [
     items: [
       { label: "Germany", value: 60 },
       { label: "Japan", value: 70 },
-      { label: "France", value: 120 },
       { label: "Brazil", value: 90 },
+      { label: "France", value: 120 },
       { label: "United States", value: 320 }
     ]
   },
@@ -14526,19 +14524,19 @@ const PUZZLES = [
     category: "Countries by Cocoa Bean Imports",
     items: [
       { label: "Japan", value: 55 },
-      { label: "United States", value: 430 },
+      { label: "Malaysia", value: 300 },
       { label: "Germany", value: 410 },
-      { label: "Netherlands", value: 800 },
-      { label: "Malaysia", value: 300 }
+      { label: "United States", value: 430 },
+      { label: "Netherlands", value: 800 }
     ]
   },
   {
     instruction: "Lowest to highest annual shrimp production (thousand tonnes, aquaculture)",
     category: "Countries by Shrimp Production",
     items: [
+      { label: "Indonesia", value: 600 },
       { label: "India", value: 700 },
       { label: "Vietnam", value: 900 },
-      { label: "Indonesia", value: 600 },
       { label: "Ecuador", value: 1000 },
       { label: "China", value: 1800 }
     ]
@@ -14548,9 +14546,9 @@ const PUZZLES = [
     category: "Countries by Bread Roll Consumption (rolls per capita per year)",
     items: [
       { label: "United States", value: 50 },
+      { label: "Chile", value: 90 },
       { label: "France", value: 120 },
       { label: "Germany", value: 200 },
-      { label: "Chile", value: 90 },
       { label: "Turkey", value: 300 }
     ]
   },
@@ -14569,10 +14567,10 @@ const PUZZLES = [
     instruction: "Lowest to highest annual cinnamon production (thousand tonnes)",
     category: "Countries by Cinnamon Production",
     items: [
-      { label: "India", value: 4 },
       { label: "Madagascar", value: 2 },
-      { label: "Vietnam", value: 37 },
+      { label: "India", value: 4 },
       { label: "Sri Lanka", value: 25 },
+      { label: "Vietnam", value: 37 },
       { label: "Indonesia", value: 90 }
     ]
   },
@@ -14582,8 +14580,8 @@ const PUZZLES = [
     items: [
       { label: "Sri Lanka", value: 20 },
       { label: "India", value: 63 },
-      { label: "Brazil", value: 110 },
       { label: "Indonesia", value: 88 },
+      { label: "Brazil", value: 110 },
       { label: "Vietnam", value: 260 }
     ]
   },
@@ -14591,10 +14589,10 @@ const PUZZLES = [
     instruction: "Lowest to highest annual clove production (thousand tonnes)",
     category: "Countries by Clove Production",
     items: [
-      { label: "Sri Lanka", value: 5 },
       { label: "Comoros", value: 4 },
-      { label: "Madagascar", value: 12 },
+      { label: "Sri Lanka", value: 5 },
       { label: "Tanzania", value: 8 },
+      { label: "Madagascar", value: 12 },
       { label: "Indonesia", value: 100 }
     ]
   },
@@ -14602,9 +14600,9 @@ const PUZZLES = [
     instruction: "Lowest to highest annual nutmeg production (thousand tonnes)",
     category: "Countries by Nutmeg Production",
     items: [
+      { label: "Grenada", value: 2 },
       { label: "Sri Lanka", value: 5 },
       { label: "India", value: 18 },
-      { label: "Grenada", value: 2 },
       { label: "Guatemala", value: 30 },
       { label: "Indonesia", value: 40 }
     ]
@@ -14613,11 +14611,11 @@ const PUZZLES = [
     instruction: "Lowest to highest annual cardamom production (thousand tonnes)",
     category: "Countries by Cardamom Production",
     items: [
-      { label: "Sri Lanka", value: 5 },
       { label: "Tanzania", value: 4 },
+      { label: "Sri Lanka", value: 5 },
+      { label: "Indonesia", value: 8 },
       { label: "India", value: 30 },
-      { label: "Guatemala", value: 45 },
-      { label: "Indonesia", value: 8 }
+      { label: "Guatemala", value: 45 }
     ]
   },
   {
@@ -14647,8 +14645,8 @@ const PUZZLES = [
     category: "Countries by Pasta Consumption Per Capita",
     items: [
       { label: "Japan", value: 2 },
-      { label: "United States", value: 8.8 },
       { label: "Germany", value: 8 },
+      { label: "United States", value: 8.8 },
       { label: "Greece", value: 12 },
       { label: "Italy", value: 23 }
     ]
@@ -14737,8 +14735,8 @@ const PUZZLES = [
       { label: "Japan", value: 30 },
       { label: "Germany", value: 90 },
       { label: "United States", value: 140 },
-      { label: "Mexico", value: 160 },
-      { label: "Argentina", value: 155 }
+      { label: "Argentina", value: 155 },
+      { label: "Mexico", value: 160 }
     ]
   },
   {
@@ -14767,9 +14765,9 @@ const PUZZLES = [
     instruction: "Lowest to highest annual paper production (million tonnes)",
     category: "Countries by Paper Production",
     items: [
+      { label: "India", value: 18 },
       { label: "Germany", value: 21 },
       { label: "Japan", value: 24 },
-      { label: "India", value: 18 },
       { label: "United States", value: 66 },
       { label: "China", value: 124 }
     ]
@@ -14778,9 +14776,9 @@ const PUZZLES = [
     instruction: "Lowest to highest annual glass production (million tonnes)",
     category: "Countries by Glass Production",
     items: [
-      { label: "Germany", value: 7 },
       { label: "India", value: 5 },
       { label: "Japan", value: 6 },
+      { label: "Germany", value: 7 },
       { label: "United States", value: 20 },
       { label: "China", value: 96 }
     ]
@@ -14800,8 +14798,8 @@ const PUZZLES = [
     instruction: "Lowest to highest annual aluminum production (million tonnes)",
     category: "Countries by Aluminum Production",
     items: [
-      { label: "Australia", value: 1.6 },
       { label: "United States", value: 0.9 },
+      { label: "Australia", value: 1.6 },
       { label: "Russia", value: 3.7 },
       { label: "India", value: 4.1 },
       { label: "China", value: 40 }
@@ -14813,8 +14811,8 @@ const PUZZLES = [
     items: [
       { label: "Japan", value: 0.9 },
       { label: "Germany", value: 1.1 },
-      { label: "United States", value: 1.7 },
       { label: "India", value: 1.2 },
+      { label: "United States", value: 1.7 },
       { label: "China", value: 14 }
     ]
   },
@@ -14845,18 +14843,18 @@ const PUZZLES = [
     category: "Countries by Wool Production",
     items: [
       { label: "South Africa", value: 40 },
+      { label: "United Kingdom", value: 60 },
       { label: "New Zealand", value: 130 },
       { label: "Australia", value: 290 },
-      { label: "China", value: 310 },
-      { label: "United Kingdom", value: 60 }
+      { label: "China", value: 310 }
     ]
   },
   {
     instruction: "Lowest to highest annual silk production (thousand tonnes)",
     category: "Countries by Silk Production",
     items: [
-      { label: "Thailand", value: 0.7 },
       { label: "Japan", value: 0.03 },
+      { label: "Thailand", value: 0.7 },
       { label: "Uzbekistan", value: 1 },
       { label: "India", value: 35 },
       { label: "China", value: 120 }
@@ -14866,8 +14864,8 @@ const PUZZLES = [
     instruction: "Lowest to highest annual leather production (million square feet)",
     category: "Countries by Leather Production",
     items: [
-      { label: "Pakistan", value: 300 },
       { label: "Bangladesh", value: 200 },
+      { label: "Pakistan", value: 300 },
       { label: "Brazil", value: 500 },
       { label: "India", value: 800 },
       { label: "China", value: 3000 }
@@ -14878,9 +14876,9 @@ const PUZZLES = [
     category: "Countries by Fertilizer Consumption",
     items: [
       { label: "Brazil", value: 14 },
+      { label: "European Union (total)", value: 14 },
       { label: "United States", value: 20 },
       { label: "India", value: 30 },
-      { label: "European Union (total)", value: 14 },
       { label: "China", value: 52 }
     ]
   },
@@ -14922,9 +14920,9 @@ const PUZZLES = [
     category: "Countries by Recycling Rate",
     items: [
       { label: "India", value: 5 },
+      { label: "Japan", value: 20 },
       { label: "United States", value: 32 },
       { label: "United Kingdom", value: 44 },
-      { label: "Japan", value: 20 },
       { label: "Germany", value: 67 }
     ]
   },
@@ -14945,8 +14943,8 @@ const PUZZLES = [
     items: [
       { label: "India", value: 2 },
       { label: "Brazil", value: 18 },
-      { label: "United States", value: 37 },
       { label: "Japan", value: 34 },
+      { label: "United States", value: 37 },
       { label: "France", value: 46 }
     ]
   },
@@ -14967,8 +14965,8 @@ const PUZZLES = [
     items: [
       { label: "India", value: 0.7 },
       { label: "United Kingdom", value: 1.7 },
-      { label: "United States", value: 3.5 },
       { label: "Japan", value: 3.3 },
+      { label: "United States", value: 3.5 },
       { label: "Israel", value: 5.6 }
     ]
   },
@@ -14977,7 +14975,7 @@ const PUZZLES = [
     category: "Countries by New Car Sales",
     items: [
       { label: "Germany", value: 2.8 },
-      { label: "Japan", value: 4.0 },
+      { label: "Japan", value: 4 },
       { label: "India", value: 4.1 },
       { label: "United States", value: 15.5 },
       { label: "China", value: 30 }
@@ -14988,8 +14986,8 @@ const PUZZLES = [
     category: "Countries by Cement Consumption Per Capita",
     items: [
       { label: "United States", value: 280 },
-      { label: "Japan", value: 360 },
       { label: "Germany", value: 310 },
+      { label: "Japan", value: 360 },
       { label: "South Korea", value: 1100 },
       { label: "China", value: 1500 }
     ]
@@ -15010,8 +15008,8 @@ const PUZZLES = [
     category: "Countries by Tourism Revenue",
     items: [
       { label: "Italy", value: 50 },
-      { label: "France", value: 64 },
       { label: "Thailand", value: 61 },
+      { label: "France", value: 64 },
       { label: "Spain", value: 80 },
       { label: "United States", value: 214 }
     ]
@@ -15021,8 +15019,8 @@ const PUZZLES = [
     category: "Countries by Remittances Received",
     items: [
       { label: "Bangladesh", value: 21 },
-      { label: "Philippines", value: 38 },
       { label: "Egypt", value: 32 },
+      { label: "Philippines", value: 38 },
       { label: "Mexico", value: 61 },
       { label: "India", value: 111 }
     ]
@@ -15031,9 +15029,9 @@ const PUZZLES = [
     instruction: "Lowest to highest percentage of GDP from services sector",
     category: "Countries by Services GDP Share (%)",
     items: [
+      { label: "India", value: 50 },
       { label: "Nigeria", value: 53 },
       { label: "China", value: 54 },
-      { label: "India", value: 50 },
       { label: "Germany", value: 69 },
       { label: "United States", value: 77 }
     ]
@@ -15064,8 +15062,8 @@ const PUZZLES = [
     instruction: "Lowest to highest annual import value (trillion USD, 2022)",
     category: "Countries by Import Value",
     items: [
-      { label: "Japan", value: 0.9 },
       { label: "South Korea", value: 0.73 },
+      { label: "Japan", value: 0.9 },
       { label: "Germany", value: 1.57 },
       { label: "China", value: 2.72 },
       { label: "United States", value: 3.27 }
@@ -15086,8 +15084,8 @@ const PUZZLES = [
     instruction: "Lowest to highest annual inflation rate (%, 2023)",
     category: "Countries by Inflation Rate",
     items: [
-      { label: "Japan", value: 3.3 },
       { label: "China", value: 0.2 },
+      { label: "Japan", value: 3.3 },
       { label: "Germany", value: 5.9 },
       { label: "United Kingdom", value: 7.3 },
       { label: "Argentina", value: 211 }
@@ -15099,8 +15097,8 @@ const PUZZLES = [
     items: [
       { label: "Japan", value: -0.1 },
       { label: "China", value: 3.45 },
-      { label: "United States", value: 5.5 },
       { label: "United Kingdom", value: 5.25 },
+      { label: "United States", value: 5.5 },
       { label: "Turkey", value: 42.5 }
     ]
   },
@@ -15109,7 +15107,7 @@ const PUZZLES = [
     category: "Countries by Unemployment Rate",
     items: [
       { label: "Japan", value: 2.6 },
-      { label: "Germany", value: 3.0 },
+      { label: "Germany", value: 3 },
       { label: "United States", value: 3.6 },
       { label: "France", value: 7.3 },
       { label: "South Africa", value: 32 }
@@ -15133,8 +15131,8 @@ const PUZZLES = [
       { label: "Singapore", value: 22 },
       { label: "United States", value: 37 },
       { label: "United Kingdom", value: 45 },
-      { label: "Japan", value: 55 },
-      { label: "Sweden", value: 52 }
+      { label: "Sweden", value: 52 },
+      { label: "Japan", value: 55 }
     ]
   },
   {
@@ -15143,8 +15141,8 @@ const PUZZLES = [
     items: [
       { label: "Ireland", value: 12.5 },
       { label: "Singapore", value: 17 },
-      { label: "United Kingdom", value: 25 },
       { label: "United States", value: 21 },
+      { label: "United Kingdom", value: 25 },
       { label: "Japan", value: 30 }
     ]
   },
@@ -15164,8 +15162,8 @@ const PUZZLES = [
     category: "Countries by Tourist Arrivals (2023)",
     items: [
       { label: "Japan", value: 25 },
-      { label: "United States", value: 66 },
       { label: "Italy", value: 57 },
+      { label: "United States", value: 66 },
       { label: "Spain", value: 85 },
       { label: "France", value: 100 }
     ]
@@ -15186,9 +15184,9 @@ const PUZZLES = [
     category: "Countries by Hospital Bed Density",
     items: [
       { label: "India", value: 0.5 },
-      { label: "United States", value: 2.9 },
       { label: "United Kingdom", value: 2.5 },
-      { label: "Germany", value: 8.0 },
+      { label: "United States", value: 2.9 },
+      { label: "Germany", value: 8 },
       { label: "Japan", value: 13 }
     ]
   },
@@ -15253,9 +15251,9 @@ const PUZZLES = [
     items: [
       { label: "United Kingdom", value: 4.5 },
       { label: "Germany", value: 7 },
+      { label: "India", value: 23 },
       { label: "China", value: 26 },
-      { label: "Japan", value: 27 },
-      { label: "India", value: 23 }
+      { label: "Japan", value: 27 }
     ]
   },
   {
@@ -15276,8 +15274,8 @@ const PUZZLES = [
       { label: "India", value: 2 },
       { label: "Germany", value: 33 },
       { label: "United Kingdom", value: 55 },
-      { label: "United States", value: 131 },
-      { label: "Spain", value: 115 }
+      { label: "Spain", value: 115 },
+      { label: "United States", value: 131 }
     ]
   },
   {
@@ -15285,7 +15283,7 @@ const PUZZLES = [
     category: "Countries by Happiness Score",
     items: [
       { label: "Afghanistan", value: 1.9 },
-      { label: "India", value: 4.0 },
+      { label: "India", value: 4 },
       { label: "Japan", value: 6.1 },
       { label: "United States", value: 6.9 },
       { label: "Finland", value: 7.8 }
@@ -15297,7 +15295,7 @@ const PUZZLES = [
     items: [
       { label: "Chad", value: 0.394 },
       { label: "India", value: 0.645 },
-      { label: "Brazil", value: 0.760 },
+      { label: "Brazil", value: 0.76 },
       { label: "United States", value: 0.921 },
       { label: "Switzerland", value: 0.962 }
     ]
@@ -15331,8 +15329,8 @@ const PUZZLES = [
       { label: "Earbuds", value: 1.5 },
       { label: "Smartphone", value: 3 },
       { label: "Laptop", value: 5 },
-      { label: "Television", value: 8 },
-      { label: "Desktop Computer", value: 7 }
+      { label: "Desktop Computer", value: 7 },
+      { label: "Television", value: 8 }
     ]
   },
   {
@@ -15351,8 +15349,8 @@ const PUZZLES = [
     category: "Countries/Agencies by Successful Mars Missions",
     items: [
       { label: "India (ISRO)", value: 1 },
-      { label: "European Space Agency (ESA)", value: 2 },
       { label: "China (CNSA)", value: 1 },
+      { label: "European Space Agency (ESA)", value: 2 },
       { label: "Russia/USSR", value: 2 },
       { label: "United States (NASA)", value: 18 }
     ]
@@ -15374,8 +15372,8 @@ const PUZZLES = [
     items: [
       { label: "India", value: 25 },
       { label: "Brazil", value: 30 },
-      { label: "Germany", value: 60 },
       { label: "Japan", value: 50 },
+      { label: "Germany", value: 60 },
       { label: "South Korea", value: 200 }
     ]
   },
@@ -15384,9 +15382,9 @@ const PUZZLES = [
     category: "Countries by 5G Subscribers",
     items: [
       { label: "Germany", value: 20 },
+      { label: "South Korea", value: 30 },
       { label: "Japan", value: 50 },
       { label: "United States", value: 190 },
-      { label: "South Korea", value: 30 },
       { label: "China", value: 770 }
     ]
   },
@@ -15395,8 +15393,8 @@ const PUZZLES = [
     category: "Countries by Industrial Robot Installations",
     items: [
       { label: "Germany", value: 26 },
-      { label: "United States", value: 40 },
       { label: "South Korea", value: 32 },
+      { label: "United States", value: 40 },
       { label: "Japan", value: 50 },
       { label: "China", value: 290 }
     ]
@@ -15416,8 +15414,8 @@ const PUZZLES = [
     instruction: "Lowest to highest annual AI investment (billion USD, 2023)",
     category: "Countries by AI Investment",
     items: [
-      { label: "Germany", value: 5 },
       { label: "Japan", value: 4 },
+      { label: "Germany", value: 5 },
       { label: "United Kingdom", value: 5 },
       { label: "China", value: 15 },
       { label: "United States", value: 67 }
@@ -15427,8 +15425,8 @@ const PUZZLES = [
     instruction: "Lowest to highest venture capital investment (billion USD, 2023)",
     category: "Countries by Venture Capital Investment",
     items: [
-      { label: "Germany", value: 6 },
       { label: "Japan", value: 5 },
+      { label: "Germany", value: 6 },
       { label: "India", value: 10 },
       { label: "China", value: 45 },
       { label: "United States", value: 170 }
@@ -15438,8 +15436,8 @@ const PUZZLES = [
     instruction: "Fewest to most unicorn companies (private startups valued $1B+, 2023)",
     category: "Countries by Number of Unicorns",
     items: [
-      { label: "Germany", value: 30 },
       { label: "Japan", value: 10 },
+      { label: "Germany", value: 30 },
       { label: "India", value: 75 },
       { label: "China", value: 170 },
       { label: "United States", value: 660 }
@@ -15460,9 +15458,9 @@ const PUZZLES = [
     instruction: "Lowest to highest annual e-commerce revenue (billion USD, 2023)",
     category: "Countries by E-Commerce Revenue",
     items: [
-      { label: "Japan", value: 190 },
       { label: "Germany", value: 140 },
       { label: "United Kingdom", value: 170 },
+      { label: "Japan", value: 190 },
       { label: "United States", value: 1140 },
       { label: "China", value: 2200 }
     ]
@@ -15495,8 +15493,8 @@ const PUZZLES = [
     items: [
       { label: "Japan", value: 40 },
       { label: "Germany", value: 50 },
-      { label: "China", value: 100 },
       { label: "United Kingdom", value: 60 },
+      { label: "China", value: 100 },
       { label: "United States", value: 2700 }
     ]
   },
@@ -15526,9 +15524,9 @@ const PUZZLES = [
     instruction: "Fewest to most total supercomputers in the TOP500 list (2023)",
     category: "Countries by TOP500 Supercomputers",
     items: [
-      { label: "Germany", value: 34 },
-      { label: "Japan", value: 32 },
       { label: "France", value: 22 },
+      { label: "Japan", value: 32 },
+      { label: "Germany", value: 34 },
       { label: "China", value: 134 },
       { label: "United States", value: 150 }
     ]
@@ -15537,8 +15535,8 @@ const PUZZLES = [
     instruction: "Lowest to highest annual smartphone sales (millions, 2023)",
     category: "Countries by Smartphone Sales",
     items: [
-      { label: "Japan", value: 28 },
       { label: "Germany", value: 20 },
+      { label: "Japan", value: 28 },
       { label: "United States", value: 145 },
       { label: "India", value: 150 },
       { label: "China", value: 270 }
@@ -15548,9 +15546,9 @@ const PUZZLES = [
     instruction: "Fewest to most annual cyber attacks reported (per million people)",
     category: "Countries by Cyber Attack Rate",
     items: [
+      { label: "India", value: 15 },
       { label: "Japan", value: 50 },
       { label: "Germany", value: 120 },
-      { label: "India", value: 15 },
       { label: "United States", value: 300 },
       { label: "United Kingdom", value: 350 }
     ]
@@ -15559,19 +15557,19 @@ const PUZZLES = [
     instruction: "Fewest to most total tech IPOs in 2023",
     category: "Countries by Tech IPOs",
     items: [
-      { label: "Japan", value: 15 },
       { label: "Germany", value: 5 },
+      { label: "Japan", value: 15 },
       { label: "India", value: 30 },
-      { label: "China", value: 80 },
-      { label: "United States", value: 50 }
+      { label: "United States", value: 50 },
+      { label: "China", value: 80 }
     ]
   },
   {
     instruction: "Fewest to most annual podcast listeners (millions, 2023)",
     category: "Countries by Podcast Listeners",
     items: [
-      { label: "Germany", value: 20 },
       { label: "Japan", value: 15 },
+      { label: "Germany", value: 20 },
       { label: "Brazil", value: 40 },
       { label: "China", value: 100 },
       { label: "United States", value: 120 }
@@ -15581,20 +15579,20 @@ const PUZZLES = [
     instruction: "Fewest to most annual video game revenue (billion USD, 2023)",
     category: "Countries by Gaming Revenue",
     items: [
-      { label: "Germany", value: 6.5 },
       { label: "United Kingdom", value: 5.5 },
+      { label: "Germany", value: 6.5 },
       { label: "Japan", value: 20 },
-      { label: "United States", value: 52 },
-      { label: "China", value: 45 }
+      { label: "China", value: 45 },
+      { label: "United States", value: 52 }
     ]
   },
   {
     instruction: "Fewest to most annual esports tournament prize pools (million USD)",
     category: "Esports Games by Annual Prize Pools",
     items: [
+      { label: "Valorant", value: 5 },
       { label: "League of Legends", value: 6 },
       { label: "Fortnite", value: 10 },
-      { label: "Valorant", value: 5 },
       { label: "Counter-Strike", value: 15 },
       { label: "Dota 2", value: 45 }
     ]
@@ -15604,9 +15602,9 @@ const PUZZLES = [
     category: "Countries by Drone Deliveries",
     items: [
       { label: "Japan", value: 5 },
+      { label: "India", value: 20 },
       { label: "United States", value: 50 },
       { label: "Australia", value: 100 },
-      { label: "India", value: 20 },
       { label: "China", value: 2000 }
     ]
   },
@@ -15625,8 +15623,8 @@ const PUZZLES = [
     instruction: "Fewest to most annual solar energy generation (TWh, 2023)",
     category: "Countries by Solar Energy Generated",
     items: [
-      { label: "Japan", value: 100 },
       { label: "Germany", value: 60 },
+      { label: "Japan", value: 100 },
       { label: "India", value: 120 },
       { label: "United States", value: 240 },
       { label: "China", value: 580 }
@@ -15649,8 +15647,8 @@ const PUZZLES = [
     items: [
       { label: "Japan", value: 8 },
       { label: "France", value: 9 },
-      { label: "United Kingdom", value: 32 },
       { label: "Germany", value: 31 },
+      { label: "United Kingdom", value: 32 },
       { label: "United States", value: 76 }
     ]
   },
@@ -15680,9 +15678,9 @@ const PUZZLES = [
     instruction: "Fewest to most total Turing Award winners by country",
     category: "Countries by Turing Award Winners",
     items: [
-      { label: "Canada", value: 5 },
       { label: "Netherlands", value: 2 },
       { label: "Israel", value: 4 },
+      { label: "Canada", value: 5 },
       { label: "United Kingdom", value: 7 },
       { label: "United States", value: 52 }
     ]
@@ -15705,8 +15703,8 @@ const PUZZLES = [
       { label: "Japan", value: 8 },
       { label: "Germany", value: 60 },
       { label: "France", value: 150 },
-      { label: "United States", value: 280 },
-      { label: "South Africa", value: 170 }
+      { label: "South Africa", value: 170 },
+      { label: "United States", value: 280 }
     ]
   },
   {
@@ -15768,9 +15766,9 @@ const PUZZLES = [
     instruction: "Fewest to most annual pet spending (billion USD)",
     category: "Countries by Pet Industry Spending",
     items: [
-      { label: "Japan", value: 15 },
       { label: "Germany", value: 8 },
       { label: "United Kingdom", value: 10 },
+      { label: "Japan", value: 15 },
       { label: "China", value: 30 },
       { label: "United States", value: 140 }
     ]
@@ -15790,8 +15788,8 @@ const PUZZLES = [
     instruction: "Fewest to most cat ownership (millions of pet cats)",
     category: "Countries by Cat Population",
     items: [
-      { label: "Germany", value: 15 },
       { label: "Japan", value: 10 },
+      { label: "Germany", value: 15 },
       { label: "Russia", value: 23 },
       { label: "China", value: 58 },
       { label: "United States", value: 74 }
@@ -15801,8 +15799,8 @@ const PUZZLES = [
     instruction: "Fewest to most annual marathons held in a country",
     category: "Countries by Number of Annual Marathons",
     items: [
-      { label: "Germany", value: 100 },
       { label: "France", value: 80 },
+      { label: "Germany", value: 100 },
       { label: "United Kingdom", value: 200 },
       { label: "Japan", value: 350 },
       { label: "United States", value: 800 }
@@ -15813,9 +15811,9 @@ const PUZZLES = [
     category: "Countries by Number of Annual Triathlons",
     items: [
       { label: "Japan", value: 100 },
+      { label: "Australia", value: 150 },
       { label: "Germany", value: 200 },
       { label: "France", value: 300 },
-      { label: "Australia", value: 150 },
       { label: "United States", value: 4000 }
     ]
   },
@@ -15824,10 +15822,10 @@ const PUZZLES = [
     category: "Countries by Yogurt Production",
     items: [
       { label: "Japan", value: 1.1 },
+      { label: "Turkey", value: 1.5 },
       { label: "Germany", value: 2 },
       { label: "United States", value: 2.8 },
-      { label: "India", value: 5 },
-      { label: "Turkey", value: 1.5 }
+      { label: "India", value: 5 }
     ]
   },
   {
@@ -15846,9 +15844,9 @@ const PUZZLES = [
     category: "Countries by Number of Wineries",
     items: [
       { label: "Australia", value: 2.5 },
-      { label: "Germany", value: 15 },
-      { label: "United States", value: 11 },
       { label: "Spain", value: 4 },
+      { label: "United States", value: 11 },
+      { label: "Germany", value: 15 },
       { label: "France", value: 85 }
     ]
   },
@@ -15879,9 +15877,9 @@ const PUZZLES = [
     category: "Countries by Avalanche Deaths Per Year (average)",
     items: [
       { label: "Japan", value: 10 },
+      { label: "Switzerland", value: 22 },
       { label: "United States", value: 25 },
       { label: "Austria", value: 26 },
-      { label: "Switzerland", value: 22 },
       { label: "France", value: 30 }
     ]
   },
@@ -15956,8 +15954,8 @@ const PUZZLES = [
     category: "Cities by Annual Heat Wave Days",
     items: [
       { label: "London", value: 1 },
-      { label: "Tokyo", value: 15 },
       { label: "New York", value: 10 },
+      { label: "Tokyo", value: 15 },
       { label: "New Delhi", value: 60 },
       { label: "Phoenix", value: 110 }
     ]
@@ -15968,8 +15966,8 @@ const PUZZLES = [
     items: [
       { label: "Japan", value: 1 },
       { label: "Norway", value: 1 },
-      { label: "Germany", value: 2 },
       { label: "Spain", value: 1 },
+      { label: "Germany", value: 2 },
       { label: "United States", value: 4 }
     ]
   },
@@ -15978,10 +15976,10 @@ const PUZZLES = [
     category: "Women Tennis Players by Olympic Golds",
     items: [
       { label: "Monica Seles", value: 0 },
-      { label: "Venus Williams", value: 4 },
-      { label: "Serena Williams", value: 4 },
       { label: "Steffi Graf", value: 1 },
-      { label: "Justine Henin", value: 1 }
+      { label: "Justine Henin", value: 1 },
+      { label: "Venus Williams", value: 4 },
+      { label: "Serena Williams", value: 4 }
     ]
   },
   {
@@ -16011,8 +16009,8 @@ const PUZZLES = [
     category: "Countries by Cut Flower Production",
     items: [
       { label: "Japan", value: 5 },
-      { label: "Colombia", value: 8 },
       { label: "Kenya", value: 6 },
+      { label: "Colombia", value: 8 },
       { label: "Netherlands", value: 13 },
       { label: "China", value: 20 }
     ]
@@ -16022,10 +16020,10 @@ const PUZZLES = [
     category: "Alpine Skiers by Overall World Cup Titles",
     items: [
       { label: "Vreni Schneider", value: 3 },
+      { label: "Ingemar Stenmark", value: 3 },
       { label: "Lindsey Vonn", value: 4 },
       { label: "Annemarie Moser-Pröll", value: 6 },
-      { label: "Marcel Hirscher", value: 8 },
-      { label: "Ingemar Stenmark", value: 3 }
+      { label: "Marcel Hirscher", value: 8 }
     ]
   },
   {
@@ -16033,9 +16031,9 @@ const PUZZLES = [
     category: "Countries by Classical Music Concerts Per Year",
     items: [
       { label: "Japan", value: 8 },
-      { label: "United States", value: 15 },
       { label: "United Kingdom", value: 10 },
       { label: "Austria", value: 12 },
+      { label: "United States", value: 15 },
       { label: "Germany", value: 30 }
     ]
   },
@@ -16076,20 +16074,20 @@ const PUZZLES = [
     instruction: "Fewest to most total World Heritage Sites in danger (by region, 2023)",
     category: "UNESCO Regions by Endangered Sites",
     items: [
-      { label: "Asia-Pacific", value: 7 },
       { label: "Europe/North America", value: 4 },
+      { label: "Asia-Pacific", value: 7 },
       { label: "Latin America/Caribbean", value: 8 },
-      { label: "Arab States", value: 19 },
-      { label: "Africa", value: 17 }
+      { label: "Africa", value: 17 },
+      { label: "Arab States", value: 19 }
     ]
   },
   {
     instruction: "Lowest to highest global bicycle sharing systems (number of cities with bike-share)",
     category: "Countries by Cities with Bike-Sharing",
     items: [
+      { label: "France", value: 40 },
       { label: "Germany", value: 80 },
       { label: "Japan", value: 100 },
-      { label: "France", value: 40 },
       { label: "United States", value: 120 },
       { label: "China", value: 400 }
     ]
@@ -16164,11 +16162,11 @@ const PUZZLES = [
     instruction: "Slowest to fastest 0-60 mph time for production cars (seconds, lower is faster)",
     category: "Production Cars by 0-60 Time",
     items: [
-      { label: "Toyota Corolla", value: 8.5 },
-      { label: "Volkswagen Golf GTI", value: 5.5 },
-      { label: "BMW M3", value: 3.8 },
+      { label: "Tesla Model S Plaid", value: 1.99 },
       { label: "Porsche 911 Turbo S", value: 2.6 },
-      { label: "Tesla Model S Plaid", value: 1.99 }
+      { label: "BMW M3", value: 3.8 },
+      { label: "Volkswagen Golf GTI", value: 5.5 },
+      { label: "Toyota Corolla", value: 8.5 }
     ]
   },
   {
@@ -16321,8 +16319,8 @@ const PUZZLES = [
       { label: "United States", value: 4.4 },
       { label: "Italy", value: 5.8 },
       { label: "Sweden", value: 7.6 },
-      { label: "Norway", value: 9.0 },
-      { label: "Finland", value: 12.0 }
+      { label: "Norway", value: 9 },
+      { label: "Finland", value: 12 }
     ]
   },
   {
@@ -16365,8 +16363,8 @@ const PUZZLES = [
       { label: "Italy", value: 3 },
       { label: "Iceland", value: 30 },
       { label: "Japan", value: 100 },
-      { label: "United States", value: 161 },
-      { label: "Indonesia", value: 127 }
+      { label: "Indonesia", value: 127 },
+      { label: "United States", value: 161 }
     ]
   },
   {
@@ -16486,7 +16484,7 @@ const PUZZLES = [
       { label: "Frozen", value: 1.28 },
       { label: "The Lion King (2019)", value: 1.66 },
       { label: "Titanic", value: 2.26 },
-      { label: "Avengers: Endgame", value: 2.80 },
+      { label: "Avengers: Endgame", value: 2.8 },
       { label: "Avatar", value: 2.92 }
     ]
   },
@@ -16604,10 +16602,10 @@ const PUZZLES = [
     instruction: "Smallest to largest forest by area (million sq km)",
     category: "Forests by Area",
     items: [
+      { label: "Daintree Rainforest (Australia)", value: 0.0012 },
       { label: "Black Forest (Germany)", value: 0.006 },
       { label: "Tongass National Forest (Alaska)", value: 0.069 },
-      { label: "Daintree Rainforest (Australia)", value: 0.0012 },
-      { label: "Congo Rainforest", value: 2.0 },
+      { label: "Congo Rainforest", value: 2 },
       { label: "Amazon Rainforest", value: 5.5 }
     ]
   },
@@ -16639,8 +16637,8 @@ const PUZZLES = [
     items: [
       { label: "Folgers Classic Roast", value: 8 },
       { label: "Colombian Supremo", value: 15 },
-      { label: "Blue Mountain (Jamaica)", value: 65 },
       { label: "Hawaiian Kona", value: 50 },
+      { label: "Blue Mountain (Jamaica)", value: 65 },
       { label: "Kopi Luwak", value: 300 }
     ]
   },
@@ -16705,7 +16703,7 @@ const PUZZLES = [
     items: [
       { label: "Bee Hummingbird", value: 0.06 },
       { label: "House Sparrow", value: 0.24 },
-      { label: "Bald Eagle", value: 2.0 },
+      { label: "Bald Eagle", value: 2 },
       { label: "Andean Condor", value: 3.2 },
       { label: "Wandering Albatross", value: 3.5 }
     ]
@@ -16759,7 +16757,7 @@ const PUZZLES = [
     category: "Materials by Thermal Conductivity",
     items: [
       { label: "Wood (Oak)", value: 0.17 },
-      { label: "Glass", value: 1.0 },
+      { label: "Glass", value: 1 },
       { label: "Stainless Steel", value: 16 },
       { label: "Aluminum", value: 237 },
       { label: "Diamond", value: 2200 }
@@ -16793,8 +16791,8 @@ const PUZZLES = [
     items: [
       { label: "Reykjavik (Iceland)", value: 0.13 },
       { label: "Lisbon (Portugal)", value: 0.55 },
-      { label: "Berlin (Germany)", value: 3.65 },
       { label: "Paris (France)", value: 2.16 },
+      { label: "Berlin (Germany)", value: 3.65 },
       { label: "London (UK)", value: 8.98 }
     ]
   },
@@ -16849,7 +16847,7 @@ const PUZZLES = [
       { label: "Argentina", value: 10.5 },
       { label: "United States", value: 23.6 },
       { label: "Spain", value: 35.7 },
-      { label: "France", value: 46.0 },
+      { label: "France", value: 46 },
       { label: "Italy", value: 49.5 }
     ]
   },
@@ -16858,8 +16856,8 @@ const PUZZLES = [
     category: "Countries by Summer Olympic Gold Medals",
     items: [
       { label: "Australia", value: 167 },
-      { label: "China", value: 263 },
       { label: "France", value: 254 },
+      { label: "China", value: 263 },
       { label: "Great Britain", value: 285 },
       { label: "United States", value: 1066 }
     ]
@@ -16978,7 +16976,7 @@ const PUZZLES = [
     instruction: "Lowest to highest annual tea consumption per capita (kg)",
     category: "Countries by Tea Consumption Per Capita",
     items: [
-      { label: "Japan", value: 1.0 },
+      { label: "Japan", value: 1 },
       { label: "United Kingdom", value: 1.5 },
       { label: "Morocco", value: 1.9 },
       { label: "Ireland", value: 2.1 },
@@ -17045,8 +17043,8 @@ const PUZZLES = [
     category: "Human Body Regions by Bone Count",
     items: [
       { label: "Skull (cranium)", value: 8 },
-      { label: "Spine (vertebrae)", value: 26 },
       { label: "Rib Cage (ribs + sternum)", value: 25 },
+      { label: "Spine (vertebrae)", value: 26 },
       { label: "Arms and Hands (both)", value: 60 },
       { label: "Legs and Feet (both)", value: 60 }
     ]
@@ -17067,9 +17065,9 @@ const PUZZLES = [
     category: "Common Substances by pH",
     items: [
       { label: "Battery Acid", value: 0.5 },
-      { label: "Lemon Juice", value: 2.0 },
-      { label: "Coffee", value: 5.0 },
-      { label: "Pure Water", value: 7.0 },
+      { label: "Lemon Juice", value: 2 },
+      { label: "Coffee", value: 5 },
+      { label: "Pure Water", value: 7 },
       { label: "Bleach", value: 12.5 }
     ]
   },
@@ -17244,20 +17242,20 @@ const PUZZLES = [
     items: [
       { label: "Diego Maradona", value: 345 },
       { label: "Ronaldo (R9)", value: 414 },
+      { label: "Josef Bican", value: 805 },
       { label: "Lionel Messi", value: 838 },
-      { label: "Cristiano Ronaldo", value: 899 },
-      { label: "Josef Bican", value: 805 }
+      { label: "Cristiano Ronaldo", value: 899 }
     ]
   },
   {
     instruction: "Lowest to highest marathon world record pace per mile (minutes)",
     category: "Marathon Records by Era (time in minutes)",
     items: [
-      { label: "1908 Olympic (Johnny Hayes)", value: 165 },
-      { label: "1960s Record (Abebe Bikila)", value: 135 },
-      { label: "1998 Record (Ronaldo da Costa)", value: 126 },
+      { label: "2023 Record (Kelvin Kiptum)", value: 121 },
       { label: "2018 Record (Eliud Kipchoge)", value: 122 },
-      { label: "2023 Record (Kelvin Kiptum)", value: 121 }
+      { label: "1998 Record (Ronaldo da Costa)", value: 126 },
+      { label: "1960s Record (Abebe Bikila)", value: 135 },
+      { label: "1908 Olympic (Johnny Hayes)", value: 165 }
     ]
   },
   {
@@ -17279,7 +17277,7 @@ const PUZZLES = [
       { label: "Copper", value: 1.68e-8 },
       { label: "Iron", value: 9.7e-8 },
       { label: "Silicon (pure)", value: 2300 },
-      { label: "Glass", value: 1e11 }
+      { label: "Glass", value: 100000000000 }
     ]
   },
   {
@@ -17299,8 +17297,8 @@ const PUZZLES = [
     items: [
       { label: "Slug", value: 0 },
       { label: "Frog", value: 159 },
-      { label: "Human", value: 206 },
       { label: "Horse", value: 205 },
+      { label: "Human", value: 206 },
       { label: "Snake (Python)", value: 600 }
     ]
   },
@@ -17343,8 +17341,8 @@ const PUZZLES = [
     items: [
       { label: "Notre-Dame de Paris", value: 69 },
       { label: "St. Patrick's Cathedral (NYC)", value: 101 },
-      { label: "Cologne Cathedral", value: 157 },
       { label: "Rouen Cathedral", value: 151 },
+      { label: "Cologne Cathedral", value: 157 },
       { label: "Ulm Minster", value: 162 }
     ]
   },
@@ -17353,9 +17351,9 @@ const PUZZLES = [
     category: "Oceans by Average Depth",
     items: [
       { label: "Arctic Ocean", value: 1205 },
-      { label: "Indian Ocean", value: 3741 },
-      { label: "Atlantic Ocean", value: 3646 },
       { label: "Southern Ocean", value: 3270 },
+      { label: "Atlantic Ocean", value: 3646 },
+      { label: "Indian Ocean", value: 3741 },
       { label: "Pacific Ocean", value: 4280 }
     ]
   },
@@ -17365,8 +17363,8 @@ const PUZZLES = [
     items: [
       { label: "India", value: 130 },
       { label: "Japan", value: 210 },
-      { label: "Russia/USSR", value: 3600 },
       { label: "China", value: 730 },
+      { label: "Russia/USSR", value: 3600 },
       { label: "United States", value: 6000 }
     ]
   },
@@ -17485,8 +17483,8 @@ const PUZZLES = [
     category: "NBA Players by Career Assists",
     items: [
       { label: "Magic Johnson", value: 10141 },
-      { label: "Steve Nash", value: 10335 },
       { label: "Mark Jackson", value: 10334 },
+      { label: "Steve Nash", value: 10335 },
       { label: "Jason Kidd", value: 12091 },
       { label: "John Stockton", value: 15806 }
     ]
@@ -17542,7 +17540,7 @@ const PUZZLES = [
       { label: "Barbados Threadsnake", value: 0.1 },
       { label: "Corn Snake", value: 1.2 },
       { label: "King Cobra", value: 3.7 },
-      { label: "Burmese Python", value: 5.0 },
+      { label: "Burmese Python", value: 5 },
       { label: "Reticulated Python", value: 6.5 }
     ]
   },
@@ -17573,10 +17571,10 @@ const PUZZLES = [
     category: "Eagle Species by Wingspan",
     items: [
       { label: "Little Eagle (Australia)", value: 1.1 },
-      { label: "Bald Eagle", value: 2.0 },
+      { label: "Bald Eagle", value: 2 },
       { label: "Golden Eagle", value: 2.2 },
-      { label: "Martial Eagle", value: 2.6 },
-      { label: "Steller's Sea Eagle", value: 2.5 }
+      { label: "Steller's Sea Eagle", value: 2.5 },
+      { label: "Martial Eagle", value: 2.6 }
     ]
   },
   {
@@ -17641,8 +17639,8 @@ const PUZZLES = [
       { label: "Kiwifruit", value: 4.4 },
       { label: "Mango", value: 57 },
       { label: "Apple", value: 86 },
-      { label: "Banana", value: 119 },
-      { label: "Watermelon", value: 100 }
+      { label: "Watermelon", value: 100 },
+      { label: "Banana", value: 119 }
     ]
   },
   {
@@ -17683,8 +17681,8 @@ const PUZZLES = [
     category: "Dams by Reservoir Volume",
     items: [
       { label: "Three Gorges Dam (China)", value: 39.3 },
-      { label: "Guri Dam (Venezuela)", value: 135 },
       { label: "Aswan High Dam (Egypt)", value: 132 },
+      { label: "Guri Dam (Venezuela)", value: 135 },
       { label: "Daniel-Johnson Dam (Canada)", value: 141.8 },
       { label: "Kariba Dam (Zambia/Zimbabwe)", value: 180 }
     ]
@@ -17704,10 +17702,10 @@ const PUZZLES = [
     instruction: "Fewest to most career home runs in MLB (left-handed batters)",
     category: "Left-Handed MLB Batters by Career Home Runs",
     items: [
-      { label: "Ken Griffey Jr.", value: 630 },
       { label: "Ted Williams", value: 521 },
-      { label: "Babe Ruth", value: 714 },
       { label: "Jim Thome", value: 612 },
+      { label: "Ken Griffey Jr.", value: 630 },
+      { label: "Babe Ruth", value: 714 },
       { label: "Barry Bonds", value: 762 }
     ]
   },
@@ -17718,8 +17716,8 @@ const PUZZLES = [
       { label: "Olive Oil", value: -6 },
       { label: "Coconut Oil", value: 24 },
       { label: "Butter", value: 32 },
-      { label: "Lard", value: 36 },
-      { label: "Cocoa Butter", value: 34 }
+      { label: "Cocoa Butter", value: 34 },
+      { label: "Lard", value: 36 }
     ]
   },
   {
@@ -17727,7 +17725,7 @@ const PUZZLES = [
     category: "Liquids by Viscosity",
     items: [
       { label: "Acetone", value: 0.32 },
-      { label: "Water", value: 1.0 },
+      { label: "Water", value: 1 },
       { label: "Olive Oil", value: 84 },
       { label: "Glycerin", value: 1412 },
       { label: "Honey", value: 10000 }
@@ -17737,11 +17735,11 @@ const PUZZLES = [
     instruction: "Fewest to most career touchdowns in NFL history",
     category: "NFL Players by Career Touchdowns",
     items: [
+      { label: "Jerry Rice (receiving TDs)", value: 197 },
+      { label: "Brett Favre", value: 508 },
       { label: "Peyton Manning", value: 539 },
       { label: "Drew Brees", value: 571 },
-      { label: "Brett Favre", value: 508 },
-      { label: "Tom Brady", value: 649 },
-      { label: "Jerry Rice (receiving TDs)", value: 197 }
+      { label: "Tom Brady", value: 649 }
     ]
   },
   {
@@ -17749,8 +17747,8 @@ const PUZZLES = [
     category: "MLB Pitchers by Career Strikeouts",
     items: [
       { label: "Bob Gibson", value: 3117 },
-      { label: "Roger Clemens", value: 4672 },
       { label: "Steve Carlton", value: 4136 },
+      { label: "Roger Clemens", value: 4672 },
       { label: "Randy Johnson", value: 4875 },
       { label: "Nolan Ryan", value: 5714 }
     ]
@@ -17771,8 +17769,8 @@ const PUZZLES = [
     category: "Metals by Annual Global Production",
     items: [
       { label: "Gold", value: 0.003 },
-      { label: "Copper", value: 22 },
       { label: "Zinc", value: 13 },
+      { label: "Copper", value: 22 },
       { label: "Aluminum", value: 69 },
       { label: "Iron/Steel", value: 1900 }
     ]
@@ -17792,11 +17790,11 @@ const PUZZLES = [
     instruction: "Lowest to highest market capitalization of a stock exchange (trillion USD)",
     category: "Stock Exchanges by Market Cap",
     items: [
-      { label: "Hong Kong Stock Exchange", value: 4.1 },
       { label: "London Stock Exchange", value: 3.5 },
+      { label: "Hong Kong Stock Exchange", value: 4.1 },
       { label: "Shanghai Stock Exchange", value: 6.5 },
-      { label: "NASDAQ", value: 22.0 },
-      { label: "New York Stock Exchange", value: 27.0 }
+      { label: "NASDAQ", value: 22 },
+      { label: "New York Stock Exchange", value: 27 }
     ]
   },
   {
@@ -17860,8 +17858,8 @@ const PUZZLES = [
     items: [
       { label: "Tubbataha Reef (Philippines)", value: 97 },
       { label: "Belize Barrier Reef", value: 960 },
-      { label: "Red Sea Coral Reef", value: 3800 },
       { label: "New Caledonia Barrier Reef", value: 1500 },
+      { label: "Red Sea Coral Reef", value: 3800 },
       { label: "Great Barrier Reef (Australia)", value: 348000 }
     ]
   },
@@ -17882,8 +17880,8 @@ const PUZZLES = [
     items: [
       { label: "Mexico", value: 15 },
       { label: "South Korea", value: 22 },
-      { label: "Turkey", value: 25 },
       { label: "Japan", value: 22 },
+      { label: "Turkey", value: 25 },
       { label: "China", value: 43 }
     ]
   },
@@ -17913,10 +17911,10 @@ const PUZZLES = [
     instruction: "Fewest to most career goals in women's international soccer",
     category: "Women's Soccer Players by International Goals",
     items: [
-      { label: "Mia Hamm", value: 158 },
-      { label: "Marta (Brazil)", value: 120 },
-      { label: "Abby Wambach", value: 184 },
       { label: "Sam Kerr (Australia)", value: 69 },
+      { label: "Marta (Brazil)", value: 120 },
+      { label: "Mia Hamm", value: 158 },
+      { label: "Abby Wambach", value: 184 },
       { label: "Christine Sinclair (Canada)", value: 190 }
     ]
   },
@@ -17936,8 +17934,8 @@ const PUZZLES = [
     category: "Canals by Length",
     items: [
       { label: "Corinth Canal (Greece)", value: 6.4 },
-      { label: "Suez Canal (Egypt)", value: 193 },
       { label: "Panama Canal", value: 82 },
+      { label: "Suez Canal (Egypt)", value: 193 },
       { label: "Erie Canal (USA)", value: 584 },
       { label: "Grand Canal (China)", value: 1776 }
     ]
@@ -17948,7 +17946,7 @@ const PUZZLES = [
     items: [
       { label: "Japan", value: 3.2 },
       { label: "United States", value: 4.8 },
-      { label: "Russia", value: 5.0 },
+      { label: "Russia", value: 5 },
       { label: "Indonesia", value: 7.7 },
       { label: "China", value: 15 }
     ]
@@ -17968,9 +17966,9 @@ const PUZZLES = [
     instruction: "Lowest to highest annual banana production by country (million tonnes)",
     category: "Countries by Banana Production",
     items: [
-      { label: "Colombia", value: 4.0 },
+      { label: "Colombia", value: 4 },
       { label: "Ecuador", value: 6.5 },
-      { label: "Philippines", value: 9.0 },
+      { label: "Philippines", value: 9 },
       { label: "China", value: 12 },
       { label: "India", value: 31 }
     ]
@@ -18036,8 +18034,8 @@ const PUZZLES = [
     items: [
       { label: "Japan", value: 43 },
       { label: "Mexico", value: 60 },
-      { label: "India", value: 130 },
       { label: "United States", value: 113 },
+      { label: "India", value: 130 },
       { label: "China", value: 550 }
     ]
   },
@@ -18091,8 +18089,8 @@ const PUZZLES = [
     items: [
       { label: "United Kingdom", value: 7 },
       { label: "United States", value: 24 },
-      { label: "China", value: 100 },
       { label: "Japan", value: 45 },
+      { label: "China", value: 100 },
       { label: "India", value: 240 }
     ]
   },
@@ -18124,8 +18122,8 @@ const PUZZLES = [
     items: [
       { label: "Babe Ruth", value: 0.342 },
       { label: "Ted Williams", value: 0.344 },
-      { label: "Rogers Hornsby", value: 0.358 },
       { label: "Shoeless Joe Jackson", value: 0.356 },
+      { label: "Rogers Hornsby", value: 0.358 },
       { label: "Ty Cobb", value: 0.366 }
     ]
   },
@@ -18201,8 +18199,8 @@ const PUZZLES = [
     items: [
       { label: "Badaling Section", value: 4 },
       { label: "Mutianyu Section", value: 5.4 },
-      { label: "Jinshanling Section", value: 10.5 },
       { label: "Simatai Section", value: 5.4 },
+      { label: "Jinshanling Section", value: 10.5 },
       { label: "Jiankou Section", value: 20 }
     ]
   },
@@ -18212,7 +18210,7 @@ const PUZZLES = [
     items: [
       { label: "United States", value: 0.9 },
       { label: "Italy", value: 3.5 },
-      { label: "Spain", value: 4.0 },
+      { label: "Spain", value: 4 },
       { label: "Turkey", value: 4.5 },
       { label: "Greece", value: 7.5 }
     ]
@@ -18245,8 +18243,8 @@ const PUZZLES = [
     items: [
       { label: "Australia", value: 16 },
       { label: "China", value: 34 },
-      { label: "Russia", value: 48 },
       { label: "Mexico", value: 42 },
+      { label: "Russia", value: 48 },
       { label: "Spain", value: 53 }
     ]
   },
@@ -18255,8 +18253,8 @@ const PUZZLES = [
     category: "Commercial Aircraft by Cruise Speed",
     items: [
       { label: "ATR 72 (turboprop)", value: 510 },
-      { label: "Embraer E175", value: 870 },
       { label: "Airbus A320", value: 840 },
+      { label: "Embraer E175", value: 870 },
       { label: "Boeing 787 Dreamliner", value: 903 },
       { label: "Concorde", value: 2180 }
     ]
@@ -18278,8 +18276,8 @@ const PUZZLES = [
     items: [
       { label: "Breaking Bad", value: 62 },
       { label: "Friends", value: 236 },
-      { label: "The Simpsons", value: 760 },
       { label: "Gunsmoke", value: 635 },
+      { label: "The Simpsons", value: 760 },
       { label: "General Hospital", value: 15000 }
     ]
   },
@@ -18287,11 +18285,11 @@ const PUZZLES = [
     instruction: "Lowest to highest taxicab fare per km (USD)",
     category: "Cities by Taxicab Fare Per Km",
     items: [
-      { label: "Cairo (Egypt)", value: 0.30 },
-      { label: "Bangkok (Thailand)", value: 0.50 },
-      { label: "New York City", value: 2.50 },
-      { label: "Tokyo (Japan)", value: 3.50 },
-      { label: "Zurich (Switzerland)", value: 4.30 }
+      { label: "Cairo (Egypt)", value: 0.3 },
+      { label: "Bangkok (Thailand)", value: 0.5 },
+      { label: "New York City", value: 2.5 },
+      { label: "Tokyo (Japan)", value: 3.5 },
+      { label: "Zurich (Switzerland)", value: 4.3 }
     ]
   },
   {
@@ -18320,11 +18318,11 @@ const PUZZLES = [
     instruction: "Shortest to longest border between two countries (km)",
     category: "International Borders by Length",
     items: [
-      { label: "Vatican City–Italy", value: 3.4 },
       { label: "Spain–Gibraltar", value: 1.2 },
+      { label: "Vatican City–Italy", value: 3.4 },
       { label: "USA–Mexico", value: 3145 },
-      { label: "USA–Canada", value: 8891 },
-      { label: "Russia–Kazakhstan", value: 7644 }
+      { label: "Russia–Kazakhstan", value: 7644 },
+      { label: "USA–Canada", value: 8891 }
     ]
   },
   {
@@ -18355,20 +18353,20 @@ const PUZZLES = [
     items: [
       { label: "Moon (Earth)", value: 0 },
       { label: "Mars", value: 5 },
+      { label: "Io (Jupiter's moon)", value: 400 },
       { label: "Earth", value: 1350 },
-      { label: "Venus", value: 1600 },
-      { label: "Io (Jupiter's moon)", value: 400 }
+      { label: "Venus", value: 1600 }
     ]
   },
   {
     instruction: "Lowest to highest average price of a Big Mac by country (USD)",
     category: "Countries by Big Mac Price",
     items: [
-      { label: "Egypt", value: 1.90 },
-      { label: "India (Maharaja Mac)", value: 2.50 },
-      { label: "Japan", value: 3.20 },
-      { label: "United States", value: 5.70 },
-      { label: "Switzerland", value: 7.30 }
+      { label: "Egypt", value: 1.9 },
+      { label: "India (Maharaja Mac)", value: 2.5 },
+      { label: "Japan", value: 3.2 },
+      { label: "United States", value: 5.7 },
+      { label: "Switzerland", value: 7.3 }
     ]
   },
   {
@@ -18410,8 +18408,8 @@ const PUZZLES = [
     items: [
       { label: "Jesse Owens", value: 4 },
       { label: "Mo Farah", value: 4 },
-      { label: "Carl Lewis", value: 9 },
       { label: "Usain Bolt", value: 8 },
+      { label: "Carl Lewis", value: 9 },
       { label: "Paavo Nurmi", value: 9 }
     ]
   },
@@ -18453,8 +18451,8 @@ const PUZZLES = [
     category: "Foods by Vitamin A Content",
     items: [
       { label: "Apple", value: 3 },
-      { label: "Egg", value: 160 },
       { label: "Mango", value: 54 },
+      { label: "Egg", value: 160 },
       { label: "Carrot", value: 835 },
       { label: "Beef Liver", value: 9442 }
     ]
@@ -18463,10 +18461,10 @@ const PUZZLES = [
     instruction: "Fewest to most active submarine volcanoes in an ocean",
     category: "Oceans by Submarine Volcano Count",
     items: [
-      { label: "Indian Ocean", value: 30 },
       { label: "Arctic Ocean", value: 10 },
-      { label: "Atlantic Ocean", value: 100 },
       { label: "Southern Ocean", value: 20 },
+      { label: "Indian Ocean", value: 30 },
+      { label: "Atlantic Ocean", value: 100 },
       { label: "Pacific Ocean", value: 300 }
     ]
   },
@@ -18475,8 +18473,8 @@ const PUZZLES = [
     category: "Countries by Honey Production",
     items: [
       { label: "Mexico", value: 55 },
-      { label: "Argentina", value: 75 },
       { label: "Ukraine", value: 65 },
+      { label: "Argentina", value: 75 },
       { label: "Turkey", value: 105 },
       { label: "China", value: 470 }
     ]
@@ -18487,9 +18485,9 @@ const PUZZLES = [
     items: [
       { label: "American Woodcock", value: 8 },
       { label: "Hummingbird (forward flight)", value: 48 },
+      { label: "Peregrine Falcon (level)", value: 110 },
       { label: "Common Swift", value: 111 },
-      { label: "Frigatebird", value: 153 },
-      { label: "Peregrine Falcon (level)", value: 110 }
+      { label: "Frigatebird", value: 153 }
     ]
   },
   {
@@ -18497,8 +18495,8 @@ const PUZZLES = [
     category: "Countries by Michelin 3-Star Restaurants",
     items: [
       { label: "United Kingdom", value: 5 },
-      { label: "United States", value: 14 },
       { label: "Germany", value: 10 },
+      { label: "United States", value: 14 },
       { label: "Japan", value: 14 },
       { label: "France", value: 29 }
     ]
@@ -18540,8 +18538,8 @@ const PUZZLES = [
     instruction: "Fewest to most countries in a continent",
     category: "Continents by Number of Countries",
     items: [
-      { label: "Australia/Oceania", value: 14 },
       { label: "South America", value: 12 },
+      { label: "Australia/Oceania", value: 14 },
       { label: "North America", value: 23 },
       { label: "Europe", value: 44 },
       { label: "Africa", value: 54 }
@@ -18564,8 +18562,8 @@ const PUZZLES = [
     items: [
       { label: "Chile", value: 0.18 },
       { label: "Kenya", value: 0.32 },
-      { label: "Colombia", value: 0.98 },
       { label: "Dominican Republic", value: 0.72 },
+      { label: "Colombia", value: 0.98 },
       { label: "Mexico", value: 2.4 }
     ]
   },
@@ -18573,9 +18571,9 @@ const PUZZLES = [
     instruction: "Lowest to highest global diamond production by country (million carats)",
     category: "Countries by Diamond Production",
     items: [
+      { label: "Angola", value: 8.8 },
       { label: "South Africa", value: 9.7 },
       { label: "Canada", value: 16.2 },
-      { label: "Angola", value: 8.8 },
       { label: "Botswana", value: 24.8 },
       { label: "Russia", value: 41.9 }
     ]
@@ -18584,18 +18582,18 @@ const PUZZLES = [
     instruction: "Fewest to most career Super Bowl rings (NFL players)",
     category: "NFL Players by Super Bowl Rings",
     items: [
+      { label: "Peyton Manning", value: 2 },
       { label: "Joe Montana", value: 4 },
       { label: "Terry Bradshaw", value: 4 },
-      { label: "Peyton Manning", value: 2 },
-      { label: "Tom Brady", value: 7 },
-      { label: "Charles Haley", value: 5 }
+      { label: "Charles Haley", value: 5 },
+      { label: "Tom Brady", value: 7 }
     ]
   },
   {
     instruction: "Lowest to highest global pineapple production by country (million tonnes)",
     category: "Countries by Pineapple Production",
     items: [
-      { label: "Mexico", value: 1.0 },
+      { label: "Mexico", value: 1 },
       { label: "India", value: 1.7 },
       { label: "Brazil", value: 2.7 },
       { label: "Philippines", value: 2.8 },
@@ -18618,8 +18616,8 @@ const PUZZLES = [
     category: "Men's FIFA World Cup Top Scorers",
     items: [
       { label: "Pelé", value: 12 },
-      { label: "Gerd Müller", value: 14 },
       { label: "Just Fontaine", value: 13 },
+      { label: "Gerd Müller", value: 14 },
       { label: "Ronaldo (R9)", value: 15 },
       { label: "Miroslav Klose", value: 16 }
     ]
@@ -18639,7 +18637,7 @@ const PUZZLES = [
     instruction: "Lowest to highest escape velocity for planets (km/s)",
     category: "Planets by Escape Velocity",
     items: [
-      { label: "Mars", value: 5.0 },
+      { label: "Mars", value: 5 },
       { label: "Earth", value: 11.2 },
       { label: "Neptune", value: 23.5 },
       { label: "Saturn", value: 35.5 },
@@ -18652,8 +18650,8 @@ const PUZZLES = [
     items: [
       { label: "Brazil", value: 3.1 },
       { label: "Iraq", value: 4.4 },
-      { label: "Saudi Arabia", value: 10.8 },
       { label: "Russia", value: 10.5 },
+      { label: "Saudi Arabia", value: 10.8 },
       { label: "United States", value: 12.9 }
     ]
   },
@@ -18662,19 +18660,19 @@ const PUZZLES = [
     category: "Snooker Players by Career Century Breaks",
     items: [
       { label: "Steve Davis", value: 365 },
+      { label: "Stephen Hendry", value: 775 },
       { label: "John Higgins", value: 950 },
       { label: "Judd Trump", value: 1100 },
-      { label: "Ronnie O'Sullivan", value: 1200 },
-      { label: "Stephen Hendry", value: 775 }
+      { label: "Ronnie O'Sullivan", value: 1200 }
     ]
   },
   {
     instruction: "Lowest to highest global palm oil production by country (million tonnes)",
     category: "Countries by Palm Oil Production",
     items: [
-      { label: "Colombia", value: 1.8 },
-      { label: "Thailand", value: 3.0 },
       { label: "Nigeria", value: 1.4 },
+      { label: "Colombia", value: 1.8 },
+      { label: "Thailand", value: 3 },
       { label: "Malaysia", value: 18.5 },
       { label: "Indonesia", value: 46 }
     ]
@@ -18696,8 +18694,8 @@ const PUZZLES = [
     items: [
       { label: "MLS (Soccer)", value: 5 },
       { label: "NHL (Hockey)", value: 83 },
-      { label: "NFL (Football)", value: 224 },
       { label: "NBA (Basketball)", value: 136 },
+      { label: "NFL (Football)", value: 224 },
       { label: "MLB (Baseball, luxury tax threshold)", value: 237 }
     ]
   },
@@ -18717,10 +18715,10 @@ const PUZZLES = [
     category: "Ice Hockey Players by Career Goals (All Leagues)",
     items: [
       { label: "Mario Lemieux", value: 690 },
-      { label: "Alexander Ovechkin", value: 830 },
       { label: "Gordie Howe", value: 801 },
-      { label: "Wayne Gretzky", value: 894 },
-      { label: "Jaromír Jágr (all leagues)", value: 810 }
+      { label: "Jaromír Jágr (all leagues)", value: 810 },
+      { label: "Alexander Ovechkin", value: 830 },
+      { label: "Wayne Gretzky", value: 894 }
     ]
   },
   {
@@ -18760,8 +18758,8 @@ const PUZZLES = [
     instruction: "Lowest to highest annual cocoa production by country (thousand tonnes)",
     category: "Countries by Cocoa Production",
     items: [
-      { label: "Nigeria", value: 340 },
       { label: "Cameroon", value: 280 },
+      { label: "Nigeria", value: 340 },
       { label: "Ecuador", value: 340 },
       { label: "Ghana", value: 700 },
       { label: "Ivory Coast", value: 2200 }
@@ -18783,8 +18781,8 @@ const PUZZLES = [
     category: "Premier League Players by Career Appearances",
     items: [
       { label: "Steven Gerrard", value: 504 },
-      { label: "Frank Lampard", value: 609 },
       { label: "David James", value: 572 },
+      { label: "Frank Lampard", value: 609 },
       { label: "Ryan Giggs", value: 632 },
       { label: "Gareth Barry", value: 653 }
     ]
@@ -18806,8 +18804,8 @@ const PUZZLES = [
     items: [
       { label: "Tunisia", value: 8 },
       { label: "Italy", value: 11 },
-      { label: "Spain", value: 30 },
       { label: "Morocco", value: 12 },
+      { label: "Spain", value: 30 },
       { label: "Portugal", value: 100 }
     ]
   },
@@ -18839,7 +18837,7 @@ const PUZZLES = [
     items: [
       { label: "Myanmar", value: 1.6 },
       { label: "United States", value: 2.5 },
-      { label: "Nigeria", value: 3.0 },
+      { label: "Nigeria", value: 3 },
       { label: "India", value: 6.7 },
       { label: "China", value: 17.5 }
     ]
@@ -18849,10 +18847,10 @@ const PUZZLES = [
     category: "Soccer Players by Goals for One Club",
     items: [
       { label: "Thierry Henry (Arsenal)", value: 228 },
+      { label: "Josef Bican (Slavia Prague)", value: 534 },
       { label: "Gerd Müller (Bayern Munich)", value: 564 },
       { label: "Pelé (Santos)", value: 643 },
-      { label: "Lionel Messi (Barcelona)", value: 672 },
-      { label: "Josef Bican (Slavia Prague)", value: 534 }
+      { label: "Lionel Messi (Barcelona)", value: 672 }
     ]
   },
   {
@@ -18871,10 +18869,10 @@ const PUZZLES = [
     category: "Cyclists by Tour de France Stage Wins",
     items: [
       { label: "Miguel Indurain", value: 12 },
-      { label: "Bernard Hinault", value: 28 },
       { label: "André Leducq", value: 25 },
-      { label: "Mark Cavendish", value: 35 },
-      { label: "Eddy Merckx", value: 34 }
+      { label: "Bernard Hinault", value: 28 },
+      { label: "Eddy Merckx", value: 34 },
+      { label: "Mark Cavendish", value: 35 }
     ]
   },
   {
@@ -18927,8 +18925,8 @@ const PUZZLES = [
     items: [
       { label: "France", value: 1.7 },
       { label: "Italy", value: 2.2 },
-      { label: "United States", value: 4.6 },
       { label: "Turkey", value: 4.4 },
+      { label: "United States", value: 4.6 },
       { label: "China", value: 46 }
     ]
   },
@@ -18947,10 +18945,10 @@ const PUZZLES = [
     instruction: "Fewest to most career holes-in-one on PGA Tour",
     category: "PGA Tour Players by Career Holes-in-One",
     items: [
+      { label: "Hal Sutton", value: 9 },
+      { label: "Robert Allenby", value: 10 },
       { label: "Jack Nicklaus", value: 20 },
       { label: "Tiger Woods", value: 20 },
-      { label: "Robert Allenby", value: 10 },
-      { label: "Hal Sutton", value: 9 },
       { label: "Mancil Davis (all-time amateur/pro record)", value: 51 }
     ]
   },
@@ -18958,10 +18956,10 @@ const PUZZLES = [
     instruction: "Lowest to highest number of lakes by country (over 0.01 sq km)",
     category: "Countries by Number of Lakes",
     items: [
-      { label: "United States", value: 102500 },
-      { label: "Norway", value: 450000 },
       { label: "Sweden", value: 97500 },
+      { label: "United States", value: 102500 },
       { label: "Finland", value: 187888 },
+      { label: "Norway", value: 450000 },
       { label: "Canada", value: 879800 }
     ]
   },
@@ -19013,8 +19011,8 @@ const PUZZLES = [
     instruction: "Fewest to most career grand prix wins (motorcycle, MotoGP/500cc)",
     category: "Motorcycle Racers by Grand Prix Wins",
     items: [
-      { label: "Mike Hailwood", value: 76 },
       { label: "Mick Doohan", value: 54 },
+      { label: "Mike Hailwood", value: 76 },
       { label: "Marc Márquez", value: 85 },
       { label: "Valentino Rossi", value: 115 },
       { label: "Giacomo Agostini", value: 122 }
@@ -19036,9 +19034,9 @@ const PUZZLES = [
     category: "Jellyfish Species by Bell Diameter",
     items: [
       { label: "Irukandji Jellyfish", value: 2 },
+      { label: "Portuguese Man o' War (float)", value: 30 },
       { label: "Moon Jellyfish", value: 40 },
       { label: "Sea Nettle", value: 50 },
-      { label: "Portuguese Man o' War (float)", value: 30 },
       { label: "Lion's Mane Jellyfish", value: 200 }
     ]
   },
@@ -19068,9 +19066,9 @@ const PUZZLES = [
     instruction: "Fewest to most career goals in Australian Rules Football (VFL/AFL)",
     category: "AFL Players by Career Goals",
     items: [
-      { label: "Jason Dunstall", value: 1254 },
       { label: "Gary Ablett Sr.", value: 1031 },
       { label: "Doug Wade", value: 1057 },
+      { label: "Jason Dunstall", value: 1254 },
       { label: "Gordon Coventry", value: 1299 },
       { label: "Tony Lockett", value: 1360 }
     ]
@@ -19091,10 +19089,10 @@ const PUZZLES = [
     category: "Countries by Number of Botanical Gardens",
     items: [
       { label: "Australia", value: 100 },
-      { label: "Japan", value: 150 },
       { label: "Russia", value: 120 },
-      { label: "United States", value: 600 },
-      { label: "China", value: 200 }
+      { label: "Japan", value: 150 },
+      { label: "China", value: 200 },
+      { label: "United States", value: 600 }
     ]
   },
   {
@@ -19113,10 +19111,10 @@ const PUZZLES = [
     category: "Tolkien Novels by Page Count",
     items: [
       { label: "The Hobbit", value: 310 },
-      { label: "The Fellowship of the Ring", value: 423 },
       { label: "The Two Towers", value: 352 },
+      { label: "The Silmarillion", value: 365 },
       { label: "The Return of the King", value: 416 },
-      { label: "The Silmarillion", value: 365 }
+      { label: "The Fellowship of the Ring", value: 423 }
     ]
   },
   {
@@ -19136,8 +19134,8 @@ const PUZZLES = [
     items: [
       { label: "Russia", value: 0.85 },
       { label: "Australia", value: 0.85 },
-      { label: "Congo (DRC)", value: 2.5 },
       { label: "Peru", value: 2.4 },
+      { label: "Congo (DRC)", value: 2.5 },
       { label: "Chile", value: 5.6 }
     ]
   },
@@ -19170,17 +19168,17 @@ const PUZZLES = [
       { label: "Clownfish", value: 0.25 },
       { label: "Atlantic Cod", value: 25 },
       { label: "Atlantic Bluefin Tuna", value: 250 },
-      { label: "Great White Shark", value: 1100 },
-      { label: "Ocean Sunfish (Mola mola)", value: 1000 }
+      { label: "Ocean Sunfish (Mola mola)", value: 1000 },
+      { label: "Great White Shark", value: 1100 }
     ]
   },
   {
     instruction: "Lowest to highest annual garlic production by country (million tonnes)",
     category: "Countries by Garlic Production",
     items: [
+      { label: "Spain", value: 0.2 },
       { label: "South Korea", value: 0.3 },
       { label: "Egypt", value: 0.35 },
-      { label: "Spain", value: 0.2 },
       { label: "India", value: 3.2 },
       { label: "China", value: 24 }
     ]
@@ -19211,8 +19209,8 @@ const PUZZLES = [
     instruction: "Fewest to most career wickets in ODI cricket",
     category: "Cricketers by Career ODI Wickets",
     items: [
-      { label: "Chaminda Vaas", value: 400 },
       { label: "Brett Lee", value: 380 },
+      { label: "Chaminda Vaas", value: 400 },
       { label: "Wasim Akram", value: 502 },
       { label: "Muttiah Muralitharan", value: 534 },
       { label: "N/A – Muralitharan holds record", value: 534 }
@@ -19225,17 +19223,17 @@ const PUZZLES = [
       { label: "Star-sucker Pygmy Octopus", value: 2.5 },
       { label: "Blue-ringed Octopus", value: 20 },
       { label: "Common Octopus", value: 90 },
-      { label: "North Pacific Giant Octopus", value: 500 },
-      { label: "Seven-arm Octopus", value: 350 }
+      { label: "Seven-arm Octopus", value: 350 },
+      { label: "North Pacific Giant Octopus", value: 500 }
     ]
   },
   {
     instruction: "Lowest to highest annual cranberry production by country (thousand tonnes)",
     category: "Countries by Cranberry Production",
     items: [
-      { label: "Chile", value: 100 },
       { label: "Azerbaijan", value: 2 },
       { label: "Belarus", value: 8 },
+      { label: "Chile", value: 100 },
       { label: "Canada", value: 175 },
       { label: "United States", value: 410 }
     ]
@@ -19245,10 +19243,10 @@ const PUZZLES = [
     category: "Men's Field Hockey Players by International Goals",
     items: [
       { label: "Jamie Dwyer (Australia)", value: 78 },
-      { label: "Sohail Abbas (Pakistan)", value: 348 },
-      { label: "Teun de Nooijer (Netherlands)", value: 217 },
       { label: "Florian Fuchs (Germany)", value: 95 },
-      { label: "Paul Litjens (Netherlands)", value: 268 }
+      { label: "Teun de Nooijer (Netherlands)", value: 217 },
+      { label: "Paul Litjens (Netherlands)", value: 268 },
+      { label: "Sohail Abbas (Pakistan)", value: 348 }
     ]
   },
   {
@@ -19257,9 +19255,9 @@ const PUZZLES = [
     items: [
       { label: "Aletsch Glacier (Switzerland)", value: 100 },
       { label: "Mendenhall Glacier (Alaska)", value: 600 },
+      { label: "Pine Island Glacier (Antarctica)", value: 4000 },
       { label: "Columbia Glacier (Alaska)", value: 7300 },
-      { label: "Jakobshavn Glacier (Greenland)", value: 12600 },
-      { label: "Pine Island Glacier (Antarctica)", value: 4000 }
+      { label: "Jakobshavn Glacier (Greenland)", value: 12600 }
     ]
   },
   {
@@ -19268,8 +19266,8 @@ const PUZZLES = [
     items: [
       { label: "Spain", value: 10 },
       { label: "United Kingdom", value: 15 },
-      { label: "China", value: 200 },
       { label: "France", value: 100 },
+      { label: "China", value: 200 },
       { label: "Bulgaria", value: 350 }
     ]
   },
@@ -19299,11 +19297,11 @@ const PUZZLES = [
     instruction: "Lowest to highest annual sunflower seed production by country (million tonnes)",
     category: "Countries by Sunflower Seed Production",
     items: [
-      { label: "Bulgaria", value: 2.0 },
+      { label: "Bulgaria", value: 2 },
       { label: "Argentina", value: 3.5 },
-      { label: "Russia", value: 16.0 },
       { label: "Ukraine", value: 15.5 },
-      { label: "N/A — Russia leads", value: 16.0 }
+      { label: "Russia", value: 16 },
+      { label: "N/A — Russia leads", value: 16 }
     ]
   },
   {
@@ -19333,10 +19331,10 @@ const PUZZLES = [
     category: "Cricketers by Career International Sixes",
     items: [
       { label: "Adam Gilchrist", value: 149 },
-      { label: "MS Dhoni", value: 250 },
       { label: "Brendon McCullum", value: 200 },
-      { label: "Chris Gayle", value: 553 },
-      { label: "Rohit Sharma", value: 530 }
+      { label: "MS Dhoni", value: 250 },
+      { label: "Rohit Sharma", value: 530 },
+      { label: "Chris Gayle", value: 553 }
     ]
   },
   {
@@ -19366,8 +19364,8 @@ const PUZZLES = [
     category: "Countries by Lithium Production",
     items: [
       { label: "Zimbabwe", value: 1.8 },
-      { label: "China", value: 19 },
       { label: "Argentina", value: 6.2 },
+      { label: "China", value: 19 },
       { label: "Chile", value: 44 },
       { label: "Australia", value: 86 }
     ]
@@ -19398,9 +19396,9 @@ const PUZZLES = [
     instruction: "Fewest to most career Test match runs in cricket",
     category: "Cricketers by Career Test Runs",
     items: [
-      { label: "Brian Lara", value: 11953 },
-      { label: "Allan Border", value: 11174 },
       { label: "Steve Waugh", value: 10927 },
+      { label: "Allan Border", value: 11174 },
+      { label: "Brian Lara", value: 11953 },
       { label: "Ricky Ponting", value: 13378 },
       { label: "Sachin Tendulkar", value: 15921 }
     ]
@@ -19410,8 +19408,8 @@ const PUZZLES = [
     category: "Planets by Density",
     items: [
       { label: "Saturn", value: 0.69 },
-      { label: "Jupiter", value: 1.33 },
       { label: "Uranus", value: 1.27 },
+      { label: "Jupiter", value: 1.33 },
       { label: "Mars", value: 3.93 },
       { label: "Earth", value: 5.51 }
     ]
@@ -19423,8 +19421,8 @@ const PUZZLES = [
       { label: "Autobahn A7 (Germany)", value: 962 },
       { label: "US Route 20 (USA)", value: 5415 },
       { label: "Trans-Canada Highway", value: 7821 },
-      { label: "Pan-American Highway", value: 30000 },
-      { label: "Asian Highway 1 (AH1)", value: 20557 }
+      { label: "Asian Highway 1 (AH1)", value: 20557 },
+      { label: "Pan-American Highway", value: 30000 }
     ]
   },
   {
@@ -19432,9 +19430,9 @@ const PUZZLES = [
     category: "Decades by Detected Meteorite Falls",
     items: [
       { label: "1800s (per decade avg)", value: 30 },
+      { label: "1980-2010 (per decade avg)", value: 40 },
       { label: "1900-1950 (per decade avg)", value: 50 },
       { label: "1950-1980 (per decade avg)", value: 60 },
-      { label: "1980-2010 (per decade avg)", value: 40 },
       { label: "2010s (bolide detections per decade)", value: 250 }
     ]
   },
@@ -19475,10 +19473,10 @@ const PUZZLES = [
     instruction: "Lowest to highest annual cinnamon production by country (thousand tonnes)",
     category: "Countries by Cinnamon Production",
     items: [
-      { label: "Madagascar", value: 3 },
       { label: "Seychelles", value: 0.5 },
-      { label: "Vietnam", value: 40 },
+      { label: "Madagascar", value: 3 },
       { label: "Sri Lanka", value: 22 },
+      { label: "Vietnam", value: 40 },
       { label: "Indonesia", value: 90 }
     ]
   },
@@ -19488,8 +19486,8 @@ const PUZZLES = [
     items: [
       { label: "Japan", value: 1 },
       { label: "Norway", value: 1 },
-      { label: "Germany", value: 2 },
       { label: "Spain", value: 1 },
+      { label: "Germany", value: 2 },
       { label: "United States", value: 4 }
     ]
   },
@@ -19497,10 +19495,10 @@ const PUZZLES = [
     instruction: "Lowest to highest annual maple syrup production by region (million gallons)",
     category: "Regions by Maple Syrup Production",
     items: [
-      { label: "New York (USA)", value: 0.8 },
-      { label: "Vermont (USA)", value: 2.5 },
-      { label: "Ontario (Canada)", value: 1.5 },
       { label: "New Brunswick (Canada)", value: 0.6 },
+      { label: "New York (USA)", value: 0.8 },
+      { label: "Ontario (Canada)", value: 1.5 },
+      { label: "Vermont (USA)", value: 2.5 },
       { label: "Quebec (Canada)", value: 13 }
     ]
   },
@@ -19520,8 +19518,8 @@ const PUZZLES = [
     category: "MMA Fighters by Career Wins",
     items: [
       { label: "Conor McGregor", value: 22 },
-      { label: "Jon Jones", value: 27 },
       { label: "Georges St-Pierre", value: 26 },
+      { label: "Jon Jones", value: 27 },
       { label: "Anderson Silva", value: 34 },
       { label: "Travis Fulton", value: 255 }
     ]
@@ -19531,19 +19529,19 @@ const PUZZLES = [
     category: "YouTube Channels by Subscriber Count",
     items: [
       { label: "PewDiePie", value: 111 },
-      { label: "Cocomelon", value: 175 },
       { label: "SET India", value: 170 },
-      { label: "MrBeast", value: 280 },
-      { label: "T-Series", value: 270 }
+      { label: "Cocomelon", value: 175 },
+      { label: "T-Series", value: 270 },
+      { label: "MrBeast", value: 280 }
     ]
   },
   {
     instruction: "Lowest to highest concentration of CO₂ in a planet's atmosphere (%)",
     category: "Planets by Atmospheric CO2 Concentration",
     items: [
-      { label: "Earth", value: 0.04 },
       { label: "Jupiter (trace)", value: 0.001 },
       { label: "Saturn (trace)", value: 0.001 },
+      { label: "Earth", value: 0.04 },
       { label: "Mars", value: 95 },
       { label: "Venus", value: 96 }
     ]
@@ -19566,8 +19564,8 @@ const PUZZLES = [
       { label: "Macadamia", value: 240 },
       { label: "Pistachio", value: 1100 },
       { label: "Walnut", value: 3800 },
-      { label: "Cashew", value: 3900 },
-      { label: "Almond", value: 3800 }
+      { label: "Almond", value: 3800 },
+      { label: "Cashew", value: 3900 }
     ]
   },
   {
@@ -19610,8 +19608,8 @@ const PUZZLES = [
       { label: "Neymar (Brazil)", value: 8 },
       { label: "Robert Lewandowski (Poland)", value: 9 },
       { label: "Lionel Messi (Argentina)", value: 10 },
-      { label: "Sven Rydell (Sweden)", value: 12 },
-      { label: "Cristiano Ronaldo (Portugal)", value: 10 }
+      { label: "Cristiano Ronaldo (Portugal)", value: 10 },
+      { label: "Sven Rydell (Sweden)", value: 12 }
     ]
   },
   {
@@ -19633,7 +19631,7 @@ const PUZZLES = [
       { label: "Morocco", value: 1.4 },
       { label: "Turkey", value: 1.8 },
       { label: "Greece", value: 2.2 },
-      { label: "Spain", value: 8.0 }
+      { label: "Spain", value: 8 }
     ]
   },
   {
@@ -19718,9 +19716,9 @@ const PUZZLES = [
     category: "Rugby Players by International Test Tries",
     items: [
       { label: "Jonah Lomu (New Zealand)", value: 37 },
-      { label: "Bryan Habana (South Africa)", value: 67 },
       { label: "Shane Williams (Wales)", value: 58 },
       { label: "David Campese (Australia)", value: 64 },
+      { label: "Bryan Habana (South Africa)", value: 67 },
       { label: "Daisuke Ohata (Japan)", value: 69 }
     ]
   },
@@ -19739,9 +19737,9 @@ const PUZZLES = [
     instruction: "Fewest to most career home runs in Japanese professional baseball (NPB)",
     category: "NPB Players by Career Home Runs",
     items: [
-      { label: "Hiromitsu Ochiai", value: 510 },
-      { label: "Tuffy Rhodes", value: 464 },
       { label: "Koji Akiyama", value: 437 },
+      { label: "Tuffy Rhodes", value: 464 },
+      { label: "Hiromitsu Ochiai", value: 510 },
       { label: "Katsuya Nomura", value: 657 },
       { label: "Sadaharu Oh", value: 868 }
     ]
@@ -19751,8 +19749,8 @@ const PUZZLES = [
     category: "Countries by Silk Production",
     items: [
       { label: "Thailand", value: 0.7 },
-      { label: "Vietnam", value: 4 },
       { label: "Uzbekistan", value: 1.2 },
+      { label: "Vietnam", value: 4 },
       { label: "India", value: 36 },
       { label: "China", value: 146 }
     ]
@@ -19774,9 +19772,9 @@ const PUZZLES = [
     items: [
       { label: "Brian Lara", value: 19 },
       { label: "Hashim Amla", value: 27 },
-      { label: "Virat Kohli", value: 50 },
       { label: "Ricky Ponting", value: 30 },
-      { label: "Sachin Tendulkar", value: 49 }
+      { label: "Sachin Tendulkar", value: 49 },
+      { label: "Virat Kohli", value: 50 }
     ]
   },
   {
@@ -19785,8 +19783,8 @@ const PUZZLES = [
     items: [
       { label: "Mexico", value: 620 },
       { label: "India", value: 800 },
-      { label: "Peru", value: 1500 },
       { label: "Australia", value: 1400 },
+      { label: "Peru", value: 1500 },
       { label: "China", value: 4200 }
     ]
   },
