@@ -146,10 +146,8 @@
       return a;
     }
 
-    var EPOCH = Date.UTC(2024, 0, 1);
     function dayNum() {
-      var now = new Date();
-      return Math.floor((Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()) - EPOCH) / 86400000);
+      return (typeof Daily !== 'undefined') ? Daily.getDayNumber() : 1;
     }
 
     function todayKey() { return new Date().toISOString().slice(0, 10); }
@@ -195,7 +193,7 @@
        APP
        ═══════════════════════════════════════════════════════ */
     function App() {
-      var puzzle = PUZZLES[new Date().getDay()];
+      var puzzle = PUZZLES[dayNum() % PUZZLES.length];
       var dn = dayNum();
 
       var withIds = useMemo(function () {
