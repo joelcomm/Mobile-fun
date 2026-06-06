@@ -62,8 +62,8 @@ var SEQUENCES = [
   // ── Powers of N ─────────────────────────────────────────
   { seq: [1, 2, 4, 8, 16, '?'], answer: 32, choices: [24, 30, 32, 64], hint: 'Powers of 2' },
   { seq: [1, 3, 9, 27, '?'], answer: 81, choices: [54, 72, 81, 108], hint: 'Powers of 3' },
-  { seq: [1, 4, 16, 64, '?'], answer: 256, choices: [128, 192, 256, 512], hint: 'Powers of 4' },
-  { seq: [1, 5, 25, 125, '?'], answer: 625, choices: [250, 500, 625, 1000], hint: 'Powers of 5' },
+  { seq: [4, 16, 64, 256, '?'], answer: 1024, choices: [512, 768, 1024, 2048], hint: 'Powers of 4 (shifted)' },
+  { seq: [5, 25, 125, 625, '?'], answer: 3125, choices: [1250, 2500, 3125, 5000], hint: 'Powers of 5 (shifted)' },
 
   // ── Digit patterns ──────────────────────────────────────
   { seq: [11, 22, 33, 44, '?'], answer: 55, choices: [50, 55, 66, 88], hint: 'Repeating digits' },
@@ -345,7 +345,7 @@ var SEQUENCES = [
   { seq: [4, 5, 8, 14, 24, '?'], answer: 39, choices: [32, 36, 39, 44], hint: 'Differences: 1, 3, 6, 10, 15 (triangular)' },
 
   // ── Powers of 2 ± offset ───────────────────────────────
-  { seq: [5, 9, 17, 33, '?'], answer: 65, choices: [49, 57, 65, 66], hint: '2^n + 1: 4+1, 8+1, 16+1, 32+1, 64+1' },
+  { seq: [9, 17, 33, 65, '?'], answer: 129, choices: [97, 113, 129, 130], hint: '2^n + 1: 8+1, 16+1, 32+1, 64+1, 128+1' },
   { seq: [7, 15, 31, 63, 127, '?'], answer: 255, choices: [191, 223, 255, 256], hint: '2^n − 1' },
   { seq: [0, 2, 6, 14, 30, '?'], answer: 62, choices: [46, 54, 62, 64], hint: '2^n − 2' },
   { seq: [5, 6, 8, 12, 20, '?'], answer: 36, choices: [28, 32, 36, 40], hint: 'Add 1, 2, 4, 8, 16 (powers of 2)' },
@@ -405,7 +405,7 @@ var SEQUENCES = [
   { seq: [1, 9, 25, 49, '?'], answer: 81, choices: [64, 72, 81, 100], hint: 'Squares of odd numbers: 1², 3², 5², 7², 9²' },
   { seq: [9, 25, 49, 81, '?'], answer: 121, choices: [100, 110, 121, 144], hint: 'Squares of odd: 3², 5², 7², 9², 11²' },
   { seq: [16, 36, 64, 100, '?'], answer: 144, choices: [120, 130, 144, 196], hint: 'Squares of even: 4², 6², 8², 10², 12²' },
-  { seq: [1, 2, 3, 5, 8, '?'], answer: 13, choices: [10, 11, 13, 15], hint: 'Fibonacci starting 1, 2' },
+  { seq: [8, 13, 21, 34, '?'], answer: 55, choices: [42, 48, 55, 68], hint: 'Fibonacci continuation' },
   { seq: [5, 7, 12, 19, 31, '?'], answer: 50, choices: [40, 45, 50, 62], hint: 'Each = sum of previous two' },
   { seq: [4, 6, 10, 16, 26, '?'], answer: 42, choices: [34, 38, 42, 52], hint: 'Each = sum of previous two' },
   { seq: [3, 8, 11, 19, 30, '?'], answer: 49, choices: [41, 45, 49, 60], hint: 'Each = sum of previous two' },
@@ -423,7 +423,7 @@ var SEQUENCES = [
   { seq: [1, 5, 12, 22, 35, '?'], answer: 51, choices: [45, 48, 51, 56], hint: 'Differences: 4, 7, 10, 13, 16' },
 
   // ── Multiply by increasing factor ──────────────────────
-  { seq: [1, 2, 6, 24, 120, '?'], answer: 720, choices: [360, 600, 720, 840], hint: 'Multiply by 2, 3, 4, 5, 6' },
+  { seq: [6, 24, 120, 720, 5040, '?'], answer: 40320, choices: [10080, 20160, 40320, 50400], hint: 'Factorials: 3!, 4!, 5!, 6!, 7!, 8!' },
   { seq: [2, 4, 12, 48, '?'], answer: 240, choices: [96, 192, 240, 288], hint: 'Multiply by 2, 3, 4, 5' },
   { seq: [1, 3, 12, 60, '?'], answer: 360, choices: [120, 240, 360, 480], hint: 'Multiply by 3, 4, 5, 6' },
   { seq: [3, 6, 18, 72, '?'], answer: 360, choices: [144, 216, 360, 432], hint: 'Multiply by 2, 3, 4, 5' },
@@ -443,7 +443,7 @@ var SEQUENCES = [
   { seq: [0, 0, 1, 1, 2, 4, '?'], answer: 7, choices: [5, 6, 7, 8], hint: 'Sum of previous three' },
   { seq: [1, 1, 1, 3, 5, 9, 17, '?'], answer: 31, choices: [25, 27, 31, 35], hint: 'Sum of previous three' },
   { seq: [2, 2, 2, 6, 10, 18, '?'], answer: 34, choices: [26, 30, 34, 38], hint: 'Sum of previous three' },
-  { seq: [1, 10, 100, 1000, '?'], answer: 10000, choices: [2000, 5000, 10000, 100000], hint: 'Multiply by 10' },
+  { seq: [10, 100, 1000, 10000, '?'], answer: 100000, choices: [20000, 50000, 100000, 1000000], hint: 'Multiply by 10' },
   { seq: [7, 11, 19, 35, '?'], answer: 67, choices: [51, 59, 67, 70], hint: 'Differences double: +4, +8, +16, +32' },
   { seq: [3, 5, 11, 23, '?'], answer: 47, choices: [35, 41, 47, 46], hint: '×2 + 1, starting from 3' },
   { seq: [100, 98, 94, 88, '?'], answer: 80, choices: [76, 78, 80, 82], hint: 'Subtract 2, 4, 6, 8' },
