@@ -1374,7 +1374,7 @@ const FACTS = [
       { text: "Roquefort cheese is aged in natural limestone caves in France.", real: true },
       { text: "Swiss cheese gets its holes from bacteria releasing hydrogen gas during aging.", real: false }
     ],
-    explanation: "Swiss cheese holes were long attributed to bacteria, but research from 2015 found they're actually caused by tiny hay particles that fall into milk during traditional milking."
+    explanation: "Swiss cheese holes are created by carbon dioxide gas (not hydrogen) produced by bacteria during aging. A 2015 study also found that tiny hay particles in milk act as nucleation sites for the gas bubbles."
   },
   {
     topic: "Blood",
@@ -1677,7 +1677,7 @@ const FACTS = [
     topic: "Cactus",
     statements: [
       { text: "Some cacti can live for over 200 years.", real: true },
-      { text: "Cacti are only found naturally in the Americas.", real: true },
+      { text: "Cacti are found naturally almost exclusively in the Americas.", real: true },
       { text: "You can drink water directly from a cactus in an emergency.", real: false }
     ],
     explanation: "Most cactus fluid contains alkaloids and acids that can cause nausea, vomiting, and diarrhea — making dehydration worse. Only a few species have drinkable fluid."
@@ -2893,9 +2893,9 @@ const FACTS = [
     statements: [
       { text: "Ancient Romans used urine as mouthwash because of its ammonia content.", real: true },
       { text: "The Colosseum could be flooded to stage mock naval battles called naumachiae.", real: true },
-      { text: "The Roman Empire at its peak had a larger population than modern-day Italy.", real: false }
+      { text: "At its peak, the Roman Empire had a larger population than modern-day China.", real: false }
     ],
-    explanation: "The Roman Empire's peak population was around 55-70 million. Modern Italy alone has about 59 million, and the empire's territory now holds far more people."
+    explanation: "The Roman Empire's peak population was around 55-70 million. Modern China has over 1.4 billion people — roughly 20 times larger."
   },
   {
     topic: "Cryptocurrency",
@@ -3003,7 +3003,7 @@ const FACTS = [
       { text: "Norway has a town called Longyearbyen where it is illegal to die because bodies don't decompose in the permafrost.", real: true },
       { text: "Norway is the largest country in Scandinavia by both area and population.", real: false }
     ],
-    explanation: "Sweden has a larger population than Norway, and if you count all of the Nordic countries, Finland is slightly larger in area."
+    explanation: "Sweden is larger than Norway in both area (about 450,000 sq km vs 385,000 sq km) and population (about 10.5 million vs 5.5 million)."
   },
   {
     topic: "Nanotechnology",
@@ -3062,7 +3062,7 @@ const FACTS = [
   {
     topic: "Jamaica",
     statements: [
-      { text: "Jamaica was the first Caribbean country to gain independence, in 1962.", real: true },
+      { text: "Jamaica gained independence from the United Kingdom in 1962.", real: true },
       { text: "Jamaica's Blue Mountain coffee is among the most expensive and sought-after coffees in the world.", real: true },
       { text: "Jamaica is the largest island in the Caribbean Sea.", real: false }
     ],
@@ -3073,9 +3073,9 @@ const FACTS = [
     statements: [
       { text: "The James Webb Space Telescope's mirror is coated in a microscopically thin layer of gold.", real: true },
       { text: "Galileo did not invent the telescope but was the first to use one for astronomical observation.", real: true },
-      { text: "The Hubble Space Telescope orbits the Earth at a higher altitude than the International Space Station.", real: false }
+      { text: "The Hubble Space Telescope orbits beyond the Moon to get clearer images of deep space.", real: false }
     ],
-    explanation: "Actually, Hubble does orbit higher than the ISS (about 340 miles vs 250 miles). This statement is true — the lie needs reworking. Hubble orbits at about 340 miles altitude while the ISS orbits at about 250 miles."
+    explanation: "Hubble orbits Earth at about 340 miles altitude — far closer than the Moon, which is about 239,000 miles away. It orbits just above the atmosphere, not in deep space."
   },
   {
     topic: "Kenya",
@@ -4386,7 +4386,7 @@ const FACTS = [
     topic: "Calendars",
     statements: [
       { text: "The Gregorian calendar, used worldwide today, was introduced by Pope Gregory XIII in 1582.", real: true },
-      { text: "February has 28 days because Roman Emperor Augustus took a day from it to add to August.", real: true },
+      { text: "The Gregorian calendar corrected a drift of about 10 days that had accumulated under the Julian calendar.", real: true },
       { text: "All cultures around the world have always used a 7-day week.", real: false }
     ],
     explanation: "Different cultures have used weeks of varying lengths. The ancient Egyptians used a 10-day week, and some cultures used 4, 5, 6, or 8-day cycles."
@@ -5775,7 +5775,7 @@ const FACTS = [
       { text: "Pluto has five known moons, with the largest (Charon) being about half Pluto's size.", real: true },
       { text: "Pluto is larger than Earth and is the biggest object in the solar system.", real: false }
     ],
-    explanation: "Pluto is tiny compared to Earth — it's about one-sixth Earth's diameter and one-sixth its mass. It's even smaller than Earth's Moon."
+    explanation: "Pluto is tiny compared to Earth — it's about one-fifth Earth's diameter and only about 0.2% of Earth's mass. It's even smaller than Earth's Moon."
   },
   {
     topic: "Chameleons",
@@ -6248,7 +6248,7 @@ const FACTS = [
   {
     topic: "Coral Snake",
     statements: [
-      { text: "Coral snakes have the second most potent venom of any snake after the black mamba.", real: true },
+      { text: "Coral snakes have highly potent neurotoxic venom that affects the nervous system.", real: true },
       { text: "The rhyme 'Red touches yellow, kill a fellow' helps distinguish coral snakes from harmless mimics in North America.", real: true },
       { text: "Coral snakes are the largest snakes in the world, growing over 30 feet long.", real: false }
     ],
