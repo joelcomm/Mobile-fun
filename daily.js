@@ -1,6 +1,6 @@
 /* daily.js — Shared daily game system (resets at midnight GMT) */
 const Daily = (function () {
-  const EPOCH = Date.UTC(2024, 0, 1); // Jan 1, 2024 00:00 UTC
+  const EPOCH = Date.UTC(2026, 5, 5); // Jun 5, 2026 — day 1 = Jun 6, 2026
 
   function getDayNumber() {
     const now = new Date();
