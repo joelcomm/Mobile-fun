@@ -133,7 +133,7 @@ var SEQUENCES = [
   { seq: [3, 6, 12, 24, '?'], answer: 48, choices: [36, 42, 48, 96], hint: 'Multiply by 2' },
   { seq: [8, 24, 72, 216, '?'], answer: 648, choices: [432, 576, 648, 864], hint: 'Multiply by 3' },
   { seq: [5, 15, 45, 135, '?'], answer: 405, choices: [270, 360, 405, 540], hint: 'Multiply by 3' },
-  { seq: [4, 16, 64, 256, '?'], answer: 1024, choices: [512, 768, 1024, 2048], hint: 'Multiply by 4' },
+  { seq: [2, 8, 32, 128, '?'], answer: 512, choices: [256, 384, 512, 1024], hint: 'Multiply by 4' },
 
   // ── Squares & Cubes (additional) ────────────────────────
   { seq: [16, 25, 36, 49, '?'], answer: 64, choices: [56, 60, 64, 81], hint: 'Squares of 4, 5, 6, 7, 8' },

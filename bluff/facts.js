@@ -2545,5 +2545,194 @@ const FACTS = [
       { text: "Lightning never strikes the same place twice.", real: false }
     ],
     explanation: "Lightning frequently strikes the same place multiple times. Tall structures and elevated terrain are hit repeatedly. The Empire State Building is struck roughly 23 times annually."
+  },
+  {
+    topic: "Volcanism Undersea",
+    statements: [
+      { text: "About 80% of volcanic eruptions happen underwater on the ocean floor.", real: true },
+      { text: "The island of Surtsey off Iceland was formed by an underwater volcanic eruption in 1963.", real: true },
+      { text: "Underwater volcanoes cannot produce explosive eruptions because the water pressure prevents them.", real: false }
+    ],
+    explanation: "Shallow underwater volcanoes can produce violent explosive eruptions. The 2022 eruption of Hunga Tonga was an underwater volcano that produced one of the most powerful explosions ever recorded."
+  },
+  {
+    topic: "Stamps",
+    statements: [
+      { text: "The Penny Black, issued in 1840 in Britain, was the world's first adhesive postage stamp.", real: true },
+      { text: "The most expensive stamp ever sold — the British Guiana 1c Magenta — fetched over $9 million.", real: true },
+      { text: "Stamps were invented by Benjamin Franklin when he was US Postmaster General.", real: false }
+    ],
+    explanation: "Adhesive postage stamps were invented by Sir Rowland Hill in Britain. While Franklin served as Postmaster General, that was decades before stamps were invented."
+  },
+  {
+    topic: "Jellyfish",
+    statements: [
+      { text: "The Turritopsis dohrnii jellyfish can revert to its juvenile state, making it potentially immortal.", real: true },
+      { text: "Box jellyfish venom can kill a human in under five minutes.", real: true },
+      { text: "Jellyfish have a brain that controls their movement.", real: false }
+    ],
+    explanation: "Jellyfish have no brain, heart, or blood. They have a nerve net — a decentralized network of nerves that allows basic responses to stimuli, but no centralized brain."
+  },
+  {
+    topic: "Sweat",
+    statements: [
+      { text: "Sweat itself is virtually odorless — body odor is caused by bacteria on the skin.", real: true },
+      { text: "Hippos secrete a red fluid sometimes called 'blood sweat' that acts as sunscreen.", real: true },
+      { text: "Humans sweat to release toxins from the body.", real: false }
+    ],
+    explanation: "The primary purpose of sweating is thermoregulation — cooling the body. While sweat contains trace amounts of waste products, the kidneys and liver handle toxin removal, not sweat glands."
+  },
+  {
+    topic: "Astronomy Colors",
+    statements: [
+      { text: "Mars appears red because its soil is rich in iron oxide (rust).", real: true },
+      { text: "Uranus appears blue-green because methane in its atmosphere absorbs red light.", real: true },
+      { text: "The Moon produces its own light, which is why it appears bright at night.", real: false }
+    ],
+    explanation: "The Moon produces no light of its own — it shines by reflecting sunlight. Only about 12% of the sunlight hitting the Moon is reflected back to Earth."
+  },
+  {
+    topic: "Lefties and Righties",
+    statements: [
+      { text: "About 10% of the world's population is left-handed.", real: true },
+      { text: "Left-handedness was historically punished in many cultures — 'sinister' comes from Latin for 'left.'", real: true },
+      { text: "Left-handed people use the right side of their brain for everything.", real: false }
+    ],
+    explanation: "While left-handers tend to have more right-hemisphere dominance for motor control, both hemispheres are used for most tasks. Brain function is far more complex than simple left-right division."
+  },
+  {
+    topic: "Typewriters",
+    statements: [
+      { text: "The QWERTY keyboard layout was designed in 1873 for typewriters.", real: true },
+      { text: "'Typewriter' is the longest word you can type using only the top row of a QWERTY keyboard.", real: true },
+      { text: "QWERTY was designed to be the fastest possible keyboard layout.", real: false }
+    ],
+    explanation: "QWERTY was actually designed to slow typists down slightly to prevent mechanical typewriter keys from jamming. Alternative layouts like Dvorak are theoretically faster."
+  },
+  {
+    topic: "Ancient Medicine",
+    statements: [
+      { text: "Trepanation — drilling holes in the skull — is the oldest known surgical procedure.", real: true },
+      { text: "Ancient Egyptians used honey as a wound dressing, which is now scientifically validated.", real: true },
+      { text: "Bloodletting (draining blood) was based on sound medical science.", real: false }
+    ],
+    explanation: "Bloodletting was based on the debunked theory of the four humors. It was practiced for over 2,000 years but was medically harmful in most cases. It has very few legitimate modern uses."
+  },
+  {
+    topic: "Jellyfish and Relatives",
+    statements: [
+      { text: "The Portuguese man-of-war is not a single animal but a colony of organisms.", real: true },
+      { text: "Moon jellyfish are one of the few jellyfish species commonly kept in aquariums.", real: true },
+      { text: "Urinating on a jellyfish sting is an effective treatment.", real: false }
+    ],
+    explanation: "Urinating on a jellyfish sting can actually make it worse by triggering more nematocyst discharge. Rinsing with vinegar or hot water is the recommended first aid."
+  },
+  {
+    topic: "Fermentation",
+    statements: [
+      { text: "Yogurt, kimchi, and sauerkraut are all made through bacterial fermentation.", real: true },
+      { text: "Sourdough bread gets its distinctive flavor from wild yeast and lactobacillus bacteria.", real: true },
+      { text: "All fermented foods contain significant amounts of alcohol.", real: false }
+    ],
+    explanation: "Many fermented foods contain no meaningful alcohol. Yogurt, sauerkraut, and miso undergo lactic acid fermentation, which produces acid rather than alcohol."
+  },
+  {
+    topic: "Eyes of Animals",
+    statements: [
+      { text: "The colossal squid has the largest eyes of any known animal — about the size of dinner plates.", real: true },
+      { text: "Chameleons can move each eye independently, giving them 360-degree vision.", real: true },
+      { text: "Bulls are enraged by the color red.", real: false }
+    ],
+    explanation: "Bulls are colorblind to red. In bullfighting, they charge at the movement of the cape, not its color. The red color is traditionally for the audience and to mask blood."
+  },
+  {
+    topic: "Astronomy Light",
+    statements: [
+      { text: "The light we see from the Sun is already 8 minutes old by the time it reaches us.", real: true },
+      { text: "A photon generated in the Sun's core takes about 100,000 years to reach the Sun's surface.", real: true },
+      { text: "Light travels at the same speed regardless of the medium it passes through.", real: false }
+    ],
+    explanation: "Light slows down when passing through denser media. It travels fastest in a vacuum, slower in air, even slower in water, and slowest in materials like diamond."
+  },
+  {
+    topic: "Ancient China",
+    statements: [
+      { text: "The Terracotta Army contains over 8,000 individually crafted warrior statues.", real: true },
+      { text: "Ancient Chinese invented both paper and gunpowder.", real: true },
+      { text: "The Great Wall of China was built all at once by a single emperor.", real: false }
+    ],
+    explanation: "The Great Wall was built over roughly 2,000 years by many different dynasties, starting with early walls in the 7th century BC. The most famous sections were built during the Ming Dynasty."
+  },
+  {
+    topic: "Taste",
+    statements: [
+      { text: "Miracle berries contain a protein that makes sour foods taste sweet.", real: true },
+      { text: "Astronauts report that food tastes blander in space because fluids shift to their heads.", real: true },
+      { text: "Humans can only detect four basic tastes: sweet, sour, salty, and bitter.", real: false }
+    ],
+    explanation: "Humans can detect at least five basic tastes. Umami (savory) was identified as the fifth taste in 1908. Some researchers propose additional tastes like fat and starch."
+  },
+  {
+    topic: "Coins",
+    statements: [
+      { text: "The ridges on the edges of coins were originally added to prevent people from shaving off precious metal.", real: true },
+      { text: "The first coins were made in ancient Lydia (modern Turkey) around 600 BC.", real: true },
+      { text: "Pennies have always been made of solid copper.", real: false }
+    ],
+    explanation: "US pennies have been mostly zinc since 1982 — they are zinc coins with a thin copper plating. A solid copper penny today would cost more than one cent to produce."
+  },
+  {
+    topic: "Honey Production",
+    statements: [
+      { text: "Bees communicate the location of flowers through a 'waggle dance.'", real: true },
+      { text: "A beehive maintains an internal temperature of about 95°F year-round.", real: true },
+      { text: "Queen bees are born as queens from special queen eggs.", real: false }
+    ],
+    explanation: "Any fertilized bee egg can become a queen. The difference is diet — larvae chosen to become queens are fed exclusively royal jelly, while worker larvae receive a different diet."
+  },
+  {
+    topic: "Photography Art",
+    statements: [
+      { text: "Ansel Adams was known for meticulously planning his landscape photographs using a system of zones.", real: true },
+      { text: "The most expensive photograph ever sold went for over $12 million.", real: true },
+      { text: "All early photographs were black and white because color film hadn't been invented.", real: false }
+    ],
+    explanation: "While most early photos were black and white, hand-colored photographs existed from the 1840s, and the first true color photo process (Autochrome) was commercially available by 1907."
+  },
+  {
+    topic: "Crocodiles and Alligators",
+    statements: [
+      { text: "Crocodiles and alligators have survived relatively unchanged for over 200 million years.", real: true },
+      { text: "You can tell a crocodile from an alligator by its snout — crocodiles have V-shaped snouts.", real: true },
+      { text: "Crocodiles and alligators are the same species, just with different common names.", real: false }
+    ],
+    explanation: "Crocodiles and alligators belong to different biological families (Crocodylidae and Alligatoridae). They diverged from a common ancestor about 80 million years ago."
+  },
+  {
+    topic: "Inventions by Accident",
+    statements: [
+      { text: "Post-it Notes were invented after a scientist accidentally created a weak adhesive.", real: true },
+      { text: "Play-Doh was originally created as a wallpaper cleaner.", real: true },
+      { text: "The telephone was invented by Alexander Graham Bell while trying to improve the telegraph.", real: false }
+    ],
+    explanation: "While Bell did work on telegraph improvements, his telephone work was deliberate and focused on transmitting voice. Multiple inventors, including Elisha Gray, were independently pursuing the same goal."
+  },
+  {
+    topic: "Bamboo Uses",
+    statements: [
+      { text: "Bamboo has a higher tensile strength than many types of steel.", real: true },
+      { text: "Thomas Edison used a carbonized bamboo filament in his early light bulbs.", real: true },
+      { text: "Bamboo is too soft and weak to be used as a building material.", real: false }
+    ],
+    explanation: "Bamboo is extensively used as a structural building material across Asia and increasingly worldwide. Its strength-to-weight ratio rivals steel and it can withstand earthquake forces."
+  },
+  {
+    topic: "Butterflies and Moths",
+    statements: [
+      { text: "Some moths don't have mouths and cannot eat — they survive only on energy stored as caterpillars.", real: true },
+      { text: "The Painted Lady butterfly migrates up to 9,000 miles from Africa to the Arctic Circle.", real: true },
+      { text: "Moths are always dull-colored and butterflies are always brightly colored.", real: false }
+    ],
+    explanation: "Many moths are strikingly colorful — like the sunset moth from Madagascar, which rivals any butterfly. And some butterflies, like skippers, can be quite drab in appearance."
   }
 ];
