@@ -1,11 +1,11 @@
 {
-  "name": "Connections Puzzle",
-  "short_name": "Connections",
-  "description": "Find the four groups of four words that share a connection!",
+  "name": "AI for Everyone Games",
+  "short_name": "AI4E Games",
+  "description": "Free original daily games to challenge your brain",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "background_color": "#f8f8fa",
+  "theme_color": "#f8f8fa",
   "orientation": "portrait",
   "icons": [
     {
