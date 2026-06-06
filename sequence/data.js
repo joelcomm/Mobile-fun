@@ -205,7 +205,7 @@ var SEQUENCES = [
   { seq: [3, 5, 7, 11, 13, '?'], answer: 17, choices: [15, 16, 17, 19], hint: 'Primes starting from 3' },
 
   // ── Powers of N (additional) ────────────────────────────
-  { seq: [1, 6, 36, 216, '?'], answer: 1296, choices: [648, 864, 1296, 1728], hint: 'Powers of 6' },
+  { seq: [6, 36, 216, 1296, '?'], answer: 7776, choices: [2592, 5184, 7776, 10368], hint: 'Multiply by 6' },
   { seq: [1, 8, 64, 512, '?'], answer: 4096, choices: [1024, 2048, 4096, 8192], hint: 'Powers of 8' },
   { seq: [1, 9, 81, 729, '?'], answer: 6561, choices: [2187, 4374, 6561, 8748], hint: 'Powers of 9' },
   { seq: [1, 10, 100, 1000, '?'], answer: 10000, choices: [2000, 5000, 10000, 100000], hint: 'Powers of 10' },
@@ -254,9 +254,9 @@ var SEQUENCES = [
   { seq: [1, 3, 7, 15, 31, '?'], answer: 63, choices: [47, 55, 63, 64], hint: 'Double and add 1' },
   { seq: [3, 7, 15, 31, '?'], answer: 63, choices: [47, 55, 63, 62], hint: 'Double and add 1' },
   { seq: [5, 11, 23, 47, '?'], answer: 95, choices: [71, 83, 95, 94], hint: 'Double and add 1' },
-  { seq: [1, 3, 9, 27, '?'], answer: 81, choices: [54, 63, 81, 108], hint: 'Multiply by 3' },
+  { seq: [9, 18, 36, 72, '?'], answer: 144, choices: [108, 128, 144, 216], hint: 'Double each time' },
   { seq: [4, 9, 19, 39, '?'], answer: 79, choices: [59, 69, 79, 78], hint: 'Double and add 1' },
-  { seq: [2, 5, 11, 23, '?'], answer: 47, choices: [35, 41, 47, 46], hint: 'Double and add 1' },
+  { seq: [6, 13, 27, 55, '?'], answer: 111, choices: [83, 97, 111, 110], hint: 'Double and add 1' },
   { seq: [7, 15, 31, 63, '?'], answer: 127, choices: [95, 111, 127, 126], hint: 'Double and add 1' },
   { seq: [1, 4, 13, 40, 121, '?'], answer: 364, choices: [242, 300, 364, 484], hint: 'Multiply by 3 and add 1' },
   { seq: [5, 9, 17, 33, '?'], answer: 65, choices: [49, 57, 65, 66], hint: 'Double and subtract 1' },
@@ -313,9 +313,9 @@ var SEQUENCES = [
   // ── Multiply then add ──────────────────────────────────
   { seq: [1, 3, 10, 32, '?'], answer: 99, choices: [64, 96, 99, 100], hint: 'Multiply by 3, then add 1; ×3+1' },
   { seq: [2, 7, 22, 67, '?'], answer: 202, choices: [134, 180, 202, 270], hint: 'Multiply by 3 and add 1' },
-  { seq: [1, 3, 7, 15, '?'], answer: 31, choices: [23, 27, 31, 30], hint: '×2 + 1' },
-  { seq: [1, 4, 13, 40, '?'], answer: 121, choices: [80, 100, 121, 160], hint: '×3 + 1' },
-  { seq: [2, 5, 11, 23, 47, '?'], answer: 95, choices: [71, 83, 95, 94], hint: '×2 + 1' },
+  { seq: [2, 7, 17, 37, '?'], answer: 77, choices: [57, 67, 77, 74], hint: '×2 + 3' },
+  { seq: [1, 5, 17, 53, '?'], answer: 161, choices: [106, 133, 161, 212], hint: '×3 + 2' },
+  { seq: [3, 7, 15, 31, 63, '?'], answer: 127, choices: [95, 111, 127, 126], hint: '×2 + 1' },
   { seq: [3, 8, 18, 38, '?'], answer: 78, choices: [58, 68, 78, 76], hint: '×2 + 2' },
   { seq: [1, 5, 21, 85, '?'], answer: 341, choices: [170, 256, 341, 425], hint: '×4 + 1' },
 
@@ -327,7 +327,7 @@ var SEQUENCES = [
   { seq: [216, 343, 512, 729, '?'], answer: 1000, choices: [800, 900, 1000, 1331], hint: 'Cubes: 6³, 7³, 8³, 9³, 10³' },
 
   // ── Sum of digits ──────────────────────────────────────
-  { seq: [10, 11, 13, 16, 20, '?'], answer: 25, choices: [23, 24, 25, 28], hint: 'Differences: +1, +2, +3, +4, +5' },
+  { seq: [20, 21, 23, 26, 30, '?'], answer: 35, choices: [33, 34, 35, 38], hint: 'Differences: +1, +2, +3, +4, +5' },
   { seq: [19, 28, 37, 46, '?'], answer: 55, choices: [50, 53, 55, 64], hint: 'Add 9; digit sum is always 10' },
   { seq: [18, 27, 36, 45, '?'], answer: 54, choices: [50, 52, 54, 63], hint: 'Add 9; digit sum is always 9' },
 
@@ -345,8 +345,8 @@ var SEQUENCES = [
   { seq: [4, 5, 8, 14, 24, '?'], answer: 39, choices: [32, 36, 39, 44], hint: 'Differences: 1, 3, 6, 10, 15 (triangular)' },
 
   // ── Powers of 2 ± offset ───────────────────────────────
-  { seq: [3, 5, 9, 17, '?'], answer: 33, choices: [25, 29, 33, 65], hint: '2^n + 1: 2+1, 4+1, 8+1, 16+1, 32+1' },
-  { seq: [1, 3, 7, 15, 31, '?'], answer: 63, choices: [47, 55, 63, 62], hint: '2^n − 1' },
+  { seq: [5, 9, 17, 33, '?'], answer: 65, choices: [49, 57, 65, 66], hint: '2^n + 1: 4+1, 8+1, 16+1, 32+1, 64+1' },
+  { seq: [7, 15, 31, 63, 127, '?'], answer: 255, choices: [191, 223, 255, 256], hint: '2^n − 1' },
   { seq: [0, 2, 6, 14, 30, '?'], answer: 62, choices: [46, 54, 62, 64], hint: '2^n − 2' },
   { seq: [5, 6, 8, 12, 20, '?'], answer: 36, choices: [28, 32, 36, 40], hint: 'Add 1, 2, 4, 8, 16 (powers of 2)' },
   { seq: [10, 11, 13, 17, 25, '?'], answer: 41, choices: [33, 37, 41, 50], hint: 'Add powers of 2: +1, +2, +4, +8, +16' },
@@ -354,7 +354,7 @@ var SEQUENCES = [
 
   // ── Catalan-style / Combinatorial ──────────────────────
   { seq: [1, 1, 2, 5, 14, '?'], answer: 42, choices: [28, 35, 42, 56], hint: 'Catalan numbers' },
-  { seq: [1, 2, 5, 14, '?'], answer: 42, choices: [28, 35, 42, 56], hint: 'Catalan numbers' },
+  { seq: [2, 5, 14, 42, '?'], answer: 132, choices: [84, 105, 132, 168], hint: 'Catalan numbers continued' },
   { seq: [1, 3, 6, 10, 15, 21, '?'], answer: 28, choices: [24, 26, 28, 36], hint: 'Triangular numbers' },
 
   // ── Mixed hard ──────────────────────────────────────────
@@ -372,16 +372,16 @@ var SEQUENCES = [
   { seq: [4, 7, 14, 17, 34, '?'], answer: 37, choices: [37, 51, 68, 71], hint: 'Alternate: +3, then ×2' },
   { seq: [3, 6, 5, 10, 9, '?'], answer: 18, choices: [12, 15, 18, 27], hint: 'Alternate: ×2, then −1' },
   { seq: [2, 4, 3, 6, 5, '?'], answer: 10, choices: [7, 8, 10, 15], hint: 'Alternate: ×2, then −1' },
-  { seq: [1, 2, 6, 24, 120, '?'], answer: 720, choices: [240, 480, 720, 960], hint: 'Factorials: 1!, 2!, 3!, 4!, 5!, 6!' },
+  { seq: [24, 120, 720, 5040, '?'], answer: 40320, choices: [10080, 20160, 40320, 50400], hint: 'Factorials: 4!, 5!, 6!, 7!, 8!' },
   { seq: [10, 13, 19, 28, 40, '?'], answer: 55, choices: [48, 52, 55, 60], hint: 'Differences: +3, +6, +9, +12, +15' },
 
   // ── n² + n ─────────────────────────────────────────────
-  { seq: [2, 6, 12, 20, 30, '?'], answer: 42, choices: [36, 40, 42, 48], hint: 'n² + n for n = 1, 2, 3, 4, 5, 6' },
+  { seq: [42, 56, 72, 90, 110, '?'], answer: 132, choices: [120, 126, 132, 144], hint: 'n(n+1) for n = 6, 7, 8, 9, 10, 11' },
   { seq: [56, 72, 90, 110, '?'], answer: 132, choices: [120, 126, 132, 144], hint: 'n(n+1) for n = 7, 8, 9, 10, 11' },
   { seq: [90, 110, 132, 156, '?'], answer: 182, choices: [168, 175, 182, 196], hint: 'n(n+1) for n = 9, 10, 11, 12, 13' },
 
   // ── Add consecutive odds ───────────────────────────────
-  { seq: [1, 4, 9, 16, '?'], answer: 25, choices: [20, 23, 25, 30], hint: 'Sum of first n odd numbers = n²' },
+  { seq: [1, 5, 14, 30, 55, '?'], answer: 91, choices: [72, 84, 91, 105], hint: 'Sum of first n squares' },
   { seq: [0, 1, 4, 9, '?'], answer: 16, choices: [12, 14, 16, 25], hint: 'Squares: 0², 1², 2², 3², 4²' },
 
   // ── n³ ± constant ──────────────────────────────────────
