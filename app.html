@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#f8f8fa">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <title>Best Daily Games</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    :root {
+      --bg: #f8f8fa;
+      --card: #ffffff;
+      --card-hover: #f0f0f5;
+      --border: #dddde4;
+      --text: #2a2a3e;
+      --text-dim: #6b6b80;
+      --white: #1a1a2e;
+      --accent: #1a9a45;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 18px;
+    }
+
+    #app {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 24px 20px;
+      padding-top: calc(24px + var(--safe-top));
+      padding-bottom: calc(24px + var(--safe-bottom));
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+      padding-top: 24px;
+    }
+
+    h1 {
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: var(--white);
+    }
+
+    .subtitle {
+      font-size: 13px;
+      letter-spacing: 2px;
+      color: var(--text-dim);
+      margin-top: 8px;
+      line-height: 1.6;
+    }
+
+    .games {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .game-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      border-radius: 12px;
+      padding: 18px 20px;
+      transition: all 0.15s;
+    }
+
+    .game-card:active {
+      background: var(--card-hover);
+      transform: scale(0.98);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 6px;
+    }
+
+    .card-icon {
+      font-size: 28px;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    .card-title {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.4;
+    }
+
+    .card-tag {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Per-game accent colors */
+    .threads .card-icon { background: rgba(138, 109, 0, 0.08); }
+    .threads .card-title { color: #8a6d00; }
+    .threads .card-tag { background: rgba(138, 109, 0, 0.06); color: #8a6d00; }
+
+    .alibi .card-icon { background: rgba(200, 144, 24, 0.08); }
+    .alibi .card-title { color: #c89018; }
+    .alibi .card-tag { background: rgba(200, 144, 24, 0.06); color: #c89018; }
+
+    .bluff .card-icon { background: rgba(208, 80, 53, 0.08); }
+    .bluff .card-title { color: #d05035; }
+    .bluff .card-tag { background: rgba(208, 80, 53, 0.06); color: #d05035; }
+
+    .lineup .card-icon { background: rgba(74, 110, 224, 0.08); }
+    .lineup .card-title { color: #4a6ee0; }
+    .lineup .card-tag { background: rgba(74, 110, 224, 0.06); color: #4a6ee0; }
+
+    .echo .card-icon { background: rgba(126, 78, 184, 0.08); }
+    .echo .card-title { color: #7e4eb8; }
+    .echo .card-tag { background: rgba(126, 78, 184, 0.06); color: #7e4eb8; }
+
+    .cipher .card-icon { background: rgba(26, 152, 80, 0.08); }
+    .cipher .card-title { color: #1a9850; }
+    .cipher .card-tag { background: rgba(26, 152, 80, 0.06); color: #1a9850; }
+
+    .reflex .card-icon { background: rgba(200, 152, 24, 0.08); }
+    .reflex .card-title { color: #c89818; }
+    .reflex .card-tag { background: rgba(200, 152, 24, 0.06); color: #c89818; }
+
+    .sequence .card-icon { background: rgba(74, 110, 224, 0.08); }
+    .sequence .card-title { color: #4a6ee0; }
+    .sequence .card-tag { background: rgba(74, 110, 224, 0.06); color: #4a6ee0; }
+
+    .rank .card-icon { background: rgba(184, 150, 10, 0.08); }
+    .rank .card-title { color: #b8960a; }
+    .rank .card-tag { background: rgba(184, 150, 10, 0.06); color: #b8960a; }
+
+    /* ─── Progress ─────────────────────────────────────────── */
+    .hub-progress { margin-top: 16px; }
+
+    .progress-ring {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .progress-count {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+    .progress-count strong {
+      color: var(--accent);
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .progress-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .pdot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: background 0.3s;
+    }
+    .pdot.filled { background: var(--accent); }
+
+    .stats-link {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--text-dim);
+      text-decoration: none;
+      padding: 6px 16px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: all 0.15s;
+    }
+    .stats-link:active { background: var(--card-hover); color: var(--white); }
+
+    .card-done-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 8px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      background: rgba(26, 154, 69, 0.08);
+      color: var(--accent);
+    }
+
+    .card-streak-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      margin-top: 8px;
+      margin-left: 6px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      background: rgba(200, 152, 24, 0.08);
+      color: #c89818;
+    }
+
+    footer {
+      text-align: center;
+      padding-top: 24px;
+      padding-bottom: 8px;
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .game-card { animation: fadeInUp 0.4s ease-out both; }
+    .game-card:nth-child(1) { animation-delay: 0.03s; }
+    .game-card:nth-child(2) { animation-delay: 0.08s; }
+    .game-card:nth-child(3) { animation-delay: 0.13s; }
+    .game-card:nth-child(4) { animation-delay: 0.18s; }
+    .game-card:nth-child(5) { animation-delay: 0.23s; }
+    .game-card:nth-child(6) { animation-delay: 0.28s; }
+    .game-card:nth-child(7) { animation-delay: 0.33s; }
+    .game-card:nth-child(8) { animation-delay: 0.38s; }
+    .game-card:nth-child(9) { animation-delay: 0.43s; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>BEST DAILY GAMES</h1>
+      <p class="subtitle">Original and fun free daily games to challenge your brain</p>
+      <p id="hub-date" class="subtitle" style="margin-top:4px;color:#c89818;font-size:12px;letter-spacing:3px"></p>
+      <div id="hub-progress" class="hub-progress"></div>
+    </header>
+
+    <div class="games">
+      <a href="threads/" class="game-card threads">
+        <div class="card-top">
+          <div class="card-icon">&#x1F9F5;</div>
+          <div class="card-title">Threads</div>
+        </div>
+        <div class="card-desc">Group 16 words into 4 categories. Find the hidden threads before your mistakes run out.</div>
+        <span class="card-tag">Word Grouping</span>
+      </a>
+
+      <a href="alibi/" class="game-card alibi">
+        <div class="card-top">
+          <div class="card-icon">&#x1F575;</div>
+          <div class="card-title">Alibi</div>
+        </div>
+        <div class="card-desc">9 words. 1 culprit. Eight have alibis — they belong to one category. Find the odd one out.</div>
+        <span class="card-tag">Word Mystery</span>
+      </a>
+
+      <a href="bluff/" class="game-card bluff">
+        <div class="card-top">
+          <div class="card-icon">&#x1F0CF;</div>
+          <div class="card-title">Bluff</div>
+        </div>
+        <div class="card-desc">Three facts about a topic. Two are real, one is made up. Can you spot the lie?</div>
+        <span class="card-tag">True or False</span>
+      </a>
+
+      <a href="lineup/" class="game-card lineup">
+        <div class="card-top">
+          <div class="card-icon">&#x1F4CA;</div>
+          <div class="card-title">Lineup</div>
+        </div>
+        <div class="card-desc">Five items, one rule. Drag them into the correct order before your attempts run out.</div>
+        <span class="card-tag">Sorting &amp; Trivia</span>
+      </a>
+
+      <a href="echo/" class="game-card echo">
+        <div class="card-top">
+          <div class="card-icon">&#x1F519;</div>
+          <div class="card-title">Echo</div>
+        </div>
+        <div class="card-desc">Watch colored tiles flash in sequence. Tap them back — in reverse. How far can you go?</div>
+        <span class="card-tag">Memory</span>
+      </a>
+
+      <a href="cipher/" class="game-card cipher">
+        <div class="card-top">
+          <div class="card-icon">&#x1F510;</div>
+          <div class="card-title">Cipher</div>
+        </div>
+        <div class="card-desc">Every letter has been swapped. Crack the substitution code to reveal the famous quote.</div>
+        <span class="card-tag">Codebreaking</span>
+      </a>
+
+      <a href="reflex/" class="game-card reflex">
+        <div class="card-top">
+          <div class="card-icon">&#x26A1;</div>
+          <div class="card-title">Reflex</div>
+        </div>
+        <div class="card-desc">A word flashes. Tap left or right to sort it into the correct category. It speeds up. 3 lives.</div>
+        <span class="card-tag">Speed Sorting</span>
+      </a>
+
+      <a href="sequence/" class="game-card sequence">
+        <div class="card-top">
+          <div class="card-icon">&#x1F522;</div>
+          <div class="card-title">Sequence</div>
+        </div>
+        <div class="card-desc">Study the pattern. Pick the missing number. 10 rounds of number sequences that get trickier.</div>
+        <span class="card-tag">Pattern &amp; Logic</span>
+      </a>
+
+      <a href="rank/" class="game-card rank">
+        <div class="card-top">
+          <div class="card-icon">&#x1F3AF;</div>
+          <div class="card-title">Rank</div>
+        </div>
+        <div class="card-desc">Four items, one hidden metric. Drag them into the correct order — then discover the surprising truth.</div>
+        <span class="card-tag">Ranking &amp; Trivia</span>
+      </a>
+    </div>
+
+    <footer>Best Daily Games</footer>
+    <script src="daily.js"></script>
+    <script>
+      document.getElementById('hub-date').textContent = Daily.getDateString();
+
+      (function () {
+        var DAILY_KEYS = ['threads','alibi','bluff','lineup','echo','cipher','reflex','sequence','rank'];
+        var done = 0;
+        var total = DAILY_KEYS.length;
+
+        DAILY_KEYS.forEach(function (key) {
+          var result = Daily.getDailyResult(key);
+          var streak = Daily.getStreak(key);
+          var card = document.querySelector('.game-card.' + key);
+          if (!card) return;
+
+          var badges = '';
+          if (result) {
+            done++;
+            badges += '<span class="card-done-badge">✓ DONE</span>';
+          }
+          if (streak > 1) {
+            badges += '<span class="card-streak-badge">🔥 ' + streak + '</span>';
+          }
+          if (badges) {
+            var wrap = document.createElement('div');
+            wrap.innerHTML = badges;
+            card.appendChild(wrap);
+          }
+        });
+
+        var prog = document.getElementById('hub-progress');
+        var dots = '';
+        for (var i = 0; i < total; i++) {
+          dots += '<div class="pdot' + (i < done ? ' filled' : '') + '"></div>';
+        }
+        prog.innerHTML =
+          '<div class="progress-ring">' +
+            '<div class="progress-count"><strong>' + done + '</strong>/' + total + ' today</div>' +
+            '<div class="progress-dots">' + dots + '</div>' +
+          '</div>' +
+          '<a href="stats.html" class="stats-link">VIEW STATS →</a>';
+      })();
+    </script>
+  </div>
+</body>
+</html>

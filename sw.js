@@ -1,4 +1,4 @@
-var CACHE_NAME = 'ai4e-games-v1';
+var CACHE_NAME = 'bestdailygames-v1';
 
 var ASSETS = [
   '/',
@@ -35,10 +35,6 @@ var ASSETS = [
   '/reflex/game.js',
   '/reflex/data.js',
   '/reflex/style.css',
-  '/vanish/index.html',
-  '/vanish/game.js',
-  '/vanish/words.js',
-  '/vanish/style.css',
   '/sequence/index.html',
   '/sequence/game.js',
   '/sequence/data.js',

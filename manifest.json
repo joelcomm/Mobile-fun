@@ -1,7 +1,7 @@
 {
-  "name": "AI for Everyone Games",
-  "short_name": "AI4E Games",
-  "description": "Free original daily games to challenge your brain",
+  "name": "Best Daily Games",
+  "short_name": "Daily Games",
+  "description": "Original and fun free daily games to challenge your brain",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f8f8fa",
