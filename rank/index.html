@@ -193,7 +193,14 @@
        APP
        ═══════════════════════════════════════════════════════ */
     function App() {
-      var puzzle = PUZZLES[dayNum() % PUZZLES.length];
+      var puzzle = (function () {
+        var dn = dayNum();
+        var cycle = Math.floor(dn / PUZZLES.length);
+        var dayInCycle = dn % PUZZLES.length;
+        var rng = mulberry32(cycle * 99991 + 7);
+        var shuffled = shuffle(PUZZLES, rng);
+        return shuffled[dayInCycle];
+      })();
       var dn = dayNum();
 
       var withIds = useMemo(function () {

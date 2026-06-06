@@ -53,7 +53,7 @@
   function startGame() {
     var rng = Daily.createRng(Daily.getDayNumber() * 2027);
     state = {
-      puzzles: Daily.pick(PUZZLES, ROUNDS, rng),
+      puzzles: Daily.dealFromDeck(PUZZLES, ROUNDS),
       rng: rng,
       current: 0,
       score: 0,
