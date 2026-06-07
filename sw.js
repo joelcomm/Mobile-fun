@@ -1,4 +1,4 @@
-var CACHE_NAME = 'bestdailygames-v1';
+var CACHE_NAME = 'acumen-v1';
 
 var ASSETS = [
   '/',

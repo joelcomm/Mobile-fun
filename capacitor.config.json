@@ -1,6 +1,6 @@
 {
-  "appId": "com.bestdailygames.app",
-  "appName": "Best Daily Games",
+  "appId": "com.acumengames.app",
+  "appName": "Acumen",
   "webDir": "www",
   "ios": {
     "contentInset": "always",

@@ -1,7 +1,7 @@
 {
-  "name": "Best Daily Games",
-  "short_name": "Daily Games",
-  "description": "Original and fun free daily games to challenge your brain",
+  "name": "Acumen",
+  "short_name": "Acumen",
+  "description": "Original daily games to sharpen your mind",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f8f8fa",
