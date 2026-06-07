@@ -80,7 +80,7 @@
   function startGame() {
     var rng = Daily.createRng(Daily.getDayNumber() * 5059);
     state = {
-      quotes: Daily.pick(QUOTES, TOTAL_ROUNDS, rng),
+      quotes: Daily.dealFromDeck(QUOTES, TOTAL_ROUNDS),
       dailyRng: rng,
       current: 0,
       score: 0,

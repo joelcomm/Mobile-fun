@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-  <title>AI for Everyone Games</title>
+  <title>Acumen — Brain Games for Smart People</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
@@ -23,6 +23,19 @@
       --white: #1a1a2e;
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
+
+      --clr-threads: #D97706;
+      --clr-alibi: #0D9488;
+      --clr-bluff: #DC2626;
+      --clr-lineup: #2563EB;
+      --clr-echo: #7C3AED;
+      --clr-cipher: #059669;
+      --clr-reflex: #EA580C;
+      --clr-vanish: #0891B2;
+      --clr-sequence: #4F46E5;
+      --clr-rank: #DB2777;
+      --clr-puptown: #EC4899;
+      --clr-poundbreak: #F97316;
     }
 
     html, body {
@@ -50,11 +63,26 @@
       padding-top: 32px;
     }
 
+    .app-logo {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 14px;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(19, 26, 43, 0.3);
+    }
+
+    .app-logo svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
     h1 {
-      font-size: 28px;
+      font-size: 32px;
       font-weight: 900;
-      letter-spacing: 2px;
-      color: var(--white);
+      letter-spacing: 4px;
+      color: #131A2B;
     }
 
     .subtitle {
@@ -85,22 +113,23 @@
       color: inherit;
       background: var(--card);
       border: 1px solid var(--border);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      border-left: 3px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
       border-radius: 12px;
       padding: 24px;
-      transition: all 0.15s;
+      transition: all 0.2s ease;
     }
 
     .game-card:active {
       background: var(--card-hover);
-      transform: scale(0.98);
+      transform: scale(0.97);
     }
 
     @media (hover: hover) {
       .game-card:hover {
         background: var(--card-hover);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
       }
     }
 
@@ -112,20 +141,40 @@
     }
 
     .card-icon {
-      font-size: 32px;
       width: 48px;
       height: 48px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 10px;
+      border-radius: 14px;
       flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .card-icon svg {
+      width: 24px;
+      height: 24px;
     }
 
     .card-title {
       font-size: 22px;
       font-weight: 800;
       letter-spacing: 1px;
+      flex: 1;
+    }
+
+    .card-chevron {
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--text-dim);
+      opacity: 0.5;
+      transition: opacity 0.2s, transform 0.2s;
+      flex-shrink: 0;
+    }
+    @media (hover: hover) {
+      .game-card:hover .card-chevron {
+        opacity: 1;
+        transform: translateX(2px);
+      }
     }
 
     .card-desc {
@@ -146,53 +195,77 @@
     }
 
     /* Per-game accent colors */
-    .threads .card-icon { background: rgba(138, 109, 0, 0.08); }
-    .threads .card-title { color: #8a6d00; }
-    .threads .card-tag { background: rgba(138, 109, 0, 0.06); color: #8a6d00; }
+    .threads { border-left-color: var(--clr-threads); }
+    .threads .card-icon { background: linear-gradient(135deg, #F59E0B, #D97706); }
+    .threads .card-title { color: #92600a; }
+    .threads .card-tag { background: rgba(217, 119, 6, 0.12); color: #92600a; }
+    @media (hover: hover) { .threads:hover { border-left-color: #F59E0B; } }
 
-    .alibi .card-icon { background: rgba(200, 144, 24, 0.08); }
-    .alibi .card-title { color: #c89018; }
-    .alibi .card-tag { background: rgba(200, 144, 24, 0.06); color: #c89018; }
+    .alibi { border-left-color: var(--clr-alibi); }
+    .alibi .card-icon { background: linear-gradient(135deg, #14B8A6, #0D9488); }
+    .alibi .card-title { color: #0D7D73; }
+    .alibi .card-tag { background: rgba(13, 148, 136, 0.12); color: #0D7D73; }
+    @media (hover: hover) { .alibi:hover { border-left-color: #14B8A6; } }
 
-    .bluff .card-icon { background: rgba(208, 80, 53, 0.08); }
-    .bluff .card-title { color: #d05035; }
-    .bluff .card-tag { background: rgba(208, 80, 53, 0.06); color: #d05035; }
+    .bluff { border-left-color: var(--clr-bluff); }
+    .bluff .card-icon { background: linear-gradient(135deg, #EF4444, #DC2626); }
+    .bluff .card-title { color: #B91C1C; }
+    .bluff .card-tag { background: rgba(220, 38, 38, 0.12); color: #B91C1C; }
+    @media (hover: hover) { .bluff:hover { border-left-color: #EF4444; } }
 
-    .lineup .card-icon { background: rgba(74, 110, 224, 0.08); }
-    .lineup .card-title { color: #4a6ee0; }
-    .lineup .card-tag { background: rgba(74, 110, 224, 0.06); color: #4a6ee0; }
+    .lineup { border-left-color: var(--clr-lineup); }
+    .lineup .card-icon { background: linear-gradient(135deg, #3B82F6, #2563EB); }
+    .lineup .card-title { color: #1D4ED8; }
+    .lineup .card-tag { background: rgba(37, 99, 235, 0.12); color: #1D4ED8; }
+    @media (hover: hover) { .lineup:hover { border-left-color: #3B82F6; } }
 
-    .echo .card-icon { background: rgba(126, 78, 184, 0.08); }
-    .echo .card-title { color: #7e4eb8; }
-    .echo .card-tag { background: rgba(126, 78, 184, 0.06); color: #7e4eb8; }
+    .echo { border-left-color: var(--clr-echo); }
+    .echo .card-icon { background: linear-gradient(135deg, #8B5CF6, #7C3AED); }
+    .echo .card-title { color: #6D28D9; }
+    .echo .card-tag { background: rgba(124, 58, 237, 0.12); color: #6D28D9; }
+    @media (hover: hover) { .echo:hover { border-left-color: #8B5CF6; } }
 
-    .cipher .card-icon { background: rgba(26, 152, 80, 0.08); }
-    .cipher .card-title { color: #1a9850; }
-    .cipher .card-tag { background: rgba(26, 152, 80, 0.06); color: #1a9850; }
+    .cipher { border-left-color: var(--clr-cipher); }
+    .cipher .card-icon { background: linear-gradient(135deg, #10B981, #059669); }
+    .cipher .card-title { color: #047857; }
+    .cipher .card-tag { background: rgba(5, 150, 105, 0.12); color: #047857; }
+    @media (hover: hover) { .cipher:hover { border-left-color: #10B981; } }
 
-    .reflex .card-icon { background: rgba(200, 152, 24, 0.08); }
-    .reflex .card-title { color: #c89818; }
-    .reflex .card-tag { background: rgba(200, 152, 24, 0.06); color: #c89818; }
+    .reflex { border-left-color: var(--clr-reflex); }
+    .reflex .card-icon { background: linear-gradient(135deg, #F97316, #EA580C); }
+    .reflex .card-title { color: #C2410C; }
+    .reflex .card-tag { background: rgba(234, 88, 12, 0.12); color: #C2410C; }
+    @media (hover: hover) { .reflex:hover { border-left-color: #F97316; } }
 
-    .vanish .card-icon { background: rgba(0, 152, 120, 0.08); }
-    .vanish .card-title { color: #009878; }
-    .vanish .card-tag { background: rgba(0, 152, 120, 0.06); color: #009878; }
+    .vanish { border-left-color: var(--clr-vanish); }
+    .vanish .card-icon { background: linear-gradient(135deg, #06B6D4, #0891B2); }
+    .vanish .card-title { color: #0E7490; }
+    .vanish .card-tag { background: rgba(8, 145, 178, 0.12); color: #0E7490; }
+    @media (hover: hover) { .vanish:hover { border-left-color: #06B6D4; } }
 
-    .sequence .card-icon { background: rgba(74, 110, 224, 0.08); }
-    .sequence .card-title { color: #4a6ee0; }
-    .sequence .card-tag { background: rgba(74, 110, 224, 0.06); color: #4a6ee0; }
+    .sequence { border-left-color: var(--clr-sequence); }
+    .sequence .card-icon { background: linear-gradient(135deg, #6366F1, #4F46E5); }
+    .sequence .card-title { color: #4338CA; }
+    .sequence .card-tag { background: rgba(79, 70, 229, 0.12); color: #4338CA; }
+    @media (hover: hover) { .sequence:hover { border-left-color: #6366F1; } }
 
-    .rank .card-icon { background: rgba(184, 150, 10, 0.08); }
-    .rank .card-title { color: #b8960a; }
-    .rank .card-tag { background: rgba(184, 150, 10, 0.06); color: #b8960a; }
+    .rank { border-left-color: var(--clr-rank); }
+    .rank .card-icon { background: linear-gradient(135deg, #EC4899, #DB2777); }
+    .rank .card-title { color: #BE185D; }
+    .rank .card-tag { background: rgba(219, 39, 119, 0.12); color: #BE185D; }
+    @media (hover: hover) { .rank:hover { border-left-color: #EC4899; } }
 
-    .puptown .card-icon { background: rgba(255, 154, 193, 0.10); }
-    .puptown .card-title { color: #d05080; }
-    .puptown .card-tag { background: rgba(255, 154, 193, 0.10); color: #d05080; }
+    .puptown { border-left-color: var(--clr-puptown); }
+    .puptown .card-icon { background: linear-gradient(135deg, #F472B6, #EC4899); }
+    .puptown .card-title { color: #DB2777; }
+    .puptown .card-tag { background: rgba(236, 72, 153, 0.12); color: #DB2777; }
+    @media (hover: hover) { .puptown:hover { border-left-color: #F472B6; } }
 
-    .poundbreak .card-icon { background: rgba(217, 160, 92, 0.12); }
-    .poundbreak .card-title { color: #b87033; }
-    .poundbreak .card-tag { background: rgba(217, 160, 92, 0.10); color: #b87033; }
+    .poundbreak { border-left-color: var(--clr-poundbreak); }
+    .poundbreak .card-icon { background: linear-gradient(135deg, #FB923C, #F97316); }
+    .poundbreak .card-title { color: #C2410C; }
+    .poundbreak .card-tag { background: rgba(249, 115, 22, 0.12); color: #C2410C; }
+    @media (hover: hover) { .poundbreak:hover { border-left-color: #FB923C; } }
 
     /* ─── Hub Progress & Stats ─────────────────────────────────── */
     .hub-progress {
@@ -299,13 +372,27 @@
     .game-card:nth-child(9) { animation-delay: 0.61s; }
     .game-card:nth-child(10) { animation-delay: 0.68s; }
     .game-card:nth-child(11) { animation-delay: 0.75s; }
+    .game-card:nth-child(12) { animation-delay: 0.82s; }
   </style>
 </head>
 <body>
   <div id="app">
     <header>
-      <h1>AI FOR EVERYONE GAMES</h1>
-      <p class="subtitle">Free original daily games to challenge your brain</p>
+      <div class="app-logo">
+        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+          <rect width="1024" height="1024" rx="224" fill="#131A2B"/>
+          <g transform="translate(512, 180)">
+            <polygon points="0,-48 -56,28 0,4 56,28" fill="#E8A317"/>
+            <g fill="none" stroke="white" stroke-width="52" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="-180" y1="660" x2="0" y2="0"/>
+              <line x1="180" y1="660" x2="0" y2="0"/>
+              <line x1="-100" y1="460" x2="100" y2="460"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <h1>ACUMEN</h1>
+      <p class="subtitle">Brain Games for Smart People</p>
       <p id="hub-date" class="subtitle" style="margin-top:4px;color:#f5c542;font-size:12px"></p>
       <div id="hub-progress" class="hub-progress"></div>
     </header>
@@ -313,8 +400,9 @@
     <div class="games">
       <a href="threads/" class="game-card threads">
         <div class="card-top">
-          <div class="card-icon">&#x1F9F5;</div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><line x1="7" y1="5" x2="17" y2="5"/><line x1="5" y1="7" x2="5" y2="17"/><line x1="19" y1="7" x2="19" y2="17"/><line x1="7" y1="19" x2="17" y2="19"/><line x1="7" y1="7" x2="17" y2="17"/><line x1="17" y1="7" x2="7" y2="17"/></svg></div>
           <div class="card-title">Threads</div>
+          <span class="card-chevron">&#x203A;</span>
         </div>
         <div class="card-desc">Group 16 words into 4 categories. Find the hidden threads before your mistakes run out.</div>
         <span class="card-tag">Word Grouping</span>
@@ -322,8 +410,9 @@
 
       <a href="alibi/" class="game-card alibi">
         <div class="card-top">
-          <div class="card-icon">&#x1F575;</div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="22" y2="22"/><text x="9" y="14" fill="white" stroke="none" font-size="10" font-weight="bold">?</text></svg></div>
           <div class="card-title">Alibi</div>
+          <span class="card-chevron">&#x203A;</span>
         </div>
         <div class="card-desc">9 words. 1 culprit. Eight have alibis — they belong to one category. Find the word that fits them all.</div>
         <span class="card-tag">Word Mystery</span>
@@ -331,8 +420,9 @@
 
       <a href="bluff/" class="game-card bluff">
         <div class="card-top">
-          <div class="card-icon">&#x1F0CF;</div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="14" height="18" rx="2"/><rect x="8" y="2" width="14" height="18" rx="2"/></svg></div>
           <div class="card-title">Bluff</div>
+          <span class="card-chevron">&#x203A;</span>
         </div>
         <div class="card-desc">Three facts about a topic. Two are real, one is made up. Can you spot the lie?</div>
         <span class="card-tag">True or False</span>
@@ -340,8 +430,9 @@
 
       <a href="lineup/" class="game-card lineup">
         <div class="card-top">
-          <div class="card-icon">&#x1F4CA;</div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="16" width="3" height="6" rx="0.5"/><rect x="8" y="12" width="3" height="10" rx="0.5"/><rect x="13" y="8" width="3" height="14" rx="0.5"/><rect x="18" y="4" width="3" height="18" rx="0.5"/></svg></div>
           <div class="card-title">Lineup</div>
+          <span class="card-chevron">&#x203A;</span>
         </div>
         <div class="card-desc">Five items, one rule. Drag them into the correct order before your attempts run out.</div>
         <span class="card-tag">Sorting &amp; Trivia</span>
@@ -349,8 +440,9 @@
 
       <a href="echo/" class="game-card echo">
         <div class="card-top">
-          <div class="card-icon">&#x1F519;</div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="4" cy="12" r="1.5" fill="white" stroke="none"/><path d="M9 7 A7 7 0 0 1 9 17"/><path d="M13 4 A11 11 0 0 1 13 20"/><path d="M17 1 A15 15 0 0 1 17 23"/></svg></div>
           <div class="card-title">Echo</div>
+          <span class="card-chevron">&#x203A;</span>
         </div>
         <div class="card-desc">Watch colored tiles flash in sequence. Now tap them back — in reverse. How far can you go?</div>
         <span class="card-tag">Memory &amp; Reflexes</span>
@@ -358,8 +450,9 @@
 
       <a href="cipher/" class="game-card cipher">
         <div class="card-top">
-          <div class="card-icon">&#x1F510;</div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="5"/><line x1="12.5" y1="11.5" x2="22" y2="2"/><line x1="17" y1="2" x2="22" y2="2"/><line x1="22" y1="2" x2="22" y2="7"/><line x1="18" y1="8" x2="22" y2="8"/></svg></div>
           <div class="card-title">Cipher</div>
+          <span class="card-chevron">&#x203A;</span>
         </div>
         <div class="card-desc">Every letter has been swapped. Crack the substitution code to reveal the famous quote hidden underneath.</div>
         <span class="card-tag">Codebreaking</span>
@@ -367,8 +460,9 @@
 
       <a href="reflex/" class="game-card reflex">
         <div class="card-top">
-          <div class="card-icon">&#x26A1;</div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 8 12 15 12 10 22"/></svg></div>
           <div class="card-title">Reflex</div>
+          <span class="card-chevron">&#x203A;</span>
         </div>
         <div class="card-desc">A word flashes. Tap left or right to sort it into the correct category. It speeds up. 3 lives.</div>
         <span class="card-tag">Speed Sorting</span>
@@ -376,8 +470,9 @@
 
       <a href="vanish/" class="game-card vanish">
         <div class="card-top">
-          <div class="card-icon">&#x1F7E9;</div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="6" height="6" rx="1"/><rect x="10" y="2" width="6" height="6" rx="1" opacity="0.6"/><rect x="18" y="2" width="4" height="4" rx="1" opacity="0.25"/><rect x="2" y="10" width="6" height="6" rx="1" opacity="0.6"/><rect x="10" y="10" width="6" height="6" rx="1"/><rect x="2" y="18" width="6" height="6" rx="1" opacity="0.35"/><rect x="10" y="18" width="6" height="6" rx="1" opacity="0.5"/><rect x="18" y="10" width="4" height="4" rx="1" opacity="0.15"/></svg></div>
           <div class="card-title">Vanish</div>
+          <span class="card-chevron">&#x203A;</span>
         </div>
         <div class="card-desc">Letters disappear every 10 seconds. Find words before the grid is gone. Longer words score more.</div>
         <span class="card-tag">Word Hunt</span>
@@ -385,8 +480,9 @@
 
       <a href="sequence/" class="game-card sequence">
         <div class="card-top">
-          <div class="card-icon">&#x1F522;</div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="4" cy="12" r="2"/><circle cx="12" cy="6" r="2"/><circle cx="20" cy="16" r="2"/><path d="M6 11 Q9 4 10 6"/><path d="M14 7 Q17 14 18 15"/></svg></div>
           <div class="card-title">Sequence</div>
+          <span class="card-chevron">&#x203A;</span>
         </div>
         <div class="card-desc">Study the pattern. Pick the missing number. 10 rounds of number sequences that get trickier.</div>
         <span class="card-tag">Pattern &amp; Logic</span>
@@ -394,8 +490,9 @@
 
       <a href="rank/" class="game-card rank">
         <div class="card-top">
-          <div class="card-icon">&#x1F3AF;</div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L14.5 8.5 L21.5 9 L16 14 L17.5 21 L12 17.5 L6.5 21 L8 14 L2.5 9 L9.5 8.5 Z"/></svg></div>
           <div class="card-title">Rank</div>
+          <span class="card-chevron">&#x203A;</span>
         </div>
         <div class="card-desc">Four items, one hidden metric. Drag them into the correct order — then discover the surprising truth.</div>
         <span class="card-tag">Ranking &amp; Trivia</span>
@@ -403,8 +500,9 @@
 
       <a href="puptown/" class="game-card puptown">
         <div class="card-top">
-          <div class="card-icon">&#x1F436;</div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M5.5 7 Q4 2 7 5"/><path d="M18.5 7 Q20 2 17 5"/><circle cx="9.5" cy="12" r="1.2" fill="white" stroke="none"/><circle cx="14.5" cy="12" r="1.2" fill="white" stroke="none"/><ellipse cx="12" cy="15" rx="2" ry="1.2"/><line x1="12" y1="16.2" x2="12" y2="17.5"/></svg></div>
           <div class="card-title">Pup Town Idle</div>
+          <span class="card-chevron">&#x203A;</span>
         </div>
         <div class="card-desc">A cozy idle game. Dogs wander your yard making Joy. Tap them, build upgrades, and watch for Zoomies.</div>
         <span class="card-tag">Idle / Pets</span>
@@ -412,8 +510,9 @@
 
       <a href="poundbreak/" class="game-card poundbreak">
         <div class="card-top">
-          <div class="card-icon">&#x1F4A6;</div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 C12 2 12 8 12 10"/><path d="M12 10 Q8 6 4 10"/><path d="M12 10 Q16 6 20 10"/><path d="M12 10 C12 12 10 18 6 22"/><path d="M12 10 C12 12 14 18 18 22"/><circle cx="12" cy="10" r="2" fill="white" stroke="none"/></svg></div>
           <div class="card-title">Pound Break</div>
+          <span class="card-chevron">&#x203A;</span>
         </div>
         <div class="card-desc">A retro 3D shooter. Sneak through a shady kennel, soak the catchers with your water pistol, and free every caged pup.</div>
         <span class="card-tag">3D Shooter</span>
@@ -441,10 +540,10 @@
           var badges = '';
           if (result) {
             done++;
-            badges += '<span class="card-done-badge">\u2713 DONE</span>';
+            badges += '<span class="card-done-badge">✓ DONE</span>';
           }
           if (streak > 1) {
-            badges += '<span class="card-streak-badge">\uD83D\uDD25 ' + streak + '</span>';
+            badges += '<span class="card-streak-badge">🔥 ' + streak + '</span>';
           }
           if (badges) {
             var wrap = document.createElement('div');
@@ -464,7 +563,7 @@
             '<div class="progress-count"><strong>' + done + '</strong>/10 today</div>' +
             '<div class="progress-dots">' + dots + '</div>' +
           '</div>' +
-          '<a href="stats.html" class="stats-link">VIEW STATS \u2192</a>';
+          '<a href="stats.html" class="stats-link">VIEW STATS →</a>';
       })();
     </script>
     <script>

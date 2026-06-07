@@ -1,5 +1,5 @@
 // ─── State ───────────────────────────────────────────────────────
-let currentPuzzleIndex = Daily.getDayNumber() % PUZZLES.length;
+let currentPuzzleIndex = PUZZLES.indexOf(Daily.dealFromDeck(PUZZLES, 1)[0]);
 let selected = [];
 let solvedGroups = [];
 let mistakesLeft = 4;

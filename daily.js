@@ -32,6 +32,21 @@ const Daily = (function () {
     return seededShuffle(arr, rng).slice(0, count);
   }
 
+  // Deal-from-deck: shuffle the full pool once per cycle, then deal
+  // sequential chunks so no puzzle repeats within a cycle.
+  // Every player gets the same puzzles on the same day.
+  function dealFromDeck(pool, perDay) {
+    var day = getDayNumber();
+    var cycleLen = Math.floor(pool.length / perDay);
+    if (cycleLen < 1) cycleLen = 1;
+    var cycle = Math.floor(day / cycleLen);
+    var dayInCycle = day % cycleLen;
+    var rng = createRng(cycle * 99991 + 7);
+    var shuffled = seededShuffle(pool, rng);
+    var start = dayInCycle * perDay;
+    return shuffled.slice(start, start + perDay);
+  }
+
   function getDateString() {
     var d = new Date();
     var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -142,6 +157,7 @@ const Daily = (function () {
     createRng: createRng,
     seededShuffle: seededShuffle,
     pick: pick,
+    dealFromDeck: dealFromDeck,
     getDateString: getDateString,
     getDailyResult: getDailyResult,
     saveDailyResult: saveDailyResult,
