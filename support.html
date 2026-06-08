@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#f8f8fa">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <title>Support — Acumen</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    :root {
+      --bg: #f8f8fa;
+      --card: #ffffff;
+      --border: #dddde4;
+      --text: #2a2a3e;
+      --text-dim: #6b6b80;
+      --white: #1a1a2e;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .back-link {
+      position: fixed; top: 14px; left: 16px; z-index: 50;
+      font-size: 13px; font-weight: 600; color: var(--text-dim);
+      text-decoration: none; letter-spacing: 1px;
+      padding-top: var(--safe-top);
+      transition: color 0.15s;
+    }
+    .back-link:hover { color: var(--white); }
+
+    #app {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 24px 20px;
+      padding-top: calc(24px + var(--safe-top));
+      padding-bottom: calc(40px + var(--safe-bottom));
+      min-height: 100dvh;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 36px;
+      padding-top: 32px;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: 4px;
+      color: #131A2B;
+      margin-bottom: 6px;
+    }
+
+    .page-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      letter-spacing: 3px;
+      color: var(--text-dim);
+      margin-top: 8px;
+      text-transform: uppercase;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      margin-top: 8px;
+    }
+
+    .content-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .content-card h2 {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--white);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .content-card p {
+      font-size: 15px;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.7;
+    }
+
+    .content-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .content-card a {
+      color: #2563EB;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .content-card a:hover { text-decoration: underline; }
+
+    .content-card ul {
+      margin: 8px 0 12px 20px;
+      font-size: 15px;
+      color: var(--text);
+    }
+
+    .content-card ul li {
+      margin-bottom: 6px;
+      line-height: 1.6;
+    }
+
+    .faq-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .faq-question {
+      padding: 20px 24px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--white);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .faq-question:hover {
+      background: rgba(0,0,0,0.015);
+    }
+
+    .faq-chevron {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--text-dim);
+      transition: transform 0.25s ease;
+      flex-shrink: 0;
+    }
+
+    .faq-item.open .faq-chevron {
+      transform: rotate(90deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 500px;
+    }
+
+    .faq-answer-inner {
+      padding: 0 24px 20px;
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.7;
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+
+    .contact-box {
+      background: linear-gradient(135deg, rgba(19,26,43,0.04), rgba(37,99,235,0.04));
+      border: 1px solid rgba(37,99,235,0.12);
+      border-radius: 12px;
+      padding: 28px 24px;
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    .contact-box h2 {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--white);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .contact-box p {
+      font-size: 15px;
+      color: var(--text);
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .contact-btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: var(--white);
+      color: #ffffff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      transition: opacity 0.15s;
+    }
+    .contact-btn:hover { opacity: 0.85; }
+    .contact-btn:active { opacity: 0.75; }
+
+    footer {
+      text-align: center;
+      padding-top: 28px;
+      font-size: 12px;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+
+    footer a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    footer a:hover { color: var(--white); }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .faq-item, .content-card, .contact-box {
+      animation: fadeInUp 0.4s ease-out both;
+    }
+    .faq-item:nth-child(1) { animation-delay: 0.05s; }
+    .faq-item:nth-child(2) { animation-delay: 0.10s; }
+    .faq-item:nth-child(3) { animation-delay: 0.15s; }
+    .faq-item:nth-child(4) { animation-delay: 0.20s; }
+    .faq-item:nth-child(5) { animation-delay: 0.25s; }
+    .faq-item:nth-child(6) { animation-delay: 0.30s; }
+    .faq-item:nth-child(7) { animation-delay: 0.35s; }
+    .faq-item:nth-child(8) { animation-delay: 0.40s; }
+    .faq-item:nth-child(9) { animation-delay: 0.45s; }
+    .faq-item:nth-child(10) { animation-delay: 0.50s; }
+  </style>
+</head>
+<body>
+  <a href="/" class="back-link">&larr; GAMES</a>
+  <div id="app">
+    <header>
+      <h1>ACUMEN</h1>
+      <div class="page-title">Support</div>
+      <p class="subtitle">Help &amp; FAQ</p>
+    </header>
+
+    <div class="section-label">Frequently Asked Questions</div>
+
+    <div class="faq-item open">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>What is Acumen?</span>
+        <span class="faq-chevron">&#x203A;</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Acumen is a free collection of daily brain games designed to challenge your memory, logic, vocabulary, and reflexes. Each day brings fresh puzzles across all games. There are no ads, no accounts, and no in-app purchases.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>How do I play?</span>
+        <span class="faq-chevron">&#x203A;</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          From the main screen, tap any game card to start playing. Each game has its own rules and instructions shown at the start. New puzzles are available every day at midnight. You can play all the games in any order.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>I lost my progress. Can I get it back?</span>
+        <span class="faq-chevron">&#x203A;</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Game progress is stored locally in your browser's storage (localStorage). If you clear your browser data, use a different browser, or switch devices, your progress and streaks will be lost. Unfortunately, since no data is stored on any server, there is no way to recover lost progress. We recommend avoiding clearing site data for Acumen if you want to keep your streaks.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>When do new puzzles appear?</span>
+        <span class="faq-chevron">&#x203A;</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          New daily puzzles are available every day at midnight (based on your local time zone). You can check the countdown timer on the Stats page to see exactly when the next set of puzzles will be available.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>Can I replay a puzzle I already completed today?</span>
+        <span class="faq-chevron">&#x203A;</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Once you complete a daily puzzle, your result is saved and you can view it, but you cannot replay the same puzzle until the next day's puzzle becomes available. This keeps the daily challenge fair and consistent for everyone.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>How do streaks work?</span>
+        <span class="faq-chevron">&#x203A;</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Each game tracks your streak independently. Your streak increases by one for every consecutive day you complete that game. If you miss a day, your streak resets to zero. Check the Stats page to see all your current streaks at a glance.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>Does Acumen work offline?</span>
+        <span class="faq-chevron">&#x203A;</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Acumen uses a service worker to cache game assets, so many of the games can work offline once they have been loaded at least once. However, the initial load and daily puzzle data may require an internet connection.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>Is Acumen free?</span>
+        <span class="faq-chevron">&#x203A;</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Yes, Acumen is completely free. There are no ads, no premium tiers, no in-app purchases, and no subscriptions. All games are fully available to everyone.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>Does Acumen collect my personal data?</span>
+        <span class="faq-chevron">&#x203A;</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          No. Acumen does not collect any personal data. There are no accounts, no analytics, no ads, and no tracking. All game data is stored locally on your device. For full details, see our <a href="privacy.html">Privacy Policy</a>.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>The app is not loading or looks broken. What should I do?</span>
+        <span class="faq-chevron">&#x203A;</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Try these steps:
+          <ul style="margin-top:8px;margin-left:20px;">
+            <li>Refresh the page (pull down on mobile, or press Ctrl+R / Cmd+R on desktop).</li>
+            <li>Make sure you have an active internet connection.</li>
+            <li>Try clearing the browser cache for this site only (not all site data, to preserve your progress).</li>
+            <li>Try a different browser to see if the issue persists.</li>
+            <li>If the problem continues, contact us at the email below.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px;"></div>
+    <div class="section-label">Still Need Help?</div>
+
+    <div class="contact-box">
+      <h2>Contact Us</h2>
+      <p>Can't find the answer you're looking for? We're happy to help.</p>
+      <a href="mailto:joel@niftycompany.com" class="contact-btn">EMAIL SUPPORT</a>
+      <p style="margin-top:14px;font-size:13px;color:var(--text-dim);margin-bottom:0;">joel@niftycompany.com</p>
+    </div>
+
+    <footer>
+      <a href="/">Acumen</a> &middot; <a href="privacy.html">Privacy Policy</a>
+    </footer>
+  </div>
+
+  <script>
+    function toggleFaq(el) {
+      var item = el.parentElement;
+      var wasOpen = item.classList.contains('open');
+      // Close all
+      var items = document.querySelectorAll('.faq-item');
+      for (var i = 0; i < items.length; i++) {
+        items[i].classList.remove('open');
+      }
+      // Toggle clicked
+      if (!wasOpen) {
+        item.classList.add('open');
+      }
+    }
+  </script>
+</body>
+</html>

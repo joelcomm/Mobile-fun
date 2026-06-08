@@ -1,66 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
-  <defs>
-    <!-- Game gradients -->
-    <linearGradient id="g-threads" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#F59E0B"/>
-      <stop offset="100%" stop-color="#D97706"/>
-    </linearGradient>
-    <linearGradient id="g-alibi" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#14B8A6"/>
-      <stop offset="100%" stop-color="#0D9488"/>
-    </linearGradient>
-    <linearGradient id="g-bluff" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#EF4444"/>
-      <stop offset="100%" stop-color="#DC2626"/>
-    </linearGradient>
-    <linearGradient id="g-lineup" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#3B82F6"/>
-      <stop offset="100%" stop-color="#2563EB"/>
-    </linearGradient>
-    <linearGradient id="g-echo" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#8B5CF6"/>
-      <stop offset="100%" stop-color="#7C3AED"/>
-    </linearGradient>
-    <linearGradient id="g-cipher" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#10B981"/>
-      <stop offset="100%" stop-color="#059669"/>
-    </linearGradient>
-    <linearGradient id="g-reflex" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#F97316"/>
-      <stop offset="100%" stop-color="#EA580C"/>
-    </linearGradient>
-    <linearGradient id="g-sequence" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#6366F1"/>
-      <stop offset="100%" stop-color="#4F46E5"/>
-    </linearGradient>
-    <linearGradient id="g-rank" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#EC4899"/>
-      <stop offset="100%" stop-color="#DB2777"/>
-    </linearGradient>
-
-    <!-- Subtle shadow filter -->
-    <filter id="shadow" x="-4%" y="-4%" width="108%" height="112%">
-      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.15"/>
-    </filter>
-  </defs>
-
-  <!-- iOS icon background shape -->
-  <rect width="1024" height="1024" rx="224" ry="224" fill="#F5F5F8"/>
-
-  <!-- 3x3 grid of rounded squares -->
-  <!-- Grid: padding=116, gap=24, square=(1024-232-48)/3 = 248 -->
-  <!-- Row 1 -->
-  <rect x="116" y="116" width="248" height="248" rx="56" fill="url(#g-threads)" filter="url(#shadow)"/>
-  <rect x="388" y="116" width="248" height="248" rx="56" fill="url(#g-alibi)" filter="url(#shadow)"/>
-  <rect x="660" y="116" width="248" height="248" rx="56" fill="url(#g-bluff)" filter="url(#shadow)"/>
-
-  <!-- Row 2 -->
-  <rect x="116" y="388" width="248" height="248" rx="56" fill="url(#g-lineup)" filter="url(#shadow)"/>
-  <rect x="388" y="388" width="248" height="248" rx="56" fill="url(#g-echo)" filter="url(#shadow)"/>
-  <rect x="660" y="388" width="248" height="248" rx="56" fill="url(#g-cipher)" filter="url(#shadow)"/>
-
-  <!-- Row 3 -->
-  <rect x="116" y="660" width="248" height="248" rx="56" fill="url(#g-reflex)" filter="url(#shadow)"/>
-  <rect x="388" y="660" width="248" height="248" rx="56" fill="url(#g-sequence)" filter="url(#shadow)"/>
-  <rect x="660" y="660" width="248" height="248" rx="56" fill="url(#g-rank)" filter="url(#shadow)"/>
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="1024" height="1024">
+  <rect width="1024" height="1024" rx="224" fill="#131A2B"/>
+  <g transform="translate(512, 180)">
+    <polygon points="0,-48 -56,28 0,4 56,28" fill="#E8A317"/>
+    <g fill="none" stroke="white" stroke-width="52" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="-180" y1="660" x2="0" y2="0"/>
+      <line x1="180" y1="660" x2="0" y2="0"/>
+      <line x1="-100" y1="460" x2="100" y2="460"/>
+    </g>
+  </g>
 </svg>

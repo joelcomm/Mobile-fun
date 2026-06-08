@@ -12,6 +12,7 @@ cp app.html www/index.html
 # Shared files
 cp daily.js stats.html manifest.json sw.js www/
 cp icon-192.png icon-512.png www/ 2>/dev/null || true
+cp privacy.html support.html www/ 2>/dev/null || true
 
 # Only the 9 app games (no vanish, puptown, poundbreak)
 for dir in threads alibi bluff lineup echo cipher reflex sequence rank; do
