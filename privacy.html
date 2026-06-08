@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#f8f8fa">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <title>Privacy Policy — Acumen</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    :root {
+      --bg: #f8f8fa;
+      --card: #ffffff;
+      --border: #dddde4;
+      --text: #2a2a3e;
+      --text-dim: #6b6b80;
+      --white: #1a1a2e;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .back-link {
+      position: fixed; top: 14px; left: 16px; z-index: 50;
+      font-size: 13px; font-weight: 600; color: var(--text-dim);
+      text-decoration: none; letter-spacing: 1px;
+      padding-top: var(--safe-top);
+      transition: color 0.15s;
+    }
+    .back-link:hover { color: var(--white); }
+
+    #app {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 24px 20px;
+      padding-top: calc(24px + var(--safe-top));
+      padding-bottom: calc(40px + var(--safe-bottom));
+      min-height: 100dvh;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 36px;
+      padding-top: 32px;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: 4px;
+      color: #131A2B;
+      margin-bottom: 6px;
+    }
+
+    .page-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      letter-spacing: 3px;
+      color: var(--text-dim);
+      margin-top: 8px;
+      text-transform: uppercase;
+    }
+
+    .effective-date {
+      font-size: 12px;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    .content-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .content-card h2 {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--white);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .content-card p {
+      font-size: 15px;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.7;
+    }
+
+    .content-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .content-card ul {
+      margin: 8px 0 12px 20px;
+      font-size: 15px;
+      color: var(--text);
+    }
+
+    .content-card ul li {
+      margin-bottom: 6px;
+      line-height: 1.6;
+    }
+
+    .content-card a {
+      color: #2563EB;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .content-card a:hover { text-decoration: underline; }
+
+    .highlight {
+      background: rgba(26, 154, 69, 0.06);
+      border-left: 3px solid #1a9a45;
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 12px 0;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    footer {
+      text-align: center;
+      padding-top: 28px;
+      font-size: 12px;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+
+    footer a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    footer a:hover { color: var(--white); }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .content-card {
+      animation: fadeInUp 0.4s ease-out both;
+    }
+    .content-card:nth-child(1) { animation-delay: 0.05s; }
+    .content-card:nth-child(2) { animation-delay: 0.10s; }
+    .content-card:nth-child(3) { animation-delay: 0.15s; }
+    .content-card:nth-child(4) { animation-delay: 0.20s; }
+    .content-card:nth-child(5) { animation-delay: 0.25s; }
+    .content-card:nth-child(6) { animation-delay: 0.30s; }
+    .content-card:nth-child(7) { animation-delay: 0.35s; }
+    .content-card:nth-child(8) { animation-delay: 0.40s; }
+    .content-card:nth-child(9) { animation-delay: 0.45s; }
+  </style>
+</head>
+<body>
+  <a href="/" class="back-link">&larr; GAMES</a>
+  <div id="app">
+    <header>
+      <h1>ACUMEN</h1>
+      <div class="page-title">Privacy Policy</div>
+      <p class="effective-date">Effective Date: June 2025</p>
+    </header>
+
+    <div class="content-card">
+      <h2>Overview</h2>
+      <p>Acumen is a free brain games app offering daily puzzle games. We are committed to protecting your privacy and being transparent about our practices.</p>
+      <div class="highlight">
+        <strong>The short version:</strong> Acumen does not collect, store, or transmit any personal data. We have no user accounts, no analytics, no ads, and no tracking. Your game progress stays on your device and nowhere else.
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h2>Information We Collect</h2>
+      <p>Acumen does <strong>not</strong> collect any personal information. Specifically:</p>
+      <ul>
+        <li>We do not require or offer user accounts or registration.</li>
+        <li>We do not collect names, email addresses, or any other personal identifiers.</li>
+        <li>We do not collect usage analytics or behavioral data.</li>
+        <li>We do not use advertising networks or display ads.</li>
+        <li>We do not include any third-party tracking SDKs.</li>
+        <li>We do not access your device's camera, microphone, contacts, location, or any other device features.</li>
+      </ul>
+    </div>
+
+    <div class="content-card">
+      <h2>Local Storage</h2>
+      <p>Acumen uses your browser's <strong>localStorage</strong> to save your game progress, scores, and streaks. This data:</p>
+      <ul>
+        <li>Is stored entirely on your device.</li>
+        <li>Is never transmitted to any server.</li>
+        <li>Is never shared with any third party.</li>
+        <li>Can be cleared at any time by clearing your browser's site data.</li>
+      </ul>
+      <p>LocalStorage is not a cookie and cannot be used to track you across websites.</p>
+    </div>
+
+    <div class="content-card">
+      <h2>Cookies</h2>
+      <p>Acumen does <strong>not</strong> use cookies of any kind. We do not use session cookies, persistent cookies, or any other cookie-based tracking mechanism.</p>
+    </div>
+
+    <div class="content-card">
+      <h2>Third-Party Services</h2>
+      <p>Acumen uses one external service:</p>
+      <ul>
+        <li><strong>Google Fonts</strong> — We load the Inter typeface from Google Fonts to display text in the app. When you load Acumen, your browser makes a request to Google's servers to fetch the font files. Google may log this request per their standard practices. You can review <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a> for details.</li>
+      </ul>
+      <p>Apart from Google Fonts, Acumen makes no network requests to any third-party service. There are no analytics platforms, no ad networks, no social media integrations, and no other external dependencies that could collect your data.</p>
+    </div>
+
+    <div class="content-card">
+      <h2>Children's Privacy</h2>
+      <p>Acumen is safe for users of all ages. Because we do not collect any personal data whatsoever, there is no risk of collecting information from children. The app contains no ads, no in-app purchases, no social features, and no external links within the games themselves.</p>
+      <p>Parents and guardians can feel confident that Acumen fully complies with the Children's Online Privacy Protection Act (COPPA) and similar regulations worldwide, as no personal data is collected from any user regardless of age.</p>
+    </div>
+
+    <div class="content-card">
+      <h2>Data Security</h2>
+      <p>Since Acumen does not collect or transmit any personal data, there is no personal data at risk of breach or unauthorized access. Your game data exists only in your browser's localStorage on your own device and is subject to whatever security measures your device and browser provide.</p>
+    </div>
+
+    <div class="content-card">
+      <h2>Changes to This Policy</h2>
+      <p>If we ever change our privacy practices, we will update this page and revise the effective date at the top. Since Acumen does not collect any contact information, we encourage you to review this page periodically. Any changes will be effective immediately upon posting.</p>
+      <p>Our commitment to not collecting personal data is fundamental to Acumen. If this ever changes, we will make it clearly known before any data collection begins.</p>
+    </div>
+
+    <div class="content-card">
+      <h2>Contact Us</h2>
+      <p>If you have any questions or concerns about this privacy policy or Acumen's practices, please reach out:</p>
+      <p><strong>Email:</strong> <a href="mailto:joel@niftycompany.com">joel@niftycompany.com</a></p>
+    </div>
+
+    <footer>
+      <a href="/">Acumen</a> &middot; <a href="support.html">Support</a>
+    </footer>
+  </div>
+</body>
+</html>
