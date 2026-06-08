@@ -1,5 +1,5 @@
 (function () {
-  const TOTAL_ROUNDS = 10;
+  const TOTAL_ROUNDS = 3;
   const MAX_HINTS = 3;
 
   const dom = {
