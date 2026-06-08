@@ -1,5 +1,5 @@
 (function () {
-  const TOTAL_ROUNDS = 15;
+  const TOTAL_ROUNDS = 5;
 
   const dom = {
     titleScreen: document.getElementById('title-screen'),

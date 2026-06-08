@@ -1,5 +1,5 @@
 (function () {
-  const ROUNDS = 10;
+  const ROUNDS = 5;
   const MAX_ATTEMPTS = 3;
 
   const dom = {
