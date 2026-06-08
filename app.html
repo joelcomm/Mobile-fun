@@ -410,9 +410,64 @@
     .game-card:nth-child(7) { animation-delay: 0.33s; }
     .game-card:nth-child(8) { animation-delay: 0.38s; }
     .game-card:nth-child(9) { animation-delay: 0.43s; }
+
+    /* Loading screen */
+    #loading-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #131A2B;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s ease;
+    }
+    #loading-screen.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #loading-screen .splash-logo {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 28px;
+      animation: splashPulse 1.8s ease-in-out infinite;
+    }
+    #loading-screen .splash-title {
+      font-size: 28px;
+      font-weight: 900;
+      color: white;
+      letter-spacing: 8px;
+      margin-bottom: 10px;
+    }
+    #loading-screen .splash-sub {
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    @keyframes splashPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.85; }
+    }
   </style>
 </head>
 <body>
+  <div id="loading-screen">
+    <svg class="splash-logo" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(512, 100)">
+        <polygon points="0,-48 -56,28 0,4 56,28" fill="#E8A317"/>
+        <g fill="none" stroke="white" stroke-width="52" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="-220" y1="800" x2="0" y2="0"/>
+          <line x1="220" y1="800" x2="0" y2="0"/>
+          <line x1="-125" y1="560" x2="125" y2="560"/>
+        </g>
+      </g>
+    </svg>
+    <div class="splash-title">ACUMEN</div>
+    <div class="splash-sub">Brain Games for Smart People</div>
+  </div>
   <div id="app">
     <header>
       <div class="app-logo">
@@ -649,6 +704,17 @@
           '</div>' +
           '<a href="stats.html" class="stats-link">VIEW STATS →</a>';
       })();
+    </script>
+    <script>
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          var ls = document.getElementById('loading-screen');
+          if (ls) {
+            ls.classList.add('fade-out');
+            setTimeout(function() { ls.remove(); }, 600);
+          }
+        }, 800);
+      });
     </script>
   </div>
 </body>
