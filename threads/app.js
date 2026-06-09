@@ -259,7 +259,10 @@ function getSelectedTiles() {
 // ─── End game ────────────────────────────────────────────────────
 function endGame(won) {
   gameOver = true;
-  Daily.saveDailyResult('threads', won ? (mistakesLeft + 1) * 25 : 0);
+  Daily.saveDailyResult('threads', won ? (mistakesLeft + 1) * 25 : 0, {
+    won: won,
+    guessHistory: guessHistory
+  });
 
   overlayTitle.textContent = won ? "You got it!" : "Next time!";
 
@@ -378,6 +381,57 @@ btnNextPuzzle.addEventListener("click", () => {
 // ─── Start ───────────────────────────────────────────────────────
 Daily.injectDailyInfo('#app header', 'threads');
 initPuzzle();
+
+// Restore completed state if already played today
+(function () {
+  var threadsResult = Daily.getDailyResult('threads');
+  if (!threadsResult) return;
+
+  gameOver = true;
+  var puzzle = PUZZLES[currentPuzzleIndex];
+
+  remainingWords = [];
+  solvedGroups = puzzle.groups.slice().sort(function (a, b) { return a.level - b.level; });
+  renderSolved();
+  renderGrid();
+
+  document.getElementById('actions').style.display = 'none';
+  document.getElementById('mistakes').style.display = 'none';
+
+  overlayTitle.textContent = threadsResult.won ? "You got it!" : "Next time!";
+
+  overlayResults.innerHTML = "";
+  if (threadsResult.guessHistory) {
+    threadsResult.guessHistory.forEach(function (levels) {
+      var row = document.createElement("div");
+      row.className = "result-row";
+      levels.forEach(function (level) {
+        var dot = document.createElement("div");
+        dot.className = "result-dot level-" + level;
+        row.appendChild(dot);
+      });
+      overlayResults.appendChild(row);
+    });
+  }
+
+  overlayAnswers.innerHTML = "";
+  puzzle.groups.slice().sort(function (a, b) { return a.level - b.level; }).forEach(function (g) {
+    var div = document.createElement("div");
+    div.className = "answer-group";
+    div.innerHTML =
+      '<div class="answer-category">' + g.category + '</div>' +
+      '<div class="answer-words">' + g.words.join(", ") + '</div>';
+    overlayAnswers.appendChild(div);
+  });
+
+  overlay.classList.remove("hidden");
+
+  function tickCd() {
+    nextCd.innerHTML = '<span style="display:block;font-size:11px;letter-spacing:2px;color:#6b6b80;margin-bottom:4px">NEW PUZZLE IN</span>' + Daily.formatCountdown();
+  }
+  tickCd();
+  setInterval(tickCd, 1000);
+})();
 
 // Register service worker
 if ("serviceWorker" in navigator) {

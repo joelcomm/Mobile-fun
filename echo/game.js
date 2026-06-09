@@ -30,6 +30,19 @@
     showBest();
     dom.btnStart.addEventListener('click', startGame);
     dom.tileGrid.addEventListener('click', handleTap);
+
+    var completed = Daily.getDailyResult('echo');
+    if (completed) {
+      dom.finalRound.textContent = completed.roundText || '';
+      dom.finalScore.textContent = completed.score;
+      dom.finalRank.textContent = completed.rank || '';
+      showScreen('gameover');
+      function tickCd() {
+        dom.nextCd.innerHTML = '<span style="display:block;font-size:11px;letter-spacing:2px;color:#6b6b80;margin-bottom:4px">NEW PUZZLE IN</span>' + Daily.formatCountdown();
+      }
+      tickCd();
+      setInterval(tickCd, 1000);
+    }
   }
 
   function showScreen(name) {
@@ -211,7 +224,10 @@
 
     dom.finalRank.textContent = rank;
 
-    Daily.saveDailyResult('echo', state.score);
+    Daily.saveDailyResult('echo', state.score, {
+      rank: rank,
+      roundText: 'Reached Round ' + state.round
+    });
     const prev = parseInt(localStorage.getItem('echo-best') || '0');
     if (state.score > prev) localStorage.setItem('echo-best', state.score);
     showBest();

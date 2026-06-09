@@ -36,6 +36,20 @@
     dom.btnLock.addEventListener('click', lockIn);
     dom.btnNextRound.addEventListener('click', nextRound);
     setupDrag();
+
+    var completed = Daily.getDailyResult('lineup');
+    if (completed) {
+      dom.finalScore.textContent = completed.score;
+      dom.finalRank.textContent = completed.rank || '';
+      dom.finalStats.innerHTML = completed.stats || '';
+      dom.progressBar.style.setProperty('--progress', '100%');
+      showScreen('gameover');
+      function tickCd() {
+        dom.nextCd.innerHTML = '<span style="display:block;font-size:11px;letter-spacing:2px;color:#6b6b80;margin-bottom:4px">NEW PUZZLE IN</span>' + Daily.formatCountdown();
+      }
+      tickCd();
+      setInterval(tickCd, 1000);
+    }
   }
 
   function showScreen(name) {
@@ -210,7 +224,10 @@
       state.perfectCount + ' perfect rounds (1st attempt)<br>' +
       'Average attempts: ' + (state.totalAttempts / ROUNDS).toFixed(1);
 
-    Daily.saveDailyResult('lineup', state.score);
+    Daily.saveDailyResult('lineup', state.score, {
+      rank: rank,
+      stats: dom.finalStats.innerHTML
+    });
     const prev = parseInt(localStorage.getItem('lineup-best') || '0');
     if (state.score > prev) localStorage.setItem('lineup-best', state.score);
     showBest();
