@@ -36,6 +36,19 @@
     dom.btnStart.addEventListener('click', startGame);
     dom.btnLeft.addEventListener('click', function () { answer('left'); });
     dom.btnRight.addEventListener('click', function () { answer('right'); });
+
+    var completed = Daily.getDailyResult('reflex');
+    if (completed) {
+      dom.finalScore.textContent = completed.score;
+      dom.finalRank.textContent = completed.rank || '';
+      dom.finalStats.innerHTML = completed.stats || '';
+      showScreen('gameover');
+      function tickCd() {
+        dom.nextCd.innerHTML = '<span style="display:block;font-size:11px;letter-spacing:2px;color:#6b6b80;margin-bottom:4px">NEW PUZZLE IN</span>' + Daily.formatCountdown();
+      }
+      tickCd();
+      setInterval(tickCd, 1000);
+    }
   }
 
   function showScreen(name) {
@@ -221,7 +234,10 @@
       'Best streak: ' + state.maxStreak + '<br>' +
       state.categoriesUsed + ' categories played';
 
-    Daily.saveDailyResult('reflex', state.score);
+    Daily.saveDailyResult('reflex', state.score, {
+      rank: rank,
+      stats: dom.finalStats.innerHTML
+    });
     const prev = parseInt(localStorage.getItem('reflex-best') || '0');
     if (state.score > prev) localStorage.setItem('reflex-best', state.score);
     showBest();

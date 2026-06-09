@@ -40,6 +40,19 @@
     dom.btnNext.addEventListener('click', nextRound);
     dom.cipherDisplay.addEventListener('click', onCipherClick);
     dom.letterPicker.addEventListener('click', onPickerClick);
+
+    var completed = Daily.getDailyResult('cipher');
+    if (completed) {
+      dom.finalScore.textContent = completed.score;
+      dom.finalRank.textContent = completed.rank || '';
+      dom.finalStats.innerHTML = completed.stats || '';
+      showScreen('gameover');
+      function tickCd() {
+        dom.nextCd.innerHTML = '<span style="display:block;font-size:11px;letter-spacing:2px;color:#6b6b80;margin-bottom:4px">NEW PUZZLE IN</span>' + Daily.formatCountdown();
+      }
+      tickCd();
+      setInterval(tickCd, 1000);
+    }
   }
 
   function showScreen(name) {
@@ -353,7 +366,10 @@
       state.noHintSolves + ' solved without hints<br>' +
       state.hintsUsedTotal + ' total hints used';
 
-    Daily.saveDailyResult('cipher', state.score);
+    Daily.saveDailyResult('cipher', state.score, {
+      rank: rank,
+      stats: dom.finalStats.innerHTML
+    });
     const prev = parseInt(localStorage.getItem('cipher-best') || '0');
     if (state.score > prev) localStorage.setItem('cipher-best', state.score);
     showBest();
