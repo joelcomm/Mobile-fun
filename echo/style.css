@@ -35,7 +35,7 @@ html, body {
   max-width: 480px;
   margin: 0 auto;
   padding: 20px;
-  padding-top: calc(48px + var(--safe-top));
+  padding-top: calc(72px + var(--safe-top));
   padding-bottom: calc(24px + var(--safe-bottom));
   min-height: 100dvh;
   display: flex;
