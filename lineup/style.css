@@ -38,7 +38,7 @@ html, body {
 }
 
 .back-link {
-  position: fixed; top: 12px; left: 12px; z-index: 999;
+  position: fixed; top: calc(env(safe-area-inset-top, 0px) + 12px); left: 12px; z-index: 999;
   display: flex; align-items: center; gap: 8px;
   text-decoration: none; padding: 6px 14px 6px 6px;
   background: rgba(19, 26, 43, 0.9); border-radius: 12px;
@@ -172,8 +172,7 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-bottom: 20px;
-  flex: 1;
+  margin-bottom: 16px;
   touch-action: none;
 }
 
@@ -206,10 +205,13 @@ html, body {
   flex-shrink: 0;
 }
 .sort-label {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--text);
   flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .sort-handle {
   font-size: 20px;

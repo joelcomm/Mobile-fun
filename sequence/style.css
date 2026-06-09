@@ -38,7 +38,7 @@ html, body {
 }
 
 .back-link {
-  position: fixed; top: 12px; left: 12px; z-index: 999;
+  position: fixed; top: calc(env(safe-area-inset-top, 0px) + 12px); left: 12px; z-index: 999;
   display: flex; align-items: center; gap: 8px;
   text-decoration: none; padding: 6px 14px 6px 6px;
   background: rgba(19, 26, 43, 0.9); border-radius: 12px;
@@ -110,7 +110,7 @@ html, body {
 
 .progress-bar {
   height: 4px; background: var(--card-border); border-radius: 2px;
-  margin-bottom: 28px; overflow: hidden; position: relative;
+  margin-bottom: 16px; overflow: hidden; position: relative;
 }
 .progress-bar::after {
   content: ''; position: absolute; left: 0; top: 0; bottom: 0;
@@ -120,8 +120,9 @@ html, body {
 
 /* ── Sequence Display ──────────────────────────────────── */
 .seq-section {
-  flex: 1; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 32px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 28px;
+  padding: 20px 0;
 }
 
 .seq-label {

@@ -69,6 +69,15 @@ function renderGrid() {
     tile.addEventListener("click", () => handleTileClick(item.word));
     grid.appendChild(tile);
   });
+  requestAnimationFrame(() => {
+    grid.querySelectorAll('.tile').forEach(t => {
+      let sz = parseFloat(getComputedStyle(t).fontSize);
+      while (t.scrollWidth > t.clientWidth && sz > 8) {
+        sz -= 0.5;
+        t.style.fontSize = sz + 'px';
+      }
+    });
+  });
 }
 
 function renderSolved() {
