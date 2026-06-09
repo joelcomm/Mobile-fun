@@ -31,7 +31,7 @@ html, body {
 }
 
 .back-link {
-  position: fixed; top: 12px; left: 12px; z-index: 999;
+  position: fixed; top: calc(env(safe-area-inset-top, 0px) + 12px); left: 12px; z-index: 999;
   display: flex; align-items: center; gap: 8px;
   text-decoration: none; padding: 6px 14px 6px 6px;
   background: rgba(19, 26, 43, 0.9); border-radius: 12px;
@@ -140,9 +140,10 @@ html, body {
 }
 
 .word-display {
-  font-size: 36px; font-weight: 900; color: var(--white);
+  font-size: clamp(24px, 8vw, 36px); font-weight: 900; color: var(--white);
   text-align: center; letter-spacing: 2px; min-height: 48px;
-  transition: all 0.2s;
+  transition: all 0.2s; overflow: hidden; white-space: nowrap;
+  text-overflow: ellipsis; max-width: 100%;
 }
 .word-display.pop-in { animation: popIn 0.3s ease-out; }
 .word-display.correct-word { color: var(--correct); }

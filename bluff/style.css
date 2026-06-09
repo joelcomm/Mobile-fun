@@ -38,7 +38,7 @@ html, body {
 }
 
 .back-link {
-  position: fixed; top: 12px; left: 12px; z-index: 999;
+  position: fixed; top: calc(env(safe-area-inset-top, 0px) + 12px); left: 12px; z-index: 999;
   display: flex; align-items: center; gap: 8px;
   text-decoration: none; padding: 6px 14px 6px 6px;
   background: rgba(19, 26, 43, 0.9); border-radius: 12px;
@@ -183,18 +183,17 @@ html, body {
 .statements {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  flex: 1;
+  gap: 12px;
 }
 
 .stmt-btn {
   background: var(--card);
   border: 2px solid var(--card-border);
   border-radius: 12px;
-  padding: 20px 22px;
+  padding: 16px 18px;
   font-family: inherit;
-  font-size: 18px;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.5;
   color: var(--text);
   text-align: left;
   cursor: pointer;
