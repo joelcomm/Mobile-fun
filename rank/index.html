@@ -21,7 +21,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-    body{font-family:'Inter',-apple-system,sans-serif;background:#f8f8fa;color:#2a2a3e;overflow-x:hidden}
+    body{font-family:'Inter',-apple-system,sans-serif;background:#f8f8fa;color:#2a2a3e;overflow:hidden;height:100%}
+    html{height:100%;overflow:hidden}
     @keyframes revealPop{0%{transform:scale(1)}30%{transform:scale(0.92)}70%{transform:scale(1.04)}100%{transform:scale(1)}}
     @keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
     @keyframes fadeIn{from{opacity:0}to{opacity:1}}
@@ -3008,8 +3009,8 @@
       var isPlay = phase === 'play';
 
       return (
-        <div className="max-w-[480px] mx-auto px-5 min-h-[100dvh] flex flex-col"
-          style={{ paddingTop: 'calc(72px + env(safe-area-inset-top, 0px))', paddingBottom: 'calc(24px + env(safe-area-inset-bottom, 0px))' }}>
+        <div className="max-w-[480px] mx-auto px-5 flex flex-col"
+          style={{ height: '100dvh', paddingTop: 'calc(72px + env(safe-area-inset-top, 0px))', paddingBottom: 'calc(24px + env(safe-area-inset-bottom, 0px))' }}>
 
           {/* Header */}
           <div className="flex justify-between items-center mb-5">

@@ -28,7 +28,7 @@ html, body {
   color: var(--text);
   font-family: 'Inter', -apple-system, sans-serif;
   font-size: 18px;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 #app {
@@ -37,7 +37,7 @@ html, body {
   padding: 20px;
   padding-top: calc(72px + var(--safe-top));
   padding-bottom: calc(24px + var(--safe-bottom));
-  min-height: 100dvh;
+  height: 100vh; height: 100dvh;
   display: flex;
   flex-direction: column;
 }
@@ -119,7 +119,7 @@ html, body {
   align-items: center;
   flex: 1;
   animation: fadeIn 0.3s ease-out;
-  overflow-y: auto; -webkit-overflow-scrolling: touch;
+  overflow-y: auto; -webkit-overflow-scrolling: touch; min-height: 0;
 }
 .game-header {
   display: flex;
