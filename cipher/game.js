@@ -52,6 +52,21 @@
       }
       tickCd();
       setInterval(tickCd, 1000);
+    } else {
+      var progress = Daily.getProgress('cipher');
+      if (progress) {
+        state = {
+          quotes: Daily.dealFromDeck(QUOTES, TOTAL_ROUNDS),
+          dailyRng: Daily.createRng(Daily.getDayNumber() * 5059),
+          current: progress.current,
+          score: progress.score,
+          solvedCount: progress.solvedCount,
+          hintsUsedTotal: progress.hintsUsedTotal,
+          noHintSolves: progress.noHintSolves
+        };
+        showScreen('game');
+        showRound();
+      }
     }
   }
 
@@ -342,8 +357,16 @@
   function nextRound() {
     state.current++;
     if (state.current >= TOTAL_ROUNDS) {
+      Daily.clearProgress('cipher');
       endGame();
     } else {
+      Daily.saveProgress('cipher', {
+        current: state.current,
+        score: state.score,
+        solvedCount: state.solvedCount,
+        hintsUsedTotal: state.hintsUsedTotal,
+        noHintSolves: state.noHintSolves
+      });
       showRound();
     }
   }

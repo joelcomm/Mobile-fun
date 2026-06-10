@@ -43,6 +43,22 @@
       }
       tickCd();
       setInterval(tickCd, 1000);
+    } else {
+      var progress = Daily.getProgress('bluff');
+      if (progress) {
+        state = {
+          rounds: Daily.dealFromDeck(FACTS, TOTAL_ROUNDS),
+          rng: Daily.createRng(Daily.getDayNumber() * 1013),
+          current: progress.current,
+          score: progress.score,
+          streak: progress.streak,
+          maxStreak: progress.maxStreak,
+          correctCount: progress.correctCount,
+          answered: false
+        };
+        showScreen('game');
+        showRound();
+      }
     }
   }
 
@@ -150,8 +166,16 @@
   function nextRound() {
     state.current++;
     if (state.current >= TOTAL_ROUNDS) {
+      Daily.clearProgress('bluff');
       endGame();
     } else {
+      Daily.saveProgress('bluff', {
+        current: state.current,
+        score: state.score,
+        streak: state.streak,
+        maxStreak: state.maxStreak,
+        correctCount: state.correctCount
+      });
       showRound();
     }
   }

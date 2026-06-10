@@ -152,6 +152,24 @@ const Daily = (function () {
     }
   }
 
+  function saveProgress(key, data) {
+    data.day = getDayNumber();
+    localStorage.setItem(key + '-progress', JSON.stringify(data));
+  }
+
+  function getProgress(key) {
+    try {
+      var s = JSON.parse(localStorage.getItem(key + '-progress') || 'null');
+      if (s && s.day === getDayNumber()) return s;
+    } catch (e) {}
+    localStorage.removeItem(key + '-progress');
+    return null;
+  }
+
+  function clearProgress(key) {
+    localStorage.removeItem(key + '-progress');
+  }
+
   return {
     getDayNumber: getDayNumber,
     createRng: createRng,
@@ -163,6 +181,9 @@ const Daily = (function () {
     saveDailyResult: saveDailyResult,
     getStreak: getStreak,
     formatCountdown: formatCountdown,
-    injectDailyInfo: injectDailyInfo
+    injectDailyInfo: injectDailyInfo,
+    saveProgress: saveProgress,
+    getProgress: getProgress,
+    clearProgress: clearProgress
   };
 })();

@@ -42,6 +42,22 @@
       }
       tickCd();
       setInterval(tickCd, 1000);
+    } else {
+      var progress = Daily.getProgress('echo');
+      if (progress) {
+        state = {
+          round: progress.round,
+          score: progress.score,
+          seqLength: progress.seqLength,
+          sequence: [],
+          reversed: [],
+          inputIndex: 0,
+          phase: 'idle',
+          rng: Daily.createRng(Daily.getDayNumber() * 3037)
+        };
+        showScreen('game');
+        startRound();
+      }
     }
   }
 
@@ -180,6 +196,11 @@
         setTimeout(() => {
           state.round++;
           state.seqLength++;
+          Daily.saveProgress('echo', {
+            round: state.round,
+            score: state.score,
+            seqLength: state.seqLength
+          });
           startRound();
         }, 1500);
       }
@@ -211,6 +232,7 @@
   }
 
   function endGame() {
+    Daily.clearProgress('echo');
     showScreen('gameover');
     dom.finalRound.textContent = 'Reached Round ' + state.round;
     dom.finalScore.textContent = state.score;

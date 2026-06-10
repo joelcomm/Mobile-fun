@@ -49,6 +49,20 @@
       }
       tickCd();
       setInterval(tickCd, 1000);
+    } else {
+      var progress = Daily.getProgress('lineup');
+      if (progress) {
+        state = {
+          puzzles: Daily.dealFromDeck(PUZZLES, ROUNDS),
+          rng: Daily.createRng(Daily.getDayNumber() * 2027),
+          current: progress.current,
+          score: progress.score,
+          perfectCount: progress.perfectCount,
+          totalAttempts: progress.totalAttempts
+        };
+        showScreen('game');
+        showRound();
+      }
     }
   }
 
@@ -200,8 +214,15 @@
   function nextRound() {
     state.current++;
     if (state.current >= ROUNDS) {
+      Daily.clearProgress('lineup');
       endGame();
     } else {
+      Daily.saveProgress('lineup', {
+        current: state.current,
+        score: state.score,
+        perfectCount: state.perfectCount,
+        totalAttempts: state.totalAttempts
+      });
       showRound();
     }
   }

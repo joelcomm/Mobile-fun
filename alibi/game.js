@@ -43,6 +43,20 @@
       }
       tickCd();
       setInterval(tickCd, 1000);
+    } else {
+      var progress = Daily.getProgress('alibi');
+      if (progress) {
+        state = {
+          rounds: Daily.dealFromDeck(ALIBI_PUZZLES, TOTAL_ROUNDS),
+          rng: Daily.createRng(Daily.getDayNumber() * 9091),
+          current: progress.current,
+          score: progress.score,
+          correctCount: progress.correctCount,
+          answered: false
+        };
+        showScreen('game');
+        showRound();
+      }
     }
   }
 
@@ -138,8 +152,14 @@
   function nextRound() {
     state.current++;
     if (state.current >= TOTAL_ROUNDS) {
+      Daily.clearProgress('alibi');
       endGame();
     } else {
+      Daily.saveProgress('alibi', {
+        current: state.current,
+        score: state.score,
+        correctCount: state.correctCount
+      });
       showRound();
     }
   }
