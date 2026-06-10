@@ -210,8 +210,7 @@ html, body {
   color: var(--text);
   flex: 1;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: break-word; word-break: break-word;
 }
 .sort-handle {
   font-size: 20px;
@@ -286,6 +285,7 @@ html, body {
   flex: 1;
   animation: fadeIn 0.5s ease-out;
 }
+#gameover-screen .btn-main { width: fit-content; }
 .gameover-heading {
   font-size: 32px;
   font-weight: 900;
