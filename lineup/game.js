@@ -97,6 +97,8 @@
     state.attempts = 0;
     state.locked = false;
 
+    state.lockedPositions = new Set();
+
     dom.roundLabel.textContent = (state.current + 1) + ' / ' + ROUNDS;
     dom.scoreLabel.textContent = state.score;
     dom.progressBar.style.setProperty('--progress', (state.current / ROUNDS * 100) + '%');
@@ -174,8 +176,9 @@
     } else {
       // Still has attempts — lock correct items, clear wrong highlights
       setTimeout(() => {
-        items.forEach(el => {
+        items.forEach((el, i) => {
           if (el.classList.contains('correct-pos')) {
+            state.lockedPositions.add(i);
             el.classList.add('locked-correct');
           }
           el.classList.remove('wrong-pos');
@@ -346,16 +349,6 @@
       const moveBy = Math.round(delta / dragState.itemHeight);
       let targetIdx = Math.max(0, Math.min(items.length - 1, startIndex + moveBy));
 
-      let minIdx = 0;
-      let maxIdx = items.length - 1;
-      for (let i = 0; i < items.length; i++) {
-        if (items[i].classList.contains('locked-correct')) {
-          if (i < draggedIdx) minIdx = i + 1;
-          else if (i > draggedIdx) { maxIdx = i - 1; break; }
-        }
-      }
-      targetIdx = Math.max(minIdx, Math.min(maxIdx, targetIdx));
-
       if (targetIdx !== draggedIdx) {
         if (targetIdx > draggedIdx) {
           list.insertBefore(dragged, items[targetIdx].nextSibling);
@@ -374,8 +367,32 @@
       dragged = null;
       dragState = null;
 
-      // Re-number
-      getItems().forEach((el, i) => {
+      if (state.lockedPositions && state.lockedPositions.size > 0) {
+        var currentLabels = getItems().map(function (el) { return el.dataset.label; });
+        var lockedAt = {};
+        state.lockedPositions.forEach(function (pos) {
+          lockedAt[pos] = state.correctOrder[pos];
+        });
+        var lockedSet = {};
+        for (var k in lockedAt) lockedSet[lockedAt[k]] = true;
+        var unlocked = currentLabels.filter(function (l) { return !lockedSet[l]; });
+        var final = [];
+        var ui = 0;
+        for (var i = 0; i < currentLabels.length; i++) {
+          if (lockedAt[i] !== undefined) {
+            final.push(lockedAt[i]);
+          } else {
+            final.push(unlocked[ui++]);
+          }
+        }
+        renderList(final);
+        state.lockedPositions.forEach(function (pos) {
+          var items = getItems();
+          if (items[pos]) items[pos].classList.add('locked-correct');
+        });
+      }
+
+      getItems().forEach(function (el, i) {
         el.querySelector('.sort-num').textContent = i + 1;
       });
     }
