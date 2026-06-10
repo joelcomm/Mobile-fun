@@ -172,10 +172,14 @@
     } else if (state.attempts >= MAX_ATTEMPTS) {
       finishRound(false, 0);
     } else {
-      // Still has attempts — clear wrong highlights after a moment
+      // Still has attempts — lock correct items, clear wrong highlights
       setTimeout(() => {
-        items.forEach(el => el.classList.remove('wrong-pos'));
-        // Re-number
+        items.forEach(el => {
+          if (el.classList.contains('correct-pos')) {
+            el.classList.add('locked-correct');
+          }
+          el.classList.remove('wrong-pos');
+        });
         items.forEach((el, i) => {
           el.querySelector('.sort-num').textContent = i + 1;
         });
@@ -285,7 +289,7 @@
     function onTouchStart(e) {
       if (state.locked) return;
       const item = e.target.closest('.sort-item');
-      if (!item) return;
+      if (!item || item.classList.contains('locked-correct')) return;
       e.preventDefault();
       startDrag(item, e.touches[0].clientY);
     }
@@ -304,7 +308,7 @@
     function onMouseDown(e) {
       if (state.locked) return;
       const item = e.target.closest('.sort-item');
-      if (!item) return;
+      if (!item || item.classList.contains('locked-correct')) return;
       e.preventDefault();
       startDrag(item, e.clientY);
     }
@@ -340,7 +344,17 @@
       const items = getItems();
       const draggedIdx = items.indexOf(dragged);
       const moveBy = Math.round(delta / dragState.itemHeight);
-      const targetIdx = Math.max(0, Math.min(items.length - 1, startIndex + moveBy));
+      let targetIdx = Math.max(0, Math.min(items.length - 1, startIndex + moveBy));
+
+      let minIdx = 0;
+      let maxIdx = items.length - 1;
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].classList.contains('locked-correct')) {
+          if (i < draggedIdx) minIdx = i + 1;
+          else if (i > draggedIdx) { maxIdx = i - 1; break; }
+        }
+      }
+      targetIdx = Math.max(minIdx, Math.min(maxIdx, targetIdx));
 
       if (targetIdx !== draggedIdx) {
         if (targetIdx > draggedIdx) {
@@ -348,8 +362,6 @@
         } else {
           list.insertBefore(dragged, items[targetIdx]);
         }
-        // Recalc startY so movement stays smooth
-        startY = y - (targetIdx - startIndex) * dragState.itemHeight + (targetIdx - startIndex) * dragState.itemHeight;
         startY = y;
         startIndex = targetIdx;
       }

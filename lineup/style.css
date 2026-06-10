@@ -241,6 +241,19 @@ html, body {
   background: var(--wrong-dim);
   color: var(--wrong);
 }
+.sort-item.locked-correct {
+  border-color: var(--correct);
+  background: var(--correct-dim);
+  opacity: 0.7;
+  cursor: default;
+}
+.sort-item.locked-correct .sort-num {
+  background: var(--correct-dim);
+  color: var(--correct);
+}
+.sort-item.locked-correct .sort-handle {
+  visibility: hidden;
+}
 
 .btn-lock {
   align-self: center;
@@ -285,7 +298,7 @@ html, body {
   flex: 1;
   animation: fadeIn 0.5s ease-out;
 }
-#gameover-screen .btn-main { width: fit-content; }
+#gameover-screen .btn-main { width: auto; }
 .gameover-heading {
   font-size: 32px;
   font-weight: 900;

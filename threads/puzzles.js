@@ -200,15 +200,6 @@ const PUZZLES = [
   {
     id: 23,
     groups: [
-      { category: "Nuts", level: 0, words: ["ALMOND", "WALNUT", "PECAN", "CASHEW"] },
-      { category: "Horror movie villains", level: 1, words: ["FREDDY", "JASON", "CHUCKY", "LEATHERFACE"] },
-      { category: "Things with teeth", level: 2, words: ["COMB", "SAW", "ZIPPER", "GEAR"] },
-      { category: "Golden ___", level: 3, words: ["GATE", "RETRIEVER", "AGE", "RULE"] }
-    ]
-  },
-  {
-    id: 24,
-    groups: [
       { category: "Planets visible to naked eye", level: 0, words: ["MARS", "JUPITER", "VENUS", "SATURN"] },
       { category: "Types of cheese", level: 1, words: ["SWISS", "PARMESAN", "STILTON", "MOZZARELLA"] },
       { category: "Things in space", level: 2, words: ["COMET", "ASTEROID", "NEBULA", "QUASAR"] },
@@ -216,7 +207,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 25,
+    id: 24,
     groups: [
       { category: "Tools", level: 0, words: ["HAMMER", "WRENCH", "DRILL", "PLIERS"] },
       { category: "Dips and sauces", level: 1, words: ["HUMMUS", "SALSA", "GUACAMOLE", "TZATZIKI"] },
@@ -225,7 +216,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 26,
+    id: 25,
     groups: [
       { category: "Winter sports", level: 0, words: ["SKIING", "HOCKEY", "CURLING", "LUGE"] },
       { category: "Famous Johns", level: 1, words: ["LENNON", "WAYNE", "ADAMS", "KENNEDY"] },
@@ -234,7 +225,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 27,
+    id: 26,
     groups: [
       { category: "Herbs", level: 0, words: ["BASIL", "THYME", "OREGANO", "MINT"] },
       { category: "Fictional detectives", level: 1, words: ["SHERLOCK", "POIROT", "COLUMBO", "MORSE"] },
@@ -243,7 +234,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 28,
+    id: 27,
     groups: [
       { category: "Tropical fruits", level: 0, words: ["COCONUT", "PINEAPPLE", "BANANA", "KIWI"] },
       { category: "Types of music", level: 1, words: ["JAZZ", "BLUES", "REGGAE", "SOUL"] },
@@ -252,7 +243,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 29,
+    id: 28,
     groups: [
       { category: "Fish", level: 0, words: ["SALMON", "TROUT", "COD", "BASS"] },
       { category: "Things in an office", level: 1, words: ["STAPLER", "PRINTER", "FOLDER", "BINDER"] },
@@ -261,7 +252,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 30,
+    id: 29,
     groups: [
       { category: "Asian countries", level: 0, words: ["JAPAN", "CHINA", "INDIA", "VIETNAM"] },
       { category: "Sandwich types", level: 1, words: ["CLUB", "WRAP", "PANINI", "SUB"] },
@@ -270,7 +261,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 31,
+    id: 30,
     groups: [
       { category: "Cat breeds", level: 0, words: ["PERSIAN", "SIAMESE", "BENGAL", "TABBY"] },
       { category: "Shapes", level: 1, words: ["HEXAGON", "TRIANGLE", "PENTAGON", "OCTAGON"] },
@@ -279,7 +270,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 32,
+    id: 31,
     groups: [
       { category: "African animals", level: 0, words: ["ELEPHANT", "GIRAFFE", "ZEBRA", "LION"] },
       { category: "Types of tea", level: 1, words: ["CHAI", "MATCHA", "OOLONG", "EARL GREY"] },
@@ -288,25 +279,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 33,
-    groups: [
-      { category: "Berries", level: 0, words: ["BLUEBERRY", "RASPBERRY", "BLACKBERRY", "STRAWBERRY"] },
-      { category: "Things in a hospital", level: 1, words: ["GURNEY", "SCALPEL", "STETHOSCOPE", "SYRINGE"] },
-      { category: "Words that mean 'fast'", level: 2, words: ["SWIFT", "RAPID", "FLEET", "BRISK"] },
-      { category: "Eye ___", level: 3, words: ["BROW", "LASH", "LID", "WITNESS"] }
-    ]
-  },
-  {
-    id: 34,
-    groups: [
-      { category: "Seas", level: 0, words: ["CARIBBEAN", "MEDITERRANEAN", "BALTIC", "CASPIAN"] },
-      { category: "Famous Williams", level: 1, words: ["SHAKESPEARE", "SHATNER", "MURRAY", "PRINCE"] },
-      { category: "Things that ring", level: 2, words: ["PHONE", "BELL", "ALARM", "DOORBELL"] },
-      { category: "Sun ___", level: 3, words: ["BURN", "FLOWER", "ROOF", "DAY"] }
-    ]
-  },
-  {
-    id: 35,
+    id: 32,
     groups: [
       { category: "Cereals", level: 0, words: ["CHEERIOS", "CORNFLAKES", "GRANOLA", "OATMEAL"] },
       { category: "Greek gods", level: 1, words: ["ZEUS", "APOLLO", "ATHENA", "HERMES"] },
@@ -315,7 +288,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 36,
+    id: 33,
     groups: [
       { category: "Citrus fruits", level: 0, words: ["LEMON", "LIME", "GRAPEFRUIT", "TANGERINE"] },
       { category: "Card suits", level: 1, words: ["CLUB", "DIAMOND", "HEART", "SPADE"] },
@@ -324,7 +297,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 37,
+    id: 34,
     groups: [
       { category: "Sharks", level: 0, words: ["HAMMERHEAD", "GREAT WHITE", "BULL", "TIGER"] },
       { category: "Things in a park", level: 1, words: ["BENCH", "FOUNTAIN", "SWING", "POND"] },
@@ -333,7 +306,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 38,
+    id: 35,
     groups: [
       { category: "Body parts", level: 0, words: ["ELBOW", "KNEE", "SHOULDER", "ANKLE"] },
       { category: "Things that float", level: 1, words: ["CORK", "BALLOON", "RAFT", "CLOUD"] },
@@ -342,7 +315,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 39,
+    id: 36,
     groups: [
       { category: "Deserts", level: 0, words: ["SAHARA", "GOBI", "MOJAVE", "KALAHARI"] },
       { category: "Things with handles", level: 1, words: ["MUG", "SUITCASE", "DOOR", "PAN"] },
@@ -351,34 +324,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 40,
-    groups: [
-      { category: "Whale types", level: 0, words: ["BLUE", "HUMPBACK", "BELUGA", "ORCA"] },
-      { category: "TV show formats", level: 1, words: ["SITCOM", "DRAMA", "REALITY", "DOCUMENTARY"] },
-      { category: "Things that grow", level: 2, words: ["PLANT", "HAIR", "CRYSTAL", "SAVINGS"] },
-      { category: "Top ___", level: 3, words: ["NOTCH", "SOIL", "SECRET", "GUN"] }
-    ]
-  },
-  {
-    id: 41,
-    groups: [
-      { category: "Volcanoes", level: 0, words: ["VESUVIUS", "ETNA", "FUJI", "KRAKATOA"] },
-      { category: "Types of bread", level: 1, words: ["SOURDOUGH", "BAGUETTE", "PUMPERNICKEL", "FOCACCIA"] },
-      { category: "Things with buttons", level: 2, words: ["SHIRT", "ELEVATOR", "REMOTE", "ACCORDION"] },
-      { category: "Half ___", level: 3, words: ["TIME", "BACK", "HEARTED", "WAY"] }
-    ]
-  },
-  {
-    id: 42,
-    groups: [
-      { category: "Mushrooms", level: 0, words: ["SHIITAKE", "PORTOBELLO", "TRUFFLE", "CHANTERELLE"] },
-      { category: "Studio Ghibli films", level: 1, words: ["SPIRITED AWAY", "TOTORO", "PONYO", "HOWL"] },
-      { category: "Things with scales", level: 2, words: ["FISH", "PIANO", "MAP", "JUSTICE"] },
-      { category: "Short ___", level: 3, words: ["CUT", "CAKE", "STOP", "HAND"] }
-    ]
-  },
-  {
-    id: 43,
+    id: 37,
     groups: [
       { category: "Mountain ranges", level: 0, words: ["ALPS", "ANDES", "ROCKIES", "HIMALAYAS"] },
       { category: "Things at a wedding", level: 1, words: ["BOUQUET", "VEIL", "CAKE", "TOAST"] },
@@ -387,7 +333,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 44,
+    id: 38,
     groups: [
       { category: "Constellations", level: 0, words: ["ORION", "SCORPIUS", "CASSIOPEIA", "PEGASUS"] },
       { category: "Types of wine", level: 1, words: ["MERLOT", "RIESLING", "SHIRAZ", "CHARDONNAY"] },
@@ -396,7 +342,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 45,
+    id: 39,
     groups: [
       { category: "Baked goods", level: 0, words: ["SCONE", "MUFFIN", "PRETZEL", "DONUT"] },
       { category: "Currencies of the world", level: 1, words: ["YEN", "PESO", "RUPEE", "EURO"] },
@@ -405,7 +351,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 46,
+    id: 40,
     groups: [
       { category: "Oceans", level: 0, words: ["ATLANTIC", "PACIFIC", "INDIAN", "ARCTIC"] },
       { category: "Things in a toolbox", level: 1, words: ["LEVEL", "SAW", "TAPE", "NAIL"] },
@@ -414,7 +360,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 47,
+    id: 41,
     groups: [
       { category: "Grains", level: 0, words: ["RICE", "WHEAT", "BARLEY", "QUINOA"] },
       { category: "Things with wings", level: 1, words: ["AIRPLANE", "BAT", "EAGLE", "MOTH"] },
@@ -423,7 +369,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 48,
+    id: 42,
     groups: [
       { category: "Martial arts movies", level: 0, words: ["CROUCHING TIGER", "KILL BILL", "RUSH HOUR", "IP MAN"] },
       { category: "Types of knot", level: 1, words: ["BOWLINE", "CLOVE", "REEF", "SLIP"] },
@@ -432,7 +378,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 49,
+    id: 43,
     groups: [
       { category: "Soups", level: 0, words: ["MINESTRONE", "CHOWDER", "GUMBO", "GAZPACHO"] },
       { category: "Types of cloud", level: 1, words: ["ALTO", "CIRRO", "STRATO", "NIMBO"] },
@@ -441,7 +387,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 50,
+    id: 44,
     groups: [
       { category: "Famous Michaels", level: 0, words: ["JORDAN", "JACKSON", "SCOTT", "PHELPS"] },
       { category: "Types of art", level: 1, words: ["SCULPTURE", "MOSAIC", "MURAL", "PORTRAIT"] },
@@ -450,7 +396,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 51,
+    id: 45,
     groups: [
       { category: "Wines by color", level: 0, words: ["RED", "WHITE", "ROSE", "ORANGE"] },
       { category: "Things at a concert", level: 1, words: ["SPEAKER", "SPOTLIGHT", "STAGE", "MICROPHONE"] },
@@ -459,7 +405,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 52,
+    id: 46,
     groups: [
       { category: "Islands", level: 0, words: ["BALI", "SICILY", "CRETE", "FIJI"] },
       { category: "Things in a classroom", level: 1, words: ["CHALK", "DESK", "GLOBE", "TEXTBOOK"] },
@@ -468,7 +414,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 53,
+    id: 47,
     groups: [
       { category: "Composers", level: 0, words: ["MOZART", "BEETHOVEN", "BACH", "CHOPIN"] },
       { category: "Things that melt", level: 1, words: ["ICE", "CHEESE", "SNOW", "CHOCOLATE"] },
@@ -477,7 +423,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 54,
+    id: 48,
     groups: [
       { category: "Canines", level: 0, words: ["WOLF", "FOX", "COYOTE", "JACKAL"] },
       { category: "Things in a cockpit", level: 1, words: ["THROTTLE", "RUDDER", "ALTIMETER", "YOKE"] },
@@ -486,16 +432,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 55,
-    groups: [
-      { category: "Peppers", level: 0, words: ["JALAPENO", "HABANERO", "CAYENNE", "SERRANO"] },
-      { category: "Parts of a book", level: 1, words: ["CHAPTER", "INDEX", "SPINE", "COVER"] },
-      { category: "Bond films", level: 2, words: ["GOLDFINGER", "SKYFALL", "SPECTRE", "THUNDERBALL"] },
-      { category: "Main ___", level: 3, words: ["STREAM", "LAND", "FRAME", "STAY"] }
-    ]
-  },
-  {
-    id: 56,
+    id: 49,
     groups: [
       { category: "Fast food chains", level: 0, words: ["WENDYS", "SUBWAY", "POPEYES", "ARBYS"] },
       { category: "Things with a crown", level: 1, words: ["KING", "TOOTH", "ROLEX", "STATUE"] },
@@ -504,7 +441,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 57,
+    id: 50,
     groups: [
       { category: "Beans", level: 0, words: ["KIDNEY", "BLACK", "PINTO", "LIMA"] },
       { category: "Things at a bar", level: 1, words: ["STOOL", "TAP", "COASTER", "JUKEBOX"] },
@@ -513,7 +450,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 58,
+    id: 51,
     groups: [
       { category: "Primates", level: 0, words: ["GORILLA", "CHIMP", "ORANGUTAN", "LEMUR"] },
       { category: "Things with a dial", level: 1, words: ["WATCH", "RADIO", "OVEN", "SAFE"] },
@@ -522,7 +459,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 59,
+    id: 52,
     groups: [
       { category: "Lakes", level: 0, words: ["MICHIGAN", "VICTORIA", "TAHOE", "COMO"] },
       { category: "Things that buzz", level: 1, words: ["BEE", "ALARM", "PHONE", "RAZOR"] },
@@ -531,7 +468,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 60,
+    id: 53,
     groups: [
       { category: "Metals", level: 0, words: ["BRONZE", "STEEL", "TIN", "PLATINUM"] },
       { category: "Things at a campsite", level: 1, words: ["TENT", "LANTERN", "COOLER", "FIREWOOD"] },
@@ -540,7 +477,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 61,
+    id: 54,
     groups: [
       { category: "Dairy products", level: 0, words: ["BUTTER", "YOGURT", "CREAM", "WHEY"] },
       { category: "Things with a net", level: 1, words: ["TENNIS", "FISHING", "BASKETBALL", "VOLLEYBALL"] },
@@ -549,7 +486,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 62,
+    id: 55,
     groups: [
       { category: "Cheeses of France", level: 0, words: ["BRIE", "CAMEMBERT", "ROQUEFORT", "GRUYERE"] },
       { category: "Words meaning 'run'", level: 1, words: ["SPRINT", "DASH", "BOLT", "GALLOP"] },
@@ -558,7 +495,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 63,
+    id: 56,
     groups: [
       { category: "Rodents", level: 0, words: ["HAMSTER", "SQUIRREL", "MOUSE", "BEAVER"] },
       { category: "Things at an airport", level: 1, words: ["TERMINAL", "RUNWAY", "GATE", "LOUNGE"] },
@@ -567,7 +504,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 64,
+    id: 57,
     groups: [
       { category: "Root vegetables", level: 0, words: ["BEET", "TURNIP", "RADISH", "PARSNIP"] },
       { category: "Things with a horn", level: 1, words: ["UNICORN", "RHINO", "CAR", "TRUMPET"] },
@@ -576,7 +513,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 65,
+    id: 58,
     groups: [
       { category: "Legumes", level: 0, words: ["LENTIL", "CHICKPEA", "SOYBEAN", "PEANUT"] },
       { category: "Things that crack", level: 1, words: ["WHIP", "KNUCKLE", "ICE", "EGG"] },
@@ -585,7 +522,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 66,
+    id: 59,
     groups: [
       { category: "Olympic sports", level: 0, words: ["FENCING", "ROWING", "ARCHERY", "JUDO"] },
       { category: "Words with double O", level: 1, words: ["VOODOO", "BAMBOO", "TABOO", "SHAMPOO"] },
@@ -594,7 +531,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 67,
+    id: 60,
     groups: [
       { category: "Breakfast foods", level: 0, words: ["WAFFLE", "PANCAKE", "OMELETTE", "CREPE"] },
       { category: "Shades of blue", level: 1, words: ["NAVY", "COBALT", "TEAL", "AZURE"] },
@@ -603,7 +540,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 68,
+    id: 61,
     groups: [
       { category: "Wild cats", level: 0, words: ["LYNX", "OCELOT", "CHEETAH", "BOBCAT"] },
       { category: "Things in a wallet", level: 1, words: ["CASH", "LICENSE", "RECEIPT", "PHOTO"] },
@@ -612,7 +549,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 69,
+    id: 62,
     groups: [
       { category: "Gemstones", level: 0, words: ["EMERALD", "TOPAZ", "OPAL", "GARNET"] },
       { category: "Kitchen appliances", level: 1, words: ["BLENDER", "TOASTER", "MIXER", "KETTLE"] },
@@ -621,7 +558,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 70,
+    id: 63,
     groups: [
       { category: "Berries", level: 0, words: ["RASPBERRY", "BLACKBERRY", "CRANBERRY", "GOOSEBERRY"] },
       { category: "Fabrics", level: 1, words: ["SILK", "DENIM", "COTTON", "LINEN"] },
@@ -630,7 +567,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 71,
+    id: 64,
     groups: [
       { category: "Nuts", level: 0, words: ["WALNUT", "CASHEW", "PECAN", "ALMOND"] },
       { category: "Things that spin", level: 1, words: ["TOP", "WHEEL", "TORNADO", "RECORD"] },
@@ -639,7 +576,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 72,
+    id: 65,
     groups: [
       { category: "Rivers", level: 0, words: ["DANUBE", "THAMES", "SEINE", "RHINE"] },
       { category: "Tools", level: 1, words: ["HAMMER", "WRENCH", "PLIERS", "CHISEL"] },
@@ -648,7 +585,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 73,
+    id: 66,
     groups: [
       { category: "Deserts", level: 0, words: ["SAHARA", "GOBI", "MOJAVE", "KALAHARI"] },
       { category: "Things with wings", level: 1, words: ["EAGLE", "AIRPLANE", "BUTTERFLY", "ANGEL"] },
@@ -657,7 +594,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 74,
+    id: 67,
     groups: [
       { category: "Spices", level: 0, words: ["CUMIN", "SAFFRON", "PAPRIKA", "NUTMEG"] },
       { category: "Board games", level: 1, words: ["CHESS", "RISK", "CLUE", "SORRY"] },
@@ -666,7 +603,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 75,
+    id: 68,
     groups: [
       { category: "Cheeses", level: 0, words: ["GOUDA", "BRIE", "FETA", "CHEDDAR"] },
       { category: "Things that sting", level: 1, words: ["WASP", "JELLYFISH", "NETTLE", "SCORPION"] },
@@ -675,7 +612,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 76,
+    id: 69,
     groups: [
       { category: "Dog breeds", level: 0, words: ["POODLE", "BEAGLE", "BOXER", "HUSKY"] },
       { category: "Currencies", level: 1, words: ["FRANC", "POUND", "PESO", "YEN"] },
@@ -684,7 +621,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 77,
+    id: 70,
     groups: [
       { category: "Herbs", level: 0, words: ["BASIL", "THYME", "SAGE", "DILL"] },
       { category: "Things that glow", level: 1, words: ["CANDLE", "FIREFLY", "NEON", "EMBER"] },
@@ -693,7 +630,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 78,
+    id: 71,
     groups: [
       { category: "Oceans", level: 0, words: ["PACIFIC", "ATLANTIC", "INDIAN", "ARCTIC"] },
       { category: "Things that bounce", level: 1, words: ["RUBBER", "TRAMPOLINE", "CHECK", "BALL"] },
@@ -702,7 +639,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 79,
+    id: 72,
     groups: [
       { category: "Marsupials", level: 0, words: ["KOALA", "KANGAROO", "WOMBAT", "POSSUM"] },
       { category: "Things in space", level: 1, words: ["COMET", "ASTEROID", "NEBULA", "QUASAR"] },
@@ -711,7 +648,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 80,
+    id: 73,
     groups: [
       { category: "Flowers", level: 0, words: ["ORCHID", "DAHLIA", "PEONY", "IRIS"] },
       { category: "Types of hats", level: 1, words: ["FEDORA", "BERET", "SOMBRERO", "TURBAN"] },
@@ -720,7 +657,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 81,
+    id: 74,
     groups: [
       { category: "Islands", level: 0, words: ["BALI", "FIJI", "CRETE", "MALTA"] },
       { category: "Things that drip", level: 1, words: ["FAUCET", "CANDLE", "ICICLE", "PAINT"] },
@@ -729,7 +666,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 82,
+    id: 75,
     groups: [
       { category: "Volcanoes", level: 0, words: ["ETNA", "VESUVIUS", "KRAKATOA", "FUJI"] },
       { category: "Things that melt", level: 1, words: ["GLACIER", "CHEESE", "CANDLE", "SNOWMAN"] },
@@ -738,7 +675,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 83,
+    id: 76,
     groups: [
       { category: "Constellations", level: 0, words: ["ORION", "CASSIOPEIA", "DRACO", "LYRA"] },
       { category: "Things with keys", level: 1, words: ["PIANO", "KEYBOARD", "MAP", "LOCK"] },
@@ -747,7 +684,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 84,
+    id: 77,
     groups: [
       { category: "Reptiles", level: 0, words: ["GECKO", "IGUANA", "CHAMELEON", "COBRA"] },
       { category: "Round things", level: 1, words: ["GLOBE", "PIZZA", "CLOCK", "COIN"] },
@@ -756,7 +693,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 85,
+    id: 78,
     groups: [
       { category: "Dances", level: 0, words: ["MAMBO", "POLKA", "RUMBA", "FOXTROT"] },
       { category: "Things that float", level: 1, words: ["CORK", "RAFT", "BALLOON", "FEATHER"] },
@@ -765,7 +702,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 86,
+    id: 79,
     groups: [
       { category: "Woodwind instruments", level: 0, words: ["CLARINET", "OBOE", "BASSOON", "PICCOLO"] },
       { category: "Things with tails", level: 1, words: ["KITE", "COMET", "MONKEY", "PEACOCK"] },
@@ -774,7 +711,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 87,
+    id: 80,
     groups: [
       { category: "Lakes", level: 0, words: ["MICHIGAN", "TAHOE", "VICTORIA", "BAIKAL"] },
       { category: "Things that are sticky", level: 1, words: ["HONEY", "TAPE", "SYRUP", "GLUE"] },
@@ -783,7 +720,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 88,
+    id: 81,
     groups: [
       { category: "Seabirds", level: 0, words: ["PELICAN", "ALBATROSS", "PUFFIN", "GANNET"] },
       { category: "Things that tick", level: 1, words: ["CLOCK", "BOMB", "METRONOME", "WATCH"] },
@@ -792,7 +729,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 89,
+    id: 82,
     groups: [
       { category: "Whales", level: 0, words: ["BELUGA", "NARWHAL", "ORCA", "HUMPBACK"] },
       { category: "Things in a gym", level: 1, words: ["TREADMILL", "DUMBBELL", "BENCH", "MAT"] },
@@ -801,7 +738,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 90,
+    id: 83,
     groups: [
       { category: "Pasta sauces", level: 0, words: ["MARINARA", "ALFREDO", "PESTO", "BOLOGNESE"] },
       { category: "Things with scales", level: 1, words: ["FISH", "DRAGON", "PIANO", "JUSTICE"] },
@@ -810,7 +747,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 91,
+    id: 84,
     groups: [
       { category: "Tectonic plates", level: 0, words: ["PACIFIC", "EURASIAN", "AFRICAN", "NAZCA"] },
       { category: "Things that are sharp", level: 1, words: ["KNIFE", "TACK", "WIT", "CHEDDAR"] },
@@ -819,7 +756,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 92,
+    id: 85,
     groups: [
       { category: "Amphibians", level: 0, words: ["NEWT", "SALAMANDER", "TOAD", "FROG"] },
       { category: "Things with strings", level: 1, words: ["GUITAR", "PUPPET", "KITE", "BOW"] },
@@ -828,7 +765,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 93,
+    id: 86,
     groups: [
       { category: "Mushrooms", level: 0, words: ["SHIITAKE", "PORTOBELLO", "TRUFFLE", "MOREL"] },
       { category: "Things that fold", level: 1, words: ["PAPER", "NAPKIN", "CHAIR", "MAP"] },
@@ -837,16 +774,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 94,
-    groups: [
-      { category: "Tropical fruits", level: 0, words: ["COCONUT", "DRAGONFRUIT", "PASSIONFRUIT", "STARFRUIT"] },
-      { category: "Things that ring", level: 1, words: ["BELL", "PHONE", "ALARM", "DOORBELL"] },
-      { category: "Phobias (fear of)", level: 2, words: ["CLAUSTRO", "ARACHNO", "ACRO", "HYDRO"] },
-      { category: "High ___", level: 3, words: ["FIVE", "LAND", "LIGHT", "WAY"] }
-    ]
-  },
-  {
-    id: 95,
+    id: 87,
     groups: [
       { category: "Primates", level: 0, words: ["GORILLA", "CHIMP", "GIBBON", "LEMUR"] },
       { category: "Things that rust", level: 1, words: ["IRON", "NAIL", "CHAIN", "ANCHOR"] },
@@ -855,7 +783,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 96,
+    id: 88,
     groups: [
       { category: "Sharks", level: 0, words: ["HAMMERHEAD", "TIGER", "BULL", "MAKO"] },
       { category: "Things that pop", level: 1, words: ["BALLOON", "CORN", "BUBBLE", "CHAMPAGNE"] },
@@ -864,7 +792,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 97,
+    id: 89,
     groups: [
       { category: "Owls", level: 0, words: ["BARN", "SNOWY", "EAGLE", "SCREECH"] },
       { category: "Things that freeze", level: 1, words: ["WATER", "PIPE", "ASSET", "FRAME"] },
@@ -873,7 +801,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 98,
+    id: 90,
     groups: [
       { category: "Minerals", level: 0, words: ["QUARTZ", "FELDSPAR", "MICA", "CALCITE"] },
       { category: "Things that bloom", level: 1, words: ["ROSE", "ALGAE", "CHERRY", "YOUTH"] },
@@ -882,7 +810,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 99,
+    id: 91,
     groups: [
       { category: "Grains", level: 0, words: ["QUINOA", "BARLEY", "MILLET", "SPELT"] },
       { category: "Things with teeth", level: 1, words: ["SAW", "COMB", "GEAR", "ZIPPER"] },
@@ -891,7 +819,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 100,
+    id: 92,
     groups: [
       { category: "Penguins", level: 0, words: ["EMPEROR", "ADELIE", "CHINSTRAP", "ROCKHOPPER"] },
       { category: "Things that echo", level: 1, words: ["CANYON", "CAVE", "TUNNEL", "HALL"] },
@@ -900,7 +828,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 101,
+    id: 93,
     groups: [
       { category: "Cactus types", level: 0, words: ["SAGUARO", "PRICKLY PEAR", "BARREL", "CHOLLA"] },
       { category: "Things that roar", level: 1, words: ["LION", "ENGINE", "CROWD", "THUNDER"] },
@@ -909,7 +837,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 102,
+    id: 94,
     groups: [
       { category: "Seashells", level: 0, words: ["CONCH", "COWRIE", "SCALLOP", "NAUTILUS"] },
       { category: "Things that bloom in spring", level: 1, words: ["TULIP", "DAFFODIL", "CROCUS", "HYACINTH"] },
@@ -918,7 +846,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 103,
+    id: 95,
     groups: [
       { category: "Knots", level: 0, words: ["BOWLINE", "CLOVE", "REEF", "FIGURE EIGHT"] },
       { category: "Things that howl", level: 1, words: ["WOLF", "WIND", "COYOTE", "SIREN"] },
@@ -927,7 +855,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 104,
+    id: 96,
     groups: [
       { category: "Ferns", level: 0, words: ["MAIDENHAIR", "BRACKEN", "STAGHORN", "BOSTON"] },
       { category: "Things with layers", level: 1, words: ["ONION", "CAKE", "LASAGNA", "EARTH"] },
@@ -936,16 +864,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 105,
-    groups: [
-      { category: "Butterflies", level: 0, words: ["MONARCH", "SWALLOWTAIL", "PAINTED LADY", "ADMIRAL"] },
-      { category: "Things that whistle", level: 1, words: ["KETTLE", "REFEREE", "WIND", "TRAIN"] },
-      { category: "Fictional islands", level: 2, words: ["NEVERLAND", "SKULL", "AVALON", "ATLANTIS"] },
-      { category: "Cold ___", level: 3, words: ["FRONT", "BLOODED", "SNAP", "SHOULDER"] }
-    ]
-  },
-  {
-    id: 106,
+    id: 97,
     groups: [
       { category: "Teas of the world", level: 0, words: ["DARJEELING", "EARL GREY", "ROOIBOS", "PU-ERH"] },
       { category: "Things that shimmer", level: 1, words: ["SEQUIN", "GLITTER", "MIRAGE", "DIAMOND"] },
@@ -954,7 +873,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 107,
+    id: 98,
     groups: [
       { category: "Deer species", level: 0, words: ["MOOSE", "ELK", "CARIBOU", "ANTELOPE"] },
       { category: "Things that sizzle", level: 1, words: ["BACON", "STEAK", "FIREWORK", "LIGHTNING"] },
@@ -963,7 +882,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 108,
+    id: 99,
     groups: [
       { category: "Coral reef fish", level: 0, words: ["CLOWNFISH", "ANGELFISH", "GROUPER", "PARROTFISH"] },
       { category: "Things that crumble", level: 1, words: ["COOKIE", "WALL", "CLIFF", "EMPIRE"] },
@@ -972,16 +891,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 109,
-    groups: [
-      { category: "Root beer ingredients", level: 0, words: ["SASSAFRAS", "VANILLA", "ANISE", "WINTERGREEN"] },
-      { category: "Things with spots", level: 1, words: ["DALMATIAN", "LEOPARD", "DICE", "LADYBUG"] },
-      { category: "Roman numerals", level: 2, words: ["SUPER BOWL", "CLOCK", "FILM SEQUEL", "OUTLINE"] },
-      { category: "Open ___", level: 3, words: ["MIND", "HEART", "BOOK", "DOOR"] }
-    ]
-  },
-  {
-    id: 110,
+    id: 100,
     groups: [
       { category: "Pigeons and doves", level: 0, words: ["MOURNING", "ROCK", "TURTLE", "WOOD"] },
       { category: "Things that crack under pressure", level: 1, words: ["ICE", "GLASS", "VOICE", "FACADE"] },
@@ -990,7 +900,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 111,
+    id: 101,
     groups: [
       { category: "Climbing plants", level: 0, words: ["IVY", "WISTERIA", "CLEMATIS", "JASMINE"] },
       { category: "Things that hum", level: 1, words: ["BEE", "MOTOR", "FRIDGE", "POWER LINE"] },
@@ -999,7 +909,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 112,
+    id: 102,
     groups: [
       { category: "Sandwiches", level: 0, words: ["REUBEN", "CLUB", "CUBANO", "BANH MI"] },
       { category: "Things that orbit", level: 1, words: ["MOON", "SATELLITE", "ELECTRON", "PLANET"] },
@@ -1008,7 +918,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 113,
+    id: 103,
     groups: [
       { category: "Bats", level: 0, words: ["FRUIT BAT", "VAMPIRE BAT", "HORSESHOE", "FLYING FOX"] },
       { category: "Things that are crispy", level: 1, words: ["BACON", "CHIP", "LEAF", "CRACKER"] },
@@ -1017,7 +927,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 114,
+    id: 104,
     groups: [
       { category: "Parrots", level: 0, words: ["MACAW", "COCKATOO", "BUDGIE", "LOVEBIRD"] },
       { category: "Things that are woven", level: 1, words: ["BASKET", "TAPESTRY", "RUG", "FABRIC"] },
@@ -1026,7 +936,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 115,
+    id: 105,
     groups: [
       { category: "Grape varieties", level: 0, words: ["MERLOT", "RIESLING", "PINOT", "SHIRAZ"] },
       { category: "Things that sway", level: 1, words: ["HAMMOCK", "BRIDGE", "TREE", "DANCER"] },
@@ -1035,7 +945,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 116,
+    id: 106,
     groups: [
       { category: "Falcons", level: 0, words: ["PEREGRINE", "KESTREL", "MERLIN", "GYRFALCON"] },
       { category: "Things that bubble", level: 1, words: ["SODA", "LAVA", "SOAP", "BROOK"] },
@@ -1044,7 +954,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 117,
+    id: 107,
     groups: [
       { category: "Ancient civilizations", level: 0, words: ["AZTEC", "MAYA", "INCA", "OLMEC"] },
       { category: "Things that crawl", level: 1, words: ["SPIDER", "BABY", "SNAIL", "VINE"] },
@@ -1053,7 +963,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 118,
+    id: 108,
     groups: [
       { category: "Coffee drinks", level: 0, words: ["ESPRESSO", "CAPPUCCINO", "AMERICANO", "MACCHIATO"] },
       { category: "Things that tower", level: 1, words: ["SKYSCRAPER", "REDWOOD", "GIRAFFE", "LIGHTHOUSE"] },
@@ -1062,7 +972,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 119,
+    id: 109,
     groups: [
       { category: "Eagles", level: 0, words: ["BALD", "GOLDEN", "HARPY", "MARTIAL"] },
       { category: "Things that are tangled", level: 1, words: ["YARN", "HEADPHONES", "HAIR", "VINES"] },
@@ -1071,7 +981,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 120,
+    id: 110,
     groups: [
       { category: "Bamboo-eating animals", level: 0, words: ["PANDA", "GORILLA", "LEMUR", "RAT"] },
       { category: "Things that sparkle", level: 1, words: ["STAR", "SNOW", "DIAMOND", "TINSEL"] },
@@ -1080,7 +990,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 121,
+    id: 111,
     groups: [
       { category: "Types of pasta", level: 0, words: ["LINGUINE", "FETTUCCINE", "RAVIOLI", "TORTELLINI"] },
       { category: "Things in a cockpit", level: 1, words: ["THROTTLE", "ALTIMETER", "RUDDER", "YOKE"] },
@@ -1089,7 +999,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 122,
+    id: 112,
     groups: [
       { category: "African countries", level: 0, words: ["KENYA", "GHANA", "MOROCCO", "TUNISIA"] },
       { category: "Things that sparkle", level: 1, words: ["GLITTER", "CRYSTAL", "SEQUIN", "FIREWORK"] },
@@ -1098,7 +1008,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 123,
+    id: 113,
     groups: [
       { category: "Leafy greens", level: 0, words: ["KALE", "ARUGULA", "ROMAINE", "WATERCRESS"] },
       { category: "Things with pedals", level: 1, words: ["BICYCLE", "ORGAN", "CAR", "PIANO"] },
@@ -1107,7 +1017,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 124,
+    id: 114,
     groups: [
       { category: "Brass instruments", level: 0, words: ["TRUMPET", "TROMBONE", "TUBA", "FRENCH HORN"] },
       { category: "Things at a carnival", level: 1, words: ["CLOWN", "FUNNEL CAKE", "RING TOSS", "STRONGMAN"] },
@@ -1116,16 +1026,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 125,
-    groups: [
-      { category: "European capitals", level: 0, words: ["BERLIN", "MADRID", "VIENNA", "LISBON"] },
-      { category: "Types of jacket", level: 1, words: ["BLAZER", "PARKA", "BOMBER", "WINDBREAKER"] },
-      { category: "Things that hatch", level: 2, words: ["EGG", "PLAN", "CHICK", "PLOT"] },
-      { category: "Foot ___", level: 3, words: ["NOTE", "BALL", "PRINT", "HILL"] }
-    ]
-  },
-  {
-    id: 126,
+    id: 115,
     groups: [
       { category: "Winter clothing", level: 0, words: ["SCARF", "MITTEN", "PARKA", "EARMUFF"] },
       { category: "Famous towers", level: 1, words: ["EIFFEL", "BIG BEN", "BABEL", "PISA"] },
@@ -1134,7 +1035,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 127,
+    id: 116,
     groups: [
       { category: "Sushi fish", level: 0, words: ["TUNA", "YELLOWTAIL", "MACKEREL", "SNAPPER"] },
       { category: "Things with a dial", level: 1, words: ["WATCH", "RADIO", "COMPASS", "THERMOSTAT"] },
@@ -1143,7 +1044,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 128,
+    id: 117,
     groups: [
       { category: "Root vegetables", level: 0, words: ["GINGER", "TURMERIC", "BEET", "YAM"] },
       { category: "Things with a bell", level: 1, words: ["CHURCH", "BICYCLE", "COW", "DOORBELL"] },
@@ -1152,7 +1053,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 129,
+    id: 118,
     groups: [
       { category: "Ducks", level: 0, words: ["MALLARD", "TEAL", "MERGANSER", "PINTAIL"] },
       { category: "Things at a spa", level: 1, words: ["SAUNA", "MASSAGE", "FACIAL", "ROBE"] },
@@ -1161,7 +1062,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 130,
+    id: 119,
     groups: [
       { category: "Citrus fruits", level: 0, words: ["KUMQUAT", "POMELO", "CLEMENTINE", "BERGAMOT"] },
       { category: "Things with a cap", level: 1, words: ["BOTTLE", "MUSHROOM", "PEN", "TOOTH"] },
@@ -1170,16 +1071,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 131,
-    groups: [
-      { category: "Woodpeckers", level: 0, words: ["DOWNY", "PILEATED", "FLICKER", "SAPSUCKER"] },
-      { category: "Things that stretch", level: 1, words: ["RUBBER", "YOGA", "LIMOUSINE", "TRUTH"] },
-      { category: "Words from German", level: 2, words: ["KINDERGARTEN", "POLTERGEIST", "RUCKSACK", "WANDERLUST"] },
-      { category: "Chain ___", level: 3, words: ["SAW", "LINK", "MAIL", "REACTION"] }
-    ]
-  },
-  {
-    id: 132,
+    id: 120,
     groups: [
       { category: "Legumes", level: 0, words: ["LENTIL", "CHICKPEA", "FAVA", "MUNG"] },
       { category: "Things in a studio", level: 1, words: ["EASEL", "CANVAS", "PALETTE", "BRUSH"] },
@@ -1188,7 +1080,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 133,
+    id: 121,
     groups: [
       { category: "Melon types", level: 0, words: ["HONEYDEW", "CANTALOUPE", "WATERMELON", "CASABA"] },
       { category: "Things with a blade", level: 1, words: ["KNIFE", "WINDMILL", "SKATE", "HELICOPTER"] },
@@ -1197,7 +1089,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 134,
+    id: 122,
     groups: [
       { category: "Penguins", level: 0, words: ["KING", "GENTOO", "MACARONI", "FAIRY"] },
       { category: "Things at a picnic", level: 1, words: ["BLANKET", "BASKET", "LEMONADE", "ANTS"] },
@@ -1206,7 +1098,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 135,
+    id: 123,
     groups: [
       { category: "Japanese food", level: 0, words: ["RAMEN", "TEMPURA", "UDON", "SASHIMI"] },
       { category: "Things with a handle", level: 1, words: ["AXE", "BROOM", "BRIEFCASE", "SHOVEL"] },
@@ -1215,16 +1107,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 136,
-    groups: [
-      { category: "Sandstone formations", level: 0, words: ["ARCH", "MESA", "BUTTE", "CANYON"] },
-      { category: "Things with a trigger", level: 1, words: ["GUN", "CAMERA", "ALARM", "MEMORY"] },
-      { category: "Famous Davids", level: 2, words: ["BOWIE", "BECKHAM", "COPPERFIELD", "LETTERMAN"] },
-      { category: "Box ___", level: 3, words: ["CAR", "OFFICE", "SPRING", "ELDER"] }
-    ]
-  },
-  {
-    id: 137,
+    id: 124,
     groups: [
       { category: "Butternut squash relatives", level: 0, words: ["ACORN", "SPAGHETTI", "PUMPKIN", "ZUCCHINI"] },
       { category: "Things that rust", level: 1, words: ["GATE", "PIPE", "NAIL", "BRIDGE"] },
@@ -1233,7 +1116,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 138,
+    id: 125,
     groups: [
       { category: "Whale species", level: 0, words: ["MINKE", "BOWHEAD", "RIGHT", "GREY"] },
       { category: "Things with pockets", level: 1, words: ["JACKET", "JEANS", "BILLIARD TABLE", "KANGAROO"] },
@@ -1242,16 +1125,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 139,
-    groups: [
-      { category: "Seabirds", level: 0, words: ["TERN", "FRIGATEBIRD", "CORMORANT", "BOOBY"] },
-      { category: "Things with a wick", level: 1, words: ["CANDLE", "LAMP", "DYNAMITE", "LIGHTER"] },
-      { category: "Words that sound like letters", level: 2, words: ["SEA", "EYE", "ARE", "WHY"] },
-      { category: "Ear ___", level: 3, words: ["RING", "DRUM", "MARK", "WIG"] }
-    ]
-  },
-  {
-    id: 140,
+    id: 126,
     groups: [
       { category: "Types of cheese", level: 0, words: ["MANCHEGO", "HAVARTI", "PROVOLONE", "EMMENTAL"] },
       { category: "Things that whisper", level: 1, words: ["WIND", "LEAVES", "GRASS", "STREAM"] },
@@ -1260,7 +1134,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 141,
+    id: 127,
     groups: [
       { category: "Terrier breeds", level: 0, words: ["YORKIE", "SCOTTIE", "WESTIE", "AIREDALE"] },
       { category: "Things at a farm", level: 1, words: ["SILO", "TRACTOR", "BARN", "SCARECROW"] },
@@ -1269,7 +1143,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 142,
+    id: 128,
     groups: [
       { category: "Types of rice", level: 0, words: ["BASMATI", "JASMINE", "ARBORIO", "WILD"] },
       { category: "Things with a clasp", level: 1, words: ["NECKLACE", "PURSE", "BINDER", "BELT"] },
@@ -1278,7 +1152,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 143,
+    id: 129,
     groups: [
       { category: "Songbirds", level: 0, words: ["ROBIN", "WREN", "FINCH", "THRUSH"] },
       { category: "Things with a hinge", level: 1, words: ["DOOR", "LAPTOP", "GATE", "JAW"] },
@@ -1287,7 +1161,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 144,
+    id: 130,
     groups: [
       { category: "Curry ingredients", level: 0, words: ["CARDAMOM", "CORIANDER", "FENUGREEK", "TURMERIC"] },
       { category: "Things that purr", level: 1, words: ["CAT", "ENGINE", "PIGEON", "CONTENTED BABY"] },
@@ -1296,7 +1170,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 145,
+    id: 131,
     groups: [
       { category: "Climbing gear", level: 0, words: ["CARABINER", "HARNESS", "PITON", "CRAMPON"] },
       { category: "Things that are layered", level: 1, words: ["PARFAIT", "SEDIMENT", "NACHOS", "ATMOSPHERE"] },
@@ -1305,7 +1179,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 146,
+    id: 132,
     groups: [
       { category: "Herbs for cooking", level: 0, words: ["ROSEMARY", "PARSLEY", "CILANTRO", "CHIVES"] },
       { category: "Things with an antenna", level: 1, words: ["RADIO", "ANT", "SATELLITE", "SNAIL"] },
@@ -1314,7 +1188,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 147,
+    id: 133,
     groups: [
       { category: "Types of bean", level: 0, words: ["NAVY", "CANNELLINI", "GARBANZO", "ADZUKI"] },
       { category: "Things that are hollow", level: 1, words: ["TUBE", "BAMBOO", "DRUM", "LOG"] },
@@ -1323,7 +1197,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 148,
+    id: 134,
     groups: [
       { category: "Cephalopods", level: 0, words: ["SQUID", "OCTOPUS", "CUTTLEFISH", "NAUTILUS"] },
       { category: "Things with a stage", level: 1, words: ["THEATER", "ROCKET", "CANCER", "CONCERT"] },
@@ -1332,7 +1206,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 149,
+    id: 135,
     groups: [
       { category: "Diving birds", level: 0, words: ["KINGFISHER", "HERON", "OSPREY", "LOON"] },
       { category: "Things with a valve", level: 1, words: ["TRUMPET", "HEART", "TIRE", "FAUCET"] },
@@ -1341,7 +1215,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 150,
+    id: 136,
     groups: [
       { category: "Mexican food", level: 0, words: ["TACO", "BURRITO", "ENCHILADA", "QUESADILLA"] },
       { category: "Things that are braided", level: 1, words: ["ROPE", "HAIR", "BREAD", "RIVER"] },
@@ -1350,7 +1224,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 151,
+    id: 137,
     groups: [
       { category: "Hound breeds", level: 0, words: ["GREYHOUND", "BLOODHOUND", "BASSET", "DACHSHUND"] },
       { category: "Things at a carnival", level: 1, words: ["MASK", "FLOAT", "CONFETTI", "STILTS"] },
@@ -1359,16 +1233,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 152,
-    groups: [
-      { category: "Dried fruits", level: 0, words: ["RAISIN", "PRUNE", "FIG", "DATE"] },
-      { category: "Things that chime", level: 1, words: ["BELL", "CLOCK", "WIND CHIME", "DOORBELL"] },
-      { category: "Words meaning 'secret'", level: 2, words: ["COVERT", "HIDDEN", "STEALTH", "CLANDESTINE"] },
-      { category: "Sharp ___", level: 3, words: ["SHOOTER", "TONGUE", "PENCIL", "TURN"] }
-    ]
-  },
-  {
-    id: 153,
+    id: 138,
     groups: [
       { category: "Indian spices", level: 0, words: ["GARAM MASALA", "CUMIN", "MUSTARD SEED", "FENNEL"] },
       { category: "Things that launch", level: 1, words: ["ROCKET", "BOAT", "STARTUP", "CAMPAIGN"] },
@@ -1377,16 +1242,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 154,
-    groups: [
-      { category: "Types of olive", level: 0, words: ["KALAMATA", "MANZANILLA", "CASTELVETRANO", "NICOISE"] },
-      { category: "Things with a crown", level: 1, words: ["TOOTH", "KING", "TREE", "PINEAPPLE"] },
-      { category: "Famous Henrys", level: 2, words: ["FORD", "THOREAU", "KISSINGER", "CAVILL"] },
-      { category: "Road ___", level: 3, words: ["MAP", "BLOCK", "KILL", "RUNNER"] }
-    ]
-  },
-  {
-    id: 155,
+    id: 139,
     groups: [
       { category: "Berries (true botanical)", level: 0, words: ["GRAPE", "BANANA", "AVOCADO", "TOMATO"] },
       { category: "Things that have a trunk", level: 1, words: ["ELEPHANT", "TREE", "CAR", "SUITCASE"] },
@@ -1395,7 +1251,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 156,
+    id: 140,
     groups: [
       { category: "Mediterranean herbs", level: 0, words: ["OREGANO", "BASIL", "THYME", "MARJORAM"] },
       { category: "Things with horns", level: 1, words: ["BULL", "RHINO", "UNICORN", "MOOSE"] },
@@ -1404,7 +1260,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 157,
+    id: 141,
     groups: [
       { category: "Raptor birds", level: 0, words: ["HAWK", "FALCON", "BUZZARD", "VULTURE"] },
       { category: "Things that are inflatable", level: 1, words: ["BALLOON", "TIRE", "MATTRESS", "RAFT"] },
@@ -1413,7 +1269,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 158,
+    id: 142,
     groups: [
       { category: "Thai ingredients", level: 0, words: ["LEMONGRASS", "GALANGAL", "FISH SAUCE", "COCONUT MILK"] },
       { category: "Things with a beak", level: 1, words: ["TOUCAN", "EAGLE", "PLATYPUS", "SQUID"] },
@@ -1422,7 +1278,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 159,
+    id: 143,
     groups: [
       { category: "Retriever breeds", level: 0, words: ["GOLDEN", "LABRADOR", "CHESAPEAKE", "FLAT COAT"] },
       { category: "Things with a shell", level: 1, words: ["CRAB", "WALNUT", "TORTOISE", "CLAM"] },
@@ -1431,7 +1287,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 160,
+    id: 144,
     groups: [
       { category: "Soft cheeses", level: 0, words: ["RICOTTA", "MASCARPONE", "BURRATA", "CHEVRE"] },
       { category: "Things that are winding", level: 1, words: ["ROAD", "RIVER", "STAIRCASE", "CLOCK"] },
@@ -1440,7 +1296,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 161,
+    id: 145,
     groups: [
       { category: "Flatbreads", level: 0, words: ["NAAN", "PITA", "TORTILLA", "ROTI"] },
       { category: "Things with a tail", level: 1, words: ["DOG", "COMET", "AIRPLANE", "SCORPION"] },
@@ -1449,7 +1305,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 162,
+    id: 146,
     groups: [
       { category: "Spanish foods", level: 0, words: ["PAELLA", "GAZPACHO", "CHURROS", "TAPAS"] },
       { category: "Things in a gym locker", level: 1, words: ["TOWEL", "PADLOCK", "SNEAKERS", "DEODORANT"] },
@@ -1458,16 +1314,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 163,
-    groups: [
-      { category: "Owls", level: 0, words: ["BARN", "GREAT HORNED", "TAWNY", "LITTLE"] },
-      { category: "Things with a spring", level: 1, words: ["MATTRESS", "CLOCK", "TRAMPOLINE", "PEN"] },
-      { category: "Famous Edwards", level: 2, words: ["SCISSORHANDS", "NORTON", "SNOWDEN", "ELGAR"] },
-      { category: "Game ___", level: 3, words: ["PLAN", "SHOW", "KEEPER", "CHANGER"] }
-    ]
-  },
-  {
-    id: 164,
+    id: 147,
     groups: [
       { category: "Olive oil grades", level: 0, words: ["EXTRA VIRGIN", "VIRGIN", "REFINED", "POMACE"] },
       { category: "Things that are frozen", level: 1, words: ["TUNDRA", "YOGURT", "POPSICLE", "ASSET"] },
@@ -1476,7 +1323,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 165,
+    id: 148,
     groups: [
       { category: "Chinese dishes", level: 0, words: ["DIM SUM", "KUNG PAO", "CHOW MEIN", "FRIED RICE"] },
       { category: "Things with feathers", level: 1, words: ["PILLOW", "ARROW", "QUILL", "PEACOCK"] },
@@ -1485,7 +1332,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 166,
+    id: 149,
     groups: [
       { category: "Australian animals", level: 0, words: ["PLATYPUS", "ECHIDNA", "QUOKKA", "WALLABY"] },
       { category: "Things at a desk", level: 1, words: ["LAMP", "STAPLER", "MONITOR", "PEN CUP"] },
@@ -1494,7 +1341,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 167,
+    id: 150,
     groups: [
       { category: "Types of noodle", level: 0, words: ["SOBA", "UDON", "RAMEN", "VERMICELLI"] },
       { category: "Things with a lens", level: 1, words: ["CAMERA", "TELESCOPE", "GLASSES", "MICROSCOPE"] },
@@ -1503,7 +1350,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 168,
+    id: 151,
     groups: [
       { category: "Crustaceans", level: 0, words: ["CRAB", "LOBSTER", "SHRIMP", "CRAWFISH"] },
       { category: "Things that unfold", level: 1, words: ["MAP", "CHAIR", "NAPKIN", "STORY"] },
@@ -1512,16 +1359,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 169,
-    groups: [
-      { category: "Wading birds", level: 0, words: ["FLAMINGO", "IBIS", "STORK", "CRANE"] },
-      { category: "Things with a dome", level: 1, words: ["CAPITOL", "IGLOO", "MOSQUE", "OBSERVATORY"] },
-      { category: "Words meaning 'to wander'", level: 2, words: ["ROAM", "RAMBLE", "DRIFT", "MEANDER"] },
-      { category: "Bull ___", level: 3, words: ["DOG", "PEN", "HORN", "FROG"] }
-    ]
-  },
-  {
-    id: 170,
+    id: 152,
     groups: [
       { category: "Middle Eastern foods", level: 0, words: ["FALAFEL", "HUMMUS", "SHAWARMA", "BAKLAVA"] },
       { category: "Things with a loop", level: 1, words: ["ROLLER COASTER", "LASSO", "BELT", "SHOELACE"] },
@@ -1530,7 +1368,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 171,
+    id: 153,
     groups: [
       { category: "Types of salmon", level: 0, words: ["SOCKEYE", "CHINOOK", "COHO", "ATLANTIC"] },
       { category: "Things that are coiled", level: 1, words: ["SNAKE", "SPRING", "HOSE", "ROPE"] },
@@ -1539,7 +1377,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 172,
+    id: 154,
     groups: [
       { category: "Korean dishes", level: 0, words: ["KIMCHI", "BIBIMBAP", "BULGOGI", "JAPCHAE"] },
       { category: "Things that reflect", level: 1, words: ["MIRROR", "LAKE", "GLASS", "MOON"] },
@@ -1548,7 +1386,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 173,
+    id: 155,
     groups: [
       { category: "Tropical birds", level: 0, words: ["TOUCAN", "MACAW", "PARROT", "COCKATOO"] },
       { category: "Things with a frame", level: 1, words: ["PICTURE", "BICYCLE", "BED", "DOOR"] },
@@ -1557,7 +1395,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 174,
+    id: 156,
     groups: [
       { category: "Italian cheeses", level: 0, words: ["PARMESAN", "PECORINO", "GORGONZOLA", "FONTINA"] },
       { category: "Things that absorb", level: 1, words: ["SPONGE", "TOWEL", "SOIL", "COTTON"] },
@@ -1566,7 +1404,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 175,
+    id: 157,
     groups: [
       { category: "Shellfish", level: 0, words: ["MUSSEL", "OYSTER", "CLAM", "SCALLOP"] },
       { category: "Things with a dial", level: 1, words: ["SAFE", "PHONE", "OVEN", "CLOCK"] },
@@ -1575,7 +1413,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 176,
+    id: 158,
     groups: [
       { category: "French pastries", level: 0, words: ["MACARON", "ECLAIR", "CROISSANT", "MILLE FEUILLE"] },
       { category: "Things with a point", level: 1, words: ["STAR", "PENCIL", "NEEDLE", "SPEAR"] },
@@ -1584,7 +1422,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 177,
+    id: 159,
     groups: [
       { category: "Peruvian foods", level: 0, words: ["CEVICHE", "LOMO SALTADO", "QUINOA", "ANTICUCHO"] },
       { category: "Things that are braided", level: 1, words: ["CHALLAH", "LANYARD", "GARLIC", "WHIP"] },
@@ -1593,7 +1431,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 178,
+    id: 160,
     groups: [
       { category: "Salamanders", level: 0, words: ["AXE", "NEWT", "HELLBENDER", "MUDPUPPY"] },
       { category: "Things with a buckle", level: 1, words: ["SHOE", "BELT", "HELMET", "WATCH"] },
@@ -1602,7 +1440,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 179,
+    id: 161,
     groups: [
       { category: "Ethiopian foods", level: 0, words: ["INJERA", "WAT", "KITFO", "TIBS"] },
       { category: "Things that shimmer", level: 1, words: ["SILK", "PEARL", "OIL SLICK", "AURORA"] },
@@ -1611,7 +1449,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 180,
+    id: 162,
     groups: [
       { category: "Bears", level: 0, words: ["SUN BEAR", "SPECTACLED", "SLOTH BEAR", "BLACK BEAR"] },
       { category: "Things with a cork", level: 1, words: ["WINE", "BULLETIN BOARD", "FISHING ROD", "BAT"] },
@@ -1620,7 +1458,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 181,
+    id: 163,
     groups: [
       { category: "Vietnamese dishes", level: 0, words: ["PHO", "BANH MI", "SPRING ROLL", "BUN CHA"] },
       { category: "Things with a propeller", level: 1, words: ["HELICOPTER", "BOAT", "FAN", "DRONE"] },
@@ -1629,7 +1467,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 182,
+    id: 164,
     groups: [
       { category: "Pelicans and relatives", level: 0, words: ["PELICAN", "CORMORANT", "FRIGATE", "GANNET"] },
       { category: "Things that are layered", level: 1, words: ["TRIFLE", "ROCK", "WEDDING CAKE", "ONION"] },
@@ -1638,7 +1476,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 183,
+    id: 165,
     groups: [
       { category: "Clam varieties", level: 0, words: ["LITTLENECK", "QUAHOG", "RAZOR", "GEODUCK"] },
       { category: "Things with a motor", level: 1, words: ["BLENDER", "DRILL", "BOAT", "CAR"] },
@@ -1647,16 +1485,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 184,
-    groups: [
-      { category: "Greek foods", level: 0, words: ["MOUSSAKA", "SPANAKOPITA", "SOUVLAKI", "GYRO"] },
-      { category: "Things with a hoop", level: 1, words: ["BASKETBALL", "EARRING", "BARREL", "CIRCUS"] },
-      { category: "Words meaning 'to grab'", level: 2, words: ["SNATCH", "SEIZE", "CLUTCH", "NAB"] },
-      { category: "Lip ___", level: 3, words: ["STICK", "SYNC", "LOCK", "SERVICE"] }
-    ]
-  },
-  {
-    id: 185,
+    id: 166,
     groups: [
       { category: "Cacti", level: 0, words: ["PRICKLY PEAR", "BARREL", "ORGAN PIPE", "HEDGEHOG"] },
       { category: "Things that cascade", level: 1, words: ["WATERFALL", "HAIR", "DOMINOES", "FLOWERS"] },
@@ -1665,7 +1494,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 186,
+    id: 167,
     groups: [
       { category: "Turkish dishes", level: 0, words: ["KEBAB", "BOREK", "LAHMACUN", "PIDE"] },
       { category: "Things with a knob", level: 1, words: ["DOOR", "STOVE", "DRAWER", "RADIO"] },
@@ -1674,7 +1503,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 187,
+    id: 168,
     groups: [
       { category: "Salamis", level: 0, words: ["GENOA", "SOPRESSATA", "CHORIZO", "PEPPERONI"] },
       { category: "Things with a brim", level: 1, words: ["HAT", "CUP", "VOLCANO", "BOWL"] },
@@ -1683,7 +1512,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 188,
+    id: 169,
     groups: [
       { category: "Jamaican foods", level: 0, words: ["JERK CHICKEN", "ACKEE", "PATTY", "CALLALOO"] },
       { category: "Things with a lid", level: 1, words: ["POT", "CHEST", "TRASH CAN", "EYE"] },
@@ -1692,7 +1521,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 189,
+    id: 170,
     groups: [
       { category: "Coral types", level: 0, words: ["BRAIN", "STAGHORN", "FAN", "ELKHORN"] },
       { category: "Things with a saddle", level: 1, words: ["HORSE", "BICYCLE", "MOUNTAIN", "SHOE"] },
@@ -1701,7 +1530,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 190,
+    id: 171,
     groups: [
       { category: "Hawaiian foods", level: 0, words: ["POKE", "LOCO MOCO", "SPAM MUSUBI", "MALASADA"] },
       { category: "Things with a track", level: 1, words: ["TRAIN", "RECORD", "RACECAR", "CURTAIN"] },
@@ -1710,16 +1539,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 191,
-    groups: [
-      { category: "Turtles", level: 0, words: ["LOGGERHEAD", "LEATHERBACK", "GREEN SEA", "HAWKSBILL"] },
-      { category: "Things with a funnel", level: 1, words: ["TORNADO", "SHIP", "KITCHEN", "ANT LION"] },
-      { category: "Words meaning 'strange'", level: 2, words: ["PECULIAR", "ODD", "QUIRKY", "BIZARRE"] },
-      { category: "Set ___", level: 3, words: ["BACK", "UP", "LIST", "TLE"] }
-    ]
-  },
-  {
-    id: 192,
+    id: 172,
     groups: [
       { category: "Indian breads", level: 0, words: ["NAAN", "CHAPATI", "PARATHA", "KULCHA"] },
       { category: "Things with a web", level: 1, words: ["SPIDER", "DUCK", "INTERNET", "FABRIC"] },
@@ -1728,7 +1548,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 193,
+    id: 173,
     groups: [
       { category: "Mushroom types", level: 0, words: ["OYSTER", "ENOKI", "LION MANE", "PORCINI"] },
       { category: "Things with a zipper", level: 1, words: ["JACKET", "BAG", "TENT", "BOOT"] },
@@ -1737,7 +1557,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 194,
+    id: 174,
     groups: [
       { category: "Moroccan dishes", level: 0, words: ["TAGINE", "COUSCOUS", "HARIRA", "PASTILLA"] },
       { category: "Things with a magnet", level: 1, words: ["FRIDGE", "COMPASS", "SPEAKER", "MRI"] },
@@ -1746,7 +1566,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 195,
+    id: 175,
     groups: [
       { category: "Apples", level: 0, words: ["GALA", "FUJI", "HONEYCRISP", "GRANNY SMITH"] },
       { category: "Things with a fin", level: 1, words: ["SHARK", "ROCKET", "SURFBOARD", "RADIATOR"] },
@@ -1755,7 +1575,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 196,
+    id: 176,
     groups: [
       { category: "Indonesian foods", level: 0, words: ["SATAY", "NASI GORENG", "RENDANG", "TEMPEH"] },
       { category: "Things with a wheel", level: 1, words: ["BICYCLE", "HAMSTER", "SHIP", "ROULETTE"] },
@@ -1764,7 +1584,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 197,
+    id: 177,
     groups: [
       { category: "Types of pepper", level: 0, words: ["BELL", "GHOST", "CHIPOTLE", "POBLANO"] },
       { category: "Things with a stripe", level: 1, words: ["ZEBRA", "TIGER", "FLAG", "CANDY CANE"] },
@@ -1773,16 +1593,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 198,
-    groups: [
-      { category: "Scandinavian foods", level: 0, words: ["LUTEFISK", "GRAVLAX", "SMORGASBORD", "MEATBALL"] },
-      { category: "Things with an engine", level: 1, words: ["CAR", "TRAIN", "PLANE", "LAWN MOWER"] },
-      { category: "Words meaning 'to forbid'", level: 2, words: ["BAN", "BAR", "BLOCK", "PROHIBIT"] },
-      { category: "Bare ___", level: 3, words: ["FOOT", "BONES", "BACK", "FACED"] }
-    ]
-  },
-  {
-    id: 199,
+    id: 178,
     groups: [
       { category: "Japanese sweets", level: 0, words: ["MOCHI", "DANGO", "TAIYAKI", "DORAYAKI"] },
       { category: "Things with a stem", level: 1, words: ["FLOWER", "CHERRY", "WINE GLASS", "MUSHROOM"] },
@@ -1791,7 +1602,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 200,
+    id: 179,
     groups: [
       { category: "Frog species", level: 0, words: ["TREE FROG", "BULLFROG", "DART FROG", "LEOPARD FROG"] },
       { category: "Things with a spout", level: 1, words: ["TEAPOT", "WHALE", "GUTTER", "WATERING CAN"] },
@@ -1800,7 +1611,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 201,
+    id: 180,
     groups: [
       { category: "Brazilian dishes", level: 0, words: ["FEIJOADA", "COXINHA", "BRIGADEIRO", "ACAI BOWL"] },
       { category: "Things with a mane", level: 1, words: ["LION", "HORSE", "ZEBRA", "GUITARIST"] },
@@ -1809,16 +1620,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 202,
-    groups: [
-      { category: "Seals and sea lions", level: 0, words: ["HARBOR SEAL", "FUR SEAL", "WALRUS", "SEA LION"] },
-      { category: "Things with a switch", level: 1, words: ["LIGHT", "TRAIN TRACK", "GUITAR", "MOOD"] },
-      { category: "Words meaning 'dangerous'", level: 2, words: ["PERILOUS", "HAZARDOUS", "TREACHEROUS", "RISKY"] },
-      { category: "Under ___", level: 3, words: ["DOG", "GROUND", "COVER", "WORLD"] }
-    ]
-  },
-  {
-    id: 203,
+    id: 181,
     groups: [
       { category: "German foods", level: 0, words: ["BRATWURST", "PRETZEL", "SCHNITZEL", "SAUERKRAUT"] },
       { category: "Things with a peak", level: 1, words: ["MOUNTAIN", "CAP", "GRAPH", "WAVE"] },
@@ -1827,7 +1629,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 204,
+    id: 182,
     groups: [
       { category: "River fish", level: 0, words: ["CATFISH", "PIKE", "PERCH", "CARP"] },
       { category: "Things that are transparent", level: 1, words: ["GLASS", "WATER", "JELLYFISH", "CELLOPHANE"] },
@@ -1836,7 +1638,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 205,
+    id: 183,
     groups: [
       { category: "French cheeses", level: 0, words: ["BRIE", "COMTE", "REBLOCHON", "SAINT AGUR"] },
       { category: "Things with a blade", level: 1, words: ["SWORD", "FAN", "GRASS", "RAZOR"] },
@@ -1845,7 +1647,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 206,
+    id: 184,
     groups: [
       { category: "Pelts and furs", level: 0, words: ["MINK", "SABLE", "ERMINE", "CHINCHILLA"] },
       { category: "Things with a dock", level: 1, words: ["BOAT", "PHONE", "COURTROOM", "SPACE STATION"] },
@@ -1854,7 +1656,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 207,
+    id: 185,
     groups: [
       { category: "Lebanese dishes", level: 0, words: ["TABBOULEH", "FATTOUSH", "KIBBEH", "MANOUSHE"] },
       { category: "Things with a cord", level: 1, words: ["PHONE", "GUITAR", "PARACHUTE", "LAMP"] },
@@ -1863,16 +1665,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 208,
-    groups: [
-      { category: "Hawks", level: 0, words: ["RED TAIL", "COOPER", "GOSHAWK", "SPARROWHAWK"] },
-      { category: "Things with a seal", level: 1, words: ["ENVELOPE", "JAR", "COURT", "WAX"] },
-      { category: "Words meaning 'to calm'", level: 2, words: ["SOOTHE", "PACIFY", "MOLLIFY", "PLACATE"] },
-      { category: "Down ___", level: 3, words: ["FALL", "TOWN", "POUR", "GRADE"] }
-    ]
-  },
-  {
-    id: 209,
+    id: 186,
     groups: [
       { category: "Polish foods", level: 0, words: ["PIEROGI", "BIGOS", "KIELBASA", "BORSCHT"] },
       { category: "Things with a paddle", level: 1, words: ["CANOE", "PING PONG", "BUTTER", "SPANKING"] },
@@ -1881,7 +1674,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 210,
+    id: 187,
     groups: [
       { category: "Types of tuna", level: 0, words: ["BLUEFIN", "YELLOWFIN", "ALBACORE", "SKIPJACK"] },
       { category: "Things with a perch", level: 1, words: ["BIRD", "PARROT", "LIFEGUARD", "BALCONY"] },
@@ -1890,16 +1683,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 211,
-    groups: [
-      { category: "Argentine foods", level: 0, words: ["EMPANADA", "ASADO", "CHIMICHURRI", "DULCE DE LECHE"] },
-      { category: "Things with a reel", level: 1, words: ["FISHING", "FILM", "HOSE", "KITE"] },
-      { category: "Words meaning 'proud'", level: 2, words: ["HAUGHTY", "VAIN", "SMUG", "COCKY"] },
-      { category: "Track ___", level: 3, words: ["SUIT", "RECORD", "SIDE", "PAD"] }
-    ]
-  },
-  {
-    id: 212,
+    id: 188,
     groups: [
       { category: "Succulents", level: 0, words: ["ALOE", "JADE", "AGAVE", "SEDUM"] },
       { category: "Things that are elastic", level: 1, words: ["RUBBER BAND", "WAISTBAND", "TRAMPOLINE", "BUNGEE"] },
@@ -1908,7 +1692,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 213,
+    id: 189,
     groups: [
       { category: "Spanish tapas", level: 0, words: ["PATATAS BRAVAS", "CROQUETAS", "GAMBAS", "JAMON"] },
       { category: "Things with a chamber", level: 1, words: ["HEART", "GUN", "CAVE", "SENATE"] },
@@ -1917,25 +1701,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 214,
-    groups: [
-      { category: "Monkeys", level: 0, words: ["SPIDER MONKEY", "HOWLER", "CAPUCHIN", "MANDRILL"] },
-      { category: "Things with a cushion", level: 1, words: ["SOFA", "PIN", "RING", "SEAT"] },
-      { category: "Words meaning 'to spread'", level: 2, words: ["PROPAGATE", "DIFFUSE", "PROLIFERATE", "PERMEATE"] },
-      { category: "Draw ___", level: 3, words: ["BRIDGE", "BACK", "STRING", "BAR"] }
-    ]
-  },
-  {
-    id: 215,
-    groups: [
-      { category: "Portuguese foods", level: 0, words: ["PASTEL DE NATA", "BACALHAU", "CALDO VERDE", "FRANCESINHA"] },
-      { category: "Things with a canopy", level: 1, words: ["BED", "RAINFOREST", "PARACHUTE", "TENT"] },
-      { category: "Words meaning 'old-fashioned'", level: 2, words: ["DATED", "RETRO", "QUAINT", "BYGONE"] },
-      { category: "Hang ___", level: 3, words: ["OVER", "OUT", "MAN", "NAIL"] }
-    ]
-  },
-  {
-    id: 216,
+    id: 190,
     groups: [
       { category: "Types of lettuce", level: 0, words: ["ICEBERG", "ROMAINE", "BUTTER", "FRISEE"] },
       { category: "Things with a rudder", level: 1, words: ["BOAT", "AIRPLANE", "SUBMARINE", "KAYAK"] },
@@ -1944,7 +1710,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 217,
+    id: 191,
     groups: [
       { category: "Diving equipment", level: 0, words: ["SNORKEL", "WETSUIT", "TANK", "MASK"] },
       { category: "Things with a fuse", level: 1, words: ["BOMB", "FIREWORK", "CIRCUIT", "TEMPER"] },
@@ -1953,7 +1719,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 218,
+    id: 192,
     groups: [
       { category: "Egyptian foods", level: 0, words: ["KOSHARI", "FUL MEDAMES", "DUKKAH", "MOLOKHIA"] },
       { category: "Things with a nest", level: 1, words: ["BIRD", "WASP", "EGG", "TABLE"] },
@@ -1962,25 +1728,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 219,
-    groups: [
-      { category: "Orchid varieties", level: 0, words: ["CATTLEYA", "DENDROBIUM", "PHALAENOPSIS", "VANDA"] },
-      { category: "Things with a crust", level: 1, words: ["PIE", "BREAD", "EARTH", "SNOW"] },
-      { category: "Words meaning 'huge'", level: 2, words: ["MAMMOTH", "TITANIC", "GARGANTUAN", "BEHEMOTH"] },
-      { category: "Screen ___", level: 3, words: ["PLAY", "SAVER", "SHOT", "PRINT"] }
-    ]
-  },
-  {
-    id: 220,
-    groups: [
-      { category: "Caribbean foods", level: 0, words: ["PLANTAIN", "RICE AND PEAS", "ROTI", "CONCH FRITTER"] },
-      { category: "Things with a thread", level: 1, words: ["NEEDLE", "SCREW", "SPIDER", "STORY"] },
-      { category: "Words meaning 'tiny'", level: 2, words: ["MINUSCULE", "INFINITESIMAL", "MICROSCOPIC", "NEGLIGIBLE"] },
-      { category: "Side ___", level: 3, words: ["WALK", "CAR", "ARM", "WINDER"] }
-    ]
-  },
-  {
-    id: 221,
+    id: 193,
     groups: [
       { category: "Olives", level: 0, words: ["KALAMATA", "CERIGNOLA", "PICHOLINE", "GAETA"] },
       { category: "Things with a root", level: 1, words: ["TREE", "TOOTH", "WORD", "GINGER"] },
@@ -1989,7 +1737,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 222,
+    id: 194,
     groups: [
       { category: "Russian dishes", level: 0, words: ["BORSCHT", "PELMENI", "BLINI", "BEEF STROGANOFF"] },
       { category: "Things with a hook", level: 1, words: ["FISHING ROD", "CRANE", "COAT RACK", "PIRATE"] },
@@ -1998,7 +1746,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 223,
+    id: 195,
     groups: [
       { category: "Antarctic animals", level: 0, words: ["SEAL", "PENGUIN", "ALBATROSS", "KRILL"] },
       { category: "Things with a gauge", level: 1, words: ["FUEL", "TIRE", "RAILROAD", "SHOTGUN"] },
@@ -2007,7 +1755,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 224,
+    id: 196,
     groups: [
       { category: "Thai curries", level: 0, words: ["GREEN", "RED", "YELLOW", "MASSAMAN"] },
       { category: "Things with a pedestal", level: 1, words: ["STATUE", "SINK", "TROPHY", "COLUMN"] },
@@ -2016,7 +1764,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 225,
+    id: 197,
     groups: [
       { category: "Salmon preparations", level: 0, words: ["SMOKED", "GRAVLAX", "SASHIMI", "TARTARE"] },
       { category: "Things that are braided", level: 1, words: ["RUG", "BELT", "CORD", "PASTRY"] },
@@ -2025,7 +1773,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 226,
+    id: 198,
     groups: [
       { category: "Stews around the world", level: 0, words: ["GOULASH", "GUMBO", "CASSOULET", "TAGINE"] },
       { category: "Things with a gauge", level: 1, words: ["PRESSURE", "RAIN", "WIRE", "WIND"] },
@@ -2034,7 +1782,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 227,
+    id: 199,
     groups: [
       { category: "Types of honey", level: 0, words: ["MANUKA", "CLOVER", "WILDFLOWER", "BUCKWHEAT"] },
       { category: "Things with a spine", level: 1, words: ["BOOK", "HEDGEHOG", "CACTUS", "HUMAN"] },
@@ -2043,7 +1791,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 228,
+    id: 200,
     groups: [
       { category: "Dim sum items", level: 0, words: ["SIU MAI", "HAR GOW", "CHAR SIU BAO", "TURNIP CAKE"] },
       { category: "Things with a bark", level: 1, words: ["DOG", "TREE", "CHOCOLATE", "CINNAMON"] },
@@ -2052,7 +1800,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 229,
+    id: 201,
     groups: [
       { category: "Bagel flavors", level: 0, words: ["EVERYTHING", "SESAME", "POPPY", "ONION"] },
       { category: "Things with a plume", level: 1, words: ["SMOKE", "PEACOCK", "HELMET", "VOLCANO"] },
@@ -2061,7 +1809,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 230,
+    id: 202,
     groups: [
       { category: "Chili varieties", level: 0, words: ["ANCHO", "GUAJILLO", "PASILLA", "ARBOL"] },
       { category: "Things with a pedal", level: 1, words: ["BICYCLE", "ORGAN", "SEWING MACHINE", "CAR"] },
@@ -2070,7 +1818,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 231,
+    id: 203,
     groups: [
       { category: "Pizza styles", level: 0, words: ["NEAPOLITAN", "DEEP DISH", "THIN CRUST", "SICILIAN"] },
       { category: "Things with a vent", level: 1, words: ["VOLCANO", "DRYER", "HOOD", "SUBMARINE"] },
@@ -2079,7 +1827,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 232,
+    id: 204,
     groups: [
       { category: "Coffee origins", level: 0, words: ["COLOMBIAN", "ETHIOPIAN", "SUMATRA", "KONA"] },
       { category: "Things with a band", level: 1, words: ["RING", "RUBBER", "WRIST", "ROCK"] },
@@ -2088,7 +1836,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 233,
+    id: 205,
     groups: [
       { category: "Raptors", level: 0, words: ["EAGLE", "OSPREY", "CONDOR", "KITE"] },
       { category: "Things with a strap", level: 1, words: ["WATCH", "SANDAL", "GUITAR", "BACKPACK"] },
@@ -2097,7 +1845,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 234,
+    id: 206,
     groups: [
       { category: "Types of cake", level: 0, words: ["CHIFFON", "BUNDT", "POUND", "ANGEL FOOD"] },
       { category: "Things with a grid", level: 1, words: ["CROSSWORD", "MAP", "WAFFLE", "CHESS BOARD"] },
@@ -2106,7 +1854,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 235,
+    id: 207,
     groups: [
       { category: "Nut butters", level: 0, words: ["PEANUT", "ALMOND", "CASHEW", "TAHINI"] },
       { category: "Things with a scale", level: 1, words: ["MOUNTAIN", "LIZARD", "BATHROOM", "GUITAR"] },
@@ -2115,7 +1863,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 236,
+    id: 208,
     groups: [
       { category: "Sausage types", level: 0, words: ["BRATWURST", "ANDOUILLE", "MERGUEZ", "LINGUICA"] },
       { category: "Things with a mirror", level: 1, words: ["BATHROOM", "CAR", "TELESCOPE", "FUN HOUSE"] },
@@ -2124,7 +1872,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 237,
+    id: 209,
     groups: [
       { category: "Types of vinegar", level: 0, words: ["BALSAMIC", "CIDER", "RICE", "MALT"] },
       { category: "Things with a ledge", level: 1, words: ["CLIFF", "WINDOW", "SHELF", "BUILDING"] },
@@ -2133,7 +1881,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 238,
+    id: 210,
     groups: [
       { category: "Smoked meats", level: 0, words: ["BRISKET", "PASTRAMI", "BACON", "JERKY"] },
       { category: "Things with a beam", level: 1, words: ["FLASHLIGHT", "BARN", "GYMNAST", "SUNLIGHT"] },
@@ -2142,7 +1890,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 239,
+    id: 211,
     groups: [
       { category: "Steak cuts", level: 0, words: ["RIBEYE", "SIRLOIN", "FILET", "FLANK"] },
       { category: "Things with a channel", level: 1, words: ["TV", "RIVER", "ENGLISH", "RADIO"] },
@@ -2151,7 +1899,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 240,
+    id: 212,
     groups: [
       { category: "Dumpling types", level: 0, words: ["GYOZA", "WONTON", "PIEROGI", "MOMO"] },
       { category: "Things with a sole", level: 1, words: ["SHOE", "FISH", "FOOT", "SOUL MUSIC"] },
@@ -2160,16 +1908,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 241,
-    groups: [
-      { category: "Bread types", level: 0, words: ["CIABATTA", "CHALLAH", "BRIOCHE", "PUMPERNICKEL"] },
-      { category: "Things with a current", level: 1, words: ["RIVER", "OCEAN", "WIRE", "NEWS"] },
-      { category: "Words meaning 'to improve'", level: 2, words: ["ENHANCE", "REFINE", "ELEVATE", "POLISH"] },
-      { category: "Sun ___", level: 3, words: ["RISE", "BURN", "FLOWER", "GLASSES"] }
-    ]
-  },
-  {
-    id: 242,
+    id: 213,
     groups: [
       { category: "Cocktails", level: 0, words: ["MOJITO", "MARGARITA", "DAIQUIRI", "NEGRONI"] },
       { category: "Things with a plug", level: 1, words: ["BATHTUB", "OUTLET", "SPARK", "EAR"] },
@@ -2178,16 +1917,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 243,
-    groups: [
-      { category: "Seafood dishes", level: 0, words: ["CEVICHE", "CALAMARI", "BISQUE", "BOUILLABAISSE"] },
-      { category: "Things with a shaft", level: 1, words: ["ARROW", "ELEVATOR", "MINE", "GOLF CLUB"] },
-      { category: "Words meaning 'to endure'", level: 2, words: ["PERSIST", "WITHSTAND", "WEATHER", "SUSTAIN"] },
-      { category: "Fish ___", level: 3, words: ["BOWL", "MONGER", "POND", "CAKE"] }
-    ]
-  },
-  {
-    id: 244,
+    id: 214,
     groups: [
       { category: "Charcuterie items", level: 0, words: ["PROSCIUTTO", "SALAMI", "CAPICOLA", "MORTADELLA"] },
       { category: "Things with a hatch", level: 1, words: ["SUBMARINE", "EGG", "SHIP", "ATTIC"] },
@@ -2196,7 +1926,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 245,
+    id: 215,
     groups: [
       { category: "Tea varieties", level: 0, words: ["ASSAM", "CEYLON", "OOLONG", "SENCHA"] },
       { category: "Things with a spine", level: 1, words: ["PORCUPINE", "MOUNTAIN RANGE", "SEA URCHIN", "BOOK"] },
@@ -2205,7 +1935,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 246,
+    id: 216,
     groups: [
       { category: "Soup varieties", level: 0, words: ["PUMPKIN", "TOMATO", "LENTIL", "MUSHROOM"] },
       { category: "Things with a patch", level: 1, words: ["EYE", "GARDEN", "JACKET", "SOFTWARE"] },
@@ -2214,16 +1944,7 @@ const PUZZLES = [
     ]
   },
   {
-    id: 247,
-    groups: [
-      { category: "Barbecue styles", level: 0, words: ["TEXAS", "CAROLINA", "MEMPHIS", "KANSAS CITY"] },
-      { category: "Things with a branch", level: 1, words: ["TREE", "BANK", "GOVERNMENT", "LIBRARY"] },
-      { category: "Words meaning 'to confuse'", level: 2, words: ["PERPLEX", "BEFUDDLE", "FLUMMOX", "DISCOMBOBULATE"] },
-      { category: "Palm ___", level: 3, words: ["TREE", "READER", "TOP", "SPRINGS"] }
-    ]
-  },
-  {
-    id: 248,
+    id: 217,
     groups: [
       { category: "Wine regions", level: 0, words: ["BORDEAUX", "TUSCANY", "NAPA", "RIOJA"] },
       { category: "Things with a harbor", level: 1, words: ["PEARL", "CITY", "BOAT", "SEAL"] },
@@ -2232,21 +1953,597 @@ const PUZZLES = [
     ]
   },
   {
+    id: 218,
+    groups: [
+      { category: "Breakfast foods", level: 0, words: ["PANCAKE", "WAFFLE", "OMELET", "BAGEL"] },
+      { category: "Olympic sports", level: 1, words: ["FENCING", "JAVELIN", "ROWING", "ARCHERY"] },
+      { category: "Words meaning 'to flee'", level: 2, words: ["ESCAPE", "BOLT", "SCATTER", "RETREAT"] },
+      { category: "Thunder ___", level: 3, words: ["STORM", "BOLT", "STRUCK", "CLAP"] }
+    ]
+  },
+  {
+    id: 219,
+    groups: [
+      { category: "Gemstones", level: 0, words: ["EMERALD", "SAPPHIRE", "TOPAZ", "GARNET"] },
+      { category: "Things in a gym", level: 1, words: ["BENCH", "MAT", "ROPE", "MIRROR"] },
+      { category: "Words meaning 'to steal'", level: 2, words: ["PILFER", "SWIPE", "PINCH", "FILCH"] },
+      { category: "Basket ___", level: 3, words: ["BALL", "CASE", "WEAVE", "WORK"] }
+    ]
+  },
+  {
+    id: 220,
+    groups: [
+      { category: "Dog breeds", level: 0, words: ["BEAGLE", "POODLE", "BOXER", "COLLIE"] },
+      { category: "Things that spin", level: 1, words: ["TOP", "WHEEL", "TORNADO", "RECORD"] },
+      { category: "Words meaning 'to annoy'", level: 2, words: ["PESTER", "RANKLE", "GRATE", "NETTLE"] },
+      { category: "Fire ___", level: 3, words: ["PLACE", "FLY", "TRUCK", "WORK"] }
+    ]
+  },
+  {
+    id: 221,
+    groups: [
+      { category: "Citrus fruits", level: 0, words: ["LEMON", "LIME", "ORANGE", "TANGERINE"] },
+      { category: "Things in a wallet", level: 1, words: ["CASH", "LICENSE", "PHOTO", "RECEIPT"] },
+      { category: "Words meaning 'to wander'", level: 2, words: ["ROAM", "DRIFT", "MEANDER", "RAMBLE"] },
+      { category: "Black ___", level: 3, words: ["BIRD", "SMITH", "BERRY", "JACK"] }
+    ]
+  },
+  {
+    id: 222,
+    groups: [
+      { category: "Musical genres", level: 0, words: ["JAZZ", "BLUES", "FUNK", "REGGAE"] },
+      { category: "Things with wings", level: 1, words: ["AIRPLANE", "ANGEL", "BAT", "STAGE"] },
+      { category: "Words meaning 'to praise'", level: 2, words: ["LAUD", "EXTOL", "COMMEND", "ACCLAIM"] },
+      { category: "Sun ___", level: 3, words: ["BURN", "FLOWER", "DIAL", "ROOF"] }
+    ]
+  },
+  {
+    id: 223,
+    groups: [
+      { category: "Salad greens", level: 0, words: ["ARUGULA", "SPINACH", "KALE", "ROMAINE"] },
+      { category: "Casino games", level: 1, words: ["CRAPS", "ROULETTE", "BACCARAT", "SLOTS"] },
+      { category: "Words meaning 'to hide'", level: 2, words: ["CONCEAL", "CLOAK", "SHROUD", "OBSCURE"] },
+      { category: "Paper ___", level: 3, words: ["BACK", "CLIP", "WEIGHT", "TRAIL"] }
+    ]
+  },
+  {
+    id: 224,
+    groups: [
+      { category: "Zoo animals", level: 0, words: ["GIRAFFE", "ZEBRA", "HIPPO", "GORILLA"] },
+      { category: "Things with strings", level: 1, words: ["GUITAR", "KITE", "PUPPET", "BALLOON"] },
+      { category: "Words meaning 'to trick'", level: 2, words: ["DUPE", "HOODWINK", "BAMBOOZLE", "SWINDLE"] },
+      { category: "Back ___", level: 3, words: ["BONE", "FIRE", "YARD", "TRACK"] }
+    ]
+  },
+  {
+    id: 225,
+    groups: [
+      { category: "Italian dishes", level: 0, words: ["RISOTTO", "LASAGNA", "GNOCCHI", "BRUSCHETTA"] },
+      { category: "Camping gear", level: 1, words: ["TENT", "LANTERN", "COMPASS", "CANTEEN"] },
+      { category: "Words meaning 'to shatter'", level: 2, words: ["SMASH", "FRACTURE", "SPLINTER", "DEMOLISH"] },
+      { category: "Cross ___", level: 3, words: ["WORD", "BOW", "WALK", "ROADS"] }
+    ]
+  },
+  {
+    id: 226,
+    groups: [
+      { category: "Spices", level: 0, words: ["CINNAMON", "TURMERIC", "PAPRIKA", "CUMIN"] },
+      { category: "Things with keys", level: 1, words: ["PIANO", "KEYBOARD", "LOCKSMITH", "MAP"] },
+      { category: "Words meaning 'to glow'", level: 2, words: ["SHIMMER", "RADIATE", "GLISTEN", "LUMINOUS"] },
+      { category: "Side ___", level: 3, words: ["KICK", "LINE", "SHOW", "STEP"] }
+    ]
+  },
+  {
+    id: 227,
+    groups: [
+      { category: "Martial arts", level: 0, words: ["KARATE", "JUDO", "KUNG FU", "AIKIDO"] },
+      { category: "Things that melt", level: 1, words: ["ICE", "BUTTER", "CHOCOLATE", "WAX"] },
+      { category: "Words meaning 'to reveal'", level: 2, words: ["EXPOSE", "DIVULGE", "DISCLOSE", "UNVEIL"] },
+      { category: "Head ___", level: 3, words: ["BAND", "LINE", "QUARTERS", "STRONG"] }
+    ]
+  },
+  {
+    id: 228,
+    groups: [
+      { category: "Board games", level: 0, words: ["CHESS", "CLUE", "RISK", "SORRY"] },
+      { category: "Things with bark", level: 1, words: ["DOG", "TREE", "COUGH", "CAPTAIN"] },
+      { category: "Words meaning 'to confuse'", level: 2, words: ["BAFFLE", "PERPLEX", "BEWILDER", "MYSTIFY"] },
+      { category: "Stone ___", level: 3, words: ["COLD", "WALL", "MASON", "HEDGE"] }
+    ]
+  },
+  {
+    id: 229,
+    groups: [
+      { category: "Sushi fish", level: 0, words: ["SALMON", "TUNA", "EEL", "MACKEREL"] },
+      { category: "Things with a crown", level: 1, words: ["KING", "TOOTH", "ROOSTER", "HILL"] },
+      { category: "Words meaning 'to bother'", level: 2, words: ["HARASS", "BADGER", "HASSLE", "NAG"] },
+      { category: "Moon ___", level: 3, words: ["LIGHT", "SHINE", "WALK", "STONE"] }
+    ]
+  },
+  {
+    id: 230,
+    groups: [
+      { category: "Cartoon cats", level: 0, words: ["GARFIELD", "TOM", "SYLVESTER", "FELIX"] },
+      { category: "Things in a pocket", level: 1, words: ["KEYS", "LINT", "COIN", "PHONE"] },
+      { category: "Words meaning 'to weaken'", level: 2, words: ["ERODE", "SAP", "UNDERMINE", "DIMINISH"] },
+      { category: "Gold ___", level: 3, words: ["FISH", "RUSH", "MINE", "LEAF"] }
+    ]
+  },
+  {
+    id: 231,
+    groups: [
+      { category: "Herbs", level: 0, words: ["BASIL", "THYME", "OREGANO", "DILL"] },
+      { category: "Parts of a ship", level: 1, words: ["HULL", "MAST", "STERN", "ANCHOR"] },
+      { category: "Words meaning 'to grab'", level: 2, words: ["CLUTCH", "SEIZE", "SNATCH", "GRASP"] },
+      { category: "Light ___", level: 3, words: ["HOUSE", "YEAR", "WEIGHT", "BULB"] }
+    ]
+  },
+  {
+    id: 232,
+    groups: [
+      { category: "Ice cream flavors", level: 0, words: ["VANILLA", "MOCHA", "PISTACHIO", "MANGO"] },
+      { category: "Things with a ring", level: 1, words: ["PHONE", "CIRCUS", "BOXING", "SATURN"] },
+      { category: "Words meaning 'to mock'", level: 2, words: ["RIDICULE", "TAUNT", "DERIDE", "SCOFF"] },
+      { category: "Snow ___", level: 3, words: ["BALL", "FLAKE", "BOARD", "DRIFT"] }
+    ]
+  },
+  {
+    id: 233,
+    groups: [
+      { category: "Fabrics", level: 0, words: ["SILK", "DENIM", "VELVET", "LINEN"] },
+      { category: "Things that bounce", level: 1, words: ["CHECK", "BALL", "TIGGER", "IDEA"] },
+      { category: "Words meaning 'to mix'", level: 2, words: ["BLEND", "MINGLE", "COMBINE", "FUSE"] },
+      { category: "Tooth ___", level: 3, words: ["PASTE", "BRUSH", "FAIRY", "ACHE"] }
+    ]
+  },
+  {
+    id: 234,
+    groups: [
+      { category: "World capitals", level: 0, words: ["TOKYO", "OSLO", "LIMA", "CAIRO"] },
+      { category: "Things with a shell", level: 1, words: ["TORTOISE", "WALNUT", "TACO", "SHOTGUN"] },
+      { category: "Words meaning 'to hurry'", level: 2, words: ["HASTEN", "SCURRY", "RUSH", "HUSTLE"] },
+      { category: "Rock ___", level: 3, words: ["STAR", "SLIDE", "BOTTOM", "BAND"] }
+    ]
+  },
+  {
+    id: 235,
+    groups: [
+      { category: "Dances", level: 0, words: ["RUMBA", "SAMBA", "FOXTROT", "POLKA"] },
+      { category: "Things with scales", level: 1, words: ["FISH", "DRAGON", "MAP", "PIANO"] },
+      { category: "Words meaning 'to scatter'", level: 2, words: ["DISPERSE", "STREW", "BROADCAST", "SPRINKLE"] },
+      { category: "Night ___", level: 3, words: ["CAP", "CLUB", "FALL", "HAWK"] }
+    ]
+  },
+  {
+    id: 236,
+    groups: [
+      { category: "Nuts", level: 0, words: ["ALMOND", "CASHEW", "PECAN", "WALNUT"] },
+      { category: "Things with a blade", level: 1, words: ["FAN", "SKATE", "GRASS", "KNIFE"] },
+      { category: "Words meaning 'to shrink'", level: 2, words: ["DWINDLE", "CONTRACT", "WITHER", "RECEDE"] },
+      { category: "Honey ___", level: 3, words: ["BEE", "MOON", "COMB", "DEW"] }
+    ]
+  },
+  {
+    id: 237,
+    groups: [
+      { category: "Cheeses", level: 0, words: ["BRIE", "GOUDA", "CHEDDAR", "FETA"] },
+      { category: "Things with a trunk", level: 1, words: ["ELEPHANT", "CAR", "TREE", "SUITCASE"] },
+      { category: "Words meaning 'to deny'", level: 2, words: ["REFUTE", "REBUFF", "REJECT", "RENOUNCE"] },
+      { category: "Dream ___", level: 3, words: ["CATCHER", "LAND", "BOAT", "WORK"] }
+    ]
+  },
+  {
+    id: 238,
+    groups: [
+      { category: "Berries", level: 0, words: ["RASPBERRY", "CRANBERRY", "BLUEBERRY", "MULBERRY"] },
+      { category: "Things with a net", level: 1, words: ["TENNIS", "FISHING", "HAMMOCK", "INTERNET"] },
+      { category: "Words meaning 'to delay'", level: 2, words: ["STALL", "POSTPONE", "DEFER", "SHELVE"] },
+      { category: "Eye ___", level: 3, words: ["BROW", "LASH", "SHADOW", "WITNESS"] }
+    ]
+  },
+  {
+    id: 239,
+    groups: [
+      { category: "Woodwind instruments", level: 0, words: ["FLUTE", "CLARINET", "OBOE", "BASSOON"] },
+      { category: "Things with a cap", level: 1, words: ["BOTTLE", "MUSHROOM", "KNEE", "PEN"] },
+      { category: "Words meaning 'to beg'", level: 2, words: ["IMPLORE", "PLEAD", "BESEECH", "ENTREAT"] },
+      { category: "Hand ___", level: 3, words: ["SHAKE", "RAIL", "MADE", "CRAFT"] }
+    ]
+  },
+  {
+    id: 240,
+    groups: [
+      { category: "Tropical fruits", level: 0, words: ["PAPAYA", "GUAVA", "COCONUT", "PASSION"] },
+      { category: "Things in a park", level: 1, words: ["BENCH", "FOUNTAIN", "STATUE", "SQUIRREL"] },
+      { category: "Words meaning 'to forbid'", level: 2, words: ["PROHIBIT", "BAN", "OUTLAW", "VETO"] },
+      { category: "Star ___", level: 3, words: ["FISH", "DUST", "BOARD", "LIGHT"] }
+    ]
+  },
+  {
+    id: 241,
+    groups: [
+      { category: "Knots", level: 0, words: ["BOWLINE", "CLOVE", "REEF", "SLIP"] },
+      { category: "Things with a face", level: 1, words: ["CLOCK", "CLIFF", "COIN", "BUILDING"] },
+      { category: "Words meaning 'to flourish'", level: 2, words: ["THRIVE", "PROSPER", "BLOOM", "BLOSSOM"] },
+      { category: "Book ___", level: 3, words: ["WORM", "MARK", "SHELF", "KEEPER"] }
+    ]
+  },
+  {
+    id: 242,
+    groups: [
+      { category: "Desserts", level: 0, words: ["TIRAMISU", "CANNOLI", "STRUDEL", "ECLAIR"] },
+      { category: "Things with teeth", level: 1, words: ["COMB", "SAW", "GEAR", "ZIPPER"] },
+      { category: "Words meaning 'to rush'", level: 2, words: ["SCRAMBLE", "DASH", "SPRINT", "BARREL"] },
+      { category: "Sand ___", level: 3, words: ["CASTLE", "STORM", "PAPER", "PIPER"] }
+    ]
+  },
+  {
+    id: 243,
+    groups: [
+      { category: "Reptiles", level: 0, words: ["IGUANA", "COBRA", "GECKO", "PYTHON"] },
+      { category: "Things with a bed", level: 1, words: ["RIVER", "TRUCK", "FLOWER", "HOSPITAL"] },
+      { category: "Words meaning 'to cheat'", level: 2, words: ["SWINDLE", "DEFRAUD", "FLEECE", "BILK"] },
+      { category: "House ___", level: 3, words: ["HOLD", "WIFE", "PLANT", "BOAT"] }
+    ]
+  },
+  {
+    id: 244,
+    groups: [
+      { category: "Cocktails", level: 0, words: ["MOJITO", "MARTINI", "DAIQUIRI", "GIMLET"] },
+      { category: "Things with a horn", level: 1, words: ["UNICORN", "RHINO", "CAR", "TRUMPET"] },
+      { category: "Words meaning 'to soothe'", level: 2, words: ["PLACATE", "MOLLIFY", "ASSUAGE", "APPEASE"] },
+      { category: "Chain ___", level: 3, words: ["SAW", "MAIL", "LINK", "GANG"] }
+    ]
+  },
+  {
+    id: 245,
+    groups: [
+      { category: "Constellations", level: 0, words: ["ORION", "GEMINI", "LEO", "DRACO"] },
+      { category: "Things with a pit", level: 1, words: ["CHERRY", "ORCHESTRA", "MINE", "PEACH"] },
+      { category: "Words meaning 'to ponder'", level: 2, words: ["MUSE", "RUMINATE", "MULL", "REFLECT"] },
+      { category: "Green ___", level: 3, words: ["HOUSE", "BACK", "HORN", "PEACE"] }
+    ]
+  },
+  {
+    id: 246,
+    groups: [
+      { category: "Breads", level: 0, words: ["FOCACCIA", "NAAN", "CHALLAH", "PITA"] },
+      { category: "Things with a tail", level: 1, words: ["COMET", "KITE", "COAT", "SHRIMP"] },
+      { category: "Words meaning 'to vanish'", level: 2, words: ["EVAPORATE", "DISSOLVE", "DISSIPATE", "FADE"] },
+      { category: "Over ___", level: 3, words: ["BOARD", "CAST", "TURE", "HAUL"] }
+    ]
+  },
+  {
+    id: 247,
+    groups: [
+      { category: "Volcanoes", level: 0, words: ["VESUVIUS", "ETNA", "FUJI", "KRAKATOA"] },
+      { category: "Things in a purse", level: 1, words: ["LIPSTICK", "MIRROR", "WALLET", "TISSUE"] },
+      { category: "Words meaning 'to stun'", level: 2, words: ["DAZE", "STAGGER", "STUPEFY", "FLUMMOX"] },
+      { category: "Iron ___", level: 3, words: ["CLAD", "WORK", "CURTAIN", "HORSE"] }
+    ]
+  },
+  {
+    id: 248,
+    groups: [
+      { category: "Mushrooms", level: 0, words: ["SHIITAKE", "TRUFFLE", "CREMINI", "OYSTER"] },
+      { category: "Things with a tongue", level: 1, words: ["SHOE", "FLAME", "BELL", "SNAKE"] },
+      { category: "Words meaning 'to scold'", level: 2, words: ["CHASTISE", "REBUKE", "ADMONISH", "BERATE"] },
+      { category: "Air ___", level: 3, words: ["PORT", "CRAFT", "TIGHT", "WAVE"] }
+    ]
+  },
+  {
     id: 249,
     groups: [
-      { category: "Fermented foods", level: 0, words: ["KIMCHI", "SAUERKRAUT", "KOMBUCHA", "MISO"] },
-      { category: "Things with a ridge", level: 1, words: ["MOUNTAIN", "CHIP", "FINGERPRINT", "ROOF"] },
-      { category: "Words meaning 'to strengthen'", level: 2, words: ["BRACE", "HARDEN", "STEEL", "TEMPER"] },
-      { category: "Air ___", level: 3, words: ["BAG", "WAY", "FIELD", "STRIP"] }
+      { category: "Peppers", level: 0, words: ["HABANERO", "SERRANO", "CAYENNE", "JALAPENO"] },
+      { category: "Things with a drum", level: 1, words: ["BAND", "STICK", "ROLL", "MAJOR"] },
+      { category: "Words meaning 'to climb'", level: 2, words: ["ASCEND", "SCALE", "CLAMBER", "SCRAMBLE"] },
+      { category: "Foot ___", level: 3, words: ["NOTE", "PRINT", "HOLD", "BALL"] }
     ]
   },
   {
     id: 250,
     groups: [
-      { category: "Street foods", level: 0, words: ["PRETZEL", "CORN DOG", "CREPE", "CHURRO"] },
-      { category: "Things with a pole", level: 1, words: ["TENT", "FLAG", "FISHING", "MAGNET"] },
-      { category: "Words meaning 'to celebrate'", level: 2, words: ["REVEL", "REJOICE", "TOAST", "COMMEMORATE"] },
-      { category: "Time ___", level: 3, words: ["BOMB", "TABLE", "KEEPER", "STAMP"] }
+      { category: "Rivers", level: 0, words: ["DANUBE", "THAMES", "NILE", "AMAZON"] },
+      { category: "Things with a handle", level: 1, words: ["MUG", "DOOR", "SUITCASE", "PAN"] },
+      { category: "Words meaning 'to destroy'", level: 2, words: ["RAVAGE", "DECIMATE", "RUIN", "WRECK"] },
+      { category: "Storm ___", level: 3, words: ["TROOPER", "DRAIN", "CHASER", "FRONT"] }
+    ]
+  },
+  {
+    id: 251,
+    groups: [
+      { category: "Pasta shapes", level: 0, words: ["PENNE", "RIGATONI", "FUSILLI", "ORZO"] },
+      { category: "Things that spin", level: 1, words: ["TOP", "WHEEL", "TORNADO", "RECORD"] },
+      { category: "Words meaning 'to flee'", level: 2, words: ["ABSCOND", "BOLT", "ESCAPE", "SCATTER"] },
+      { category: "Black ___", level: 3, words: ["BERRY", "SMITH", "JACK", "BIRD"] }
+    ]
+  },
+  {
+    id: 252,
+    groups: [
+      { category: "Breakfast foods", level: 0, words: ["PANCAKE", "WAFFLE", "OMELET", "GRANOLA"] },
+      { category: "Olympic sports", level: 1, words: ["FENCING", "ROWING", "JAVELIN", "BOXING"] },
+      { category: "Words meaning 'to sparkle'", level: 2, words: ["SHIMMER", "GLISTEN", "TWINKLE", "GLIMMER"] },
+      { category: "___ light", level: 3, words: ["FLASH", "MOON", "STAR", "HIGH"] }
+    ]
+  },
+  {
+    id: 253,
+    groups: [
+      { category: "Dog breeds", level: 0, words: ["BEAGLE", "POODLE", "BOXER", "COLLIE"] },
+      { category: "Things with strings", level: 1, words: ["GUITAR", "KITE", "PUPPET", "BOW"] },
+      { category: "Words meaning 'to annoy'", level: 2, words: ["IRRITATE", "PESTER", "NETTLE", "GALL"] },
+      { category: "Fire ___", level: 3, words: ["FLY", "WORK", "CRACKER", "PLACE"] }
+    ]
+  },
+  {
+    id: 254,
+    groups: [
+      { category: "Gemstones", level: 0, words: ["RUBY", "TOPAZ", "OPAL", "GARNET"] },
+      { category: "Things that drip", level: 1, words: ["FAUCET", "CANDLE", "ICICLE", "PAINT"] },
+      { category: "Words meaning 'brave'", level: 2, words: ["VALIANT", "GALLANT", "INTREPID", "BOLD"] },
+      { category: "Gold ___", level: 3, words: ["FISH", "MINE", "RUSH", "DIGGER"] }
+    ]
+  },
+  {
+    id: 255,
+    groups: [
+      { category: "Dances", level: 0, words: ["SALSA", "TANGO", "WALTZ", "POLKA"] },
+      { category: "Things in a toolbox", level: 1, words: ["WRENCH", "PLIERS", "HAMMER", "DRILL"] },
+      { category: "Words meaning 'to praise'", level: 2, words: ["COMMEND", "EXTOL", "LAUD", "ACCLAIM"] },
+      { category: "Snow ___", level: 3, words: ["FLAKE", "BOARD", "DRIFT", "PLOW"] }
+    ]
+  },
+  {
+    id: 256,
+    groups: [
+      { category: "Berries", level: 0, words: ["RASPBERRY", "CRANBERRY", "MULBERRY", "GOOSEBERRY"] },
+      { category: "Things with a spine", level: 1, words: ["BOOK", "CACTUS", "HEDGEHOG", "MOUNTAIN"] },
+      { category: "Words meaning 'to wander'", level: 2, words: ["MEANDER", "ROAM", "RAMBLE", "DRIFT"] },
+      { category: "Key ___", level: 3, words: ["BOARD", "STONE", "CHAIN", "NOTE"] }
+    ]
+  },
+  {
+    id: 257,
+    groups: [
+      { category: "Citrus fruits", level: 0, words: ["LEMON", "LIME", "GRAPEFRUIT", "TANGERINE"] },
+      { category: "Things that howl", level: 1, words: ["WOLF", "WIND", "COYOTE", "SIREN"] },
+      { category: "Words meaning 'to grab'", level: 2, words: ["SEIZE", "CLUTCH", "SNATCH", "GRASP"] },
+      { category: "Moon ___", level: 3, words: ["SHINE", "WALK", "BEAM", "LIGHT"] }
+    ]
+  },
+  {
+    id: 258,
+    groups: [
+      { category: "Sharks", level: 0, words: ["HAMMER", "TIGER", "BULL", "NURSE"] },
+      { category: "Things in a wallet", level: 1, words: ["CASH", "LICENSE", "RECEIPT", "PHOTO"] },
+      { category: "Words meaning 'to reveal'", level: 2, words: ["DISCLOSE", "DIVULGE", "EXPOSE", "UNVEIL"] },
+      { category: "Sun ___", level: 3, words: ["BURN", "FLOWER", "SCREEN", "RISE"] }
+    ]
+  },
+  {
+    id: 259,
+    groups: [
+      { category: "Cheeses", level: 0, words: ["CHEDDAR", "BRIE", "GOUDA", "FETA"] },
+      { category: "Things with a crown", level: 1, words: ["KING", "TOOTH", "ROOSTER", "PINEAPPLE"] },
+      { category: "Words meaning 'to shrink'", level: 2, words: ["CONTRACT", "DIMINISH", "WANE", "DWINDLE"] },
+      { category: "Star ___", level: 3, words: ["FISH", "BOARD", "DUST", "LIGHT"] }
+    ]
+  },
+  {
+    id: 260,
+    groups: [
+      { category: "Garden flowers", level: 0, words: ["DAHLIA", "PETUNIA", "MARIGOLD", "ZINNIA"] },
+      { category: "Things that tick", level: 1, words: ["CLOCK", "BOMB", "INSECT", "HEART"] },
+      { category: "Words meaning 'to soothe'", level: 2, words: ["PLACATE", "MOLLIFY", "APPEASE", "PACIFY"] },
+      { category: "Hand ___", level: 3, words: ["SHAKE", "MADE", "CUFF", "STAND"] }
+    ]
+  },
+  {
+    id: 261,
+    groups: [
+      { category: "Nuts", level: 0, words: ["CASHEW", "PECAN", "ALMOND", "WALNUT"] },
+      { category: "Things that bloom", level: 1, words: ["ROSE", "ALGAE", "YOUTH", "ROMANCE"] },
+      { category: "Words meaning 'to mock'", level: 2, words: ["RIDICULE", "DERIDE", "SCOFF", "TAUNT"] },
+      { category: "Back ___", level: 3, words: ["FIRE", "STAGE", "BONE", "LASH"] }
+    ]
+  },
+  {
+    id: 262,
+    groups: [
+      { category: "Tropical fruits", level: 0, words: ["MANGO", "PAPAYA", "GUAVA", "COCONUT"] },
+      { category: "Things with a blade", level: 1, words: ["KNIFE", "FAN", "SKATE", "GRASS"] },
+      { category: "Words meaning 'to ponder'", level: 2, words: ["MULL", "RUMINATE", "MUSE", "REFLECT"] },
+      { category: "Side ___", level: 3, words: ["KICK", "TRACK", "LINE", "STEP"] }
+    ]
+  },
+  {
+    id: 263,
+    groups: [
+      { category: "Spices", level: 0, words: ["CUMIN", "TURMERIC", "PAPRIKA", "SAFFRON"] },
+      { category: "Things that hiss", level: 1, words: ["SNAKE", "STEAM", "CAT", "TIRE"] },
+      { category: "Words meaning 'to ban'", level: 2, words: ["PROHIBIT", "FORBID", "OUTLAW", "BAR"] },
+      { category: "Head ___", level: 3, words: ["BAND", "LINE", "HUNTER", "STRONG"] }
+    ]
+  },
+  {
+    id: 264,
+    groups: [
+      { category: "Woodwind family", level: 0, words: ["CLARINET", "OBOE", "FLUTE", "BASSOON"] },
+      { category: "Things with a shell", level: 1, words: ["TURTLE", "EGG", "LOBSTER", "WALNUT"] },
+      { category: "Words meaning 'to beg'", level: 2, words: ["IMPLORE", "BESEECH", "ENTREAT", "PLEAD"] },
+      { category: "Cross ___", level: 3, words: ["BOW", "WALK", "WORD", "ROADS"] }
+    ]
+  },
+  {
+    id: 265,
+    groups: [
+      { category: "Deserts", level: 0, words: ["SAHARA", "GOBI", "MOJAVE", "KALAHARI"] },
+      { category: "Things that buzz", level: 1, words: ["BEE", "PHONE", "RAZOR", "CROWD"] },
+      { category: "Words meaning 'to hurry'", level: 2, words: ["HASTEN", "EXPEDITE", "HUSTLE", "DASH"] },
+      { category: "Book ___", level: 3, words: ["WORM", "MARK", "CASE", "SHELF"] }
+    ]
+  },
+  {
+    id: 266,
+    groups: [
+      { category: "Sushi types", level: 0, words: ["NIGIRI", "SASHIMI", "TEMAKI", "URAMAKI"] },
+      { category: "Things with a wing", level: 1, words: ["BIRD", "PLANE", "HOSPITAL", "MANSION"] },
+      { category: "Words meaning 'to tremble'", level: 2, words: ["QUIVER", "SHUDDER", "QUAKE", "SHIVER"] },
+      { category: "Ring ___", level: 3, words: ["LEADER", "TONE", "SIDE", "WORM"] }
+    ]
+  },
+  {
+    id: 267,
+    groups: [
+      { category: "Salad greens", level: 0, words: ["ARUGULA", "KALE", "SPINACH", "ROMAINE"] },
+      { category: "Things with a horn", level: 1, words: ["RHINO", "CAR", "UNICORN", "BULL"] },
+      { category: "Words meaning 'to glow'", level: 2, words: ["RADIATE", "GLEAM", "LUMINOUS", "BEAM"] },
+      { category: "Over ___", level: 3, words: ["COAT", "BOARD", "LOOK", "TIME"] }
+    ]
+  },
+  {
+    id: 268,
+    groups: [
+      { category: "Martial arts", level: 0, words: ["KARATE", "JUDO", "AIKIDO", "TAEKWONDO"] },
+      { category: "Things with a net", level: 1, words: ["TENNIS", "SPIDER", "FISHING", "BASKET"] },
+      { category: "Words meaning 'to hoard'", level: 2, words: ["STOCKPILE", "AMASS", "STASH", "SQUIRREL"] },
+      { category: "Long ___", level: 3, words: ["BOW", "HORN", "SHOT", "HAND"] }
+    ]
+  },
+  {
+    id: 269,
+    groups: [
+      { category: "Herbs", level: 0, words: ["CILANTRO", "BASIL", "THYME", "OREGANO"] },
+      { category: "Things with a tail", level: 1, words: ["COMET", "KITE", "COAT", "MONKEY"] },
+      { category: "Words meaning 'to linger'", level: 2, words: ["LOITER", "DAWDLE", "TARRY", "DALLY"] },
+      { category: "Short ___", level: 3, words: ["CAKE", "STOP", "HAND", "CUT"] }
+    ]
+  },
+  {
+    id: 270,
+    groups: [
+      { category: "Volcanoes", level: 0, words: ["VESUVIUS", "ETNA", "FUJI", "KRAKATOA"] },
+      { category: "Things with a point", level: 1, words: ["NEEDLE", "PENCIL", "STAR", "COMPASS"] },
+      { category: "Words meaning 'to outwit'", level: 2, words: ["OUTFOX", "DUPE", "BAMBOOZLE", "HOODWINK"] },
+      { category: "Double ___", level: 3, words: ["DUTCH", "CROSS", "DOWN", "TAKE"] }
+    ]
+  },
+  {
+    id: 271,
+    groups: [
+      { category: "Board games", level: 0, words: ["CHESS", "RISK", "CLUE", "SORRY"] },
+      { category: "Things that crack", level: 1, words: ["WHIP", "ICE", "JOKE", "KNUCKLE"] },
+      { category: "Words meaning 'to absorb'", level: 2, words: ["ENGROSS", "IMMERSE", "SOAK", "CONSUME"] },
+      { category: "Green ___", level: 3, words: ["HOUSE", "HORN", "BACK", "PEACE"] }
+    ]
+  },
+  {
+    id: 272,
+    groups: [
+      { category: "Constellations", level: 0, words: ["ORION", "CASSIOPEIA", "DRACO", "PEGASUS"] },
+      { category: "Things that pop", level: 1, words: ["BALLOON", "CORN", "BUBBLE", "CORK"] },
+      { category: "Words meaning 'to flaunt'", level: 2, words: ["BRANDISH", "PARADE", "SHOWCASE", "FLAUNT"] },
+      { category: "Blue ___", level: 3, words: ["PRINT", "JAY", "BELL", "GRASS"] }
+    ]
+  },
+  {
+    id: 273,
+    groups: [
+      { category: "Teas", level: 0, words: ["OOLONG", "MATCHA", "CHAMOMILE", "EARL GREY"] },
+      { category: "Things with a cap", level: 1, words: ["MUSHROOM", "BOTTLE", "PEN", "KNEE"] },
+      { category: "Words meaning 'to forbid'", level: 2, words: ["VETO", "EMBARGO", "RESTRICT", "TABOO"] },
+      { category: "Wild ___", level: 3, words: ["FIRE", "LIFE", "CARD", "CAT"] }
+    ]
+  },
+  {
+    id: 274,
+    groups: [
+      { category: "Whales", level: 0, words: ["HUMPBACK", "BELUGA", "NARWHAL", "ORCA"] },
+      { category: "Things with a mouth", level: 1, words: ["RIVER", "CAVE", "BOTTLE", "VOLCANO"] },
+      { category: "Words meaning 'to enchant'", level: 2, words: ["BEGUILE", "ENTRANCE", "CHARM", "ALLURE"] },
+      { category: "Red ___", level: 3, words: ["WOOD", "EYE", "NECK", "LINE"] }
+    ]
+  },
+  {
+    id: 275,
+    groups: [
+      { category: "Knots", level: 0, words: ["BOWLINE", "CLOVE", "REEF", "SQUARE"] },
+      { category: "Things that roar", level: 1, words: ["LION", "ENGINE", "CROWD", "OCEAN"] },
+      { category: "Words meaning 'to baffle'", level: 2, words: ["PERPLEX", "MYSTIFY", "CONFOUND", "STUMP"] },
+      { category: "Rock ___", level: 3, words: ["SLIDE", "STAR", "BOTTOM", "BAND"] }
+    ]
+  },
+  {
+    id: 276,
+    groups: [
+      { category: "Fabrics", level: 0, words: ["SILK", "DENIM", "VELVET", "LINEN"] },
+      { category: "Things with a bank", level: 1, words: ["RIVER", "BLOOD", "PIGGY", "SNOW"] },
+      { category: "Words meaning 'to pamper'", level: 2, words: ["CODDLE", "INDULGE", "SPOIL", "DOTE"] },
+      { category: "Sand ___", level: 3, words: ["CASTLE", "STORM", "PIPER", "PAPER"] }
+    ]
+  },
+  {
+    id: 277,
+    groups: [
+      { category: "Freshwater fish", level: 0, words: ["TROUT", "PERCH", "BASS", "PIKE"] },
+      { category: "Things that melt", level: 1, words: ["BUTTER", "GLACIER", "CHOCOLATE", "HEART"] },
+      { category: "Words meaning 'to scorch'", level: 2, words: ["SINGE", "SEAR", "CHAR", "BLISTER"] },
+      { category: "Grand ___", level: 3, words: ["PIANO", "CANYON", "STAND", "MASTER"] }
+    ]
+  },
+  {
+    id: 278,
+    groups: [
+      { category: "Fossils", level: 0, words: ["AMMONITE", "TRILOBITE", "AMBER", "FERN"] },
+      { category: "Things with a pocket", level: 1, words: ["JACKET", "POOL", "WATCH", "AIR"] },
+      { category: "Words meaning 'to sway'", level: 2, words: ["OSCILLATE", "WAVER", "TEETER", "VACILLATE"] },
+      { category: "Half ___", level: 3, words: ["TIME", "BACK", "PIPE", "WAY"] }
+    ]
+  },
+  {
+    id: 279,
+    groups: [
+      { category: "Root vegetables", level: 0, words: ["TURNIP", "BEET", "PARSNIP", "RADISH"] },
+      { category: "Things that whistle", level: 1, words: ["KETTLE", "REFEREE", "TRAIN", "WIND"] },
+      { category: "Words meaning 'to soften'", level: 2, words: ["MITIGATE", "TEMPER", "CUSHION", "EASE"] },
+      { category: "Dead ___", level: 3, words: ["LINE", "LOCK", "PAN", "BEAT"] }
+    ]
+  },
+  {
+    id: 280,
+    groups: [
+      { category: "Clouds", level: 0, words: ["CUMULUS", "STRATUS", "CIRRUS", "NIMBUS"] },
+      { category: "Things with a bridge", level: 1, words: ["GUITAR", "NOSE", "SHIP", "TOOTH"] },
+      { category: "Words meaning 'to erase'", level: 2, words: ["OBLITERATE", "EXPUNGE", "EFFACE", "DELETE"] },
+      { category: "House ___", level: 3, words: ["KEEPER", "WORK", "HOLD", "FLY"] }
+    ]
+  },
+  {
+    id: 281,
+    groups: [
+      { category: "Owls", level: 0, words: ["BARN", "SNOWY", "HORNED", "SCREECH"] },
+      { category: "Things with a ring", level: 1, words: ["BOXING", "SATURN", "PHONE", "CIRCUS"] },
+      { category: "Words meaning 'to thwart'", level: 2, words: ["FOIL", "FRUSTRATE", "STYMIE", "IMPEDE"] },
+      { category: "Light ___", level: 3, words: ["HOUSE", "WEIGHT", "YEAR", "BULB"] }
+    ]
+  },
+  {
+    id: 282,
+    groups: [
+      { category: "Beans", level: 0, words: ["PINTO", "KIDNEY", "NAVY", "LIMA"] },
+      { category: "Things with a bed", level: 1, words: ["RIVER", "FLOWER", "TRUCK", "OYSTER"] },
+      { category: "Words meaning 'to bewitch'", level: 2, words: ["ENTHRALL", "CAPTIVATE", "SPELLBIND", "ENRAPTURE"] },
+      { category: "Blind ___", level: 3, words: ["SPOT", "FOLD", "SIDE", "DATE"] }
+    ]
+  },
+  {
+    id: 283,
+    groups: [
+      { category: "Cactus types", level: 0, words: ["SAGUARO", "PRICKLY", "BARREL", "CHOLLA"] },
+      { category: "Things that echo", level: 1, words: ["CANYON", "CAVE", "HALLWAY", "TUNNEL"] },
+      { category: "Words meaning 'to ignite'", level: 2, words: ["KINDLE", "SPARK", "INFLAME", "COMBUST"] },
+      { category: "Tall ___", level: 3, words: ["TALE", "SHIP", "ORDER", "BOY"] }
     ]
   }
 ];

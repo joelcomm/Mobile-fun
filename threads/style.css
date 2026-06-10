@@ -363,7 +363,7 @@ header h1 {
 }
 
 #overlay-content .btn {
-  width: fit-content;
+  width: auto;
   margin: 8px auto 0;
 }
 
