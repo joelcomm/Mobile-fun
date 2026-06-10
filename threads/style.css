@@ -138,10 +138,10 @@ header h1 {
   user-select: none;
   transition: transform 0.1s, background 0.15s, color 0.15s;
   overflow: hidden;
-  white-space: nowrap;
   line-height: 1.15;
   text-transform: uppercase;
   letter-spacing: 0.3px;
+  overflow-wrap: break-word; word-break: break-word;
 }
 
 .tile:active {

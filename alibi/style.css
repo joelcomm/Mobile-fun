@@ -111,8 +111,10 @@ html, body {
   border-radius: 12px; padding: 14px 6px;
   font-family: inherit; font-size: clamp(13px, 3.8vw, 17px); font-weight: 700;
   color: var(--text); text-align: center; cursor: pointer;
-  transition: all 0.15s; overflow: hidden; white-space: nowrap;
-  line-height: 1.3;
+  transition: all 0.15s; overflow: hidden;
+  line-height: 1.3; min-height: 64px;
+  display: flex; align-items: center; justify-content: center;
+  overflow-wrap: break-word; word-break: break-word;
 }
 .word-btn:active { transform: scale(0.96); }
 .word-btn.correct-pick {

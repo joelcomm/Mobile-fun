@@ -142,8 +142,8 @@ html, body {
 .word-display {
   font-size: clamp(24px, 8vw, 36px); font-weight: 900; color: var(--white);
   text-align: center; letter-spacing: 2px; min-height: 48px;
-  transition: all 0.2s; overflow: hidden; white-space: nowrap;
-  text-overflow: ellipsis; max-width: 100%;
+  transition: all 0.2s; overflow: hidden;
+  max-width: 100%; overflow-wrap: break-word; word-break: break-word;
 }
 .word-display.pop-in { animation: popIn 0.3s ease-out; }
 .word-display.correct-word { color: var(--correct); }
