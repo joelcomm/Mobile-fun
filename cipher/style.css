@@ -19,7 +19,7 @@
 
 html, body {
   height: 100%; background: var(--bg); color: var(--text);
-  font-family: 'Inter', -apple-system, sans-serif; font-size: 18px; overflow: hidden;
+  font-family: 'Inter', -apple-system, sans-serif; font-size: 18px; overflow-x: hidden;
 }
 
 #app {
@@ -27,6 +27,7 @@ html, body {
   padding-top: calc(72px + var(--safe-top));
   padding-bottom: calc(24px + var(--safe-bottom));
   height: 100vh; height: 100dvh; display: flex; flex-direction: column;
+  overflow: hidden;
 }
 
 .back-link {
@@ -185,6 +186,7 @@ html, body {
   text-align: center; display: flex; flex-direction: column;
   align-items: center; justify-content: center; flex: 1;
   animation: fadeIn 0.5s ease-out;
+  overflow-y: auto; -webkit-overflow-scrolling: touch; min-height: 0;
 }
 #gameover-screen .btn-main { width: auto; }
 .gameover-heading { font-size: 32px; font-weight: 900; letter-spacing: 4px; color: var(--white); margin-bottom: 16px; }

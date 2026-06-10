@@ -23,7 +23,7 @@ html, body {
   color: var(--text);
   font-family: 'Inter', -apple-system, sans-serif;
   font-size: 18px;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 #app {
@@ -35,6 +35,7 @@ html, body {
   height: 100vh; height: 100dvh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .back-link {
@@ -266,6 +267,9 @@ html, body {
   justify-content: center;
   flex: 1;
   animation: fadeIn 0.5s ease-out;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  min-height: 0;
 }
 #gameover-screen .btn-main { width: auto; }
 .gameover-heading {
