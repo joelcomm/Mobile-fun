@@ -291,10 +291,12 @@ header h1 {
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   z-index: 100;
   padding: 24px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   animation: fadeIn 0.3s ease;
 }
 
@@ -309,6 +311,7 @@ header h1 {
   max-width: 380px;
   width: 100%;
   text-align: center;
+  margin: auto 0;
   animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 

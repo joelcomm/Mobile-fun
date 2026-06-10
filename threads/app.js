@@ -221,7 +221,7 @@ function handleWrongGuess(oneAway) {
       // Game over — reveal remaining groups
       revealAll();
     } else {
-      selected = [];
+      if (!oneAway) selected = [];
       renderGrid();
       updateButtons();
     }
