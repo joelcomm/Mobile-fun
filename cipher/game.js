@@ -64,8 +64,20 @@
           hintsUsedTotal: progress.hintsUsedTotal,
           noHintSolves: progress.noHintSolves
         };
+        for (var i = 0; i < progress.current; i++) {
+          generateCipherMap(state.quotes[i].text, state.dailyRng);
+        }
         showScreen('game');
         showRound();
+        if (progress.playerMap) {
+          state.playerMap = progress.playerMap;
+          state.lockedLetters = progress.lockedLetters || {};
+          state.hintsUsed = progress.hintsUsed || 0;
+          dom.btnHint.textContent = 'HINT (' + (MAX_HINTS - state.hintsUsed) + ')';
+          if (state.hintsUsed >= MAX_HINTS) dom.btnHint.disabled = true;
+          renderCipher();
+          renderPicker();
+        }
       }
     }
   }
@@ -223,10 +235,10 @@
     if (state.lockedLetters[cipher]) return; // locked by hint
 
     if (state.selectedCipher === cipher) {
-      // Deselect — clear mapping
       state.selectedCipher = null;
       delete state.playerMap[cipher];
       dom.selectedInfo.textContent = '';
+      saveCipherProgress();
     } else {
       state.selectedCipher = cipher;
       dom.selectedInfo.textContent = 'Replace ' + cipher + ' with...';
@@ -255,6 +267,7 @@
 
     renderCipher();
     renderPicker();
+    saveCipherProgress();
   }
 
   function checkSolution() {
@@ -352,6 +365,20 @@
 
     renderCipher();
     renderPicker();
+    saveCipherProgress();
+  }
+
+  function saveCipherProgress() {
+    Daily.saveProgress('cipher', {
+      current: state.current,
+      score: state.score,
+      solvedCount: state.solvedCount,
+      hintsUsedTotal: state.hintsUsedTotal,
+      noHintSolves: state.noHintSolves,
+      playerMap: state.playerMap,
+      lockedLetters: state.lockedLetters,
+      hintsUsed: state.hintsUsed
+    });
   }
 
   function nextRound() {

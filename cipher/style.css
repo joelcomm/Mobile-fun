@@ -84,6 +84,7 @@ html, body {
 #game-screen {
   display: flex; flex-direction: column; flex: 1;
   animation: fadeIn 0.3s ease-out;
+  overflow-y: auto; -webkit-overflow-scrolling: touch;
 }
 .game-header {
   display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;
