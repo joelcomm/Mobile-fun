@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0d12">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <title>Event Snap — Organizer Setup</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #0b0d12; color: #f4f6fb;
+      min-height: 100vh; padding: 28px 18px 60px;
+    }
+    .wrap { max-width: 560px; margin: 0 auto; }
+    h1 { font-size: 26px; font-weight: 900; letter-spacing: -.02em; }
+    .lead { color: #9aa3b8; margin: 8px 0 26px; line-height: 1.5; }
+    label { display: block; font-weight: 700; font-size: 14px; margin: 18px 0 7px; }
+    .req { color: #ff5a5f; }
+    input {
+      width: 100%; padding: 14px; border-radius: 12px;
+      border: 1px solid #2a3040; background: #151823; color: #fff;
+      font-size: 15px; font-family: inherit;
+    }
+    input:focus { outline: none; border-color: #4f8cff; }
+    .small { font-size: 12px; color: #9aa3b8; margin-top: 6px; line-height: 1.5; }
+    button {
+      width: 100%; margin-top: 24px; border: none; border-radius: 14px;
+      padding: 16px; font-size: 16px; font-weight: 800; color: #fff;
+      background: linear-gradient(180deg, #4f8cff, #2f6bd6); cursor: pointer;
+    }
+    button:active { transform: translateY(1px); }
+    button.ghost { background: #1d2230; border: 1px solid #2a3040; }
+    .result { display: none; margin-top: 30px; text-align: center; }
+    .result.show { display: block; }
+    .qr-card {
+      background: #fff; border-radius: 18px; padding: 24px;
+      display: inline-block; margin: 0 auto;
+    }
+    .qr-card #qr { display: grid; place-items: center; }
+    .qr-card .ev { color: #0b0d12; font-weight: 800; margin-top: 14px; font-size: 18px; }
+    .qr-card .tip { color: #555; font-size: 12px; margin-top: 4px; }
+    .linkbox {
+      margin-top: 16px; word-break: break-all; font-size: 12px; color: #9aa3b8;
+      background: #151823; border: 1px solid #2a3040; border-radius: 10px; padding: 10px;
+    }
+    .row { display: flex; gap: 10px; }
+    .row button { margin-top: 16px; }
+    .err { color: #ff5a5f; font-size: 13px; margin-top: 12px; font-weight: 600; display: none; }
+    .err.show { display: block; }
+    a { color: #4f8cff; }
+    details { margin-top: 30px; border-top: 1px solid #2a3040; padding-top: 18px; }
+    summary { cursor: pointer; font-weight: 700; }
+    ol { margin: 12px 0 0 20px; line-height: 1.7; color: #c7cdda; }
+    code { background: #151823; padding: 2px 6px; border-radius: 6px; font-size: 13px; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <h1>📸 Event Snap — Setup</h1>
+  <p class="lead">Generate the QR code attendees scan. Each photo they take uploads straight into your Google&nbsp;Drive folder — no sign-in for them.</p>
+
+  <label>Upload endpoint URL <span class="req">*</span></label>
+  <input id="endpoint" type="url" placeholder="https://script.google.com/macros/s/AKfy…/exec" autocomplete="off">
+  <p class="small">Paste the <strong>Web app URL</strong> from your deployed Google Apps Script (see steps below).</p>
+
+  <label>Event name <span class="req">*</span></label>
+  <input id="event" type="text" placeholder="Acme Summit 2026" autocomplete="off">
+  <p class="small">Shown in the app and used as the Drive subfolder name.</p>
+
+  <label>Shared key <span style="color:#9aa3b8;font-weight:400">(optional)</span></label>
+  <input id="key" type="text" placeholder="leave blank unless your script checks one" autocomplete="off">
+  <p class="small">If your Apps Script verifies a secret, enter the same value here.</p>
+
+  <button id="gen">Generate QR code</button>
+  <p id="err" class="err"></p>
+
+  <div id="result" class="result">
+    <div class="qr-card">
+      <div id="qr"></div>
+      <div class="ev" id="evname"></div>
+      <div class="tip">Scan to start taking photos</div>
+    </div>
+    <div class="linkbox" id="link"></div>
+    <div class="row">
+      <button class="ghost" id="copy">Copy link</button>
+      <button class="ghost" id="download">Download QR</button>
+    </div>
+    <button id="print" style="background:#1d2230;border:1px solid #2a3040;" onclick="window.print()">Print this page</button>
+  </div>
+
+  <details>
+    <summary>One-time Google Drive setup (≈5 min)</summary>
+    <ol>
+      <li>In Google&nbsp;Drive, create a folder for the event and open it. Copy the <strong>folder ID</strong> from the URL (the part after <code>/folders/</code>).</li>
+      <li>Go to <a href="https://script.google.com" target="_blank" rel="noopener">script.google.com</a> → <strong>New project</strong>.</li>
+      <li>Paste the contents of <a href="apps-script.gs" target="_blank" rel="noopener">apps-script.gs</a> (in this folder) and set <code>FOLDER_ID</code> to your folder ID.</li>
+      <li>Click <strong>Deploy → New deployment → Web app</strong>. Set <em>Execute as: Me</em> and <em>Who has access: Anyone</em>. Authorize when prompted.</li>
+      <li>Copy the <strong>Web app URL</strong> and paste it in the field above.</li>
+      <li>Generate the QR, print it, and put it where attendees can scan it. Done.</li>
+    </ol>
+  </details>
+</div>
+
+<!-- Tiny, dependency-free QR generator -->
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var qrObj = null;
+
+  function buildLink() {
+    var ep = $('endpoint').value.trim();
+    var ev = $('event').value.trim();
+    var key = $('key').value.trim();
+    if (!ep || !ev) return null;
+    var base = location.href.replace(/setup\.html.*$/, 'index.html');
+    var url = base + '?e=' + encodeURIComponent(btoa(ep)) + '&n=' + encodeURIComponent(ev);
+    if (key) url += '&k=' + encodeURIComponent(key);
+    return { url: url, ev: ev, ep: ep };
+  }
+
+  $('gen').addEventListener('click', function () {
+    var err = $('err');
+    err.classList.remove('show');
+    var data = buildLink();
+    if (!data) { err.textContent = 'Please fill in both the endpoint URL and the event name.'; err.classList.add('show'); return; }
+    if (!/^https:\/\/script\.google\.com\/macros\//.test(data.ep) && !/^https:\/\//.test(data.ep)) {
+      err.textContent = 'That endpoint doesn’t look like a valid https URL.'; err.classList.add('show'); return;
+    }
+
+    $('qr').innerHTML = '';
+    qrObj = new QRCode($('qr'), { text: data.url, width: 240, height: 240, correctLevel: QRCode.CorrectLevel.M });
+    $('evname').textContent = data.ev;
+    $('link').textContent = data.url;
+    $('result').classList.add('show');
+    $('result').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  $('copy').addEventListener('click', function () {
+    var t = $('link').textContent;
+    navigator.clipboard.writeText(t).then(function () {
+      $('copy').textContent = 'Copied!';
+      setTimeout(function () { $('copy').textContent = 'Copy link'; }, 1500);
+    });
+  });
+
+  $('download').addEventListener('click', function () {
+    var img = $('qr').querySelector('img') || $('qr').querySelector('canvas');
+    if (!img) return;
+    var src = img.tagName === 'IMG' ? img.src : img.toDataURL('image/png');
+    var a = document.createElement('a');
+    a.href = src;
+    a.download = 'event-snap-qr.png';
+    a.click();
+  });
+})();
+</script>
+</body>
+</html>

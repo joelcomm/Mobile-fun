@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0b0d12">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <title>Event Snap</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- ===== Welcome / launch screen ===== -->
+  <section id="welcome" class="screen active">
+    <div class="welcome-inner">
+      <div class="logo">📸</div>
+      <h1 id="welcome-title">Event Snap</h1>
+      <p id="welcome-sub" class="sub">Take photos at the event — every shot uploads straight to the shared Google&nbsp;Drive.</p>
+      <button id="btn-launch" class="btn-primary">Open Camera</button>
+      <p id="welcome-error" class="hint error hidden"></p>
+      <p class="hint muted">No account needed. Your photos are added to the organizer's gallery.</p>
+    </div>
+  </section>
+
+  <!-- ===== Camera screen ===== -->
+  <section id="camera" class="screen">
+    <video id="video" playsinline autoplay muted></video>
+    <canvas id="canvas" class="hidden"></canvas>
+
+    <div class="cam-top">
+      <span id="event-badge" class="badge"></span>
+      <span id="count-badge" class="badge">0 uploaded</span>
+    </div>
+
+    <div id="flash" class="flash"></div>
+
+    <div class="cam-bottom">
+      <button id="btn-flip" class="circle-btn" title="Switch camera" aria-label="Switch camera">🔄</button>
+      <button id="btn-shutter" class="shutter" aria-label="Take photo"></button>
+      <button id="btn-thumb" class="circle-btn thumb" title="Recent" aria-label="Recent photos"></button>
+    </div>
+
+    <div id="toast" class="toast"></div>
+  </section>
+
+  <!-- ===== Gallery (this device's session) ===== -->
+  <section id="gallery" class="screen">
+    <div class="gallery-head">
+      <button id="btn-gallery-back" class="text-btn">‹ Camera</button>
+      <h2>This session</h2>
+      <span></span>
+    </div>
+    <div id="gallery-grid" class="gallery-grid"></div>
+    <p id="gallery-empty" class="hint muted center">Photos you take will appear here.</p>
+  </section>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,306 @@
+/* Event Snap — scan a QR, open camera, every photo uploads to the
+   organizer's Google Drive via a Google Apps Script web app endpoint.
+
+   Config arrives in the QR's URL as query params and is then cached in
+   localStorage so the app keeps working if reopened:
+     ?e=<base64 endpoint URL>   the Apps Script /exec web-app URL
+     ?n=<event name>            label shown in-app + used as Drive subfolder
+     ?k=<key>                   optional shared secret checked by the script
+*/
+(function () {
+  'use strict';
+
+  var LS = 'eventsnap.config';
+  var QUEUE_KEY = 'eventsnap.queue';
+
+  // ---- DOM ----
+  var $ = function (id) { return document.getElementById(id); };
+  var screens = {
+    welcome: $('welcome'),
+    camera: $('camera'),
+    gallery: $('gallery')
+  };
+  var video = $('video');
+  var canvas = $('canvas');
+  var shutter = $('btn-shutter');
+  var flash = $('flash');
+  var toast = $('toast');
+  var countBadge = $('count-badge');
+  var eventBadge = $('event-badge');
+  var thumbBtn = $('btn-thumb');
+  var galleryGrid = $('gallery-grid');
+  var galleryEmpty = $('gallery-empty');
+
+  // ---- State ----
+  var config = loadConfig();
+  var stream = null;
+  var facing = 'environment';
+  var uploadedCount = 0;
+  var session = []; // { dataUrl, status } newest-first
+
+  // ===================================================================
+  // Config
+  // ===================================================================
+  function loadConfig() {
+    var params = new URLSearchParams(location.search);
+    var cfg = {};
+    try { cfg = JSON.parse(localStorage.getItem(LS)) || {}; } catch (e) { cfg = {}; }
+
+    if (params.get('e')) {
+      try { cfg.endpoint = atob(decodeURIComponent(params.get('e'))); }
+      catch (e) { cfg.endpoint = decodeURIComponent(params.get('e')); }
+    }
+    if (params.get('n')) cfg.event = decodeURIComponent(params.get('n'));
+    if (params.get('k')) cfg.key = decodeURIComponent(params.get('k'));
+
+    if (cfg.endpoint) {
+      try { localStorage.setItem(LS, JSON.stringify(cfg)); } catch (e) {}
+    }
+    // Clean params out of the address bar so a refresh keeps working.
+    if (params.get('e') || params.get('n') || params.get('k')) {
+      history.replaceState(null, '', location.pathname);
+    }
+    return cfg;
+  }
+
+  // ===================================================================
+  // Screen switching
+  // ===================================================================
+  function show(name) {
+    Object.keys(screens).forEach(function (k) {
+      screens[k].classList.toggle('active', k === name);
+    });
+  }
+
+  // ===================================================================
+  // Welcome
+  // ===================================================================
+  function initWelcome() {
+    if (config.event) {
+      $('welcome-title').textContent = config.event;
+      eventBadge.textContent = config.event;
+    } else {
+      eventBadge.textContent = 'Event Snap';
+    }
+
+    if (!config.endpoint) {
+      var err = $('welcome-error');
+      err.textContent = 'This link is missing its upload destination. Ask the organizer for the correct QR code.';
+      err.classList.remove('hidden');
+      $('btn-launch').disabled = true;
+      $('btn-launch').style.opacity = '.5';
+      return;
+    }
+    $('btn-launch').addEventListener('click', launch);
+  }
+
+  function launch() {
+    if (!isSecure()) {
+      fail('Camera needs a secure (https) connection. Open the link over https.');
+      return;
+    }
+    startCamera().then(function () {
+      show('camera');
+      drainQueue();
+    }).catch(function (e) {
+      fail(cameraErrorText(e));
+    });
+  }
+
+  function fail(msg) {
+    var err = $('welcome-error');
+    err.textContent = msg;
+    err.classList.remove('hidden');
+  }
+
+  function isSecure() {
+    return location.protocol === 'https:' ||
+           location.hostname === 'localhost' ||
+           location.hostname === '127.0.0.1';
+  }
+
+  function cameraErrorText(e) {
+    if (!e) return 'Could not open the camera.';
+    if (e.name === 'NotAllowedError') return 'Camera permission was blocked. Enable it in your browser settings and reload.';
+    if (e.name === 'NotFoundError') return 'No camera was found on this device.';
+    return 'Could not open the camera: ' + (e.message || e.name || e);
+  }
+
+  // ===================================================================
+  // Camera
+  // ===================================================================
+  function startCamera() {
+    if (stream) { stream.getTracks().forEach(function (t) { t.stop(); }); }
+    return navigator.mediaDevices.getUserMedia({
+      video: { facingMode: { ideal: facing }, width: { ideal: 1920 }, height: { ideal: 1920 } },
+      audio: false
+    }).then(function (s) {
+      stream = s;
+      video.srcObject = s;
+      return video.play().catch(function () {});
+    });
+  }
+
+  function flipCamera() {
+    facing = (facing === 'environment') ? 'user' : 'environment';
+    startCamera().catch(function (e) { showToast(cameraErrorText(e), 'err'); });
+  }
+
+  // ===================================================================
+  // Capture + upload
+  // ===================================================================
+  function capture() {
+    if (!stream) return;
+    var w = video.videoWidth, h = video.videoHeight;
+    if (!w || !h) return;
+
+    // Cap the long edge so uploads stay quick on event wifi.
+    var max = 1600, scale = Math.min(1, max / Math.max(w, h));
+    canvas.width = Math.round(w * scale);
+    canvas.height = Math.round(h * scale);
+    var ctx = canvas.getContext('2d');
+    if (facing === 'user') { // un-mirror the selfie
+      ctx.translate(canvas.width, 0);
+      ctx.scale(-1, 1);
+    }
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    var dataUrl = canvas.toDataURL('image/jpeg', 0.85);
+
+    flash.classList.remove('fire'); void flash.offsetWidth; flash.classList.add('fire');
+    if (navigator.vibrate) navigator.vibrate(15);
+
+    var item = { dataUrl: dataUrl, status: 'pending' };
+    session.unshift(item);
+    if (session.length > 60) session.length = 60;
+    thumbBtn.style.backgroundImage = 'url(' + dataUrl + ')';
+    renderGallery();
+
+    upload(dataUrl, item);
+  }
+
+  function upload(dataUrl, item) {
+    showToast('Uploading…', 'pending');
+    var payload = {
+      image: dataUrl,
+      event: config.event || '',
+      key: config.key || '',
+      filename: makeName(),
+      ts: Date.now()
+    };
+    sendToDrive(payload).then(function () {
+      item.status = 'ok';
+      uploadedCount++;
+      updateCount();
+      renderGallery();
+      showToast('Saved to Drive', 'ok');
+    }).catch(function () {
+      item.status = 'err';
+      renderGallery();
+      enqueue(payload);
+      showToast('Saved — will retry upload', 'err');
+    });
+  }
+
+  // Apps Script web apps don't send CORS headers, so we POST as a
+  // "simple request" (text/plain, no preflight). We can't read the
+  // response cross-origin, so a resolved fetch is treated as success.
+  function sendToDrive(payload) {
+    return fetch(config.endpoint, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    }).then(function (r) { return r; });
+  }
+
+  function makeName() {
+    var d = new Date();
+    var p = function (n) { return String(n).padStart(2, '0'); };
+    var stamp = d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + '-' +
+                p(d.getHours()) + p(d.getMinutes()) + p(d.getSeconds());
+    var rand = Math.random().toString(36).slice(2, 6);
+    return 'snap-' + stamp + '-' + rand + '.jpg';
+  }
+
+  function updateCount() {
+    countBadge.textContent = uploadedCount + ' uploaded';
+  }
+
+  // ===================================================================
+  // Retry queue (survives reloads / flaky wifi)
+  // ===================================================================
+  function enqueue(payload) {
+    var q = readQueue();
+    q.push(payload);
+    if (q.length > 40) q = q.slice(-40);
+    try { localStorage.setItem(QUEUE_KEY, JSON.stringify(q)); } catch (e) {}
+  }
+  function readQueue() {
+    try { return JSON.parse(localStorage.getItem(QUEUE_KEY)) || []; } catch (e) { return []; }
+  }
+  function drainQueue() {
+    var q = readQueue();
+    if (!q.length || !config.endpoint) return;
+    localStorage.removeItem(QUEUE_KEY);
+    q.forEach(function (payload) {
+      sendToDrive(payload).then(function () {
+        uploadedCount++; updateCount();
+      }).catch(function () { enqueue(payload); });
+    });
+  }
+
+  // ===================================================================
+  // Toast
+  // ===================================================================
+  var toastTimer = null;
+  function showToast(msg, kind) {
+    toast.className = 'toast show ' + (kind || '');
+    toast.innerHTML = (kind === 'pending' ? '<span class="spinner"></span>' : '') +
+                      '<span>' + msg + '</span>';
+    clearTimeout(toastTimer);
+    if (kind !== 'pending') {
+      toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 1800);
+    }
+  }
+
+  // ===================================================================
+  // Gallery
+  // ===================================================================
+  function renderGallery() {
+    galleryGrid.innerHTML = '';
+    galleryEmpty.classList.toggle('hidden', session.length > 0);
+    session.forEach(function (item) {
+      var cell = document.createElement('div');
+      cell.className = 'cell';
+      var img = document.createElement('img');
+      img.src = item.dataUrl;
+      cell.appendChild(img);
+      var s = document.createElement('span');
+      s.className = 'status ' + item.status;
+      s.textContent = item.status === 'ok' ? '✓' : item.status === 'err' ? '↻' : '…';
+      cell.appendChild(s);
+      galleryGrid.appendChild(cell);
+    });
+  }
+
+  // ===================================================================
+  // Wire up
+  // ===================================================================
+  shutter.addEventListener('click', capture);
+  $('btn-flip').addEventListener('click', flipCamera);
+  thumbBtn.addEventListener('click', function () { renderGallery(); show('gallery'); });
+  $('btn-gallery-back').addEventListener('click', function () { show('camera'); });
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      if (stream) { stream.getTracks().forEach(function (t) { t.stop(); }); stream = null; }
+    } else if (screens.camera.classList.contains('active')) {
+      startCamera().then(drainQueue).catch(function () {});
+    }
+  });
+
+  updateCount();
+  initWelcome();
+  show('welcome');
+})();
