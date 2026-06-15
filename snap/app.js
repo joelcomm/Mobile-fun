@@ -12,6 +12,8 @@
 
   var LS = 'eventsnap.config';
   var QUEUE_KEY = 'eventsnap.queue';
+  var GUEST_KEY = 'eventsnap.guest';
+  var GUEST_COOKIE = 'eventsnap_guest';
 
   // ---- DOM ----
   var $ = function (id) { return document.getElementById(id); };
@@ -33,10 +35,30 @@
 
   // ---- State ----
   var config = loadConfig();
+  var guestName = loadGuest();
   var stream = null;
   var facing = 'environment';
   var uploadedCount = 0;
   var session = []; // { dataUrl, status } newest-first
+
+  // ===================================================================
+  // Guest name (cookie + localStorage so we only ask once)
+  // ===================================================================
+  function loadGuest() {
+    var name = '';
+    try { name = localStorage.getItem(GUEST_KEY) || ''; } catch (e) {}
+    if (!name) {
+      var m = document.cookie.match(new RegExp('(?:^|; )' + GUEST_COOKIE + '=([^;]*)'));
+      if (m) { try { name = decodeURIComponent(m[1]); } catch (e) { name = m[1]; } }
+    }
+    return name;
+  }
+  function saveGuest(name) {
+    guestName = name;
+    try { localStorage.setItem(GUEST_KEY, name); } catch (e) {}
+    document.cookie = GUEST_COOKIE + '=' + encodeURIComponent(name) +
+                      '; max-age=31536000; path=/; samesite=lax';
+  }
 
   // ===================================================================
   // Config
@@ -76,25 +98,67 @@
   // Welcome
   // ===================================================================
   function initWelcome() {
-    if (config.event) {
-      $('welcome-title').textContent = config.event;
-      eventBadge.textContent = config.event;
-    } else {
-      eventBadge.textContent = 'Event Snap';
-    }
+    if (!config.event) config.event = 'Joel & Erin Wedding';
+    eventBadge.textContent = 'Joel & Erin · 9.5.26';
 
     if (!config.endpoint) {
       var err = $('welcome-error');
-      err.textContent = 'This link is missing its upload destination. Ask the organizer for the correct QR code.';
+      err.textContent = 'This link is missing its upload destination. Please use the QR code Joel & Erin shared.';
       err.classList.remove('hidden');
-      $('btn-launch').disabled = true;
-      $('btn-launch').style.opacity = '.5';
+      disable($('btn-start')); disable($('btn-launch'));
+    }
+
+    renderNameState();
+
+    $('btn-start').addEventListener('click', submitName);
+    $('guest-name').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') submitName();
+    });
+    $('btn-launch').addEventListener('click', launch);
+    $('btn-change-name').addEventListener('click', function () {
+      $('guest-name').value = guestName;
+      showNameStep(true);
+      $('guest-name').focus();
+    });
+  }
+
+  function disable(btn) { btn.disabled = true; btn.style.opacity = '.5'; }
+
+  function renderNameState() {
+    if (guestName) {
+      $('greet').innerHTML = 'Hi <b>' + escapeHtml(guestName) + '</b> 👋';
+      showNameStep(false);
+    } else {
+      showNameStep(true);
+    }
+  }
+  function showNameStep(showInput) {
+    $('name-step').classList.toggle('hidden', !showInput);
+    $('ready-step').classList.toggle('hidden', showInput);
+  }
+
+  function submitName() {
+    var name = $('guest-name').value.trim().replace(/\s+/g, ' ');
+    var err = $('name-error');
+    if (name.length < 2) {
+      err.textContent = 'Please enter your name so we know who took the photos.';
+      err.classList.remove('hidden');
       return;
     }
-    $('btn-launch').addEventListener('click', launch);
+    err.classList.add('hidden');
+    saveGuest(name);
+    launch();
+  }
+
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
   }
 
   function launch() {
+    if (!guestName) { showNameStep(true); $('guest-name').focus(); return; }
+    if (!config.endpoint) return;
     if (!isSecure()) {
       fail('Camera needs a secure (https) connection. Open the link over https.');
       return;
@@ -164,6 +228,7 @@
       ctx.scale(-1, 1);
     }
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    stampCaption(ctx);
 
     var dataUrl = canvas.toDataURL('image/jpeg', 0.85);
 
@@ -179,11 +244,38 @@
     upload(dataUrl, item);
   }
 
+  // Burn a small caption into the photo so the couple can see who took it,
+  // even outside the filename. Reset any selfie-mirror transform first.
+  function stampCaption(ctx) {
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    var W = canvas.width, H = canvas.height;
+    var fs = Math.max(20, Math.round(W * 0.030));
+    var pad = Math.round(W * 0.035);
+    var label = '♥ ' + (guestName || 'Guest') + '  ·  Joel & Erin 9.5.26';
+
+    // subtle gradient scrim along the bottom for legibility
+    var grad = ctx.createLinearGradient(0, H - fs * 3.2, 0, H);
+    grad.addColorStop(0, 'rgba(0,0,0,0)');
+    grad.addColorStop(1, 'rgba(0,0,0,0.45)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, H - fs * 3.2, W, fs * 3.2);
+
+    ctx.font = '600 ' + fs + 'px Inter, Arial, sans-serif';
+    ctx.textBaseline = 'alphabetic';
+    ctx.shadowColor = 'rgba(0,0,0,0.55)';
+    ctx.shadowBlur = fs * 0.35;
+    ctx.shadowOffsetY = 1;
+    ctx.fillStyle = 'rgba(255,255,255,0.96)';
+    ctx.fillText(label, pad, H - pad);
+    ctx.shadowColor = 'transparent';
+  }
+
   function upload(dataUrl, item) {
     showToast('Uploading…', 'pending');
     var payload = {
       image: dataUrl,
       event: config.event || '',
+      guest: guestName || '',
       key: config.key || '',
       filename: makeName(),
       ts: Date.now()
@@ -220,7 +312,8 @@
     var stamp = d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + '-' +
                 p(d.getHours()) + p(d.getMinutes()) + p(d.getSeconds());
     var rand = Math.random().toString(36).slice(2, 6);
-    return 'snap-' + stamp + '-' + rand + '.jpg';
+    var who = (guestName || 'guest').replace(/[^a-z0-9]+/gi, '-').replace(/^-+|-+$/g, '').slice(0, 30) || 'guest';
+    return who + '_' + stamp + '-' + rand + '.jpg';
   }
 
   function updateCount() {

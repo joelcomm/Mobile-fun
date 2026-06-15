@@ -58,15 +58,15 @@
 </head>
 <body>
 <div class="wrap">
-  <h1>📸 Event Snap — Setup</h1>
-  <p class="lead">Generate the QR code attendees scan. Each photo they take uploads straight into your Google&nbsp;Drive folder — no sign-in for them.</p>
+  <h1>💍 Joel &amp; Erin — Photo Setup</h1>
+  <p class="lead">Generate the QR code guests scan at the wedding. Each photo they take uploads straight into your Google&nbsp;Drive folder — no sign-in for them.</p>
 
   <label>Upload endpoint URL <span class="req">*</span></label>
   <input id="endpoint" type="url" placeholder="https://script.google.com/macros/s/AKfy…/exec" autocomplete="off">
   <p class="small">Paste the <strong>Web app URL</strong> from your deployed Google Apps Script (see steps below).</p>
 
   <label>Event name <span class="req">*</span></label>
-  <input id="event" type="text" placeholder="Acme Summit 2026" autocomplete="off">
+  <input id="event" type="text" value="Joel & Erin Wedding" autocomplete="off">
   <p class="small">Shown in the app and used as the Drive subfolder name.</p>
 
   <label>Shared key <span style="color:#9aa3b8;font-weight:400">(optional)</span></label>
@@ -93,12 +93,11 @@
   <details>
     <summary>One-time Google Drive setup (≈5 min)</summary>
     <ol>
-      <li>In Google&nbsp;Drive, create a folder for the event and open it. Copy the <strong>folder ID</strong> from the URL (the part after <code>/folders/</code>).</li>
       <li>Go to <a href="https://script.google.com" target="_blank" rel="noopener">script.google.com</a> → <strong>New project</strong>.</li>
-      <li>Paste the contents of <a href="apps-script.gs" target="_blank" rel="noopener">apps-script.gs</a> (in this folder) and set <code>FOLDER_ID</code> to your folder ID.</li>
-      <li>Click <strong>Deploy → New deployment → Web app</strong>. Set <em>Execute as: Me</em> and <em>Who has access: Anyone</em>. Authorize when prompted.</li>
-      <li>Copy the <strong>Web app URL</strong> and paste it in the field above.</li>
-      <li>Generate the QR, print it, and put it where attendees can scan it. Done.</li>
+      <li>Paste the contents of <a href="apps-script.gs" target="_blank" rel="noopener">apps-script.gs</a> (in this folder). <code>FOLDER_ID</code> is already set to your wedding Drive folder — nothing to change.</li>
+      <li>Click <strong>Deploy → New deployment → Web app</strong>. Set <em>Execute as: Me</em> and <em>Who has access: Anyone</em>. Authorize when prompted (it’s your own script writing to your own Drive).</li>
+      <li>Copy the <strong>Web app URL</strong> (ends in <code>/exec</code>) and paste it in the field above.</li>
+      <li>Generate the QR, print it, and place it on tables / signage. Done — guests scan and shoot.</li>
     </ol>
   </details>
 </div>

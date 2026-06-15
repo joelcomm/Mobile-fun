@@ -1,9 +1,9 @@
-# Event Snap 📸
+# Joel & Erin Wedding — Photo Share 💍📸
 
-A zero-login, web-based event photo uploader. Attendees scan a QR code, the
-camera app launches in their browser, and **every photo they take uploads
-straight into the organizer's Google Drive folder** — no app install, no
-Google sign-in for attendees.
+A zero-login, web-based wedding photo uploader (September 5, 2026). Guests scan
+a QR code, the camera app launches in their browser, and **every photo they
+take uploads straight into the couple's Google Drive folder** — no app install,
+no Google sign-in for guests.
 
 Because this site is static (GitHub Pages, no backend), uploads are routed
 through a small **Google Apps Script web app** that runs as the organizer.
@@ -18,21 +18,34 @@ without exposing any secret in the browser.
 | `setup.html` | Organizer page: enter your endpoint + event name, get a printable QR. |
 | `apps-script.gs` | The Google Apps Script you deploy to receive uploads. |
 
-## Setup (organizer, ~5 minutes)
+## Setup (~5 minutes)
 
-1. **Drive folder** — In Google Drive create a folder for the event and open
-   it. Copy its **folder ID** from the URL (the part after `/folders/`).
-2. **Apps Script** — Go to [script.google.com](https://script.google.com) →
-   **New project**. Paste `apps-script.gs`, set `FOLDER_ID` to your folder ID.
-3. **Deploy** — **Deploy → New deployment → Web app**, with
+The Drive folder ID is already wired into `apps-script.gs`
+(`1REwmkGbvVcDZtv8dWGsIjAAOipYZmmZu`), so you only need to deploy and grab a URL.
+
+1. **Apps Script** — Go to [script.google.com](https://script.google.com) →
+   **New project**. Paste `apps-script.gs` (`FOLDER_ID` is already set).
+2. **Deploy** — **Deploy → New deployment → Web app**, with
    **Execute as: Me** and **Who has access: Anyone**. Authorize when asked.
    Copy the **Web app URL** (ends in `/exec`).
-4. **QR** — Open `setup.html` on the live site, paste the Web app URL and your
-   event name, click **Generate QR code**, then print or display it.
-5. Attendees scan it → camera opens → every shot lands in your Drive folder.
+3. **QR** — Open `setup.html` on the live site, paste the Web app URL (event
+   name is pre-filled), click **Generate QR code**, then print or display it.
+4. Guests scan it → camera opens → every shot lands in the wedding Drive folder.
 
 > Tip: visit the Web app URL directly in a browser — it should return
 > `{"ok":true,...}`, confirming the deployment is live.
+
+## Guest names
+
+On a guest's **first visit** the app asks for their name, then remembers it
+(localStorage **and** a 1-year cookie) so it never asks again on that device.
+Every photo they take is labeled three ways so the couple knows who shot it:
+
+- **Filename** prefix, e.g. `Aunt-Mary_20260905-203114-k7r2.jpg`
+- A small **caption burned into the photo** (`♥ Aunt Mary · Joel & Erin 9.5.26`)
+- The Drive file **description** (`Photo by Aunt Mary — …`)
+
+A guest can tap **"Not you? Change name"** on the welcome screen to switch.
 
 ## How it works
 

@@ -12,9 +12,10 @@
  */
 
 // === CONFIGURE ME ===========================================================
-// The Drive folder that should collect the photos. Copy the ID from the
-// folder's URL: https://drive.google.com/drive/folders/<THIS_IS_THE_ID>
-var FOLDER_ID = 'PASTE_YOUR_DRIVE_FOLDER_ID_HERE';
+// The Drive folder that collects the photos. Copy the ID from the folder's
+// URL: https://drive.google.com/drive/folders/<THIS_IS_THE_ID>
+// Pre-filled with Joel & Erin's wedding folder.
+var FOLDER_ID = '1REwmkGbvVcDZtv8dWGsIjAAOipYZmmZu';
 
 // Optional shared secret. Leave '' to accept any upload. If set, the app's
 // QR must carry the same key (the "Shared key" field in setup.html).
@@ -49,7 +50,13 @@ function doPost(e) {
 
     var file = folder.createFile(blob);
 
-    return out({ ok: true, id: file.getId(), name: file.getName() });
+    // Record who took it (also embedded in the filename and on the photo).
+    if (data.guest) {
+      var when = data.ts ? new Date(Number(data.ts)) : new Date();
+      file.setDescription('Photo by ' + data.guest + ' — ' + (data.event || '') + ' — ' + when);
+    }
+
+    return out({ ok: true, id: file.getId(), name: file.getName(), guest: data.guest || '' });
   } catch (err) {
     return out({ ok: false, error: String(err) });
   }
@@ -57,7 +64,7 @@ function doPost(e) {
 
 // Lets you confirm the deployment is live by visiting the URL in a browser.
 function doGet() {
-  return out({ ok: true, service: 'Event Snap uploader', ready: FOLDER_ID !== 'PASTE_YOUR_DRIVE_FOLDER_ID_HERE' });
+  return out({ ok: true, service: 'Joel & Erin wedding uploader', ready: !!FOLDER_ID });
 }
 
 function getTargetFolder(eventName) {
