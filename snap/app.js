@@ -10,8 +10,8 @@
 
   // ===================================================================
   // Baked-in upload destination. Fill in the Cloudinary values:
-  var DEFAULT_CLOUD_NAME = '';     // your Cloudinary "cloud name"
-  var DEFAULT_UPLOAD_PRESET = '';  // an UNSIGNED upload preset name
+  var DEFAULT_CLOUD_NAME = 'dwwkjkrzb';   // Cloudinary cloud name
+  var DEFAULT_UPLOAD_PRESET = 'wedding';  // unsigned upload preset
   // (Optional) Google Apps Script /exec URL instead of Cloudinary:
   var DEFAULT_ENDPOINT = '';
   var DEFAULT_EVENT = 'Joel & Erin Wedding';
