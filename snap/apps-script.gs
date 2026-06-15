@@ -4,25 +4,25 @@
  * Deploy this as a Web app (Deploy > New deployment > Web app):
  *   • Execute as:      Me
  *   • Who has access:  Anyone
- * Then copy the Web app URL into snap/setup.html.
  *
- * Every photo the app captures is POSTed here and saved into your Drive
- * folder. Attendees never sign in — the script runs as YOU, so the files
- * land in your Drive with your permissions.
+ * Every photo the app captures is POSTed here and saved into your Drive.
+ * Guests never sign in — the script runs as YOU, so the files land in your
+ * Drive with your permissions.
  */
 
 // === CONFIGURE ME ===========================================================
-// The Drive folder that collects the photos. Copy the ID from the folder's
-// URL: https://drive.google.com/drive/folders/<THIS_IS_THE_ID>
-// Pre-filled with Joel & Erin's wedding folder.
-var FOLDER_ID = '1REwmkGbvVcDZtv8dWGsIjAAOipYZmmZu';
+// Leave FOLDER_ID blank to auto-create a folder named FOLDER_NAME in your
+// "My Drive". Or paste a specific folder's ID (the part of its URL after
+// /folders/) to use an existing folder instead.
+var FOLDER_ID = '';
+var FOLDER_NAME = 'Joel & Erin Wedding Photos';
 
-// Optional shared secret. Leave '' to accept any upload. If set, the app's
-// QR must carry the same key (the "Shared key" field in setup.html).
+// Optional shared secret. Leave '' to accept any upload.
 var SHARED_KEY = '';
 
-// Put each event's photos in its own subfolder named after the event.
-var USE_EVENT_SUBFOLDERS = true;
+// One wedding = one folder, so keep this false. (Set true to split photos
+// into per-event subfolders when reusing this for multiple events.)
+var USE_EVENT_SUBFOLDERS = false;
 // ============================================================================
 
 
@@ -64,11 +64,18 @@ function doPost(e) {
 
 // Lets you confirm the deployment is live by visiting the URL in a browser.
 function doGet() {
-  return out({ ok: true, service: 'Joel & Erin wedding uploader', ready: !!FOLDER_ID });
+  return out({ ok: true, service: 'Joel & Erin wedding uploader' });
 }
 
 function getTargetFolder(eventName) {
-  var root = DriveApp.getFolderById(FOLDER_ID);
+  var root;
+  if (FOLDER_ID) {
+    root = DriveApp.getFolderById(FOLDER_ID);
+  } else {
+    var found = DriveApp.getFoldersByName(FOLDER_NAME);
+    root = found.hasNext() ? found.next() : DriveApp.createFolder(FOLDER_NAME);
+  }
+
   if (!USE_EVENT_SUBFOLDERS || !eventName) return root;
 
   var safe = String(eventName).replace(/[\\/:*?"<>|]/g, '_').trim() || 'Event';
