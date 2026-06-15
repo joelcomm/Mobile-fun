@@ -1,90 +1,105 @@
 /**
  * Event Snap — Google Apps Script upload endpoint.
  *
- * Deploy this as a Web app (Deploy > New deployment > Web app):
- *   • Execute as:      Me
- *   • Who has access:  Anyone
+ * Uploads via the Drive REST API (NOT DriveApp) so it only needs the
+ * "drive.file" scope — a non-restricted scope a personal Gmail can approve.
+ * DriveApp would force the full "drive" restricted scope, which Google
+ * hard-blocks for unverified apps.
  *
- * Every photo the app captures is POSTed here and saved into your Drive.
- * Guests never sign in — the script runs as YOU, so the files land in your
- * Drive with your permissions.
+ * Deploy: Deploy > New deployment > Web app, Execute as: Me,
+ * Who has access: Anyone. Authorize when prompted.
+ *
+ * Requires this manifest (appsscript.json) oauthScopes:
+ *   "https://www.googleapis.com/auth/script.external_request",
+ *   "https://www.googleapis.com/auth/drive.file"
  */
 
-// === CONFIGURE ME ===========================================================
-// Leave FOLDER_ID blank to auto-create a folder named FOLDER_NAME in your
-// "My Drive". Or paste a specific folder's ID (the part of its URL after
-// /folders/) to use an existing folder instead.
-var FOLDER_ID = '';
 var FOLDER_NAME = 'Joel & Erin Wedding Photos';
-
-// Optional shared secret. Leave '' to accept any upload.
-var SHARED_KEY = '';
-
-// One wedding = one folder, so keep this false. (Set true to split photos
-// into per-event subfolders when reusing this for multiple events.)
-var USE_EVENT_SUBFOLDERS = false;
-// ============================================================================
+var SHARED_KEY = '';  // optional; leave '' to accept any upload
 
 
 function doPost(e) {
   try {
-    if (!e || !e.postData || !e.postData.contents) {
-      return out({ ok: false, error: 'empty request' });
-    }
-
+    if (!e || !e.postData || !e.postData.contents) return out({ ok: false, error: 'empty request' });
     var data = JSON.parse(e.postData.contents);
+    if (SHARED_KEY && data.key !== SHARED_KEY) return out({ ok: false, error: 'unauthorized' });
+    if (!data.image) return out({ ok: false, error: 'no image' });
 
-    if (SHARED_KEY && data.key !== SHARED_KEY) {
-      return out({ ok: false, error: 'unauthorized' });
-    }
-    if (!data.image) {
-      return out({ ok: false, error: 'no image' });
-    }
+    var folderId = getOrCreateFolder_();
+    var bytes = Utilities.base64Decode(String(data.image).replace(/^data:[^,]+,/, ''));
+    var name = data.filename || ('snap-' + Date.now() + '.jpg');
+    var desc = data.guest ? ('Photo by ' + data.guest + ' — ' + (data.event || '')) : '';
 
-    var folder = getTargetFolder(data.event);
-
-    // Strip the "data:image/jpeg;base64," prefix if present.
-    var b64 = String(data.image).replace(/^data:[^,]+,/, '');
-    var bytes = Utilities.base64Decode(b64);
-    var blob = Utilities.newBlob(bytes, 'image/jpeg', data.filename || ('snap-' + Date.now() + '.jpg'));
-
-    var file = folder.createFile(blob);
-
-    // Record who took it (also embedded in the filename and on the photo).
-    if (data.guest) {
-      var when = data.ts ? new Date(Number(data.ts)) : new Date();
-      file.setDescription('Photo by ' + data.guest + ' — ' + (data.event || '') + ' — ' + when);
-    }
-
-    return out({ ok: true, id: file.getId(), name: file.getName(), guest: data.guest || '' });
+    var id = uploadToDrive_(bytes, name, folderId, desc);
+    return out({ ok: true, id: id, name: name });
   } catch (err) {
     return out({ ok: false, error: String(err) });
   }
 }
 
-// Lets you confirm the deployment is live by visiting the URL in a browser.
 function doGet() {
   return out({ ok: true, service: 'Joel & Erin wedding uploader' });
 }
 
-function getTargetFolder(eventName) {
-  var root;
-  if (FOLDER_ID) {
-    root = DriveApp.getFolderById(FOLDER_ID);
+// Find (or create once) the wedding folder. Cached so we only look it up once.
+function getOrCreateFolder_() {
+  var props = PropertiesService.getScriptProperties();
+  var cached = props.getProperty('FOLDER_ID');
+  if (cached) return cached;
+
+  var token = ScriptApp.getOAuthToken();
+  var q = "mimeType='application/vnd.google-apps.folder' and name='" +
+          FOLDER_NAME.replace(/'/g, "\\'") + "' and trashed=false";
+  var look = UrlFetchApp.fetch(
+    'https://www.googleapis.com/drive/v3/files?q=' + encodeURIComponent(q) + '&fields=files(id)',
+    { headers: { Authorization: 'Bearer ' + token }, muteHttpExceptions: true });
+  var files = (JSON.parse(look.getContentText()).files) || [];
+
+  var id;
+  if (files.length) {
+    id = files[0].id;
   } else {
-    var found = DriveApp.getFoldersByName(FOLDER_NAME);
-    root = found.hasNext() ? found.next() : DriveApp.createFolder(FOLDER_NAME);
+    var made = UrlFetchApp.fetch('https://www.googleapis.com/drive/v3/files?fields=id', {
+      method: 'post',
+      contentType: 'application/json',
+      headers: { Authorization: 'Bearer ' + token },
+      payload: JSON.stringify({ name: FOLDER_NAME, mimeType: 'application/vnd.google-apps.folder' }),
+      muteHttpExceptions: true });
+    id = JSON.parse(made.getContentText()).id;
   }
+  props.setProperty('FOLDER_ID', id);
+  return id;
+}
 
-  if (!USE_EVENT_SUBFOLDERS || !eventName) return root;
+// Multipart upload of the image bytes into the folder.
+function uploadToDrive_(bytes, name, folderId, description) {
+  var token = ScriptApp.getOAuthToken();
+  var boundary = 'snap' + Date.now();
+  var meta = { name: name, parents: [folderId] };
+  if (description) meta.description = description;
 
-  var safe = String(eventName).replace(/[\\/:*?"<>|]/g, '_').trim() || 'Event';
-  var existing = root.getFoldersByName(safe);
-  return existing.hasNext() ? existing.next() : root.createFolder(safe);
+  var pre = '--' + boundary + '\r\n' +
+            'Content-Type: application/json; charset=UTF-8\r\n\r\n' +
+            JSON.stringify(meta) + '\r\n' +
+            '--' + boundary + '\r\n' +
+            'Content-Type: image/jpeg\r\n\r\n';
+  var post = '\r\n--' + boundary + '--';
+
+  var body = Utilities.newBlob(pre).getBytes()
+               .concat(bytes)
+               .concat(Utilities.newBlob(post).getBytes());
+
+  var resp = UrlFetchApp.fetch(
+    'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id', {
+      method: 'post',
+      contentType: 'multipart/related; boundary=' + boundary,
+      headers: { Authorization: 'Bearer ' + token },
+      payload: Utilities.newBlob(body),
+      muteHttpExceptions: true });
+  return JSON.parse(resp.getContentText()).id;
 }
 
 function out(obj) {
-  return ContentService
-    .createTextOutput(JSON.stringify(obj))
+  return ContentService.createTextOutput(JSON.stringify(obj))
     .setMimeType(ContentService.MimeType.JSON);
 }
