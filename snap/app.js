@@ -1,14 +1,21 @@
-/* Event Snap — scan a QR, open camera, every photo uploads to the
-   organizer's Google Drive via a Google Apps Script web app endpoint.
+/* Event Snap — open camera, every photo uploads to a shared gallery.
 
-   Config arrives in the QR's URL as query params and is then cached in
-   localStorage so the app keeps working if reopened:
-     ?e=<base64 endpoint URL>   the Apps Script /exec web-app URL
-     ?n=<event name>            label shown in-app + used as Drive subfolder
-     ?k=<key>                   optional shared secret checked by the script
+   Uploads go to Cloudinary (unsigned preset) — no login for guests and the
+   QR on the tables is just a plain link to this page, so the destination is
+   baked in below. (A Google Apps Script endpoint is still supported as a
+   fallback if DEFAULT_ENDPOINT is set instead.)
 */
 (function () {
   'use strict';
+
+  // ===================================================================
+  // Baked-in upload destination. Fill in the Cloudinary values:
+  var DEFAULT_CLOUD_NAME = 'dwwkjkrzb';   // Cloudinary cloud name
+  var DEFAULT_UPLOAD_PRESET = 'wedding';  // unsigned upload preset
+  // (Optional) Google Apps Script /exec URL instead of Cloudinary:
+  var DEFAULT_ENDPOINT = '';
+  var DEFAULT_EVENT = 'Joel & Erin Wedding';
+  // ===================================================================
 
   var LS = 'eventsnap.config';
   var QUEUE_KEY = 'eventsnap.queue';
@@ -72,17 +79,30 @@
       try { cfg.endpoint = atob(decodeURIComponent(params.get('e'))); }
       catch (e) { cfg.endpoint = decodeURIComponent(params.get('e')); }
     }
+    if (params.get('cn')) cfg.cloudName = decodeURIComponent(params.get('cn'));
+    if (params.get('up')) cfg.uploadPreset = decodeURIComponent(params.get('up'));
     if (params.get('n')) cfg.event = decodeURIComponent(params.get('n'));
     if (params.get('k')) cfg.key = decodeURIComponent(params.get('k'));
 
-    if (cfg.endpoint) {
+    // Fall back to the values baked into this page, so a plain link works.
+    if (!cfg.cloudName && DEFAULT_CLOUD_NAME) cfg.cloudName = DEFAULT_CLOUD_NAME;
+    if (!cfg.uploadPreset && DEFAULT_UPLOAD_PRESET) cfg.uploadPreset = DEFAULT_UPLOAD_PRESET;
+    if (!cfg.endpoint && DEFAULT_ENDPOINT) cfg.endpoint = DEFAULT_ENDPOINT;
+    if (!cfg.event) cfg.event = DEFAULT_EVENT;
+
+    if (isConfigured(cfg)) {
       try { localStorage.setItem(LS, JSON.stringify(cfg)); } catch (e) {}
     }
     // Clean params out of the address bar so a refresh keeps working.
-    if (params.get('e') || params.get('n') || params.get('k')) {
+    if (params.get('e') || params.get('cn') || params.get('up') || params.get('n') || params.get('k')) {
       history.replaceState(null, '', location.pathname);
     }
     return cfg;
+  }
+
+  // Configured if we have a Cloudinary cloud+preset, or an Apps Script URL.
+  function isConfigured(cfg) {
+    return !!((cfg.cloudName && cfg.uploadPreset) || cfg.endpoint);
   }
 
   // ===================================================================
@@ -101,7 +121,7 @@
     if (!config.event) config.event = 'Joel & Erin Wedding';
     eventBadge.textContent = 'Joel & Erin · 9.5.26';
 
-    if (!config.endpoint) {
+    if (!isConfigured(config)) {
       var err = $('welcome-error');
       err.textContent = 'This link is missing its upload destination. Please use the QR code Joel & Erin shared.';
       err.classList.remove('hidden');
@@ -158,7 +178,7 @@
 
   function launch() {
     if (!guestName) { showNameStep(true); $('guest-name').focus(); return; }
-    if (!config.endpoint) return;
+    if (!isConfigured(config)) return;
     if (!isSecure()) {
       fail('Camera needs a secure (https) connection. Open the link over https.');
       return;
@@ -280,12 +300,12 @@
       filename: makeName(),
       ts: Date.now()
     };
-    sendToDrive(payload).then(function () {
+    sendPhoto(payload).then(function () {
       item.status = 'ok';
       uploadedCount++;
       updateCount();
       renderGallery();
-      showToast('Saved to Drive', 'ok');
+      showToast('Shared 💕', 'ok');
     }).catch(function () {
       item.status = 'err';
       renderGallery();
@@ -294,9 +314,35 @@
     });
   }
 
-  // Apps Script web apps don't send CORS headers, so we POST as a
-  // "simple request" (text/plain, no preflight). We can't read the
-  // response cross-origin, so a resolved fetch is treated as success.
+  // Dispatch to whichever destination is configured.
+  function sendPhoto(payload) {
+    if (config.cloudName && config.uploadPreset) return sendToCloudinary(payload);
+    return sendToDrive(payload);
+  }
+
+  // Cloudinary unsigned upload. CORS is allowed, so we get a real
+  // success/failure (and the guest name rides along as a tag + context).
+  function sendToCloudinary(payload) {
+    var url = 'https://api.cloudinary.com/v1_1/' + encodeURIComponent(config.cloudName) + '/image/upload';
+    var form = new FormData();
+    form.append('file', payload.image);
+    form.append('upload_preset', config.uploadPreset);
+    if (payload.guest) {
+      form.append('tags', slug(payload.guest));
+      form.append('context', 'guest=' + payload.guest + '|event=' + (payload.event || ''));
+    }
+    return fetch(url, { method: 'POST', body: form }).then(function (r) {
+      if (!r.ok) throw new Error('upload failed: ' + r.status);
+      return r.json();
+    });
+  }
+
+  function slug(s) {
+    return String(s).replace(/[^a-z0-9]+/gi, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'guest';
+  }
+
+  // Apps Script fallback: no CORS headers, so POST as a "simple request"
+  // (text/plain, no preflight); a resolved fetch is treated as success.
   function sendToDrive(payload) {
     return fetch(config.endpoint, {
       method: 'POST',
@@ -334,10 +380,10 @@
   }
   function drainQueue() {
     var q = readQueue();
-    if (!q.length || !config.endpoint) return;
+    if (!q.length || !isConfigured(config)) return;
     localStorage.removeItem(QUEUE_KEY);
     q.forEach(function (payload) {
-      sendToDrive(payload).then(function () {
+      sendPhoto(payload).then(function () {
         uploadedCount++; updateCount();
       }).catch(function () { enqueue(payload); });
     });
