@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#caa0a6">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700;800&family=Tangerine:wght@700&display=swap" rel="stylesheet">
+  <title>Joel &amp; Erin · 9.5.2026</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- ===== Welcome / launch screen ===== -->
+  <section id="welcome" class="screen active">
+    <div class="hero-photo"></div>
+    <div class="welcome-inner">
+      <p class="eyebrow">Together with their families</p>
+      <h1 class="names">Joel <span class="amp">&amp;</span> Erin</h1>
+      <p class="marrying">are getting married</p>
+      <p class="wed-date">September 5, 2026</p>
+
+      <div class="invite-card">
+        <p class="invite-lead">Be our photographer 💕</p>
+        <p class="invite-sub">Snap a photo and it’s shared with us instantly — candids, dance floor, all of it.</p>
+
+        <!-- First visit: ask for a name -->
+        <div id="name-step">
+          <input id="guest-name" type="text" placeholder="Your name" autocomplete="name" maxlength="40" enterkeyhint="go">
+          <button id="btn-start" class="btn-primary">Start Taking Photos</button>
+          <p id="name-error" class="hint error hidden"></p>
+        </div>
+
+        <!-- Return visit: greet + go -->
+        <div id="ready-step" class="hidden">
+          <p class="greet" id="greet"></p>
+          <button id="btn-launch" class="btn-primary">Take a Photo</button>
+          <button id="btn-change-name" class="link-btn">Not you? Change name</button>
+        </div>
+
+        <p id="welcome-error" class="hint error hidden"></p>
+        <p class="hint muted">No app, no sign-in. Just point and shoot.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Camera screen ===== -->
+  <section id="camera" class="screen">
+    <video id="video" playsinline autoplay muted></video>
+    <canvas id="canvas" class="hidden"></canvas>
+
+    <div class="cam-top">
+      <span id="event-badge" class="badge"></span>
+      <span id="count-badge" class="badge">0 uploaded</span>
+    </div>
+
+    <div id="flash" class="flash"></div>
+
+    <div class="cam-bottom">
+      <button id="btn-flip" class="circle-btn" title="Switch camera" aria-label="Switch camera">🔄</button>
+      <button id="btn-shutter" class="shutter" aria-label="Take photo"></button>
+      <button id="btn-thumb" class="circle-btn thumb" title="Recent" aria-label="Recent photos"></button>
+    </div>
+
+    <div id="toast" class="toast"></div>
+  </section>
+
+  <!-- ===== Gallery (this device's session) ===== -->
+  <section id="gallery" class="screen">
+    <div class="gallery-head">
+      <button id="btn-gallery-back" class="text-btn">‹ Camera</button>
+      <h2>Your photos</h2>
+      <span></span>
+    </div>
+    <div id="gallery-grid" class="gallery-grid"></div>
+    <p id="gallery-empty" class="hint muted center">Photos you take will appear here.</p>
+  </section>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
