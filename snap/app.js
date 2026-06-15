@@ -10,6 +10,14 @@
 (function () {
   'use strict';
 
+  // ===================================================================
+  // Baked-in config — the QR on the tables is just a plain link to this
+  // page, so the upload destination lives here, not in the URL.
+  // Paste the Apps Script Web app URL (ends in /exec) between the quotes:
+  var DEFAULT_ENDPOINT = '';
+  var DEFAULT_EVENT = 'Joel & Erin Wedding';
+  // ===================================================================
+
   var LS = 'eventsnap.config';
   var QUEUE_KEY = 'eventsnap.queue';
   var GUEST_KEY = 'eventsnap.guest';
@@ -74,6 +82,10 @@
     }
     if (params.get('n')) cfg.event = decodeURIComponent(params.get('n'));
     if (params.get('k')) cfg.key = decodeURIComponent(params.get('k'));
+
+    // Fall back to the values baked into this page, so a plain link works.
+    if (!cfg.endpoint && DEFAULT_ENDPOINT) cfg.endpoint = DEFAULT_ENDPOINT;
+    if (!cfg.event) cfg.event = DEFAULT_EVENT;
 
     if (cfg.endpoint) {
       try { localStorage.setItem(LS, JSON.stringify(cfg)); } catch (e) {}
