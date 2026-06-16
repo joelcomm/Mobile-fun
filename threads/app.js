@@ -373,14 +373,22 @@ btnNextPuzzle.addEventListener("click", () => {
   }
 });
 
-// ─── Start ───────────────────────────────────────────────────────
-Daily.injectDailyInfo('#app header', 'threads');
-initPuzzle();
+// ─── Title / Start ──────────────────────────────────────────────
+const titleScreen = document.getElementById("title-screen");
+const gameScreen = document.getElementById("game-screen");
+const btnStart = document.getElementById("btn-start");
 
-// Restore completed state if already played today
-(function () {
-  var threadsResult = Daily.getDailyResult('threads');
-  if (!threadsResult) return;
+function showGame() {
+  titleScreen.style.display = "none";
+  gameScreen.classList.remove("hidden");
+  Daily.injectDailyInfo('#game-screen header', 'threads');
+  initPuzzle();
+}
+
+// Check if already played today — skip title screen
+var threadsResult = Daily.getDailyResult('threads');
+if (threadsResult) {
+  showGame();
 
   gameOver = true;
   var puzzle = PUZZLES[currentPuzzleIndex];
@@ -428,7 +436,11 @@ initPuzzle();
   }
   tickCd();
   setInterval(tickCd, 1000);
-})();
+} else {
+  Daily.injectDailyInfo('#title-screen', 'threads');
+}
+
+btnStart.addEventListener("click", showGame);
 
 // Register service worker
 if ("serviceWorker" in navigator) {

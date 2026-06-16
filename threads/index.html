@@ -12,29 +12,54 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <a href="../app.html" class="back-link"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><rect width="1024" height="1024" rx="224" fill="#131A2B"/><g transform="translate(512, 180)"><g fill="none" stroke="white" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"><line x1="-180" y1="660" x2="0" y2="0"/><line x1="180" y1="660" x2="0" y2="0"/><line x1="-100" y1="460" x2="100" y2="460"/></g><polygon points="0,-90 -85,30 0,-5 85,30" fill="#E8A317"/></g></svg><span>ACUMEN · HOME</span></a>
   <div id="app">
-    <header>
-      <h1>Threads</h1>
-      <p class="subtitle">Pull the hidden strands — watch for loose threads</p>
-    </header>
 
-    <!-- Solved groups appear here -->
-    <div id="solved-area"></div>
-
-    <!-- Word pool -->
-    <div id="grid"></div>
-
-    <!-- Mistakes -->
-    <div id="mistakes">
-      Mistakes remaining:
-      <span id="mistake-dots"></span>
+    <!-- Title Screen -->
+    <div id="title-screen">
+      <div class="title-icon">&#x1F9F5;</div>
+      <h1 class="game-title">THREADS</h1>
+      <p class="tagline">PULL THE HIDDEN STRANDS. WATCH FOR LOOSE THREADS.</p>
+      <div class="rules-box">
+        <p><span class="hl">Select words</span> that belong to the same category.</p>
+        <p><span class="hl">Beware</span> — some words are loose threads that don't belong anywhere.</p>
+        <p><span class="hl">Pull Thread</span> to lock in your guess.</p>
+      </div>
+      <button id="btn-start" class="btn-main">START PULLING</button>
     </div>
 
-    <!-- Action buttons -->
-    <div id="actions">
-      <button id="btn-shuffle" class="btn btn-secondary">Shuffle</button>
-      <button id="btn-deselect" class="btn btn-secondary" disabled>Deselect All</button>
-      <button id="btn-submit" class="btn btn-primary" disabled>Pull Thread</button>
+    <!-- Game Screen -->
+    <div id="game-screen" class="hidden">
+      <header>
+        <h1>Threads</h1>
+        <p class="subtitle">Pull the hidden strands — watch for loose threads</p>
+      </header>
+
+      <!-- Solved groups appear here -->
+      <div id="solved-area"></div>
+
+      <!-- Word pool -->
+      <div id="grid"></div>
+
+      <!-- Mistakes -->
+      <div id="mistakes">
+        Mistakes remaining:
+        <span id="mistake-dots"></span>
+      </div>
+
+      <!-- Action buttons -->
+      <div id="actions">
+        <button id="btn-shuffle" class="btn btn-secondary">Shuffle</button>
+        <button id="btn-deselect" class="btn btn-secondary" disabled>Deselect All</button>
+        <button id="btn-submit" class="btn btn-primary" disabled>Pull Thread</button>
+      </div>
+
+      <!-- Puzzle selector -->
+      <div id="puzzle-nav">
+        <button id="btn-prev-puzzle" class="btn-nav">&larr;</button>
+        <span id="puzzle-label">Puzzle 1 / 10</span>
+        <button id="btn-next-puzzle" class="btn-nav">&rarr;</button>
+      </div>
     </div>
 
     <!-- Game over overlay -->
@@ -49,15 +74,6 @@
       </div>
     </div>
 
-    <!-- Back to hub -->
-    <a href="../app.html" style="position:fixed;top:calc(env(safe-area-inset-top, 0px) + 12px);left:12px;z-index:999;display:flex;align-items:center;gap:8px;text-decoration:none;padding:6px 14px 6px 6px;background:rgba(19,26,43,0.9);border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.15);"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px;border-radius:6px;"><rect width="1024" height="1024" rx="224" fill="#131A2B"/><g transform="translate(512, 180)"><g fill="none" stroke="white" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"><line x1="-180" y1="660" x2="0" y2="0"/><line x1="180" y1="660" x2="0" y2="0"/><line x1="-100" y1="460" x2="100" y2="460"/></g><polygon points="0,-90 -85,30 0,-5 85,30" fill="#E8A317"/></g></svg><span style="font-family:'Inter',-apple-system,sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;color:rgba(255,255,255,0.9);">ACUMEN · HOME</span></a>
-
-    <!-- Puzzle selector -->
-    <div id="puzzle-nav">
-      <button id="btn-prev-puzzle" class="btn-nav">&larr;</button>
-      <span id="puzzle-label">Puzzle 1 / 10</span>
-      <button id="btn-next-puzzle" class="btn-nav">&rarr;</button>
-    </div>
   </div>
 
   <!-- Toast notification -->

@@ -443,6 +443,117 @@ header h1 {
   to { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
+/* Back link */
+.back-link {
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) + 12px);
+  left: 12px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  padding: 6px 14px 6px 6px;
+  background: rgba(19, 26, 43, 0.9);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+.back-link svg {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+}
+.back-link span {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Title Screen */
+#title-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex: 1;
+  padding: 40px 24px;
+  gap: 8px;
+}
+#title-screen .title-icon {
+  font-size: 64px;
+  margin-bottom: 8px;
+}
+#title-screen .game-title {
+  font-size: 48px;
+  font-weight: 900;
+  letter-spacing: 6px;
+  color: var(--color-text);
+}
+#title-screen .tagline {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #6b6b6b;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.rules-box {
+  background: #f4f4f0;
+  border-radius: 12px;
+  padding: 20px 24px;
+  text-align: left;
+  max-width: 360px;
+  width: 100%;
+  margin-bottom: 24px;
+}
+.rules-box p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 8px;
+  color: #444;
+}
+.rules-box p:last-child {
+  margin-bottom: 0;
+}
+.rules-box .hl {
+  font-weight: 700;
+  color: var(--color-accent-3);
+}
+.btn-main {
+  display: inline-block;
+  background: var(--color-accent-3);
+  color: #fff;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 12px;
+  padding: 18px 48px;
+  cursor: pointer;
+  transition: transform 0.1s, opacity 0.15s;
+}
+.btn-main:active {
+  transform: scale(0.96);
+}
+
+/* Game Screen */
+#game-screen {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+#game-screen.hidden {
+  display: none;
+}
+
 /* Small phones */
 @media (max-height: 667px) {
   header { padding: 2px 0 4px; }
