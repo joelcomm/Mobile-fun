@@ -6,7 +6,7 @@ const PUZZLES = [
       { category: "Card games", words: ["BRIDGE", "POKER", "HEARTS", "SPADES"] },
       { category: "Shoes", words: ["LOAFER", "SANDAL", "MULE"] }
     ],
-    decoys: ["BOOT", "TITAN", "ANNE"]
+    decoys: ["BOOT", "PUMP", "MARS"]
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ const PUZZLES = [
       { category: "Things that are red", words: ["CHERRY", "FIRE ENGINE", "CARDINAL", "RUBY"] },
       { category: "Dance styles", words: ["TANGO", "WALTZ", "SWING"] }
     ],
-    decoys: ["SALSA", "HEART", "LUNCH"]
+    decoys: ["SALSA", "SUNSET", "FOXTROT"]
   },
   {
     id: 3,
@@ -24,7 +24,7 @@ const PUZZLES = [
       { category: "Instruments", words: ["DRUM", "FLUTE", "HARP", "CELLO"] },
       { category: "Types of clouds", words: ["CIRRUS", "NIMBUS", "STRATUS"] }
     ],
-    decoys: ["CUMULUS", "STUPEFY", "EXPECTO"]
+    decoys: ["CUMULUS", "VIOLIN", "GUITAR"]
   },
   {
     id: 4,
@@ -33,7 +33,7 @@ const PUZZLES = [
       { category: "Things with keys", words: ["PIANO", "KEYBOARD", "LOCK", "MAP"] },
       { category: "Baseball terms", words: ["DIAMOND", "STRIKE", "PITCH"] }
     ],
-    decoys: ["CYAN", "TEAL", "SHOT"]
+    decoys: ["CYAN", "TEAL", "MAGENTA"]
   },
   {
     id: 5,
@@ -42,7 +42,7 @@ const PUZZLES = [
       { category: "Coffee drinks", words: ["LATTE", "MOCHA", "ESPRESSO", "CORTADO"] },
       { category: "Math concepts", words: ["PRIME", "MATRIX", "FUNCTION"] }
     ],
-    decoys: ["ROOT", "HARE", "LION"]
+    decoys: ["DALMATIAN", "THEOREM", "RETRIEVER"]
   },
   {
     id: 6,
@@ -51,7 +51,7 @@ const PUZZLES = [
       { category: "Currencies", words: ["POUND", "FRANC", "CROWN", "BUCK"] },
       { category: "Things that spin", words: ["TOP", "WHEEL", "RECORD"] }
     ],
-    decoys: ["TORNADO", "TAKE", "DOWN"]
+    decoys: ["TORNADO", "YEN", "JELLYFISH"]
   },
   {
     id: 7,
@@ -60,7 +60,7 @@ const PUZZLES = [
       { category: "Fabrics", words: ["SILK", "DENIM", "COTTON", "VELVET"] },
       { category: "Movie genres", words: ["HORROR", "COMEDY", "THRILLER"] }
     ],
-    decoys: ["WESTERN", "SLIDE", "STAR"]
+    decoys: ["WESTERN", "OATMEAL", "GRANOLA"]
   },
   {
     id: 8,
@@ -69,16 +69,16 @@ const PUZZLES = [
       { category: "Kitchen tools", words: ["WHISK", "LADLE", "TONGS", "GRATER"] },
       { category: "Modes of transport", words: ["FERRY", "CABLE CAR", "RICKSHAW"] }
     ],
-    decoys: ["GONDOLA", "HOLE", "SHEEP"]
+    decoys: ["GONDOLA", "SPATULA", "TROLLEY"]
   },
   {
     id: 9,
     groups: [
       { category: "Gemstones", words: ["EMERALD", "TOPAZ", "OPAL", "JADE"] },
-      { category: "Things with wings", words: ["AIRPLANE", "ANGEL", "BUTTERFLY", "STAGE"] },
+      { category: "Things with wings", words: ["AIRPLANE", "ANGEL", "BUTTERFLY", "DRAGONFLY"] },
       { category: "Board games", words: ["RISK", "LIFE", "SORRY"] }
     ],
-    decoys: ["CLUE", "TURKEY", "FRONT"]
+    decoys: ["CLUE", "MONOPOLY", "RUBY"]
   },
   {
     id: 10,
@@ -87,7 +87,7 @@ const PUZZLES = [
       { category: "Things that glow", words: ["EMBER", "FIREFLY", "NEON", "STAR"] },
       { category: "Olympic events", words: ["HURDLE", "RELAY", "VAULT"] }
     ],
-    decoys: ["JAVELIN", "RANGER", "WASH"]
+    decoys: ["JAVELIN", "DISCUS", "SHOT PUT"]
   },
   {
     id: 11,
@@ -96,7 +96,7 @@ const PUZZLES = [
       { category: "Michael Jackson album titles", words: ["THRILLER", "BAD", "DANGEROUS", "INVINCIBLE"] },
       { category: "Artists who go by one name", words: ["PRINCE", "JEWEL", "PINK"] }
     ],
-    decoys: ["SEAL", "NINE", "GREEN"]
+    decoys: ["SEAL", "ADELE", "BEYONCE"]
   },
   {
     id: 12,
@@ -105,7 +105,7 @@ const PUZZLES = [
       { category: "Zodiac signs", words: ["SCORPIO", "LEO", "ARIES", "GEMINI"] },
       { category: "Poker terms", words: ["FOLD", "FLUSH", "RIVER"] }
     ],
-    decoys: ["BLIND", "PLACE", "TRUCK"]
+    decoys: ["BLIND", "BLUFF", "TAURUS"]
   },
   {
     id: 13,
@@ -114,7 +114,7 @@ const PUZZLES = [
       { category: "Types of bear", words: ["GRIZZLY", "POLAR", "PANDA", "KODIAK"] },
       { category: "Gym equipment", words: ["BENCH", "PLATE", "RACK"] }
     ],
-    decoys: ["PEONY", "SHIN", "ZINNIA"]
+    decoys: ["PEONY", "ASTER", "ZINNIA"]
   },
   {
     id: 14,
@@ -123,7 +123,7 @@ const PUZZLES = [
       { category: "Types of hat", words: ["BERET", "FEDORA", "TURBAN", "STETSON"] },
       { category: "Things with strings", words: ["GUITAR", "KITE", "BOW"] }
     ],
-    decoys: ["PUPPET", "BOTTOM", "PUNCH"]
+    decoys: ["PUPPET", "VIOLIN", "BOWLER"]
   },
   {
     id: 15,
@@ -132,7 +132,7 @@ const PUZZLES = [
       { category: "Greek letters", words: ["ALPHA", "DELTA", "OMEGA", "SIGMA"] },
       { category: "Things in a wallet", words: ["CASH", "LICENSE", "RECEIPT"] }
     ],
-    decoys: ["PHOTO", "SLAM", "PIANO"]
+    decoys: ["PHOTO", "BETA", "FOAL"]
   },
   {
     id: 16,
@@ -141,7 +141,7 @@ const PUZZLES = [
       { category: "Pizza toppings", words: ["MUSHROOM", "OLIVE", "PEPPER", "ONION"] },
       { category: "Words meaning 'smart'", words: ["BRIGHT", "CLEVER", "KEEN"] }
     ],
-    decoys: ["SHARP", "RHYTHM", "MADE"]
+    decoys: ["SHARP", "SEINE", "PEPPERONI"]
   },
   {
     id: 17,
@@ -150,7 +150,7 @@ const PUZZLES = [
       { category: "Sushi varieties", words: ["SALMON", "TUNA", "EEL", "SHRIMP"] },
       { category: "Things that are round", words: ["GLOBE", "COIN", "PLATE"] }
     ],
-    decoys: ["MOON", "FIRE", "SNOW"]
+    decoys: ["MOON", "BALL", "FIREFLY"]
   },
   {
     id: 18,
@@ -159,7 +159,7 @@ const PUZZLES = [
       { category: "Classic video games", words: ["TETRIS", "PONG", "PACMAN", "FROGGER"] },
       { category: "Types of bridge", words: ["ARCH", "SUSPENSION", "DRAWBRIDGE"] }
     ],
-    decoys: ["TRUSS", "PLAIN", "BRAIN"]
+    decoys: ["TRUSS", "CANTILEVER", "ASTEROIDS"]
   },
   {
     id: 19,
@@ -168,7 +168,7 @@ const PUZZLES = [
       { category: "Chemical elements", words: ["COPPER", "IRON", "SILVER", "GOLD"] },
       { category: "Things at a circus", words: ["TRAPEZE", "CLOWN", "TIGHTROPE"] }
     ],
-    decoys: ["RINGMASTER", "PROOF", "MELON"]
+    decoys: ["RINGMASTER", "CREME BRULEE", "ACROBAT"]
   },
   {
     id: 20,
@@ -177,7 +177,7 @@ const PUZZLES = [
       { category: "Things you blow", words: ["CANDLE", "WHISTLE", "BUBBLE", "HORN"] },
       { category: "Parts of a ship", words: ["HULL", "MAST", "ANCHOR"] }
     ],
-    decoys: ["STERN", "PORT", "TIGHT"]
+    decoys: ["STERN", "NOSE", "TRUMPET"]
   },
   {
     id: 21,
@@ -186,7 +186,7 @@ const PUZZLES = [
       { category: "Shades of blue", words: ["NAVY", "COBALT", "TEAL", "AZURE"] },
       { category: "Dances", words: ["RUMBA", "FOXTROT", "MAMBO"] }
     ],
-    decoys: ["POLKA", "TOWN", "SICK"]
+    decoys: ["CHAMELEON", "PYTHON", "CROCODILE"]
   },
   {
     id: 22,
@@ -195,7 +195,7 @@ const PUZZLES = [
       { category: "Martial arts", words: ["JUDO", "KARATE", "BOXING", "FENCING"] },
       { category: "Things in a courtroom", words: ["GAVEL", "JURY", "BENCH"] }
     ],
-    decoys: ["WITNESS", "BUTTON", "STAR"]
+    decoys: ["WITNESS", "BAILIFF", "OATH"]
   },
   {
     id: 23,
@@ -204,7 +204,7 @@ const PUZZLES = [
       { category: "Types of cheese", words: ["SWISS", "PARMESAN", "STILTON", "MOZZARELLA"] },
       { category: "Things in space", words: ["COMET", "ASTEROID", "NEBULA"] }
     ],
-    decoys: ["QUASAR", "WARE", "PLAY"]
+    decoys: ["QUASAR", "MERCURY", "PULSAR"]
   },
   {
     id: 24,
@@ -213,7 +213,7 @@ const PUZZLES = [
       { category: "Dips and sauces", words: ["HUMMUS", "SALSA", "GUACAMOLE", "TZATZIKI"] },
       { category: "Things that tick", words: ["CLOCK", "HEART", "METRONOME"] }
     ],
-    decoys: ["BOMB", "BONE", "STAGE"]
+    decoys: ["BOMB", "WATCH", "TIMER"]
   },
   {
     id: 25,
@@ -222,7 +222,7 @@ const PUZZLES = [
       { category: "Famous Johns", words: ["LENNON", "WAYNE", "ADAMS", "KENNEDY"] },
       { category: "Things that drip", words: ["FAUCET", "CANDLE", "ICICLE"] }
     ],
-    decoys: ["PAINT", "BREAK", "LINE"]
+    decoys: ["PAINT", "HONEY", "SKATING"]
   },
   {
     id: 26,
@@ -231,7 +231,7 @@ const PUZZLES = [
       { category: "Fictional detectives", words: ["SHERLOCK", "POIROT", "COLUMBO", "MORSE"] },
       { category: "Things with layers", words: ["ONION", "CAKE", "LASAGNA"] }
     ],
-    decoys: ["EARTH", "FIRE", "CLOCK"]
+    decoys: ["EARTH", "PARFAIT", "ROSEMARY"]
   },
   {
     id: 27,
@@ -240,7 +240,7 @@ const PUZZLES = [
       { category: "Types of music", words: ["JAZZ", "BLUES", "REGGAE", "SOUL"] },
       { category: "Things at a carnival", words: ["CAROUSEL", "COTTON CANDY", "BUMPER CARS"] }
     ],
-    decoys: ["FERRIS WHEEL", "SHINE", "STONE"]
+    decoys: ["FERRIS WHEEL", "FUNK", "FUNNEL CAKE"]
   },
   {
     id: 28,
@@ -249,7 +249,7 @@ const PUZZLES = [
       { category: "Things in an office", words: ["STAPLER", "PRINTER", "FOLDER", "BINDER"] },
       { category: "Words meaning 'happy'", words: ["JOLLY", "MERRY", "CONTENT"] }
     ],
-    decoys: ["GLAD", "PICK", "BRUSH"]
+    decoys: ["PIKE", "PERCH", "MARLIN"]
   },
   {
     id: 29,
@@ -258,7 +258,7 @@ const PUZZLES = [
       { category: "Sandwich types", words: ["CLUB", "WRAP", "PANINI", "SUB"] },
       { category: "Things that bounce", words: ["BALL", "CHECK", "TRAMPOLINE"] }
     ],
-    decoys: ["SPRING", "RHYTHM", "LOCK"]
+    decoys: ["SPRING", "LAOS", "KANGAROO"]
   },
   {
     id: 30,
@@ -267,7 +267,7 @@ const PUZZLES = [
       { category: "Shapes", words: ["HEXAGON", "TRIANGLE", "PENTAGON", "OCTAGON"] },
       { category: "Things that glow in the dark", words: ["STARS", "JELLYFISH", "RADIUM"] }
     ],
-    decoys: ["FIREFLY", "WEIGHT", "NING"]
+    decoys: ["FIREFLY", "RAGDOLL", "RHOMBUS"]
   },
   {
     id: 31,
@@ -276,7 +276,7 @@ const PUZZLES = [
       { category: "Types of tea", words: ["CHAI", "MATCHA", "OOLONG", "EARL GREY"] },
       { category: "Things at the beach", words: ["SURFBOARD", "SHELL", "TOWEL"] }
     ],
-    decoys: ["SANDCASTLE", "RHYTHM", "BOARD"]
+    decoys: ["SANDCASTLE", "CHAMOMILE", "DARJEELING"]
   },
   {
     id: 32,
@@ -285,7 +285,7 @@ const PUZZLES = [
       { category: "Greek gods", words: ["ZEUS", "APOLLO", "ATHENA", "HERMES"] },
       { category: "Things with a lid", words: ["POT", "JAR", "TRUNK"] }
     ],
-    decoys: ["COFFIN", "MATE", "RHYTHM"]
+    decoys: ["COFFIN", "WHEATIES", "FROOT LOOPS"]
   },
   {
     id: 33,
@@ -294,7 +294,7 @@ const PUZZLES = [
       { category: "Card suits", words: ["CLUB", "DIAMOND", "HEART", "SPADE"] },
       { category: "Things in a gym", words: ["DUMBBELL", "MAT", "LOCKER"] }
     ],
-    decoys: ["TREADMILL", "CHECK", "RHYTHM"]
+    decoys: ["TREADMILL", "HEARTS", "DIAMONDS"]
   },
   {
     id: 34,
@@ -303,7 +303,7 @@ const PUZZLES = [
       { category: "Things in a park", words: ["BENCH", "FOUNTAIN", "SWING", "POND"] },
       { category: "Words that mean 'angry'", words: ["FURIOUS", "IRATE", "CROSS"] }
     ],
-    decoys: ["LIVID", "THUMB", "HOUSE"]
+    decoys: ["LIVID", "MAKO", "NURSE"]
   },
   {
     id: 35,
@@ -312,7 +312,7 @@ const PUZZLES = [
       { category: "Things that float", words: ["CORK", "BALLOON", "RAFT", "CLOUD"] },
       { category: "Dunder Mifflin employees", words: ["MICHAEL", "JIM", "STANLEY"] }
     ],
-    decoys: ["DWIGHT", "RHYTHM", "BREAK"]
+    decoys: ["DWIGHT", "ANGELA", "BOAT"]
   },
   {
     id: 36,
@@ -321,7 +321,7 @@ const PUZZLES = [
       { category: "Things with handles", words: ["MUG", "SUITCASE", "DOOR", "PAN"] },
       { category: "Words associated with royalty", words: ["THRONE", "SCEPTER", "PALACE"] }
     ],
-    decoys: ["CROWN", "HAUL", "SIGHT"]
+    decoys: ["CROWN", "ATACAMA", "REGENT"]
   },
   {
     id: 37,
@@ -330,7 +330,7 @@ const PUZZLES = [
       { category: "Things at a wedding", words: ["BOUQUET", "VEIL", "CAKE", "TOAST"] },
       { category: "Words meaning 'fake'", words: ["SHAM", "PHONY", "MOCK"] }
     ],
-    decoys: ["BOGUS", "BALL", "RHYTHM"]
+    decoys: ["BOGUS", "PYRENEES", "SPURIOUS"]
   },
   {
     id: 38,
@@ -339,7 +339,7 @@ const PUZZLES = [
       { category: "Types of wine", words: ["MERLOT", "RIESLING", "SHIRAZ", "CHARDONNAY"] },
       { category: "Monopoly spaces", words: ["BOARDWALK", "PARK PLACE", "CHANCE"] }
     ],
-    decoys: ["JAIL", "CARE", "DREAM"]
+    decoys: ["MARVIN GARDENS", "BALTIC", "URSA MAJOR"]
   },
   {
     id: 39,
@@ -348,7 +348,7 @@ const PUZZLES = [
       { category: "Currencies of the world", words: ["YEN", "PESO", "RUPEE", "EURO"] },
       { category: "Things that are sticky", words: ["TAPE", "GLUE", "SAP"] }
     ],
-    decoys: ["HONEY", "FIRE", "GOOSE"]
+    decoys: ["HONEY", "POUND", "GUM"]
   },
   {
     id: 40,
@@ -357,7 +357,7 @@ const PUZZLES = [
       { category: "Things in a toolbox", words: ["LEVEL", "SAW", "TAPE", "NAIL"] },
       { category: "Words meaning 'walk'", words: ["MARCH", "STRIDE", "TRUDGE"] }
     ],
-    decoys: ["STROLL", "BIRD", "BELL"]
+    decoys: ["STROLL", "SOUTHERN", "ANTARCTIC"]
   },
   {
     id: 41,
@@ -366,7 +366,7 @@ const PUZZLES = [
       { category: "Things with wings", words: ["AIRPLANE", "BAT", "EAGLE", "MOTH"] },
       { category: "Shakespearean characters", words: ["HAMLET", "JULIET", "MACBETH"] }
     ],
-    decoys: ["OTHELLO", "RHYTHM", "FIGURE"]
+    decoys: ["OTHELLO", "MILLET", "SORGHUM"]
   },
   {
     id: 42,
@@ -375,7 +375,7 @@ const PUZZLES = [
       { category: "Types of knot", words: ["BOWLINE", "CLOVE", "REEF", "SLIP"] },
       { category: "Seinfeld characters", words: ["KRAMER", "GEORGE", "NEWMAN"] }
     ],
-    decoys: ["ELAINE", "LINING", "TONGUE"]
+    decoys: ["ELAINE", "PUDDY", "PETERMAN"]
   },
   {
     id: 43,
@@ -384,7 +384,7 @@ const PUZZLES = [
       { category: "Types of cloud", words: ["ALTO", "CIRRO", "STRATO", "NIMBO"] },
       { category: "Fictional islands", words: ["NEVERLAND", "SKULL", "AVALON"] }
     ],
-    decoys: ["TRACEY", "ISLAND", "RHYTHM"]
+    decoys: ["CIRRUS", "NIMBUS", "BISQUE"]
   },
   {
     id: 44,
@@ -393,7 +393,7 @@ const PUZZLES = [
       { category: "Types of art", words: ["SCULPTURE", "MOSAIC", "MURAL", "PORTRAIT"] },
       { category: "Things with a point", words: ["NEEDLE", "PENCIL", "COMPASS"] }
     ],
-    decoys: ["ARROW", "WEIGHT", "CLIP"]
+    decoys: ["ARROW", "STAR", "SCHUMACHER"]
   },
   {
     id: 45,
@@ -402,7 +402,7 @@ const PUZZLES = [
       { category: "Things at a concert", words: ["SPEAKER", "SPOTLIGHT", "STAGE", "MICROPHONE"] },
       { category: "Words with double O", words: ["BLOOD", "MOOSE", "GOOSE"] }
     ],
-    decoys: ["FLOOD", "WALL", "MASON"]
+    decoys: ["MERLOT", "CHARDONNAY", "PINOT GRIGIO"]
   },
   {
     id: 46,
@@ -411,7 +411,7 @@ const PUZZLES = [
       { category: "Things in a classroom", words: ["CHALK", "DESK", "GLOBE", "TEXTBOOK"] },
       { category: "Words meaning 'big'", words: ["MASSIVE", "COLOSSAL", "IMMENSE"] }
     ],
-    decoys: ["VAST", "KEEPER", "RHYTHM"]
+    decoys: ["VAST", "ERASER", "ENORMOUS"]
   },
   {
     id: 47,
@@ -420,7 +420,7 @@ const PUZZLES = [
       { category: "Things that melt", words: ["ICE", "CHEESE", "SNOW", "CHOCOLATE"] },
       { category: "Pixar films", words: ["UP", "COCO", "BRAVE"] }
     ],
-    decoys: ["WALL-E", "RATATOUILLE", "ABOUT"]
+    decoys: ["WALL-E", "RATATOUILLE", "VIVALDI"]
   },
   {
     id: 48,
@@ -429,7 +429,7 @@ const PUZZLES = [
       { category: "Things in a cockpit", words: ["THROTTLE", "RUDDER", "ALTIMETER", "YOKE"] },
       { category: "Words ending in -tion", words: ["NATION", "STATION", "PORTION"] }
     ],
-    decoys: ["MOTION", "BALL", "COVER"]
+    decoys: ["MOTION", "POTION", "JOYSTICK"]
   },
   {
     id: 49,
@@ -438,7 +438,7 @@ const PUZZLES = [
       { category: "Things with a crown", words: ["KING", "TOOTH", "ROLEX", "STATUE"] },
       { category: "Words meaning 'leave'", words: ["DEPART", "EXIT", "FLEE"] }
     ],
-    decoys: ["BAIL", "LINE", "BURNS"]
+    decoys: ["QUEEN", "VACATE", "ABSCOND"]
   },
   {
     id: 50,
@@ -447,7 +447,7 @@ const PUZZLES = [
       { category: "Things at a bar", words: ["STOOL", "TAP", "COASTER", "JUKEBOX"] },
       { category: "Famous Roberts", words: ["DOWNEY", "DENIRO", "PLANT"] }
     ],
-    decoys: ["REDFORD", "RHYTHM", "DROP"]
+    decoys: ["REDFORD", "SHAKER", "DE NIRO"]
   },
   {
     id: 51,
@@ -456,7 +456,7 @@ const PUZZLES = [
       { category: "Things with a dial", words: ["WATCH", "RADIO", "OVEN", "SAFE"] },
       { category: "Tarantino films", words: ["PULP FICTION", "DJANGO", "RESERVOIR DOGS"] }
     ],
-    decoys: ["JACKIE BROWN", "FIVE", "LIGHT"]
+    decoys: ["JACKIE BROWN", "CHIMPANZEE", "CLOCK"]
   },
   {
     id: 52,
@@ -465,7 +465,7 @@ const PUZZLES = [
       { category: "Things that buzz", words: ["BEE", "ALARM", "PHONE", "RAZOR"] },
       { category: "Words meaning 'steal'", words: ["SWIPE", "PINCH", "LIFT"] }
     ],
-    decoys: ["NICK", "CARD", "RHYTHM"]
+    decoys: ["FLY", "BAIKAL", "PILFER"]
   },
   {
     id: 53,
@@ -474,7 +474,7 @@ const PUZZLES = [
       { category: "Things at a campsite", words: ["TENT", "LANTERN", "COOLER", "FIREWOOD"] },
       { category: "Disney princesses", words: ["MOANA", "ARIEL", "MULAN"] }
     ],
-    decoys: ["JASMINE", "SPOT", "DATE"]
+    decoys: ["JASMINE", "FIRE PIT", "GOLD"]
   },
   {
     id: 54,
@@ -483,7 +483,7 @@ const PUZZLES = [
       { category: "Things with a net", words: ["TENNIS", "FISHING", "BASKETBALL", "VOLLEYBALL"] },
       { category: "Words meaning 'surprise'", words: ["SHOCK", "STARTLE", "JAR"] }
     ],
-    decoys: ["STUN", "ROCK", "SIDE"]
+    decoys: ["MILK", "ASTONISH", "CHEESE"]
   },
   {
     id: 55,
@@ -492,7 +492,7 @@ const PUZZLES = [
       { category: "Words meaning 'run'", words: ["SPRINT", "DASH", "BOLT", "GALLOP"] },
       { category: "Things with a shell", words: ["EGG", "LOBSTER", "NUT"] }
     ],
-    decoys: ["TURTLE", "MINE", "SLIDE"]
+    decoys: ["TURTLE", "CLAM", "COMTE"]
   },
   {
     id: 56,
@@ -501,7 +501,7 @@ const PUZZLES = [
       { category: "Things at an airport", words: ["TERMINAL", "RUNWAY", "GATE", "LOUNGE"] },
       { category: "TV show creators", words: ["SORKIN", "SIMON", "CHASE"] }
     ],
-    decoys: ["GILLIGAN", "LEADER", "TONE"]
+    decoys: ["GERBIL", "BAGGAGE", "RAT"]
   },
   {
     id: 57,
@@ -510,7 +510,7 @@ const PUZZLES = [
       { category: "Things with a horn", words: ["UNICORN", "RHINO", "CAR", "TRUMPET"] },
       { category: "Words meaning 'small'", words: ["MINUTE", "PETITE", "WEE"] }
     ],
-    decoys: ["TINY", "LINE", "TIRE"]
+    decoys: ["TINY", "CARROT", "RAM"]
   },
   {
     id: 58,
@@ -519,7 +519,7 @@ const PUZZLES = [
       { category: "Things that crack", words: ["WHIP", "KNUCKLE", "ICE", "EGG"] },
       { category: "Famous paintings", words: ["MONA LISA", "THE SCREAM", "GUERNICA"] }
     ],
-    decoys: ["STARRY NIGHT", "HORSE", "ROOM"]
+    decoys: ["STARRY NIGHT", "PEA", "GIRL WITH A PEARL EARRING"]
   },
   {
     id: 59,
@@ -528,7 +528,7 @@ const PUZZLES = [
       { category: "Words with double O", words: ["VOODOO", "BAMBOO", "TABOO", "SHAMPOO"] },
       { category: "Famous bridges", words: ["BROOKLYN", "TOWER", "RIALTO"] }
     ],
-    decoys: ["LONDON", "STONE", "BOARD"]
+    decoys: ["LONDON", "GOLDEN GATE", "BOXING"]
   },
   {
     id: 60,
@@ -537,7 +537,7 @@ const PUZZLES = [
       { category: "Shades of blue", words: ["NAVY", "COBALT", "TEAL", "AZURE"] },
       { category: "Types of storms", words: ["BLIZZARD", "MONSOON", "CYCLONE"] }
     ],
-    decoys: ["TYPHOON", "RUSH", "FISH"]
+    decoys: ["TYPHOON", "CERULEAN", "INDIGO"]
   },
   {
     id: 61,
@@ -546,7 +546,7 @@ const PUZZLES = [
       { category: "Things in a wallet", words: ["CASH", "LICENSE", "RECEIPT", "PHOTO"] },
       { category: "Words ending in -tion", words: ["NATION", "POTION", "RATION"] }
     ],
-    decoys: ["STATION", "BAND", "SLIDE"]
+    decoys: ["STATION", "COUGAR", "CARD"]
   },
   {
     id: 62,
@@ -555,7 +555,7 @@ const PUZZLES = [
       { category: "Kitchen appliances", words: ["BLENDER", "TOASTER", "MIXER", "KETTLE"] },
       { category: "Famous explorers", words: ["COLUMBUS", "MAGELLAN", "POLO"] }
     ],
-    decoys: ["DRAKE", "WEIGHT", "TRAIL"]
+    decoys: ["DRAKE", "COOK", "AMUNDSEN"]
   },
   {
     id: 63,
@@ -564,7 +564,7 @@ const PUZZLES = [
       { category: "Fabrics", words: ["SILK", "DENIM", "COTTON", "LINEN"] },
       { category: "Mythical creatures", words: ["GRIFFIN", "PHOENIX", "CENTAUR"] }
     ],
-    decoys: ["DRAGON", "SATIN", "TRUCK"]
+    decoys: ["DRAGON", "SATIN", "VELVET"]
   },
   {
     id: 64,
@@ -573,7 +573,7 @@ const PUZZLES = [
       { category: "Things that spin", words: ["TOP", "WHEEL", "TORNADO", "RECORD"] },
       { category: "Shakespeare plays", words: ["OTHELLO", "MACBETH", "TEMPEST"] }
     ],
-    decoys: ["HAMLET", "PISTACHIO", "FLAKE"]
+    decoys: ["HAMLET", "PISTACHIO", "HAZELNUT"]
   },
   {
     id: 65,
@@ -582,7 +582,7 @@ const PUZZLES = [
       { category: "Tools", words: ["HAMMER", "WRENCH", "PLIERS", "CHISEL"] },
       { category: "Types of music", words: ["REGGAE", "GRUNGE", "PUNK"] }
     ],
-    decoys: ["GOSPEL", "CARD", "THUMB"]
+    decoys: ["GOSPEL", "SCREWDRIVER", "NILE"]
   },
   {
     id: 66,
@@ -591,7 +591,7 @@ const PUZZLES = [
       { category: "Things with wings", words: ["EAGLE", "AIRPLANE", "BUTTERFLY", "ANGEL"] },
       { category: "Words meaning 'angry'", words: ["LIVID", "IRATE", "CROSS"] }
     ],
-    decoys: ["FURIOUS", "PRESSURE", "TYPE"]
+    decoys: ["FURIOUS", "ATACAMA", "INCENSED"]
   },
   {
     id: 67,
@@ -600,7 +600,7 @@ const PUZZLES = [
       { category: "Board games", words: ["CHESS", "RISK", "CLUE", "SORRY"] },
       { category: "Famous scientists", words: ["NEWTON", "CURIE", "TESLA"] }
     ],
-    decoys: ["DARWIN", "TRAVEL", "LINE"]
+    decoys: ["DARWIN", "EINSTEIN", "GALILEO"]
   },
   {
     id: 68,
@@ -609,7 +609,7 @@ const PUZZLES = [
       { category: "Things that sting", words: ["WASP", "JELLYFISH", "NETTLE", "SCORPION"] },
       { category: "Words meaning 'happy'", words: ["ELATED", "JOYFUL", "BLISSFUL"] }
     ],
-    decoys: ["MERRY", "FALL", "PROOF"]
+    decoys: ["GRUYERE", "BEE", "HORNET"]
   },
   {
     id: 69,
@@ -618,7 +618,7 @@ const PUZZLES = [
       { category: "Currencies", words: ["FRANC", "POUND", "PESO", "YEN"] },
       { category: "Famous mountains", words: ["EVEREST", "FUJI", "BLANC"] }
     ],
-    decoys: ["DENALI", "WHIPPET", "BACK"]
+    decoys: ["DENALI", "COLLIE", "DALMATIAN"]
   },
   {
     id: 70,
@@ -627,7 +627,7 @@ const PUZZLES = [
       { category: "Things that glow", words: ["CANDLE", "FIREFLY", "NEON", "EMBER"] },
       { category: "Star Wars characters", words: ["LEIA", "SOLO", "LUKE"] }
     ],
-    decoys: ["YODA", "MOON", "TIME"]
+    decoys: ["YODA", "VADER", "STAR"]
   },
   {
     id: 71,
@@ -636,7 +636,7 @@ const PUZZLES = [
       { category: "Things that bounce", words: ["RUBBER", "TRAMPOLINE", "CHECK", "BALL"] },
       { category: "Types of tea", words: ["JASMINE", "CHAMOMILE", "MATCHA"] }
     ],
-    decoys: ["OOLONG", "RHYTHM", "HORN"]
+    decoys: ["OOLONG", "KANGAROO", "SPRING"]
   },
   {
     id: 72,
@@ -645,7 +645,7 @@ const PUZZLES = [
       { category: "Things in space", words: ["COMET", "ASTEROID", "NEBULA", "QUASAR"] },
       { category: "Palindromes", words: ["KAYAK", "RADAR", "CIVIC"] }
     ],
-    decoys: ["LEVEL", "BANG", "RHYTHM"]
+    decoys: ["LEVEL", "PULSAR", "OPOSSUM"]
   },
   {
     id: 73,
@@ -654,7 +654,7 @@ const PUZZLES = [
       { category: "Types of hats", words: ["FEDORA", "BERET", "SOMBRERO", "TURBAN"] },
       { category: "Greek gods", words: ["ATHENA", "HERMES", "APOLLO"] }
     ],
-    decoys: ["ZEUS", "TOOTH", "HEART"]
+    decoys: ["ZEUS", "BOWLER", "ZINNIA"]
   },
   {
     id: 74,
@@ -663,7 +663,7 @@ const PUZZLES = [
       { category: "Things that drip", words: ["FAUCET", "CANDLE", "ICICLE", "PAINT"] },
       { category: "Phonetic alphabet", words: ["ALPHA", "BRAVO", "FOXTROT"] }
     ],
-    decoys: ["DELTA", "SHEEP", "MARKET"]
+    decoys: ["DELTA", "MADAGASCAR", "CHARLIE"]
   },
   {
     id: 75,
@@ -672,7 +672,7 @@ const PUZZLES = [
       { category: "Things that melt", words: ["GLACIER", "CHEESE", "CANDLE", "SNOWMAN"] },
       { category: "Silent letters (has one)", words: ["KNIGHT", "SALMON", "ISLAND"] }
     ],
-    decoys: ["RECEIPT", "KILAUEA", "WALK"]
+    decoys: ["RECEIPT", "KILAUEA", "PINATUBO"]
   },
   {
     id: 76,
@@ -681,7 +681,7 @@ const PUZZLES = [
       { category: "Things with keys", words: ["PIANO", "KEYBOARD", "MAP", "LOCK"] },
       { category: "Words from Japanese", words: ["KARAOKE", "TSUNAMI", "EMOJI"] }
     ],
-    decoys: ["TOFU", "TYPEWRITER", "CURTAIN"]
+    decoys: ["TOFU", "TYPEWRITER", "KARATE"]
   },
   {
     id: 77,
@@ -690,7 +690,7 @@ const PUZZLES = [
       { category: "Round things", words: ["GLOBE", "PIZZA", "CLOCK", "COIN"] },
       { category: "Latin phrases", words: ["ALIAS", "BONUS", "VIRUS"] }
     ],
-    decoys: ["CAMPUS", "PORT", "CRAFT"]
+    decoys: ["PYTHON", "BALL", "TORTOISE"]
   },
   {
     id: 78,
@@ -699,7 +699,7 @@ const PUZZLES = [
       { category: "Things that float", words: ["CORK", "RAFT", "BALLOON", "FEATHER"] },
       { category: "Words meaning 'steal'", words: ["SWIPE", "NICK", "LIFT"] }
     ],
-    decoys: ["PINCH", "RHYTHM", "LINE"]
+    decoys: ["PINCH", "PILFER", "FILCH"]
   },
   {
     id: 79,
@@ -708,7 +708,7 @@ const PUZZLES = [
       { category: "Things with tails", words: ["KITE", "COMET", "MONKEY", "PEACOCK"] },
       { category: "Famous duos", words: ["BONNIE", "BATMAN", "SHERLOCK"] }
     ],
-    decoys: ["ROMEO", "LINE", "STEP"]
+    decoys: ["FLUTE", "BONNIE AND CLYDE", "ROMEO AND JULIET"]
   },
   {
     id: 80,
@@ -717,7 +717,7 @@ const PUZZLES = [
       { category: "Things that are sticky", words: ["HONEY", "TAPE", "SYRUP", "GLUE"] },
       { category: "One-word countries", words: ["BRAZIL", "EGYPT", "NORWAY"] }
     ],
-    decoys: ["JAPAN", "SPOT", "SIDE"]
+    decoys: ["JAPAN", "FRANCE", "TITICACA"]
   },
   {
     id: 81,
@@ -726,7 +726,7 @@ const PUZZLES = [
       { category: "Things that tick", words: ["CLOCK", "BOMB", "METRONOME", "WATCH"] },
       { category: "Compound words with SUN", words: ["SUNBURN", "SUNFLOWER", "SUNSCREEN"] }
     ],
-    decoys: ["SUNRISE", "PLANT", "HOUSE"]
+    decoys: ["SUNRISE", "PETREL", "SUNSET"]
   },
   {
     id: 82,
@@ -735,7 +735,7 @@ const PUZZLES = [
       { category: "Things in a gym", words: ["TREADMILL", "DUMBBELL", "BENCH", "MAT"] },
       { category: "Words with all vowels", words: ["EDUCATION", "EQUATION", "AUTHORIZE"] }
     ],
-    decoys: ["SEQUOIA", "WOOD", "CARPET"]
+    decoys: ["SEQUOIA", "BENCH PRESS", "MINKE"]
   },
   {
     id: 83,
@@ -744,7 +744,7 @@ const PUZZLES = [
       { category: "Things with scales", words: ["FISH", "DRAGON", "PIANO", "JUSTICE"] },
       { category: "Famous walls", words: ["BERLIN", "CHINA", "WAILING"] }
     ],
-    decoys: ["STREET", "PRINT", "BELL"]
+    decoys: ["ARRABBIATA", "CARBONARA", "SNAKE"]
   },
   {
     id: 84,
@@ -753,7 +753,7 @@ const PUZZLES = [
       { category: "Things that are sharp", words: ["KNIFE", "TACK", "WIT", "CHEDDAR"] },
       { category: "Double-letter animals", words: ["BUFFALO", "CHEETAH", "RABBIT"] }
     ],
-    decoys: ["RACCOON", "WORK", "HOLD"]
+    decoys: ["RACCOON", "LLAMA", "NEEDLE"]
   },
   {
     id: 85,
@@ -762,7 +762,7 @@ const PUZZLES = [
       { category: "Things with strings", words: ["GUITAR", "PUPPET", "KITE", "BOW"] },
       { category: "NASA missions", words: ["APOLLO", "MERCURY", "ARTEMIS"] }
     ],
-    decoys: ["GEMINI", "WEST", "LIFE"]
+    decoys: ["GEMINI", "CAECILIAN", "VOYAGER"]
   },
   {
     id: 86,
@@ -771,7 +771,7 @@ const PUZZLES = [
       { category: "Things that fold", words: ["PAPER", "NAPKIN", "CHAIR", "MAP"] },
       { category: "Famous addresses", words: ["DOWNING", "BROADWAY", "BAKER"] }
     ],
-    decoys: ["SESAME", "LANCE", "RHYTHM"]
+    decoys: ["SESAME", "ABBEY ROAD", "CHANTERELLE"]
   },
   {
     id: 87,
@@ -789,7 +789,7 @@ const PUZZLES = [
       { category: "Things that pop", words: ["BALLOON", "CORN", "BUBBLE", "CHAMPAGNE"] },
       { category: "Words from Arabic", words: ["COTTON", "LEMON", "ZERO"] }
     ],
-    decoys: ["ALGEBRA", "GATE", "DUST"]
+    decoys: ["ALGEBRA", "MAGAZINE", "NURSE"]
   },
   {
     id: 89,
@@ -798,7 +798,7 @@ const PUZZLES = [
       { category: "Things that freeze", words: ["WATER", "PIPE", "ASSET", "FRAME"] },
       { category: "Fictional detectives", words: ["POIROT", "MARPLE", "COLUMBO"] }
     ],
-    decoys: ["MONK", "NOTCH", "KNOT"]
+    decoys: ["MONK", "BARN OWL", "LAKE"]
   },
   {
     id: 90,
@@ -807,7 +807,7 @@ const PUZZLES = [
       { category: "Things that bloom", words: ["ROSE", "ALGAE", "CHERRY", "YOUTH"] },
       { category: "Portmanteau words", words: ["BRUNCH", "MOTEL", "SPORK"] }
     ],
-    decoys: ["SMOG", "RHYTHM", "LINING"]
+    decoys: ["SMOG", "PODCAST", "BLOG"]
   },
   {
     id: 91,
@@ -816,7 +816,7 @@ const PUZZLES = [
       { category: "Things with teeth", words: ["SAW", "COMB", "GEAR", "ZIPPER"] },
       { category: "Nobel Prize categories", words: ["PEACE", "PHYSICS", "LITERATURE"] }
     ],
-    decoys: ["CHEMISTRY", "RHYTHM", "WORD"]
+    decoys: ["CHEMISTRY", "WHEAT", "RAKE"]
   },
   {
     id: 92,
@@ -825,7 +825,7 @@ const PUZZLES = [
       { category: "Things that echo", words: ["CANYON", "CAVE", "TUNNEL", "HALL"] },
       { category: "Words ending in -ight", words: ["BLIGHT", "PLIGHT", "KNIGHT"] }
     ],
-    decoys: ["FLIGHT", "BODY", "MATE"]
+    decoys: ["FLIGHT", "CATHEDRAL", "LIGHT"]
   },
   {
     id: 93,
@@ -834,7 +834,7 @@ const PUZZLES = [
       { category: "Things that roar", words: ["LION", "ENGINE", "CROWD", "THUNDER"] },
       { category: "Silent film stars", words: ["CHAPLIN", "LLOYD", "VALENTINO"] }
     ],
-    decoys: ["KEATON", "BAND", "STRONG"]
+    decoys: ["KEATON", "WATERFALL", "PICKFORD"]
   },
   {
     id: 94,
@@ -843,7 +843,7 @@ const PUZZLES = [
       { category: "Things that bloom in spring", words: ["TULIP", "DAFFODIL", "CROCUS", "HYACINTH"] },
       { category: "Ancient wonders", words: ["PYRAMID", "LIGHTHOUSE", "MAUSOLEUM"] }
     ],
-    decoys: ["COLOSSUS", "CHANGE", "HAND"]
+    decoys: ["COLOSSUS", "WHELK", "CHERRY BLOSSOM"]
   },
   {
     id: 95,
@@ -852,7 +852,7 @@ const PUZZLES = [
       { category: "Things that howl", words: ["WOLF", "WIND", "COYOTE", "SIREN"] },
       { category: "Words from French", words: ["BALLET", "DEPOT", "CHAUFFEUR"] }
     ],
-    decoys: ["ROUGE", "WEIGHT", "YEAR"]
+    decoys: ["ROUGE", "CLOVE HITCH", "SQUARE"]
   },
   {
     id: 96,
@@ -861,7 +861,7 @@ const PUZZLES = [
       { category: "Things with layers", words: ["ONION", "CAKE", "LASAGNA", "EARTH"] },
       { category: "Words meaning 'brave'", words: ["GALLANT", "BOLD", "FEARLESS"] }
     ],
-    decoys: ["VALIANT", "RHYTHM", "STAGE"]
+    decoys: ["VALIANT", "STAGHORN FERN", "ROYAL"]
   },
   {
     id: 97,
@@ -870,16 +870,16 @@ const PUZZLES = [
       { category: "Things that shimmer", words: ["SEQUIN", "GLITTER", "MIRAGE", "DIAMOND"] },
       { category: "Types of government", words: ["MONARCHY", "REPUBLIC", "THEOCRACY"] }
     ],
-    decoys: ["OLIGARCHY", "RAIL", "SHAKE"]
+    decoys: ["OLIGARCHY", "SENCHA", "MATE"]
   },
   {
     id: 98,
     groups: [
-      { category: "Deer species", words: ["MOOSE", "ELK", "CARIBOU", "ANTELOPE"] },
+      { category: "Deer species", words: ["MOOSE", "ELK", "CARIBOU", "MUNTJAC"] },
       { category: "Things that sizzle", words: ["BACON", "STEAK", "FIREWORK", "LIGHTNING"] },
       { category: "Words that are also dances", words: ["JIVE", "TWIST", "STOMP"] }
     ],
-    decoys: ["HUSTLE", "CUSHION", "STRIPE"]
+    decoys: ["HUSTLE", "FAJITA", "GRIDDLE"]
   },
   {
     id: 99,
@@ -888,7 +888,7 @@ const PUZZLES = [
       { category: "Things that crumble", words: ["COOKIE", "WALL", "CLIFF", "EMPIRE"] },
       { category: "Famous last words", words: ["ROSEBUD", "BEAUTIFUL", "CURTAIN"] }
     ],
-    decoys: ["FREEDOM", "TAKE", "CROSS"]
+    decoys: ["EUREKA", "ALAS", "FETA"]
   },
   {
     id: 100,
@@ -897,7 +897,7 @@ const PUZZLES = [
       { category: "Things that crack under pressure", words: ["ICE", "GLASS", "VOICE", "FACADE"] },
       { category: "Brands named after founders", words: ["CHANEL", "ADIDAS", "DISNEY"] }
     ],
-    decoys: ["FERRARI", "TRIP", "ABOUT"]
+    decoys: ["EGG", "DAM", "NUT"]
   },
   {
     id: 101,
@@ -906,7 +906,7 @@ const PUZZLES = [
       { category: "Things that hum", words: ["BEE", "MOTOR", "FRIDGE", "POWER LINE"] },
       { category: "Words from Hindi", words: ["JUNGLE", "THUG", "SHAMPOO"] }
     ],
-    decoys: ["LOOT", "EARTH", "MATE"]
+    decoys: ["LOOT", "BUNGALOW", "HONEYSUCKLE"]
   },
   {
     id: 102,
@@ -915,7 +915,7 @@ const PUZZLES = [
       { category: "Things that orbit", words: ["MOON", "SATELLITE", "ELECTRON", "PLANET"] },
       { category: "Words from Italian", words: ["STUDIO", "VOLCANO", "FIASCO"] }
     ],
-    decoys: ["PIANO", "GOWN", "MARE"]
+    decoys: ["PIANO", "BLT", "COMET"]
   },
   {
     id: 103,
@@ -924,7 +924,7 @@ const PUZZLES = [
       { category: "Things that are crispy", words: ["BACON", "CHIP", "LEAF", "CRACKER"] },
       { category: "Famous walls", words: ["WESTERN", "FIREWALL", "PAYWALL"] }
     ],
-    decoys: ["HADRIAN", "THROUGH", "FAST"]
+    decoys: ["BERLIN", "GREAT WALL", "PIPISTRELLE"]
   },
   {
     id: 104,
@@ -933,7 +933,7 @@ const PUZZLES = [
       { category: "Things that are woven", words: ["BASKET", "TAPESTRY", "RUG", "FABRIC"] },
       { category: "Words that are also months", words: ["MARCH", "MAY", "JUNE"] }
     ],
-    decoys: ["AUGUST", "FOREST", "RHYTHM"]
+    decoys: ["AUGUST", "APRIL", "CONURE"]
   },
   {
     id: 105,
@@ -942,7 +942,7 @@ const PUZZLES = [
       { category: "Things that sway", words: ["HAMMOCK", "BRIDGE", "TREE", "DANCER"] },
       { category: "Famous robots", words: ["WALL-E", "R2-D2", "TERMINATOR"] }
     ],
-    decoys: ["OPTIMUS", "SHIP", "WARE"]
+    decoys: ["OPTIMUS", "PENDULUM", "GRASS"]
   },
   {
     id: 106,
@@ -951,7 +951,7 @@ const PUZZLES = [
       { category: "Things that bubble", words: ["SODA", "LAVA", "SOAP", "BROOK"] },
       { category: "Types of poetry", words: ["HAIKU", "SONNET", "LIMERICK"] }
     ],
-    decoys: ["BALLAD", "JURY", "PRIX"]
+    decoys: ["BALLAD", "HOBBY", "CHAMPAGNE"]
   },
   {
     id: 107,
@@ -960,7 +960,7 @@ const PUZZLES = [
       { category: "Things that crawl", words: ["SPIDER", "BABY", "SNAIL", "VINE"] },
       { category: "Fictional schools", words: ["HOGWARTS", "BAYSIDE", "RYDELL"] }
     ],
-    decoys: ["XAVIER", "BURN", "WHITE"]
+    decoys: ["ANT", "SUMERIAN", "XAVIER'S"]
   },
   {
     id: 108,
@@ -969,7 +969,7 @@ const PUZZLES = [
       { category: "Things that tower", words: ["SKYSCRAPER", "REDWOOD", "GIRAFFE", "LIGHTHOUSE"] },
       { category: "Words with QU", words: ["QUILT", "UNIQUE", "MOSQUE"] }
     ],
-    decoys: ["ANTIQUE", "WALL", "HEDGE"]
+    decoys: ["LATTE", "QUEEN", "MOCHA"]
   },
   {
     id: 109,
@@ -978,7 +978,7 @@ const PUZZLES = [
       { category: "Things that are tangled", words: ["YARN", "HEADPHONES", "HAIR", "VINES"] },
       { category: "Olympic host cities", words: ["TOKYO", "PARIS", "BEIJING"] }
     ],
-    decoys: ["LONDON", "ROLL", "CLEAN"]
+    decoys: ["LONDON", "CHRISTMAS LIGHTS", "STEPPE"]
   },
   {
     id: 110,
@@ -987,7 +987,7 @@ const PUZZLES = [
       { category: "Things that sparkle", words: ["STAR", "SNOW", "DIAMOND", "TINSEL"] },
       { category: "Famous canals", words: ["SUEZ", "ERIE", "VENICE"] }
     ],
-    decoys: ["PANAMA", "IDEA", "EYES"]
+    decoys: ["PANAMA", "OKAPI", "GRAND"]
   },
   {
     id: 111,
@@ -996,7 +996,7 @@ const PUZZLES = [
       { category: "Things in a cockpit", words: ["THROTTLE", "ALTIMETER", "RUDDER", "YOKE"] },
       { category: "Words meaning 'to criticize'", words: ["SLAM", "BASH", "ROAST"] }
     ],
-    decoys: ["KNOCK", "TEAR", "NAME"]
+    decoys: ["PENNE", "RIGATONI", "FUSILLI"]
   },
   {
     id: 112,
@@ -1005,7 +1005,7 @@ const PUZZLES = [
       { category: "Things that sparkle", words: ["GLITTER", "CRYSTAL", "SEQUIN", "FIREWORK"] },
       { category: "Cartoon dogs", words: ["PLUTO", "SCOOBY", "GOOFY"] }
     ],
-    decoys: ["SNOOPY", "BOARD", "RHYTHM"]
+    decoys: ["SNOOPY", "ASTRO", "ODIE"]
   },
   {
     id: 113,
@@ -1014,7 +1014,7 @@ const PUZZLES = [
       { category: "Things with pedals", words: ["BICYCLE", "ORGAN", "CAR", "PIANO"] },
       { category: "Words meaning 'to leave quickly'", words: ["DASH", "FLEE", "SPLIT"] }
     ],
-    decoys: ["BOLT", "RHYTHM", "STICK"]
+    decoys: ["BOLT", "SCRAM", "SCARPER"]
   },
   {
     id: 114,
@@ -1023,7 +1023,7 @@ const PUZZLES = [
       { category: "Things at a carnival", words: ["CLOWN", "FUNNEL CAKE", "RING TOSS", "STRONGMAN"] },
       { category: "Words that contain a body part", words: ["CARPET", "LEGEND", "THUMBNAIL"] }
     ],
-    decoys: ["ELBOW", "COMB", "RHYTHM"]
+    decoys: ["ELBOW", "HEARTH", "KNEECAP"]
   },
   {
     id: 115,
@@ -1032,7 +1032,7 @@ const PUZZLES = [
       { category: "Famous towers", words: ["EIFFEL", "BIG BEN", "BABEL", "PISA"] },
       { category: "Words with silent B", words: ["PLUMBER", "CLIMB", "THUMB"] }
     ],
-    decoys: ["SUBTLE", "KNOWN", "SPRING"]
+    decoys: ["SUBTLE", "THERMAL", "BEANIE"]
   },
   {
     id: 116,
@@ -1041,7 +1041,7 @@ const PUZZLES = [
       { category: "Things with a dial", words: ["WATCH", "RADIO", "COMPASS", "THERMOSTAT"] },
       { category: "Words meaning 'to confuse'", words: ["BAFFLE", "BEWILDER", "STUMP"] }
     ],
-    decoys: ["PUZZLE", "STONE", "STAFF"]
+    decoys: ["PERPLEX", "MYSTIFY", "MUDDLE"]
   },
   {
     id: 117,
@@ -1050,7 +1050,7 @@ const PUZZLES = [
       { category: "Things with a bell", words: ["CHURCH", "BICYCLE", "COW", "DOORBELL"] },
       { category: "Olympic medals", words: ["GOLD", "SILVER", "BRONZE"] }
     ],
-    decoys: ["IRON", "PHRASE", "WORD"]
+    decoys: ["CARROT", "CAT", "TURNIP"]
   },
   {
     id: 118,
@@ -1059,7 +1059,7 @@ const PUZZLES = [
       { category: "Things at a spa", words: ["SAUNA", "MASSAGE", "FACIAL", "ROBE"] },
       { category: "Words that mean 'excellent'", words: ["SUPERB", "PRIME", "CRACK"] }
     ],
-    decoys: ["STELLAR", "BELLY", "LUCK"]
+    decoys: ["STELLAR", "EIDER", "SPLENDID"]
   },
   {
     id: 119,
@@ -1068,7 +1068,7 @@ const PUZZLES = [
       { category: "Things with a cap", words: ["BOTTLE", "MUSHROOM", "PEN", "TOOTH"] },
       { category: "Famous Georges", words: ["WASHINGTON", "CLOONEY", "LUCAS"] }
     ],
-    decoys: ["ORWELL", "ROLL", "RUPT"]
+    decoys: ["ORWELL", "LEMON", "HARRISON"]
   },
   {
     id: 120,
@@ -1077,7 +1077,7 @@ const PUZZLES = [
       { category: "Things in a studio", words: ["EASEL", "CANVAS", "PALETTE", "BRUSH"] },
       { category: "Famous Jacks", words: ["SPARROW", "BLACK", "FROST"] }
     ],
-    decoys: ["NICHOLSON", "FACE", "TOWER"]
+    decoys: ["NICHOLSON", "KENNEDY", "PEA"]
   },
   {
     id: 121,
@@ -1086,7 +1086,7 @@ const PUZZLES = [
       { category: "Things with a blade", words: ["KNIFE", "WINDMILL", "SKATE", "HELICOPTER"] },
       { category: "Words ending in -ous", words: ["NERVOUS", "CURIOUS", "SERIOUS"] }
     ],
-    decoys: ["FAMOUS", "WORK", "FLIX"]
+    decoys: ["FAMOUS", "FURIOUS", "SCYTHE"]
   },
   {
     id: 122,
@@ -1095,7 +1095,7 @@ const PUZZLES = [
       { category: "Things at a picnic", words: ["BLANKET", "BASKET", "LEMONADE", "ANTS"] },
       { category: "Words meaning 'to delay'", words: ["STALL", "TABLE", "SHELVE"] }
     ],
-    decoys: ["DEFER", "ROOM", "PARK"]
+    decoys: ["DEFER", "COOLER", "POSTPONE"]
   },
   {
     id: 123,
@@ -1104,7 +1104,7 @@ const PUZZLES = [
       { category: "Things with a handle", words: ["AXE", "BROOM", "BRIEFCASE", "SHOVEL"] },
       { category: "Words that are also colors", words: ["IVORY", "SCARLET", "CRIMSON"] }
     ],
-    decoys: ["AMBER", "CORAL", "RELEASE"]
+    decoys: ["AMBER", "CORAL", "TONKATSU"]
   },
   {
     id: 124,
@@ -1113,7 +1113,7 @@ const PUZZLES = [
       { category: "Things that rust", words: ["GATE", "PIPE", "NAIL", "BRIDGE"] },
       { category: "Words from Spanish", words: ["TORNADO", "PLAZA", "CANYON"] }
     ],
-    decoys: ["RODEO", "FLOOR", "WORK"]
+    decoys: ["RODEO", "KABOCHA", "DELICATA"]
   },
   {
     id: 125,
@@ -1122,7 +1122,7 @@ const PUZZLES = [
       { category: "Things with pockets", words: ["JACKET", "JEANS", "BILLIARD TABLE", "KANGAROO"] },
       { category: "Words meaning 'to annoy'", words: ["BUG", "NEEDLE", "RIDE"] }
     ],
-    decoys: ["GRILL", "PIECE", "MIND"]
+    decoys: ["HUMPBACK", "PESTER", "IRKED"]
   },
   {
     id: 126,
@@ -1131,7 +1131,7 @@ const PUZZLES = [
       { category: "Things that whisper", words: ["WIND", "LEAVES", "GRASS", "STREAM"] },
       { category: "Famous Jameses", words: ["DEAN", "BROWN", "MADISON"] }
     ],
-    decoys: ["BOND", "OVER", "WORD"]
+    decoys: ["BOND", "BRIE", "GOUDA"]
   },
   {
     id: 127,
@@ -1140,7 +1140,7 @@ const PUZZLES = [
       { category: "Things at a farm", words: ["SILO", "TRACTOR", "BARN", "SCARECROW"] },
       { category: "Words meaning 'money'", words: ["DOUGH", "CHEDDAR", "CABBAGE"] }
     ],
-    decoys: ["BREAD", "PAPER", "RHYTHM"]
+    decoys: ["BREAD", "MOOLAH", "BUCKS"]
   },
   {
     id: 128,
@@ -1149,7 +1149,7 @@ const PUZZLES = [
       { category: "Things with a clasp", words: ["NECKLACE", "PURSE", "BINDER", "BELT"] },
       { category: "Famous Alexanders", words: ["GREAT", "HAMILTON", "GRAHAM BELL"] }
     ],
-    decoys: ["MCQUEEN", "FIELD", "WING"]
+    decoys: ["MCQUEEN", "BROWN", "THE GREAT"]
   },
   {
     id: 129,
@@ -1158,7 +1158,7 @@ const PUZZLES = [
       { category: "Things with a hinge", words: ["DOOR", "LAPTOP", "GATE", "JAW"] },
       { category: "Words meaning 'old'", words: ["ANCIENT", "ARCHAIC", "VINTAGE"] }
     ],
-    decoys: ["ANTIQUE", "RHYTHM", "BRAND"]
+    decoys: ["ANTIQUE", "NIGHTINGALE", "VENERABLE"]
   },
   {
     id: 130,
@@ -1167,7 +1167,7 @@ const PUZZLES = [
       { category: "Things that purr", words: ["CAT", "ENGINE", "PIGEON", "CONTENTED BABY"] },
       { category: "Words meaning 'to eat greedily'", words: ["GORGE", "WOLF", "SCARF"] }
     ],
-    decoys: ["DEVOUR", "HOUSE", "RHYTHM"]
+    decoys: ["DEVOUR", "GOBBLE", "MOTOR"]
   },
   {
     id: 131,
@@ -1176,7 +1176,7 @@ const PUZZLES = [
       { category: "Things that are layered", words: ["PARFAIT", "SEDIMENT", "NACHOS", "ATMOSPHERE"] },
       { category: "Words from Portuguese", words: ["FLAMINGO", "COBRA", "MOSQUITO"] }
     ],
-    decoys: ["MARMALADE", "CLOTH", "TENNIS"]
+    decoys: ["MARMALADE", "ALBINO", "CASHEW"]
   },
   {
     id: 132,
@@ -1185,7 +1185,7 @@ const PUZZLES = [
       { category: "Things with an antenna", words: ["RADIO", "ANT", "SATELLITE", "SNAIL"] },
       { category: "Famous Charleses", words: ["DARWIN", "CHAPLIN", "SCHULZ"] }
     ],
-    decoys: ["DICKENS", "CASE", "WORM"]
+    decoys: ["DICKENS", "DE GAULLE", "TV"]
   },
   {
     id: 133,
@@ -1194,7 +1194,7 @@ const PUZZLES = [
       { category: "Things that are hollow", words: ["TUBE", "BAMBOO", "DRUM", "LOG"] },
       { category: "Words meaning 'to copy'", words: ["MIMIC", "APE", "ECHO"] }
     ],
-    decoys: ["PARROT", "HOLDER", "MARKET"]
+    decoys: ["PARROT", "PINTO", "PIPE"]
   },
   {
     id: 134,
@@ -1203,7 +1203,7 @@ const PUZZLES = [
       { category: "Things with a stage", words: ["THEATER", "ROCKET", "CANCER", "CONCERT"] },
       { category: "Words from Arabic", words: ["ALGORITHM", "MAGAZINE", "TARIFF"] }
     ],
-    decoys: ["SAFARI", "BASE", "BORN"]
+    decoys: ["SAFARI", "ALGEBRA", "MICROSCOPE"]
   },
   {
     id: 135,
@@ -1212,7 +1212,7 @@ const PUZZLES = [
       { category: "Things with a valve", words: ["TRUMPET", "HEART", "TIRE", "FAUCET"] },
       { category: "Words meaning 'to throw'", words: ["HURL", "FLING", "HEAVE"] }
     ],
-    decoys: ["TOSS", "DOWN", "TWAIN"]
+    decoys: ["TOSS", "CHUCK", "LOB"]
   },
   {
     id: 136,
@@ -1221,7 +1221,7 @@ const PUZZLES = [
       { category: "Things that are braided", words: ["ROPE", "HAIR", "BREAD", "RIVER"] },
       { category: "Words meaning 'tip'", words: ["PEAK", "APEX", "CREST"] }
     ],
-    decoys: ["SUMMIT", "TAIN", "STONE"]
+    decoys: ["SUMMIT", "PINNACLE", "RUG"]
   },
   {
     id: 137,
@@ -1230,7 +1230,7 @@ const PUZZLES = [
       { category: "Things at a carnival", words: ["MASK", "FLOAT", "CONFETTI", "STILTS"] },
       { category: "Words meaning 'edge'", words: ["BRINK", "VERGE", "MARGIN"] }
     ],
-    decoys: ["FRINGE", "LOOK", "RAGE"]
+    decoys: ["FRINGE", "FERRIS WHEEL", "PERIPHERY"]
   },
   {
     id: 138,
@@ -1239,7 +1239,7 @@ const PUZZLES = [
       { category: "Things that launch", words: ["ROCKET", "BOAT", "STARTUP", "CAMPAIGN"] },
       { category: "Words meaning 'group'", words: ["CLUSTER", "BATCH", "BUNCH"] }
     ],
-    decoys: ["PACK", "DOWN", "STONE"]
+    decoys: ["PACK", "TURMERIC", "CARDAMOM"]
   },
   {
     id: 139,
@@ -1248,7 +1248,7 @@ const PUZZLES = [
       { category: "Things that have a trunk", words: ["ELEPHANT", "TREE", "CAR", "SUITCASE"] },
       { category: "Words meaning 'to shine'", words: ["GLEAM", "GLISTEN", "RADIATE"] }
     ],
-    decoys: ["SHIMMER", "PIKE", "TABLE"]
+    decoys: ["SHIMMER", "KIWI", "GOOSEBERRY"]
   },
   {
     id: 140,
@@ -1257,7 +1257,7 @@ const PUZZLES = [
       { category: "Things with horns", words: ["BULL", "RHINO", "UNICORN", "MOOSE"] },
       { category: "Scrabble high-point letters", words: ["Q", "Z", "X"] }
     ],
-    decoys: ["RHYTHM", "BACK", "SHOE"]
+    decoys: ["J", "K", "RAM"]
   },
   {
     id: 141,
@@ -1266,7 +1266,7 @@ const PUZZLES = [
       { category: "Things that are inflatable", words: ["BALLOON", "TIRE", "MATTRESS", "RAFT"] },
       { category: "Words meaning 'to think'", words: ["PONDER", "MULL", "REFLECT"] }
     ],
-    decoys: ["MUSE", "GATE", "BONE"]
+    decoys: ["MUSE", "CONTEMPLATE", "RUMINATE"]
   },
   {
     id: 142,
@@ -1275,7 +1275,7 @@ const PUZZLES = [
       { category: "Things with a beak", words: ["TOUCAN", "EAGLE", "PLATYPUS", "SQUID"] },
       { category: "Words meaning 'a lot'", words: ["HEAPS", "OODLES", "LOADS"] }
     ],
-    decoys: ["SCADS", "WORK", "TRIP"]
+    decoys: ["BIRD", "PLETHORA", "KAFFIR LIME"]
   },
   {
     id: 143,
@@ -1284,7 +1284,7 @@ const PUZZLES = [
       { category: "Things with a shell", words: ["CRAB", "WALNUT", "TORTOISE", "CLAM"] },
       { category: "Words meaning 'strong'", words: ["ROBUST", "STURDY", "SOLID"] }
     ],
-    decoys: ["STOUT", "RHYTHM", "HOUSE"]
+    decoys: ["STOUT", "FLAT-COAT", "MIGHTY"]
   },
   {
     id: 144,
@@ -1293,7 +1293,7 @@ const PUZZLES = [
       { category: "Things that are winding", words: ["ROAD", "RIVER", "STAIRCASE", "CLOCK"] },
       { category: "Words that sound like numbers", words: ["WON", "ATE", "SICS"] }
     ],
-    decoys: ["FORE", "STORY", "LETTER"]
+    decoys: ["FORE", "PATH", "TOO"]
   },
   {
     id: 145,
@@ -1302,7 +1302,7 @@ const PUZZLES = [
       { category: "Things with a tail", words: ["DOG", "COMET", "AIRPLANE", "SCORPION"] },
       { category: "Words meaning 'to stop'", words: ["HALT", "CEASE", "QUIT"] }
     ],
-    decoys: ["DESIST", "SHIELD", "FALL"]
+    decoys: ["DESIST", "KITE", "SUSPEND"]
   },
   {
     id: 146,
@@ -1311,7 +1311,7 @@ const PUZZLES = [
       { category: "Things in a gym locker", words: ["TOWEL", "PADLOCK", "SNEAKERS", "DEODORANT"] },
       { category: "Words meaning 'thin'", words: ["SLENDER", "SLIM", "LEAN"] }
     ],
-    decoys: ["GAUNT", "TEASE", "MINE"]
+    decoys: ["GAUNT", "TORTILLA", "LANKY"]
   },
   {
     id: 147,
@@ -1320,7 +1320,7 @@ const PUZZLES = [
       { category: "Things that are frozen", words: ["TUNDRA", "YOGURT", "POPSICLE", "ASSET"] },
       { category: "Words meaning 'loud'", words: ["THUNDEROUS", "DEAFENING", "BLARING"] }
     ],
-    decoys: ["BOOMING", "ISHED", "RHYTHM"]
+    decoys: ["BOOMING", "COLD PRESSED", "FIRST PRESS"]
   },
   {
     id: 148,
@@ -1329,7 +1329,7 @@ const PUZZLES = [
       { category: "Things with feathers", words: ["PILLOW", "ARROW", "QUILL", "PEACOCK"] },
       { category: "Words meaning 'scared'", words: ["ALARMED", "SPOOKED", "SHAKEN"] }
     ],
-    decoys: ["RATTLED", "SHOT", "SUIT"]
+    decoys: ["RATTLED", "EAGLE", "PARROT"]
   },
   {
     id: 149,
@@ -1338,7 +1338,7 @@ const PUZZLES = [
       { category: "Things at a desk", words: ["LAMP", "STAPLER", "MONITOR", "PEN CUP"] },
       { category: "Words from Dutch", words: ["COOKIE", "BOSS", "YACHT"] }
     ],
-    decoys: ["WAFFLE", "TIME", "DREAM"]
+    decoys: ["WOMBAT", "COLESLAW", "EASEL"]
   },
   {
     id: 150,
@@ -1347,7 +1347,7 @@ const PUZZLES = [
       { category: "Things with a lens", words: ["CAMERA", "TELESCOPE", "GLASSES", "MICROSCOPE"] },
       { category: "Words meaning 'to look'", words: ["GAZE", "PEER", "GLANCE"] }
     ],
-    decoys: ["STARE", "KICK", "RHYTHM"]
+    decoys: ["STARE", "RICE", "GLASS"]
   },
   {
     id: 151,
@@ -1356,7 +1356,7 @@ const PUZZLES = [
       { category: "Things that unfold", words: ["MAP", "CHAIR", "NAPKIN", "STORY"] },
       { category: "Words meaning 'pale'", words: ["ASHEN", "PALLID", "SALLOW"] }
     ],
-    decoys: ["BARNACLE", "SHADE", "PRAWN"]
+    decoys: ["BARNACLE", "GHOSTLY", "PRAWN"]
   },
   {
     id: 152,
@@ -1365,7 +1365,7 @@ const PUZZLES = [
       { category: "Things with a loop", words: ["ROLLER COASTER", "LASSO", "BELT", "SHOELACE"] },
       { category: "Words meaning 'nonsense'", words: ["HOGWASH", "BUNK", "TRIPE"] }
     ],
-    decoys: ["DRIVEL", "NAIL", "RHYTHM"]
+    decoys: ["DRIVEL", "TABOULEH", "KIBBEH"]
   },
   {
     id: 153,
@@ -1374,7 +1374,7 @@ const PUZZLES = [
       { category: "Things that are coiled", words: ["SNAKE", "SPRING", "HOSE", "ROPE"] },
       { category: "Words meaning 'crazy'", words: ["BONKERS", "BANANAS", "BATTY"] }
     ],
-    decoys: ["BARMY", "STILL", "POINT"]
+    decoys: ["BARMY", "PINK", "CHUM"]
   },
   {
     id: 154,
@@ -1383,7 +1383,7 @@ const PUZZLES = [
       { category: "Things that reflect", words: ["MIRROR", "LAKE", "GLASS", "MOON"] },
       { category: "Words meaning 'stubborn'", words: ["DOGGED", "PIGHEADED", "BULLISH"] }
     ],
-    decoys: ["MULISH", "STEP", "BELL"]
+    decoys: ["MULISH", "TTEOKBOKKI", "CHROME"]
   },
   {
     id: 155,
@@ -1392,7 +1392,7 @@ const PUZZLES = [
       { category: "Things with a frame", words: ["PICTURE", "BICYCLE", "BED", "DOOR"] },
       { category: "Words meaning 'beautiful'", words: ["STUNNING", "GORGEOUS", "RAVISHING"] }
     ],
-    decoys: ["EXQUISITE", "BREAK", "FELT"]
+    decoys: ["EXQUISITE", "WINDOW", "FLAMINGO"]
   },
   {
     id: 156,
@@ -1401,7 +1401,7 @@ const PUZZLES = [
       { category: "Things that absorb", words: ["SPONGE", "TOWEL", "SOIL", "COTTON"] },
       { category: "Words meaning 'to fix'", words: ["MEND", "PATCH", "REPAIR"] }
     ],
-    decoys: ["RESTORE", "TIME", "BREAK"]
+    decoys: ["RESTORE", "REMEDY", "RECTIFY"]
   },
   {
     id: 157,
@@ -1410,7 +1410,7 @@ const PUZZLES = [
       { category: "Things with a dial", words: ["SAFE", "PHONE", "OVEN", "CLOCK"] },
       { category: "Words meaning 'to hurry'", words: ["RUSH", "HUSTLE", "HASTEN"] }
     ],
-    decoys: ["SCRAMBLE", "HUNTER", "BAND"]
+    decoys: ["SCRAMBLE", "ABALONE", "WHELK"]
   },
   {
     id: 158,
@@ -1419,7 +1419,7 @@ const PUZZLES = [
       { category: "Things with a point", words: ["STAR", "PENCIL", "NEEDLE", "SPEAR"] },
       { category: "Words meaning 'foolish'", words: ["ABSURD", "DAFT", "INANE"] }
     ],
-    decoys: ["SILLY", "RHYTHM", "PIPE"]
+    decoys: ["MILLE-FEUILLE", "ASININE", "PROFITEROLE"]
   },
   {
     id: 159,
@@ -1428,12 +1428,12 @@ const PUZZLES = [
       { category: "Things that are braided", words: ["CHALLAH", "LANYARD", "GARLIC", "WHIP"] },
       { category: "Words meaning 'bright'", words: ["LUMINOUS", "VIVID", "RADIANT"] }
     ],
-    decoys: ["BRILLIANT", "LEADER", "TONE"]
+    decoys: ["BRILLIANT", "DAZZLING", "AJI DE GALLINA"]
   },
   {
     id: 160,
     groups: [
-      { category: "Salamanders", words: ["AXE", "NEWT", "HELLBENDER", "MUDPUPPY"] },
+      { category: "Salamanders", words: ["FIRE SALAMANDER", "NEWT", "HELLBENDER", "MUDPUPPY"] },
       { category: "Things with a buckle", words: ["SHOE", "BELT", "HELMET", "WATCH"] },
       { category: "Words meaning 'to persuade'", words: ["COAX", "SWAY", "CAJOLE"] }
     ],
@@ -1446,7 +1446,7 @@ const PUZZLES = [
       { category: "Things that shimmer", words: ["SILK", "PEARL", "OIL SLICK", "AURORA"] },
       { category: "Words meaning 'brave'", words: ["COURAGEOUS", "INTREPID", "DARING"] }
     ],
-    decoys: ["HEROIC", "SCOTCH", "RHYTHM"]
+    decoys: ["VALIANT", "GALLANT", "SHIRO"]
   },
   {
     id: 162,
@@ -1455,7 +1455,7 @@ const PUZZLES = [
       { category: "Things with a cork", words: ["WINE", "BULLETIN BOARD", "FISHING ROD", "BAT"] },
       { category: "Words meaning 'to decrease'", words: ["WANE", "EBB", "TAPER"] }
     ],
-    decoys: ["DWINDLE", "FINCH", "SMITH"]
+    decoys: ["DWINDLE", "WINE BOTTLE", "GRIZZLY"]
   },
   {
     id: 163,
@@ -1464,7 +1464,7 @@ const PUZZLES = [
       { category: "Things with a propeller", words: ["HELICOPTER", "BOAT", "FAN", "DRONE"] },
       { category: "Words meaning 'to shout'", words: ["BELLOW", "HOLLER", "YELL"] }
     ],
-    decoys: ["ROAR", "RHYTHM", "WORD"]
+    decoys: ["ROAR", "AIRPLANE", "SUBMARINE"]
   },
   {
     id: 164,
@@ -1473,7 +1473,7 @@ const PUZZLES = [
       { category: "Things that are layered", words: ["TRIFLE", "ROCK", "WEDDING CAKE", "ONION"] },
       { category: "Words meaning 'to reveal'", words: ["DISCLOSE", "EXPOSE", "DIVULGE"] }
     ],
-    decoys: ["UNVEIL", "SPRING", "BEAT"]
+    decoys: ["UNVEIL", "BOOBY", "UNMASK"]
   },
   {
     id: 165,
@@ -1482,7 +1482,7 @@ const PUZZLES = [
       { category: "Things with a motor", words: ["BLENDER", "DRILL", "BOAT", "CAR"] },
       { category: "Words meaning 'tricky'", words: ["CRAFTY", "WILY", "CUNNING"] }
     ],
-    decoys: ["RHYTHM", "WISE", "PINCHER"]
+    decoys: ["CHERRYSTONE", "DEVIOUS", "COCKLE"]
   },
   {
     id: 166,
@@ -1491,7 +1491,7 @@ const PUZZLES = [
       { category: "Things that cascade", words: ["WATERFALL", "HAIR", "DOMINOES", "FLOWERS"] },
       { category: "Words meaning 'to praise'", words: ["LAUD", "COMMEND", "HAIL"] }
     ],
-    decoys: ["EXTOL", "STAIRS", "KEEP"]
+    decoys: ["EXTOL", "ACCLAIM", "FOUNTAIN"]
   },
   {
     id: 167,
@@ -1500,7 +1500,7 @@ const PUZZLES = [
       { category: "Things with a knob", words: ["DOOR", "STOVE", "DRAWER", "RADIO"] },
       { category: "Words meaning 'to predict'", words: ["FORECAST", "DIVINE", "AUGUR"] }
     ],
-    decoys: ["FORESEE", "HUMMUS", "SIMIT"]
+    decoys: ["FORESEE", "PROPHESY", "SIMIT"]
   },
   {
     id: 168,
@@ -1509,7 +1509,7 @@ const PUZZLES = [
       { category: "Things with a brim", words: ["HAT", "CUP", "VOLCANO", "BOWL"] },
       { category: "Words meaning 'to eat'", words: ["CONSUME", "DEVOUR", "NIBBLE"] }
     ],
-    decoys: ["FEAST", "PHONE", "COUNT"]
+    decoys: ["FEAST", "FINOCCHIONA", "MUNCH"]
   },
   {
     id: 169,
@@ -1518,7 +1518,7 @@ const PUZZLES = [
       { category: "Things with a lid", words: ["POT", "CHEST", "TRASH CAN", "EYE"] },
       { category: "Words meaning 'fast'", words: ["NIMBLE", "AGILE", "HASTY"] }
     ],
-    decoys: ["SPEEDY", "SHOE", "PLOW"]
+    decoys: ["SPEEDY", "BAMMY", "JAR"]
   },
   {
     id: 170,
@@ -1527,7 +1527,7 @@ const PUZZLES = [
       { category: "Things with a saddle", words: ["HORSE", "BICYCLE", "MOUNTAIN", "SHOE"] },
       { category: "Words meaning 'calm'", words: ["SERENE", "PLACID", "COMPOSED"] }
     ],
-    decoys: ["TRANQUIL", "CRAFT", "MARK"]
+    decoys: ["TRANQUIL", "MOTORCYCLE", "PILLAR"]
   },
   {
     id: 171,
@@ -1536,7 +1536,7 @@ const PUZZLES = [
       { category: "Things with a track", words: ["TRAIN", "RECORD", "RACECAR", "CURTAIN"] },
       { category: "Words meaning 'wet'", words: ["DAMP", "MOIST", "DRENCHED"] }
     ],
-    decoys: ["SOGGY", "BAKED", "MOON"]
+    decoys: ["SOGGY", "KALUA PIG", "HAUPIA"]
   },
   {
     id: 172,
@@ -1545,7 +1545,7 @@ const PUZZLES = [
       { category: "Things with a web", words: ["SPIDER", "DUCK", "INTERNET", "FABRIC"] },
       { category: "Words meaning 'ugly'", words: ["GHASTLY", "GROTESQUE", "UNSIGHTLY"] }
     ],
-    decoys: ["HIDEOUS", "DOWN", "ROOM"]
+    decoys: ["HIDEOUS", "GRISLY", "HEINOUS"]
   },
   {
     id: 173,
@@ -1554,7 +1554,7 @@ const PUZZLES = [
       { category: "Things with a zipper", words: ["JACKET", "BAG", "TENT", "BOOT"] },
       { category: "Words meaning 'to agree'", words: ["CONCUR", "ASSENT", "CONSENT"] }
     ],
-    decoys: ["ENDORSE", "FARE", "LAID"]
+    decoys: ["ENDORSE", "SLEEPING BAG", "COMPLY"]
   },
   {
     id: 174,
@@ -1563,7 +1563,7 @@ const PUZZLES = [
       { category: "Things with a magnet", words: ["FRIDGE", "COMPASS", "SPEAKER", "MRI"] },
       { category: "Words meaning 'to shake'", words: ["TREMBLE", "QUIVER", "QUAKE"] }
     ],
-    decoys: ["SHUDDER", "RHYTHM", "CASE"]
+    decoys: ["SHUDDER", "MSEMEN", "HARD DRIVE"]
   },
   {
     id: 175,
@@ -1572,7 +1572,7 @@ const PUZZLES = [
       { category: "Things with a fin", words: ["SHARK", "ROCKET", "SURFBOARD", "RADIATOR"] },
       { category: "Words meaning 'to avoid'", words: ["DODGE", "SIDESTEP", "DUCK"] }
     ],
-    decoys: ["EVADE", "CREW", "FALL"]
+    decoys: ["EVADE", "ELUDE", "DOLPHIN"]
   },
   {
     id: 176,
@@ -1581,7 +1581,7 @@ const PUZZLES = [
       { category: "Things with a wheel", words: ["BICYCLE", "HAMSTER", "SHIP", "ROULETTE"] },
       { category: "Words meaning 'mysterious'", words: ["ARCANE", "ENIGMATIC", "OCCULT"] }
     ],
-    decoys: ["CRYPTIC", "GUARD", "SETTER"]
+    decoys: ["CRYPTIC", "GADO GADO", "ESOTERIC"]
   },
   {
     id: 177,
@@ -1590,7 +1590,7 @@ const PUZZLES = [
       { category: "Things with a stripe", words: ["ZEBRA", "TIGER", "FLAG", "CANDY CANE"] },
       { category: "Words meaning 'to help'", words: ["AID", "ASSIST", "BOLSTER"] }
     ],
-    decoys: ["FOSTER", "WHEEL", "WEIGHT"]
+    decoys: ["FOSTER", "SKUNK", "JALAPENO"]
   },
   {
     id: 178,
@@ -1599,7 +1599,7 @@ const PUZZLES = [
       { category: "Things with a stem", words: ["FLOWER", "CHERRY", "WINE GLASS", "MUSHROOM"] },
       { category: "Words meaning 'new'", words: ["NOVEL", "FRESH", "CURRENT"] }
     ],
-    decoys: ["MODERN", "SESSION", "RHYTHM"]
+    decoys: ["NASCENT", "BUDDING", "PIPE"]
   },
   {
     id: 179,
@@ -1608,7 +1608,7 @@ const PUZZLES = [
       { category: "Things with a spout", words: ["TEAPOT", "WHALE", "GUTTER", "WATERING CAN"] },
       { category: "Words meaning 'to bother'", words: ["PESTER", "HARASS", "HASSLE"] }
     ],
-    decoys: ["BADGER", "WORD", "HOLE"]
+    decoys: ["BADGER", "IRK", "NEEDLE"]
   },
   {
     id: 180,
@@ -1617,7 +1617,7 @@ const PUZZLES = [
       { category: "Things with a mane", words: ["LION", "HORSE", "ZEBRA", "GUITARIST"] },
       { category: "Words meaning 'to boast'", words: ["BRAG", "FLAUNT", "GLOAT"] }
     ],
-    decoys: ["CROW", "ABOUT", "DOWN"]
+    decoys: ["CROW", "GIRAFFE", "SWAGGER"]
   },
   {
     id: 181,
@@ -1626,7 +1626,7 @@ const PUZZLES = [
       { category: "Things with a peak", words: ["MOUNTAIN", "CAP", "GRAPH", "WAVE"] },
       { category: "Words meaning 'to wander'", words: ["STRAY", "TREK", "TRAIPSE"] }
     ],
-    decoys: ["ROVE", "FATHER", "CHILD"]
+    decoys: ["ROVE", "STRUDEL", "SAUERBRATEN"]
   },
   {
     id: 182,
@@ -1635,7 +1635,7 @@ const PUZZLES = [
       { category: "Things that are transparent", words: ["GLASS", "WATER", "JELLYFISH", "CELLOPHANE"] },
       { category: "Words meaning 'to cut'", words: ["CARVE", "SLICE", "SEVER"] }
     ],
-    decoys: ["CLEAVE", "KICK", "BACK"]
+    decoys: ["CLEAVE", "ICE", "TROUT"]
   },
   {
     id: 183,
@@ -1644,7 +1644,7 @@ const PUZZLES = [
       { category: "Things with a blade", words: ["SWORD", "FAN", "GRASS", "RAZOR"] },
       { category: "Words meaning 'to persuade'", words: ["CONVINCE", "TEMPT", "LURE"] }
     ],
-    decoys: ["ENTICE", "ACHE", "BRUSH"]
+    decoys: ["ENTICE", "COAX", "CAMEMBERT"]
   },
   {
     id: 184,
@@ -1653,7 +1653,7 @@ const PUZZLES = [
       { category: "Things with a dock", words: ["BOAT", "PHONE", "COURTROOM", "SPACE STATION"] },
       { category: "Words meaning 'to vanish'", words: ["EVAPORATE", "FADE", "DISSIPATE"] }
     ],
-    decoys: ["DISSOLVE", "BACK", "RHYTHM"]
+    decoys: ["DISSOLVE", "LAPTOP", "FOX"]
   },
   {
     id: 185,
@@ -1662,7 +1662,7 @@ const PUZZLES = [
       { category: "Things with a cord", words: ["PHONE", "GUITAR", "PARACHUTE", "LAMP"] },
       { category: "Words meaning 'to try'", words: ["ENDEAVOR", "STRIVE", "VENTURE"] }
     ],
-    decoys: ["ATTEMPT", "BALL", "OPENER"]
+    decoys: ["ATTEMPT", "MANAKISH", "SHAWARMA"]
   },
   {
     id: 186,
@@ -1671,7 +1671,7 @@ const PUZZLES = [
       { category: "Things with a paddle", words: ["CANOE", "PING PONG", "BUTTER", "SPANKING"] },
       { category: "Words meaning 'to sparkle'", words: ["TWINKLE", "SHIMMER", "GLINT"] }
     ],
-    decoys: ["GLITTER", "ROLL", "CHECK"]
+    decoys: ["GLITTER", "GLEAM", "ZUREK"]
   },
   {
     id: 187,
@@ -1680,7 +1680,7 @@ const PUZZLES = [
       { category: "Things with a perch", words: ["BIRD", "PARROT", "LIFEGUARD", "BALCONY"] },
       { category: "Words meaning 'to scatter'", words: ["DISPERSE", "SPRINKLE", "SPLAY"] }
     ],
-    decoys: ["STREW", "LINE", "RHYTHM"]
+    decoys: ["STREW", "BIGEYE", "LONGFIN"]
   },
   {
     id: 188,
@@ -1689,7 +1689,7 @@ const PUZZLES = [
       { category: "Things that are elastic", words: ["RUBBER BAND", "WAISTBAND", "TRAMPOLINE", "BUNGEE"] },
       { category: "Words meaning 'weird'", words: ["EERIE", "SURREAL", "OUTLANDISH"] }
     ],
-    decoys: ["UNCANNY", "RHYTHM", "CHECK"]
+    decoys: ["UNCANNY", "ECHEVERIA", "SEMPERVIVUM"]
   },
   {
     id: 189,
@@ -1698,7 +1698,7 @@ const PUZZLES = [
       { category: "Things with a chamber", words: ["HEART", "GUN", "CAVE", "SENATE"] },
       { category: "Words meaning 'to suggest'", words: ["PROPOSE", "HINT", "INSINUATE"] }
     ],
-    decoys: ["IMPLY", "WASH", "COLLAR"]
+    decoys: ["IMPLY", "INTIMATE", "ECHO"]
   },
   {
     id: 190,
@@ -1707,7 +1707,7 @@ const PUZZLES = [
       { category: "Things with a rudder", words: ["BOAT", "AIRPLANE", "SUBMARINE", "KAYAK"] },
       { category: "Words meaning 'to reveal'", words: ["UNCOVER", "BETRAY", "BARE"] }
     ],
-    decoys: ["UNMASK", "CHEAP", "RHYTHM"]
+    decoys: ["UNMASK", "EXPOSE", "SHIP"]
   },
   {
     id: 191,
@@ -1716,7 +1716,7 @@ const PUZZLES = [
       { category: "Things with a fuse", words: ["BOMB", "FIREWORK", "CIRCUIT", "TEMPER"] },
       { category: "Words meaning 'to wander'", words: ["AMBLE", "MOSEY", "GALLIVANT"] }
     ],
-    decoys: ["SAUNTER", "POLISH", "RHYTHM"]
+    decoys: ["ROAM", "FINS", "DRIFT"]
   },
   {
     id: 192,
@@ -1725,7 +1725,7 @@ const PUZZLES = [
       { category: "Things with a nest", words: ["BIRD", "WASP", "EGG", "TABLE"] },
       { category: "Words meaning 'to defeat'", words: ["CONQUER", "ROUT", "TOPPLE"] }
     ],
-    decoys: ["VANQUISH", "FALL", "LORD"]
+    decoys: ["VANQUISH", "TROUNCE", "OVERCOME"]
   },
   {
     id: 193,
@@ -1734,7 +1734,7 @@ const PUZZLES = [
       { category: "Things with a root", words: ["TREE", "TOOTH", "WORD", "GINGER"] },
       { category: "Words meaning 'to jump'", words: ["LEAP", "BOUND", "SPRING"] }
     ],
-    decoys: ["VAULT", "SHOT", "SHIP"]
+    decoys: ["VAULT", "MANZANILLA", "CASTELVETRANO"]
   },
   {
     id: 194,
@@ -1743,7 +1743,7 @@ const PUZZLES = [
       { category: "Things with a hook", words: ["FISHING ROD", "CRANE", "COAT RACK", "PIRATE"] },
       { category: "Words meaning 'to grip'", words: ["CLUTCH", "GRASP", "CLENCH"] }
     ],
-    decoys: ["CLASP", "HANDED", "RHYTHM"]
+    decoys: ["CLASP", "SEIZE", "SHASHLIK"]
   },
   {
     id: 195,
@@ -1752,7 +1752,7 @@ const PUZZLES = [
       { category: "Things with a gauge", words: ["FUEL", "TIRE", "RAILROAD", "SHOTGUN"] },
       { category: "Words meaning 'empty'", words: ["HOLLOW", "BARREN", "VOID"] }
     ],
-    decoys: ["VACANT", "CAST", "HEAD"]
+    decoys: ["VACANT", "DESOLATE", "PRESSURE"]
   },
   {
     id: 196,
@@ -1761,7 +1761,7 @@ const PUZZLES = [
       { category: "Things with a pedestal", words: ["STATUE", "SINK", "TROPHY", "COLUMN"] },
       { category: "Words meaning 'lazy'", words: ["SLOTHFUL", "INDOLENT", "LETHARGIC"] }
     ],
-    decoys: ["IDLE", "STEP", "RHYTHM"]
+    decoys: ["IDLE", "LANGUID", "VASE"]
   },
   {
     id: 197,
@@ -1770,7 +1770,7 @@ const PUZZLES = [
       { category: "Things that are braided", words: ["RUG", "BELT", "CORD", "PASTRY"] },
       { category: "Words meaning 'rare'", words: ["SCARCE", "UNCOMMON", "SPARSE"] }
     ],
-    decoys: ["ELUSIVE", "LASH", "HAND"]
+    decoys: ["ELUSIVE", "POACHED", "TERIYAKI"]
   },
   {
     id: 198,
@@ -1779,7 +1779,7 @@ const PUZZLES = [
       { category: "Things with a gauge", words: ["PRESSURE", "RAIN", "WIRE", "WIND"] },
       { category: "Words meaning 'to calm down'", words: ["SUBSIDE", "ABATE", "RECEDE"] }
     ],
-    decoys: ["RELENT", "SPOT", "BEAM"]
+    decoys: ["FUEL", "SOOTHE", "PACIFY"]
   },
   {
     id: 199,
@@ -1788,7 +1788,7 @@ const PUZZLES = [
       { category: "Things with a spine", words: ["BOOK", "HEDGEHOG", "CACTUS", "HUMAN"] },
       { category: "Words meaning 'clever'", words: ["SHREWD", "SAVVY", "SHARP"] }
     ],
-    decoys: ["ASTUTE", "SHED", "LINE"]
+    decoys: ["ASTUTE", "ACACIA", "PORCUPINE"]
   },
   {
     id: 200,
@@ -1797,7 +1797,7 @@ const PUZZLES = [
       { category: "Things with a bark", words: ["DOG", "TREE", "CHOCOLATE", "CINNAMON"] },
       { category: "Words meaning 'to strengthen'", words: ["REINFORCE", "BOLSTER", "BUTTRESS"] }
     ],
-    decoys: ["FORTIFY", "TIME", "BACK"]
+    decoys: ["FORTIFY", "CHEUNG FUN", "WILLOW"]
   },
   {
     id: 201,
@@ -1806,7 +1806,7 @@ const PUZZLES = [
       { category: "Things with a plume", words: ["SMOKE", "PEACOCK", "HELMET", "VOLCANO"] },
       { category: "Words meaning 'to beg'", words: ["PLEAD", "IMPLORE", "ENTREAT"] }
     ],
-    decoys: ["BESEECH", "RULE", "TIME"]
+    decoys: ["BESEECH", "SUPPLICATE", "GROVEL"]
   },
   {
     id: 202,
@@ -1815,7 +1815,7 @@ const PUZZLES = [
       { category: "Things with a pedal", words: ["BICYCLE", "ORGAN", "SEWING MACHINE", "CAR"] },
       { category: "Words meaning 'to break'", words: ["SHATTER", "FRACTURE", "SPLINTER"] }
     ],
-    decoys: ["RUPTURE", "REST", "RHYTHM"]
+    decoys: ["RUPTURE", "SMASH", "SNAP"]
   },
   {
     id: 203,
@@ -1824,7 +1824,7 @@ const PUZZLES = [
       { category: "Things with a vent", words: ["VOLCANO", "DRYER", "HOOD", "SUBMARINE"] },
       { category: "Words meaning 'to flee'", words: ["ESCAPE", "BOLT", "SCARPER"] }
     ],
-    decoys: ["ABSCOND", "BREED", "RHYTHM"]
+    decoys: ["ABSCOND", "SCRAM", "DETROIT"]
   },
   {
     id: 204,
@@ -1833,7 +1833,7 @@ const PUZZLES = [
       { category: "Things with a band", words: ["RING", "RUBBER", "WRIST", "ROCK"] },
       { category: "Words meaning 'to avoid'", words: ["SHUN", "SKIRT", "ESCHEW"] }
     ],
-    decoys: ["ELUDE", "KICK", "RHYTHM"]
+    decoys: ["ELUDE", "KENYAN", "EVADE"]
   },
   {
     id: 205,
@@ -1842,7 +1842,7 @@ const PUZZLES = [
       { category: "Things with a strap", words: ["WATCH", "SANDAL", "GUITAR", "BACKPACK"] },
       { category: "Words meaning 'to lessen'", words: ["MITIGATE", "CURTAIL", "ALLEVIATE"] }
     ],
-    decoys: ["DIMINISH", "MAID", "WEED"]
+    decoys: ["DIMINISH", "DWINDLE", "HELMET"]
   },
   {
     id: 206,
@@ -1851,7 +1851,7 @@ const PUZZLES = [
       { category: "Things with a grid", words: ["CROSSWORD", "MAP", "WAFFLE", "CHESS BOARD"] },
       { category: "Words meaning 'to ban'", words: ["OUTLAW", "VETO", "EMBARGO"] }
     ],
-    decoys: ["CENSOR", "PLANT", "WIFE"]
+    decoys: ["PROHIBIT", "SPONGE", "WINDOW"]
   },
   {
     id: 207,
@@ -1860,7 +1860,7 @@ const PUZZLES = [
       { category: "Things with a scale", words: ["MOUNTAIN", "LIZARD", "BATHROOM", "GUITAR"] },
       { category: "Words meaning 'to hide'", words: ["CONCEAL", "STASH", "TUCK"] }
     ],
-    decoys: ["HARBOR", "HOUSE", "CRASH"]
+    decoys: ["FISH", "SNAKE", "HAZELNUT"]
   },
   {
     id: 208,
@@ -1869,7 +1869,7 @@ const PUZZLES = [
       { category: "Things with a mirror", words: ["BATHROOM", "CAR", "TELESCOPE", "FUN HOUSE"] },
       { category: "Words meaning 'to destroy'", words: ["RAZE", "ANNIHILATE", "OBLITERATE"] }
     ],
-    decoys: ["DEMOLISH", "FARE", "WISHER"]
+    decoys: ["DEMOLISH", "LASER", "DECIMATE"]
   },
   {
     id: 209,
@@ -1878,7 +1878,7 @@ const PUZZLES = [
       { category: "Things with a ledge", words: ["CLIFF", "WINDOW", "SHELF", "BUILDING"] },
       { category: "Words meaning 'to wander aimlessly'", words: ["LOITER", "DAWDLE", "MILL"] }
     ],
-    decoys: ["LINGER", "POWER", "STICK"]
+    decoys: ["APPLE CIDER", "RED WINE", "WHITE WINE"]
   },
   {
     id: 210,
@@ -1887,7 +1887,7 @@ const PUZZLES = [
       { category: "Things with a beam", words: ["FLASHLIGHT", "BARN", "GYMNAST", "SUNLIGHT"] },
       { category: "Words meaning 'to honor'", words: ["REVERE", "ESTEEM", "CHERISH"] }
     ],
-    decoys: ["VENERATE", "PHONE", "PIECE"]
+    decoys: ["SALUTE", "ACCLAIM", "KIPPER"]
   },
   {
     id: 211,
@@ -1896,7 +1896,7 @@ const PUZZLES = [
       { category: "Things with a channel", words: ["TV", "RIVER", "ENGLISH", "RADIO"] },
       { category: "Words meaning 'to gather'", words: ["AMASS", "MUSTER", "CONVENE"] }
     ],
-    decoys: ["ASSEMBLE", "FRONT", "CHASER"]
+    decoys: ["ASSEMBLE", "TELEVISION", "COLLECT"]
   },
   {
     id: 212,
@@ -1905,7 +1905,7 @@ const PUZZLES = [
       { category: "Things with a sole", words: ["SHOE", "FISH", "FOOT", "SOUL MUSIC"] },
       { category: "Words meaning 'to anger'", words: ["INFURIATE", "PROVOKE", "INCENSE"] }
     ],
-    decoys: ["ENRAGE", "MOCHI", "KNODEL"]
+    decoys: ["ENRAGE", "RILE", "KNODEL"]
   },
   {
     id: 213,
@@ -1914,7 +1914,7 @@ const PUZZLES = [
       { category: "Things with a plug", words: ["BATHTUB", "OUTLET", "SPARK", "EAR"] },
       { category: "Words meaning 'to admire'", words: ["ADORE", "IDOLIZE", "TREASURE"] }
     ],
-    decoys: ["WORSHIP", "BACK", "LINE"]
+    decoys: ["WORSHIP", "REVERE", "ESTEEM"]
   },
   {
     id: 214,
@@ -1923,7 +1923,7 @@ const PUZZLES = [
       { category: "Things with a hatch", words: ["SUBMARINE", "EGG", "SHIP", "ATTIC"] },
       { category: "Words meaning 'to hurry'", words: ["BOLT", "SPRINT", "ZOOM"] }
     ],
-    decoys: ["DART", "WORK", "RHYTHM"]
+    decoys: ["COPPA", "BRESAOLA", "TRAPDOOR"]
   },
   {
     id: 215,
@@ -1932,7 +1932,7 @@ const PUZZLES = [
       { category: "Things with a spine", words: ["PORCUPINE", "MOUNTAIN RANGE", "SEA URCHIN", "BOOK"] },
       { category: "Words meaning 'to argue'", words: ["DISPUTE", "SQUABBLE", "WRANGLE"] }
     ],
-    decoys: ["BICKER", "FISH", "SHOCK"]
+    decoys: ["BICKER", "CACTUS", "EARL GREY"]
   },
   {
     id: 216,
@@ -1941,7 +1941,7 @@ const PUZZLES = [
       { category: "Things with a patch", words: ["EYE", "GARDEN", "JACKET", "SOFTWARE"] },
       { category: "Words meaning 'to shine'", words: ["GLEAM", "BEAM", "BLAZE"] }
     ],
-    decoys: ["GLOW", "WAGON", "WIDTH"]
+    decoys: ["GLOW", "PIRATE", "MINESTRONE"]
   },
   {
     id: 217,
@@ -1950,7 +1950,7 @@ const PUZZLES = [
       { category: "Things with a harbor", words: ["PEARL", "CITY", "BOAT", "SEAL"] },
       { category: "Words meaning 'to charm'", words: ["CAPTIVATE", "ENCHANT", "MESMERIZE"] }
     ],
-    decoys: ["BEWITCH", "SHED", "LOGGED"]
+    decoys: ["BEWITCH", "BEGUILE", "ALLURE"]
   },
   {
     id: 218,
@@ -1959,7 +1959,7 @@ const PUZZLES = [
       { category: "Olympic sports", words: ["FENCING", "JAVELIN", "ROWING", "ARCHERY"] },
       { category: "Words meaning 'to flee'", words: ["ESCAPE", "BOLT", "SCATTER"] }
     ],
-    decoys: ["RETREAT", "STORM", "CLAP"]
+    decoys: ["RETREAT", "CROISSANT", "OATMEAL"]
   },
   {
     id: 219,
@@ -1968,7 +1968,7 @@ const PUZZLES = [
       { category: "Things in a gym", words: ["BENCH", "MAT", "ROPE", "MIRROR"] },
       { category: "Words meaning 'to steal'", words: ["SWIPE", "PINCH", "FILCH"] }
     ],
-    decoys: ["PILFER", "WORK", "BALL"]
+    decoys: ["PILFER", "PURLOIN", "DUMBBELL"]
   },
   {
     id: 220,
@@ -1977,7 +1977,7 @@ const PUZZLES = [
       { category: "Things that spin", words: ["TOP", "WHEEL", "TORNADO", "RECORD"] },
       { category: "Words meaning 'to annoy'", words: ["PESTER", "GRATE", "NETTLE"] }
     ],
-    decoys: ["RANKLE", "PLACE", "TRUCK"]
+    decoys: ["RANKLE", "DALMATIAN", "RETRIEVER"]
   },
   {
     id: 221,
@@ -1986,16 +1986,16 @@ const PUZZLES = [
       { category: "Things in a wallet", words: ["CASH", "LICENSE", "PHOTO", "RECEIPT"] },
       { category: "Words meaning 'to wander'", words: ["ROAM", "MEANDER", "RAMBLE"] }
     ],
-    decoys: ["DRIFT", "BERRY", "SMITH"]
+    decoys: ["DRIFT", "GRAPEFRUIT", "KUMQUAT"]
   },
   {
     id: 222,
     groups: [
       { category: "Musical genres", words: ["JAZZ", "BLUES", "FUNK", "REGGAE"] },
-      { category: "Things with wings", words: ["AIRPLANE", "ANGEL", "BAT", "STAGE"] },
+      { category: "Things with wings", words: ["AIRPLANE", "ANGEL", "BAT", "MOTH"] },
       { category: "Words meaning 'to praise'", words: ["LAUD", "EXTOL", "ACCLAIM"] }
     ],
-    decoys: ["COMMEND", "ROOF", "DIAL"]
+    decoys: ["COMMEND", "SOUL", "APPLAUD"]
   },
   {
     id: 223,
@@ -2004,7 +2004,7 @@ const PUZZLES = [
       { category: "Casino games", words: ["CRAPS", "ROULETTE", "BACCARAT", "SLOTS"] },
       { category: "Words meaning 'to hide'", words: ["CONCEAL", "SHROUD", "OBSCURE"] }
     ],
-    decoys: ["CLOAK", "TRAIL", "WEIGHT"]
+    decoys: ["CLOAK", "ENDIVE", "RADICCHIO"]
   },
   {
     id: 224,
@@ -2013,7 +2013,7 @@ const PUZZLES = [
       { category: "Things with strings", words: ["GUITAR", "KITE", "PUPPET", "BALLOON"] },
       { category: "Words meaning 'to trick'", words: ["DUPE", "HOODWINK", "SWINDLE"] }
     ],
-    decoys: ["BAMBOOZLE", "FIRE", "YARD"]
+    decoys: ["BAMBOOZLE", "DECEIVE", "ELEPHANT"]
   },
   {
     id: 225,
@@ -2022,16 +2022,16 @@ const PUZZLES = [
       { category: "Camping gear", words: ["TENT", "LANTERN", "COMPASS", "CANTEEN"] },
       { category: "Words meaning 'to shatter'", words: ["SMASH", "FRACTURE", "SPLINTER"] }
     ],
-    decoys: ["DEMOLISH", "ROADS", "RHYTHM"]
+    decoys: ["DEMOLISH", "CARBONARA", "TIRAMISU"]
   },
   {
     id: 226,
     groups: [
       { category: "Spices", words: ["CINNAMON", "TURMERIC", "PAPRIKA", "CUMIN"] },
       { category: "Things with keys", words: ["PIANO", "KEYBOARD", "LOCKSMITH", "MAP"] },
-      { category: "Words meaning 'to glow'", words: ["SHIMMER", "GLISTEN", "LUMINOUS"] }
+      { category: "Words meaning 'to glow'", words: ["SHIMMER", "GLISTEN", "GLEAM"] }
     ],
-    decoys: ["RADIATE", "KICK", "SHOW"]
+    decoys: ["RADIATE", "NUTMEG", "BLAZE"]
   },
   {
     id: 227,
@@ -2040,7 +2040,7 @@ const PUZZLES = [
       { category: "Things that melt", words: ["ICE", "BUTTER", "CHOCOLATE", "WAX"] },
       { category: "Words meaning 'to reveal'", words: ["EXPOSE", "DISCLOSE", "UNVEIL"] }
     ],
-    decoys: ["DIVULGE", "BAND", "LINE"]
+    decoys: ["DIVULGE", "UNMASK", "SNOWMAN"]
   },
   {
     id: 228,
@@ -2049,7 +2049,7 @@ const PUZZLES = [
       { category: "Things with bark", words: ["DOG", "TREE", "COUGH", "CAPTAIN"] },
       { category: "Words meaning 'to confuse'", words: ["BAFFLE", "PERPLEX", "MYSTIFY"] }
     ],
-    decoys: ["BEWILDER", "COLD", "MASON"]
+    decoys: ["BEWILDER", "MUDDLE", "LIFE"]
   },
   {
     id: 229,
@@ -2058,7 +2058,7 @@ const PUZZLES = [
       { category: "Things with a crown", words: ["KING", "TOOTH", "ROOSTER", "HILL"] },
       { category: "Words meaning 'to bother'", words: ["HARASS", "BADGER", "HASSLE"] }
     ],
-    decoys: ["RHYTHM", "WALK", "LIGHT"]
+    decoys: ["PESTER", "QUEEN", "YELLOWTAIL"]
   },
   {
     id: 230,
@@ -2067,7 +2067,7 @@ const PUZZLES = [
       { category: "Things in a pocket", words: ["KEYS", "LINT", "COIN", "PHONE"] },
       { category: "Words meaning 'to weaken'", words: ["ERODE", "UNDERMINE", "DIMINISH"] }
     ],
-    decoys: ["RHYTHM", "LEAF", "FISH"]
+    decoys: ["HEATHCLIFF", "SAP", "FIGARO"]
   },
   {
     id: 231,
@@ -2076,7 +2076,7 @@ const PUZZLES = [
       { category: "Parts of a ship", words: ["HULL", "MAST", "STERN", "ANCHOR"] },
       { category: "Words meaning 'to grab'", words: ["CLUTCH", "SEIZE", "GRASP"] }
     ],
-    decoys: ["SNATCH", "HOUSE", "WEIGHT"]
+    decoys: ["SNATCH", "ROSEMARY", "NAB"]
   },
   {
     id: 232,
@@ -2085,7 +2085,7 @@ const PUZZLES = [
       { category: "Things with a ring", words: ["PHONE", "CIRCUS", "BOXING", "SATURN"] },
       { category: "Words meaning 'to mock'", words: ["RIDICULE", "TAUNT", "DERIDE"] }
     ],
-    decoys: ["SCOFF", "BALL", "BOARD"]
+    decoys: ["SCOFF", "BELL", "TREE"]
   },
   {
     id: 233,
@@ -2094,7 +2094,7 @@ const PUZZLES = [
       { category: "Things that bounce", words: ["CHECK", "BALL", "TIGGER", "IDEA"] },
       { category: "Words meaning 'to mix'", words: ["BLEND", "COMBINE", "FUSE"] }
     ],
-    decoys: ["MINGLE", "BRUSH", "FAIRY"]
+    decoys: ["MINGLE", "COTTON", "KANGAROO"]
   },
   {
     id: 234,
@@ -2103,7 +2103,7 @@ const PUZZLES = [
       { category: "Things with a shell", words: ["TORTOISE", "WALNUT", "TACO", "SHOTGUN"] },
       { category: "Words meaning 'to hurry'", words: ["HASTEN", "SCURRY", "HUSTLE"] }
     ],
-    decoys: ["RUSH", "BOTTOM", "SLIDE"]
+    decoys: ["RUSH", "DASH", "SCRAMBLE"]
   },
   {
     id: 235,
@@ -2112,7 +2112,7 @@ const PUZZLES = [
       { category: "Things with scales", words: ["FISH", "DRAGON", "MAP", "PIANO"] },
       { category: "Words meaning 'to scatter'", words: ["STREW", "BROADCAST", "SPRINKLE"] }
     ],
-    decoys: ["DISPERSE", "CLUB", "FALL"]
+    decoys: ["DISPERSE", "TANGO", "SPREAD"]
   },
   {
     id: 236,
@@ -2130,7 +2130,7 @@ const PUZZLES = [
       { category: "Things with a trunk", words: ["ELEPHANT", "CAR", "TREE", "SUITCASE"] },
       { category: "Words meaning 'to deny'", words: ["REFUTE", "REBUFF", "REJECT"] }
     ],
-    decoys: ["RENOUNCE", "WORK", "CATCHER"]
+    decoys: ["GRUYERE", "ROQUEFORT", "REPUDIATE"]
   },
   {
     id: 238,
@@ -2139,7 +2139,7 @@ const PUZZLES = [
       { category: "Things with a net", words: ["TENNIS", "FISHING", "HAMMOCK", "INTERNET"] },
       { category: "Words meaning 'to delay'", words: ["STALL", "DEFER", "SHELVE"] }
     ],
-    decoys: ["POSTPONE", "WITNESS", "LASH"]
+    decoys: ["POSTPONE", "STRAWBERRY", "BLACKBERRY"]
   },
   {
     id: 239,
@@ -2148,7 +2148,7 @@ const PUZZLES = [
       { category: "Things with a cap", words: ["BOTTLE", "MUSHROOM", "KNEE", "PEN"] },
       { category: "Words meaning 'to beg'", words: ["IMPLORE", "PLEAD", "BESEECH"] }
     ],
-    decoys: ["ENTREAT", "MADE", "CRAFT"]
+    decoys: ["ENTREAT", "SUPPLICATE", "GROVEL"]
   },
   {
     id: 240,
@@ -2157,7 +2157,7 @@ const PUZZLES = [
       { category: "Things in a park", words: ["BENCH", "FOUNTAIN", "STATUE", "SQUIRREL"] },
       { category: "Words meaning 'to forbid'", words: ["PROHIBIT", "BAN", "VETO"] }
     ],
-    decoys: ["OUTLAW", "FISH", "LIGHT"]
+    decoys: ["OUTLAW", "MANGO", "LYCHEE"]
   },
   {
     id: 241,
@@ -2166,7 +2166,7 @@ const PUZZLES = [
       { category: "Things with a face", words: ["CLOCK", "CLIFF", "COIN", "BUILDING"] },
       { category: "Words meaning 'to flourish'", words: ["THRIVE", "PROSPER", "BLOSSOM"] }
     ],
-    decoys: ["BLOOM", "WORM", "KEEPER"]
+    decoys: ["BLOOM", "BURGEON", "CLOVE HITCH"]
   },
   {
     id: 242,
@@ -2175,7 +2175,7 @@ const PUZZLES = [
       { category: "Things with teeth", words: ["COMB", "SAW", "GEAR", "ZIPPER"] },
       { category: "Words meaning 'to rush'", words: ["SCRAMBLE", "SPRINT", "BARREL"] }
     ],
-    decoys: ["DASH", "STORM", "CASTLE"]
+    decoys: ["DASH", "HURTLE", "CREME BRULEE"]
   },
   {
     id: 243,
@@ -2184,7 +2184,7 @@ const PUZZLES = [
       { category: "Things with a bed", words: ["RIVER", "TRUCK", "FLOWER", "HOSPITAL"] },
       { category: "Words meaning 'to cheat'", words: ["SWINDLE", "DEFRAUD", "FLEECE"] }
     ],
-    decoys: ["BILK", "WIFE", "HOLD"]
+    decoys: ["BILK", "CHAMELEON", "TORTOISE"]
   },
   {
     id: 244,
@@ -2193,7 +2193,7 @@ const PUZZLES = [
       { category: "Things with a horn", words: ["UNICORN", "RHINO", "CAR", "TRUMPET"] },
       { category: "Words meaning 'to soothe'", words: ["MOLLIFY", "ASSUAGE", "APPEASE"] }
     ],
-    decoys: ["PLACATE", "RHYTHM", "LINK"]
+    decoys: ["PLACATE", "RAM", "BULL"]
   },
   {
     id: 245,
@@ -2202,7 +2202,7 @@ const PUZZLES = [
       { category: "Things with a pit", words: ["CHERRY", "ORCHESTRA", "MINE", "PEACH"] },
       { category: "Words meaning 'to ponder'", words: ["MUSE", "RUMINATE", "MULL"] }
     ],
-    decoys: ["REFLECT", "HOUSE", "HORN"]
+    decoys: ["REFLECT", "AVOCADO", "CONTEMPLATE"]
   },
   {
     id: 246,
@@ -2211,7 +2211,7 @@ const PUZZLES = [
       { category: "Things with a tail", words: ["COMET", "KITE", "COAT", "SHRIMP"] },
       { category: "Words meaning 'to vanish'", words: ["DISSOLVE", "DISSIPATE", "FADE"] }
     ],
-    decoys: ["EVAPORATE", "BOARD", "HAUL"]
+    decoys: ["EVAPORATE", "SOURDOUGH", "PUMPERNICKEL"]
   },
   {
     id: 247,
@@ -2220,7 +2220,7 @@ const PUZZLES = [
       { category: "Things in a purse", words: ["LIPSTICK", "MIRROR", "WALLET", "TISSUE"] },
       { category: "Words meaning 'to stun'", words: ["DAZE", "STAGGER", "FLUMMOX"] }
     ],
-    decoys: ["STUPEFY", "WORK", "HORSE"]
+    decoys: ["STUPEFY", "SHOCK", "PARALYZE"]
   },
   {
     id: 248,
@@ -2229,7 +2229,7 @@ const PUZZLES = [
       { category: "Things with a tongue", words: ["SHOE", "FLAME", "BELL", "SNAKE"] },
       { category: "Words meaning 'to scold'", words: ["CHASTISE", "REBUKE", "ADMONISH"] }
     ],
-    decoys: ["BERATE", "TIGHT", "WAVE"]
+    decoys: ["BERATE", "PORTOBELLO", "CHANTERELLE"]
   },
   {
     id: 249,
@@ -2238,7 +2238,7 @@ const PUZZLES = [
       { category: "Things with a drum", words: ["BAND", "STICK", "ROLL", "MAJOR"] },
       { category: "Words meaning 'to climb'", words: ["ASCEND", "SCALE", "SCRAMBLE"] }
     ],
-    decoys: ["CLAMBER", "PRINT", "HOLD"]
+    decoys: ["CLAMBER", "MOUNT", "WASHING MACHINE"]
   },
   {
     id: 250,
@@ -2247,7 +2247,7 @@ const PUZZLES = [
       { category: "Things with a handle", words: ["MUG", "DOOR", "SUITCASE", "PAN"] },
       { category: "Words meaning 'to destroy'", words: ["DECIMATE", "RUIN", "WRECK"] }
     ],
-    decoys: ["RAVAGE", "TROOPER", "DRAIN"]
+    decoys: ["RAVAGE", "DEMOLISH", "SEINE"]
   },
   {
     id: 251,
@@ -2256,7 +2256,7 @@ const PUZZLES = [
       { category: "Things that spin", words: ["TOP", "WHEEL", "TORNADO", "RECORD"] },
       { category: "Words meaning 'to flee'", words: ["ABSCOND", "ESCAPE", "SCATTER"] }
     ],
-    decoys: ["BOLT", "JACK", "SMITH"]
+    decoys: ["BOLT", "SCRAM", "EVACUATE"]
   },
   {
     id: 252,
@@ -2265,7 +2265,7 @@ const PUZZLES = [
       { category: "Olympic sports", words: ["FENCING", "ROWING", "JAVELIN", "BOXING"] },
       { category: "Words meaning 'to sparkle'", words: ["SHIMMER", "TWINKLE", "GLIMMER"] }
     ],
-    decoys: ["GLISTEN", "HIGH", "FLASH"]
+    decoys: ["GLISTEN", "GLITTER", "FLASH"]
   },
   {
     id: 253,
@@ -2274,7 +2274,7 @@ const PUZZLES = [
       { category: "Things with strings", words: ["GUITAR", "KITE", "PUPPET", "BOW"] },
       { category: "Words meaning 'to annoy'", words: ["IRRITATE", "NETTLE", "GALL"] }
     ],
-    decoys: ["PESTER", "CRACKER", "WHIPPET"]
+    decoys: ["PESTER", "VIOLIN", "DALMATIAN"]
   },
   {
     id: 254,
@@ -2283,7 +2283,7 @@ const PUZZLES = [
       { category: "Things that drip", words: ["FAUCET", "CANDLE", "ICICLE", "PAINT"] },
       { category: "Words meaning 'brave'", words: ["VALIANT", "GALLANT", "BOLD"] }
     ],
-    decoys: ["INTREPID", "RUSH", "FISH"]
+    decoys: ["INTREPID", "EMERALD", "JADE"]
   },
   {
     id: 255,
@@ -2292,7 +2292,7 @@ const PUZZLES = [
       { category: "Things in a toolbox", words: ["WRENCH", "PLIERS", "HAMMER", "DRILL"] },
       { category: "Words meaning 'to praise'", words: ["COMMEND", "LAUD", "ACCLAIM"] }
     ],
-    decoys: ["EXTOL", "BOARD", "PLOW"]
+    decoys: ["EXTOL", "APPLAUD", "EXALT"]
   },
   {
     id: 256,
@@ -2301,7 +2301,7 @@ const PUZZLES = [
       { category: "Things with a spine", words: ["BOOK", "CACTUS", "HEDGEHOG", "MOUNTAIN"] },
       { category: "Words meaning 'to wander'", words: ["MEANDER", "ROAM", "DRIFT"] }
     ],
-    decoys: ["RAMBLE", "STONE", "CHAIN"]
+    decoys: ["RAMBLE", "BLUEBERRY", "STRAWBERRY"]
   },
   {
     id: 257,
@@ -2310,16 +2310,16 @@ const PUZZLES = [
       { category: "Things that howl", words: ["WOLF", "WIND", "COYOTE", "SIREN"] },
       { category: "Words meaning 'to grab'", words: ["SEIZE", "SNATCH", "GRASP"] }
     ],
-    decoys: ["CLUTCH", "WALK", "LIGHT"]
+    decoys: ["CLUTCH", "KUMQUAT", "NAB"]
   },
   {
     id: 258,
     groups: [
-      { category: "Sharks", words: ["HAMMER", "TIGER", "BULL", "NURSE"] },
+      { category: "Sharks", words: ["HAMMERHEAD", "TIGER", "BULL", "NURSE"] },
       { category: "Things in a wallet", words: ["CASH", "LICENSE", "RECEIPT", "PHOTO"] },
       { category: "Words meaning 'to reveal'", words: ["DIVULGE", "EXPOSE", "UNVEIL"] }
     ],
-    decoys: ["DISCLOSE", "BURN", "RISE"]
+    decoys: ["DISCLOSE", "UNMASK", "MAKO"]
   },
   {
     id: 259,
@@ -2328,7 +2328,7 @@ const PUZZLES = [
       { category: "Things with a crown", words: ["KING", "TOOTH", "ROOSTER", "PINEAPPLE"] },
       { category: "Words meaning 'to shrink'", words: ["CONTRACT", "DIMINISH", "WANE"] }
     ],
-    decoys: ["DWINDLE", "BOARD", "DUST"]
+    decoys: ["DWINDLE", "GRUYERE", "ROQUEFORT"]
   },
   {
     id: 260,
@@ -2337,7 +2337,7 @@ const PUZZLES = [
       { category: "Things that tick", words: ["CLOCK", "BOMB", "INSECT", "HEART"] },
       { category: "Words meaning 'to soothe'", words: ["PLACATE", "MOLLIFY", "APPEASE"] }
     ],
-    decoys: ["PACIFY", "CUFF", "SHAKE"]
+    decoys: ["PACIFY", "CALM", "ROSE"]
   },
   {
     id: 261,
@@ -2346,7 +2346,7 @@ const PUZZLES = [
       { category: "Things that bloom", words: ["ROSE", "ALGAE", "YOUTH", "ROMANCE"] },
       { category: "Words meaning 'to mock'", words: ["RIDICULE", "SCOFF", "TAUNT"] }
     ],
-    decoys: ["DERIDE", "STAGE", "LASH"]
+    decoys: ["DERIDE", "JEER", "PISTACHIO"]
   },
   {
     id: 262,
@@ -2355,7 +2355,7 @@ const PUZZLES = [
       { category: "Things with a blade", words: ["KNIFE", "FAN", "SKATE", "GRASS"] },
       { category: "Words meaning 'to ponder'", words: ["RUMINATE", "MUSE", "REFLECT"] }
     ],
-    decoys: ["MULL", "KICK", "LINE"]
+    decoys: ["MULL", "SCYTHE", "CONTEMPLATE"]
   },
   {
     id: 263,
@@ -2364,7 +2364,7 @@ const PUZZLES = [
       { category: "Things that hiss", words: ["SNAKE", "STEAM", "CAT", "TIRE"] },
       { category: "Words meaning 'to ban'", words: ["PROHIBIT", "FORBID", "BAR"] }
     ],
-    decoys: ["OUTLAW", "BAND", "HUNTER"]
+    decoys: ["OUTLAW", "VETO", "RADIATOR"]
   },
   {
     id: 264,
@@ -2373,7 +2373,7 @@ const PUZZLES = [
       { category: "Things with a shell", words: ["TURTLE", "EGG", "LOBSTER", "WALNUT"] },
       { category: "Words meaning 'to beg'", words: ["IMPLORE", "BESEECH", "ENTREAT"] }
     ],
-    decoys: ["PLEAD", "WALK", "RHYTHM"]
+    decoys: ["PLEAD", "SUPPLICATE", "PICCOLO"]
   },
   {
     id: 265,
@@ -2382,7 +2382,7 @@ const PUZZLES = [
       { category: "Things that buzz", words: ["BEE", "PHONE", "RAZOR", "CROWD"] },
       { category: "Words meaning 'to hurry'", words: ["EXPEDITE", "HUSTLE", "DASH"] }
     ],
-    decoys: ["HASTEN", "SHELF", "CASE"]
+    decoys: ["HASTEN", "ATACAMA", "SONORAN"]
   },
   {
     id: 266,
@@ -2391,16 +2391,16 @@ const PUZZLES = [
       { category: "Things with a wing", words: ["BIRD", "PLANE", "HOSPITAL", "MANSION"] },
       { category: "Words meaning 'to tremble'", words: ["QUIVER", "QUAKE", "SHIVER"] }
     ],
-    decoys: ["SHUDDER", "LEADER", "TONE"]
+    decoys: ["SHUDDER", "SHAKE", "VIBRATE"]
   },
   {
     id: 267,
     groups: [
       { category: "Salad greens", words: ["ARUGULA", "KALE", "SPINACH", "ROMAINE"] },
       { category: "Things with a horn", words: ["RHINO", "CAR", "UNICORN", "BULL"] },
-      { category: "Words meaning 'to glow'", words: ["RADIATE", "GLEAM", "LUMINOUS"] }
+      { category: "Words meaning 'to glow'", words: ["RADIATE", "GLEAM", "SMOLDER"] }
     ],
-    decoys: ["BEAM", "BOARD", "TIME"]
+    decoys: ["BEAM", "ENDIVE", "RADICCHIO"]
   },
   {
     id: 268,
@@ -2409,7 +2409,7 @@ const PUZZLES = [
       { category: "Things with a net", words: ["TENNIS", "SPIDER", "FISHING", "BASKET"] },
       { category: "Words meaning 'to hoard'", words: ["STOCKPILE", "STASH", "SQUIRREL"] }
     ],
-    decoys: ["AMASS", "RHYTHM", "HAND"]
+    decoys: ["AMASS", "KUNG FU", "CACHE"]
   },
   {
     id: 269,
@@ -2418,7 +2418,7 @@ const PUZZLES = [
       { category: "Things with a tail", words: ["COMET", "KITE", "COAT", "MONKEY"] },
       { category: "Words meaning 'to linger'", words: ["LOITER", "DAWDLE", "TARRY"] }
     ],
-    decoys: ["DALLY", "CAKE", "STOP"]
+    decoys: ["DALLY", "ROSEMARY", "DILL"]
   },
   {
     id: 270,
@@ -2427,7 +2427,7 @@ const PUZZLES = [
       { category: "Things with a point", words: ["NEEDLE", "PENCIL", "STAR", "COMPASS"] },
       { category: "Words meaning 'to outwit'", words: ["OUTFOX", "DUPE", "BAMBOOZLE"] }
     ],
-    decoys: ["HOODWINK", "DUTCH", "DOWN"]
+    decoys: ["HOODWINK", "PINATUBO", "KILAUEA"]
   },
   {
     id: 271,
@@ -2436,16 +2436,16 @@ const PUZZLES = [
       { category: "Things that crack", words: ["WHIP", "ICE", "JOKE", "KNUCKLE"] },
       { category: "Words meaning 'to absorb'", words: ["ENGROSS", "SOAK", "CONSUME"] }
     ],
-    decoys: ["IMMERSE", "HORN", "PEACE"]
+    decoys: ["EGG", "IMBIBE", "GLASS"]
   },
   {
     id: 272,
     groups: [
       { category: "Constellations", words: ["ORION", "CASSIOPEIA", "DRACO", "PEGASUS"] },
       { category: "Things that pop", words: ["BALLOON", "CORN", "BUBBLE", "CORK"] },
-      { category: "Words meaning 'to flaunt'", words: ["PARADE", "SHOWCASE", "FLAUNT"] }
+      { category: "Words meaning 'to flaunt'", words: ["PARADE", "SHOWCASE", "VAUNT"] }
     ],
-    decoys: ["BRANDISH", "GRASS", "RHYTHM"]
+    decoys: ["BRANDISH", "CHAMPAGNE", "URSA MAJOR"]
   },
   {
     id: 273,
@@ -2454,7 +2454,7 @@ const PUZZLES = [
       { category: "Things with a cap", words: ["MUSHROOM", "BOTTLE", "PEN", "KNEE"] },
       { category: "Words meaning 'to forbid'", words: ["EMBARGO", "RESTRICT", "TABOO"] }
     ],
-    decoys: ["VETO", "LIFE", "CARD"]
+    decoys: ["VETO", "DARJEELING", "PROHIBIT"]
   },
   {
     id: 274,
@@ -2463,7 +2463,7 @@ const PUZZLES = [
       { category: "Things with a mouth", words: ["RIVER", "CAVE", "BOTTLE", "VOLCANO"] },
       { category: "Words meaning 'to enchant'", words: ["ENTRANCE", "CHARM", "ALLURE"] }
     ],
-    decoys: ["BEGUILE", "LINE", "RHYTHM"]
+    decoys: ["BEGUILE", "JAR", "MINKE"]
   },
   {
     id: 275,
@@ -2472,7 +2472,7 @@ const PUZZLES = [
       { category: "Things that roar", words: ["LION", "ENGINE", "CROWD", "OCEAN"] },
       { category: "Words meaning 'to baffle'", words: ["PERPLEX", "CONFOUND", "STUMP"] }
     ],
-    decoys: ["MYSTIFY", "SLIDE", "BAND"]
+    decoys: ["MYSTIFY", "BEMUSE", "BEWILDER"]
   },
   {
     id: 276,
@@ -2481,7 +2481,7 @@ const PUZZLES = [
       { category: "Things with a bank", words: ["RIVER", "BLOOD", "PIGGY", "SNOW"] },
       { category: "Words meaning 'to pamper'", words: ["INDULGE", "SPOIL", "DOTE"] }
     ],
-    decoys: ["CODDLE", "PIPER", "PAPER"]
+    decoys: ["CODDLE", "COTTON", "SATIN"]
   },
   {
     id: 277,
@@ -2490,7 +2490,7 @@ const PUZZLES = [
       { category: "Things that melt", words: ["BUTTER", "GLACIER", "CHOCOLATE", "HEART"] },
       { category: "Words meaning 'to scorch'", words: ["SINGE", "SEAR", "CHAR"] }
     ],
-    decoys: ["BLISTER", "PIANO", "CANYON"]
+    decoys: ["BLISTER", "PARCH", "ICE"]
   },
   {
     id: 278,
@@ -2499,7 +2499,7 @@ const PUZZLES = [
       { category: "Things with a pocket", words: ["JACKET", "POOL", "WATCH", "AIR"] },
       { category: "Words meaning 'to sway'", words: ["OSCILLATE", "WAVER", "VACILLATE"] }
     ],
-    decoys: ["TEETER", "BACK", "RHYTHM"]
+    decoys: ["JEANS", "INFLUENCE", "PERSUADE"]
   },
   {
     id: 279,
@@ -2508,7 +2508,7 @@ const PUZZLES = [
       { category: "Things that whistle", words: ["KETTLE", "REFEREE", "TRAIN", "WIND"] },
       { category: "Words meaning 'to soften'", words: ["MITIGATE", "CUSHION", "EASE"] }
     ],
-    decoys: ["TEMPER", "LOCK", "BEAT"]
+    decoys: ["TEMPER", "CARROT", "RUTABAGA"]
   },
   {
     id: 280,
@@ -2517,7 +2517,7 @@ const PUZZLES = [
       { category: "Things with a bridge", words: ["GUITAR", "NOSE", "SHIP", "TOOTH"] },
       { category: "Words meaning 'to erase'", words: ["OBLITERATE", "EXPUNGE", "DELETE"] }
     ],
-    decoys: ["EFFACE", "KEEPER", "HOLD"]
+    decoys: ["EFFACE", "ALTO", "CUMULONIMBUS"]
   },
   {
     id: 281,
@@ -2526,7 +2526,7 @@ const PUZZLES = [
       { category: "Things with a ring", words: ["BOXING", "SATURN", "PHONE", "CIRCUS"] },
       { category: "Words meaning 'to thwart'", words: ["FOIL", "FRUSTRATE", "STYMIE"] }
     ],
-    decoys: ["IMPEDE", "WEIGHT", "BULB"]
+    decoys: ["IMPEDE", "BELL", "OBSTRUCT"]
   },
   {
     id: 282,
@@ -2535,15 +2535,15 @@ const PUZZLES = [
       { category: "Things with a bed", words: ["RIVER", "FLOWER", "TRUCK", "OYSTER"] },
       { category: "Words meaning 'to bewitch'", words: ["ENTHRALL", "CAPTIVATE", "ENRAPTURE"] }
     ],
-    decoys: ["SPELLBIND", "SPOT", "SIDE"]
+    decoys: ["SPELLBIND", "ENCHANT", "BLACK"]
   },
   {
     id: 283,
     groups: [
-      { category: "Cactus types", words: ["SAGUARO", "PRICKLY", "BARREL", "CHOLLA"] },
+      { category: "Cactus types", words: ["SAGUARO", "PRICKLY PEAR", "BARREL", "CHOLLA"] },
       { category: "Things that echo", words: ["CANYON", "CAVE", "HALLWAY", "TUNNEL"] },
       { category: "Words meaning 'to ignite'", words: ["SPARK", "INFLAME", "COMBUST"] }
     ],
-    decoys: ["KINDLE", "ORDER", "LIGHT"]
+    decoys: ["KINDLE", "ORGAN PIPE", "LIGHT"]
   }
 ];
