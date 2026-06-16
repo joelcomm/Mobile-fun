@@ -1,4 +1,4 @@
-const CACHE_NAME = "threads-v1";
+const CACHE_NAME = "threads-v2";
 const ASSETS = [
   "/",
   "/index.html",

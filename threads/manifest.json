@@ -1,7 +1,7 @@
 {
   "name": "Threads Puzzle",
   "short_name": "Threads",
-  "description": "Find the four groups of four words that share a connection!",
+  "description": "Find the word that links all three cues!",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
