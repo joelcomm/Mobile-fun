@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#0d1117">
+  <meta name="theme-color" content="#f8f8fa">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -14,30 +14,28 @@
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
     :root {
-      --bg: #0d1117;
-      --surface: rgba(255,255,255,0.04);
-      --surface-hover: rgba(255,255,255,0.08);
-      --border: rgba(255,255,255,0.08);
-      --text: #e6edf3;
-      --text-dim: rgba(255,255,255,0.45);
-      --text-muted: rgba(255,255,255,0.3);
-      --gold: #E8A317;
-      --green: #3fb950;
+      --bg: #f8f8fa;
+      --card: #ffffff;
+      --card-hover: #f0f0f5;
+      --border: #dddde4;
+      --text: #2a2a3e;
+      --text-dim: #6b6b80;
+      --white: #1a1a2e;
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
 
-      --clr-threads: #F59E0B;
-      --clr-alibi: #14B8A6;
-      --clr-bluff: #EF4444;
-      --clr-lineup: #3B82F6;
-      --clr-echo: #8B5CF6;
-      --clr-cipher: #10B981;
-      --clr-reflex: #F97316;
-      --clr-vanish: #06B6D4;
-      --clr-sequence: #6366F1;
-      --clr-rank: #EC4899;
-      --clr-puptown: #F472B6;
-      --clr-poundbreak: #FB923C;
+      --clr-threads: #D97706;
+      --clr-alibi: #0D9488;
+      --clr-bluff: #DC2626;
+      --clr-lineup: #2563EB;
+      --clr-echo: #7C3AED;
+      --clr-cipher: #059669;
+      --clr-reflex: #EA580C;
+      --clr-vanish: #0891B2;
+      --clr-sequence: #4F46E5;
+      --clr-rank: #DB2777;
+      --clr-puptown: #EC4899;
+      --clr-poundbreak: #F97316;
     }
 
     html, body {
@@ -46,7 +44,6 @@
       color: var(--text);
       font-family: 'Inter', -apple-system, sans-serif;
       font-size: 18px;
-      overflow-x: hidden;
     }
 
     #app {
@@ -60,21 +57,19 @@
       flex-direction: column;
     }
 
-    /* ─── Header ─────────────────────────────────────────── */
     header {
       text-align: center;
-      margin-bottom: 28px;
-      padding-top: 20px;
-      position: relative;
+      margin-bottom: 36px;
+      padding-top: 32px;
     }
 
     .app-logo {
-      width: 72px;
-      height: 72px;
-      margin: 0 auto 16px;
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 14px;
       border-radius: 18px;
       overflow: hidden;
-      box-shadow: 0 0 40px rgba(232, 163, 23, 0.2), 0 4px 16px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 4px 16px rgba(19, 26, 43, 0.3);
     }
 
     .app-logo svg {
@@ -84,29 +79,195 @@
     }
 
     h1 {
-      font-size: 28px;
+      font-size: 32px;
       font-weight: 900;
-      letter-spacing: 6px;
-      color: #ffffff;
+      letter-spacing: 4px;
+      color: #131A2B;
     }
 
     .subtitle {
-      font-size: 12px;
-      letter-spacing: 2.5px;
+      font-size: 13px;
+      letter-spacing: 3px;
       color: var(--text-dim);
-      margin-top: 6px;
+      margin-top: 8px;
       text-transform: uppercase;
     }
 
-    .hub-date {
-      font-size: 11px;
-      letter-spacing: 3px;
-      color: var(--gold);
-      margin-top: 8px;
-      font-weight: 700;
+    .games {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      flex: 1;
     }
 
-    /* ─── Circular Progress ──────────────────────────────── */
+    @media (min-width: 768px) {
+      .games {
+        grid-template-columns: repeat(3, 1fr);
+        align-content: start;
+      }
+    }
+
+    .game-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.2s ease;
+    }
+
+    .game-card:active {
+      background: var(--card-hover);
+      transform: scale(0.97);
+    }
+
+    @media (hover: hover) {
+      .game-card:hover {
+        background: var(--card-hover);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      }
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+      flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .card-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .card-title {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      flex: 1;
+    }
+
+    .card-chevron {
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--text-dim);
+      opacity: 0.5;
+      transition: opacity 0.2s, transform 0.2s;
+      flex-shrink: 0;
+    }
+    @media (hover: hover) {
+      .game-card:hover .card-chevron {
+        opacity: 1;
+        transform: translateX(2px);
+      }
+    }
+
+    .card-desc {
+      font-size: 15px;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    .card-tag {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Per-game accent colors */
+    .threads { border-left-color: var(--clr-threads); }
+    .threads .card-icon { background: linear-gradient(135deg, #F59E0B, #D97706); }
+    .threads .card-title { color: #92600a; }
+    .threads .card-tag { background: rgba(217, 119, 6, 0.12); color: #92600a; }
+    @media (hover: hover) { .threads:hover { border-left-color: #F59E0B; } }
+
+    .alibi { border-left-color: var(--clr-alibi); }
+    .alibi .card-icon { background: linear-gradient(135deg, #14B8A6, #0D9488); }
+    .alibi .card-title { color: #0D7D73; }
+    .alibi .card-tag { background: rgba(13, 148, 136, 0.12); color: #0D7D73; }
+    @media (hover: hover) { .alibi:hover { border-left-color: #14B8A6; } }
+
+    .bluff { border-left-color: var(--clr-bluff); }
+    .bluff .card-icon { background: linear-gradient(135deg, #EF4444, #DC2626); }
+    .bluff .card-title { color: #B91C1C; }
+    .bluff .card-tag { background: rgba(220, 38, 38, 0.12); color: #B91C1C; }
+    @media (hover: hover) { .bluff:hover { border-left-color: #EF4444; } }
+
+    .lineup { border-left-color: var(--clr-lineup); }
+    .lineup .card-icon { background: linear-gradient(135deg, #3B82F6, #2563EB); }
+    .lineup .card-title { color: #1D4ED8; }
+    .lineup .card-tag { background: rgba(37, 99, 235, 0.12); color: #1D4ED8; }
+    @media (hover: hover) { .lineup:hover { border-left-color: #3B82F6; } }
+
+    .echo { border-left-color: var(--clr-echo); }
+    .echo .card-icon { background: linear-gradient(135deg, #8B5CF6, #7C3AED); }
+    .echo .card-title { color: #6D28D9; }
+    .echo .card-tag { background: rgba(124, 58, 237, 0.12); color: #6D28D9; }
+    @media (hover: hover) { .echo:hover { border-left-color: #8B5CF6; } }
+
+    .cipher { border-left-color: var(--clr-cipher); }
+    .cipher .card-icon { background: linear-gradient(135deg, #10B981, #059669); }
+    .cipher .card-title { color: #047857; }
+    .cipher .card-tag { background: rgba(5, 150, 105, 0.12); color: #047857; }
+    @media (hover: hover) { .cipher:hover { border-left-color: #10B981; } }
+
+    .reflex { border-left-color: var(--clr-reflex); }
+    .reflex .card-icon { background: linear-gradient(135deg, #F97316, #EA580C); }
+    .reflex .card-title { color: #C2410C; }
+    .reflex .card-tag { background: rgba(234, 88, 12, 0.12); color: #C2410C; }
+    @media (hover: hover) { .reflex:hover { border-left-color: #F97316; } }
+
+    .vanish { border-left-color: var(--clr-vanish); }
+    .vanish .card-icon { background: linear-gradient(135deg, #06B6D4, #0891B2); }
+    .vanish .card-title { color: #0E7490; }
+    .vanish .card-tag { background: rgba(8, 145, 178, 0.12); color: #0E7490; }
+    @media (hover: hover) { .vanish:hover { border-left-color: #06B6D4; } }
+
+    .sequence { border-left-color: var(--clr-sequence); }
+    .sequence .card-icon { background: linear-gradient(135deg, #6366F1, #4F46E5); }
+    .sequence .card-title { color: #4338CA; }
+    .sequence .card-tag { background: rgba(79, 70, 229, 0.12); color: #4338CA; }
+    @media (hover: hover) { .sequence:hover { border-left-color: #6366F1; } }
+
+    .rank { border-left-color: var(--clr-rank); }
+    .rank .card-icon { background: linear-gradient(135deg, #EC4899, #DB2777); }
+    .rank .card-title { color: #BE185D; }
+    .rank .card-tag { background: rgba(219, 39, 119, 0.12); color: #BE185D; }
+    @media (hover: hover) { .rank:hover { border-left-color: #EC4899; } }
+
+    .puptown { border-left-color: var(--clr-puptown); }
+    .puptown .card-icon { background: linear-gradient(135deg, #F472B6, #EC4899); }
+    .puptown .card-title { color: #DB2777; }
+    .puptown .card-tag { background: rgba(236, 72, 153, 0.12); color: #DB2777; }
+    @media (hover: hover) { .puptown:hover { border-left-color: #F472B6; } }
+
+    .poundbreak { border-left-color: var(--clr-poundbreak); }
+    .poundbreak .card-icon { background: linear-gradient(135deg, #FB923C, #F97316); }
+    .poundbreak .card-title { color: #C2410C; }
+    .poundbreak .card-tag { background: rgba(249, 115, 22, 0.12); color: #C2410C; }
+    @media (hover: hover) { .poundbreak:hover { border-left-color: #FB923C; } }
+
+    /* ─── Circular Progress ────────────────────────────────── */
     .hub-progress {
       margin-top: 20px;
       display: flex;
@@ -129,13 +290,13 @@
 
     .progress-track {
       fill: none;
-      stroke: rgba(255,255,255,0.06);
+      stroke: var(--border);
       stroke-width: 6;
     }
 
     .progress-fill {
       fill: none;
-      stroke: var(--green);
+      stroke: #1a9a45;
       stroke-width: 6;
       stroke-linecap: round;
       transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
@@ -153,7 +314,7 @@
     .progress-num {
       font-size: 22px;
       font-weight: 900;
-      color: #fff;
+      color: var(--text);
       line-height: 1;
     }
 
@@ -174,176 +335,23 @@
       text-decoration: none;
       padding: 6px 16px;
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 6px;
       transition: all 0.15s;
     }
-    .stats-link:active { background: var(--surface-hover); color: #fff; }
+    .stats-link:active { background: var(--card-hover); color: var(--white); }
 
-    /* ─── Section divider ────────────────────────────────── */
-    .section-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      margin-bottom: 12px;
-      padding-left: 4px;
-    }
-
-    /* ─── Game Cards ─────────────────────────────────────── */
-    .games {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-      flex: 1;
-    }
-
-    @media (min-width: 768px) {
-      .games {
-        grid-template-columns: repeat(3, 1fr);
-        align-content: start;
-      }
-    }
-
-    .game-card {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 16px 18px;
-      transition: all 0.2s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .game-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--glow), transparent);
-      opacity: 0.5;
-    }
-
-    .game-card:active {
-      background: var(--surface-hover);
-      transform: scale(0.98);
-    }
-
-    .card-top {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 8px;
-    }
-
-    .card-icon {
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 12px;
-      flex-shrink: 0;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    }
-
-    .card-icon svg {
-      width: 22px;
-      height: 22px;
-    }
-
-    .card-title {
-      font-size: 18px;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      flex: 1;
-      color: #ffffff;
-    }
-
-    .card-chevron {
-      color: rgba(255,255,255,0.2);
-      font-size: 22px;
-      font-weight: 300;
-      flex-shrink: 0;
-      margin-left: auto;
-      line-height: 1;
-    }
-
-    .card-desc {
-      font-size: 13px;
-      color: var(--text-dim);
-      line-height: 1.45;
-    }
-
-    .card-tag {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 3px 8px;
-      border-radius: 6px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    /* Per-game accent glow + colors */
-    .threads    { --glow: var(--clr-threads); }
-    .alibi      { --glow: var(--clr-alibi); }
-    .bluff      { --glow: var(--clr-bluff); }
-    .lineup     { --glow: var(--clr-lineup); }
-    .echo       { --glow: var(--clr-echo); }
-    .cipher     { --glow: var(--clr-cipher); }
-    .reflex     { --glow: var(--clr-reflex); }
-    .vanish     { --glow: var(--clr-vanish); }
-    .sequence   { --glow: var(--clr-sequence); }
-    .rank       { --glow: var(--clr-rank); }
-    .puptown    { --glow: var(--clr-puptown); }
-    .poundbreak { --glow: var(--clr-poundbreak); }
-
-    .threads .card-icon    { background: linear-gradient(135deg, #F59E0B, #B45309); }
-    .alibi .card-icon      { background: linear-gradient(135deg, #14B8A6, #0D6E64); }
-    .bluff .card-icon      { background: linear-gradient(135deg, #EF4444, #B91C1C); }
-    .lineup .card-icon     { background: linear-gradient(135deg, #3B82F6, #1D4ED8); }
-    .echo .card-icon       { background: linear-gradient(135deg, #8B5CF6, #5B21B6); }
-    .cipher .card-icon     { background: linear-gradient(135deg, #10B981, #047857); }
-    .reflex .card-icon     { background: linear-gradient(135deg, #F97316, #C2410C); }
-    .vanish .card-icon     { background: linear-gradient(135deg, #06B6D4, #0E7490); }
-    .sequence .card-icon   { background: linear-gradient(135deg, #6366F1, #4338CA); }
-    .rank .card-icon       { background: linear-gradient(135deg, #EC4899, #BE185D); }
-    .puptown .card-icon    { background: linear-gradient(135deg, #F472B6, #DB2777); }
-    .poundbreak .card-icon { background: linear-gradient(135deg, #FB923C, #C2410C); }
-
-    .threads .card-tag    { background: rgba(245, 158, 11, 0.12); color: #F59E0B; }
-    .alibi .card-tag      { background: rgba(20, 184, 166, 0.12); color: #14B8A6; }
-    .bluff .card-tag      { background: rgba(239, 68, 68, 0.12);  color: #EF4444; }
-    .lineup .card-tag     { background: rgba(59, 130, 246, 0.12); color: #3B82F6; }
-    .echo .card-tag       { background: rgba(139, 92, 246, 0.12); color: #8B5CF6; }
-    .cipher .card-tag     { background: rgba(16, 185, 129, 0.12); color: #10B981; }
-    .reflex .card-tag     { background: rgba(249, 115, 22, 0.12); color: #F97316; }
-    .vanish .card-tag     { background: rgba(6, 182, 212, 0.12);  color: #06B6D4; }
-    .sequence .card-tag   { background: rgba(99, 102, 241, 0.12); color: #6366F1; }
-    .rank .card-tag       { background: rgba(236, 72, 153, 0.12); color: #EC4899; }
-    .puptown .card-tag    { background: rgba(244, 114, 182, 0.12); color: #F472B6; }
-    .poundbreak .card-tag { background: rgba(251, 146, 60, 0.12); color: #FB923C; }
-
-    /* ─── Badges ─────────────────────────────────────────── */
     .card-done-badge {
       display: inline-flex;
       align-items: center;
       gap: 4px;
       margin-top: 8px;
       padding: 3px 8px;
-      border-radius: 6px;
+      border-radius: 4px;
       font-size: 10px;
       font-weight: 800;
       letter-spacing: 1px;
-      background: rgba(63, 185, 80, 0.12);
-      color: var(--green);
+      background: rgba(26, 154, 69, 0.08);
+      color: #1a9a45;
     }
 
     .card-streak-badge {
@@ -353,22 +361,28 @@
       margin-top: 8px;
       margin-left: 6px;
       padding: 3px 8px;
-      border-radius: 6px;
+      border-radius: 4px;
       font-size: 10px;
       font-weight: 800;
       letter-spacing: 1px;
-      background: rgba(232, 163, 23, 0.12);
-      color: var(--gold);
+      background: rgba(200, 152, 24, 0.08);
+      color: #c89818;
+    }
+    footer {
+      text-align: center;
+      padding-top: 28px;
+      font-size: 12px;
+      color: var(--text-dim);
+      letter-spacing: 1px;
     }
 
-    /* ─── Show Banner ────────────────────────────────────── */
     .show-banner {
-      margin-top: 16px;
+      margin-top: 12px;
       margin-bottom: 8px;
       padding: 20px 24px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(19,26,43,0.06), rgba(107,33,168,0.06));
+      border: 1px solid rgba(19,26,43,0.08);
+      border-radius: 14px;
       text-align: center;
     }
     .show-banner-label {
@@ -376,13 +390,13 @@
       font-weight: 700;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: var(--text-muted);
+      color: var(--text-dim);
       margin-bottom: 10px;
     }
     .show-banner-title {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 900;
-      color: #fff;
+      color: var(--text);
       letter-spacing: 1px;
       margin-bottom: 6px;
     }
@@ -395,7 +409,7 @@
     .show-links {
       display: flex;
       justify-content: center;
-      gap: 10px;
+      gap: 12px;
       flex-wrap: wrap;
     }
     .show-link {
@@ -404,46 +418,36 @@
       gap: 6px;
       padding: 8px 16px;
       border-radius: 8px;
-      background: rgba(255,255,255,0.08);
-      color: #fff;
+      background: var(--text);
+      color: white;
       text-decoration: none;
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.5px;
-      border: 1px solid var(--border);
-      transition: all 0.2s;
+      transition: opacity 0.2s;
     }
-    .show-link:active { background: rgba(255,255,255,0.15); }
+    .show-link:active { opacity: 0.8; }
     .show-link svg { width: 16px; height: 16px; flex-shrink: 0; }
+    @media (hover: hover) { .show-link:hover { opacity: 0.85; } }
 
-    footer {
-      text-align: center;
-      padding-top: 24px;
-      padding-bottom: 8px;
-      font-size: 11px;
-      color: var(--text-muted);
-      letter-spacing: 2px;
-    }
-
-    /* ─── Animations ─────────────────────────────────────── */
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(12px); }
+      from { opacity: 0; transform: translateY(16px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .game-card { animation: fadeInUp 0.35s ease-out both; }
-    .game-card:nth-child(1)  { animation-delay: 0.03s; }
-    .game-card:nth-child(2)  { animation-delay: 0.07s; }
-    .game-card:nth-child(3)  { animation-delay: 0.11s; }
-    .game-card:nth-child(4)  { animation-delay: 0.15s; }
-    .game-card:nth-child(5)  { animation-delay: 0.19s; }
-    .game-card:nth-child(6)  { animation-delay: 0.23s; }
-    .game-card:nth-child(7)  { animation-delay: 0.27s; }
-    .game-card:nth-child(8)  { animation-delay: 0.31s; }
-    .game-card:nth-child(9)  { animation-delay: 0.35s; }
-    .game-card:nth-child(10) { animation-delay: 0.39s; }
-    .game-card:nth-child(11) { animation-delay: 0.43s; }
-    .game-card:nth-child(12) { animation-delay: 0.47s; }
+    .game-card { animation: fadeInUp 0.4s ease-out both; }
+    .game-card:nth-child(1) { animation-delay: 0.05s; }
+    .game-card:nth-child(2) { animation-delay: 0.12s; }
+    .game-card:nth-child(3) { animation-delay: 0.19s; }
+    .game-card:nth-child(4) { animation-delay: 0.26s; }
+    .game-card:nth-child(5) { animation-delay: 0.33s; }
+    .game-card:nth-child(6) { animation-delay: 0.40s; }
+    .game-card:nth-child(7) { animation-delay: 0.47s; }
+    .game-card:nth-child(8) { animation-delay: 0.54s; }
+    .game-card:nth-child(9) { animation-delay: 0.61s; }
+    .game-card:nth-child(10) { animation-delay: 0.68s; }
+    .game-card:nth-child(11) { animation-delay: 0.75s; }
+    .game-card:nth-child(12) { animation-delay: 0.82s; }
   </style>
 </head>
 <body>
@@ -464,11 +468,9 @@
       </div>
       <h1>ACUMEN</h1>
       <p class="subtitle">Brain Games for Smart People</p>
-      <p id="hub-date" class="hub-date"></p>
+      <p id="hub-date" class="subtitle" style="margin-top:4px;color:#f5c542;font-size:12px"></p>
       <div id="hub-progress" class="hub-progress"></div>
     </header>
-
-    <div class="section-label">Daily Puzzles</div>
 
     <div class="games">
       <a href="threads/" class="game-card threads">
@@ -608,7 +610,7 @@
       </div>
     </div>
 
-    <footer>ACUMEN</footer>
+    <footer>Acumen</footer>
     <script src="daily.js"></script>
     <script>
       document.getElementById('hub-date').textContent = Daily.getDateString();
@@ -616,13 +618,14 @@
       // Completion tracking
       (function () {
         var DAILY_KEYS = ['threads','alibi','bluff','lineup','echo','cipher','reflex','vanish','sequence','rank'];
+        var DAILY_CSS = ['threads','alibi','bluff','lineup','echo','cipher','reflex','vanish','sequence','rank'];
         var done = 0;
-        var total = DAILY_KEYS.length;
+        var cards = document.querySelectorAll('.game-card');
 
-        DAILY_KEYS.forEach(function (key) {
+        DAILY_KEYS.forEach(function (key, i) {
           var result = Daily.getDailyResult(key);
           var streak = Daily.getStreak(key);
-          var card = document.querySelector('.game-card.' + key);
+          var card = document.querySelector('.game-card.' + DAILY_CSS[i]);
           if (!card) return;
 
           var badges = '';
@@ -640,24 +643,22 @@
           }
         });
 
-        // SVG circular progress
+        // Progress bar
         var prog = document.getElementById('hub-progress');
         var r = 34;
         var circ = 2 * Math.PI * r;
-        var pct = done / total;
+        var pct = done / 10;
         var offset = circ * (1 - pct);
-
         prog.innerHTML =
           '<div class="progress-circle-wrap">' +
             '<svg viewBox="0 0 80 80">' +
               '<circle class="progress-track" cx="40" cy="40" r="' + r + '"/>' +
               '<circle class="progress-fill" cx="40" cy="40" r="' + r + '" ' +
-                'stroke-dasharray="' + circ + '" ' +
-                'stroke-dashoffset="' + offset + '"/>' +
+                'stroke-dasharray="' + circ + '" stroke-dashoffset="' + offset + '"/>' +
             '</svg>' +
             '<div class="progress-label">' +
               '<span class="progress-num">' + done + '</span>' +
-              '<span class="progress-of">of ' + total + '</span>' +
+              '<span class="progress-of">of 10</span>' +
             '</div>' +
           '</div>' +
           '<a href="stats.html" class="stats-link">VIEW STATS →</a>';
