@@ -253,7 +253,7 @@
     var $score = document.getElementById('overlay-score');
     var $stats = document.getElementById('overlay-stats');
 
-    $title.textContent = won ? 'Thread Pulled!' : 'Unraveled!';
+    $title.textContent = won ? 'Linked!' : 'Missing!';
 
     $answer.textContent = puzzle.answer;
 
@@ -287,8 +287,8 @@
     var finalScore = won ? score : 0;
     var date = Daily.getDateString();
 
-    var text = 'Threads — ' + date + '\n';
-    text += won ? 'Thread Pulled!' : 'Unraveled!';
+    var text = 'Missing Link — ' + date + '\n';
+    text += won ? 'Linked!' : 'Missing!';
     text += ' Score: ' + finalScore + '\n';
     text += puzzle.cues.join(' · ') + ' → ' + (won ? puzzle.answer : '???') + '\n';
     text += guesses.length + ' guess' + (guesses.length === 1 ? '' : 'es');
