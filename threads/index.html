@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Threads">
+  <meta name="apple-mobile-web-app-title" content="Missing Link">
   <meta name="theme-color" content="#f8f8fa">
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="manifest" href="manifest.json">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <title>Threads</title>
+  <title>Missing Link</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -22,20 +22,20 @@
     <!-- Title Screen -->
     <div id="title-screen">
       <div class="title-icon">&#x1F9F5;</div>
-      <h1 class="game-title">THREADS</h1>
+      <h1 class="game-title">MISSING LINK</h1>
       <p class="tagline">FIND THE WORD THAT LINKS ALL THREE</p>
       <div class="rules-box">
         <p><span class="hl">Three cue words</span> each form a compound word or phrase with the same hidden word.</p>
-        <p><span class="hl">Type your guess</span> to find the thread that connects them.</p>
+        <p><span class="hl">Type your guess</span> to find the missing link.</p>
         <p><span class="hl">Use hints</span> if you're stuck &mdash; but they cost points.</p>
       </div>
-      <button id="btn-start" class="btn-main">PULL THE THREAD</button>
+      <button id="btn-start" class="btn-main">FIND THE LINK</button>
     </div>
 
     <!-- Game Screen -->
     <div id="game-screen" class="hidden">
       <header>
-        <h1>Threads</h1>
+        <h1>Missing Link</h1>
         <p class="subtitle">Find the word that links all three</p>
       </header>
 
@@ -56,7 +56,7 @@
       <!-- Guess input -->
       <div id="input-area">
         <input type="text" id="guess-input" placeholder="Type the linking word…" autocomplete="off" autocapitalize="characters" spellcheck="false">
-        <button id="btn-guess" class="btn btn-primary" disabled>Pull Thread</button>
+        <button id="btn-guess" class="btn btn-primary" disabled>Guess</button>
       </div>
 
       <!-- Hint + info -->
