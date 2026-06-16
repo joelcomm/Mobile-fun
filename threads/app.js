@@ -1,448 +1,321 @@
-// ─── State ───────────────────────────────────────────────────────
-const MIN_STRAND = 3;
-let currentPuzzleIndex = PUZZLES.indexOf(Daily.dealFromDeck(PUZZLES, 1)[0]);
-let selected = [];
-let solvedGroups = [];
-let mistakesLeft = 4;
-let guessHistory = [];
-let previousGuesses = [];
-let remainingWords = [];
-let gameOver = false;
+(function () {
+  'use strict';
 
-// ─── DOM refs ────────────────────────────────────────────────────
-const grid = document.getElementById("grid");
-const solvedArea = document.getElementById("solved-area");
-const mistakeDots = document.getElementById("mistake-dots");
-const btnShuffle = document.getElementById("btn-shuffle");
-const btnDeselect = document.getElementById("btn-deselect");
-const btnSubmit = document.getElementById("btn-submit");
-const overlay = document.getElementById("overlay");
-const overlayTitle = document.getElementById("overlay-title");
-const overlayResults = document.getElementById("overlay-results");
-const overlayAnswers = document.getElementById("overlay-answers");
-const looseThreads = document.getElementById("loose-threads");
-const nextCd = document.getElementById("next-cd");
-const btnShare = document.getElementById("btn-share");
-const btnPrevPuzzle = document.getElementById("btn-prev-puzzle");
-const btnNextPuzzle = document.getElementById("btn-next-puzzle");
-const puzzleLabel = document.getElementById("puzzle-label");
-const toast = document.getElementById("toast");
+  var MAX_GUESSES = 4;
+  var PENALTY_WRONG = 20;
+  var PENALTY_HINT = 15;
+  var SCORE_FLOOR = 10;
+  var GAME_KEY = 'threads';
 
-// ─── Init ────────────────────────────────────────────────────────
-function initPuzzle() {
-  const puzzle = PUZZLES[currentPuzzleIndex];
-  selected = [];
-  solvedGroups = [];
-  mistakesLeft = 4;
-  guessHistory = [];
-  previousGuesses = [];
-  gameOver = false;
+  var puzzle, score, guessesLeft, hintsUsed, guesses, solved, hintLetters;
 
-  remainingWords = [];
-  puzzle.groups.forEach(g => {
-    g.words.forEach(w => remainingWords.push({ word: w }));
-  });
-  (puzzle.decoys || []).forEach(w => remainingWords.push({ word: w }));
+  var $titleScreen = document.getElementById('title-screen');
+  var $gameScreen = document.getElementById('game-screen');
+  var $overlay = document.getElementById('overlay');
+  var $helpOverlay = document.getElementById('help-overlay');
+  var $toast = document.getElementById('toast');
+  var $input = document.getElementById('guess-input');
+  var $btnGuess = document.getElementById('btn-guess');
+  var $btnHint = document.getElementById('btn-hint');
+  var $btnStart = document.getElementById('btn-start');
+  var $btnShare = document.getElementById('btn-share');
+  var $btnCloseHelp = document.getElementById('btn-close-help');
+  var $scoreValue = document.getElementById('score-value');
+  var $hintDisplay = document.getElementById('hint-display');
+  var $hintText = document.getElementById('hint-text');
+  var $mistakeDots = document.getElementById('mistake-dots');
 
-  shuffle(remainingWords);
-  renderGrid();
-  renderSolved();
-  renderMistakes();
-  updateButtons();
-  updatePuzzleNav();
-  overlay.classList.add("hidden");
-}
+  Daily.injectDailyInfo('#title-screen', GAME_KEY);
 
-// ─── Render ──────────────────────────────────────────────────────
-function renderGrid() {
-  grid.innerHTML = "";
-  remainingWords.forEach(item => {
-    const tile = document.createElement("button");
-    tile.className = "tile";
-    tile.textContent = item.word;
-    tile.dataset.word = item.word;
-    if (selected.includes(item.word)) tile.classList.add("selected");
-    tile.addEventListener("click", () => handleTileClick(item.word));
-    grid.appendChild(tile);
-  });
-}
-
-function renderSolved() {
-  solvedArea.innerHTML = "";
-  solvedGroups.forEach(g => {
-    const div = document.createElement("div");
-    div.className = "solved-group accent-" + g._accent;
-    div.innerHTML =
-      '<div class="solved-category">' + g.category + '</div>' +
-      '<div class="solved-words">' + g.words.join(", ") + '</div>';
-    solvedArea.appendChild(div);
-  });
-}
-
-function renderMistakes() {
-  mistakeDots.innerHTML = "";
-  for (let i = 0; i < 4; i++) {
-    const dot = document.createElement("span");
-    dot.className = "dot";
-    if (i >= mistakesLeft) dot.classList.add("used");
-    mistakeDots.appendChild(dot);
-  }
-}
-
-function updateButtons() {
-  btnDeselect.disabled = selected.length === 0;
-  btnSubmit.disabled = selected.length < MIN_STRAND;
-}
-
-function updatePuzzleNav() {
-  puzzleLabel.textContent = Daily.getDateString();
-  btnPrevPuzzle.style.display = 'none';
-  btnNextPuzzle.style.display = 'none';
-}
-
-// ─── Tile interaction ────────────────────────────────────────────
-function handleTileClick(word) {
-  if (gameOver) return;
-
-  if (selected.includes(word)) {
-    selected = selected.filter(w => w !== word);
-  } else {
-    selected.push(word);
-  }
-
-  renderGrid();
-  updateButtons();
-}
-
-// ─── Submit guess ────────────────────────────────────────────────
-function submitGuess() {
-  if (selected.length < MIN_STRAND || gameOver) return;
-
-  const puzzle = PUZZLES[currentPuzzleIndex];
-  const sortedGuess = [...selected].sort().join("|");
-
-  if (previousGuesses.includes(sortedGuess)) {
-    showToast("Already pulled that thread");
-    return;
-  }
-  previousGuesses.push(sortedGuess);
-
-  const matched = puzzle.groups.find(g =>
-    g.words.length === selected.length &&
-    [...g.words].sort().join("|") === sortedGuess
-  );
-
-  guessHistory.push({ size: selected.length, correct: !!matched });
-
-  if (matched) handleCorrectGuess(matched);
-  else handleWrongGuess(diagnoseGuess(puzzle, selected));
-}
-
-function diagnoseGuess(puzzle, guess) {
-  const decoySet = new Set(puzzle.decoys || []);
-  if (guess.some(w => decoySet.has(w))) return "One of those is a loose thread";
-  let best = 0, bestSize = 0;
-  puzzle.groups.forEach(g => {
-    const overlap = guess.filter(w => g.words.includes(w)).length;
-    if (overlap > best) { best = overlap; bestSize = g.words.length; }
-  });
-  if (best === bestSize && guess.length === bestSize + 1) return "So close — drop one word";
-  if (best === guess.length && best === bestSize - 1) return "So close — one word missing";
-  return null;
-}
-
-function handleCorrectGuess(group) {
-  const tiles = getSelectedTiles();
-
-  tiles.forEach((tile, i) => {
-    setTimeout(() => tile.classList.add("bounce"), i * 80);
+  $btnStart.addEventListener('click', startGame);
+  $btnGuess.addEventListener('click', submitGuess);
+  $btnHint.addEventListener('click', useHint);
+  $btnShare.addEventListener('click', shareResult);
+  $btnCloseHelp.addEventListener('click', function () {
+    $helpOverlay.classList.add('hidden');
   });
 
-  setTimeout(() => {
-    remainingWords = remainingWords.filter(item => !selected.includes(item.word));
-    group._accent = solvedGroups.length;
-    solvedGroups.push(group);
-    selected = [];
+  $input.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && !$btnGuess.disabled) submitGuess();
+  });
 
-    renderSolved();
-    renderGrid();
-    updateButtons();
+  $input.addEventListener('input', function () {
+    $btnGuess.disabled = $input.value.trim().length === 0;
+  });
 
-    if (solvedGroups.length === PUZZLES[currentPuzzleIndex].groups.length) {
-      setTimeout(() => endGame(true), 600);
-    }
-  }, 500);
-}
+  function startGame() {
+    var deals = Daily.dealFromDeck(PUZZLES, 1);
+    puzzle = deals[0];
 
-function handleWrongGuess(hint) {
-  const tiles = getSelectedTiles();
-
-  tiles.forEach(tile => tile.classList.add("shake"));
-
-  if (hint) showToast(hint);
-
-  mistakesLeft--;
-  renderMistakes();
-
-  setTimeout(() => {
-    tiles.forEach(tile => tile.classList.remove("shake"));
-
-    if (mistakesLeft <= 0) {
-      revealAll();
+    var progress = Daily.getProgress(GAME_KEY);
+    if (progress && progress.puzzleId === puzzle.id) {
+      score = progress.score;
+      guessesLeft = progress.guessesLeft;
+      hintsUsed = progress.hintsUsed;
+      guesses = progress.guesses || [];
+      solved = progress.solved || false;
+      hintLetters = progress.hintLetters || [];
     } else {
-      renderGrid();
-      updateButtons();
+      score = 100;
+      guessesLeft = MAX_GUESSES;
+      hintsUsed = 0;
+      guesses = [];
+      solved = false;
+      hintLetters = [];
     }
-  }, 600);
-}
 
-function revealAll() {
-  const puzzle = PUZZLES[currentPuzzleIndex];
-  const unsolvedGroups = puzzle.groups
-    .filter(g => !solvedGroups.find(sg => sg.category === g.category));
+    $titleScreen.classList.add('hidden');
+    $gameScreen.classList.remove('hidden');
+    renderGame();
 
-  let delay = 0;
-  unsolvedGroups.forEach(group => {
-    setTimeout(() => {
-      remainingWords = remainingWords.filter(item => !group.words.includes(item.word));
-      group._accent = solvedGroups.length;
-      solvedGroups.push(group);
-      selected = [];
-      renderSolved();
-      renderGrid();
-      updateButtons();
-    }, delay);
-    delay += 600;
-  });
-
-  setTimeout(() => endGame(false), delay + 400);
-}
-
-function getSelectedTiles() {
-  return Array.from(grid.querySelectorAll(".tile")).filter(
-    tile => selected.includes(tile.dataset.word)
-  );
-}
-
-// ─── End game ────────────────────────────────────────────────────
-function endGame(won) {
-  gameOver = true;
-  Daily.saveDailyResult('threads', won ? (mistakesLeft + 1) * 25 : 0, {
-    won: won,
-    guessHistory: guessHistory
-  });
-
-  overlayTitle.textContent = won ? "You got it!" : "Next time!";
-
-  buildResultsDisplay(guessHistory);
-  buildAnswersDisplay();
-
-  overlay.classList.remove("hidden");
-
-  function tickCd() {
-    nextCd.innerHTML = '<span style="display:block;font-size:11px;letter-spacing:2px;color:#6b6b80;margin-bottom:4px">NEW PUZZLE IN</span>' + Daily.formatCountdown();
-  }
-  tickCd();
-  setInterval(tickCd, 1000);
-}
-
-function buildResultsDisplay(history) {
-  overlayResults.innerHTML = "";
-  history.forEach(g => {
-    const row = document.createElement("div");
-    row.className = "result-row";
-    for (let i = 0; i < g.size; i++) {
-      const block = document.createElement("div");
-      block.className = "result-block " + (g.correct ? "correct" : "wrong");
-      row.appendChild(block);
+    if (solved) {
+      showOverlay(true);
+    } else if (guessesLeft <= 0) {
+      showOverlay(false);
     }
-    const mark = document.createElement("span");
-    mark.className = "result-mark";
-    mark.textContent = g.correct ? " ✓" : " ✗";
-    row.appendChild(mark);
-    overlayResults.appendChild(row);
-  });
-}
-
-function buildAnswersDisplay() {
-  var puzzle = PUZZLES[currentPuzzleIndex];
-  overlayAnswers.innerHTML = "";
-  puzzle.groups.forEach(function (g) {
-    var div = document.createElement("div");
-    div.className = "answer-group";
-    div.innerHTML =
-      '<div class="answer-category">' + g.category + '</div>' +
-      '<div class="answer-words">' + g.words.join(", ") + '</div>';
-    overlayAnswers.appendChild(div);
-  });
-
-  looseThreads.innerHTML = "";
-  var decoys = puzzle.decoys || [];
-  if (decoys.length > 0) {
-    var heading = document.createElement("div");
-    heading.className = "loose-heading";
-    heading.textContent = "Loose threads";
-    looseThreads.appendChild(heading);
-    var chips = document.createElement("div");
-    chips.className = "loose-chips";
-    decoys.forEach(function (w) {
-      var chip = document.createElement("span");
-      chip.className = "loose-chip";
-      chip.textContent = w;
-      chips.appendChild(chip);
-    });
-    looseThreads.appendChild(chips);
   }
-}
 
-// ─── Share ───────────────────────────────────────────────────────
-function shareResults() {
-  var d = Daily.getDateString();
-  var text = "Threads " + d + "\n";
-  guessHistory.forEach(function (g) {
-    var bar = "";
-    for (var i = 0; i < g.size; i++) bar += "▰";
-    text += bar + (g.correct ? " ✓" : " ✗") + "\n";
-  });
-  var loose = (PUZZLES[currentPuzzleIndex].decoys || []).length;
-  if (loose) text += loose + " loose thread" + (loose > 1 ? "s" : "") + "\n";
+  function renderGame() {
+    for (var i = 0; i < 3; i++) {
+      var $cue = document.getElementById('cue-' + i);
+      $cue.textContent = puzzle.cues[i];
+      $cue.classList.toggle('solved', solved);
+    }
 
-  if (navigator.share) {
-    navigator.share({ text: text }).catch(function () {
-      copyToClipboard(text);
-    });
-  } else {
-    copyToClipboard(text);
-  }
-}
+    renderDots();
+    updateScore();
+    renderHints();
 
-function copyToClipboard(text) {
-  navigator.clipboard.writeText(text).then(function () {
-    showToast("Copied to clipboard!");
-  }).catch(function () {
-    showToast("Could not copy");
-  });
-}
-
-// ─── Shuffle ─────────────────────────────────────────────────────
-var _connRng;
-function shuffle(arr) {
-  if (!_connRng) _connRng = Daily.createRng(Daily.getDayNumber() * 8089);
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(_connRng() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
-}
-
-function shuffleGrid() {
-  shuffle(remainingWords);
-  renderGrid();
-}
-
-// ─── Toast ───────────────────────────────────────────────────────
-let toastTimeout;
-function showToast(msg) {
-  toast.textContent = msg;
-  toast.classList.remove("hidden");
-  clearTimeout(toastTimeout);
-  toastTimeout = setTimeout(() => toast.classList.add("hidden"), 1800);
-}
-
-// ─── Event listeners ─────────────────────────────────────────────
-btnShuffle.addEventListener("click", shuffleGrid);
-btnDeselect.addEventListener("click", () => {
-  selected = [];
-  renderGrid();
-  updateButtons();
-});
-btnSubmit.addEventListener("click", submitGuess);
-if (btnShare) btnShare.addEventListener("click", shareResults);
-
-btnPrevPuzzle.addEventListener("click", () => {
-  if (currentPuzzleIndex > 0) {
-    currentPuzzleIndex--;
-    initPuzzle();
-  }
-});
-
-btnNextPuzzle.addEventListener("click", () => {
-  if (currentPuzzleIndex < PUZZLES.length - 1) {
-    currentPuzzleIndex++;
-    initPuzzle();
-  }
-});
-
-// ─── Title / Start ──────────────────────────────────────────────
-const titleScreen = document.getElementById("title-screen");
-const gameScreen = document.getElementById("game-screen");
-const btnStart = document.getElementById("btn-start");
-
-function showGame() {
-  titleScreen.style.display = "none";
-  gameScreen.classList.remove("hidden");
-  Daily.injectDailyInfo('#game-screen header', 'threads');
-  initPuzzle();
-}
-
-// Check if already played today — skip title screen
-var threadsResult = Daily.getDailyResult('threads');
-if (threadsResult) {
-  showGame();
-
-  gameOver = true;
-  var puzzle = PUZZLES[currentPuzzleIndex];
-
-  remainingWords = [];
-  solvedGroups = puzzle.groups.slice().map(function (g, i) {
-    var copy = { category: g.category, words: g.words.slice(), _accent: i };
-    return copy;
-  });
-  renderSolved();
-  renderGrid();
-
-  document.getElementById('actions').style.display = 'none';
-  document.getElementById('mistakes').style.display = 'none';
-
-  overlayTitle.textContent = threadsResult.won ? "You got it!" : "Next time!";
-
-  overlayResults.innerHTML = "";
-  if (threadsResult.guessHistory) {
-    threadsResult.guessHistory.forEach(function (g) {
-      if (typeof g.size === 'number') {
-        var row = document.createElement("div");
-        row.className = "result-row";
-        for (var i = 0; i < g.size; i++) {
-          var block = document.createElement("div");
-          block.className = "result-block " + (g.correct ? "correct" : "wrong");
-          row.appendChild(block);
-        }
-        var mark = document.createElement("span");
-        mark.className = "result-mark";
-        mark.textContent = g.correct ? " ✓" : " ✗";
-        row.appendChild(mark);
-        overlayResults.appendChild(row);
+    if (solved || guessesLeft <= 0) {
+      $input.disabled = true;
+      $btnGuess.disabled = true;
+      $btnHint.disabled = true;
+      if (solved) {
+        $input.value = puzzle.answer;
+        $input.classList.add('correct');
+        showLinks();
       }
+    }
+  }
+
+  function renderDots() {
+    var html = '';
+    for (var i = 0; i < MAX_GUESSES; i++) {
+      html += '<span class="dot' + (i >= guessesLeft ? ' used' : '') + '"></span>';
+    }
+    $mistakeDots.innerHTML = html;
+  }
+
+  function updateScore() {
+    $scoreValue.textContent = score;
+  }
+
+  function renderHints() {
+    if (hintLetters.length > 0) {
+      $hintDisplay.classList.remove('hidden');
+      var display = '';
+      var answer = puzzle.answer;
+      for (var i = 0; i < answer.length; i++) {
+        if (hintLetters.indexOf(i) !== -1) {
+          display += answer[i];
+        } else {
+          display += '_';
+        }
+      }
+      $hintText.textContent = display;
+    } else {
+      $hintDisplay.classList.add('hidden');
+    }
+
+    $btnHint.disabled = solved || guessesLeft <= 0 || hintLetters.length >= puzzle.answer.length - 1;
+  }
+
+  function showLinks() {
+    var $linkArea = document.getElementById('link-area');
+    $linkArea.classList.remove('hidden');
+    for (var i = 0; i < 3; i++) {
+      document.getElementById('link-' + i).textContent = puzzle.links[i];
+    }
+  }
+
+  function submitGuess() {
+    if (solved || guessesLeft <= 0) return;
+
+    var guess = $input.value.trim().toUpperCase();
+    if (!guess) return;
+
+    if (guesses.indexOf(guess) !== -1) {
+      showToast('Already guessed!');
+      return;
+    }
+
+    guesses.push(guess);
+
+    if (guess === puzzle.answer.toUpperCase()) {
+      solved = true;
+      score = Math.max(score, SCORE_FLOOR);
+      $input.classList.add('correct');
+      $input.disabled = true;
+      $btnGuess.disabled = true;
+      $btnHint.disabled = true;
+
+      for (var i = 0; i < 3; i++) {
+        document.getElementById('cue-' + i).classList.add('solved');
+      }
+      showLinks();
+
+      Daily.saveDailyResult(GAME_KEY, score, {
+        guesses: guesses.length,
+        hints: hintsUsed,
+        answer: puzzle.answer
+      });
+      Daily.clearProgress(GAME_KEY);
+
+      setTimeout(function () { showOverlay(true); }, 800);
+    } else {
+      guessesLeft--;
+      score = Math.max(score - PENALTY_WRONG, 0);
+
+      $input.classList.add('wrong');
+      setTimeout(function () { $input.classList.remove('wrong'); }, 500);
+      $input.value = '';
+      $btnGuess.disabled = true;
+
+      renderDots();
+      updateScore();
+
+      if (guessesLeft <= 0) {
+        score = 0;
+        updateScore();
+        $input.disabled = true;
+        $btnGuess.disabled = true;
+        $btnHint.disabled = true;
+
+        Daily.saveDailyResult(GAME_KEY, 0, {
+          guesses: guesses.length,
+          hints: hintsUsed,
+          answer: puzzle.answer
+        });
+        Daily.clearProgress(GAME_KEY);
+
+        setTimeout(function () { showOverlay(false); }, 600);
+      } else {
+        saveProgress();
+        var remaining = MAX_GUESSES - guessesLeft;
+        if (remaining === 1) {
+          showToast('Not quite!');
+        } else {
+          showToast(guessesLeft + ' guess' + (guessesLeft === 1 ? '' : 'es') + ' left');
+        }
+      }
+    }
+  }
+
+  function useHint() {
+    if (solved || guessesLeft <= 0) return;
+
+    var answer = puzzle.answer;
+    var unrevealed = [];
+    for (var i = 0; i < answer.length; i++) {
+      if (hintLetters.indexOf(i) === -1) unrevealed.push(i);
+    }
+
+    if (unrevealed.length <= 1) return;
+
+    var idx = unrevealed[Math.floor(Math.random() * unrevealed.length)];
+    hintLetters.push(idx);
+    hintsUsed++;
+    score = Math.max(score - PENALTY_HINT, 0);
+
+    updateScore();
+    renderHints();
+    saveProgress();
+  }
+
+  function saveProgress() {
+    Daily.saveProgress(GAME_KEY, {
+      puzzleId: puzzle.id,
+      score: score,
+      guessesLeft: guessesLeft,
+      hintsUsed: hintsUsed,
+      guesses: guesses,
+      solved: solved,
+      hintLetters: hintLetters
     });
-    guessHistory = threadsResult.guessHistory;
   }
 
-  buildAnswersDisplay();
+  function showOverlay(won) {
+    $overlay.classList.remove('hidden');
 
-  overlay.classList.remove("hidden");
+    var $title = document.getElementById('overlay-title');
+    var $answer = document.getElementById('overlay-answer');
+    var $links = document.getElementById('overlay-links');
+    var $score = document.getElementById('overlay-score');
+    var $stats = document.getElementById('overlay-stats');
 
-  function tickCd() {
-    nextCd.innerHTML = '<span style="display:block;font-size:11px;letter-spacing:2px;color:#6b6b80;margin-bottom:4px">NEW PUZZLE IN</span>' + Daily.formatCountdown();
+    $title.textContent = won ? 'Thread Pulled!' : 'Unraveled!';
+
+    $answer.textContent = puzzle.answer;
+
+    var linksHtml = '';
+    for (var i = 0; i < 3; i++) {
+      linksHtml += '<div class="overlay-link-row">' +
+        '<span class="overlay-link-cue">' + puzzle.cues[i] + '</span>' +
+        '<span class="overlay-link-arrow">&rarr;</span>' +
+        '<span class="overlay-link-phrase">' + puzzle.links[i] + '</span>' +
+        '</div>';
+    }
+    $links.innerHTML = linksHtml;
+
+    var finalScore = won ? score : 0;
+    $score.innerHTML = '<span class="big-score' + (won ? '' : ' lost') + '">' + finalScore + '</span>';
+
+    var statsText = guesses.length + ' guess' + (guesses.length === 1 ? '' : 'es');
+    if (hintsUsed > 0) statsText += ' &middot; ' + hintsUsed + ' hint' + (hintsUsed === 1 ? '' : 's');
+    var streak = Daily.getStreak(GAME_KEY);
+    if (streak > 0) statsText += ' &middot; ' + streak + ' day streak';
+    $stats.innerHTML = statsText;
+
+    var $cd = document.getElementById('next-cd');
+    function tick() { $cd.textContent = 'Next puzzle in ' + Daily.formatCountdown(); }
+    tick();
+    setInterval(tick, 1000);
   }
-  tickCd();
-  setInterval(tickCd, 1000);
-} else {
-  Daily.injectDailyInfo('#title-screen', 'threads');
-}
 
-btnStart.addEventListener("click", showGame);
+  function shareResult() {
+    var won = solved;
+    var finalScore = won ? score : 0;
+    var date = Daily.getDateString();
 
-// Register service worker
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("sw.js");
-}
+    var text = 'Threads — ' + date + '\n';
+    text += won ? 'Thread Pulled!' : 'Unraveled!';
+    text += ' Score: ' + finalScore + '\n';
+    text += puzzle.cues.join(' · ') + ' → ' + (won ? puzzle.answer : '???') + '\n';
+    text += guesses.length + ' guess' + (guesses.length === 1 ? '' : 'es');
+    if (hintsUsed > 0) text += ', ' + hintsUsed + ' hint' + (hintsUsed === 1 ? '' : 's');
+    text += '\nPlay at acumen.fun';
+
+    if (navigator.share) {
+      navigator.share({ text: text }).catch(function () {});
+    } else if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(function () {
+        showToast('Copied to clipboard!');
+      });
+    }
+  }
+
+  var toastTimer;
+  function showToast(msg) {
+    $toast.textContent = msg;
+    $toast.classList.remove('hidden');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () {
+      $toast.classList.add('hidden');
+    }, 2000);
+  }
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+
+})();

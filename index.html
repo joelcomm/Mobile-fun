@@ -24,6 +24,7 @@
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
 
+      --accent: #1a9a45;
       --clr-threads: #D97706;
       --clr-alibi: #0D9488;
       --clr-bluff: #DC2626;
@@ -59,9 +60,27 @@
 
     header {
       text-align: center;
-      margin-bottom: 36px;
+      margin-bottom: 32px;
       padding-top: 32px;
+      position: relative;
     }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -24px;
+      left: -20px;
+      right: -20px;
+      height: 200px;
+      background: linear-gradient(180deg,
+        rgba(19, 26, 43, 0.04) 0%,
+        rgba(232, 163, 23, 0.03) 40%,
+        rgba(248, 248, 250, 0) 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    header > * { position: relative; z-index: 1; }
 
     .app-logo {
       width: 80px;
@@ -114,22 +133,30 @@
       background: var(--card);
       border: 1px solid var(--border);
       border-left: 3px solid var(--border);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border-radius: 14px;
       padding: 24px;
       transition: all 0.2s ease;
+      --glow: #888;
     }
 
     .game-card:active {
-      background: var(--card-hover);
       transform: scale(0.97);
+      box-shadow: 0 4px 20px color-mix(in srgb, var(--glow) 25%, transparent);
+    }
+
+    .game-card.done {
+      opacity: 0.7;
+    }
+    .game-card.done:active {
+      opacity: 0.85;
     }
 
     @media (hover: hover) {
       .game-card:hover {
         background: var(--card-hover);
         transform: translateY(-3px);
-        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        box-shadow: 0 8px 24px color-mix(in srgb, var(--glow) 20%, rgba(0,0,0,0.1));
       }
     }
 
@@ -137,26 +164,45 @@
       display: flex;
       align-items: center;
       gap: 14px;
-      margin-bottom: 10px;
+      margin-bottom: 6px;
     }
 
     .card-icon {
-      width: 48px;
-      height: 48px;
+      width: 52px;
+      height: 52px;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 14px;
       flex-shrink: 0;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.2);
+      position: relative;
     }
     .card-icon svg {
-      width: 24px;
-      height: 24px;
+      width: 26px;
+      height: 26px;
+    }
+
+    .card-icon .done-check {
+      position: absolute;
+      bottom: -4px;
+      right: -4px;
+      width: 20px;
+      height: 20px;
+      background: var(--accent);
+      border-radius: 50%;
+      border: 2px solid var(--card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-icon .done-check svg {
+      width: 11px;
+      height: 11px;
     }
 
     .card-title {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 800;
       letter-spacing: 1px;
       flex: 1;
@@ -195,73 +241,73 @@
     }
 
     /* Per-game accent colors */
-    .threads { border-left-color: var(--clr-threads); }
+    .threads { border-left-color: var(--clr-threads); --glow: var(--clr-threads); }
     .threads .card-icon { background: linear-gradient(135deg, #F59E0B, #D97706); }
     .threads .card-title { color: #92600a; }
     .threads .card-tag { background: rgba(217, 119, 6, 0.12); color: #92600a; }
     @media (hover: hover) { .threads:hover { border-left-color: #F59E0B; } }
 
-    .alibi { border-left-color: var(--clr-alibi); }
+    .alibi { border-left-color: var(--clr-alibi); --glow: var(--clr-alibi); }
     .alibi .card-icon { background: linear-gradient(135deg, #14B8A6, #0D9488); }
     .alibi .card-title { color: #0D7D73; }
     .alibi .card-tag { background: rgba(13, 148, 136, 0.12); color: #0D7D73; }
     @media (hover: hover) { .alibi:hover { border-left-color: #14B8A6; } }
 
-    .bluff { border-left-color: var(--clr-bluff); }
+    .bluff { border-left-color: var(--clr-bluff); --glow: var(--clr-bluff); }
     .bluff .card-icon { background: linear-gradient(135deg, #EF4444, #DC2626); }
     .bluff .card-title { color: #B91C1C; }
     .bluff .card-tag { background: rgba(220, 38, 38, 0.12); color: #B91C1C; }
     @media (hover: hover) { .bluff:hover { border-left-color: #EF4444; } }
 
-    .lineup { border-left-color: var(--clr-lineup); }
+    .lineup { border-left-color: var(--clr-lineup); --glow: var(--clr-lineup); }
     .lineup .card-icon { background: linear-gradient(135deg, #3B82F6, #2563EB); }
     .lineup .card-title { color: #1D4ED8; }
     .lineup .card-tag { background: rgba(37, 99, 235, 0.12); color: #1D4ED8; }
     @media (hover: hover) { .lineup:hover { border-left-color: #3B82F6; } }
 
-    .echo { border-left-color: var(--clr-echo); }
+    .echo { border-left-color: var(--clr-echo); --glow: var(--clr-echo); }
     .echo .card-icon { background: linear-gradient(135deg, #8B5CF6, #7C3AED); }
     .echo .card-title { color: #6D28D9; }
     .echo .card-tag { background: rgba(124, 58, 237, 0.12); color: #6D28D9; }
     @media (hover: hover) { .echo:hover { border-left-color: #8B5CF6; } }
 
-    .cipher { border-left-color: var(--clr-cipher); }
+    .cipher { border-left-color: var(--clr-cipher); --glow: var(--clr-cipher); }
     .cipher .card-icon { background: linear-gradient(135deg, #10B981, #059669); }
     .cipher .card-title { color: #047857; }
     .cipher .card-tag { background: rgba(5, 150, 105, 0.12); color: #047857; }
     @media (hover: hover) { .cipher:hover { border-left-color: #10B981; } }
 
-    .reflex { border-left-color: var(--clr-reflex); }
+    .reflex { border-left-color: var(--clr-reflex); --glow: var(--clr-reflex); }
     .reflex .card-icon { background: linear-gradient(135deg, #F97316, #EA580C); }
     .reflex .card-title { color: #C2410C; }
     .reflex .card-tag { background: rgba(234, 88, 12, 0.12); color: #C2410C; }
     @media (hover: hover) { .reflex:hover { border-left-color: #F97316; } }
 
-    .vanish { border-left-color: var(--clr-vanish); }
+    .vanish { border-left-color: var(--clr-vanish); --glow: var(--clr-vanish); }
     .vanish .card-icon { background: linear-gradient(135deg, #06B6D4, #0891B2); }
     .vanish .card-title { color: #0E7490; }
     .vanish .card-tag { background: rgba(8, 145, 178, 0.12); color: #0E7490; }
     @media (hover: hover) { .vanish:hover { border-left-color: #06B6D4; } }
 
-    .sequence { border-left-color: var(--clr-sequence); }
+    .sequence { border-left-color: var(--clr-sequence); --glow: var(--clr-sequence); }
     .sequence .card-icon { background: linear-gradient(135deg, #6366F1, #4F46E5); }
     .sequence .card-title { color: #4338CA; }
     .sequence .card-tag { background: rgba(79, 70, 229, 0.12); color: #4338CA; }
     @media (hover: hover) { .sequence:hover { border-left-color: #6366F1; } }
 
-    .rank { border-left-color: var(--clr-rank); }
+    .rank { border-left-color: var(--clr-rank); --glow: var(--clr-rank); }
     .rank .card-icon { background: linear-gradient(135deg, #EC4899, #DB2777); }
     .rank .card-title { color: #BE185D; }
     .rank .card-tag { background: rgba(219, 39, 119, 0.12); color: #BE185D; }
     @media (hover: hover) { .rank:hover { border-left-color: #EC4899; } }
 
-    .puptown { border-left-color: var(--clr-puptown); }
+    .puptown { border-left-color: var(--clr-puptown); --glow: var(--clr-puptown); }
     .puptown .card-icon { background: linear-gradient(135deg, #F472B6, #EC4899); }
     .puptown .card-title { color: #DB2777; }
     .puptown .card-tag { background: rgba(236, 72, 153, 0.12); color: #DB2777; }
     @media (hover: hover) { .puptown:hover { border-left-color: #F472B6; } }
 
-    .poundbreak { border-left-color: var(--clr-poundbreak); }
+    .poundbreak { border-left-color: var(--clr-poundbreak); --glow: var(--clr-poundbreak); }
     .poundbreak .card-icon { background: linear-gradient(135deg, #FB923C, #F97316); }
     .poundbreak .card-title { color: #C2410C; }
     .poundbreak .card-tag { background: rgba(249, 115, 22, 0.12); color: #C2410C; }
@@ -296,10 +342,15 @@
 
     .progress-fill {
       fill: none;
-      stroke: #1a9a45;
+      stroke: var(--accent);
       stroke-width: 6;
       stroke-linecap: round;
-      transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: progressFill 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+    }
+
+    @keyframes progressFill {
+      from { stroke-dashoffset: var(--circ); }
+      to   { stroke-dashoffset: var(--offset); }
     }
 
     .progress-label {
@@ -340,6 +391,28 @@
     }
     .stats-link:active { background: var(--card-hover); color: var(--white); }
 
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .section-header::before,
+    .section-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
     .card-done-badge {
       display: inline-flex;
       align-items: center;
@@ -371,9 +444,25 @@
     footer {
       text-align: center;
       padding-top: 28px;
-      font-size: 12px;
+      padding-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .footer-logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      overflow: hidden;
+      opacity: 0.35;
+    }
+    .footer-logo svg { width: 100%; height: 100%; display: block; }
+    .footer-text {
+      font-size: 10px;
       color: var(--text-dim);
-      letter-spacing: 1px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
     }
 
     .show-banner {
@@ -468,9 +557,11 @@
       </div>
       <h1>ACUMEN</h1>
       <p class="subtitle">Brain Games for Smart People</p>
-      <p id="hub-date" class="subtitle" style="margin-top:4px;color:#f5c542;font-size:12px"></p>
+      <p id="hub-date" class="subtitle" style="margin-top:4px;color:#c89818;font-size:12px;letter-spacing:3px"></p>
       <div id="hub-progress" class="hub-progress"></div>
     </header>
+
+    <div class="section-header"><span class="section-label">Today's Challenges</span></div>
 
     <div class="games">
       <a href="threads/" class="game-card threads">
@@ -610,7 +701,22 @@
       </div>
     </div>
 
-    <footer>Acumen</footer>
+    <footer>
+      <div class="footer-logo">
+        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+          <rect width="1024" height="1024" rx="224" fill="#131A2B"/>
+          <g transform="translate(512, 180)">
+            <g fill="none" stroke="white" stroke-width="52" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="-180" y1="660" x2="0" y2="0"/>
+              <line x1="180" y1="660" x2="0" y2="0"/>
+              <line x1="-100" y1="460" x2="100" y2="460"/>
+            </g>
+            <polygon points="0,-90 -85,30 0,-5 85,30" fill="#E8A317"/>
+          </g>
+        </svg>
+      </div>
+      <span class="footer-text">Acumen v1.0</span>
+    </footer>
     <script src="daily.js"></script>
     <script>
       document.getElementById('hub-date').textContent = Daily.getDateString();
@@ -631,6 +737,9 @@
           var badges = '';
           if (result) {
             done++;
+            card.classList.add('done');
+            var icon = card.querySelector('.card-icon');
+            if (icon) icon.innerHTML += '<span class="done-check"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>';
             badges += '<span class="card-done-badge">✓ DONE</span>';
           }
           if (streak > 1) {
@@ -643,22 +752,23 @@
           }
         });
 
-        // Progress bar
         var prog = document.getElementById('hub-progress');
+        var total = DAILY_KEYS.length;
         var r = 34;
         var circ = 2 * Math.PI * r;
-        var pct = done / 10;
+        var pct = done / total;
         var offset = circ * (1 - pct);
         prog.innerHTML =
           '<div class="progress-circle-wrap">' +
             '<svg viewBox="0 0 80 80">' +
               '<circle class="progress-track" cx="40" cy="40" r="' + r + '"/>' +
               '<circle class="progress-fill" cx="40" cy="40" r="' + r + '" ' +
-                'stroke-dasharray="' + circ + '" stroke-dashoffset="' + offset + '"/>' +
+                'stroke-dasharray="' + circ + '" ' +
+                'style="--circ:' + circ + ';--offset:' + offset + '"/>' +
             '</svg>' +
             '<div class="progress-label">' +
               '<span class="progress-num">' + done + '</span>' +
-              '<span class="progress-of">of 10</span>' +
+              '<span class="progress-of">of ' + total + '</span>' +
             '</div>' +
           '</div>' +
           '<a href="stats.html" class="stats-link">VIEW STATS →</a>';

@@ -123,6 +123,28 @@
       border-radius: 50%;
     }
 
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .section-header::before,
+    .section-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
     .games {
       display: flex;
       flex-direction: column;
@@ -136,29 +158,36 @@
       color: inherit;
       background: var(--card);
       border: 1px solid var(--border);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border-radius: 14px;
       padding: 18px 20px;
-      transition: all 0.15s;
+      transition: all 0.2s ease;
       position: relative;
+      --glow: #888;
     }
 
     .game-card:active {
-      background: var(--card-hover);
       transform: scale(0.97);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+      box-shadow: 0 4px 20px color-mix(in srgb, var(--glow) 25%, transparent);
     }
 
-    /* Left color border per game */
-    .threads { border-left: 3px solid var(--clr-threads); }
-    .alibi   { border-left: 3px solid var(--clr-alibi); }
-    .bluff   { border-left: 3px solid var(--clr-bluff); }
-    .lineup  { border-left: 3px solid var(--clr-lineup); }
-    .echo    { border-left: 3px solid var(--clr-echo); }
-    .cipher  { border-left: 3px solid var(--clr-cipher); }
-    .reflex  { border-left: 3px solid var(--clr-reflex); }
-    .sequence { border-left: 3px solid var(--clr-sequence); }
-    .rank    { border-left: 3px solid var(--clr-rank); }
+    .game-card.done {
+      opacity: 0.7;
+    }
+    .game-card.done:active {
+      opacity: 0.85;
+    }
+
+    /* Left color border + glow var per game */
+    .threads  { border-left: 3px solid var(--clr-threads); --glow: var(--clr-threads); }
+    .alibi    { border-left: 3px solid var(--clr-alibi);   --glow: var(--clr-alibi); }
+    .bluff    { border-left: 3px solid var(--clr-bluff);   --glow: var(--clr-bluff); }
+    .lineup   { border-left: 3px solid var(--clr-lineup);  --glow: var(--clr-lineup); }
+    .echo     { border-left: 3px solid var(--clr-echo);    --glow: var(--clr-echo); }
+    .cipher   { border-left: 3px solid var(--clr-cipher);  --glow: var(--clr-cipher); }
+    .reflex   { border-left: 3px solid var(--clr-reflex);  --glow: var(--clr-reflex); }
+    .sequence { border-left: 3px solid var(--clr-sequence); --glow: var(--clr-sequence); }
+    .rank     { border-left: 3px solid var(--clr-rank);    --glow: var(--clr-rank); }
 
     .card-top {
       display: flex;
@@ -168,19 +197,38 @@
     }
 
     .card-icon {
-      width: 48px;
-      height: 48px;
+      width: 52px;
+      height: 52px;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 14px;
       flex-shrink: 0;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.2);
+      position: relative;
     }
 
     .card-icon svg {
-      width: 24px;
-      height: 24px;
+      width: 26px;
+      height: 26px;
+    }
+
+    .card-icon .done-check {
+      position: absolute;
+      bottom: -4px;
+      right: -4px;
+      width: 20px;
+      height: 20px;
+      background: var(--accent);
+      border-radius: 50%;
+      border: 2px solid var(--card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-icon .done-check svg {
+      width: 11px;
+      height: 11px;
     }
 
     .card-title {
@@ -285,7 +333,12 @@
       stroke: var(--accent);
       stroke-width: 6;
       stroke-linecap: round;
-      transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: progressFill 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+    }
+
+    @keyframes progressFill {
+      from { stroke-dashoffset: var(--circ); }
+      to   { stroke-dashoffset: var(--offset); }
     }
 
     .progress-label {
@@ -357,11 +410,26 @@
 
     footer {
       text-align: center;
-      padding-top: 24px;
-      padding-bottom: 8px;
-      font-size: 11px;
+      padding-top: 28px;
+      padding-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .footer-logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      overflow: hidden;
+      opacity: 0.35;
+    }
+    .footer-logo svg { width: 100%; height: 100%; display: block; }
+    .footer-text {
+      font-size: 10px;
       color: var(--text-dim);
-      letter-spacing: 1px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
     }
 
     .show-banner {
@@ -511,6 +579,8 @@
       <p id="hub-date" class="subtitle" style="margin-top:4px;color:#c89818;font-size:12px;letter-spacing:3px"></p>
       <div id="hub-progress" class="hub-progress"></div>
     </header>
+
+    <div class="section-header"><span class="section-label">Today's Challenges</span></div>
 
     <div class="games">
       <a href="threads/" class="game-card threads">
@@ -678,7 +748,22 @@
       </div>
     </div>
 
-    <footer>Acumen</footer>
+    <footer>
+      <div class="footer-logo">
+        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+          <rect width="1024" height="1024" rx="224" fill="#131A2B"/>
+          <g transform="translate(512, 180)">
+            <g fill="none" stroke="white" stroke-width="52" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="-180" y1="660" x2="0" y2="0"/>
+              <line x1="180" y1="660" x2="0" y2="0"/>
+              <line x1="-100" y1="460" x2="100" y2="460"/>
+            </g>
+            <polygon points="0,-90 -85,30 0,-5 85,30" fill="#E8A317"/>
+          </g>
+        </svg>
+      </div>
+      <span class="footer-text">Acumen v1.0</span>
+    </footer>
     <script src="daily.js"></script>
     <script>
       document.getElementById('hub-date').textContent = Daily.getDateString();
@@ -697,6 +782,9 @@
           var badges = '';
           if (result) {
             done++;
+            card.classList.add('done');
+            var icon = card.querySelector('.card-icon');
+            if (icon) icon.innerHTML += '<span class="done-check"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>';
             badges += '<span class="card-done-badge">✓ DONE</span>';
           }
           if (streak > 1) {
@@ -719,7 +807,8 @@
             '<svg viewBox="0 0 80 80">' +
               '<circle class="progress-track" cx="40" cy="40" r="' + r + '"/>' +
               '<circle class="progress-fill" cx="40" cy="40" r="' + r + '" ' +
-                'stroke-dasharray="' + circ + '" stroke-dashoffset="' + offset + '"/>' +
+                'stroke-dasharray="' + circ + '" ' +
+                'style="--circ:' + circ + ';--offset:' + offset + '"/>' +
             '</svg>' +
             '<div class="progress-label">' +
               '<span class="progress-num">' + done + '</span>' +

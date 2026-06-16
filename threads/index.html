@@ -6,71 +6,107 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Threads">
+  <meta name="theme-color" content="#f8f8fa">
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <title>Threads</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <a href="../app.html" class="back-link"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><rect width="1024" height="1024" rx="224" fill="#131A2B"/><g transform="translate(512, 180)"><g fill="none" stroke="white" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"><line x1="-180" y1="660" x2="0" y2="0"/><line x1="180" y1="660" x2="0" y2="0"/><line x1="-100" y1="460" x2="100" y2="460"/></g><polygon points="0,-90 -85,30 0,-5 85,30" fill="#E8A317"/></g></svg><span>ACUMEN · HOME</span></a>
+  <a href="../app.html" class="back-link"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><rect width="1024" height="1024" rx="224" fill="#131A2B"/><g transform="translate(512, 180)"><g fill="none" stroke="white" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"><line x1="-180" y1="660" x2="0" y2="0"/><line x1="180" y1="660" x2="0" y2="0"/><line x1="-100" y1="460" x2="100" y2="460"/></g><polygon points="0,-90 -85,30 0,-5 85,30" fill="#E8A317"/></g></svg><span>ACUMEN &middot; HOME</span></a>
   <div id="app">
 
     <!-- Title Screen -->
     <div id="title-screen">
       <div class="title-icon">&#x1F9F5;</div>
       <h1 class="game-title">THREADS</h1>
-      <p class="tagline">PULL THE HIDDEN STRANDS. WATCH FOR LOOSE THREADS.</p>
+      <p class="tagline">FIND THE WORD THAT LINKS ALL THREE</p>
       <div class="rules-box">
-        <p><span class="hl">Select words</span> that belong to the same category.</p>
-        <p><span class="hl">Beware</span> — some words are loose threads that don't belong anywhere.</p>
-        <p><span class="hl">Pull Thread</span> to lock in your guess.</p>
+        <p><span class="hl">Three cue words</span> each form a compound word or phrase with the same hidden word.</p>
+        <p><span class="hl">Type your guess</span> to find the thread that connects them.</p>
+        <p><span class="hl">Use hints</span> if you're stuck &mdash; but they cost points.</p>
       </div>
-      <button id="btn-start" class="btn-main">START PULLING</button>
+      <button id="btn-start" class="btn-main">PULL THE THREAD</button>
     </div>
 
     <!-- Game Screen -->
     <div id="game-screen" class="hidden">
       <header>
         <h1>Threads</h1>
-        <p class="subtitle">Pull the hidden strands — watch for loose threads</p>
+        <p class="subtitle">Find the word that links all three</p>
       </header>
 
-      <!-- Solved groups appear here -->
-      <div id="solved-area"></div>
-
-      <!-- Word pool -->
-      <div id="grid"></div>
-
-      <!-- Mistakes -->
-      <div id="mistakes">
-        Mistakes remaining:
-        <span id="mistake-dots"></span>
+      <!-- Cue cards -->
+      <div id="cue-area">
+        <div class="cue-card" id="cue-0"></div>
+        <div class="cue-card" id="cue-1"></div>
+        <div class="cue-card" id="cue-2"></div>
       </div>
 
-      <!-- Action buttons -->
-      <div id="actions">
-        <button id="btn-shuffle" class="btn btn-secondary">Shuffle</button>
-        <button id="btn-deselect" class="btn btn-secondary" disabled>Deselect All</button>
-        <button id="btn-submit" class="btn btn-primary" disabled>Pull Thread</button>
+      <!-- Link phrases (revealed on solve) -->
+      <div id="link-area" class="hidden">
+        <div class="link-row" id="link-0"></div>
+        <div class="link-row" id="link-1"></div>
+        <div class="link-row" id="link-2"></div>
       </div>
 
-      <!-- Puzzle selector -->
-      <div id="puzzle-nav">
-        <button id="btn-prev-puzzle" class="btn-nav">&larr;</button>
-        <span id="puzzle-label">Puzzle 1 / 10</span>
-        <button id="btn-next-puzzle" class="btn-nav">&rarr;</button>
+      <!-- Guess input -->
+      <div id="input-area">
+        <input type="text" id="guess-input" placeholder="Type the linking word…" autocomplete="off" autocapitalize="characters" spellcheck="false">
+        <button id="btn-guess" class="btn btn-primary" disabled>Pull Thread</button>
+      </div>
+
+      <!-- Hint + info -->
+      <div id="status-bar">
+        <div id="mistakes">
+          <span class="status-label">Guesses left:</span>
+          <span id="mistake-dots"></span>
+        </div>
+        <button id="btn-hint" class="btn btn-hint">Hint</button>
+      </div>
+
+      <!-- Hint display -->
+      <div id="hint-display" class="hidden">
+        <span id="hint-text"></span>
+      </div>
+
+      <!-- Score -->
+      <div id="score-display">
+        Score: <span id="score-value">100</span>
       </div>
     </div>
 
-    <!-- Game over overlay -->
+    <!-- Result overlay -->
     <div id="overlay" class="hidden">
       <div id="overlay-content">
         <h2 id="overlay-title"></h2>
-        <div id="overlay-results"></div>
-        <div id="overlay-answers"></div>
-        <div id="loose-threads"></div>
+        <div id="overlay-answer"></div>
+        <div id="overlay-links"></div>
+        <div id="overlay-score"></div>
+        <div id="overlay-stats"></div>
+        <button id="btn-share" class="btn btn-primary" style="margin:12px auto 0;display:block">Share Result</button>
         <p id="next-cd" style="font-size:14px;font-weight:700;letter-spacing:2px;color:#5e81ac;margin:12px 0"></p>
         <div style="text-align:center"><a href="../app.html" style="text-decoration:none;display:inline-block;background:#1a1a1a;color:#fff;font-family:inherit;font-size:16px;font-weight:800;letter-spacing:2px;border-radius:10px;padding:14px 32px;text-transform:uppercase">ALL GAMES</a></div>
+      </div>
+    </div>
+
+    <!-- Help overlay -->
+    <div id="help-overlay" class="hidden">
+      <div id="help-content">
+        <h2>How to Play</h2>
+        <p>You are shown <strong>three cue words</strong>. Each one forms a compound word or common phrase with the <strong>same hidden word</strong>.</p>
+        <p><strong>Example:</strong></p>
+        <div class="help-example">
+          <span class="help-cue">SUN</span>
+          <span class="help-cue">MOON</span>
+          <span class="help-cue">FLASH</span>
+        </div>
+        <p>Answer: <strong>LIGHT</strong> (sunlight, moonlight, flashlight)</p>
+        <p>You have <strong>4 guesses</strong>. Each wrong guess costs 20 points. Hints reveal letters of the answer but cost 15 points each.</p>
+        <button id="btn-close-help" class="btn btn-primary">Got It</button>
       </div>
     </div>
 
