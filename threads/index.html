@@ -15,13 +15,13 @@
   <div id="app">
     <header>
       <h1>Threads</h1>
-      <p class="subtitle">Group 4 words that share a thread</p>
+      <p class="subtitle">Pull the hidden strands — watch for loose threads</p>
     </header>
 
     <!-- Solved groups appear here -->
     <div id="solved-area"></div>
 
-    <!-- Word grid -->
+    <!-- Word pool -->
     <div id="grid"></div>
 
     <!-- Mistakes -->
@@ -34,7 +34,7 @@
     <div id="actions">
       <button id="btn-shuffle" class="btn btn-secondary">Shuffle</button>
       <button id="btn-deselect" class="btn btn-secondary" disabled>Deselect All</button>
-      <button id="btn-submit" class="btn btn-primary" disabled>Submit</button>
+      <button id="btn-submit" class="btn btn-primary" disabled>Pull Thread</button>
     </div>
 
     <!-- Game over overlay -->
@@ -43,7 +43,8 @@
         <h2 id="overlay-title"></h2>
         <div id="overlay-results"></div>
         <div id="overlay-answers"></div>
-        <p id="next-cd" style="font-size:14px;font-weight:700;letter-spacing:2px;color:var(--color-level-1);margin:12px 0"></p>
+        <div id="loose-threads"></div>
+        <p id="next-cd" style="font-size:14px;font-weight:700;letter-spacing:2px;color:#5e81ac;margin:12px 0"></p>
         <div style="text-align:center"><a href="../app.html" style="text-decoration:none;display:inline-block;background:#1a1a1a;color:#fff;font-family:inherit;font-size:16px;font-weight:800;letter-spacing:2px;border-radius:10px;padding:14px 32px;text-transform:uppercase">ALL GAMES</a></div>
       </div>
     </div>

@@ -1,10 +1,11 @@
 // ─── State ───────────────────────────────────────────────────────
+const MIN_STRAND = 3;
 let currentPuzzleIndex = PUZZLES.indexOf(Daily.dealFromDeck(PUZZLES, 1)[0]);
 let selected = [];
 let solvedGroups = [];
 let mistakesLeft = 4;
-let guessHistory = []; // track each guess for share grid
-let previousGuesses = []; // prevent duplicate guesses
+let guessHistory = [];
+let previousGuesses = [];
 let remainingWords = [];
 let gameOver = false;
 
@@ -19,6 +20,7 @@ const overlay = document.getElementById("overlay");
 const overlayTitle = document.getElementById("overlay-title");
 const overlayResults = document.getElementById("overlay-results");
 const overlayAnswers = document.getElementById("overlay-answers");
+const looseThreads = document.getElementById("loose-threads");
 const nextCd = document.getElementById("next-cd");
 const btnShare = document.getElementById("btn-share");
 const btnPrevPuzzle = document.getElementById("btn-prev-puzzle");
@@ -36,13 +38,11 @@ function initPuzzle() {
   previousGuesses = [];
   gameOver = false;
 
-  // Collect all words with their group level
   remainingWords = [];
   puzzle.groups.forEach(g => {
-    g.words.forEach(w => {
-      remainingWords.push({ word: w, level: g.level });
-    });
+    g.words.forEach(w => remainingWords.push({ word: w }));
   });
+  (puzzle.decoys || []).forEach(w => remainingWords.push({ word: w }));
 
   shuffle(remainingWords);
   renderGrid();
@@ -61,22 +61,9 @@ function renderGrid() {
     tile.className = "tile";
     tile.textContent = item.word;
     tile.dataset.word = item.word;
-
-    if (selected.includes(item.word)) {
-      tile.classList.add("selected");
-    }
-
+    if (selected.includes(item.word)) tile.classList.add("selected");
     tile.addEventListener("click", () => handleTileClick(item.word));
     grid.appendChild(tile);
-  });
-  requestAnimationFrame(() => {
-    grid.querySelectorAll('.tile').forEach(t => {
-      let sz = parseFloat(getComputedStyle(t).fontSize);
-      while (t.scrollWidth > t.clientWidth && sz > 8) {
-        sz -= 0.5;
-        t.style.fontSize = sz + 'px';
-      }
-    });
   });
 }
 
@@ -84,11 +71,10 @@ function renderSolved() {
   solvedArea.innerHTML = "";
   solvedGroups.forEach(g => {
     const div = document.createElement("div");
-    div.className = `solved-group level-${g.level}`;
-    div.innerHTML = `
-      <div class="solved-category">${g.category}</div>
-      <div class="solved-words">${g.words.join(", ")}</div>
-    `;
+    div.className = "solved-group accent-" + g._accent;
+    div.innerHTML =
+      '<div class="solved-category">' + g.category + '</div>' +
+      '<div class="solved-words">' + g.words.join(", ") + '</div>';
     solvedArea.appendChild(div);
   });
 }
@@ -105,12 +91,11 @@ function renderMistakes() {
 
 function updateButtons() {
   btnDeselect.disabled = selected.length === 0;
-  btnSubmit.disabled = selected.length !== 4;
+  btnSubmit.disabled = selected.length < MIN_STRAND;
 }
 
 function updatePuzzleNav() {
   puzzleLabel.textContent = Daily.getDateString();
-  // Hide prev/next for daily mode
   btnPrevPuzzle.style.display = 'none';
   btnNextPuzzle.style.display = 'none';
 }
@@ -122,7 +107,6 @@ function handleTileClick(word) {
   if (selected.includes(word)) {
     selected = selected.filter(w => w !== word);
   } else {
-    if (selected.length >= 4) return;
     selected.push(word);
   }
 
@@ -132,50 +116,42 @@ function handleTileClick(word) {
 
 // ─── Submit guess ────────────────────────────────────────────────
 function submitGuess() {
-  if (selected.length !== 4 || gameOver) return;
+  if (selected.length < MIN_STRAND || gameOver) return;
 
   const puzzle = PUZZLES[currentPuzzleIndex];
-  const sortedGuess = [...selected].sort().join(",");
+  const sortedGuess = [...selected].sort().join("|");
 
-  // Check for duplicate guess
   if (previousGuesses.includes(sortedGuess)) {
-    showToast("Already guessed!");
+    showToast("Already pulled that thread");
     return;
   }
   previousGuesses.push(sortedGuess);
 
-  // Find which group (if any) the guess matches
-  const matchedGroup = puzzle.groups.find(g => {
-    const groupWords = [...g.words].sort().join(",");
-    return groupWords === sortedGuess;
-  });
+  const matched = puzzle.groups.find(g =>
+    g.words.length === selected.length &&
+    [...g.words].sort().join("|") === sortedGuess
+  );
 
-  // Record guess levels for share grid
-  const guessLevels = selected.map(word => {
-    const group = puzzle.groups.find(g => g.words.includes(word));
-    return group.level;
-  });
-  guessHistory.push(guessLevels);
+  guessHistory.push({ size: selected.length, correct: !!matched });
 
-  if (matchedGroup) {
-    // Correct!
-    handleCorrectGuess(matchedGroup);
-  } else {
-    // Wrong — check if one away
-    const oneAway = checkOneAway(puzzle, selected);
-    handleWrongGuess(oneAway);
-  }
+  if (matched) handleCorrectGuess(matched);
+  else handleWrongGuess(diagnoseGuess(puzzle, selected));
 }
 
-function checkOneAway(puzzle, guess) {
-  return puzzle.groups.some(g => {
-    const overlap = guess.filter(w => g.words.includes(w));
-    return overlap.length === 3;
+function diagnoseGuess(puzzle, guess) {
+  const decoySet = new Set(puzzle.decoys || []);
+  if (guess.some(w => decoySet.has(w))) return "One of those is a loose thread";
+  let best = 0, bestSize = 0;
+  puzzle.groups.forEach(g => {
+    const overlap = guess.filter(w => g.words.includes(w)).length;
+    if (overlap > best) { best = overlap; bestSize = g.words.length; }
   });
+  if (best === bestSize && guess.length === bestSize + 1) return "So close — drop one word";
+  if (best === guess.length && best === bestSize - 1) return "So close — one word missing";
+  return null;
 }
 
 function handleCorrectGuess(group) {
-  // Animate selected tiles
   const tiles = getSelectedTiles();
 
   tiles.forEach((tile, i) => {
@@ -183,10 +159,8 @@ function handleCorrectGuess(group) {
   });
 
   setTimeout(() => {
-    // Remove matched words from remaining
     remainingWords = remainingWords.filter(item => !selected.includes(item.word));
-
-    // Add to solved
+    group._accent = solvedGroups.length;
     solvedGroups.push(group);
     selected = [];
 
@@ -194,22 +168,18 @@ function handleCorrectGuess(group) {
     renderGrid();
     updateButtons();
 
-    // Check if all groups solved
-    if (solvedGroups.length === 4) {
+    if (solvedGroups.length === PUZZLES[currentPuzzleIndex].groups.length) {
       setTimeout(() => endGame(true), 600);
     }
   }, 500);
 }
 
-function handleWrongGuess(oneAway) {
+function handleWrongGuess(hint) {
   const tiles = getSelectedTiles();
 
-  // Shake animation
   tiles.forEach(tile => tile.classList.add("shake"));
 
-  if (oneAway) {
-    showToast("One away...");
-  }
+  if (hint) showToast(hint);
 
   mistakesLeft--;
   renderMistakes();
@@ -218,10 +188,8 @@ function handleWrongGuess(oneAway) {
     tiles.forEach(tile => tile.classList.remove("shake"));
 
     if (mistakesLeft <= 0) {
-      // Game over — reveal remaining groups
       revealAll();
     } else {
-      if (!oneAway) selected = [];
       renderGrid();
       updateButtons();
     }
@@ -231,13 +199,13 @@ function handleWrongGuess(oneAway) {
 function revealAll() {
   const puzzle = PUZZLES[currentPuzzleIndex];
   const unsolvedGroups = puzzle.groups
-    .filter(g => !solvedGroups.find(sg => sg.category === g.category))
-    .sort((a, b) => a.level - b.level);
+    .filter(g => !solvedGroups.find(sg => sg.category === g.category));
 
   let delay = 0;
   unsolvedGroups.forEach(group => {
     setTimeout(() => {
       remainingWords = remainingWords.filter(item => !group.words.includes(item.word));
+      group._accent = solvedGroups.length;
       solvedGroups.push(group);
       selected = [];
       renderSolved();
@@ -266,33 +234,8 @@ function endGame(won) {
 
   overlayTitle.textContent = won ? "You got it!" : "Next time!";
 
-  // Build results grid
-  overlayResults.innerHTML = "";
-  guessHistory.forEach(levels => {
-    const row = document.createElement("div");
-    row.className = "result-row";
-    levels.forEach(level => {
-      const dot = document.createElement("div");
-      dot.className = `result-dot level-${level}`;
-      row.appendChild(dot);
-    });
-    overlayResults.appendChild(row);
-  });
-
-  // Show answers
-  const puzzle = PUZZLES[currentPuzzleIndex];
-  overlayAnswers.innerHTML = "";
-  puzzle.groups
-    .sort((a, b) => a.level - b.level)
-    .forEach(g => {
-      const div = document.createElement("div");
-      div.className = "answer-group";
-      div.innerHTML = `
-        <div class="answer-category">${g.category}</div>
-        <div class="answer-words">${g.words.join(", ")}</div>
-      `;
-      overlayAnswers.appendChild(div);
-    });
+  buildResultsDisplay(guessHistory);
+  buildAnswersDisplay();
 
   overlay.classList.remove("hidden");
 
@@ -303,17 +246,69 @@ function endGame(won) {
   setInterval(tickCd, 1000);
 }
 
-// ─── Share ───────────────────────────────────────────────────────
-function shareResults() {
-  const levelEmojis = ["🟨", "🟩", "🟦", "🟪"];
-  let text = `Threads Puzzle #${currentPuzzleIndex + 1}\n`;
+function buildResultsDisplay(history) {
+  overlayResults.innerHTML = "";
+  history.forEach(g => {
+    const row = document.createElement("div");
+    row.className = "result-row";
+    for (let i = 0; i < g.size; i++) {
+      const block = document.createElement("div");
+      block.className = "result-block " + (g.correct ? "correct" : "wrong");
+      row.appendChild(block);
+    }
+    const mark = document.createElement("span");
+    mark.className = "result-mark";
+    mark.textContent = g.correct ? " ✓" : " ✗";
+    row.appendChild(mark);
+    overlayResults.appendChild(row);
+  });
+}
 
-  guessHistory.forEach(levels => {
-    text += levels.map(l => levelEmojis[l]).join("") + "\n";
+function buildAnswersDisplay() {
+  var puzzle = PUZZLES[currentPuzzleIndex];
+  overlayAnswers.innerHTML = "";
+  puzzle.groups.forEach(function (g) {
+    var div = document.createElement("div");
+    div.className = "answer-group";
+    div.innerHTML =
+      '<div class="answer-category">' + g.category + '</div>' +
+      '<div class="answer-words">' + g.words.join(", ") + '</div>';
+    overlayAnswers.appendChild(div);
   });
 
+  looseThreads.innerHTML = "";
+  var decoys = puzzle.decoys || [];
+  if (decoys.length > 0) {
+    var heading = document.createElement("div");
+    heading.className = "loose-heading";
+    heading.textContent = "Loose threads";
+    looseThreads.appendChild(heading);
+    var chips = document.createElement("div");
+    chips.className = "loose-chips";
+    decoys.forEach(function (w) {
+      var chip = document.createElement("span");
+      chip.className = "loose-chip";
+      chip.textContent = w;
+      chips.appendChild(chip);
+    });
+    looseThreads.appendChild(chips);
+  }
+}
+
+// ─── Share ───────────────────────────────────────────────────────
+function shareResults() {
+  var d = Daily.getDateString();
+  var text = "Threads " + d + "\n";
+  guessHistory.forEach(function (g) {
+    var bar = "";
+    for (var i = 0; i < g.size; i++) bar += "▰";
+    text += bar + (g.correct ? " ✓" : " ✗") + "\n";
+  });
+  var loose = (PUZZLES[currentPuzzleIndex].decoys || []).length;
+  if (loose) text += loose + " loose thread" + (loose > 1 ? "s" : "") + "\n";
+
   if (navigator.share) {
-    navigator.share({ text }).catch(() => {
+    navigator.share({ text: text }).catch(function () {
       copyToClipboard(text);
     });
   } else {
@@ -322,9 +317,9 @@ function shareResults() {
 }
 
 function copyToClipboard(text) {
-  navigator.clipboard.writeText(text).then(() => {
+  navigator.clipboard.writeText(text).then(function () {
     showToast("Copied to clipboard!");
-  }).catch(() => {
+  }).catch(function () {
     showToast("Could not copy");
   });
 }
@@ -391,7 +386,10 @@ initPuzzle();
   var puzzle = PUZZLES[currentPuzzleIndex];
 
   remainingWords = [];
-  solvedGroups = puzzle.groups.slice().sort(function (a, b) { return a.level - b.level; });
+  solvedGroups = puzzle.groups.slice().map(function (g, i) {
+    var copy = { category: g.category, words: g.words.slice(), _accent: i };
+    return copy;
+  });
   renderSolved();
   renderGrid();
 
@@ -402,27 +400,26 @@ initPuzzle();
 
   overlayResults.innerHTML = "";
   if (threadsResult.guessHistory) {
-    threadsResult.guessHistory.forEach(function (levels) {
-      var row = document.createElement("div");
-      row.className = "result-row";
-      levels.forEach(function (level) {
-        var dot = document.createElement("div");
-        dot.className = "result-dot level-" + level;
-        row.appendChild(dot);
-      });
-      overlayResults.appendChild(row);
+    threadsResult.guessHistory.forEach(function (g) {
+      if (typeof g.size === 'number') {
+        var row = document.createElement("div");
+        row.className = "result-row";
+        for (var i = 0; i < g.size; i++) {
+          var block = document.createElement("div");
+          block.className = "result-block " + (g.correct ? "correct" : "wrong");
+          row.appendChild(block);
+        }
+        var mark = document.createElement("span");
+        mark.className = "result-mark";
+        mark.textContent = g.correct ? " ✓" : " ✗";
+        row.appendChild(mark);
+        overlayResults.appendChild(row);
+      }
     });
+    guessHistory = threadsResult.guessHistory;
   }
 
-  overlayAnswers.innerHTML = "";
-  puzzle.groups.slice().sort(function (a, b) { return a.level - b.level; }).forEach(function (g) {
-    var div = document.createElement("div");
-    div.className = "answer-group";
-    div.innerHTML =
-      '<div class="answer-category">' + g.category + '</div>' +
-      '<div class="answer-words">' + g.words.join(", ") + '</div>';
-    overlayAnswers.appendChild(div);
-  });
+  buildAnswersDisplay();
 
   overlay.classList.remove("hidden");
 
