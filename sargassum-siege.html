@@ -828,9 +828,9 @@ function tick(){
       for(let i=0;i<3;i++) spitFlame();
       flameLight.intensity=8+Math.random()*5;
     } else {
-      player.fuel=Math.min(100,player.fuel+6*dt);
+      if(!firing) player.fuel=Math.min(100,player.fuel+6*dt);
       flameLight.intensity=Math.max(0,flameLight.intensity-dt*40);
-      if(firing&&player.fuel<=0){
+      if(firing){
         for(const f of flames){ scene.remove(f.m); } flames.length=0;
         flameLight.intensity=0;
       }
