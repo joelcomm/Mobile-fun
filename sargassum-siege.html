@@ -626,7 +626,7 @@ function makePHA(x,z){
   scene.add(grp);
   phaGuys.push({grp,x,z,walkT:Math.random()*100,speed:0.6+Math.random()*0.5,dir:Math.random()*6.28,turnT:0,blockCD:0});
 }
-for(var pi=0;pi<5;pi++){
+for(var pi=0;pi<12;pi++){
   var pz=BEACH.zMin+60+Math.random()*(BEACH.zMax-BEACH.zMin-120);
   var px=shoreX(pz)-6-Math.random()*12;
   makePHA(px,pz);
@@ -1065,28 +1065,46 @@ function tick(){
       }
     }
 
-    /* PHA board members: wander + block player */
+    /* PHA board members: chase player + block */
+    const phaQuotes=[
+      "You need a permit for that!",
+      "This violates section 4.2!",
+      "I'm calling an emergency meeting!",
+      "You can't do that here!",
+      "That's against the bylaws!",
+      "We need to form a committee first!",
+      "I'm filing a complaint!",
+      "This is a restricted area!"
+    ];
     for(const p of phaGuys){
       p.walkT+=dt;
-      p.turnT-=dt;
       p.blockCD=Math.max(0,p.blockCD-dt);
-      if(p.turnT<=0){ p.dir+=((Math.random()-.5)*1.8); p.turnT=3+Math.random()*4; }
-      var pmx=p.grp.position.x+Math.cos(p.dir)*p.speed*dt;
-      var pmz=p.grp.position.z+Math.sin(p.dir)*p.speed*dt;
+      var pdx=player.pos.x-p.grp.position.x, pdz=player.pos.z-p.grp.position.z;
+      var pdist=Math.sqrt(pdx*pdx+pdz*pdz);
+      if(pdist<30){
+        p.dir=Math.atan2(pdz,pdx);
+        var chaseSpd=pdist<8 ? p.speed*2.2 : p.speed*1.4;
+        var pmx=p.grp.position.x+Math.cos(p.dir)*chaseSpd*dt;
+        var pmz=p.grp.position.z+Math.sin(p.dir)*chaseSpd*dt;
+      } else {
+        p.turnT-=dt;
+        if(p.turnT<=0){ p.dir+=((Math.random()-.5)*1.8); p.turnT=3+Math.random()*4; }
+        var pmx=p.grp.position.x+Math.cos(p.dir)*p.speed*dt;
+        var pmz=p.grp.position.z+Math.sin(p.dir)*p.speed*dt;
+      }
       var pms=shoreX(pmz);
       pmx=THREE.MathUtils.clamp(pmx,pms-DUNE_OFF-6,pms+3);
       pmz=THREE.MathUtils.clamp(pmz,BEACH.zMin+20,BEACH.zMax-20);
       p.grp.position.set(pmx,groundH(pmx,pmz),pmz);
       p.grp.rotation.y=p.dir;
+      var armSpd=pdist<30 ? 5 : 3;
       const arms=p.grp.children;
-      if(arms[5]) arms[5].rotation.x=Math.sin(p.walkT*3)*0.4;
-      if(arms[6]) arms[6].rotation.x=-Math.sin(p.walkT*3)*0.4;
-      var pdx=player.pos.x-pmx, pdz=player.pos.z-pmz;
-      var pdist=Math.sqrt(pdx*pdx+pdz*pdz);
+      if(arms[5]) arms[5].rotation.x=Math.sin(p.walkT*armSpd)*0.5;
+      if(arms[6]) arms[6].rotation.x=-Math.sin(p.walkT*armSpd)*0.5;
       if(pdist<1.5){
         var pushX=pdx/pdist*1.5, pushZ=pdz/pdist*1.5;
         player.pos.x=pmx+pushX; player.pos.z=pmz+pushZ;
-        if(p.blockCD<=0){ toast('PHA says: "You can\'t do that here!"'); p.blockCD=6; }
+        if(p.blockCD<=0){ toast('PHA: "'+phaQuotes[Math.floor(Math.random()*phaQuotes.length)]+'"'); p.blockCD=4; }
       }
     }
   }
