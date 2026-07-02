@@ -467,42 +467,34 @@ function umbrella(x,z,color){
   district('WYNDHAM PALMAS', 80, shoreX(80)-56);
 }
 
-/* BEACH VILLAGE — white stepped ziggurats: glass sliders, terrace rails, planters, arched base */
+/* BEACH VILLAGE — white 2-story condos with terracotta roofs, balconies, walkways */
 {
-  const zigZs = [130, 145, 160, 175, 190];
-  for(let bIdx=0;bIdx<5;bIdx++){
-    const z=zigZs[bIdx];
-    const baseX=shoreX(z)-DUNE_OFF-2;
-    for(let t=0;t<5;t++){
-      const w=8, d=12-t*1.2, h=3.1;
-      const bx=baseX - t*5.2;
-      const by=t*h;
-      const opts = t===0
-        ? {base:'#f4efe4',floors:1,bays:4,style:'arch',roofColor:0xf4efe4}
-        : {base: t%2?'#f8f4ea':'#efe9da',floors:1,bays:4,style:'slider',roofColor:0xf1ece0};
-      const wall=new THREE.MeshStandardMaterial({map:facadeTex(opts),roughness:.9});
-      const roofM=plainMat(0xf1ece0);
-      const bl=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),[wall,wall,roofM,roofM,wall,wall]);
-      bl.position.set(bx, groundH(bx,z)+by+h/2, z);
-      bl.castShadow=true; bl.receiveShadow=true;
-      scene.add(bl);
-      if(t>0){
-        const slab=new THREE.Mesh(new THREE.BoxGeometry(5.0,0.18,d+1), plainMat(0xf4efe4));
-        slab.position.set(bx+w/2+2.5, groundH(bx,z)+by+0.09, z);
-        slab.castShadow=true; slab.receiveShadow=true; scene.add(slab);
-        const rail=new THREE.Mesh(new THREE.BoxGeometry(0.08,0.8,d+1),
-          new THREE.MeshStandardMaterial({color:0xffffff,roughness:.5}));
-        rail.position.set(bx+w/2+5.0, groundH(bx,z)+by+0.55, z);
-        scene.add(rail);
-        for(let p=0;p<3;p++){
-          const pl=new THREE.Mesh(new THREE.BoxGeometry(0.7,0.5,0.7), plainMat(0x2e7d3a));
-          pl.position.set(bx+w/2+4.4, groundH(bx,z)+by+0.45, z-d/2+2+p*(d/3));
-          scene.add(pl);
-        }
-      }
+  const bvColors=['#f8f4ec','#f4efe4','#faf6ee','#f0ebe0'];
+  const bvZs=[128,140,152,164,176,188,200,212];
+  for(let i=0;i<bvZs.length;i++){
+    const z=bvZs[i];
+    const row=i%2;
+    const x1=shoreX(z)-DUNE_OFF-6-row*4;
+    const x2=x1-14;
+    const floors=2, h=floors*3.4, w=10, d=11;
+    const col=bvColors[i%4];
+    const b1=facadeBuilding(x1,z,w,h,d,{base:col,floors,bays:3,style:'slider',roofColor:0xb35a33,capColor:0xffffff});
+    hipRoofBig(x1,z,w+1.5,d+1.5,b1.position.y+h/2,0xb35a33);
+    addBalconies(b1,w,h,d,floors,3);
+    const b2=facadeBuilding(x2,z,w,h,d,{base:bvColors[(i+2)%4],floors,bays:3,style:'window',roofColor:0xb35a33,capColor:0xffffff});
+    hipRoofBig(x2,z,w+1.5,d+1.5,b2.position.y+h/2,0xb35a33);
+    addBalconies(b2,w,h,d,floors,3);
+    const wx=(x1+x2)/2;
+    const walk=new THREE.Mesh(new THREE.BoxGeometry(14,0.1,2.2), plainMat(0xe0d8c8));
+    walk.position.set(wx,groundH(wx,z)+0.06,z); walk.receiveShadow=true; scene.add(walk);
+    if(i%3===0){
+      const pl=new THREE.Mesh(new THREE.CylinderGeometry(0.35,0.35,0.8,8), plainMat(0x2e7d3a));
+      pl.position.set(wx,groundH(wx,z)+0.4,z+1.6); scene.add(pl);
+      const canopy=new THREE.Mesh(new THREE.SphereGeometry(1.2,8,6), plainMat(0x1a6b2a));
+      canopy.position.set(wx,groundH(wx,z)+1.6,z+1.6); scene.add(canopy);
     }
   }
-  district('BEACH VILLAGE', 160, shoreX(160)-46);
+  district('BEACH VILLAGE', 168, shoreX(168)-46);
 }
 
 /* scattered beach furniture (some abandoned to the weed) */
