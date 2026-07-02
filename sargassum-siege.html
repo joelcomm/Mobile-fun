@@ -851,8 +851,8 @@ function tick(){
       if(sg.state==='up' && canFire){
         toC.set(sg.cx-camera.position.x, 0.4-camera.position.y+1, sg.cz-camera.position.z);
         const dist=toC.length();
-        if(dist<13){ toC.normalize();
-          if(toC.dot(camDir)>0.82){ sg.state='burning'; sg.t=0; }
+        if(dist<8){ toC.normalize();
+          if(toC.dot(camDir)>0.93){ sg.state='burning'; sg.t=0; }
         }
       } else if(sg.state==='burning'){
         sg.t+=dt;
@@ -911,8 +911,8 @@ function tick(){
         if(canFire){
           toC.subVectors(c.m.position,camera.position);
           const dist=toC.length();
-          if(dist<13){ toC.normalize();
-            if(toC.dot(camDir)>0.86){
+          if(dist<8){ toC.normalize();
+            if(toC.dot(camDir)>0.93){
               c.char+=dt*0.9;
               const k=Math.min(1,c.char);
               for(const m of c.m.userData.mats){
@@ -968,8 +968,8 @@ function tick(){
         if(canFire){
           toC.subVectors(tu.grp.position,camera.position);
           var tdist=toC.length();
-          if(tdist<10){ toC.normalize();
-            if(toC.dot(camDir)>0.88){
+          if(tdist<7){ toC.normalize();
+            if(toC.dot(camDir)>0.93){
               tu.alive=false;
               tu.grp.rotation.x=Math.PI;
               tu.grp.position.y+=0.6;
