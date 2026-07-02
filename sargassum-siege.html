@@ -830,9 +830,13 @@ function tick(){
     } else {
       player.fuel=Math.min(100,player.fuel+6*dt);
       flameLight.intensity=Math.max(0,flameLight.intensity-dt*40);
+      if(firing&&player.fuel<=0){
+        for(const f of flames){ scene.remove(f.m); } flames.length=0;
+        flameLight.intensity=0;
+      }
     }
     $('fuel').style.width=player.fuel+'%';
-    if(firing&&player.fuel<=0){ $('prompt').textContent='OUT OF FUEL — FIND A RED TANK'; $('prompt').style.opacity=1; }
+    if(firing&&player.fuel<=0){ $('prompt').textContent='Refuel!'; $('prompt').style.opacity=1; }
     else $('prompt').style.opacity=0;
 
     camera.getWorldDirection(camDir);
