@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#f8f8fa">
+  <meta name="theme-color" content="#f5f5f7">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -14,11 +14,11 @@
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
     :root {
-      --bg: #f8f8fa;
-      --card: #ffffff;
+      --bg: #f5f5f7;
+      --card: #fffffe;
       --card-hover: #f0f0f5;
-      --border: #dddde4;
-      --text: #2a2a3e;
+      --border: rgba(19, 26, 43, 0.08);
+      --text: #1d1d2b;
       --text-dim: #6b6b80;
       --white: #1a1a2e;
       --accent: #1a9a45;
@@ -53,13 +53,14 @@
       min-height: 100dvh;
       display: flex;
       flex-direction: column;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* ─── Header gradient banner ─────────────────────────── */
+    /* ─── Header ─────────────────────────── */
     header {
       text-align: center;
-      margin-bottom: 32px;
-      padding-top: 24px;
+      margin-bottom: 24px;
+      padding-top: 20px;
       position: relative;
     }
 
@@ -71,9 +72,9 @@
       right: -20px;
       height: 200px;
       background: linear-gradient(180deg,
-        rgba(19, 26, 43, 0.04) 0%,
-        rgba(232, 163, 23, 0.03) 40%,
-        rgba(248, 248, 250, 0) 100%);
+        rgba(19, 26, 43, 0.035) 0%,
+        rgba(232, 163, 23, 0.02) 50%,
+        transparent 100%);
       pointer-events: none;
       z-index: 0;
     }
@@ -81,12 +82,12 @@
     header > * { position: relative; z-index: 1; }
 
     .app-logo {
-      width: 80px;
-      height: 80px;
-      margin: 0 auto 14px;
-      border-radius: 18px;
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 12px;
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 4px 16px rgba(19, 26, 43, 0.3);
+      box-shadow: 0 2px 8px rgba(19, 26, 43, 0.2), 0 8px 24px rgba(19, 26, 43, 0.15);
     }
 
     .app-logo svg {
@@ -96,25 +97,22 @@
     }
 
     h1 {
-      font-size: 32px;
+      font-size: 28px;
       font-weight: 900;
-      letter-spacing: 4px;
+      letter-spacing: 5px;
       color: #131A2B;
     }
 
     .subtitle {
-      font-size: 13px;
-      letter-spacing: 2px;
+      font-size: 12px;
+      letter-spacing: 2.5px;
       color: var(--text-dim);
-      margin-top: 8px;
+      margin-top: 6px;
       line-height: 1.6;
     }
 
     .color-dots {
-      display: flex;
-      justify-content: center;
-      gap: 6px;
-      margin-top: 12px;
+      display: none;
     }
 
     .color-dots .cdot {
@@ -127,7 +125,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
     .section-header::before,
     .section-header::after {
@@ -148,7 +146,7 @@
     .games {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       flex: 1;
     }
 
@@ -157,68 +155,68 @@
       text-decoration: none;
       color: inherit;
       background: var(--card);
-      border: 1px solid var(--border);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border: 1px solid rgba(19, 26, 43, 0.06);
+      box-shadow: 0 1px 2px rgba(19, 26, 43, 0.06), 0 4px 12px rgba(19, 26, 43, 0.04);
       border-radius: 14px;
-      padding: 18px 20px;
-      transition: all 0.2s ease;
+      padding: 16px 18px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
       position: relative;
       --glow: #888;
     }
 
     .game-card:active {
-      transform: scale(0.97);
-      box-shadow: 0 4px 20px color-mix(in srgb, var(--glow) 25%, transparent);
+      transform: scale(0.975) translateY(1px);
+      box-shadow: 0 1px 3px rgba(19, 26, 43, 0.08), 0 2px 6px rgba(19, 26, 43, 0.04);
     }
 
     .game-card.done {
-      opacity: 0.7;
+      opacity: 0.65;
     }
     .game-card.done:active {
-      opacity: 0.85;
+      opacity: 0.8;
     }
 
-    /* Left color border + glow var per game */
-    .threads  { border-left: 3px solid var(--clr-threads); --glow: var(--clr-threads); }
-    .alibi    { border-left: 3px solid var(--clr-alibi);   --glow: var(--clr-alibi); }
-    .bluff    { border-left: 3px solid var(--clr-bluff);   --glow: var(--clr-bluff); }
-    .lineup   { border-left: 3px solid var(--clr-lineup);  --glow: var(--clr-lineup); }
-    .echo     { border-left: 3px solid var(--clr-echo);    --glow: var(--clr-echo); }
-    .cipher   { border-left: 3px solid var(--clr-cipher);  --glow: var(--clr-cipher); }
-    .reflex   { border-left: 3px solid var(--clr-reflex);  --glow: var(--clr-reflex); }
-    .sequence { border-left: 3px solid var(--clr-sequence); --glow: var(--clr-sequence); }
-    .rank     { border-left: 3px solid var(--clr-rank);    --glow: var(--clr-rank); }
+    /* Glow var per game — no left border */
+    .threads  { --glow: var(--clr-threads); }
+    .alibi    { --glow: var(--clr-alibi); }
+    .bluff    { --glow: var(--clr-bluff); }
+    .lineup   { --glow: var(--clr-lineup); }
+    .echo     { --glow: var(--clr-echo); }
+    .cipher   { --glow: var(--clr-cipher); }
+    .reflex   { --glow: var(--clr-reflex); }
+    .sequence { --glow: var(--clr-sequence); }
+    .rank     { --glow: var(--clr-rank); }
 
     .card-top {
       display: flex;
       align-items: center;
       gap: 14px;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .card-icon {
-      width: 52px;
-      height: 52px;
+      width: 48px;
+      height: 48px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 14px;
+      border-radius: 12px;
       flex-shrink: 0;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.2);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.15);
       position: relative;
     }
 
     .card-icon svg {
-      width: 26px;
-      height: 26px;
+      width: 24px;
+      height: 24px;
     }
 
     .card-icon .done-check {
       position: absolute;
       bottom: -4px;
       right: -4px;
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       background: var(--accent);
       border-radius: 50%;
       border: 2px solid var(--card);
@@ -227,20 +225,21 @@
       justify-content: center;
     }
     .card-icon .done-check svg {
-      width: 11px;
-      height: 11px;
+      width: 10px;
+      height: 10px;
     }
 
     .card-title {
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: 1px;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
       flex: 1;
+      color: var(--text);
     }
 
     .card-chevron {
-      color: #c0c0cc;
-      font-size: 22px;
+      color: #c8c8d0;
+      font-size: 20px;
       font-weight: 300;
       flex-shrink: 0;
       margin-left: auto;
@@ -248,92 +247,83 @@
     }
 
     .card-desc {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--text-dim);
-      line-height: 1.4;
+      line-height: 1.55;
     }
 
     .card-tag {
       display: inline-block;
-      margin-top: 8px;
-      padding: 3px 8px;
+      margin-top: 6px;
+      padding: 2px 7px;
       border-radius: 4px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1px;
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
       text-transform: uppercase;
     }
 
-    /* Per-game accent colors — icon gradients + tag + title */
+    /* Per-game accent colors — icon gradients + subtle tag tints */
     .threads .card-icon { background: linear-gradient(135deg, #F59E0B, #D97706); }
-    .threads .card-title { color: #92600a; }
-    .threads .card-tag { background: rgba(217, 119, 6, 0.12); color: #92600a; }
+    .threads .card-tag { background: rgba(217, 119, 6, 0.08); color: #92600a; }
 
     .alibi .card-icon { background: linear-gradient(135deg, #14B8A6, #0D9488); }
-    .alibi .card-title { color: #0D7D73; }
-    .alibi .card-tag { background: rgba(13, 148, 136, 0.12); color: #0D7D73; }
+    .alibi .card-tag { background: rgba(13, 148, 136, 0.08); color: #0D7D73; }
 
     .bluff .card-icon { background: linear-gradient(135deg, #EF4444, #DC2626); }
-    .bluff .card-title { color: #B91C1C; }
-    .bluff .card-tag { background: rgba(220, 38, 38, 0.12); color: #B91C1C; }
+    .bluff .card-tag { background: rgba(220, 38, 38, 0.08); color: #B91C1C; }
 
     .lineup .card-icon { background: linear-gradient(135deg, #3B82F6, #2563EB); }
-    .lineup .card-title { color: #1D4ED8; }
-    .lineup .card-tag { background: rgba(37, 99, 235, 0.12); color: #1D4ED8; }
+    .lineup .card-tag { background: rgba(37, 99, 235, 0.08); color: #1D4ED8; }
 
     .echo .card-icon { background: linear-gradient(135deg, #8B5CF6, #7C3AED); }
-    .echo .card-title { color: #6D28D9; }
-    .echo .card-tag { background: rgba(124, 58, 237, 0.12); color: #6D28D9; }
+    .echo .card-tag { background: rgba(124, 58, 237, 0.08); color: #6D28D9; }
 
     .cipher .card-icon { background: linear-gradient(135deg, #10B981, #059669); }
-    .cipher .card-title { color: #047857; }
-    .cipher .card-tag { background: rgba(5, 150, 105, 0.12); color: #047857; }
+    .cipher .card-tag { background: rgba(5, 150, 105, 0.08); color: #047857; }
 
     .reflex .card-icon { background: linear-gradient(135deg, #F97316, #EA580C); }
-    .reflex .card-title { color: #C2410C; }
-    .reflex .card-tag { background: rgba(234, 88, 12, 0.12); color: #C2410C; }
+    .reflex .card-tag { background: rgba(234, 88, 12, 0.08); color: #C2410C; }
 
     .sequence .card-icon { background: linear-gradient(135deg, #6366F1, #4F46E5); }
-    .sequence .card-title { color: #4338CA; }
-    .sequence .card-tag { background: rgba(79, 70, 229, 0.12); color: #4338CA; }
+    .sequence .card-tag { background: rgba(79, 70, 229, 0.08); color: #4338CA; }
 
     .rank .card-icon { background: linear-gradient(135deg, #EC4899, #DB2777); }
-    .rank .card-title { color: #BE185D; }
-    .rank .card-tag { background: rgba(219, 39, 119, 0.12); color: #BE185D; }
+    .rank .card-tag { background: rgba(219, 39, 119, 0.08); color: #BE185D; }
 
     /* ─── Circular Progress ────────────────────────────────── */
     .hub-progress {
-      margin-top: 20px;
+      margin-top: 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .progress-circle-wrap {
       position: relative;
-      width: 80px;
-      height: 80px;
+      width: 72px;
+      height: 72px;
     }
 
     .progress-circle-wrap svg {
       transform: rotate(-90deg);
-      width: 80px;
-      height: 80px;
+      width: 72px;
+      height: 72px;
     }
 
     .progress-track {
       fill: none;
-      stroke: var(--border);
-      stroke-width: 6;
+      stroke: rgba(19, 26, 43, 0.06);
+      stroke-width: 5;
     }
 
     .progress-fill {
       fill: none;
       stroke: var(--accent);
-      stroke-width: 6;
+      stroke-width: 5;
       stroke-linecap: round;
-      animation: progressFill 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+      animation: progressFill 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
     }
 
     @keyframes progressFill {
@@ -351,14 +341,14 @@
     }
 
     .progress-num {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 900;
       color: var(--text);
       line-height: 1;
     }
 
     .progress-of {
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 600;
       color: var(--text-dim);
       letter-spacing: 1px;
@@ -367,13 +357,13 @@
 
     .stats-link {
       display: inline-block;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
       letter-spacing: 2px;
       color: var(--text-dim);
       text-decoration: none;
-      padding: 6px 16px;
-      border: 1px solid var(--border);
+      padding: 5px 14px;
+      border: 1px solid rgba(19, 26, 43, 0.08);
       border-radius: 6px;
       transition: all 0.15s;
     }
@@ -383,13 +373,13 @@
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      margin-top: 8px;
-      padding: 3px 8px;
+      margin-top: 6px;
+      padding: 2px 7px;
       border-radius: 4px;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      background: rgba(26, 154, 69, 0.08);
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      background: rgba(26, 154, 69, 0.07);
       color: var(--accent);
     }
 
@@ -397,20 +387,20 @@
       display: inline-flex;
       align-items: center;
       gap: 3px;
-      margin-top: 8px;
-      margin-left: 6px;
-      padding: 3px 8px;
+      margin-top: 6px;
+      margin-left: 4px;
+      padding: 2px 7px;
       border-radius: 4px;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      background: rgba(200, 152, 24, 0.08);
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      background: rgba(200, 152, 24, 0.07);
       color: #c89818;
     }
 
     footer {
       text-align: center;
-      padding-top: 28px;
+      padding-top: 24px;
       padding-bottom: 12px;
       display: flex;
       flex-direction: column;
@@ -418,89 +408,91 @@
       gap: 6px;
     }
     .footer-logo {
-      width: 28px;
-      height: 28px;
-      border-radius: 7px;
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
       overflow: hidden;
-      opacity: 0.35;
+      opacity: 0.3;
     }
     .footer-logo svg { width: 100%; height: 100%; display: block; }
     .footer-text {
-      font-size: 10px;
+      font-size: 9px;
       color: var(--text-dim);
       letter-spacing: 2px;
       text-transform: uppercase;
+      opacity: 0.7;
     }
 
     .show-banner {
-      margin-top: 12px;
+      margin-top: 16px;
       margin-bottom: 8px;
-      padding: 20px 24px;
-      background: linear-gradient(135deg, rgba(19,26,43,0.06), rgba(107,33,168,0.06));
-      border: 1px solid rgba(19,26,43,0.08);
+      padding: 20px 20px;
+      background: var(--card);
+      border: 1px solid rgba(19, 26, 43, 0.06);
+      box-shadow: 0 1px 2px rgba(19, 26, 43, 0.06), 0 4px 12px rgba(19, 26, 43, 0.04);
       border-radius: 14px;
       text-align: center;
     }
     .show-banner-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 3px;
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
       text-transform: uppercase;
       color: var(--text-dim);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     .show-banner-title {
-      font-size: 20px;
-      font-weight: 900;
+      font-size: 18px;
+      font-weight: 800;
       color: var(--text);
-      letter-spacing: 1px;
-      margin-bottom: 6px;
+      letter-spacing: 0.3px;
+      margin-bottom: 4px;
     }
     .show-banner-desc {
-      font-size: 13px;
+      font-size: 12.5px;
       color: var(--text-dim);
-      line-height: 1.5;
+      line-height: 1.55;
       margin-bottom: 14px;
     }
     .show-links {
       display: flex;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
     }
     .show-link {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 8px 16px;
+      padding: 7px 14px;
       border-radius: 8px;
-      background: var(--text);
+      background: #131A2B;
       color: white;
       text-decoration: none;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.5px;
-      transition: opacity 0.2s;
+      letter-spacing: 0.3px;
+      transition: opacity 0.18s;
     }
     .show-link:active { opacity: 0.8; }
-    .show-link svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .show-link svg { width: 14px; height: 14px; flex-shrink: 0; }
     @media (hover: hover) { .show-link:hover { opacity: 0.85; } }
 
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(16px); }
+      from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .game-card { animation: fadeInUp 0.4s ease-out both; }
-    .game-card:nth-child(1) { animation-delay: 0.03s; }
-    .game-card:nth-child(2) { animation-delay: 0.08s; }
-    .game-card:nth-child(3) { animation-delay: 0.13s; }
-    .game-card:nth-child(4) { animation-delay: 0.18s; }
-    .game-card:nth-child(5) { animation-delay: 0.23s; }
-    .game-card:nth-child(6) { animation-delay: 0.28s; }
-    .game-card:nth-child(7) { animation-delay: 0.33s; }
-    .game-card:nth-child(8) { animation-delay: 0.38s; }
-    .game-card:nth-child(9) { animation-delay: 0.43s; }
+    .game-card { animation: fadeInUp 0.3s ease-out both; }
+    .game-card:nth-child(1) { animation-delay: 0.02s; }
+    .game-card:nth-child(2) { animation-delay: 0.06s; }
+    .game-card:nth-child(3) { animation-delay: 0.10s; }
+    .game-card:nth-child(4) { animation-delay: 0.14s; }
+    .game-card:nth-child(5) { animation-delay: 0.18s; }
+    .game-card:nth-child(6) { animation-delay: 0.22s; }
+    .game-card:nth-child(7) { animation-delay: 0.26s; }
+    .game-card:nth-child(8) { animation-delay: 0.30s; }
+    .game-card:nth-child(9) { animation-delay: 0.34s; }
 
     /* Loading screen */
     #loading-screen {
@@ -540,7 +532,7 @@
     }
     @keyframes splashPulse {
       0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.05); opacity: 0.85; }
+      50% { transform: scale(1.02); opacity: 0.9; }
     }
   </style>
 </head>
