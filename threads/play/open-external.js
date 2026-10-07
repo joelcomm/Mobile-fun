@@ -1,16 +1,27 @@
-/* Open links marked data-external in the phone's real browser instead of X's in-app browser.
-   iOS: x-safari-https:// hands the URL to Safari (iOS 17+).
-   Android: an intent:// URL hands it to the default browser.
-   Desktop: a normal new tab. If a phone ignores the hand-off, load the page in place
+/* Links marked data-external escape in-app browsers (X, Facebook, Instagram, Android WebViews)
+   so the full game opens in the phone's real browser:
+     iOS: x-safari-https:// hands the URL to Safari (iOS 17+).
+     Android: an intent:// URL hands it to the default browser.
+   In a normal mobile browser (Chrome, Safari, ...) the link just opens in place, and on
+   desktop in a new tab. If a hand-off is ignored, the page loads in place
    (a delayed window.open would be popup-blocked). */
 (function () {
   var ua = navigator.userAgent || '';
   var isIOS = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   var isAndroid = /Android/.test(ua);
+  var isMobile = isIOS || isAndroid;
+  // Chrome/Firefox/Edge on iOS are already real browsers; x-safari would bounce them to Safari
+  var isOtherIOSBrowser = /CriOS|FxiOS|EdgiOS|OPiOS/.test(ua);
+  var isInApp = /Twitter|TwitterAndroid|FBAN|FBAV|Instagram|Line\/|; wv\)/.test(ua) ||
+    (isIOS && !isOtherIOSBrowser && !/Safari\//.test(ua));
 
   function openExternal(url) {
-    if (!isIOS && !isAndroid) {
+    if (!isMobile) {
       window.open(url, '_blank', 'noopener');
+      return;
+    }
+    if (!isInApp) {
+      window.location.href = url;
       return;
     }
     var handoff;
