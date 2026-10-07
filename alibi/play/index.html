@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>window.ACUMEN_EMBED = true;</script><script src="../../x-embed.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Alibi — Acumen</title>
+  <!-- Compact ~480x480 player used ONLY inside the X Player Card iframe.
+       The shareable URL is ../x-card/ (it carries the card meta tags). -->
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://games.aiforeveryoneshow.com/alibi/x-card/">
+  <meta name="twitter:card" content="player">
+  <meta name="twitter:site" content="@joelcomm">
+  <meta name="twitter:title" content="Alibi — Acumen">
+  <meta name="twitter:description" content="Nine words. Eight have alibis. Can you catch the culprit? Play a quick round.">
+  <meta name="twitter:image" content="https://games.aiforeveryoneshow.com/alibi/x-card/card.png">
+  <meta name="twitter:image:alt" content="Alibi: a 3x3 grid of yellow things, BANANA, LEMON, CANARY and more, with TOMATO caught as the culprit.">
+  <meta name="twitter:player" content="https://games.aiforeveryoneshow.com/alibi/play/">
+  <meta name="twitter:player:width" content="480">
+  <meta name="twitter:player:height" content="480">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Acumen">
+  <meta property="og:url" content="https://games.aiforeveryoneshow.com/alibi/x-card/">
+  <meta property="og:title" content="Alibi — Acumen">
+  <meta property="og:description" content="Nine words. Eight have alibis. Can you catch the culprit? Play a quick round.">
+  <meta property="og:image" content="https://games.aiforeveryoneshow.com/alibi/x-card/card.png">
+  <meta property="og:image:width" content="960">
+  <meta property="og:image:height" content="960">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="embed.css">
+</head>
+<body class="embed">
+  <a href="https://games.aiforeveryoneshow.com/alibi/" target="_blank" rel="noopener" class="embed-brand" data-external>ACUMEN &middot; FULL GAME &#x2197;</a>
+  <div id="app">
+
+    <!-- Title Screen -->
+    <div id="title-screen">
+      <div class="title-icon">&#x1F575;</div>
+      <h1 class="game-title">ALIBI</h1>
+      <p class="tagline">9 words. 8 have alibis. Find the culprit.</p>
+      <p class="embed-howto">Tap the <span class="hl">one word</span> that doesn't share the hidden link &middot; 5 cases</p>
+      <button id="btn-start" class="btn-main">START INVESTIGATION</button>
+      <p id="best-score" class="best-score"></p>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="hidden">
+      <div class="game-header">
+        <span id="round-label" class="round-label">1 / 10</span>
+        <span id="score-label" class="score-label">0</span>
+      </div>
+      <div id="progress-bar" class="progress-bar"></div>
+      <p class="prompt-label">FIND THE CULPRIT</p>
+      <p class="sub-label">One word doesn't belong</p>
+      <div id="word-grid" class="word-grid"></div>
+      <div id="feedback" class="feedback hidden">
+        <p id="fb-result" class="fb-result"></p>
+        <p id="fb-category" class="fb-category"></p>
+        <p id="fb-explain" class="fb-explain"></p>
+        <button id="btn-next" class="btn-main btn-sm">NEXT</button>
+      </div>
+    </div>
+
+    <!-- Game Over -->
+    <div id="gameover-screen" class="hidden">
+      <h2 class="gameover-heading">CASE CLOSED</h2>
+      <div id="final-score" class="final-score"></div>
+      <div id="final-rank" class="final-rank"></div>
+      <div id="final-stats" class="final-stats"></div>
+      <p id="next-cd"></p>
+      <div class="embed-actions">
+        <button id="btn-share" class="embed-btn">Share on X</button>
+        <a class="embed-btn embed-more" href="https://games.aiforeveryoneshow.com/" target="_blank" rel="noopener" data-external>All Games</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="../../daily.js"></script>
+  <script src="../puzzles.js"></script>
+  <script src="../game.js"></script>
+</body>
+</html>
