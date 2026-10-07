@@ -30,6 +30,8 @@
     dom.btnStart.addEventListener('click', startGame);
     dom.btnNext.addEventListener('click', nextRound);
     dom.wordGrid.addEventListener('click', handlePick);
+    var btnShare = document.getElementById('btn-share');
+    if (btnShare) btnShare.addEventListener('click', shareX);
 
     var completed = Daily.getDailyResult('alibi');
     if (completed) {
@@ -58,6 +60,16 @@
         showRound();
       }
     }
+  }
+
+  // Spoiler-free share: only how many culprits were caught, never the words.
+  function shareX() {
+    var res = Daily.getDailyResult('alibi');
+    var score = res ? res.score : (state.score || 0);
+    var caught = Math.round(score / 100);
+    var text = 'Can you find the word with no alibi? I caught ' + caught + '/' + TOTAL_ROUNDS +
+      ' culprits on today\'s Alibi. Can you beat it?';
+    if (window.AcumenX) AcumenX.postToX(text, AcumenX.cardUrl('alibi'));
   }
 
   function showScreen(name) {
