@@ -272,3 +272,11 @@ html, body {
   .seq-num { min-width: 40px; height: 40px; font-size: 20px; }
   .choice-btn { padding: 12px 6px; font-size: 18px; }
 }
+
+/* Share on X (game over) — matches the ALL GAMES button */
+.btn-share {
+  display: inline-block; background: var(--accent); color: #fff; border: none; cursor: pointer;
+  font-family: inherit; font-size: 16px; font-weight: 800; letter-spacing: 2px;
+  border-radius: 10px; padding: 14px 32px; text-transform: uppercase; margin-bottom: 12px;
+}
+.btn-share:active { transform: scale(0.97); opacity: 0.9; }

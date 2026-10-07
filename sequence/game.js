@@ -19,7 +19,8 @@
     finalScore: document.getElementById('final-score'),
     finalRank: document.getElementById('final-rank'),
     finalStats: document.getElementById('final-stats'),
-    bestScore: document.getElementById('best-score')
+    bestScore: document.getElementById('best-score'),
+    btnShare: document.getElementById('btn-share')
   };
 
   var state = {};
@@ -30,6 +31,7 @@
     dom.btnStart.addEventListener('click', startGame);
     dom.btnNext.addEventListener('click', nextRound);
     dom.choices.addEventListener('click', handlePick);
+    if (dom.btnShare) dom.btnShare.addEventListener('click', shareResult);
 
     var completed = Daily.getDailyResult('sequence');
     if (completed) {
@@ -72,6 +74,17 @@
   function showBest() {
     var b = localStorage.getItem('sequence-best');
     if (b) dom.bestScore.textContent = 'BEST: ' + b;
+  }
+
+  // Spoiler-free share text: score and rounds correct only, never the numbers.
+  function shareResult() {
+    var res = Daily.getDailyResult('sequence');
+    if (!res || !window.AcumenX) return;
+    var m = /^(\d+) \/ (\d+) correct/.exec(res.stats || '');
+    var text = 'Can you crack the pattern? I scored ' + res.score +
+      (m ? ' (' + m[1] + '/' + m[2] + ' correct)' : '') +
+      " on today's Sequence. Can you beat it?";
+    AcumenX.postToX(text, AcumenX.cardUrl('sequence'));
   }
 
   function startGame() {
