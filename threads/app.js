@@ -285,30 +285,13 @@
   }
 
   function shareResult() {
-    var won = solved;
-    var finalScore = won ? score : 0;
-    var date = Daily.getDateString();
-
-    var text = 'Missing Link — ' + date + '\n';
-    text += won ? 'Linked!' : 'Missing!';
-    text += ' Score: ' + finalScore + '\n';
-    text += puzzle.cues.join(' · ') + ' → ' + (won ? puzzle.answer : '???') + '\n';
-    text += guesses.length + ' guess' + (guesses.length === 1 ? '' : 'es');
-    if (hintsUsed > 0) text += ', ' + hintsUsed + ' hint' + (hintsUsed === 1 ? '' : 's');
-    text += '\nPlay at acumen.fun';
-
-    if (EMBED) {
-      // Inside X's iframe: native share/clipboard are usually blocked, so open a post composer
-      var url = 'https://games.aiforeveryoneshow.com/threads/x-card/';
-      window.open('https://x.com/intent/post?text=' + encodeURIComponent(text.replace('\nPlay at acumen.fun', '')) +
-        '&url=' + encodeURIComponent(url), '_blank', 'noopener');
-    } else if (navigator.share) {
-      navigator.share({ text: text }).catch(function () {});
-    } else if (navigator.clipboard) {
-      navigator.clipboard.writeText(text).then(function () {
-        showToast('Copied to clipboard!');
-      });
-    }
+    // Post straight to X with the cue words only (never the answer) and a link to the playable card
+    var text = 'What is the missing link between these words?\n\n' +
+      puzzle.cues.join(' · ') + '\n\n' +
+      (solved ? 'I solved it. Can you?' : 'It stumped me. Can you solve it?');
+    var url = 'https://games.aiforeveryoneshow.com/threads/x-card/';
+    window.open('https://x.com/intent/post?text=' + encodeURIComponent(text) +
+      '&url=' + encodeURIComponent(url), '_blank', 'noopener');
   }
 
   var toastTimer;
