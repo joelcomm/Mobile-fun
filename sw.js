@@ -1,9 +1,11 @@
-var CACHE_NAME = 'acumen-v1';
+// Bump the version whenever cached game files change, or returning visitors keep the old copies.
+var CACHE_NAME = 'acumen-v2';
 
 var ASSETS = [
   '/',
   '/index.html',
   '/daily.js',
+  '/x-embed.js',
   '/stats.html',
   '/icon-192.png',
   '/icon-512.png',
@@ -39,7 +41,9 @@ var ASSETS = [
   '/sequence/game.js',
   '/sequence/data.js',
   '/sequence/style.css',
-  '/rank/index.html'
+  '/rank/index.html',
+  '/rank/game.js',
+  '/rank/style.css'
 ];
 
 self.addEventListener('install', function (event) {

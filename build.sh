@@ -11,7 +11,7 @@ rm -rf www
 mkdir -p www
 
 cp app.html www/index.html
-cp daily.js stats.html manifest.json sw.js www/
+cp daily.js x-embed.js stats.html manifest.json sw.js www/
 cp icon-192.png icon-512.png www/ 2>/dev/null || true
 cp privacy.html support.html www/ 2>/dev/null || true
 
