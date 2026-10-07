@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script>window.ACUMEN_EMBED = true;</script><script src="../../x-embed.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Cipher — Acumen</title>
+  <!-- Compact ~480x480 player used ONLY inside the X Player Card iframe.
+       The shareable URL is ../x-card/ (it carries the card meta tags). -->
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://games.aiforeveryoneshow.com/cipher/x-card/">
+  <meta name="twitter:card" content="player">
+  <meta name="twitter:site" content="@joelcomm">
+  <meta name="twitter:title" content="Cipher — Acumen">
+  <meta name="twitter:description" content="Crack the code, decode the quote. Play a quick round.">
+  <meta name="twitter:image" content="https://games.aiforeveryoneshow.com/cipher/x-card/card.png">
+  <meta name="twitter:image:alt" content="Cipher: a coded phrase with some letters decoded, and a letter picker to crack the rest.">
+  <meta name="twitter:player" content="https://games.aiforeveryoneshow.com/cipher/play/">
+  <meta name="twitter:player:width" content="480">
+  <meta name="twitter:player:height" content="480">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="embed.css">
+</head>
+<body class="embed">
+  <a href="https://games.aiforeveryoneshow.com/cipher/" target="_blank" rel="noopener" class="embed-brand" data-external>ACUMEN &middot; FULL GAME &#x2197;</a>
+  <div id="app">
+
+    <!-- Title Screen -->
+    <div id="title-screen">
+      <h1 class="game-title"><span class="title-icon">&#x1F510;</span> CIPHER</h1>
+      <p class="tagline">CRACK THE CODE. DECODE THE QUOTE.</p>
+      <div class="embed-example" aria-label="Example: coded letters with their decoded letters above">
+        <span class="cipher-word">
+          <span class="cipher-char"><span class="cipher-decoded">C</span><span class="cipher-coded">X</span></span>
+          <span class="cipher-char"><span class="cipher-decoded">O</span><span class="cipher-coded">J</span></span>
+          <span class="cipher-char selected"><span class="cipher-decoded"></span><span class="cipher-coded">Q</span></span>
+          <span class="cipher-char"><span class="cipher-decoded">E</span><span class="cipher-coded">M</span></span>
+        </span>
+      </div>
+      <p class="embed-how">Tap a coded letter, then tap its replacement.</p>
+      <button id="btn-start" class="btn-main">BEGIN DECRYPTION</button>
+      <p id="best-score" class="best-score"></p>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="hidden">
+      <div class="game-header">
+        <span id="round-label" class="round-label">1 / 10</span>
+        <span id="score-label" class="score-label">0</span>
+      </div>
+      <div id="progress-bar" class="progress-bar"></div>
+      <div class="embed-scroll">
+        <div id="cipher-display" class="cipher-display"></div>
+        <p id="author-label" class="author-label"></p>
+      </div>
+      <div id="selected-info" class="selected-info"></div>
+      <div id="letter-picker" class="letter-picker"></div>
+      <div class="game-actions">
+        <button id="btn-check" class="btn-main btn-sm">CHECK</button>
+        <button id="btn-hint" class="btn-hint">HINT</button>
+      </div>
+      <div id="round-feedback" class="round-feedback hidden">
+        <p id="rf-text" class="rf-text"></p>
+        <p id="rf-quote" class="rf-quote"></p>
+        <p id="rf-pts" class="rf-pts"></p>
+        <button id="btn-next" class="btn-main btn-sm">NEXT</button>
+      </div>
+    </div>
+
+    <!-- Game Over -->
+    <div id="gameover-screen" class="hidden">
+      <h2 class="gameover-heading">DECRYPTED</h2>
+      <div id="final-score" class="final-score"></div>
+      <div id="final-rank" class="final-rank"></div>
+      <div id="final-stats" class="final-stats"></div>
+      <p id="next-cd"></p>
+      <div class="embed-actions">
+        <button id="btn-share" class="btn-main">Share on X</button>
+        <a class="btn-main embed-more" href="https://games.aiforeveryoneshow.com/" target="_blank" rel="noopener" data-external>All Games</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="../../daily.js"></script>
+  <script src="../quotes.js"></script>
+  <script src="../game.js"></script>
+</body>
+</html>

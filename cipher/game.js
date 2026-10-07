@@ -26,10 +26,12 @@
     finalRank: document.getElementById('final-rank'),
     finalStats: document.getElementById('final-stats'),
     bestScore: document.getElementById('best-score'),
+    btnShare: document.getElementById('btn-share'),
     gameActions: document.querySelector('.game-actions')
   };
 
   let state = {};
+  let shareInfo = null; // { score, solved } for today's finished game
 
   function init() {
     Daily.injectDailyInfo('#title-screen', 'cipher');
@@ -40,12 +42,15 @@
     dom.btnNext.addEventListener('click', nextRound);
     dom.cipherDisplay.addEventListener('click', onCipherClick);
     dom.letterPicker.addEventListener('click', onPickerClick);
+    if (dom.btnShare) dom.btnShare.addEventListener('click', shareResult);
 
     var completed = Daily.getDailyResult('cipher');
     if (completed) {
       dom.finalScore.textContent = completed.score;
       dom.finalRank.textContent = completed.rank || '';
       dom.finalStats.innerHTML = completed.stats || '';
+      var solvedMatch = /^(\d+) \/ \d+ decoded/.exec(completed.stats || '');
+      shareInfo = { score: completed.score, solved: solvedMatch ? parseInt(solvedMatch[1], 10) : null };
       showScreen('gameover');
       function tickCd() {
         dom.nextCd.innerHTML = '<span style="display:block;font-size:11px;letter-spacing:2px;color:#6b6b80;margin-bottom:4px">NEW PUZZLE IN</span>' + Daily.formatCountdown();
@@ -416,6 +421,7 @@
       state.noHintSolves + ' solved without hints<br>' +
       state.hintsUsedTotal + ' total hints used';
 
+    shareInfo = { score: state.score, solved: state.solvedCount };
     Daily.saveDailyResult('cipher', state.score, {
       rank: rank,
       stats: dom.finalStats.innerHTML
@@ -429,6 +435,20 @@
     }
     tickCd();
     setInterval(tickCd, 1000);
+  }
+
+  function shareResult() {
+    // Spoiler-free: only the score and how many quotes were cracked, never the quotes or letters
+    var info = shareInfo || { score: 0, solved: null };
+    var text = 'Can you crack the code?\n\n';
+    if (info.solved !== null) {
+      text += '\uD83D\uDD13'.repeat(info.solved) + '\uD83D\uDD12'.repeat(Math.max(0, TOTAL_ROUNDS - info.solved)) + '\n' +
+        'I decoded ' + info.solved + '/' + TOTAL_ROUNDS + ' quotes for ' + info.score + ' pts on today\'s Cipher.';
+    } else {
+      text += 'I scored ' + info.score + ' pts on today\'s Cipher.';
+    }
+    text += ' Can you beat it?';
+    AcumenX.postToX(text, AcumenX.cardUrl('cipher'));
   }
 
   init();
