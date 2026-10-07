@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Missing Link — Acumen</title>
+  <!-- Compact ~480x480 player used ONLY inside the X Player Card iframe.
+       The shareable URL is ../x-card/ (it carries the card meta tags). -->
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://games.aiforeveryoneshow.com/threads/x-card/">
+  <meta name="twitter:card" content="player">
+  <meta name="twitter:site" content="@REPLACE_WITH_HANDLE">
+  <meta name="twitter:title" content="Missing Link — Acumen">
+  <meta name="twitter:description" content="Connect the clues. Play a quick round.">
+  <meta name="twitter:image" content="https://games.aiforeveryoneshow.com/threads/x-card/card.png">
+  <meta name="twitter:player" content="https://games.aiforeveryoneshow.com/threads/play/">
+  <meta name="twitter:player:width" content="480">
+  <meta name="twitter:player:height" content="480">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="embed.css">
+  <script>
+    window.ML_EMBED = true;
+    // Third-party iframes can have storage blocked; fall back to memory so the game still runs.
+    (function () {
+      try {
+        var k = '__ml_probe';
+        window.localStorage.setItem(k, '1');
+        window.localStorage.removeItem(k);
+      } catch (e) {
+        var mem = {};
+        var shim = {
+          getItem: function (key) { return Object.prototype.hasOwnProperty.call(mem, key) ? mem[key] : null; },
+          setItem: function (key, val) { mem[key] = String(val); },
+          removeItem: function (key) { delete mem[key]; },
+          clear: function () { mem = {}; }
+        };
+        try { Object.defineProperty(window, 'localStorage', { value: shim, configurable: true }); } catch (e2) {}
+      }
+    })();
+  </script>
+</head>
+<body class="embed">
+  <a href="https://games.aiforeveryoneshow.com/threads/" target="_blank" rel="noopener" class="embed-brand">ACUMEN &middot; FULL GAME &#x2197;</a>
+  <div id="app">
+
+    <!-- Title Screen -->
+    <div id="title-screen">
+      <h1 class="game-title"><span class="title-icon">&#x1F9F5;</span> MISSING LINK</h1>
+      <p class="tagline">Find the word that links all three</p>
+      <div class="help-example embed-example" aria-label="Example">
+        <span class="help-cue">SUN</span>
+        <span class="help-cue">MOON</span>
+        <span class="help-cue">FLASH</span>
+      </div>
+      <p class="embed-example-answer">&rarr; <strong>LIGHT</strong> &middot; 4 guesses &middot; hints cost points</p>
+      <button id="btn-start" class="btn-main">PLAY TODAY'S LINK</button>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="hidden">
+      <div id="cue-area">
+        <div class="cue-card" id="cue-0"></div>
+        <div class="cue-card" id="cue-1"></div>
+        <div class="cue-card" id="cue-2"></div>
+      </div>
+
+      <div id="link-area" class="hidden">
+        <div class="link-row" id="link-0"></div>
+        <div class="link-row" id="link-1"></div>
+        <div class="link-row" id="link-2"></div>
+      </div>
+
+      <div id="input-area">
+        <input type="text" id="guess-input" placeholder="Type the linking word…" autocomplete="off" autocapitalize="characters" spellcheck="false" enterkeyhint="go">
+        <button id="btn-guess" class="btn btn-primary" disabled>Guess</button>
+      </div>
+
+      <div id="status-bar">
+        <div id="mistakes">
+          <span class="status-label">Guesses:</span>
+          <span id="mistake-dots"></span>
+        </div>
+        <div id="hint-display" class="hidden"><span id="hint-text"></span></div>
+        <button id="btn-hint" class="btn btn-hint">Hint</button>
+      </div>
+
+      <div id="score-display">Score: <span id="score-value">100</span></div>
+    </div>
+
+    <!-- Result overlay -->
+    <div id="overlay" class="hidden">
+      <div id="overlay-content">
+        <h2 id="overlay-title"></h2>
+        <div id="overlay-answer"></div>
+        <div id="overlay-links"></div>
+        <div id="overlay-score"></div>
+        <div id="overlay-stats"></div>
+        <div class="embed-actions">
+          <button id="btn-share" class="btn btn-primary">Post Result</button>
+          <a class="btn embed-more" href="https://games.aiforeveryoneshow.com/app.html" target="_blank" rel="noopener">All Games</a>
+        </div>
+        <p id="next-cd"></p>
+      </div>
+    </div>
+
+    <!-- Help overlay (required by app.js; not opened in the embed) -->
+    <div id="help-overlay" class="hidden">
+      <div id="help-content"><button id="btn-close-help" class="btn btn-primary">Got It</button></div>
+    </div>
+
+  </div>
+
+  <div id="toast" class="hidden"></div>
+
+  <script src="../../daily.js"></script>
+  <script src="../puzzles.js"></script>
+  <script src="../app.js"></script>
+  <script>
+    // Links injected by Daily (e.g. "ALL GAMES" after today's puzzle is done) must leave the iframe.
+    document.querySelectorAll('.daily-hub-link').forEach(function (a) {
+      a.href = 'https://games.aiforeveryoneshow.com/threads/';
+      a.textContent = 'OPEN FULL GAME';
+      a.target = '_blank';
+      a.rel = 'noopener';
+    });
+  </script>
+</body>
+</html>

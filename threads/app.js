@@ -6,6 +6,8 @@
   var PENALTY_HINT = 15;
   var SCORE_FLOOR = 10;
   var GAME_KEY = 'threads';
+  // Set by play/index.html (the compact X Player Card embed)
+  var EMBED = !!window.ML_EMBED;
 
   var puzzle, score, guessesLeft, hintsUsed, guesses, solved, hintLetters;
 
@@ -295,7 +297,12 @@
     if (hintsUsed > 0) text += ', ' + hintsUsed + ' hint' + (hintsUsed === 1 ? '' : 's');
     text += '\nPlay at acumen.fun';
 
-    if (navigator.share) {
+    if (EMBED) {
+      // Inside X's iframe: native share/clipboard are usually blocked, so open a post composer
+      var url = 'https://games.aiforeveryoneshow.com/threads/x-card/';
+      window.open('https://x.com/intent/post?text=' + encodeURIComponent(text.replace('\nPlay at acumen.fun', '')) +
+        '&url=' + encodeURIComponent(url), '_blank', 'noopener');
+    } else if (navigator.share) {
       navigator.share({ text: text }).catch(function () {});
     } else if (navigator.clipboard) {
       navigator.clipboard.writeText(text).then(function () {
@@ -314,7 +321,7 @@
     }, 2000);
   }
 
-  if ('serviceWorker' in navigator) {
+  if ('serviceWorker' in navigator && !EMBED) {
     navigator.serviceWorker.register('sw.js');
   }
 
