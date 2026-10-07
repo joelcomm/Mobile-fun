@@ -30,6 +30,8 @@
     showBest();
     dom.btnStart.addEventListener('click', startGame);
     dom.tileGrid.addEventListener('click', handleTap);
+    var btnShare = document.getElementById('btn-share');
+    if (btnShare) btnShare.addEventListener('click', shareResult);
 
     var completed = Daily.getDailyResult('echo');
     if (completed) {
@@ -259,6 +261,17 @@
     }
     tickCd();
     setInterval(tickCd, 1000);
+  }
+
+  // Spoiler-free share text: only the round reached and score, never the sequence.
+  function shareResult() {
+    var res = Daily.getDailyResult('echo');
+    var roundText = (res && res.roundText) || dom.finalRound.textContent || '';
+    var score = res ? res.score : dom.finalScore.textContent;
+    var m = /Round (\d+)/.exec(roundText);
+    var text = 'Can you play it back in reverse? I reached ' + (m ? 'Round ' + m[1] : 'the end') +
+      ' (' + score + ' pts) on today\'s Echo. Can you beat it?';
+    if (window.AcumenX) AcumenX.postToX(text, AcumenX.cardUrl('echo'));
   }
 
   init();
