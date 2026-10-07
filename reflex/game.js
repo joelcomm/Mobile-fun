@@ -24,7 +24,8 @@
     finalScore: document.getElementById('final-score'),
     finalRank: document.getElementById('final-rank'),
     finalStats: document.getElementById('final-stats'),
-    bestScore: document.getElementById('best-score')
+    bestScore: document.getElementById('best-score'),
+    btnShare: document.getElementById('btn-share')
   };
 
   let state = {};
@@ -36,6 +37,7 @@
     dom.btnStart.addEventListener('click', startGame);
     dom.btnLeft.addEventListener('click', function () { answer('left'); });
     dom.btnRight.addEventListener('click', function () { answer('right'); });
+    if (dom.btnShare) dom.btnShare.addEventListener('click', shareResult);
 
     var completed = Daily.getDailyResult('reflex');
     if (completed) {
@@ -49,6 +51,15 @@
       tickCd();
       setInterval(tickCd, 1000);
     }
+  }
+
+  // Spoiler-free: only the score and rank, never categories or words.
+  function shareResult() {
+    if (!window.AcumenX) return;
+    var rank = dom.finalRank.textContent;
+    var text = 'How fast are your reflexes? I scored ' + dom.finalScore.textContent +
+      ' on today\'s Reflex' + (rank ? ' (' + rank + ')' : '') + '. Can you beat it?';
+    AcumenX.postToX(text, AcumenX.cardUrl('reflex'));
   }
 
   function showScreen(name) {
