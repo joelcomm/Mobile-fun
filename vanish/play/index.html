@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script>window.ACUMEN_EMBED = true;</script><script src="../../x-embed.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Vanish — Acumen</title>
+  <!-- Compact ~480x480 player used ONLY inside the X Player Card iframe.
+       The shareable URL is ../x-card/ (it carries the card meta tags). -->
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://games.aiforeveryoneshow.com/vanish/x-card/">
+  <meta name="twitter:card" content="player">
+  <meta name="twitter:site" content="@joelcomm">
+  <meta name="twitter:title" content="Vanish — Acumen">
+  <meta name="twitter:description" content="The grid is disappearing. Make words, fast. Play a quick round.">
+  <meta name="twitter:image" content="https://games.aiforeveryoneshow.com/vanish/x-card/card.png">
+  <meta name="twitter:image:alt" content="Vanish: a 5x5 letter grid with some tiles already gone, spelling the example word STONE.">
+  <meta name="twitter:player" content="https://games.aiforeveryoneshow.com/vanish/play/">
+  <meta name="twitter:player:width" content="480">
+  <meta name="twitter:player:height" content="480">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="embed.css">
+</head>
+<body class="embed">
+  <a href="https://games.aiforeveryoneshow.com/vanish/" target="_blank" rel="noopener" class="embed-brand" data-external>ACUMEN &middot; FULL GAME &#x2197;</a>
+  <div id="app">
+
+    <!-- Intro Screen -->
+    <div id="intro-screen">
+      <h1 class="game-title"><span class="title-icon">&#x1F7E9;</span> VANISH</h1>
+      <p class="tagline">THE GRID IS DISAPPEARING. MAKE WORDS. FAST.</p>
+      <p class="embed-howto">Tap letters to spell 3+ letter words. Every 10s a letter vanishes &mdash; longer words score more.</p>
+      <button id="btn-play" class="btn-main">PLAY</button>
+      <p id="best-score" class="best-score"></p>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="hidden">
+      <div class="game-header">
+        <span class="header-title">VANISH</span>
+        <div id="timer-num" class="timer-num">10s</div>
+        <span id="score-display" class="score-label"><span id="score-num">0</span> pts</span>
+      </div>
+      <div class="timer-bar">
+        <div id="timer-fill" class="timer-fill"></div>
+      </div>
+      <div class="grid-wrap">
+        <div id="grid" class="letter-grid"></div>
+        <div id="message" class="message hidden"></div>
+      </div>
+      <div class="word-bar">
+        <div id="current-word" class="current-word">
+          <span class="placeholder">tap letters&hellip;</span>
+        </div>
+        <div class="word-actions">
+          <button id="btn-clear" class="btn-sm btn-dim" disabled>&#x2715;</button>
+          <button id="btn-submit" class="btn-sm btn-accent" disabled>SUBMIT</button>
+        </div>
+      </div>
+      <div class="found-section">
+        <div class="found-header">FOUND</div>
+        <div id="found-list" class="found-list">
+          <span class="found-empty">none yet</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="over-screen" class="hidden">
+      <h2 class="gameover-heading">GRID GONE</h2>
+      <div id="final-score" class="final-score">0</div>
+      <div class="final-label">FINAL SCORE</div>
+      <div id="best-words" class="best-words"></div>
+      <div class="embed-actions">
+        <button id="btn-share" type="button" class="btn-main">Share on X</button>
+        <a class="btn-main embed-more" href="https://games.aiforeveryoneshow.com/" target="_blank" rel="noopener" data-external>All Games</a>
+      </div>
+      <p id="next-cd"></p>
+    </div>
+
+  </div>
+  <script src="../../daily.js"></script>
+  <script src="../words.js"></script>
+  <script src="../game.js"></script>
+  <script>
+    // Daily's "ALL GAMES" link (shown once today's puzzle is done) opens the full game outside the iframe.
+    document.querySelectorAll('.daily-hub-link').forEach(function (a) {
+      a.href = 'https://games.aiforeveryoneshow.com/vanish/';
+      a.textContent = 'OPEN FULL GAME';
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.setAttribute('data-external', '');
+    });
+  </script>
+</body>
+</html>

@@ -264,6 +264,13 @@
   dom.btnClear.addEventListener('click', clearSelection);
   dom.btnSubmit.addEventListener('click', submitWord);
 
+  var btnShare = document.getElementById('btn-share');
+  if (btnShare) btnShare.addEventListener('click', function () {
+    var text = 'The grid is disappearing. How many words can you make before it\u2019s gone? I scored ' +
+      score + (score === 1 ? ' pt' : ' pts') + ' on today\u2019s Vanish. Can you beat it?';
+    if (window.AcumenX) AcumenX.postToX(text, AcumenX.cardUrl('vanish'));
+  });
+
   Daily.injectDailyInfo('#intro-screen', 'vanish');
   showBest();
 })();
