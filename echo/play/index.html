@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>window.ACUMEN_EMBED = true;</script>
+  <script src="../../x-embed.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Echo — Acumen</title>
+  <!-- Compact ~480x480 player used ONLY inside the X Player Card iframe.
+       The shareable URL is ../x-card/ (it carries the card meta tags). -->
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://games.aiforeveryoneshow.com/echo/x-card/">
+  <meta name="twitter:card" content="player">
+  <meta name="twitter:site" content="@joelcomm">
+  <meta name="twitter:title" content="Echo — Acumen">
+  <meta name="twitter:description" content="Watch the tiles flash, then tap them back in reverse. Play a quick round.">
+  <meta name="twitter:image" content="https://games.aiforeveryoneshow.com/echo/x-card/card.png">
+  <meta name="twitter:image:alt" content="Echo: a grid of six colored tiles; watch them flash 1, 2, 3, then tap them back 3, 2, 1.">
+  <meta name="twitter:player" content="https://games.aiforeveryoneshow.com/echo/play/">
+  <meta name="twitter:player:width" content="480">
+  <meta name="twitter:player:height" content="480">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="embed.css">
+</head>
+<body class="embed">
+  <a href="https://games.aiforeveryoneshow.com/echo/" target="_blank" rel="noopener" class="embed-brand" data-external>ACUMEN &middot; FULL GAME &#x2197;</a>
+  <div id="app">
+
+    <!-- Title Screen -->
+    <div id="title-screen">
+      <h1 class="game-title"><span class="title-icon">&#x1F519;</span> ECHO</h1>
+      <p class="tagline">WATCH. REMEMBER. REVERSE.</p>
+      <p class="embed-howto">Watch the tiles flash, then tap them back in <strong>reverse</strong> order. One more each round.</p>
+      <button id="btn-start" class="btn-main">START ECHO</button>
+      <p id="best-score" class="best-score"></p>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="hidden">
+      <div class="game-header">
+        <span id="round-label" class="round-label">ROUND 1</span>
+        <span id="score-label" class="score-label">0</span>
+      </div>
+      <p id="status-label" class="status-label">WATCH</p>
+      <div id="tile-grid" class="tile-grid">
+        <button class="tile tile-0" data-tile="0"></button>
+        <button class="tile tile-1" data-tile="1"></button>
+        <button class="tile tile-2" data-tile="2"></button>
+        <button class="tile tile-3" data-tile="3"></button>
+        <button class="tile tile-4" data-tile="4"></button>
+        <button class="tile tile-5" data-tile="5"></button>
+      </div>
+      <div id="input-dots" class="input-dots"></div>
+      <p id="hint-label" class="hint-label"></p>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameover-screen" class="hidden">
+      <h2 class="gameover-heading">GAME OVER</h2>
+      <div id="final-round" class="final-round"></div>
+      <div id="final-score" class="final-score"></div>
+      <div id="final-rank" class="final-rank"></div>
+      <div class="embed-actions">
+        <button id="btn-share" type="button" class="btn-main">Share on X</button>
+        <a class="btn-main embed-more" href="https://games.aiforeveryoneshow.com/app.html" target="_blank" rel="noopener" data-external>All Games</a>
+      </div>
+      <p id="next-cd" class="embed-cd"></p>
+    </div>
+
+  </div>
+  <script src="../../daily.js"></script>
+  <script src="../game.js"></script>
+  <script>
+    // Links injected by Daily (e.g. "ALL GAMES" after today's puzzle is done) must leave the iframe.
+    document.querySelectorAll('.daily-hub-link').forEach(function (a) {
+      a.href = 'https://games.aiforeveryoneshow.com/echo/';
+      a.textContent = 'OPEN FULL GAME';
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.setAttribute('data-external', '');
+    });
+  </script>
+</body>
+</html>
