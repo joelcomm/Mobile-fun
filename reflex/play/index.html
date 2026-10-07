@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>window.ACUMEN_EMBED = true;</script>
+  <script src="../../x-embed.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Reflex — Acumen</title>
+  <!-- Compact ~480x480 player used ONLY inside the X Player Card iframe.
+       The shareable URL is ../x-card/ (it carries the card meta tags). -->
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://games.aiforeveryoneshow.com/reflex/x-card/">
+  <meta name="twitter:card" content="player">
+  <meta name="twitter:site" content="@joelcomm">
+  <meta name="twitter:title" content="Reflex — Acumen">
+  <meta name="twitter:description" content="Sort fast. Think faster. Play a quick round.">
+  <meta name="twitter:image" content="https://games.aiforeveryoneshow.com/reflex/x-card/card.png">
+  <meta name="twitter:image:alt" content="Reflex: a word flashes in the center and you tap left or right to sort it before the timer runs out.">
+  <meta name="twitter:player" content="https://games.aiforeveryoneshow.com/reflex/play/">
+  <meta name="twitter:player:width" content="480">
+  <meta name="twitter:player:height" content="480">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="embed.css">
+</head>
+<body class="embed">
+  <a href="https://games.aiforeveryoneshow.com/reflex/" target="_blank" rel="noopener" class="embed-brand" data-external>ACUMEN &middot; FULL GAME &#x2197;</a>
+  <div id="app">
+
+    <!-- Title Screen -->
+    <div id="title-screen">
+      <h1 class="game-title"><span class="title-icon">&#x26A1;</span> REFLEX</h1>
+      <p class="tagline">SORT FAST. THINK FASTER.</p>
+      <p class="embed-howto">Tap <span class="hl-left">left</span> or <span class="hl-right">right</span> to sort each word &middot; 3 lives &middot; it speeds up</p>
+      <button id="btn-start" class="btn-main">GO</button>
+      <p id="best-score" class="best-score"></p>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="hidden">
+      <div class="game-header">
+        <span id="score-label" class="score-label">0</span>
+        <span id="lives-label" class="lives-label"></span>
+      </div>
+      <div id="timer-bar" class="timer-bar">
+        <div id="timer-fill" class="timer-fill"></div>
+      </div>
+      <div class="arena">
+        <div class="word-zone">
+          <p id="category-hint" class="category-hint"></p>
+          <div id="word-display" class="word-display"></div>
+          <p id="flash-feedback" class="flash-feedback"></p>
+        </div>
+        <div class="choice-row">
+          <button id="btn-left" class="sort-btn sort-left">
+            <span id="label-left" class="sort-cat-label"></span>
+          </button>
+          <button id="btn-right" class="sort-btn sort-right">
+            <span id="label-right" class="sort-cat-label"></span>
+          </button>
+        </div>
+      </div>
+      <div id="streak-label" class="streak-label"></div>
+    </div>
+
+    <!-- Game Over -->
+    <div id="gameover-screen" class="hidden">
+      <h2 class="gameover-heading">TIME'S UP</h2>
+      <div id="final-score" class="final-score"></div>
+      <div id="final-rank" class="final-rank"></div>
+      <div id="final-stats" class="final-stats"></div>
+      <p id="next-cd"></p>
+      <div class="embed-actions">
+        <button id="btn-share" type="button" class="embed-btn">SHARE ON X</button>
+        <a class="embed-btn embed-more" href="https://games.aiforeveryoneshow.com/" target="_blank" rel="noopener" data-external>ALL GAMES</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="../../daily.js"></script>
+  <script src="../data.js"></script>
+  <script src="../game.js"></script>
+</body>
+</html>

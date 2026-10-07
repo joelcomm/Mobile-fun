@@ -1,0 +1,75 @@
+/* Compact layout for the X Player Card iframe (~480x480, may be scaled down). */
+html, body { height: 100%; overflow: hidden; font-size: 16px; }
+
+#app {
+  max-width: 480px;
+  height: 100vh;
+  height: 100dvh;
+  padding: 40px 16px 12px;
+}
+
+.embed-brand {
+  position: fixed;
+  top: 8px;
+  right: 10px;
+  z-index: 50;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: var(--text-dim);
+  text-decoration: none;
+  padding: 5px 9px;
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  background: #fff;
+}
+
+/* Title screen */
+.embed #title-screen { overflow-y: auto; min-height: 0; }
+.embed .daily-hdr { margin-bottom: 8px; }
+.embed .title-icon { font-size: inherit; margin: 0; }
+.embed .game-title { font-size: clamp(30px, 10vmin, 48px); letter-spacing: 5px; white-space: nowrap; }
+.embed .tagline { font-size: 12px; letter-spacing: 2px; margin-top: 4px; }
+.embed-howto { font-size: 14px; line-height: 1.5; color: var(--text); margin: 18px 0 20px; max-width: 340px; }
+.embed-howto .hl-left { color: var(--left-color); font-weight: 800; }
+.embed-howto .hl-right { color: var(--right-color); font-weight: 800; }
+.embed .btn-main { min-height: 52px; font-size: 16px; }
+.embed .best-score { margin-top: 8px; }
+
+/* Game screen */
+.embed #game-screen { overflow: hidden; }
+.embed .score-label { font-size: 24px; }
+.embed .lives-label { font-size: 18px; }
+.embed .timer-bar { margin-bottom: 8px; }
+.embed .arena { gap: 16px; min-height: 0; }
+.embed .word-display { font-size: clamp(24px, 8vmin, 36px); }
+.embed .flash-feedback { margin-top: 6px; }
+.embed .sort-btn { height: clamp(52px, 15vmin, 72px); }
+.embed .sort-cat-label { font-size: 14px; }
+.embed .streak-label { margin-top: 4px; }
+
+/* Game over */
+.embed #gameover-screen { justify-content: center; }
+.embed .gameover-heading { font-size: 22px; margin-bottom: 4px; }
+.embed .final-score { font-size: 48px; margin-bottom: 2px; line-height: 1.1; }
+.embed .final-rank { font-size: 15px; margin-bottom: 8px; }
+.embed .final-stats { font-size: 13px; line-height: 1.5; margin-bottom: 8px; }
+.embed #next-cd { font-size: 13px; font-weight: 700; letter-spacing: 2px; color: var(--accent); margin-bottom: 10px; }
+.embed-actions { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.embed-btn {
+  display: inline-flex; align-items: center; text-decoration: none;
+  background: var(--accent); color: #fff; font-family: inherit;
+  font-size: 14px; font-weight: 800; letter-spacing: 2px; border: none;
+  border-radius: 10px; padding: 12px 20px; text-transform: uppercase; cursor: pointer;
+}
+.embed-btn:active { transform: scale(0.97); opacity: 0.9; }
+.embed-more { background: #efeff3; color: var(--text); }
+
+/* Small iframes (X scales the card down on narrow timelines) */
+@media (max-height: 400px) {
+  #app { padding-top: 34px; }
+  .embed-howto { margin: 10px 0 12px; font-size: 13px; }
+  .embed .final-score { font-size: 40px; }
+  .embed .final-stats { line-height: 1.35; }
+  .embed .arena { gap: 10px; }
+}
