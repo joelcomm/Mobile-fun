@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script>window.ACUMEN_EMBED = true;</script><script src="../../x-embed.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Lineup — Acumen</title>
+  <!-- Compact ~480x480 player used ONLY inside the X Player Card iframe.
+       The shareable URL is ../x-card/ (it carries the card meta tags). -->
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://games.aiforeveryoneshow.com/lineup/x-card/">
+  <meta name="twitter:card" content="player">
+  <meta name="twitter:site" content="@joelcomm">
+  <meta name="twitter:title" content="Lineup — Acumen">
+  <meta name="twitter:description" content="Put five things in order. Trust your gut. Play a quick round.">
+  <meta name="twitter:image" content="https://games.aiforeveryoneshow.com/lineup/x-card/card.png">
+  <meta name="twitter:player" content="https://games.aiforeveryoneshow.com/lineup/play/">
+  <meta name="twitter:player:width" content="480">
+  <meta name="twitter:player:height" content="480">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="embed.css">
+</head>
+<body class="embed">
+  <a href="https://games.aiforeveryoneshow.com/lineup/" target="_blank" rel="noopener" class="embed-brand" data-external>ACUMEN &middot; FULL GAME &#x2197;</a>
+  <div id="app">
+
+    <!-- Title Screen -->
+    <div id="title-screen">
+      <h1 class="game-title"><span class="title-icon">&#x1F4CA;</span> LINEUP</h1>
+      <p class="tagline">PUT THEM IN ORDER. TRUST YOUR GUT.</p>
+      <p class="embed-howto"><span class="hl">Drag</span> 5 items into order &middot; 3 tries a round &middot; 5 rounds</p>
+      <button id="btn-start" class="btn-main">START LINEUP</button>
+      <p id="best-score" class="best-score"></p>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="hidden">
+      <div class="game-header">
+        <span id="round-label" class="round-label">1 / 10</span>
+        <span id="score-label" class="score-label">0</span>
+      </div>
+      <div id="progress-bar" class="progress-bar"></div>
+      <p id="category-label" class="category-label"></p>
+      <p id="instruction-label" class="instruction-label"></p>
+      <div id="attempts-label" class="attempts-label"></div>
+      <div id="sortable-list" class="sortable-list"></div>
+      <button id="btn-lock" class="btn-main btn-lock">LOCK IN</button>
+      <div id="round-feedback" class="round-feedback hidden">
+        <p id="rf-text" class="rf-text"></p>
+        <div id="rf-correct-order" class="rf-correct-order"></div>
+        <button id="btn-next-round" class="btn-main btn-next-round">NEXT</button>
+      </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameover-screen" class="hidden">
+      <h2 class="gameover-heading">ALL DONE</h2>
+      <div id="final-score" class="final-score"></div>
+      <div id="final-rank" class="final-rank"></div>
+      <div id="final-stats" class="final-stats"></div>
+      <div class="embed-actions">
+        <button id="btn-share" class="btn-main">SHARE ON X</button>
+        <a class="btn-main embed-more" href="https://games.aiforeveryoneshow.com/" target="_blank" rel="noopener" data-external>ALL GAMES</a>
+      </div>
+      <p id="next-cd" class="embed-cd"></p>
+    </div>
+
+  </div>
+  <script src="../../daily.js"></script>
+  <script src="../puzzles.js"></script>
+  <script src="../game.js"></script>
+</body>
+</html>
