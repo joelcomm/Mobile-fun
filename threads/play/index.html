@@ -43,7 +43,7 @@
   </script>
 </head>
 <body class="embed">
-  <a href="https://games.aiforeveryoneshow.com/threads/" target="_blank" rel="noopener" class="embed-brand">ACUMEN &middot; FULL GAME &#x2197;</a>
+  <a href="https://games.aiforeveryoneshow.com/threads/" target="_blank" rel="noopener" class="embed-brand" data-external>ACUMEN &middot; FULL GAME &#x2197;</a>
   <div id="app">
 
     <!-- Title Screen -->
@@ -100,7 +100,7 @@
         <div id="overlay-stats"></div>
         <div class="embed-actions">
           <button id="btn-share" class="btn btn-primary">Share on X</button>
-          <a class="btn embed-more" href="https://games.aiforeveryoneshow.com/app.html" target="_blank" rel="noopener">All Games</a>
+          <a class="btn embed-more" href="https://games.aiforeveryoneshow.com/app.html" target="_blank" rel="noopener" data-external>All Games</a>
         </div>
         <p id="next-cd"></p>
       </div>
@@ -118,6 +118,7 @@
   <script src="../../daily.js"></script>
   <script src="../puzzles.js"></script>
   <script src="../app.js"></script>
+  <script src="open-external.js"></script>
   <script>
     // Links injected by Daily (e.g. "ALL GAMES" after today's puzzle is done) must leave the iframe.
     document.querySelectorAll('.daily-hub-link').forEach(function (a) {
@@ -125,6 +126,7 @@
       a.textContent = 'OPEN FULL GAME';
       a.target = '_blank';
       a.rel = 'noopener';
+      a.setAttribute('data-external', '');
     });
   </script>
 </body>
