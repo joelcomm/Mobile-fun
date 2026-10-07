@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>window.ACUMEN_EMBED = true;</script>
+  <script src="../../x-embed.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Rank — Acumen</title>
+  <!-- Compact ~480x480 player used ONLY inside the X Player Card iframe.
+       The shareable URL is ../x-card/ (it carries the card meta tags). -->
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://games.aiforeveryoneshow.com/rank/x-card/">
+  <meta name="twitter:card" content="player">
+  <meta name="twitter:site" content="@joelcomm">
+  <meta name="twitter:title" content="Rank — Acumen">
+  <meta name="twitter:description" content="Four things, one hidden measure. Can you put them in order? Play a quick round.">
+  <meta name="twitter:image" content="https://games.aiforeveryoneshow.com/rank/x-card/card.png">
+  <meta name="twitter:image:alt" content="Rank: four cards — pineapple, cherry, pumpkin, lemon — to drag into order from lowest to highest on a hidden measure.">
+  <meta name="twitter:player" content="https://games.aiforeveryoneshow.com/rank/play/">
+  <meta name="twitter:player:width" content="480">
+  <meta name="twitter:player:height" content="480">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: { colors: { accent: '#c89818', surface: '#ffffff' } } }
+    };
+  </script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="embed.css">
+</head>
+<body class="embed">
+  <a href="https://games.aiforeveryoneshow.com/rank/" target="_blank" rel="noopener" class="embed-brand" data-external>ACUMEN &middot; FULL GAME &#x2197;</a>
+  <div id="root">
+    <div class="embed-loading">RANK</div>
+  </div>
+  <script src="../../daily.js"></script>
+  <script type="text/babel" src="../game.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+/* Compact layout for the X Player Card iframe (~480x480, may be scaled down).
+   The game (../game.js) renders with Tailwind classes + inline styles, so the
+   overrides below target its structure and need !important. */
+html, body { height: 100%; overflow: hidden; }
+/* the game's ALL GAMES button uses var(--accent), which the full game never defines */
+.embed { --accent: #c89818; }
+
+.embed-loading {
+  display: flex; align-items: center; justify-content: center; height: 100vh;
+  color: #c89818; font-weight: 900; font-size: 28px; letter-spacing: 8px;
+}
+
+.embed-brand {
+  position: fixed;
+  top: 8px;
+  right: 10px;
+  z-index: 60;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #6b6b80;
+  text-decoration: none;
+  padding: 5px 9px;
+  border: 1px solid #dddde4;
+  border-radius: 999px;
+  background: #fff;
+}
+
+/* App column */
+.embed #root > div {
+  height: 100vh !important;
+  height: 100dvh !important;
+  padding: 10px 14px 10px !important;
+}
+
+/* Header: RANK + streak, kept clear of the brand pill */
+.embed #root > div > div:first-child { margin-bottom: 6px; padding-right: 150px; justify-content: flex-start; gap: 12px; }
+.embed #root h1 { font-size: 24px; line-height: 28px; letter-spacing: 5px; }
+.embed #root h1 + span { font-size: 14px; }
+
+/* Metric / how-to */
+.embed #root > div > div:nth-child(2) { margin-bottom: 10px; }
+.embed #root > div > div:nth-child(2) > p:first-child { font-size: 10px; letter-spacing: 2px; margin-bottom: 2px; }
+.embed #root > div > div:nth-child(2) > p:last-child { font-size: 17px; line-height: 22px; }
+
+/* Cards (keep the 12px gap: the drag code assumes it) */
+.embed #root .flex-col.gap-3 { margin-bottom: 12px; }
+.embed #root .select-none { padding-top: 9px; padding-bottom: 9px; }
+
+/* Submit */
+.embed #root > div > button { padding-top: 12px; padding-bottom: 12px; font-size: 16px; flex-shrink: 0; }
+
+/* Score row: score | correct order | Share on X, on one line */
+.embed #root > div > .anim-fade.text-center {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  grid-template-rows: auto auto;
+  align-items: center;
+  column-gap: 14px;
+  margin-bottom: 12px;
+}
+.embed #root > div > .anim-fade.text-center > div:first-child { grid-row: 1 / 3; margin: 0; line-height: 1; }
+.embed #root > div > .anim-fade.text-center > div:first-child > span:first-child { font-size: 40px; }
+.embed #root > div > .anim-fade.text-center > p { grid-column: 2; margin: 0 0 2px; font-size: 9px; letter-spacing: 2px; }
+.embed #root > div > .anim-fade.text-center > div.flex { grid-column: 2; gap: 8px; }
+.embed #root > div > .anim-fade.text-center > div.flex > div { gap: 0; }
+.embed #root > div > .anim-fade.text-center > div.flex .text-xl { font-size: 17px; line-height: 22px; }
+.embed #root .rank-share {
+  grid-column: 3; grid-row: 1 / 3;
+  margin: 0; width: 100%;
+  padding: 12px 8px; font-size: 14px; letter-spacing: 2px; white-space: nowrap;
+}
+
+/* Fact + countdown (reachable by scrolling the result) */
+.embed #root .anim-slide { padding: 12px 14px; margin-bottom: 12px; }
+.embed #root .anim-slide > p:first-child { font-size: 22px; margin-bottom: 6px; }
+.embed #root .anim-slide > p:last-child { font-size: 13px; line-height: 1.45; }
+.embed #root > div > .anim-fade.flex-col { gap: 10px; padding-bottom: 4px; }
+.embed #root > div > .anim-fade.flex-col a { padding: 10px 24px !important; font-size: 14px !important; }
+
+/* Small iframes (X scales the card down on narrow timelines) */
+@media (max-height: 420px) {
+  .embed #root > div { padding-top: 8px !important; padding-bottom: 8px !important; }
+  .embed #root > div > div:first-child { margin-bottom: 2px; }
+  .embed #root h1 { font-size: 20px; line-height: 24px; }
+  .embed #root > div > div:nth-child(2) { margin-bottom: 6px; }
+  .embed #root > div > div:nth-child(2) > p:last-child { font-size: 15px; line-height: 19px; }
+  .embed #root .flex-col.gap-3 { margin-bottom: 8px; }
+  .embed #root .select-none { padding-top: 5px; padding-bottom: 5px; }
+  .embed #root .select-none > span:nth-child(2) { font-size: 1.2rem; }
+  .embed #root .select-none > span:nth-child(3) { font-size: 13px; line-height: 1.2; }
+  .embed #root > div > button { padding-top: 9px; padding-bottom: 9px; font-size: 15px; }
+  .embed #root > div > .anim-fade.text-center > div:first-child > span:first-child { font-size: 32px; }
+  /* result: keep Share on X in view when names wrap */
+  .embed #root > div:has(.rank-share) > div:nth-child(2) > p:first-child { display: none; }
+  .embed #root > div:has(.rank-share) .select-none { padding-top: 3px; padding-bottom: 3px; }
+}
+@media (max-width: 400px) {
+  .embed #root > div { padding-left: 10px !important; padding-right: 10px !important; }
+  .embed #root > div > div:first-child { padding-right: 140px; }
+  .embed #root > div > .anim-fade.text-center { column-gap: 10px; }
+  .embed #root > div > .anim-fade.text-center > div.flex { gap: 5px; }
+  .embed #root .rank-share { font-size: 12px; letter-spacing: 1px; padding: 10px 6px; }
+}
