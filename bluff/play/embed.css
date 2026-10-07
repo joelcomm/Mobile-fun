@@ -1,0 +1,132 @@
+/* Compact layout for the X Player Card iframe (~480x480, may be scaled down). */
+html, body { height: 100%; overflow: hidden; font-size: 16px; }
+
+#app {
+  max-width: 480px;
+  height: 100vh;
+  height: 100dvh;
+  padding: 40px 14px 12px;
+}
+
+.embed-brand {
+  position: fixed;
+  top: 8px;
+  right: 10px;
+  z-index: 50;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #6b6b80;
+  text-decoration: none;
+  padding: 5px 9px;
+  border: 1px solid #dddde4;
+  border-radius: 999px;
+  background: #fff;
+}
+
+/* Title screen */
+.embed #title-screen { overflow-y: auto; min-height: 0; }
+.embed .daily-hdr { margin-bottom: 10px; }
+.embed .daily-done { margin: 8px 0; padding: 10px; }
+.embed .daily-done-score { font-size: 26px; }
+.embed .daily-hub-link { margin-top: 8px; padding: 10px 24px; font-size: 14px; }
+.embed .title-icon { font-size: inherit; margin: 0; }
+.embed .game-title { font-size: clamp(30px, 10vmin, 46px); letter-spacing: 5px; white-space: nowrap; }
+.embed .tagline { font-size: 12px; letter-spacing: 2px; margin-top: 4px; }
+.embed-howto { font-size: 13px; color: var(--text-dim); margin: 18px 0; line-height: 1.5; }
+.embed-howto strong { color: var(--accent); }
+.embed .btn-main { min-height: 50px; font-size: 16px; }
+.embed .best-score { margin-top: 8px; font-size: 12px; }
+
+/* Game screen: statements scroll only if a round is unusually long; feedback stays pinned */
+.embed #game-screen { overflow: hidden; }
+.embed .game-header { margin-bottom: 6px; }
+.embed .round-label { font-size: 12px; }
+.embed .score-label { font-size: 18px; }
+.embed .streak-bar { margin-bottom: 10px; }
+.embed .topic-label { font-size: 18px; margin-bottom: 2px; }
+.embed .instruction-label { font-size: 11px; margin-bottom: 10px; }
+.embed .statements {
+  gap: 8px;
+  flex: 0 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-top: 8px; /* room for the TRUE / THE BLUFF badges */
+}
+.embed .stmt-btn {
+  position: relative;
+  padding: 10px 12px;
+  font-size: 14px;
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+.embed .stmt-btn.locked { opacity: 0.75; }
+/* Badges sit on the card's top edge instead of adding a line under each statement */
+.embed .stmt-label {
+  position: absolute;
+  top: -8px;
+  right: 10px;
+  margin: 0;
+  font-size: 9px;
+  padding: 2px 6px;
+  background: #fff;
+  border: 1px solid currentColor;
+}
+
+/* Once answered, drop the instruction line to make room for the feedback */
+.embed #game-screen:has(#feedback:not(.hidden)) .instruction-label { display: none; }
+.embed .feedback { margin-top: 8px; flex-shrink: 0; }
+.embed-feedback-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.embed .feedback-result { font-size: 18px; margin: 0; }
+.embed .btn-next { width: auto; max-width: none; min-height: 40px; padding: 0 22px; font-size: 14px; margin: 0; }
+.embed .feedback-explain {
+  font-size: 12.5px;
+  line-height: 1.45;
+  margin: 6px 0 0;
+  text-align: left;
+  max-height: 5.8em; /* 4 lines; longer explanations scroll */
+  overflow-y: auto;
+}
+
+/* Game over */
+.embed #gameover-screen { justify-content: center; }
+.embed .gameover-heading { font-size: 22px; margin-bottom: 4px; }
+.embed .final-score { font-size: 52px; margin-bottom: 2px; line-height: 1.1; }
+.embed .final-rank { font-size: 16px; margin-bottom: 8px; }
+.embed .final-stats { font-size: 13px; line-height: 1.6; margin-bottom: 14px; }
+.embed-actions { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.embed-actions .btn-main {
+  width: auto;
+  min-height: 46px;
+  padding: 0 20px;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+.embed .embed-more { background: #efefe6; color: var(--text); }
+.embed #next-cd { font-size: 13px; font-weight: 700; letter-spacing: 2px; color: var(--accent); margin-top: 12px; }
+
+/* Small iframes (X scales the card down on narrow timelines) */
+@media (max-height: 400px) {
+  #app { padding: 34px 10px 8px; }
+  .embed .tagline { letter-spacing: 1px; font-size: 11px; }
+  /* Tiny cards: after answering keep only the pick and the bluff, so the result fits without scrolling */
+  .embed .stmt-btn.locked:not(.correct-pick):not(.wrong-pick):not(.reveal-lie) { display: none; }
+  .embed .game-title { font-size: 30px; }
+  .embed-howto { margin: 10px 0; font-size: 12px; }
+  .embed .btn-main { min-height: 44px; }
+  .embed .streak-bar { margin-bottom: 6px; }
+  .embed .topic-label { font-size: 16px; }
+  .embed .instruction-label { margin-bottom: 4px; letter-spacing: 2px; }
+  .embed .stmt-btn { padding: 8px 10px; font-size: 13px; line-height: 1.35; }
+  .embed .statements { gap: 6px; }
+  .embed .feedback-explain { font-size: 12px; max-height: 4.4em; }
+  .embed .btn-next { min-height: 36px; }
+  .embed .gameover-heading { font-size: 18px; }
+  .embed .final-score { font-size: 40px; }
+  .embed .final-stats { margin-bottom: 10px; }
+  .embed-actions .btn-main { min-height: 40px; padding: 0 16px; font-size: 13px; }
+  .embed #next-cd { margin-top: 8px; font-size: 12px; }
+}

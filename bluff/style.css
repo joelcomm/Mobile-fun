@@ -315,3 +315,6 @@ html, body {
   .stmt-btn { padding: 16px 18px; font-size: 16px; }
   .topic-label { font-size: 20px; }
 }
+
+/* ---- Share on X (game over) ---- */
+#gameover-screen .btn-share { min-height: 0; font-size: 16px; padding: 14px 32px; margin-bottom: 12px; }

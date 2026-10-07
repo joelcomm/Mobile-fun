@@ -19,10 +19,23 @@
     finalScore: document.getElementById('final-score'),
     finalRank: document.getElementById('final-rank'),
     finalStats: document.getElementById('final-stats'),
-    bestScore: document.getElementById('best-score')
+    bestScore: document.getElementById('best-score'),
+    btnShare: document.getElementById('btn-share')
   };
 
   let state = {};
+  let lastResult = null; // { correct, score } for the Share on X button
+
+  // Spoiler-free: only the player's own tally, never topics, statements or explanations.
+  function shareText(r) {
+    return 'Can you spot the lie? I caught ' + r.correct + '/' + TOTAL_ROUNDS +
+      ' bluffs on today\'s Bluff (' + r.score + ' pts). Can you beat it?';
+  }
+
+  function shareToX() {
+    if (!lastResult || !window.AcumenX) return;
+    AcumenX.postToX(shareText(lastResult), AcumenX.cardUrl('bluff'));
+  }
 
   function init() {
     Daily.injectDailyInfo('#title-screen', 'bluff');
@@ -30,12 +43,16 @@
     dom.btnStart.addEventListener('click', startGame);
     dom.btnNext.addEventListener('click', nextRound);
     dom.statements.addEventListener('click', handlePick);
+    if (dom.btnShare) dom.btnShare.addEventListener('click', shareToX);
 
     var completed = Daily.getDailyResult('bluff');
     if (completed) {
       dom.finalScore.textContent = completed.score;
       dom.finalRank.textContent = completed.rank || '';
       dom.finalStats.innerHTML = completed.stats || '';
+      var m = /^(\d+)\s*\/\s*\d+/.exec(String(completed.stats || ''));
+      lastResult = { correct: m ? parseInt(m[1], 10) : 0, score: completed.score };
+      if (!m && dom.btnShare) dom.btnShare.classList.add('hidden');
       dom.streakBar.style.setProperty('--progress', '100%');
       showScreen('gameover');
       function tickCd() {
@@ -184,6 +201,7 @@
     showScreen('gameover');
 
     dom.finalScore.textContent = state.score;
+    lastResult = { correct: state.correctCount, score: state.score };
 
     const pct = Math.round((state.correctCount / TOTAL_ROUNDS) * 100);
     let rank;
