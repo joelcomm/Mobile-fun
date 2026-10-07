@@ -23,7 +23,8 @@
     finalScore: document.getElementById('final-score'),
     finalRank: document.getElementById('final-rank'),
     finalStats: document.getElementById('final-stats'),
-    bestScore: document.getElementById('best-score')
+    bestScore: document.getElementById('best-score'),
+    btnShare: document.getElementById('btn-share')
   };
 
   let state = {};
@@ -36,6 +37,7 @@
     dom.btnLock.addEventListener('click', lockIn);
     dom.btnNextRound.addEventListener('click', nextRound);
     setupDrag();
+    if (dom.btnShare) dom.btnShare.addEventListener('click', shareResult);
 
     var completed = Daily.getDailyResult('lineup');
     if (completed) {
@@ -266,6 +268,15 @@
     }
     tickCd();
     setInterval(tickCd, 1000);
+  }
+
+  // Spoiler-free share text: score + rank only, never the items or their order.
+  function shareResult() {
+    var score = dom.finalScore.textContent || '0';
+    var rank = dom.finalRank.textContent;
+    var text = 'Can you put them in order? I scored ' + score + '/' + (ROUNDS * 300) +
+      " on today's Lineup" + (rank ? ' (' + rank + ')' : '') + '. Can you beat it?';
+    if (window.AcumenX) AcumenX.postToX(text, AcumenX.cardUrl('lineup'));
   }
 
   // ---- Touch drag-to-reorder ----
