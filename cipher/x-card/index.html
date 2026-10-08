@@ -4,6 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cipher — Acumen</title>
+  <!-- People go straight to the full game. Card readers (X, Slack, iMessage...) don't run
+       scripts, so they still see the meta tags below. Add ?stay to view this page itself. -->
+  <script>
+    if (!/[?&]stay\b/.test(location.search) && !/bot|crawl|spider|slurp|preview|facebookexternalhit|embedly/i.test(navigator.userAgent)) {
+      location.replace('../');
+    }
+  </script>
   <script src="../../x-embed.js"></script>
   <meta name="description" content="Crack the code, decode the quote. Play a quick round of Cipher, the daily quote-decoding puzzle from Acumen.">
   <link rel="canonical" href="https://games.aiforeveryoneshow.com/cipher/x-card/">
