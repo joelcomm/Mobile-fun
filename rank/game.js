@@ -2785,6 +2785,8 @@
     function todayKey() { return new Date().toISOString().slice(0, 10); }
 
     function loadResult() {
+      // Trust the shared daily record too, so a day-number restart in daily.js starts Rank fresh
+      if (typeof Daily !== 'undefined' && !Daily.getDailyResult('rank')) return null;
       try { return JSON.parse(localStorage.getItem('rank_result_' + todayKey())); }
       catch (e) { return null; }
     }
