@@ -1,5 +1,5 @@
 // Bump the version whenever cached game files change, or returning visitors keep the old copies.
-var CACHE_NAME = 'acumen-v3';
+var CACHE_NAME = 'acumen-v4';
 
 var ASSETS = [
   '/',
