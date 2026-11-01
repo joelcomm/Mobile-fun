@@ -6,3 +6,9 @@ android/
 *.xcworkspace
 *.xcuserdata
 Pods/
+
+# added 2026-11-01: secrets, build caches, macOS junk
+.env
+.env.*
+.next/
+Icon?

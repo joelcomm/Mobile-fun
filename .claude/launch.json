@@ -1,0 +1,35 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "acumen-static",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8934"],
+      "port": 8934
+    },
+    {
+      "name": "acumen-static-2",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8935"],
+      "port": 8935
+    },
+    {
+      "name": "acumen-nocache",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["/private/tmp/claude-501/-Users-joelcomm-Desktop-Mobile-fun/57a7ea56-696e-4c17-a0ec-00931296aa66/scratchpad/nocache_server.py"],
+      "port": 8936
+    },
+    {
+      "name": "alibi-csp",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["/private/tmp/claude-501/-Users-joelcomm-Desktop-Mobile-fun/57a7ea56-696e-4c17-a0ec-00931296aa66/scratchpad/csp_server.py", "/Users/joelcomm/Desktop/Mobile-fun/alibi", "8939"],
+      "port": 8939
+    },
+    {
+      "name": "acumen-fresh",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["/private/tmp/claude-501/-Users-joelcomm-Desktop-Mobile-fun/57a7ea56-696e-4c17-a0ec-00931296aa66/scratchpad/nocache_server_8938.py"],
+      "port": 8938
+    }
+  ]
+}

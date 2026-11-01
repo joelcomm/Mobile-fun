@@ -5,9 +5,9 @@
   var PENALTY_WRONG = 20;
   var PENALTY_HINT = 15;
   var SCORE_FLOOR = 10;
-  var GAME_KEY = 'threads';
 
   var puzzle, score, guessesLeft, hintsUsed, guesses, solved, hintLetters;
+  var paused = false;
 
   var $titleScreen = document.getElementById('title-screen');
   var $gameScreen = document.getElementById('game-screen');
@@ -18,19 +18,40 @@
   var $btnGuess = document.getElementById('btn-guess');
   var $btnHint = document.getElementById('btn-hint');
   var $btnStart = document.getElementById('btn-start');
-  var $btnShare = document.getElementById('btn-share');
   var $btnCloseHelp = document.getElementById('btn-close-help');
   var $scoreValue = document.getElementById('score-value');
   var $hintDisplay = document.getElementById('hint-display');
   var $hintText = document.getElementById('hint-text');
   var $mistakeDots = document.getElementById('mistake-dots');
 
-  Daily.injectDailyInfo('#title-screen', GAME_KEY);
+  // ── Playables boot sequence ────────────────────────────────────────────
+  // First frame (title screen) is already painted by the time this script
+  // runs, so tell the host immediately, then load save data before letting
+  // the player interact.
+  PlayablesSDK.firstFrameReady();
+
+  Daily.init().then(function () {
+    Daily.injectDailyInfo('#title-screen');
+    $btnStart.disabled = false;
+    PlayablesSDK.gameReady();
+  });
+
+  PlayablesSDK.onPause(function () {
+    paused = true;
+    stopCountdown();
+    if (toastTimer) { clearTimeout(toastTimer); toastTimer = null; }
+    Daily.pauseAll();
+  });
+
+  PlayablesSDK.onResume(function () {
+    paused = false;
+    if (overlayCountdownActive) startCountdown();
+    Daily.resumeAll();
+  });
 
   $btnStart.addEventListener('click', startGame);
   $btnGuess.addEventListener('click', submitGuess);
   $btnHint.addEventListener('click', useHint);
-  $btnShare.addEventListener('click', shareResult);
   $btnCloseHelp.addEventListener('click', function () {
     $helpOverlay.classList.add('hidden');
   });
@@ -44,10 +65,12 @@
   });
 
   function startGame() {
+    if (paused) return;
+
     var deals = Daily.dealFromDeck(PUZZLES, 1);
     puzzle = deals[0];
 
-    var progress = Daily.getProgress(GAME_KEY);
+    var progress = Daily.getProgress();
     if (progress && progress.puzzleId === puzzle.id) {
       score = progress.score;
       guessesLeft = progress.guessesLeft;
@@ -139,7 +162,7 @@
   }
 
   function submitGuess() {
-    if (solved || guessesLeft <= 0) return;
+    if (paused || solved || guessesLeft <= 0) return;
 
     var guess = $input.value.trim().toUpperCase();
     if (!guess) return;
@@ -164,12 +187,12 @@
       }
       showLinks();
 
-      Daily.saveDailyResult(GAME_KEY, score, {
+      Daily.saveDailyResult(score, {
         guesses: guesses.length,
         hints: hintsUsed,
         answer: puzzle.answer
       });
-      Daily.clearProgress(GAME_KEY);
+      Daily.clearProgress();
 
       setTimeout(function () { showOverlay(true); }, 800);
     } else {
@@ -191,12 +214,12 @@
         $btnGuess.disabled = true;
         $btnHint.disabled = true;
 
-        Daily.saveDailyResult(GAME_KEY, 0, {
+        Daily.saveDailyResult(0, {
           guesses: guesses.length,
           hints: hintsUsed,
           answer: puzzle.answer
         });
-        Daily.clearProgress(GAME_KEY);
+        Daily.clearProgress();
 
         setTimeout(function () { showOverlay(false); }, 600);
       } else {
@@ -212,7 +235,7 @@
   }
 
   function useHint() {
-    if (solved || guessesLeft <= 0) return;
+    if (paused || solved || guessesLeft <= 0) return;
 
     var answer = puzzle.answer;
     var unrevealed = [];
@@ -233,7 +256,7 @@
   }
 
   function saveProgress() {
-    Daily.saveProgress(GAME_KEY, {
+    Daily.saveProgress({
       puzzleId: puzzle.id,
       score: score,
       guessesLeft: guessesLeft,
@@ -242,6 +265,21 @@
       solved: solved,
       hintLetters: hintLetters
     });
+  }
+
+  var overlayCountdownActive = false;
+  var countdownTimer = null;
+
+  function startCountdown() {
+    var $cd = document.getElementById('next-cd');
+    if (!$cd) return;
+    function tick() { $cd.textContent = 'Next puzzle in ' + Daily.formatCountdown(); }
+    tick();
+    countdownTimer = setInterval(tick, 1000);
+  }
+
+  function stopCountdown() {
+    if (countdownTimer) { clearInterval(countdownTimer); countdownTimer = null; }
   }
 
   function showOverlay(won) {
@@ -272,36 +310,12 @@
 
     var statsText = guesses.length + ' guess' + (guesses.length === 1 ? '' : 'es');
     if (hintsUsed > 0) statsText += ' &middot; ' + hintsUsed + ' hint' + (hintsUsed === 1 ? '' : 's');
-    var streak = Daily.getStreak(GAME_KEY);
+    var streak = Daily.getStreak();
     if (streak > 0) statsText += ' &middot; ' + streak + ' day streak';
     $stats.innerHTML = statsText;
 
-    var $cd = document.getElementById('next-cd');
-    function tick() { $cd.textContent = 'Next puzzle in ' + Daily.formatCountdown(); }
-    tick();
-    setInterval(tick, 1000);
-  }
-
-  function shareResult() {
-    var won = solved;
-    var finalScore = won ? score : 0;
-    var date = Daily.getDateString();
-
-    var text = 'Missing Link — ' + date + '\n';
-    text += won ? 'Linked!' : 'Missing!';
-    text += ' Score: ' + finalScore + '\n';
-    text += puzzle.cues.join(' · ') + ' → ' + (won ? puzzle.answer : '???') + '\n';
-    text += guesses.length + ' guess' + (guesses.length === 1 ? '' : 'es');
-    if (hintsUsed > 0) text += ', ' + hintsUsed + ' hint' + (hintsUsed === 1 ? '' : 's');
-    text += '\nPlay at acumen.fun';
-
-    if (navigator.share) {
-      navigator.share({ text: text }).catch(function () {});
-    } else if (navigator.clipboard) {
-      navigator.clipboard.writeText(text).then(function () {
-        showToast('Copied to clipboard!');
-      });
-    }
+    overlayCountdownActive = true;
+    if (!paused) startCountdown();
   }
 
   var toastTimer;
@@ -311,11 +325,8 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(function () {
       $toast.classList.add('hidden');
+      toastTimer = null;
     }, 2000);
-  }
-
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js');
   }
 
 })();

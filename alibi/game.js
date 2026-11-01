@@ -1,5 +1,6 @@
 (function () {
   var TOTAL_ROUNDS = 5;
+  var paused = false;
 
   var dom = {
     titleScreen: document.getElementById('title-screen'),
@@ -24,27 +25,57 @@
 
   var state = {};
 
+  // ── Playables boot sequence ────────────────────────────────────────────
+  // First frame (title screen) is already painted by the time this script
+  // runs, so tell the host immediately, then load save data before letting
+  // the player interact.
+  PlayablesSDK.firstFrameReady();
+
+  Daily.init().then(function () {
+    init();
+    dom.btnStart.disabled = false;
+    PlayablesSDK.gameReady();
+  });
+
+  PlayablesSDK.onPause(function () {
+    paused = true;
+    Daily.pauseAll();
+  });
+
+  PlayablesSDK.onResume(function () {
+    paused = false;
+    Daily.resumeAll();
+  });
+
+  function makeCountdown() {
+    var timer = null;
+    function tick() {
+      dom.nextCd.innerHTML = '<span style="display:block;font-size:11px;letter-spacing:2px;color:var(--text-dim)">NEW PUZZLE IN</span>' + Daily.formatCountdown();
+    }
+    function start() { tick(); timer = setInterval(tick, 1000); }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    return { start: start, stop: stop };
+  }
+
   function init() {
-    Daily.injectDailyInfo('#title-screen', 'alibi');
+    Daily.injectDailyInfo('#title-screen');
     showBest();
     dom.btnStart.addEventListener('click', startGame);
     dom.btnNext.addEventListener('click', nextRound);
     dom.wordGrid.addEventListener('click', handlePick);
 
-    var completed = Daily.getDailyResult('alibi');
+    var completed = Daily.getDailyResult();
     if (completed) {
       dom.finalScore.textContent = completed.score;
       dom.finalRank.textContent = completed.rank || '';
       dom.finalStats.innerHTML = completed.stats || '';
       dom.progressBar.style.setProperty('--progress', '100%');
       showScreen('gameover');
-      function tickCd() {
-        dom.nextCd.innerHTML = '<span style="display:block;font-size:11px;letter-spacing:2px;color:#6b6b80;margin-bottom:4px">NEW PUZZLE IN</span>' + Daily.formatCountdown();
-      }
-      tickCd();
-      setInterval(tickCd, 1000);
+      var cd = makeCountdown();
+      Daily.registerTimer(cd);
+      cd.start();
     } else {
-      var progress = Daily.getProgress('alibi');
+      var progress = Daily.getProgress();
       if (progress) {
         state = {
           rounds: Daily.dealFromDeck(ALIBI_PUZZLES, TOTAL_ROUNDS),
@@ -68,11 +99,13 @@
   }
 
   function showBest() {
-    var b = localStorage.getItem('alibi-best');
-    if (b) dom.bestScore.textContent = 'BEST: ' + b;
+    var b = Daily.getBest();
+    if (b > 0) dom.bestScore.textContent = 'BEST: ' + b;
   }
 
   function startGame() {
+    if (paused) return;
+
     var rng = Daily.createRng(Daily.getDayNumber() * 9091);
     state = {
       rounds: Daily.dealFromDeck(ALIBI_PUZZLES, TOTAL_ROUNDS),
@@ -113,6 +146,7 @@
   }
 
   function handlePick(e) {
+    if (paused) return;
     var btn = e.target.closest('.word-btn');
     if (!btn || state.answered) return;
     state.answered = true;
@@ -150,12 +184,13 @@
   }
 
   function nextRound() {
+    if (paused) return;
     state.current++;
     if (state.current >= TOTAL_ROUNDS) {
-      Daily.clearProgress('alibi');
+      Daily.clearProgress();
       endGame();
     } else {
-      Daily.saveProgress('alibi', {
+      Daily.saveProgress({
         current: state.current,
         score: state.score,
         correctCount: state.correctCount
@@ -180,21 +215,15 @@
     dom.finalStats.innerHTML =
       state.correctCount + ' / ' + TOTAL_ROUNDS + ' culprits caught (' + pct + '%)';
 
-    Daily.saveDailyResult('alibi', state.score, {
+    Daily.saveDailyResult(state.score, {
       rank: rank,
       stats: dom.finalStats.innerHTML
     });
-    var prev = parseInt(localStorage.getItem('alibi-best') || '0');
-    if (state.score > prev) localStorage.setItem('alibi-best', state.score);
     showBest();
     dom.progressBar.style.setProperty('--progress', '100%');
 
-    function tickCd() {
-      dom.nextCd.innerHTML = '<span style="display:block;font-size:11px;letter-spacing:2px;color:#6b6b80;margin-bottom:4px">NEW PUZZLE IN</span>' + Daily.formatCountdown();
-    }
-    tickCd();
-    setInterval(tickCd, 1000);
+    var cd = makeCountdown();
+    Daily.registerTimer(cd);
+    cd.start();
   }
-
-  init();
 })();

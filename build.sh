@@ -13,6 +13,8 @@ mkdir -p www
 cp app.html www/index.html
 cp daily.js stats.html manifest.json sw.js www/
 cp icon-192.png icon-512.png www/ 2>/dev/null || true
+mkdir -p www/fonts
+cp fonts/*.woff2 www/fonts/ 2>/dev/null || true
 cp privacy.html support.html www/ 2>/dev/null || true
 
 GAMES="threads alibi bluff lineup echo cipher reflex sequence rank"
@@ -25,6 +27,10 @@ for dir in $GAMES; do
     cp "$dir"/*.css  "www/$dir/" 2>/dev/null || true
     cp "$dir"/*.png  "www/$dir/" 2>/dev/null || true
     cp "$dir"/*.json "www/$dir/" 2>/dev/null || true
+    if [ -d "$dir/fonts" ]; then
+      mkdir -p "www/$dir/fonts"
+      cp "$dir"/fonts/*.woff2 "www/$dir/fonts/" 2>/dev/null || true
+    fi
   fi
 done
 

@@ -6,14 +6,10 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#f8f8fa">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <title>Alibi</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <a href="../app.html" class="back-link"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><rect width="1024" height="1024" rx="224" fill="#131A2B"/><g transform="translate(512, 180)"><g fill="none" stroke="white" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"><line x1="-180" y1="660" x2="0" y2="0"/><line x1="180" y1="660" x2="0" y2="0"/><line x1="-100" y1="460" x2="100" y2="460"/></g><polygon points="0,-90 -85,30 0,-5 85,30" fill="#E8A317"/></g></svg><span>ACUMEN · HOME</span></a>
   <div id="app">
 
     <!-- Title Screen -->
@@ -26,7 +22,7 @@
         <p><span class="hl">One word</span> doesn't belong — it's the culprit.</p>
         <p><span class="hl">Tap</span> the word with no alibi.</p>
       </div>
-      <button id="btn-start" class="btn-main">START INVESTIGATION</button>
+      <button id="btn-start" class="btn-main" disabled>START INVESTIGATION</button>
       <p id="best-score" class="best-score"></p>
     </div>
 
@@ -54,12 +50,13 @@
       <div id="final-score" class="final-score"></div>
       <div id="final-rank" class="final-rank"></div>
       <div id="final-stats" class="final-stats"></div>
-      <p id="next-cd" style="font-size:14px;font-weight:700;letter-spacing:2px;color:var(--accent);margin-bottom:16px"></p>
-      <div style="text-align:center"><a href="../app.html" style="text-decoration:none;display:inline-block;background:var(--accent);color:#fff;font-family:inherit;font-size:16px;font-weight:800;letter-spacing:2px;border-radius:10px;padding:14px 32px;text-transform:uppercase">ALL GAMES</a></div>
+      <p id="next-cd" style="font-size:14px;font-weight:700;letter-spacing:2px;color:var(--accent)"></p>
     </div>
 
   </div>
-  <script src="../daily.js"></script>
+  <script src="https://www.youtube.com/game_api/v1"></script>
+  <script src="playables-sdk.js"></script>
+  <script src="daily.js"></script>
   <script src="puzzles.js"></script>
   <script src="game.js"></script>
 </body>

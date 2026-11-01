@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url('fonts/Inter-Variable.woff2') format('woff2');
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 :root {
@@ -29,18 +37,6 @@ html, body {
   height: 100vh; height: 100dvh; display: flex; flex-direction: column;
   overflow: hidden;
 }
-
-.back-link {
-  position: fixed; top: calc(env(safe-area-inset-top, 0px) + 12px); left: 12px; z-index: 999;
-  display: flex; align-items: center; gap: 8px;
-  text-decoration: none; padding: 6px 14px 6px 6px;
-  background: rgba(19, 26, 43, 0.9); border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  transition: transform 0.15s;
-}
-.back-link:active { transform: scale(0.95); }
-.back-link svg { width: 28px; height: 28px; border-radius: 6px; }
-.back-link span { font-family: 'Inter', -apple-system, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; color: rgba(255,255,255,0.9); }
 
 .hidden { display: none !important; }
 
