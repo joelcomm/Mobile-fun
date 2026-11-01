@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#f8f8fa">
+  <title>Stats — Acumen</title>
+  <link rel="stylesheet" href="acumen-ui.css">
+</head>
+<body>
+  <div id="app">
+    <div class="top">
+      <a href="index.html" class="statslink">‹ HOME</a>
+      <div class="meta" style="text-align:right"><h1 class="brand" style="font-size:22px;letter-spacing:4px">STATS</h1></div>
+    </div>
+
+    <div class="scorecard" style="display:block">
+      <div class="eyebrow" style="color:var(--gold)">ACUMEN RATING · 7-DAY AVERAGE</div>
+      <div style="display:flex;align-items:baseline;gap:12px;margin-top:6px"><div style="font-size:54px;font-weight:900;line-height:1" id="rating">0</div><div style="font-size:20px;font-weight:900;letter-spacing:1px" id="rating-title">Bystander</div></div>
+      <div class="chips"><span class="chip" id="s-streak"></span><span class="chip" id="s-closed"></span><span class="chip" id="s-longest"></span></div>
+    </div>
+
+    <div class="section"><span class="eyebrow">Last 14 days</span><span class="count">DAILY SCORE / 1000</span></div>
+    <div class="panel" style="margin-top:0"><div class="bars" id="bars"></div></div>
+
+    <div class="section"><span class="eyebrow">Career</span></div>
+    <div class="grid2" id="career"></div>
+
+    <div class="section"><span class="eyebrow">By game</span></div>
+    <div class="panel" style="margin-top:0" id="pergame"></div>
+
+    <div class="section"><span class="eyebrow">Ranks</span></div>
+    <div class="panel" style="margin-top:0"><div class="tiers" id="tiers"></div></div>
+
+    <div class="row" style="margin-top:16px"><button class="btn" id="btn-share">Share my score</button></div>
+    <div class="foot">STATS LIVE ON THIS DEVICE ONLY</div>
+  </div>
+  <script src="daily.js"></script>
+  <script src="acumen-core.js"></script>
+  <script>
+  (function () {
+    var A = AcumenCore;
+    function render() {
+      var st = A.stats();
+      document.getElementById('rating').textContent = st.rating;
+      document.getElementById('rating-title').textContent = st.ratingTitle;
+      document.getElementById('s-streak').textContent = '\uD83D\uDD25 ' + st.streaks.current + '-day streak';
+      document.getElementById('s-closed').textContent = '\u2705 ' + st.streaks.closed + ' cases-closed streak';
+      document.getElementById('s-longest').textContent = 'Best ' + st.streaks.longest + ' days';
+      var bars = '';
+      st.history.forEach(function (h, i) {
+        var cls = h.score === 0 ? 'bar zero' : (h.done === 4 ? 'bar full' : 'bar');
+        bars += '<div class="' + cls + '"><i style="height:' + Math.max(3, Math.round(h.score / 10)) + '%"></i><small>' + (i === 13 ? 'T' : '') + '</small></div>';
+      });
+      document.getElementById('bars').innerHTML = bars;
+      document.getElementById('career').innerHTML =
+        '<div class="stat"><b>' + st.daysPlayed + '</b><span>Days played</span></div>' +
+        '<div class="stat"><b>' + st.casesClosed + '</b><span>Cases closed</span></div>' +
+        '<div class="stat"><b>' + st.avgDaily + '</b><span>Avg daily score</span></div>' +
+        '<div class="stat"><b>' + st.bestDay + '</b><span>Best day</span></div>';
+      var pg = '';
+      st.perGame.forEach(function (g) {
+        pg += '<div class="pg"><div class="ico" style="background:' + g.color + '">' + g.icon + '</div><div class="n">' + g.name + '<small>' + g.plays + ' played \u00B7 best ' + g.best + '% \u00B7 ' + g.perfect + ' perfect</small></div><div class="avg">' + (g.plays ? g.avg + '%' : '\u2014') + '<small>AVG</small></div></div>';
+      });
+      document.getElementById('pergame').innerHTML = pg;
+      var tiers = '';
+      A.TITLES.forEach(function (t) { tiers += '<div class="' + (t.name === st.ratingTitle ? 'on' : '') + '">' + (t.name === st.ratingTitle ? '\u25B6 ' : '') + t.name + ' <span>\u2014 ' + t.min + '+</span></div>'; });
+      document.getElementById('tiers').innerHTML = tiers;
+    }
+    document.getElementById('btn-share').addEventListener('click', function () {
+      var st = A.stats();
+      A.share('My Acumen rating: ' + st.rating + ' (' + st.ratingTitle + ') \u00B7 \uD83D\uDD25 ' + st.streaks.current + '-day streak \u00B7 ' + st.casesClosed + ' cases closed');
+    });
+    A.ready().then(render); render();
+  })();
+  </script>
+</body>
+</html>

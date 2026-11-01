@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#f8f8fa">
+  <title>Acumen</title>
+  <link rel="stylesheet" href="acumen-ui.css">
+</head>
+<body>
+  <div id="loading-screen">
+    <div style="width:96px;height:96px"><svg style="width:100%;height:100%" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><rect width="1024" height="1024" rx="224" fill="#131A2B"/><g transform="translate(512, 180)"><g fill="none" stroke="white" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"><line x1="-180" y1="660" x2="0" y2="0"/><line x1="180" y1="660" x2="0" y2="0"/><line x1="-100" y1="460" x2="100" y2="460"/></g><polygon points="0,-90 -85,30 0,-5 85,30" fill="#E8A317"/></g></svg></div>
+    <div class="t">ACUMEN</div>
+    <div class="s">The Daily Case File</div>
+  </div>
+  <div id="app">
+    <div class="top">
+      <div class="logo"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><rect width="1024" height="1024" rx="224" fill="#131A2B"/><g transform="translate(512, 180)"><g fill="none" stroke="white" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"><line x1="-180" y1="660" x2="0" y2="0"/><line x1="180" y1="660" x2="0" y2="0"/><line x1="-100" y1="460" x2="100" y2="460"/></g><polygon points="0,-90 -85,30 0,-5 85,30" fill="#E8A317"/></g></svg></div>
+      <div class="meta">
+        <h1 class="brand">ACUMEN</h1>
+        <div class="sub" id="today-sub"></div>
+      </div>
+      <a href="stats.html" class="statslink">STATS</a>
+    </div>
+
+    <div class="scorecard">
+      <div class="ring">
+        <svg viewBox="0 0 120 120"><circle class="track" cx="60" cy="60" r="52"/><circle class="fill" id="ring-fill" cx="60" cy="60" r="52"/></svg>
+        <div class="num"><b id="score-num">0</b><span>OF 1000</span></div>
+      </div>
+      <div class="sc-right">
+        <div class="eyebrow" style="color:var(--gold)">TODAY&rsquo;S ACUMEN SCORE</div>
+        <div class="sc-title" id="score-title">Bystander</div>
+        <div class="sc-line" id="score-line"></div>
+        <div class="chips"><span class="chip" id="chip-streak">🔥 0-day streak</span><span class="chip" id="chip-rating">7-day rating 0</span></div>
+      </div>
+    </div>
+
+    <div class="section"><span class="eyebrow">Today&rsquo;s case file</span><span class="count" id="case-count"></span></div>
+    <div id="cases"></div>
+
+    <div class="row" style="margin-top:14px">
+      <button class="btn" id="btn-share" disabled>Share today&rsquo;s score</button>
+    </div>
+
+    <div class="panel">
+      <h3>Daily reminder</h3>
+      <div class="reminder">
+        <div class="txt"><b id="rem-label">Never miss a case</b><span id="rem-sub">Get a nudge when the new case file opens.</span></div>
+        <input type="time" id="rem-time" value="08:00">
+        <label class="switch"><input type="checkbox" id="rem-toggle"><span class="sl"></span></label>
+      </div>
+      <div class="note" id="rem-note"></div>
+    </div>
+
+    <div class="foot">NEW CASE FILE EVERY DAY AT MIDNIGHT UTC<br><span id="cd" style="color:var(--navy);font-weight:800"></span><br><br>FROM THE MAKERS OF THE <a href="https://aiforeveryoneshow.com" target="_blank" rel="noopener">AI FOR EVERYONE SHOW</a></div>
+  </div>
+
+  <script src="daily.js"></script>
+  <script src="acumen-core.js"></script>
+  <script>
+  (function () {
+    var A = AcumenCore;
+    var C = 2 * Math.PI * 52;
+    var fill = document.getElementById('ring-fill');
+    fill.style.strokeDasharray = C;
+    fill.style.strokeDashoffset = C;
+
+    function esc(s){return String(s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+
+    function render() {
+      var s = A.summary();
+      document.getElementById('today-sub').textContent = 'CASE #' + s.day + ' \u00B7 ' + Daily.getDateString().toUpperCase();
+      document.getElementById('score-num').textContent = s.score;
+      document.getElementById('score-title').textContent = s.score > 0 ? s.title : 'Case file open';
+      document.getElementById('score-line').textContent = s.done === s.total
+        ? 'Case closed. Come back tomorrow for four new ones.'
+        : (s.done === 0 ? 'Solve all four cases to build today\u2019s score.' : (s.total - s.done) + ' case' + (s.total - s.done === 1 ? '' : 's') + ' still open \u2014 ' + (s.max - s.score) + ' points on the table.');
+      document.getElementById('chip-streak').textContent = '\uD83D\uDD25 ' + s.streak + '-day streak';
+      document.getElementById('chip-rating').textContent = '7-day rating ' + s.rating;
+      document.getElementById('case-count').textContent = s.done + ' / ' + s.total + ' SOLVED';
+      requestAnimationFrame(function () { fill.style.strokeDashoffset = C * (1 - s.score / s.max); });
+
+      var html = '';
+      A.GAMES.forEach(function (g, i) {
+        var r = s.games[i];
+        html += '<a class="case' + (r.done ? ' done' : '') + '" href="' + g.path + '" style="--c:' + g.color + '">' +
+          '<div class="ico">' + g.icon + '</div>' +
+          '<div class="body"><div class="verb">' + esc(g.verb) + '</div><div class="name">' + esc(g.name) + '</div></div>' +
+          '<div class="state">' + (r.done ? '<div class="pts">+' + r.points + '<small>' + r.pct + '% \u2713</small></div>' : '<div class="go">PLAY \u203A</div>') + '</div></a>';
+      });
+      document.getElementById('cases').innerHTML = html;
+      document.getElementById('btn-share').disabled = s.done === 0;
+    }
+
+    document.getElementById('btn-share').addEventListener('click', function () { A.share(); });
+
+    // reminder UI
+    var tgl = document.getElementById('rem-toggle'), tm = document.getElementById('rem-time'), note = document.getElementById('rem-note');
+    function pad(n){return n<10?'0'+n:''+n;}
+    var cfg = A.getReminder();
+    tgl.checked = !!cfg.enabled; tm.value = pad(cfg.hour) + ':' + pad(cfg.minute);
+    if (!A.isNative()) note.textContent = 'Reminders are available in the iPhone app.';
+    function applyReminder() {
+      var p = tm.value.split(':');
+      A.setReminder(tgl.checked, parseInt(p[0], 10), parseInt(p[1], 10)).then(function (r) {
+        if (!r.ok && r.reason === 'denied') { tgl.checked = false; note.textContent = 'Notifications are off for Acumen. Turn them on in Settings > Notifications.'; }
+        else if (r.ok && tgl.checked) note.textContent = 'Reminder set for ' + tm.value + ' every day.';
+        else if (r.ok) note.textContent = 'Reminder off.';
+      });
+    }
+    tgl.addEventListener('change', applyReminder); tm.addEventListener('change', function () { if (tgl.checked) applyReminder(); });
+    if (cfg.enabled && A.isNative()) note.textContent = 'Reminder set for ' + tm.value + ' every day.';
+
+    function tick(){ document.getElementById('cd').textContent = 'NEXT CASE FILE IN ' + Daily.formatCountdown(); }
+    tick(); setInterval(tick, 1000);
+
+    A.ready().then(render); render();
+    document.addEventListener('visibilitychange', function(){ if(!document.hidden) render(); });
+    window.addEventListener('pageshow', render);
+
+    window.addEventListener('load', function () {
+      setTimeout(function () { var ls = document.getElementById('loading-screen'); if (ls) { ls.classList.add('fade-out'); setTimeout(function(){ ls.remove(); }, 600); } }, 700);
+    });
+  })();
+  </script>
+</body>
+</html>

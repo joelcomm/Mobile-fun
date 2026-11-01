@@ -1,0 +1,27 @@
+{
+	"appId": "com.acumengames.app",
+	"appName": "Acumen",
+	"webDir": "www",
+	"ios": {
+		"contentInset": "always",
+		"allowsLinkPreview": false,
+		"scrollEnabled": true
+	},
+	"plugins": {
+		"SplashScreen": {
+			"launchAutoHide": true,
+			"launchShowDuration": 600
+		},
+		"LocalNotifications": {
+			"iconColor": "#E8A317"
+		}
+	},
+	"packageClassList": [
+		"HapticsPlugin",
+		"LocalNotificationsPlugin",
+		"PreferencesPlugin",
+		"SharePlugin",
+		"SplashScreenPlugin",
+		"StatusBarPlugin"
+	]
+}
