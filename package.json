@@ -1,12 +1,13 @@
 {
-  "name": "ai-for-everyone-games",
-  "version": "1.0.0",
-  "description": "Free original daily games to challenge your brain",
+  "name": "acumen",
+  "version": "2.0.0",
+  "description": "Acumen: the daily case file. Four original daily games rolled into one Acumen Score.",
   "scripts": {
     "build": "bash build.sh",
     "cap:sync": "npm run build && npx cap sync ios",
     "cap:open": "npx cap open ios",
-    "cap:run": "npm run build && npx cap sync ios && npx cap open ios"
+    "cap:run": "npm run build && npx cap sync ios && npx cap open ios",
+    "build:rank": "babel --config-file ./rank/src/babel.config.json rank/src/app.jsx -o rank/app.js && tailwindcss -c rank/src/tailwind.config.js -i rank/src/tailwind.css -o rank/rank.css --minify"
   },
   "author": "Joel Comm",
   "license": "ISC",
@@ -14,11 +15,21 @@
   "dependencies": {
     "@capacitor/cli": "^8.4.0",
     "@capacitor/core": "^8.4.0",
+    "@capacitor/haptics": "^8.0.2",
     "@capacitor/ios": "^8.4.0",
+    "@capacitor/local-notifications": "^8.3.1",
+    "@capacitor/preferences": "^8.0.1",
+    "@capacitor/share": "^8.0.3",
     "@capacitor/splash-screen": "^8.0.1",
     "@capacitor/status-bar": "^8.0.2"
   },
   "devDependencies": {
-    "sharp": "^0.34.5"
+    "@babel/cli": "^8.0.6",
+    "@babel/core": "^8.0.9",
+    "@babel/preset-react": "^8.0.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^3.4.19"
   }
 }

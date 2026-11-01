@@ -215,6 +215,7 @@
     dom.finalStats.innerHTML =
       state.correctCount + ' / ' + TOTAL_ROUNDS + ' culprits caught (' + pct + '%)';
 
+    if (window.AcumenCore) AcumenCore.record('alibi', pct);
     Daily.saveDailyResult(state.score, {
       rank: rank,
       stats: dom.finalStats.innerHTML

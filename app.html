@@ -7,833 +7,124 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#f8f8fa">
   <title>Acumen</title>
-  <style>
-    @font-face {
-      font-family: 'Inter';
-      font-style: normal;
-      font-weight: 400 900;
-      font-display: swap;
-      src: url('fonts/Inter-Variable.woff2') format('woff2');
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
-    :root {
-      --bg: #f8f8fa;
-      --card: #ffffff;
-      --card-hover: #f0f0f5;
-      --border: #dddde4;
-      --text: #2a2a3e;
-      --text-dim: #6b6b80;
-      --white: #1a1a2e;
-      --accent: #1a9a45;
-      --safe-top: env(safe-area-inset-top, 0px);
-      --safe-bottom: env(safe-area-inset-bottom, 0px);
-
-      --clr-threads: #D97706;
-      --clr-alibi: #0D9488;
-      --clr-bluff: #DC2626;
-      --clr-lineup: #2563EB;
-      --clr-echo: #7C3AED;
-      --clr-cipher: #059669;
-      --clr-reflex: #EA580C;
-      --clr-sequence: #4F46E5;
-      --clr-rank: #DB2777;
-    }
-
-    html, body {
-      height: 100%;
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', -apple-system, sans-serif;
-      font-size: 18px;
-    }
-
-    #app {
-      max-width: 480px;
-      margin: 0 auto;
-      padding: 24px 20px;
-      padding-top: calc(24px + var(--safe-top));
-      padding-bottom: calc(24px + var(--safe-bottom));
-      min-height: 100dvh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* ─── Header gradient banner ─────────────────────────── */
-    header {
-      text-align: center;
-      margin-bottom: 32px;
-      padding-top: 24px;
-      position: relative;
-    }
-
-    header::before {
-      content: '';
-      position: absolute;
-      top: -24px;
-      left: -20px;
-      right: -20px;
-      height: 200px;
-      background: linear-gradient(180deg,
-        rgba(19, 26, 43, 0.04) 0%,
-        rgba(232, 163, 23, 0.03) 40%,
-        rgba(248, 248, 250, 0) 100%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    header > * { position: relative; z-index: 1; }
-
-    .app-logo {
-      width: 80px;
-      height: 80px;
-      margin: 0 auto 14px;
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: 0 4px 16px rgba(19, 26, 43, 0.3);
-    }
-
-    .app-logo svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    h1 {
-      font-size: 32px;
-      font-weight: 900;
-      letter-spacing: 4px;
-      color: #131A2B;
-    }
-
-    .subtitle {
-      font-size: 13px;
-      letter-spacing: 2px;
-      color: var(--text-dim);
-      margin-top: 8px;
-      line-height: 1.6;
-    }
-
-    .color-dots {
-      display: flex;
-      justify-content: center;
-      gap: 6px;
-      margin-top: 12px;
-    }
-
-    .color-dots .cdot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-    .section-header::before,
-    .section-header::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-    .section-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    .games {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      flex: 1;
-    }
-
-    .game-card {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-      background: var(--card);
-      border: 1px solid var(--border);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-      border-radius: 14px;
-      padding: 18px 20px;
-      transition: all 0.2s ease;
-      position: relative;
-      --glow: #888;
-    }
-
-    .game-card:active {
-      transform: scale(0.97);
-      box-shadow: 0 4px 20px color-mix(in srgb, var(--glow) 25%, transparent);
-    }
-
-    .game-card.done {
-      opacity: 0.7;
-    }
-    .game-card.done:active {
-      opacity: 0.85;
-    }
-
-    /* Left color border + glow var per game */
-    .threads  { border-left: 3px solid var(--clr-threads); --glow: var(--clr-threads); }
-    .alibi    { border-left: 3px solid var(--clr-alibi);   --glow: var(--clr-alibi); }
-    .bluff    { border-left: 3px solid var(--clr-bluff);   --glow: var(--clr-bluff); }
-    .lineup   { border-left: 3px solid var(--clr-lineup);  --glow: var(--clr-lineup); }
-    .echo     { border-left: 3px solid var(--clr-echo);    --glow: var(--clr-echo); }
-    .cipher   { border-left: 3px solid var(--clr-cipher);  --glow: var(--clr-cipher); }
-    .reflex   { border-left: 3px solid var(--clr-reflex);  --glow: var(--clr-reflex); }
-    .sequence { border-left: 3px solid var(--clr-sequence); --glow: var(--clr-sequence); }
-    .rank     { border-left: 3px solid var(--clr-rank);    --glow: var(--clr-rank); }
-
-    .card-top {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 6px;
-    }
-
-    .card-icon {
-      width: 52px;
-      height: 52px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 14px;
-      flex-shrink: 0;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.2);
-      position: relative;
-    }
-
-    .card-icon svg {
-      width: 26px;
-      height: 26px;
-    }
-
-    .card-icon .done-check {
-      position: absolute;
-      bottom: -4px;
-      right: -4px;
-      width: 20px;
-      height: 20px;
-      background: var(--accent);
-      border-radius: 50%;
-      border: 2px solid var(--card);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .card-icon .done-check svg {
-      width: 11px;
-      height: 11px;
-    }
-
-    .card-title {
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      flex: 1;
-    }
-
-    .card-chevron {
-      color: #c0c0cc;
-      font-size: 22px;
-      font-weight: 300;
-      flex-shrink: 0;
-      margin-left: auto;
-      line-height: 1;
-    }
-
-    .card-desc {
-      font-size: 14px;
-      color: var(--text-dim);
-      line-height: 1.4;
-    }
-
-    .card-tag {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    /* Per-game accent colors — icon gradients + tag + title */
-    .threads .card-icon { background: linear-gradient(135deg, #F59E0B, #D97706); }
-    .threads .card-title { color: #92600a; }
-    .threads .card-tag { background: rgba(217, 119, 6, 0.12); color: #92600a; }
-
-    .alibi .card-icon { background: linear-gradient(135deg, #14B8A6, #0D9488); }
-    .alibi .card-title { color: #0D7D73; }
-    .alibi .card-tag { background: rgba(13, 148, 136, 0.12); color: #0D7D73; }
-
-    .bluff .card-icon { background: linear-gradient(135deg, #EF4444, #DC2626); }
-    .bluff .card-title { color: #B91C1C; }
-    .bluff .card-tag { background: rgba(220, 38, 38, 0.12); color: #B91C1C; }
-
-    .lineup .card-icon { background: linear-gradient(135deg, #3B82F6, #2563EB); }
-    .lineup .card-title { color: #1D4ED8; }
-    .lineup .card-tag { background: rgba(37, 99, 235, 0.12); color: #1D4ED8; }
-
-    .echo .card-icon { background: linear-gradient(135deg, #8B5CF6, #7C3AED); }
-    .echo .card-title { color: #6D28D9; }
-    .echo .card-tag { background: rgba(124, 58, 237, 0.12); color: #6D28D9; }
-
-    .cipher .card-icon { background: linear-gradient(135deg, #10B981, #059669); }
-    .cipher .card-title { color: #047857; }
-    .cipher .card-tag { background: rgba(5, 150, 105, 0.12); color: #047857; }
-
-    .reflex .card-icon { background: linear-gradient(135deg, #F97316, #EA580C); }
-    .reflex .card-title { color: #C2410C; }
-    .reflex .card-tag { background: rgba(234, 88, 12, 0.12); color: #C2410C; }
-
-    .sequence .card-icon { background: linear-gradient(135deg, #6366F1, #4F46E5); }
-    .sequence .card-title { color: #4338CA; }
-    .sequence .card-tag { background: rgba(79, 70, 229, 0.12); color: #4338CA; }
-
-    .rank .card-icon { background: linear-gradient(135deg, #EC4899, #DB2777); }
-    .rank .card-title { color: #BE185D; }
-    .rank .card-tag { background: rgba(219, 39, 119, 0.12); color: #BE185D; }
-
-    /* ─── Circular Progress ────────────────────────────────── */
-    .hub-progress {
-      margin-top: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .progress-circle-wrap {
-      position: relative;
-      width: 80px;
-      height: 80px;
-    }
-
-    .progress-circle-wrap svg {
-      transform: rotate(-90deg);
-      width: 80px;
-      height: 80px;
-    }
-
-    .progress-track {
-      fill: none;
-      stroke: var(--border);
-      stroke-width: 6;
-    }
-
-    .progress-fill {
-      fill: none;
-      stroke: var(--accent);
-      stroke-width: 6;
-      stroke-linecap: round;
-      animation: progressFill 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
-    }
-
-    @keyframes progressFill {
-      from { stroke-dashoffset: var(--circ); }
-      to   { stroke-dashoffset: var(--offset); }
-    }
-
-    .progress-label {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .progress-num {
-      font-size: 22px;
-      font-weight: 900;
-      color: var(--text);
-      line-height: 1;
-    }
-
-    .progress-of {
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--text-dim);
-      letter-spacing: 1px;
-      margin-top: 2px;
-    }
-
-    .stats-link {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: var(--text-dim);
-      text-decoration: none;
-      padding: 6px 16px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      transition: all 0.15s;
-    }
-    .stats-link:active { background: var(--card-hover); color: var(--white); }
-
-    .card-done-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      margin-top: 8px;
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      background: rgba(26, 154, 69, 0.08);
-      color: var(--accent);
-    }
-
-    .card-streak-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 3px;
-      margin-top: 8px;
-      margin-left: 6px;
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      background: rgba(200, 152, 24, 0.08);
-      color: #c89818;
-    }
-
-    footer {
-      text-align: center;
-      padding-top: 28px;
-      padding-bottom: 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-    }
-    .footer-logo {
-      width: 28px;
-      height: 28px;
-      border-radius: 7px;
-      overflow: hidden;
-      opacity: 0.35;
-    }
-    .footer-logo svg { width: 100%; height: 100%; display: block; }
-    .footer-text {
-      font-size: 10px;
-      color: var(--text-dim);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .show-banner {
-      margin-top: 12px;
-      margin-bottom: 8px;
-      padding: 20px 24px;
-      background: linear-gradient(135deg, rgba(19,26,43,0.06), rgba(107,33,168,0.06));
-      border: 1px solid rgba(19,26,43,0.08);
-      border-radius: 14px;
-      text-align: center;
-    }
-    .show-banner-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      margin-bottom: 10px;
-    }
-    .show-banner-title {
-      font-size: 20px;
-      font-weight: 900;
-      color: var(--text);
-      letter-spacing: 1px;
-      margin-bottom: 6px;
-    }
-    .show-banner-desc {
-      font-size: 13px;
-      color: var(--text-dim);
-      line-height: 1.5;
-      margin-bottom: 14px;
-    }
-    .show-links {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .show-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 16px;
-      border-radius: 8px;
-      background: var(--text);
-      color: white;
-      text-decoration: none;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      transition: opacity 0.2s;
-    }
-    .show-link:active { opacity: 0.8; }
-    .show-link svg { width: 16px; height: 16px; flex-shrink: 0; }
-    @media (hover: hover) { .show-link:hover { opacity: 0.85; } }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .game-card { animation: fadeInUp 0.4s ease-out both; }
-    .game-card:nth-child(1) { animation-delay: 0.03s; }
-    .game-card:nth-child(2) { animation-delay: 0.08s; }
-    .game-card:nth-child(3) { animation-delay: 0.13s; }
-    .game-card:nth-child(4) { animation-delay: 0.18s; }
-    .game-card:nth-child(5) { animation-delay: 0.23s; }
-    .game-card:nth-child(6) { animation-delay: 0.28s; }
-    .game-card:nth-child(7) { animation-delay: 0.33s; }
-    .game-card:nth-child(8) { animation-delay: 0.38s; }
-    .game-card:nth-child(9) { animation-delay: 0.43s; }
-
-    /* Loading screen */
-    #loading-screen {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: #131A2B;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.5s ease;
-    }
-    #loading-screen.fade-out {
-      opacity: 0;
-      pointer-events: none;
-    }
-    #loading-screen .splash-logo {
-      width: 120px;
-      height: 120px;
-      margin-bottom: 28px;
-      animation: splashPulse 1.8s ease-in-out infinite;
-    }
-    #loading-screen .splash-title {
-      font-size: 28px;
-      font-weight: 900;
-      color: white;
-      letter-spacing: 8px;
-      margin-bottom: 10px;
-    }
-    #loading-screen .splash-sub {
-      font-size: 12px;
-      font-weight: 500;
-      color: rgba(255,255,255,0.4);
-      letter-spacing: 3px;
-      text-transform: uppercase;
-    }
-    @keyframes splashPulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.05); opacity: 0.85; }
-    }
-  </style>
+  <link rel="stylesheet" href="acumen-ui.css">
 </head>
 <body>
   <div id="loading-screen">
-    <svg class="splash-logo" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-      <g transform="translate(512, 100)">
-        <g fill="none" stroke="white" stroke-width="52" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="-220" y1="800" x2="0" y2="0"/>
-          <line x1="220" y1="800" x2="0" y2="0"/>
-          <line x1="-125" y1="560" x2="125" y2="560"/>
-        </g>
-        <polygon points="0,-90 -85,30 0,-5 85,30" fill="#E8A317"/>
-      </g>
-    </svg>
-    <div class="splash-title">ACUMEN</div>
-    <div class="splash-sub">Brain Games for Smart People</div>
+    <div style="width:96px;height:96px"><svg style="width:100%;height:100%" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><rect width="1024" height="1024" rx="224" fill="#131A2B"/><g transform="translate(512, 180)"><g fill="none" stroke="white" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"><line x1="-180" y1="660" x2="0" y2="0"/><line x1="180" y1="660" x2="0" y2="0"/><line x1="-100" y1="460" x2="100" y2="460"/></g><polygon points="0,-90 -85,30 0,-5 85,30" fill="#E8A317"/></g></svg></div>
+    <div class="t">ACUMEN</div>
+    <div class="s">The Daily Case File</div>
   </div>
   <div id="app">
-    <header>
-      <div class="app-logo">
-        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-          <rect width="1024" height="1024" rx="224" fill="#131A2B"/>
-          <g transform="translate(512, 180)">
-            <g fill="none" stroke="white" stroke-width="52" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="-180" y1="660" x2="0" y2="0"/>
-              <line x1="180" y1="660" x2="0" y2="0"/>
-              <line x1="-100" y1="460" x2="100" y2="460"/>
-            </g>
-            <polygon points="0,-90 -85,30 0,-5 85,30" fill="#E8A317"/>
-          </g>
-        </svg>
+    <div class="top">
+      <div class="logo"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><rect width="1024" height="1024" rx="224" fill="#131A2B"/><g transform="translate(512, 180)"><g fill="none" stroke="white" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"><line x1="-180" y1="660" x2="0" y2="0"/><line x1="180" y1="660" x2="0" y2="0"/><line x1="-100" y1="460" x2="100" y2="460"/></g><polygon points="0,-90 -85,30 0,-5 85,30" fill="#E8A317"/></g></svg></div>
+      <div class="meta">
+        <h1 class="brand">ACUMEN</h1>
+        <div class="sub" id="today-sub"></div>
       </div>
-      <h1>ACUMEN</h1>
-      <p class="subtitle">Brain Games for Smart People</p>
-      <p id="hub-date" class="subtitle" style="margin-top:4px;color:#c89818;font-size:12px;letter-spacing:3px"></p>
-      <div id="hub-progress" class="hub-progress"></div>
-    </header>
-
-    <div class="section-header"><span class="section-label">Today's Challenges</span></div>
-
-    <div class="games">
-      <a href="threads/" class="game-card threads">
-        <div class="card-top">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="18" r="2.5"/>
-              <line x1="8.5" y1="6" x2="15.5" y2="6"/><line x1="8.5" y1="18" x2="15.5" y2="18"/>
-              <line x1="6" y1="8.5" x2="6" y2="15.5"/><line x1="18" y1="8.5" x2="18" y2="15.5"/>
-              <line x1="8" y1="8" x2="16" y2="16"/><line x1="16" y1="8" x2="8" y2="16"/>
-            </svg>
-          </div>
-          <div class="card-title">Missing Link</div>
-          <span class="card-chevron">&#x203A;</span>
-        </div>
-        <div class="card-desc">Three words share a hidden connection — find the missing link that ties them all together.</div>
-        <span class="card-tag">Word Association</span>
-      </a>
-
-      <a href="alibi/" class="game-card alibi">
-        <div class="card-top">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="10" cy="10" r="7"/>
-              <line x1="21" y1="21" x2="15" y2="15"/>
-              <text x="7.5" y="13.5" fill="white" stroke="none" font-size="10" font-weight="bold" font-family="Inter, sans-serif">?</text>
-            </svg>
-          </div>
-          <div class="card-title">Alibi</div>
-          <span class="card-chevron">&#x203A;</span>
-        </div>
-        <div class="card-desc">9 words. 1 culprit. Eight have alibis — they belong to one category. Find the odd one out.</div>
-        <span class="card-tag">Word Mystery</span>
-      </a>
-
-      <a href="bluff/" class="game-card bluff">
-        <div class="card-top">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="4" width="14" height="18" rx="2"/>
-              <rect x="8" y="2" width="14" height="18" rx="2"/>
-            </svg>
-          </div>
-          <div class="card-title">Bluff</div>
-          <span class="card-chevron">&#x203A;</span>
-        </div>
-        <div class="card-desc">Three facts about a topic. Two are real, one is made up. Can you spot the lie?</div>
-        <span class="card-tag">True or False</span>
-      </a>
-
-      <a href="lineup/" class="game-card lineup">
-        <div class="card-top">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="18" width="3" height="4" rx="0.5"/>
-              <rect x="6.5" y="14" width="3" height="8" rx="0.5"/>
-              <rect x="11" y="10" width="3" height="12" rx="0.5"/>
-              <rect x="15.5" y="6" width="3" height="16" rx="0.5"/>
-              <rect x="20" y="2" width="3" height="20" rx="0.5"/>
-            </svg>
-          </div>
-          <div class="card-title">Lineup</div>
-          <span class="card-chevron">&#x203A;</span>
-        </div>
-        <div class="card-desc">Five items, one rule. Drag them into the correct order before your attempts run out.</div>
-        <span class="card-tag">Sorting &amp; Trivia</span>
-      </a>
-
-      <a href="echo/" class="game-card echo">
-        <div class="card-top">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="4" cy="12" r="1.5" fill="white" stroke="none"/>
-              <path d="M9 6 C14 6, 16 9, 16 12 C16 15, 14 18, 9 18"/>
-              <path d="M11 2 C18 2, 21 7, 21 12 C21 17, 18 22, 11 22"/>
-              <path d="M10 9.5 C12 9.5, 13 10.5, 13 12 C13 13.5, 12 14.5, 10 14.5"/>
-            </svg>
-          </div>
-          <div class="card-title">Echo</div>
-          <span class="card-chevron">&#x203A;</span>
-        </div>
-        <div class="card-desc">Watch colored tiles flash in sequence. Tap them back — in reverse. How far can you go?</div>
-        <span class="card-tag">Memory</span>
-      </a>
-
-      <a href="cipher/" class="game-card cipher">
-        <div class="card-top">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="8" cy="15" r="5"/>
-              <circle cx="8" cy="15" r="2"/>
-              <line x1="13" y1="15" x2="22" y2="15"/>
-              <line x1="22" y1="15" x2="22" y2="11"/>
-              <line x1="18" y1="15" x2="18" y2="12"/>
-            </svg>
-          </div>
-          <div class="card-title">Cipher</div>
-          <span class="card-chevron">&#x203A;</span>
-        </div>
-        <div class="card-desc">Every letter has been swapped. Crack the substitution code to reveal the famous quote.</div>
-        <span class="card-tag">Codebreaking</span>
-      </a>
-
-      <a href="reflex/" class="game-card reflex">
-        <div class="card-top">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="13 2 10 10 16 10 11 22"/>
-            </svg>
-          </div>
-          <div class="card-title">Reflex</div>
-          <span class="card-chevron">&#x203A;</span>
-        </div>
-        <div class="card-desc">A word flashes. Tap left or right to sort it into the correct category. It speeds up. 3 lives.</div>
-        <span class="card-tag">Speed Sorting</span>
-      </a>
-
-      <a href="sequence/" class="game-card sequence">
-        <div class="card-top">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="4" cy="16" r="2" fill="white" stroke="none"/>
-              <circle cx="12" cy="8" r="2" fill="white" stroke="none"/>
-              <circle cx="20" cy="14" r="2" fill="white" stroke="none"/>
-              <path d="M6 15 C8 10, 10 9, 12 8"/>
-              <path d="M14 9 C16 10, 18 13, 20 14"/>
-            </svg>
-          </div>
-          <div class="card-title">Sequence</div>
-          <span class="card-chevron">&#x203A;</span>
-        </div>
-        <div class="card-desc">Study the pattern. Pick the missing number. 10 rounds of number sequences that get trickier.</div>
-        <span class="card-tag">Pattern &amp; Logic</span>
-      </a>
-
-      <a href="rank/" class="game-card rank">
-        <div class="card-top">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M6 9 L12 3 L18 9"/>
-              <path d="M8 9 L5 20 L12 16 L19 20 L16 9"/>
-            </svg>
-          </div>
-          <div class="card-title">Rank</div>
-          <span class="card-chevron">&#x203A;</span>
-        </div>
-        <div class="card-desc">Four items, one hidden metric. Drag them into the correct order — then discover the surprising truth.</div>
-        <span class="card-tag">Ranking &amp; Trivia</span>
-      </a>
+      <a href="stats.html" class="statslink">STATS</a>
     </div>
 
-    <div class="show-banner">
-      <div class="show-banner-label">From the makers of</div>
-      <div class="show-banner-title">AI for Everyone Show</div>
-      <div class="show-banner-desc">Join Joel Comm exploring how AI is changing everything — interviews, demos, and insights for everyone.</div>
-      <div class="show-links">
-        <a href="https://www.youtube.com/@aiforeveryoneshow" target="_blank" rel="noopener" class="show-link">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
-          YouTube
-        </a>
-        <a href="https://aiforeveryoneshow.com" target="_blank" rel="noopener" class="show-link">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          Website
-        </a>
+    <div class="scorecard">
+      <div class="ring">
+        <svg viewBox="0 0 120 120"><circle class="track" cx="60" cy="60" r="52"/><circle class="fill" id="ring-fill" cx="60" cy="60" r="52"/></svg>
+        <div class="num"><b id="score-num">0</b><span>OF 1000</span></div>
+      </div>
+      <div class="sc-right">
+        <div class="eyebrow" style="color:var(--gold)">TODAY&rsquo;S ACUMEN SCORE</div>
+        <div class="sc-title" id="score-title">Bystander</div>
+        <div class="sc-line" id="score-line"></div>
+        <div class="chips"><span class="chip" id="chip-streak">🔥 0-day streak</span><span class="chip" id="chip-rating">7-day rating 0</span></div>
       </div>
     </div>
 
-    <footer>
-      <div class="footer-logo">
-        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-          <rect width="1024" height="1024" rx="224" fill="#131A2B"/>
-          <g transform="translate(512, 180)">
-            <g fill="none" stroke="white" stroke-width="52" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="-180" y1="660" x2="0" y2="0"/>
-              <line x1="180" y1="660" x2="0" y2="0"/>
-              <line x1="-100" y1="460" x2="100" y2="460"/>
-            </g>
-            <polygon points="0,-90 -85,30 0,-5 85,30" fill="#E8A317"/>
-          </g>
-        </svg>
+    <div class="section"><span class="eyebrow">Today&rsquo;s case file</span><span class="count" id="case-count"></span></div>
+    <div id="cases"></div>
+
+    <div class="row" style="margin-top:14px">
+      <button class="btn" id="btn-share" disabled>Share today&rsquo;s score</button>
+    </div>
+
+    <div class="panel">
+      <h3>Daily reminder</h3>
+      <div class="reminder">
+        <div class="txt"><b id="rem-label">Never miss a case</b><span id="rem-sub">Get a nudge when the new case file opens.</span></div>
+        <input type="time" id="rem-time" value="08:00">
+        <label class="switch"><input type="checkbox" id="rem-toggle"><span class="sl"></span></label>
       </div>
-      <span class="footer-text">Acumen v1.0</span>
-    </footer>
-    <script src="daily.js"></script>
-    <script>
-      document.getElementById('hub-date').textContent = Daily.getDateString();
+      <div class="note" id="rem-note"></div>
+    </div>
 
-      (function () {
-        var DAILY_KEYS = ['threads','alibi','bluff','lineup','echo','cipher','reflex','sequence','rank'];
-        var done = 0;
-        var total = DAILY_KEYS.length;
-
-        DAILY_KEYS.forEach(function (key) {
-          var result = Daily.getDailyResult(key);
-          var streak = Daily.getStreak(key);
-          var card = document.querySelector('.game-card.' + key);
-          if (!card) return;
-
-          var badges = '';
-          if (result) {
-            done++;
-            card.classList.add('done');
-            var icon = card.querySelector('.card-icon');
-            if (icon) icon.innerHTML += '<span class="done-check"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>';
-            badges += '<span class="card-done-badge">✓ DONE</span>';
-          }
-          if (streak > 1) {
-            badges += '<span class="card-streak-badge">🔥 ' + streak + '</span>';
-          }
-          if (badges) {
-            var wrap = document.createElement('div');
-            wrap.innerHTML = badges;
-            card.appendChild(wrap);
-          }
-        });
-
-        var prog = document.getElementById('hub-progress');
-        var r = 34;
-        var circ = 2 * Math.PI * r;
-        var pct = done / total;
-        var offset = circ * (1 - pct);
-        prog.innerHTML =
-          '<div class="progress-circle-wrap">' +
-            '<svg viewBox="0 0 80 80">' +
-              '<circle class="progress-track" cx="40" cy="40" r="' + r + '"/>' +
-              '<circle class="progress-fill" cx="40" cy="40" r="' + r + '" ' +
-                'stroke-dasharray="' + circ + '" ' +
-                'style="--circ:' + circ + ';--offset:' + offset + '"/>' +
-            '</svg>' +
-            '<div class="progress-label">' +
-              '<span class="progress-num">' + done + '</span>' +
-              '<span class="progress-of">of ' + total + '</span>' +
-            '</div>' +
-          '</div>' +
-          '<a href="stats.html" class="stats-link">VIEW STATS →</a>';
-      })();
-    </script>
-    <script>
-      window.addEventListener('load', function() {
-        setTimeout(function() {
-          var ls = document.getElementById('loading-screen');
-          if (ls) {
-            ls.classList.add('fade-out');
-            setTimeout(function() { ls.remove(); }, 600);
-          }
-        }, 800);
-      });
-    </script>
+    <div class="foot">NEW CASE FILE EVERY DAY AT MIDNIGHT UTC<br><span id="cd" style="color:var(--navy);font-weight:800"></span><br><br>FROM THE MAKERS OF THE <a href="https://aiforeveryoneshow.com" target="_blank" rel="noopener">AI FOR EVERYONE SHOW</a></div>
   </div>
+
+  <script src="daily.js"></script>
+  <script src="acumen-core.js"></script>
+  <script>
+  (function () {
+    var A = AcumenCore;
+    var C = 2 * Math.PI * 52;
+    var fill = document.getElementById('ring-fill');
+    fill.style.strokeDasharray = C;
+    fill.style.strokeDashoffset = C;
+
+    function esc(s){return String(s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+
+    function render() {
+      var s = A.summary();
+      document.getElementById('today-sub').textContent = 'CASE #' + s.day + ' \u00B7 ' + Daily.getDateString().toUpperCase();
+      document.getElementById('score-num').textContent = s.score;
+      document.getElementById('score-title').textContent = s.score > 0 ? s.title : 'Case file open';
+      document.getElementById('score-line').textContent = s.done === s.total
+        ? 'Case closed. Come back tomorrow for four new ones.'
+        : (s.done === 0 ? 'Solve all four cases to build today\u2019s score.' : (s.total - s.done) + ' case' + (s.total - s.done === 1 ? '' : 's') + ' still open \u2014 ' + (s.max - s.score) + ' points on the table.');
+      document.getElementById('chip-streak').textContent = '\uD83D\uDD25 ' + s.streak + '-day streak';
+      document.getElementById('chip-rating').textContent = '7-day rating ' + s.rating;
+      document.getElementById('case-count').textContent = s.done + ' / ' + s.total + ' SOLVED';
+      requestAnimationFrame(function () { fill.style.strokeDashoffset = C * (1 - s.score / s.max); });
+
+      var html = '';
+      A.GAMES.forEach(function (g, i) {
+        var r = s.games[i];
+        html += '<a class="case' + (r.done ? ' done' : '') + '" href="' + g.path + '" style="--c:' + g.color + '">' +
+          '<div class="ico">' + g.icon + '</div>' +
+          '<div class="body"><div class="verb">' + esc(g.verb) + '</div><div class="name">' + esc(g.name) + '</div></div>' +
+          '<div class="state">' + (r.done ? '<div class="pts">+' + r.points + '<small>' + r.pct + '% \u2713</small></div>' : '<div class="go">PLAY \u203A</div>') + '</div></a>';
+      });
+      document.getElementById('cases').innerHTML = html;
+      document.getElementById('btn-share').disabled = s.done === 0;
+    }
+
+    document.getElementById('btn-share').addEventListener('click', function () { A.share(); });
+
+    // reminder UI
+    var tgl = document.getElementById('rem-toggle'), tm = document.getElementById('rem-time'), note = document.getElementById('rem-note');
+    function pad(n){return n<10?'0'+n:''+n;}
+    var cfg = A.getReminder();
+    tgl.checked = !!cfg.enabled; tm.value = pad(cfg.hour) + ':' + pad(cfg.minute);
+    if (!A.isNative()) note.textContent = 'Reminders are available in the iPhone app.';
+    function applyReminder() {
+      var p = tm.value.split(':');
+      A.setReminder(tgl.checked, parseInt(p[0], 10), parseInt(p[1], 10)).then(function (r) {
+        if (!r.ok && r.reason === 'denied') { tgl.checked = false; note.textContent = 'Notifications are off for Acumen. Turn them on in Settings > Notifications.'; }
+        else if (r.ok && tgl.checked) note.textContent = 'Reminder set for ' + tm.value + ' every day.';
+        else if (r.ok) note.textContent = 'Reminder off.';
+      });
+    }
+    tgl.addEventListener('change', applyReminder); tm.addEventListener('change', function () { if (tgl.checked) applyReminder(); });
+    if (cfg.enabled && A.isNative()) note.textContent = 'Reminder set for ' + tm.value + ' every day.';
+
+    function tick(){ document.getElementById('cd').textContent = 'NEXT CASE FILE IN ' + Daily.formatCountdown(); }
+    tick(); setInterval(tick, 1000);
+
+    A.ready().then(render); render();
+    document.addEventListener('visibilitychange', function(){ if(!document.hidden) render(); });
+    window.addEventListener('pageshow', render);
+
+    window.addEventListener('load', function () {
+      setTimeout(function () { var ls = document.getElementById('loading-screen'); if (ls) { ls.classList.add('fade-out'); setTimeout(function(){ ls.remove(); }, 600); } }, 700);
+    });
+  })();
+  </script>
 </body>
 </html>

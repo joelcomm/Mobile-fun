@@ -198,6 +198,7 @@
       state.correctCount + ' / ' + TOTAL_ROUNDS + ' correct (' + pct + '%)<br>' +
       'Best streak: ' + state.maxStreak;
 
+    if (window.AcumenCore) AcumenCore.record('bluff', pct);
     Daily.saveDailyResult('bluff', state.score, {
       rank: rank,
       stats: dom.finalStats.innerHTML

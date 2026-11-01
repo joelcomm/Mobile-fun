@@ -187,6 +187,7 @@
       }
       showLinks();
 
+      if (window.AcumenCore) AcumenCore.record('threads', score);
       Daily.saveDailyResult(score, {
         guesses: guesses.length,
         hints: hintsUsed,
@@ -214,6 +215,7 @@
         $btnGuess.disabled = true;
         $btnHint.disabled = true;
 
+        if (window.AcumenCore) AcumenCore.record('threads', 0);
         Daily.saveDailyResult(0, {
           guesses: guesses.length,
           hints: hintsUsed,

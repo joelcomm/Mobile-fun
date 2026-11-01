@@ -6,471 +6,74 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#f8f8fa">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <title>Stats — Mobile Fun</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
-    :root {
-      --bg: #f8f8fa;
-      --card: #ffffff;
-      --card-hover: #f0f0f5;
-      --border: #dddde4;
-      --text: #2a2a3e;
-      --text-dim: #6b6b80;
-      --white: #1a1a2e;
-      --accent: #c89818;
-      --green: #1a9a45;
-      --safe-top: env(safe-area-inset-top, 0px);
-      --safe-bottom: env(safe-area-inset-bottom, 0px);
-    }
-
-    html, body {
-      height: 100%;
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', -apple-system, sans-serif;
-      font-size: 18px;
-    }
-
-    .back-link {
-      position: fixed; top: 14px; left: 16px; z-index: 50;
-      font-size: 13px; font-weight: 600; color: var(--text-dim);
-      text-decoration: none; letter-spacing: 1px;
-      padding-top: var(--safe-top);
-    }
-
-    #app {
-      max-width: 480px;
-      margin: 0 auto;
-      padding: 24px 20px;
-      padding-top: calc(24px + var(--safe-top));
-      padding-bottom: calc(24px + var(--safe-bottom));
-      min-height: 100dvh;
-    }
-
-    header {
-      text-align: center;
-      margin-bottom: 28px;
-      padding-top: 32px;
-    }
-
-    h1 {
-      font-size: 32px;
-      font-weight: 900;
-      letter-spacing: 2px;
-      color: var(--white);
-    }
-
-    .subtitle {
-      font-size: 13px;
-      letter-spacing: 3px;
-      color: var(--text-dim);
-      margin-top: 6px;
-      text-transform: uppercase;
-    }
-
-    /* ─── Summary Cards ────────────────────────────────────────── */
-    .summary-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 24px;
-    }
-
-    .summary-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px 12px;
-      text-align: center;
-    }
-
-    .summary-num {
-      font-size: 32px;
-      font-weight: 900;
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-
-    .summary-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: var(--text-dim);
-      text-transform: uppercase;
-    }
-
-    /* ─── Countdown ────────────────────────────────────────────── */
-    .countdown-bar {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px 20px;
-      text-align: center;
-      margin-bottom: 24px;
-    }
-
-    .countdown-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: var(--text-dim);
-      margin-bottom: 6px;
-    }
-
-    .countdown-time {
-      font-size: 28px;
-      font-weight: 900;
-      color: var(--accent);
-      letter-spacing: 3px;
-      font-variant-numeric: tabular-nums;
-    }
-
-    /* ─── Section Headers ──────────────────────────────────────── */
-    .section-hdr {
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 3px;
-      color: var(--text-dim);
-      margin-bottom: 12px;
-      text-transform: uppercase;
-    }
-
-    /* ─── Game Stats Grid ──────────────────────────────────────── */
-    .game-stats {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 28px;
-    }
-
-    .gs-card {
-      display: grid;
-      grid-template-columns: 44px 1fr auto;
-      align-items: center;
-      gap: 14px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px 16px;
-      text-decoration: none;
-      color: inherit;
-      transition: all 0.15s;
-    }
-    .gs-card:active { background: var(--card-hover); transform: scale(0.98); }
-
-    .gs-icon {
-      width: 44px; height: 44px;
-      display: flex; align-items: center; justify-content: center;
-      border-radius: 10px;
-      font-size: 22px;
-      flex-shrink: 0;
-    }
-
-    .gs-info { min-width: 0; }
-
-    .gs-name {
-      font-size: 16px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      margin-bottom: 3px;
-    }
-
-    .gs-meta {
-      font-size: 12px;
-      color: var(--text-dim);
-      display: flex;
-      gap: 12px;
-    }
-
-    .gs-meta span { white-space: nowrap; }
-
-    .gs-status {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 2px;
-    }
-
-    .gs-badge {
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      padding: 3px 8px;
-      border-radius: 4px;
-    }
-
-    .gs-badge.done {
-      background: rgba(26, 154, 69, 0.08);
-      color: var(--green);
-    }
-
-    .gs-badge.pending {
-      background: rgba(160, 160, 176, 0.08);
-      color: var(--text-dim);
-    }
-
-    .gs-score {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text-dim);
-    }
-
-    /* ─── Streak Chart ─────────────────────────────────────────── */
-    .streak-section { margin-bottom: 28px; }
-
-    .streak-grid {
-      display: grid;
-      grid-template-columns: repeat(10, 1fr);
-      gap: 6px;
-    }
-
-    .streak-col {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .streak-bar-wrap {
-      width: 100%;
-      height: 80px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-    }
-
-    .streak-bar {
-      width: 100%;
-      border-radius: 4px 4px 0 0;
-      min-height: 4px;
-      transition: height 0.3s;
-    }
-
-    .streak-label {
-      font-size: 8px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      color: var(--text-dim);
-      text-align: center;
-      line-height: 1.1;
-    }
-
-    .streak-num {
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--white);
-    }
-
-    /* ─── Per-game accent colors ───────────────────────────────── */
-    .gs-threads .gs-icon { background: rgba(138,109,0,.08); }
-    .gs-threads .gs-name { color: #8a6d00; }
-
-    .gs-alibi .gs-icon { background: rgba(200,144,24,.08); }
-    .gs-alibi .gs-name { color: #c89018; }
-
-    .gs-bluff .gs-icon { background: rgba(208,80,53,.08); }
-    .gs-bluff .gs-name { color: #d05035; }
-
-    .gs-lineup .gs-icon { background: rgba(74,110,224,.08); }
-    .gs-lineup .gs-name { color: #4a6ee0; }
-
-    .gs-echo .gs-icon { background: rgba(126,78,184,.08); }
-    .gs-echo .gs-name { color: #7e4eb8; }
-
-.gs-cipher .gs-icon { background: rgba(26,152,80,.08); }
-    .gs-cipher .gs-name { color: #1a9850; }
-
-    .gs-reflex .gs-icon { background: rgba(200,152,24,.08); }
-    .gs-reflex .gs-name { color: #c89818; }
-
-    .gs-vanish .gs-icon { background: rgba(0,152,120,.08); }
-    .gs-vanish .gs-name { color: #009878; }
-
-    .gs-sequence .gs-icon { background: rgba(74,110,224,.08); }
-    .gs-sequence .gs-name { color: #4a6ee0; }
-
-    .gs-rank .gs-icon { background: rgba(184,150,10,.08); }
-    .gs-rank .gs-name { color: #b8960a; }
-
-    /* Animations */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .gs-card { animation: fadeInUp 0.35s ease-out both; }
-    .gs-card:nth-child(1) { animation-delay: 0.03s; }
-    .gs-card:nth-child(2) { animation-delay: 0.08s; }
-    .gs-card:nth-child(3) { animation-delay: 0.13s; }
-    .gs-card:nth-child(4) { animation-delay: 0.18s; }
-    .gs-card:nth-child(5) { animation-delay: 0.23s; }
-    .gs-card:nth-child(6) { animation-delay: 0.28s; }
-    .gs-card:nth-child(7) { animation-delay: 0.33s; }
-    .gs-card:nth-child(8) { animation-delay: 0.38s; }
-    .gs-card:nth-child(9) { animation-delay: 0.43s; }
-    .gs-card:nth-child(10) { animation-delay: 0.48s; }
-    .gs-card:nth-child(11) { animation-delay: 0.53s; }
-
-    footer {
-      text-align: center;
-      padding-top: 20px;
-      font-size: 12px;
-      color: var(--text-dim);
-      letter-spacing: 1px;
-    }
-  </style>
+  <title>Stats — Acumen</title>
+  <link rel="stylesheet" href="acumen-ui.css">
 </head>
 <body>
-  <a href="/" class="back-link">&larr; GAMES</a>
   <div id="app">
-    <header>
-      <h1>YOUR STATS</h1>
-      <p class="subtitle">Daily progress &amp; streaks</p>
-    </header>
-
-    <!-- Summary -->
-    <div class="summary-row">
-      <div class="summary-card">
-        <div id="sum-today" class="summary-num" style="color:var(--green)">0</div>
-        <div class="summary-label">Today</div>
-      </div>
-      <div class="summary-card">
-        <div id="sum-streak" class="summary-num" style="color:var(--accent)">0</div>
-        <div class="summary-label">Best Streak</div>
-      </div>
-      <div class="summary-card">
-        <div id="sum-total" class="summary-num" style="color:#7e4eb8">0</div>
-        <div class="summary-label">All Time</div>
-      </div>
+    <div class="top">
+      <a href="index.html" class="statslink">‹ HOME</a>
+      <div class="meta" style="text-align:right"><h1 class="brand" style="font-size:22px;letter-spacing:4px">STATS</h1></div>
     </div>
 
-    <!-- Countdown -->
-    <div class="countdown-bar">
-      <div class="countdown-label">NEXT DAILY PUZZLE</div>
-      <div id="countdown" class="countdown-time">--:--:--</div>
+    <div class="scorecard" style="display:block">
+      <div class="eyebrow" style="color:var(--gold)">ACUMEN RATING · 7-DAY AVERAGE</div>
+      <div style="display:flex;align-items:baseline;gap:12px;margin-top:6px"><div style="font-size:54px;font-weight:900;line-height:1" id="rating">0</div><div style="font-size:20px;font-weight:900;letter-spacing:1px" id="rating-title">Bystander</div></div>
+      <div class="chips"><span class="chip" id="s-streak"></span><span class="chip" id="s-closed"></span><span class="chip" id="s-longest"></span></div>
     </div>
 
-    <!-- Streak Chart -->
-    <div class="streak-section">
-      <div class="section-hdr">Current Streaks</div>
-      <div id="streak-chart" class="streak-grid"></div>
-    </div>
+    <div class="section"><span class="eyebrow">Last 14 days</span><span class="count">DAILY SCORE / 1000</span></div>
+    <div class="panel" style="margin-top:0"><div class="bars" id="bars"></div></div>
 
-    <!-- Daily Games -->
-    <div class="section-hdr">Daily Games</div>
-    <div id="daily-games" class="game-stats"></div>
+    <div class="section"><span class="eyebrow">Career</span></div>
+    <div class="grid2" id="career"></div>
 
-    <footer>Acumen</footer>
+    <div class="section"><span class="eyebrow">By game</span></div>
+    <div class="panel" style="margin-top:0" id="pergame"></div>
+
+    <div class="section"><span class="eyebrow">Ranks</span></div>
+    <div class="panel" style="margin-top:0"><div class="tiers" id="tiers"></div></div>
+
+    <div class="row" style="margin-top:16px"><button class="btn" id="btn-share">Share my score</button></div>
+    <div class="foot">STATS LIVE ON THIS DEVICE ONLY</div>
   </div>
-
   <script src="daily.js"></script>
+  <script src="acumen-core.js"></script>
   <script>
   (function () {
-    var GAMES = [
-      { key: 'threads',  name: 'Threads',  icon: '\uD83E\uDDF5', href: 'threads/',  abbr: 'THR' },
-      { key: 'alibi',    name: 'Alibi',    icon: '\uD83D\uDD75',  href: 'alibi/',    abbr: 'ALI' },
-      { key: 'bluff',    name: 'Bluff',    icon: '\uD83C\uDCCF', href: 'bluff/',    abbr: 'BLF' },
-      { key: 'lineup',   name: 'Lineup',   icon: '\uD83D\uDCCA', href: 'lineup/',   abbr: 'LIN' },
-      { key: 'echo',     name: 'Echo',     icon: '\uD83D\uDD19', href: 'echo/',     abbr: 'ECH' },
-      { key: 'cipher',   name: 'Cipher',   icon: '\uD83D\uDD10', href: 'cipher/',   abbr: 'CIP' },
-      { key: 'reflex',   name: 'Reflex',   icon: '\u26A1',       href: 'reflex/',   abbr: 'RFX' },
-      { key: 'vanish',   name: 'Vanish',   icon: '\uD83D\uDFE9', href: 'vanish/',   abbr: 'VAN' },
-      { key: 'sequence', name: 'Sequence', icon: '\uD83D\uDD22', href: 'sequence/', abbr: 'SEQ' },
-      { key: 'rank',     name: 'Rank',     icon: '\uD83C\uDFAF', href: 'rank/',     abbr: 'RNK' }
-    ];
-
-    var todayCount = 0;
-    var bestStreak = 0;
-    var totalPlayed = 0;
-    var streaks = [];
-    var gameData = [];
-
-    GAMES.forEach(function (g) {
-      var result = Daily.getDailyResult(g.key);
-      var streak = Daily.getStreak(g.key);
-      var played = result !== null;
-      if (played) todayCount++;
-      if (streak > bestStreak) bestStreak = streak;
-      streaks.push({ abbr: g.abbr, streak: streak, color: getColor(g.key) });
-
-      // Count total plays from streak data
-      try {
-        var sd = JSON.parse(localStorage.getItem(g.key + '-streak') || '{}');
-        if (sd.lastDay) totalPlayed++;
-      } catch (e) {}
-
-      gameData.push({
-        key: g.key, name: g.name, icon: g.icon, href: g.href,
-        played: played, score: result ? result.score : null, streak: streak
+    var A = AcumenCore;
+    function render() {
+      var st = A.stats();
+      document.getElementById('rating').textContent = st.rating;
+      document.getElementById('rating-title').textContent = st.ratingTitle;
+      document.getElementById('s-streak').textContent = '\uD83D\uDD25 ' + st.streaks.current + '-day streak';
+      document.getElementById('s-closed').textContent = '\u2705 ' + st.streaks.closed + ' cases-closed streak';
+      document.getElementById('s-longest').textContent = 'Best ' + st.streaks.longest + ' days';
+      var bars = '';
+      st.history.forEach(function (h, i) {
+        var cls = h.score === 0 ? 'bar zero' : (h.done === 4 ? 'bar full' : 'bar');
+        bars += '<div class="' + cls + '"><i style="height:' + Math.max(3, Math.round(h.score / 10)) + '%"></i><small>' + (i === 13 ? 'T' : '') + '</small></div>';
       });
-    });
-
-    // Summary cards
-    document.getElementById('sum-today').textContent = todayCount + '/10';
-    document.getElementById('sum-streak').textContent = bestStreak;
-    document.getElementById('sum-total').textContent = totalPlayed;
-
-    // Countdown
-    function tickCd() {
-      document.getElementById('countdown').textContent = Daily.formatCountdown();
+      document.getElementById('bars').innerHTML = bars;
+      document.getElementById('career').innerHTML =
+        '<div class="stat"><b>' + st.daysPlayed + '</b><span>Days played</span></div>' +
+        '<div class="stat"><b>' + st.casesClosed + '</b><span>Cases closed</span></div>' +
+        '<div class="stat"><b>' + st.avgDaily + '</b><span>Avg daily score</span></div>' +
+        '<div class="stat"><b>' + st.bestDay + '</b><span>Best day</span></div>';
+      var pg = '';
+      st.perGame.forEach(function (g) {
+        pg += '<div class="pg"><div class="ico" style="background:' + g.color + '">' + g.icon + '</div><div class="n">' + g.name + '<small>' + g.plays + ' played \u00B7 best ' + g.best + '% \u00B7 ' + g.perfect + ' perfect</small></div><div class="avg">' + (g.plays ? g.avg + '%' : '\u2014') + '<small>AVG</small></div></div>';
+      });
+      document.getElementById('pergame').innerHTML = pg;
+      var tiers = '';
+      A.TITLES.forEach(function (t) { tiers += '<div class="' + (t.name === st.ratingTitle ? 'on' : '') + '">' + (t.name === st.ratingTitle ? '\u25B6 ' : '') + t.name + ' <span>\u2014 ' + t.min + '+</span></div>'; });
+      document.getElementById('tiers').innerHTML = tiers;
     }
-    tickCd();
-    setInterval(tickCd, 1000);
-
-    // Streak chart
-    var maxStreak = Math.max.apply(null, streaks.map(function (s) { return s.streak; }));
-    if (maxStreak < 1) maxStreak = 1;
-    var chartEl = document.getElementById('streak-chart');
-    streaks.forEach(function (s) {
-      var col = document.createElement('div');
-      col.className = 'streak-col';
-      var h = Math.max((s.streak / maxStreak) * 68, s.streak > 0 ? 8 : 4);
-      col.innerHTML =
-        '<div class="streak-num">' + s.streak + '</div>' +
-        '<div class="streak-bar-wrap"><div class="streak-bar" style="height:' + h + 'px;background:' + s.color + '"></div></div>' +
-        '<div class="streak-label">' + s.abbr + '</div>';
-      chartEl.appendChild(col);
+    document.getElementById('btn-share').addEventListener('click', function () {
+      var st = A.stats();
+      A.share('My Acumen rating: ' + st.rating + ' (' + st.ratingTitle + ') \u00B7 \uD83D\uDD25 ' + st.streaks.current + '-day streak \u00B7 ' + st.casesClosed + ' cases closed');
     });
-
-    // Game cards
-    var listEl = document.getElementById('daily-games');
-    gameData.forEach(function (g) {
-      var a = document.createElement('a');
-      a.href = g.href;
-      a.className = 'gs-card gs-' + g.key;
-
-      var streakText = g.streak > 0 ? '\uD83D\uDD25 ' + g.streak : '—';
-      var scoreText = g.score !== null ? 'Score: ' + g.score : '';
-      var badge = g.played
-        ? '<span class="gs-badge done">DONE</span>'
-        : '<span class="gs-badge pending">PLAY</span>';
-
-      a.innerHTML =
-        '<div class="gs-icon">' + g.icon + '</div>' +
-        '<div class="gs-info">' +
-          '<div class="gs-name">' + g.name.toUpperCase() + '</div>' +
-          '<div class="gs-meta"><span>Streak: ' + streakText + '</span>' +
-          (scoreText ? '<span>' + scoreText + '</span>' : '') +
-          '</div>' +
-        '</div>' +
-        '<div class="gs-status">' + badge + '</div>';
-      listEl.appendChild(a);
-    });
-
-    function getColor(key) {
-      var colors = {
-        threads: '#8a6d00', alibi: '#c89018',
-        bluff: '#d05035', lineup: '#4a6ee0', echo: '#7e4eb8',
-        cipher: '#1a9850', reflex: '#c89818',
-        vanish: '#009878',
-        sequence: '#4a6ee0',
-        rank: '#b8960a'
-      };
-      return colors[key] || '#888';
-    }
+    A.ready().then(render); render();
   })();
   </script>
 </body>
