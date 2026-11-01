@@ -1,0 +1,128 @@
+{
+  "name": "Acumen X Cards",
+  "account": "@joelcomm",
+  "updated": "2026-11-01",
+  "instructions": "Each card is posted as an ordinary X post whose text is post_text exactly as given; it already ends with card_url, and X turns that link into a playable card. Post one card per post, one game at a time, in 'order'. Do not attach images or media (X builds the card from the link) and do not shorten or change card_url. To make X refresh a card it has cached, append ?v=2 (then ?v=3, ...) to card_url in the post. Never reveal puzzle answers in any post or reply.",
+  "cards": [
+    {
+      "order": 1,
+      "game": "Missing Link",
+      "key": "threads",
+      "card_url": "https://games.aiforeveryoneshow.com/threads/x-card/",
+      "post_text": "Three words. One hidden word links them all.\n\nSUN · MOON · FLASH → ?\n\nPlay today's Missing Link right here in your feed.\n\nhttps://games.aiforeveryoneshow.com/threads/x-card/",
+      "card_title": "Missing Link — Acumen",
+      "card_description": "Connect the clues. Play a quick round.",
+      "card_image": "https://games.aiforeveryoneshow.com/threads/x-card/card.png",
+      "card_image_alt": "Missing Link: three cue words, SUN, MOON, FLASH, linked by one hidden word.",
+      "full_game_url": "https://games.aiforeveryoneshow.com/threads/"
+    },
+    {
+      "order": 2,
+      "game": "Bluff",
+      "key": "bluff",
+      "card_url": "https://games.aiforeveryoneshow.com/bluff/x-card/",
+      "post_text": "Two truths. One lie. Five rounds.\n\nCan you call the bluff? Play today's round right here in your feed.\n\nhttps://games.aiforeveryoneshow.com/bluff/x-card/",
+      "card_title": "Bluff — Acumen",
+      "card_description": "Two truths, one lie. Can you spot the bluff? Play a quick round.",
+      "card_image": "https://games.aiforeveryoneshow.com/bluff/x-card/card.png",
+      "card_image_alt": "Bluff: three statements about a topic, two true and one fake. Tap the lie.",
+      "full_game_url": "https://games.aiforeveryoneshow.com/bluff/"
+    },
+    {
+      "order": 3,
+      "game": "Alibi",
+      "key": "alibi",
+      "card_url": "https://games.aiforeveryoneshow.com/alibi/x-card/",
+      "post_text": "Nine words. Eight share a secret. One has no alibi.\n\nCan you catch the culprit? Play today's case right here in your feed.\n\nhttps://games.aiforeveryoneshow.com/alibi/x-card/",
+      "card_title": "Alibi — Acumen",
+      "card_description": "Nine words. Eight have alibis. Can you catch the culprit? Play a quick round.",
+      "card_image": "https://games.aiforeveryoneshow.com/alibi/x-card/card.png",
+      "card_image_alt": "Alibi: a 3x3 grid of yellow things, BANANA, LEMON, CANARY and more, with TOMATO caught as the culprit.",
+      "full_game_url": "https://games.aiforeveryoneshow.com/alibi/"
+    },
+    {
+      "order": 4,
+      "game": "Sequence",
+      "key": "sequence",
+      "card_url": "https://games.aiforeveryoneshow.com/sequence/x-card/",
+      "post_text": "9, 14, 24, 44 … what comes next?\n\nFive number patterns a day. Play today's round right here in your feed.\n\nhttps://games.aiforeveryoneshow.com/sequence/x-card/",
+      "card_title": "Sequence — Acumen",
+      "card_description": "Find the pattern. Pick the missing number. Play a quick round.",
+      "card_image": "https://games.aiforeveryoneshow.com/sequence/x-card/card.png",
+      "card_image_alt": "Sequence: the numbers 9, 14, 24, 44 and a mystery tile — what comes next?",
+      "full_game_url": "https://games.aiforeveryoneshow.com/sequence/"
+    },
+    {
+      "order": 5,
+      "game": "Cipher",
+      "key": "cipher",
+      "card_url": "https://games.aiforeveryoneshow.com/cipher/x-card/",
+      "post_text": "Every letter is swapped for another. Crack the code to reveal the quote.\n\nPlay today's Cipher right here in your feed.\n\nhttps://games.aiforeveryoneshow.com/cipher/x-card/",
+      "card_title": "Cipher — Acumen",
+      "card_description": "Crack the code, decode the quote. Play a quick round.",
+      "card_image": "https://games.aiforeveryoneshow.com/cipher/x-card/card.png",
+      "card_image_alt": "Cipher: a coded phrase with some letters decoded, and a letter picker to crack the rest.",
+      "full_game_url": "https://games.aiforeveryoneshow.com/cipher/"
+    },
+    {
+      "order": 6,
+      "game": "Lineup",
+      "key": "lineup",
+      "card_url": "https://games.aiforeveryoneshow.com/lineup/x-card/",
+      "post_text": "Five things. Put them in order. Three tries a round.\n\nTrust your gut and play today's Lineup right here in your feed.\n\nhttps://games.aiforeveryoneshow.com/lineup/x-card/",
+      "card_title": "Lineup — Acumen",
+      "card_description": "Put five things in order. Trust your gut. Play a quick round.",
+      "card_image": "https://games.aiforeveryoneshow.com/lineup/x-card/card.png",
+      "card_image_alt": "Lineup: drag five units of time — Week, Second, Year, Hour, Day — into order from shortest to longest.",
+      "full_game_url": "https://games.aiforeveryoneshow.com/lineup/"
+    },
+    {
+      "order": 7,
+      "game": "Rank",
+      "key": "rank",
+      "card_url": "https://games.aiforeveryoneshow.com/rank/x-card/",
+      "post_text": "Four things. One hidden measure. Lowest to highest.\n\nCan you rank them right? Play today's round right here in your feed.\n\nhttps://games.aiforeveryoneshow.com/rank/x-card/",
+      "card_title": "Rank — Acumen",
+      "card_description": "Four things, one hidden measure. Can you put them in order? Play a quick round.",
+      "card_image": "https://games.aiforeveryoneshow.com/rank/x-card/card.png",
+      "card_image_alt": "Rank: four cards — pineapple, cherry, pumpkin, lemon — to drag into order from lowest to highest on a hidden measure.",
+      "full_game_url": "https://games.aiforeveryoneshow.com/rank/"
+    },
+    {
+      "order": 8,
+      "game": "Reflex",
+      "key": "reflex",
+      "card_url": "https://games.aiforeveryoneshow.com/reflex/x-card/",
+      "post_text": "A word flashes. Left or right? Faster every round.\n\nHow fast are your reflexes? Play right here in your feed.\n\nhttps://games.aiforeveryoneshow.com/reflex/x-card/",
+      "card_title": "Reflex — Acumen",
+      "card_description": "Sort fast. Think faster. Play a quick round.",
+      "card_image": "https://games.aiforeveryoneshow.com/reflex/x-card/card.png",
+      "card_image_alt": "Reflex: a word flashes in the center and you tap left or right to sort it before the timer runs out.",
+      "full_game_url": "https://games.aiforeveryoneshow.com/reflex/"
+    },
+    {
+      "order": 9,
+      "game": "Echo",
+      "key": "echo",
+      "card_url": "https://games.aiforeveryoneshow.com/echo/x-card/",
+      "post_text": "Watch the tiles flash. Tap them back in reverse. One more each round.\n\nHow far can you go? Play today's Echo right here in your feed.\n\nhttps://games.aiforeveryoneshow.com/echo/x-card/",
+      "card_title": "Echo — Acumen",
+      "card_description": "Watch the tiles flash, then tap them back in reverse. Play a quick round.",
+      "card_image": "https://games.aiforeveryoneshow.com/echo/x-card/card.png",
+      "card_image_alt": "Echo: a grid of six colored tiles; watch them flash 1, 2, 3, then tap them back 3, 2, 1.",
+      "full_game_url": "https://games.aiforeveryoneshow.com/echo/"
+    },
+    {
+      "order": 10,
+      "game": "Vanish",
+      "key": "vanish",
+      "card_url": "https://games.aiforeveryoneshow.com/vanish/x-card/",
+      "post_text": "The letter grid is disappearing. Make as many words as you can before it's gone.\n\nPlay today's Vanish right here in your feed.\n\nhttps://games.aiforeveryoneshow.com/vanish/x-card/",
+      "card_title": "Vanish — Acumen",
+      "card_description": "The grid is disappearing. Make words, fast. Play a quick round.",
+      "card_image": "https://games.aiforeveryoneshow.com/vanish/x-card/card.png",
+      "card_image_alt": "Vanish: a 5x5 letter grid with some tiles already gone, spelling the example word STONE.",
+      "full_game_url": "https://games.aiforeveryoneshow.com/vanish/"
+    }
+  ]
+}
