@@ -1,0 +1,102 @@
+/* theme.css — "Arcade Bevel": dark board, bright bevelled pieces, chamfered
+ * corners, solid lips that press down, and the same extruded display-font
+ * title as the store thumbnail. Load AFTER style.css and kit.css, then the
+ * game's own file (sets --accent, --glow, --t1/--t2/--ext, --title-font).
+ * Almost everything restyles through the CSS variables the games already use. */
+:root {
+  --bg: #0d1024; --card: #1a1e44; --card-border: rgba(255,255,255,.18); --border: rgba(255,255,255,.18);
+  --text: #eef1ff; --text-dim: #a9b1e6; --white: #ffffff;
+  --accent-dim: color-mix(in srgb, var(--accent) 22%, transparent);
+  --correct: #35e08a; --correct-dim: rgba(53,224,138,.18);
+  --wrong: #ff5a6e; --wrong-dim: rgba(255,90,110,.18); --danger: #ff5a6e;
+  --cut: 14px; --ink: #0a0720; --lip: rgba(0,0,0,.42);
+  --btn-text: #fff;
+}
+html, body {
+  color: var(--text);
+  background:
+    radial-gradient(130% 60% at 50% -4%, var(--glow) 0%, transparent 70%),
+    linear-gradient(180deg, var(--bg), color-mix(in srgb, var(--bg) 65%, #000));
+  background-attachment: fixed;
+}
+body::before {            /* faint diagonal "board" texture */
+  content: ""; position: fixed; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(135deg, rgba(255,255,255,.04) 0 2px, transparent 2px 24px);
+}
+/* the website edition's #app is a fixed-height, overflow:hidden column; the bigger title header
+   needs it to scroll on short phones (kit.css already does this for the Playables edition) */
+#app { position: relative; overflow-x: hidden; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+
+/* chamfered (bevelled) corners */
+.rules-box, .btn-main, .btn-sm, .tile, .word-btn, .vg-cell, .game-header,
+.stmt-btn, .sort-item, .pick-btn, .btn-hint, .sort-btn, .seq-num, .choice-btn,
+.cue-card, #guess-input, .btn, .rk-card, .rk-submit, .rk-fact {
+  border-radius: 0;
+  clip-path: polygon(var(--cut) 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% calc(100% - var(--cut)),
+                     calc(100% - var(--cut)) 100%, var(--cut) 100%, 0 calc(100% - var(--cut)), 0 var(--cut));
+}
+
+/* title header: same look as the store thumbnail */
+.game-title, .rk-title {
+  font-family: var(--title-font), 'Inter', sans-serif; font-weight: 400;
+  font-size: var(--title-size, clamp(54px, 17vw, 78px)); line-height: 1; letter-spacing: .03em; text-transform: uppercase;
+  padding: 4px 10px 12px; transform: rotate(-2deg);
+  color: transparent;
+  background: linear-gradient(180deg, var(--t1) 0 48%, var(--t2) 50% 100%);
+  -webkit-background-clip: text; background-clip: text;
+  filter: drop-shadow(2px 0 0 var(--ink)) drop-shadow(-2px 0 0 var(--ink)) drop-shadow(0 2px 0 var(--ink)) drop-shadow(0 -2px 0 var(--ink))
+          drop-shadow(0 4px 0 var(--ext)) drop-shadow(0 8px 0 var(--ext)) drop-shadow(0 18px 12px rgba(0,0,0,.5));
+}
+.tagline { color: var(--text-dim); font-weight: 700; }
+.title-icon { filter: drop-shadow(0 6px 0 var(--lip)) drop-shadow(0 0 22px var(--glow)); }
+
+/* panels */
+.rules-box {
+  background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.03)), var(--card);
+  border: 0; border-top: 4px solid var(--accent); border-bottom: 6px solid var(--lip);
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.14);
+}
+.rules-box p { color: var(--text); }
+.hl { color: var(--accent); }
+.best-score { color: var(--text-dim); }
+
+/* primary button: glossy, thick lip, presses down */
+.btn-main {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 55%, #fff) 0%, var(--accent) 52%, color-mix(in srgb, var(--accent) 82%, #000) 100%);
+  color: var(--btn-text); text-shadow: 0 2px 0 rgba(0,0,0,.28);
+  border: 0; border-bottom: 8px solid color-mix(in srgb, var(--accent) 42%, #000);
+  box-shadow: inset 0 3px 0 rgba(255,255,255,.5);
+  min-height: 66px; letter-spacing: 3px;
+}
+.btn-main:active { transform: translateY(5px); opacity: 1; border-bottom-width: 3px; }
+.btn-main:disabled { filter: grayscale(.7) brightness(.7); }
+
+/* HUD chip */
+.game-header { background: rgba(255,255,255,.07); padding: 8px 16px; --cut: 9px; box-shadow: inset 0 -3px 0 rgba(0,0,0,.25); }
+.round-label { color: var(--text-dim); }
+.score-label { color: var(--accent); text-shadow: 0 0 14px color-mix(in srgb, var(--accent) 60%, transparent); }
+
+/* shared lip under grids of pieces */
+.tile-grid, .word-grid, .letter-grid { filter: drop-shadow(0 6px 0 var(--lip)); }
+
+.gameover-heading, .final-score { font-family: var(--title-font), 'Inter', sans-serif; font-weight: 400; }
+#next-cd, .daily-cd { color: var(--accent); }
+
+/* ── overrides for things the hub's own JS styles at runtime / inline ─────
+ * (the website edition's daily.js injects a light-theme header and the games
+ * hard-code a few greys; `body` prefixes beat those single-class rules.) */
+body .daily-badge { background: color-mix(in srgb, var(--accent) 22%, transparent); color: var(--accent); }
+body .daily-date { color: var(--text-dim); }
+body .daily-streak { color: var(--accent); }
+body .daily-done { background: rgba(53,224,138,.12); border-color: rgba(53,224,138,.35); }
+body .daily-done-lbl, body .daily-done-score { color: var(--correct); }
+body .daily-cd { color: var(--text-dim); }
+#next-cd span, .daily-cd { color: var(--text-dim) !important; }
+a[href$="app.html"]:not(.back-link):not([style*="position:fixed"]), .daily-hub-link {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 55%, #fff), var(--accent) 52%, color-mix(in srgb, var(--accent) 82%, #000)) !important;
+  color: var(--btn-text) !important; text-shadow: 0 2px 0 rgba(0,0,0,.25);
+  border: 0 !important; border-bottom: 6px solid color-mix(in srgb, var(--accent) 42%, #000) !important; border-radius: 0 !important;
+  box-shadow: inset 0 3px 0 rgba(255,255,255,.5);
+  clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px);
+}
+.back-link { background: rgba(255,255,255,.1) !important; box-shadow: inset 0 -3px 0 rgba(0,0,0,.3) !important; }

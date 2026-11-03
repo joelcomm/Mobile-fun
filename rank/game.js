@@ -2976,22 +2976,22 @@
       var isPlay = phase === 'play';
 
       return (
-        <div className="max-w-[480px] mx-auto px-5 flex flex-col"
+        <div className="rk-root max-w-[480px] mx-auto px-5 flex flex-col"
           style={{ height: '100dvh', overflowX: 'hidden', overflowY: phase === 'done' ? 'auto' : 'hidden', paddingTop: 'calc(72px + env(safe-area-inset-top, 0px))', paddingBottom: 'calc(24px + env(safe-area-inset-bottom, 0px))' }}>
 
           {/* Header */}
           <div className="flex justify-between items-center mb-5">
-            <h1 className="text-3xl font-black tracking-[6px] text-accent">RANK</h1>
-            {streak > 0 && <span className="text-base font-bold tracking-wide">{'\uD83D\uDD25'} {streak}</span>}
+            <h1 className="rk-title">RANK</h1>
+            {streak > 0 && <span className="rk-streak text-base font-bold tracking-wide">{'\uD83D\uDD25'} {streak}</span>}
           </div>
 
           {/* Metric */}
           <div className="text-center mb-5">
-            <p className="text-[11px] font-bold tracking-[3px] text-gray-600 uppercase mb-2">
+            <p className="rk-sub text-[11px] font-bold tracking-[3px] text-gray-600 uppercase mb-2">
               {EMBED && isPlay ? 'Drag to rank from lowest to highest' : 'Rank from lowest to highest'}
             </p>
-            <p className="text-xl font-extrabold tracking-wide"
-              style={{ color: isPlay ? '#6b6b80' : '#c89818' }}>
+            <p className="rk-metric text-xl font-extrabold tracking-wide" data-play={isPlay ? '1' : '0'}
+              style={{ color: isPlay ? 'var(--text-dim, #6b6b80)' : 'var(--accent, #c89818)' }}>
               {isPlay ? '? ? ?' : puzzle.metric}
             </p>
           </div>
@@ -3006,15 +3006,15 @@
 
               var borderColor = '#dddde4';
               var bgColor = '#ffffff';
-              if (dragging) { borderColor = '#c89818'; bgColor = 'rgba(200,152,24,0.1)'; }
+              if (dragging) { borderColor = 'var(--accent, #c89818)'; bgColor = 'rgba(200,152,24,0.1)'; }
               else if (shown) {
                 borderColor = ok ? 'rgba(34,197,94,0.6)' : 'rgba(239,68,68,0.6)';
                 bgColor = ok ? 'rgba(34,197,94,0.06)' : 'rgba(239,68,68,0.06)';
               }
 
               return (
-                <div key={item.ci}
-                  className={'relative flex items-center gap-3 px-4 py-[14px] rounded-xl select-none' + (shown ? ' anim-pop' : '')}
+                <div key={item.ci} data-st={dragging ? 'drag' : shown ? (ok ? 'ok' : 'bad') : 'idle'}
+                  className={'rk-card relative flex items-center gap-3 px-4 py-[14px] rounded-xl select-none' + (shown ? ' anim-pop' : '')}
                   style={{
                     border: '2px solid ' + borderColor,
                     background: bgColor,
@@ -3028,20 +3028,20 @@
                   onPointerDown={function (e) { grab(e, i); }}>
 
                   {isPlay ? (
-                    <span style={{ color: '#aaa', fontSize: '14px', width: '20px', flexShrink: 0 }}>{'\u2B0D'}</span>
+                    <span className="rk-grip" style={{ color: '#aaa', fontSize: '14px', width: '20px', flexShrink: 0 }}>{'\u2B0D'}</span>
                   ) : (
-                    <span className="flex items-center justify-center flex-shrink-0 text-[11px] font-bold rounded-full"
+                    <span className="rk-badge flex items-center justify-center flex-shrink-0 text-[11px] font-bold rounded-full"
                       style={{
                         width: '24px', height: '24px',
                         background: shown ? (ok ? '#22c55e' : '#ef4444') : '#dddde4',
-                        color: shown ? (ok ? '#000' : '#fff') : '#6b6b80',
+                        color: shown ? (ok ? '#000' : '#fff') : 'var(--text-dim, #6b6b80)',
                       }}>
                       {i + 1}
                     </span>
                   )}
 
                   <span className="text-[1.5rem] leading-none">{item.emoji}</span>
-                  <span className="font-bold text-[14px] flex-1 leading-snug">{item.name}</span>
+                  <span className="rk-name font-bold text-[14px] flex-1 leading-snug">{item.name}</span>
 
                   {shown && (
                     <span className="text-base font-black"
@@ -3057,7 +3057,7 @@
           {/* Submit */}
           {isPlay && (
             <button onClick={submit}
-              className="w-full py-4 rounded-xl bg-accent font-extrabold text-lg tracking-[3px] active:scale-[0.97] transition-transform"
+              className="rk-submit w-full py-4 rounded-xl bg-accent font-extrabold text-lg tracking-[3px] active:scale-[0.97] transition-transform"
               style={{ color: '#fff' }}>
               SUBMIT
             </button>
@@ -3068,14 +3068,14 @@
             <div className="anim-fade text-center mb-5">
               <div className="mb-3">
                 <span className="text-5xl font-black text-accent">{score}</span>
-                <span className="text-xl font-bold" style={{ color: '#6b6b80' }}>/4</span>
+                <span className="text-xl font-bold" style={{ color: 'var(--text-dim, #6b6b80)' }}>/4</span>
               </div>
-              <p className="text-[10px] font-bold tracking-[3px] mb-2" style={{ color: '#6b6b80' }}>CORRECT ORDER</p>
+              <p className="text-[10px] font-bold tracking-[3px] mb-2" style={{ color: 'var(--text-dim, #6b6b80)' }}>CORRECT ORDER</p>
               <div className="flex justify-center gap-4">
                 {puzzle.items.map(function (it, i) {
                   return (
                     <div key={i} className="flex flex-col items-center gap-1">
-                      <span className="text-[10px] font-bold" style={{ color: '#6b6b80' }}>{i + 1}</span>
+                      <span className="text-[10px] font-bold" style={{ color: 'var(--text-dim, #6b6b80)' }}>{i + 1}</span>
                       <span className="text-xl">{it.emoji}</span>
                     </div>
                   );
@@ -3093,10 +3093,10 @@
 
           {/* Fact */}
           {showFact && (
-            <div className="anim-slide rounded-xl p-5 mb-5"
+            <div className="rk-fact anim-slide rounded-xl p-5 mb-5"
               style={{ background: 'rgba(200,152,24,0.06)', border: '1px solid rgba(200,152,24,0.15)' }}>
               <p className="text-center text-3xl mb-3">{puzzle.factEmoji}</p>
-              <p className="text-[14px] leading-relaxed text-center" style={{ color: '#6b6b80' }}>{puzzle.fact}</p>
+              <p className="text-[14px] leading-relaxed text-center" style={{ color: 'var(--text-dim, #6b6b80)' }}>{puzzle.fact}</p>
             </div>
           )}
 
@@ -3104,7 +3104,7 @@
           {phase === 'done' && (
             <div className="anim-fade flex flex-col items-center gap-4 pb-4">
               <div className="text-center">
-                <p className="text-[10px] font-bold tracking-[3px] mb-1" style={{ color: '#6b6b80' }}>NEW PUZZLE IN</p>
+                <p className="text-[10px] font-bold tracking-[3px] mb-1" style={{ color: 'var(--text-dim, #6b6b80)' }}>NEW PUZZLE IN</p>
                 <p className="text-lg font-bold text-accent tracking-[3px]" style={{ fontVariantNumeric: 'tabular-nums' }}>{cd}</p>
               </div>
               <div style={{ textAlign: 'center' }}>

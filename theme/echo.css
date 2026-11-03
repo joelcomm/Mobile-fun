@@ -1,0 +1,17 @@
+@font-face { font-family: 'Title'; src: url('fonts/Audiowide.woff2') format('woff2'); font-display: swap; }
+:root { --title-font: 'Title'; --accent: #b58cff; --glow: #3a1f7a; --t1: #f2fdff; --t2: #6fe3ff; --ext: #25106a; --bg: #100a26; --card: #1f1650; --cut: 16px; }
+/* Simon-style pads: dim until lit */
+.tile { border: 0; box-shadow: inset 0 5px 0 rgba(255,255,255,.28), inset 0 -10px 0 rgba(0,0,0,.34); }
+.tile-0 { background: color-mix(in srgb, var(--c0) 58%, #1a1240); }
+.tile-1 { background: color-mix(in srgb, var(--c1) 58%, #1a1240); }
+.tile-2 { background: color-mix(in srgb, var(--c2) 58%, #1a1240); }
+.tile-3 { background: color-mix(in srgb, var(--c3) 58%, #1a1240); }
+.tile-4 { background: color-mix(in srgb, var(--c4) 58%, #1a1240); }
+.tile-5 { background: color-mix(in srgb, var(--c5) 58%, #1a1240); }
+.tile[class*="flash-"] { filter: brightness(1.3) saturate(1.3); box-shadow: inset 0 5px 0 rgba(255,255,255,.7), inset 0 0 46px rgba(255,255,255,.55), inset 0 -10px 0 rgba(0,0,0,.2); }
+.tile.correct-flash { box-shadow: inset 0 5px 0 rgba(255,255,255,.7), inset 0 0 46px rgba(255,255,255,.5); }
+.status-label { text-shadow: 0 0 16px currentColor; }
+.dot { box-shadow: 0 2px 0 var(--lip); }
+/* the base game fades pads to 50% while they're not tappable ("WATCH"); keep them vivid */
+.tile.disabled { opacity: 1; }
+.tile.disabled:not([class*="flash-"]) { filter: brightness(.82); }

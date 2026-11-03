@@ -1,0 +1,12 @@
+@font-face { font-family: 'Title'; src: url('fonts/Racing-Sans-One.woff2') format('woff2'); font-display: swap; }
+:root { --title-font: 'Title'; --accent: #ffc83a; --glow: #8a4a00; --t1: #ffffff; --t2: #8fd0ff; --ext: #0b2f7a; --bg: #160e02; --card: #2c1d06; --btn-text: #2a1500; --cut: 14px; --left-color: #4a90ff; --right-color: #ff5a4a; }
+.sort-btn { height: 84px; border: 0; border-bottom: 8px solid rgba(0,0,0,.4); color: #fff; }
+.sort-left { background: linear-gradient(180deg, #7db4ff, #3a78ee); border-bottom-color: #1d3f9a; box-shadow: inset 0 3px 0 rgba(255,255,255,.5); }
+.sort-right { background: linear-gradient(180deg, #ff8c7e, #e0412f); border-bottom-color: #8a1f12; box-shadow: inset 0 3px 0 rgba(255,255,255,.45); }
+.sort-btn:active { transform: translateY(5px); border-bottom-width: 3px; }
+.sort-left .sort-cat-label, .sort-right .sort-cat-label { color: #fff; text-shadow: 0 2px 0 rgba(0,0,0,.35); }
+.word-display { font-family: var(--title-font), 'Inter', sans-serif; font-weight: 400; color: #fff; text-shadow: 0 4px 0 var(--ext), 0 8px 14px rgba(0,0,0,.45); }
+.timer-bar { height: 12px; background: rgba(255,255,255,.14); border-radius: 0; }
+.timer-fill { background: linear-gradient(90deg, #ffe27a, #ffb000); border-radius: 0; }
+.timer-fill.urgent { background: linear-gradient(90deg, #ff8c7e, #e0412f); }
+.category-hint { color: var(--text-dim); }

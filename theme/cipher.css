@@ -1,0 +1,14 @@
+@font-face { font-family: 'Title'; src: url('fonts/Black-Ops-One.woff2') format('woff2'); font-display: swap; }
+:root { --title-font: 'Title'; --accent: #3ee08f; --glow: #0e6a40; --t1: #fffbd0; --t2: #ffe14a; --ext: #08432a; --bg: #04150e; --card: #0e2c20; --btn-text: #04231a; --cut: 12px; }
+.cipher-decoded { color: #fff; border-bottom: 3px solid rgba(255,255,255,.35); }
+.cipher-char.selected .cipher-decoded { color: var(--accent); border-color: var(--accent); }
+.cipher-char.correct-char .cipher-decoded { color: #7dffb4; border-color: #7dffb4; }
+.pick-btn { --cut: 7px; background: linear-gradient(180deg, #ffffff, #d6e2ff); color: #0e1a2c; border: 0; border-bottom: 5px solid #7f8ccc; box-shadow: inset 0 2px 0 #fff; }
+.pick-btn:active { transform: translateY(3px); }
+.pick-btn.active-pick { background: linear-gradient(180deg, #7dffb4, #25c071); color: #04231a; border-bottom-color: #0d6a3e; }
+.btn-hint { --cut: 9px; background: rgba(255,255,255,.1); color: var(--text); border: 0; border-bottom: 5px solid var(--lip); }
+.btn-hint:disabled { opacity: .4; }
+.progress-bar { background: rgba(255,255,255,.14); }
+.rf-text, .rf-quote { color: var(--text); }
+/* long quotes: let the screen scroll instead of squashing the quote into the header/keyboard */
+.cipher-display, .cipher-word, .author-label, .selected-info, .letter-picker, .game-actions, .game-header, .progress-bar { flex-shrink: 0; }

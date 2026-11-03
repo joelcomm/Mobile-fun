@@ -1,0 +1,24 @@
+@font-face { font-family: 'Title'; src: url('fonts/Titan-One.woff2') format('woff2'); font-display: swap; }
+:root { --title-font: 'Title'; --accent: #ffc83a; --glow: #8a4a00; --t1: #ffffff; --t2: #e4d2ff; --ext: #6a3200; --bg: #1a1004; --card: #33220a; --btn-text: #2a1500; --cut: 14px; }
+.rk-title { font-size: 46px; letter-spacing: .04em; padding: 2px 8px 12px; }
+.rk-streak { color: var(--accent); font-weight: 800; text-shadow: 0 0 12px color-mix(in srgb, var(--accent) 60%, transparent); }
+.rk-sub { color: var(--text-dim) !important; }
+.rk-metric { color: var(--accent) !important; text-shadow: 0 0 14px color-mix(in srgb, var(--accent) 55%, transparent); }
+.rk-metric[data-play="1"] { color: var(--text-dim) !important; text-shadow: none; }
+
+/* cards: cream pieces with a lip, green/red when revealed */
+.rk-card { background: linear-gradient(180deg, #fffaf0, #f1dfae) !important; color: #2a1500; border: 0 !important; border-bottom: 6px solid #a8863a !important; box-shadow: inset 0 3px 0 #fff !important; }
+.rk-card[data-st="drag"] { background: linear-gradient(180deg, #fff6c9, #ffd75a) !important; border-bottom-color: #b58500 !important; }
+.rk-card[data-st="ok"] { background: linear-gradient(180deg, #62f2a6, #1fb86a) !important; border-bottom-color: #0d6a3e !important; color: #04231a; }
+.rk-card[data-st="bad"] { background: linear-gradient(180deg, #ff8494, #e03650) !important; border-bottom-color: #8e1428 !important; color: #2a0509; }
+.rk-name { color: inherit; }
+.rk-grip { color: #8a6a2a !important; }
+.rk-card[data-st="ok"] .rk-badge { background: #0d6a3e !important; color: #caffe3 !important; }
+.rk-card[data-st="bad"] .rk-badge { background: #8e1428 !important; color: #ffd5db !important; }
+.rk-card[data-st="ok"] > span:last-child, .rk-card[data-st="bad"] > span:last-child { color: inherit !important; }
+
+.rk-submit { background: linear-gradient(180deg, #ffe58a, #ffb400) !important; color: #2a1500 !important; border: 0; border-bottom: 8px solid #a56a00; box-shadow: inset 0 3px 0 rgba(255,255,255,.5); text-shadow: 0 2px 0 rgba(255,255,255,.35); min-height: 66px; }
+.rk-submit:active { transform: translateY(5px); border-bottom-width: 3px; }
+.rk-fact { background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.03)), var(--card) !important; border: 0 !important; border-top: 4px solid var(--accent) !important; border-bottom: 6px solid var(--lip) !important; box-shadow: inset 0 2px 0 rgba(255,255,255,.14); }
+.rk-fact p { color: var(--text) !important; }
+.rk-root { position: relative; }
