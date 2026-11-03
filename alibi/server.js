@@ -12,7 +12,7 @@ const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 app.post('/api/puzzle', async (req, res) => {
   try {
     const message = await client.messages.create({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-sonnet-5-5',
       max_tokens: 1024,
       system: 'You are a puzzle generator. Respond ONLY with raw valid JSON — no markdown, no backticks, no explanation.',
       messages: [
