@@ -1,12 +1,12 @@
 /* daily.js — Shared daily game system (resets at midnight GMT) */
 const Daily = (function () {
-  // Restarted Oct 8, 2026 so every game begins again from its first puzzle.
-  // (Previously Jun 5, 2026 — day 1 = Jun 6, 2026.)
-  const EPOCH = Date.UTC(2026, 9, 7); // Oct 7, 2026 — day 1 = Oct 8, 2026
+  // Restarted Nov 3, 2026 so every game begins again from its first puzzle.
+  // (Previously Oct 8, 2026 — day 1 = Oct 8; before that Jun 5 — day 1 = Jun 6.)
+  const EPOCH = Date.UTC(2026, 10, 2); // Nov 2, 2026 — day 1 = Nov 3, 2026
 
   // One-time wipe of each player's saved results, streaks, in-progress games and best scores
   // from before the restart, so every game is like new. Change RESET_ID to wipe again.
-  const RESET_ID = '2026-10-08';
+  const RESET_ID = '2026-11-03';
   const RESET_GAMES = /^(threads|alibi|bluff|cipher|echo|lineup|rank|reflex|sequence|vanish)-(daily|streak|progress|best)$|^rank_/;
   try {
     if (localStorage.getItem('acumen-reset') !== RESET_ID) {
