@@ -1,5 +1,6 @@
-// Bump the version whenever cached game files change, or returning visitors keep the old copies.
-var CACHE_NAME = 'acumen-v7';
+// Bump the version whenever cached game assets (css/js/images/fonts) change, or returning visitors keep the old copies.
+// Pages (html) are fetched network-first, so a redeploy shows up on the next visit without a bump.
+var CACHE_NAME = 'acumen-v8';
 
 var ASSETS = [
   '/',
@@ -44,7 +45,6 @@ var ASSETS = [
   '/theme/fonts/Racing-Sans-One.woff2',
   '/theme/fonts/Bungee.woff2',
   '/theme/fonts/Orbitron.woff2',
-  '/theme/fonts/Titan-One.woff2',
   '/threads/index.html',
   '/threads/app.js',
   '/threads/puzzles.js',
@@ -81,10 +81,16 @@ var ASSETS = [
   '/rank/style.css'
 ];
 
+// De-duplicate: Cache.addAll rejects duplicate URLs, which used to make the whole install fail.
+ASSETS = ASSETS.filter(function (u, i) { return ASSETS.indexOf(u) === i; });
+
 self.addEventListener('install', function (event) {
   event.waitUntil(
     caches.open(CACHE_NAME).then(function (cache) {
-      return cache.addAll(ASSETS);
+      // One file at a time, so a single missing/failed file can never block an update.
+      return Promise.all(ASSETS.map(function (url) {
+        return cache.add(new Request(url, { cache: 'reload' })).catch(function () {});
+      }));
     })
   );
   self.skipWaiting();
@@ -103,15 +109,35 @@ self.addEventListener('activate', function (event) {
 });
 
 self.addEventListener('fetch', function (event) {
-  event.respondWith(
-    caches.match(event.request).then(function (cached) {
-      if (cached) return cached;
-      return fetch(event.request).then(function (response) {
+  var req = event.request;
+  if (req.method !== 'GET') return;
+
+  var isPage = req.mode === 'navigate' || (req.headers.get('accept') || '').indexOf('text/html') !== -1;
+
+  if (isPage) {
+    // Network first: always show the latest page when online; use the cached copy only when offline.
+    event.respondWith(
+      fetch(req).then(function (response) {
         if (response && response.status === 200 && response.type === 'basic') {
           var clone = response.clone();
-          caches.open(CACHE_NAME).then(function (cache) {
-            cache.put(event.request, clone);
-          });
+          caches.open(CACHE_NAME).then(function (cache) { cache.put(req, clone); });
+        }
+        return response;
+      }).catch(function () {
+        return caches.match(req).then(function (cached) { return cached || caches.match('/index.html'); });
+      })
+    );
+    return;
+  }
+
+  // Everything else (scripts, styles, images, fonts): cache first.
+  event.respondWith(
+    caches.match(req).then(function (cached) {
+      if (cached) return cached;
+      return fetch(req).then(function (response) {
+        if (response && response.status === 200 && response.type === 'basic') {
+          var clone = response.clone();
+          caches.open(CACHE_NAME).then(function (cache) { cache.put(req, clone); });
         }
         return response;
       });
