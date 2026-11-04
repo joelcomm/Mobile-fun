@@ -1,5 +1,5 @@
 // Bump the version whenever cached game files change, or returning visitors keep the old copies.
-var CACHE_NAME = 'acumen-v6';
+var CACHE_NAME = 'acumen-v7';
 
 var ASSETS = [
   '/',
@@ -10,6 +10,20 @@ var ASSETS = [
   '/icon-192.png',
   '/icon-512.png',
   '/manifest.json',
+  '/theme/fonts/Titan-One.woff2',
+  '/img/cards/threads.jpg',
+  '/img/cards/alibi.jpg',
+  '/img/cards/bluff.jpg',
+  '/img/cards/lineup.jpg',
+  '/img/cards/echo.jpg',
+  '/img/cards/cipher.jpg',
+  '/img/cards/reflex.jpg',
+  '/img/cards/vanish.jpg',
+  '/img/cards/sequence.jpg',
+  '/img/cards/rank.jpg',
+  '/img/cards/puptown.jpg',
+  '/img/cards/poundbreak.jpg',
+  '/img/cards/constellation.jpg',
   '/theme/theme.css',
   '/theme/threads.css',
   '/theme/alibi.css',
