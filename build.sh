@@ -14,6 +14,7 @@ cp app.html www/index.html
 cp daily.js x-embed.js stats.html manifest.json sw.js www/
 cp icon-192.png icon-512.png www/ 2>/dev/null || true
 mkdir -p www/theme && cp -R theme/. www/theme/   # shared "Arcade Bevel" game theme
+mkdir -p www/img && cp -R img/. www/img/             # hub card art
 cp privacy.html support.html www/ 2>/dev/null || true
 
 GAMES="threads alibi bluff lineup echo cipher reflex sequence rank"

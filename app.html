@@ -5,540 +5,211 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#f5f5f7">
+  <meta name="theme-color" content="#0d1024">
+  <meta name="description" content="Acumen: a new set of daily brain games every day. Word puzzles, trivia, memory, logic and more.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <title>Acumen</title>
   <style>
+    @font-face { font-family: 'Title'; src: url('theme/fonts/Titan-One.woff2') format('woff2'); font-display: swap; }
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
     :root {
-      --bg: #f5f5f7;
-      --card: #fffffe;
-      --card-hover: #f0f0f5;
-      --border: rgba(19, 26, 43, 0.08);
-      --text: #1d1d2b;
-      --text-dim: #6b6b80;
-      --white: #1a1a2e;
-      --accent: #1a9a45;
+      --bg: #0d1024;
+      --panel: #1a1e44;
+      --text: #eef1ff;
+      --dim: #a9b1e6;
+      --ink: #0a0720;
+      --lip: rgba(0, 0, 0, .45);
+      --gold: #ffc83a;
+      --cut: 14px;
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
-
-      --clr-threads: #D97706;
-      --clr-alibi: #0D9488;
-      --clr-bluff: #DC2626;
-      --clr-lineup: #2563EB;
-      --clr-echo: #7C3AED;
-      --clr-cipher: #059669;
-      --clr-reflex: #EA580C;
-      --clr-sequence: #4F46E5;
-      --clr-rank: #DB2777;
     }
 
     html, body {
-      height: 100%;
-      background: var(--bg);
+      min-height: 100%;
       color: var(--text);
       font-family: 'Inter', -apple-system, sans-serif;
-      font-size: 18px;
+      font-size: 16px;
+      background:
+        radial-gradient(130% 55% at 50% -6%, #3a2f8a 0%, transparent 70%),
+        linear-gradient(180deg, var(--bg), #070916) #070916;   /* solid colour last, so nothing can ever show white */
+      background-attachment: fixed;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none;
+      background: repeating-linear-gradient(135deg, rgba(255,255,255,.04) 0 2px, transparent 2px 26px);
     }
 
     #app {
-      max-width: 480px;
+      position: relative;
+      max-width: 960px;
       margin: 0 auto;
-      padding: 24px 20px;
+      padding: 24px 18px;
       padding-top: calc(24px + var(--safe-top));
-      padding-bottom: calc(24px + var(--safe-bottom));
+      padding-bottom: calc(28px + var(--safe-bottom));
       min-height: 100dvh;
       display: flex;
       flex-direction: column;
-      -webkit-font-smoothing: antialiased;
     }
 
-    /* ─── Header ─────────────────────────── */
-    header {
-      text-align: center;
-      margin-bottom: 24px;
-      padding-top: 20px;
-      position: relative;
-    }
-
-    header::before {
-      content: '';
-      position: absolute;
-      top: -24px;
-      left: -20px;
-      right: -20px;
-      height: 200px;
-      background: linear-gradient(180deg,
-        rgba(19, 26, 43, 0.035) 0%,
-        rgba(232, 163, 23, 0.02) 50%,
-        transparent 100%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    header > * { position: relative; z-index: 1; }
-
+    /* ── header ───────────────────────────────────────────── */
+    header { text-align: center; padding: 6px 0 4px; }
     .app-logo {
-      width: 72px;
-      height: 72px;
-      margin: 0 auto 12px;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(19, 26, 43, 0.2), 0 8px 24px rgba(19, 26, 43, 0.15);
+      width: 68px; height: 68px; margin: 0 auto 6px;
+      filter: drop-shadow(0 5px 0 var(--lip)) drop-shadow(0 0 22px rgba(255, 200, 58, .35));
     }
-
-    .app-logo svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
+    .app-logo svg { width: 100%; height: 100%; display: block; }
     h1 {
-      font-size: 28px;
-      font-weight: 900;
-      letter-spacing: 5px;
-      color: #131A2B;
+      font-family: 'Title', 'Inter', sans-serif; font-weight: 400;
+      font-size: clamp(56px, 14vw, 104px); line-height: 1; letter-spacing: .05em;
+      padding: 4px 12px 14px; transform: rotate(-2deg);
+      color: transparent;
+      background: linear-gradient(180deg, #fff3b0 0 48%, #ffb400 50% 100%);
+      -webkit-background-clip: text; background-clip: text;
+      filter: drop-shadow(2px 0 0 var(--ink)) drop-shadow(-2px 0 0 var(--ink)) drop-shadow(0 2px 0 var(--ink)) drop-shadow(0 -2px 0 var(--ink))
+              drop-shadow(0 4px 0 #7a3b00) drop-shadow(0 8px 0 #7a3b00) drop-shadow(0 20px 14px rgba(0,0,0,.5));
     }
-
     .subtitle {
-      font-size: 12px;
-      letter-spacing: 2.5px;
-      color: var(--text-dim);
-      margin-top: 6px;
-      line-height: 1.6;
+      font-size: 12px; font-weight: 800; letter-spacing: 4px; text-transform: uppercase; color: var(--dim);
+    }
+    #hub-date {
+      display: inline-block; margin-top: 10px; padding: 5px 16px;
+      font-size: 11px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--gold);
+      background: rgba(255, 200, 58, .14);
+      clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px);
     }
 
-    .color-dots {
-      display: none;
-    }
-
-    .color-dots .cdot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-    .section-header::before,
-    .section-header::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-    .section-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    .games {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      flex: 1;
-    }
-
-    .game-card {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-      background: var(--card);
-      border: 1px solid rgba(19, 26, 43, 0.06);
-      box-shadow: 0 1px 2px rgba(19, 26, 43, 0.06), 0 4px 12px rgba(19, 26, 43, 0.04);
-      border-radius: 14px;
-      padding: 16px 18px;
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
-      position: relative;
-      --glow: #888;
-    }
-
-    .game-card:active {
-      transform: scale(0.975) translateY(1px);
-      box-shadow: 0 1px 3px rgba(19, 26, 43, 0.08), 0 2px 6px rgba(19, 26, 43, 0.04);
-    }
-
-    .game-card.done {
-      opacity: 0.65;
-    }
-    .game-card.done:active {
-      opacity: 0.8;
-    }
-
-    /* Glow var per game — no left border */
-    .threads  { --glow: var(--clr-threads); }
-    .alibi    { --glow: var(--clr-alibi); }
-    .bluff    { --glow: var(--clr-bluff); }
-    .lineup   { --glow: var(--clr-lineup); }
-    .echo     { --glow: var(--clr-echo); }
-    .cipher   { --glow: var(--clr-cipher); }
-    .reflex   { --glow: var(--clr-reflex); }
-    .sequence { --glow: var(--clr-sequence); }
-    .rank     { --glow: var(--clr-rank); }
-
-    .card-top {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 4px;
-    }
-
-    .card-icon {
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 12px;
-      flex-shrink: 0;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.15);
-      position: relative;
-    }
-
-    .card-icon svg {
-      width: 24px;
-      height: 24px;
-    }
-
-    .card-icon .done-check {
-      position: absolute;
-      bottom: -4px;
-      right: -4px;
-      width: 18px;
-      height: 18px;
-      background: var(--accent);
-      border-radius: 50%;
-      border: 2px solid var(--card);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .card-icon .done-check svg {
-      width: 10px;
-      height: 10px;
-    }
-
-    .card-title {
-      font-size: 17px;
-      font-weight: 700;
-      letter-spacing: 0.3px;
-      flex: 1;
-      color: var(--text);
-    }
-
-    .card-chevron {
-      color: #c8c8d0;
-      font-size: 20px;
-      font-weight: 300;
-      flex-shrink: 0;
-      margin-left: auto;
-      line-height: 1;
-    }
-
-    .card-desc {
-      font-size: 13px;
-      color: var(--text-dim);
-      line-height: 1.55;
-    }
-
-    .card-tag {
-      display: inline-block;
-      margin-top: 6px;
-      padding: 2px 7px;
-      border-radius: 4px;
-      font-size: 9.5px;
-      font-weight: 600;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-    }
-
-    /* Per-game accent colors — icon gradients + subtle tag tints */
-    .threads .card-icon { background: linear-gradient(135deg, #F59E0B, #D97706); }
-    .threads .card-tag { background: rgba(217, 119, 6, 0.08); color: #92600a; }
-
-    .alibi .card-icon { background: linear-gradient(135deg, #14B8A6, #0D9488); }
-    .alibi .card-tag { background: rgba(13, 148, 136, 0.08); color: #0D7D73; }
-
-    .bluff .card-icon { background: linear-gradient(135deg, #EF4444, #DC2626); }
-    .bluff .card-tag { background: rgba(220, 38, 38, 0.08); color: #B91C1C; }
-
-    .lineup .card-icon { background: linear-gradient(135deg, #3B82F6, #2563EB); }
-    .lineup .card-tag { background: rgba(37, 99, 235, 0.08); color: #1D4ED8; }
-
-    .echo .card-icon { background: linear-gradient(135deg, #8B5CF6, #7C3AED); }
-    .echo .card-tag { background: rgba(124, 58, 237, 0.08); color: #6D28D9; }
-
-    .cipher .card-icon { background: linear-gradient(135deg, #10B981, #059669); }
-    .cipher .card-tag { background: rgba(5, 150, 105, 0.08); color: #047857; }
-
-    .reflex .card-icon { background: linear-gradient(135deg, #F97316, #EA580C); }
-    .reflex .card-tag { background: rgba(234, 88, 12, 0.08); color: #C2410C; }
-
-    .sequence .card-icon { background: linear-gradient(135deg, #6366F1, #4F46E5); }
-    .sequence .card-tag { background: rgba(79, 70, 229, 0.08); color: #4338CA; }
-
-    .rank .card-icon { background: linear-gradient(135deg, #EC4899, #DB2777); }
-    .rank .card-tag { background: rgba(219, 39, 119, 0.08); color: #BE185D; }
-
-    /* ─── Circular Progress ────────────────────────────────── */
-    .hub-progress {
-      margin-top: 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .progress-circle-wrap {
-      position: relative;
-      width: 72px;
-      height: 72px;
-    }
-
-    .progress-circle-wrap svg {
-      transform: rotate(-90deg);
-      width: 72px;
-      height: 72px;
-    }
-
-    .progress-track {
-      fill: none;
-      stroke: rgba(19, 26, 43, 0.06);
-      stroke-width: 5;
-    }
-
+    .hub-progress { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 18px; }
+    .progress-circle-wrap { position: relative; width: 100px; height: 100px; filter: drop-shadow(0 4px 0 var(--lip)); }
+    .progress-circle-wrap svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .progress-track { fill: rgba(255,255,255,.04); stroke: rgba(255,255,255,.16); stroke-width: 8; }
     .progress-fill {
-      fill: none;
-      stroke: var(--accent);
-      stroke-width: 5;
-      stroke-linecap: round;
-      animation: progressFill 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+      fill: none; stroke: url(#ringGrad); stroke-width: 8; stroke-linecap: round;
+      stroke-dashoffset: var(--circ); animation: ringFill 1s .3s ease-out forwards;
+    }
+    @keyframes ringFill { to { stroke-dashoffset: var(--offset); } }
+    .progress-label { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .progress-num { font-family: 'Title', 'Inter', sans-serif; font-size: 32px; line-height: 1; color: var(--gold); text-shadow: 0 0 16px rgba(255, 200, 58, .5); }
+    .progress-of { font-size: 11px; font-weight: 800; letter-spacing: 1px; color: var(--dim); margin-top: 2px; }
+
+    .stats-link, .show-link {
+      display: inline-flex; align-items: center; gap: 8px; text-decoration: none; cursor: pointer;
+      padding: 11px 24px; font-size: 12px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase;
+      color: #2a1500;
+      background: linear-gradient(180deg, #ffe58a, #ffc83a 52%, #f0a800);
+      border-bottom: 5px solid #a56a00; box-shadow: inset 0 3px 0 rgba(255,255,255,.5);
+      clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px);
+      transition: transform .1s;
+    }
+    .stats-link:active, .show-link:active { transform: translateY(3px); border-bottom-width: 2px; }
+    .show-link svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* ── sections ─────────────────────────────────────────── */
+    .section-header { display: flex; align-items: center; gap: 16px; margin: 30px 0 16px; }
+    .section-header::before, .section-header::after { content: ""; flex: 1; height: 3px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.22)); }
+    .section-header::after { background: linear-gradient(270deg, transparent, rgba(255,255,255,.22)); }
+    .section-label { font-size: 12px; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); text-shadow: 0 0 14px rgba(255, 200, 58, .4); white-space: nowrap; }
+
+    /* ── game cards ───────────────────────────────────────── */
+    .games { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .game-card {
+      --c: var(--gold);
+      position: relative; display: flex; flex-direction: column; min-width: 0;
+      text-decoration: none; color: inherit;
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.03)), var(--panel);
+      border-top: 4px solid var(--c); border-bottom: 6px solid var(--lip);
+      box-shadow: inset 0 2px 0 rgba(255,255,255,.14);
+      clip-path: polygon(var(--cut) 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% calc(100% - var(--cut)),
+                         calc(100% - var(--cut)) 100%, var(--cut) 100%, 0 calc(100% - var(--cut)), 0 var(--cut));
+      transition: transform .15s, filter .15s;
+    }
+    .game-card:active { transform: translateY(3px); }
+    @media (hover: hover) {
+      .game-card:hover { transform: translateY(-5px); filter: brightness(1.1); }
+      .game-card:hover img { transform: scale(1.05); }
+    }
+    .card-art { position: relative; aspect-ratio: 1; overflow: hidden; background: #000; }
+    .card-art img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .3s, filter .2s; }
+    .card-body { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 12px 14px 16px; flex: 1; }
+    .card-tag {
+      font-size: 10px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; color: var(--c);
+      padding: 4px 9px; background: color-mix(in srgb, var(--c) 20%, transparent);
+    }
+    .card-desc {
+      font-size: 12.5px; line-height: 1.5; color: var(--dim);
+      display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
     }
 
-    @keyframes progressFill {
-      from { stroke-dashoffset: var(--circ); }
-      to   { stroke-dashoffset: var(--offset); }
+    /* played today */
+    .game-card.done .card-art img { filter: saturate(.5) brightness(.62); }
+    .card-icon { position: absolute; bottom: 10px; right: 10px; z-index: 2; }   /* bottom: the game title sits at the top of the art */
+    .done-check {
+      display: flex; align-items: center; justify-content: center; width: 34px; height: 34px;
+      background: linear-gradient(180deg, #62f2a6, #1fb86a); border: 3px solid var(--ink); border-radius: 50%;
+      box-shadow: 0 3px 0 var(--lip);
     }
+    .done-check svg { width: 18px; height: 18px; }
+    .card-badges { position: absolute; left: 10px; bottom: 10px; z-index: 2; display: flex; gap: 6px; flex-wrap: wrap; }
+    .card-done-badge, .card-streak-badge {
+      font-size: 10px; font-weight: 900; letter-spacing: 1.5px; padding: 4px 9px; color: #fff; border-bottom: 3px solid rgba(0,0,0,.45);
+      clip-path: polygon(6px 0, calc(100% - 6px) 0, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px), 0 6px);
+    }
+    .card-done-badge { background: linear-gradient(180deg, #34d98a, #138a4e); }
+    .card-streak-badge { background: linear-gradient(180deg, #ff9a45, #d9531a); }
 
-    .progress-label {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .progress-num {
-      font-size: 20px;
-      font-weight: 900;
-      color: var(--text);
-      line-height: 1;
-    }
-
-    .progress-of {
-      font-size: 9px;
-      font-weight: 600;
-      color: var(--text-dim);
-      letter-spacing: 1px;
-      margin-top: 2px;
-    }
-
-    .stats-link {
-      display: inline-block;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: var(--text-dim);
-      text-decoration: none;
-      padding: 5px 14px;
-      border: 1px solid rgba(19, 26, 43, 0.08);
-      border-radius: 6px;
-      transition: all 0.15s;
-    }
-    .stats-link:active { background: var(--card-hover); color: var(--white); }
-
-    .card-done-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      margin-top: 6px;
-      padding: 2px 7px;
-      border-radius: 4px;
-      font-size: 9.5px;
-      font-weight: 700;
-      letter-spacing: 0.8px;
-      background: rgba(26, 154, 69, 0.07);
-      color: var(--accent);
-    }
-
-    .card-streak-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 3px;
-      margin-top: 6px;
-      margin-left: 4px;
-      padding: 2px 7px;
-      border-radius: 4px;
-      font-size: 9.5px;
-      font-weight: 700;
-      letter-spacing: 0.8px;
-      background: rgba(200, 152, 24, 0.07);
-      color: #c89818;
-    }
-
-    footer {
-      text-align: center;
-      padding-top: 24px;
-      padding-bottom: 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-    }
-    .footer-logo {
-      width: 24px;
-      height: 24px;
-      border-radius: 6px;
-      overflow: hidden;
-      opacity: 0.3;
-    }
-    .footer-logo svg { width: 100%; height: 100%; display: block; }
-    .footer-text {
-      font-size: 9px;
-      color: var(--text-dim);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      opacity: 0.7;
-    }
-
+    /* ── show banner ──────────────────────────────────────── */
     .show-banner {
-      margin-top: 16px;
-      margin-bottom: 8px;
-      padding: 20px 20px;
-      background: var(--card);
-      border: 1px solid rgba(19, 26, 43, 0.06);
-      box-shadow: 0 1px 2px rgba(19, 26, 43, 0.06), 0 4px 12px rgba(19, 26, 43, 0.04);
-      border-radius: 14px;
-      text-align: center;
+      margin-top: 36px; padding: 26px 22px 28px; text-align: center;
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.03)), var(--panel);
+      border-top: 4px solid var(--gold); border-bottom: 6px solid var(--lip); box-shadow: inset 0 2px 0 rgba(255,255,255,.14);
+      clip-path: polygon(var(--cut) 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, var(--cut) 100%, 0 calc(100% - var(--cut)), 0 var(--cut));
     }
-    .show-banner-label {
-      font-size: 9.5px;
-      font-weight: 600;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      margin-bottom: 8px;
-    }
-    .show-banner-title {
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--text);
-      letter-spacing: 0.3px;
-      margin-bottom: 4px;
-    }
-    .show-banner-desc {
-      font-size: 12.5px;
-      color: var(--text-dim);
-      line-height: 1.55;
-      margin-bottom: 14px;
-    }
-    .show-links {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .show-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 7px 14px;
-      border-radius: 8px;
-      background: #131A2B;
-      color: white;
-      text-decoration: none;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.3px;
-      transition: opacity 0.18s;
-    }
-    .show-link:active { opacity: 0.8; }
-    .show-link svg { width: 14px; height: 14px; flex-shrink: 0; }
-    @media (hover: hover) { .show-link:hover { opacity: 0.85; } }
+    .show-banner-label { font-size: 10px; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; color: var(--dim); }
+    .show-banner-title { font-family: 'Title', 'Inter', sans-serif; font-size: 28px; letter-spacing: .03em; color: var(--gold); margin: 6px 0 8px; text-shadow: 0 3px 0 #7a3b00; }
+    .show-banner-desc { max-width: 520px; margin: 0 auto 16px; font-size: 13px; line-height: 1.6; color: var(--dim); }
+    .show-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    footer { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: auto; padding-top: 30px; }
+    .footer-logo { width: 26px; height: 26px; }
+    .footer-logo svg { width: 100%; height: 100%; display: block; }
+    .footer-text { font-size: 11px; font-weight: 800; letter-spacing: 2px; color: var(--dim); opacity: .8; }
 
-    .game-card { animation: fadeInUp 0.3s ease-out both; }
-    .game-card:nth-child(1) { animation-delay: 0.02s; }
-    .game-card:nth-child(2) { animation-delay: 0.06s; }
-    .game-card:nth-child(3) { animation-delay: 0.10s; }
-    .game-card:nth-child(4) { animation-delay: 0.14s; }
-    .game-card:nth-child(5) { animation-delay: 0.18s; }
-    .game-card:nth-child(6) { animation-delay: 0.22s; }
-    .game-card:nth-child(7) { animation-delay: 0.26s; }
-    .game-card:nth-child(8) { animation-delay: 0.30s; }
-    .game-card:nth-child(9) { animation-delay: 0.34s; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .game-card { animation: fadeInUp .4s ease-out both; }
+    .games .game-card:nth-child(1) { animation-delay: .05s; } .games .game-card:nth-child(2) { animation-delay: .10s; }
+    .games .game-card:nth-child(3) { animation-delay: .15s; } .games .game-card:nth-child(4) { animation-delay: .20s; }
+    .games .game-card:nth-child(5) { animation-delay: .25s; } .games .game-card:nth-child(6) { animation-delay: .30s; }
+    .games .game-card:nth-child(7) { animation-delay: .35s; } .games .game-card:nth-child(8) { animation-delay: .40s; }
+    .games .game-card:nth-child(9) { animation-delay: .45s; } .games .game-card:nth-child(10) { animation-delay: .50s; }
+    @media (prefers-reduced-motion: reduce) { .game-card, .progress-fill { animation: none; } .progress-fill { stroke-dashoffset: var(--offset); } }
 
-    /* Loading screen */
+    /* ── tablets: nine games make a clean 3 x 3 ── */
+    @media (min-width: 640px) { .games { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; } }
+
+    /* ── native splash screen ── */
     #loading-screen {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: #131A2B;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.5s ease;
+      position: fixed; inset: 0; z-index: 9999;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: radial-gradient(130% 60% at 50% -4%, #3a2f8a 0%, transparent 70%), linear-gradient(180deg, #0d1024, #070916) #070916;
+      transition: opacity .5s ease;
     }
-    #loading-screen.fade-out {
-      opacity: 0;
-      pointer-events: none;
-    }
-    #loading-screen .splash-logo {
-      width: 120px;
-      height: 120px;
-      margin-bottom: 28px;
-      animation: splashPulse 1.8s ease-in-out infinite;
-    }
+    #loading-screen.fade-out { opacity: 0; pointer-events: none; }
+    #loading-screen .splash-logo { width: 120px; height: 120px; margin-bottom: 22px; filter: drop-shadow(0 6px 0 var(--lip)) drop-shadow(0 0 28px rgba(255, 200, 58, .4)); animation: splashPulse 1.8s ease-in-out infinite; }
     #loading-screen .splash-title {
-      font-size: 28px;
-      font-weight: 900;
-      color: white;
-      letter-spacing: 8px;
-      margin-bottom: 10px;
+      font-family: 'Title', 'Inter', sans-serif; font-size: 56px; letter-spacing: .06em; line-height: 1; padding: 4px 10px 12px; margin-bottom: 6px;
+      color: transparent; background: linear-gradient(180deg, #fff3b0 0 48%, #ffb400 50% 100%); -webkit-background-clip: text; background-clip: text;
+      filter: drop-shadow(2px 0 0 var(--ink)) drop-shadow(-2px 0 0 var(--ink)) drop-shadow(0 2px 0 var(--ink)) drop-shadow(0 -2px 0 var(--ink)) drop-shadow(0 4px 0 #7a3b00) drop-shadow(0 8px 0 #7a3b00) drop-shadow(0 16px 12px rgba(0,0,0,.5));
     }
-    #loading-screen .splash-sub {
-      font-size: 12px;
-      font-weight: 500;
-      color: rgba(255,255,255,0.4);
-      letter-spacing: 3px;
-      text-transform: uppercase;
-    }
-    @keyframes splashPulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.02); opacity: 0.9; }
-    }
+    #loading-screen .splash-sub { font-size: 12px; font-weight: 800; color: var(--dim); letter-spacing: 3px; text-transform: uppercase; }
+    @keyframes splashPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
   </style>
 </head>
 <body>
   <div id="loading-screen">
-    <svg class="splash-logo" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+    <svg class="splash-logo" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <g transform="translate(512, 100)">
         <g fill="none" stroke="white" stroke-width="52" stroke-linecap="round" stroke-linejoin="round">
           <line x1="-220" y1="800" x2="0" y2="0"/>
@@ -553,174 +224,105 @@
   </div>
   <div id="app">
     <header>
-      <div class="app-logo">
-        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-          <rect width="1024" height="1024" rx="224" fill="#131A2B"/>
-          <g transform="translate(512, 180)">
-            <g fill="none" stroke="white" stroke-width="52" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="-180" y1="660" x2="0" y2="0"/>
-              <line x1="180" y1="660" x2="0" y2="0"/>
-              <line x1="-100" y1="460" x2="100" y2="460"/>
-            </g>
-            <polygon points="0,-90 -85,30 0,-5 85,30" fill="#E8A317"/>
-          </g>
-        </svg>
-      </div>
+      <div class="app-logo"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="1024" height="1024" rx="224" fill="#131A2B"/><g transform="translate(512, 180)"><g fill="none" stroke="white" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"><line x1="-180" y1="660" x2="0" y2="0"/><line x1="180" y1="660" x2="0" y2="0"/><line x1="-100" y1="460" x2="100" y2="460"/></g><polygon points="0,-90 -85,30 0,-5 85,30" fill="#E8A317"/></g></svg></div>
       <h1>ACUMEN</h1>
       <p class="subtitle">Brain Games for Smart People</p>
-      <p id="hub-date" class="subtitle" style="margin-top:4px;color:#c89818;font-size:12px;letter-spacing:3px"></p>
+      <p id="hub-date"></p>
       <div id="hub-progress" class="hub-progress"></div>
     </header>
 
     <div class="section-header"><span class="section-label">Today's Challenges</span></div>
 
     <div class="games">
-      <a href="threads/" class="game-card threads">
-        <div class="card-top">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="18" r="2.5"/>
-              <line x1="8.5" y1="6" x2="15.5" y2="6"/><line x1="8.5" y1="18" x2="15.5" y2="18"/>
-              <line x1="6" y1="8.5" x2="6" y2="15.5"/><line x1="18" y1="8.5" x2="18" y2="15.5"/>
-              <line x1="8" y1="8" x2="16" y2="16"/><line x1="16" y1="8" x2="8" y2="16"/>
-            </svg>
-          </div>
-          <div class="card-title">Missing Link</div>
-          <span class="card-chevron">&#x203A;</span>
+      <a href="threads/" class="game-card threads" style="--c:#ffbf4d">
+        <div class="card-art">
+          <img src="img/cards/threads.jpg" alt="Missing Link" width="640" height="640" decoding="async">
+          <div class="card-icon"></div>
         </div>
-        <div class="card-desc">Three words share a hidden connection — find the missing link that ties them all together.</div>
-        <span class="card-tag">Word Association</span>
+        <div class="card-body">
+          <span class="card-tag">Word Association</span>
+          <p class="card-desc">Three words share a hidden connection — find the missing link that ties them all together.</p>
+        </div>
       </a>
-
-      <a href="alibi/" class="game-card alibi">
-        <div class="card-top">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="10" cy="10" r="7"/>
-              <line x1="21" y1="21" x2="15" y2="15"/>
-              <text x="7.5" y="13.5" fill="white" stroke="none" font-size="10" font-weight="bold" font-family="Inter, sans-serif">?</text>
-            </svg>
-          </div>
-          <div class="card-title">Alibi</div>
-          <span class="card-chevron">&#x203A;</span>
+      <a href="alibi/" class="game-card alibi" style="--c:#ffc24a">
+        <div class="card-art">
+          <img src="img/cards/alibi.jpg" alt="Alibi" width="640" height="640" decoding="async">
+          <div class="card-icon"></div>
         </div>
-        <div class="card-desc">9 words. 1 culprit. Eight have alibis — they belong to one category. Find the odd one out.</div>
-        <span class="card-tag">Word Mystery</span>
+        <div class="card-body">
+          <span class="card-tag">Word Mystery</span>
+          <p class="card-desc">9 words. 1 culprit. Eight have alibis — they belong to one category. Find the word that fits them all.</p>
+        </div>
       </a>
-
-      <a href="bluff/" class="game-card bluff">
-        <div class="card-top">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="4" width="14" height="18" rx="2"/>
-              <rect x="8" y="2" width="14" height="18" rx="2"/>
-            </svg>
-          </div>
-          <div class="card-title">Bluff</div>
-          <span class="card-chevron">&#x203A;</span>
+      <a href="bluff/" class="game-card bluff" style="--c:#ff6a52">
+        <div class="card-art">
+          <img src="img/cards/bluff.jpg" alt="Bluff" width="640" height="640" decoding="async">
+          <div class="card-icon"></div>
         </div>
-        <div class="card-desc">Three facts about a topic. Two are real, one is made up. Can you spot the lie?</div>
-        <span class="card-tag">True or False</span>
+        <div class="card-body">
+          <span class="card-tag">True or False</span>
+          <p class="card-desc">Three facts about a topic. Two are real, one is made up. Can you spot the lie?</p>
+        </div>
       </a>
-
-      <a href="lineup/" class="game-card lineup">
-        <div class="card-top">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="18" width="3" height="4" rx="0.5"/>
-              <rect x="6.5" y="14" width="3" height="8" rx="0.5"/>
-              <rect x="11" y="10" width="3" height="12" rx="0.5"/>
-              <rect x="15.5" y="6" width="3" height="16" rx="0.5"/>
-              <rect x="20" y="2" width="3" height="20" rx="0.5"/>
-            </svg>
-          </div>
-          <div class="card-title">Lineup</div>
-          <span class="card-chevron">&#x203A;</span>
+      <a href="lineup/" class="game-card lineup" style="--c:#5b8bff">
+        <div class="card-art">
+          <img src="img/cards/lineup.jpg" alt="Lineup" width="640" height="640" decoding="async">
+          <div class="card-icon"></div>
         </div>
-        <div class="card-desc">Five items, one rule. Drag them into the correct order before your attempts run out.</div>
-        <span class="card-tag">Sorting &amp; Trivia</span>
+        <div class="card-body">
+          <span class="card-tag">Sorting &amp; Trivia</span>
+          <p class="card-desc">Five items, one rule. Drag them into the correct order before your attempts run out.</p>
+        </div>
       </a>
-
-      <a href="echo/" class="game-card echo">
-        <div class="card-top">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="4" cy="12" r="1.5" fill="white" stroke="none"/>
-              <path d="M9 6 C14 6, 16 9, 16 12 C16 15, 14 18, 9 18"/>
-              <path d="M11 2 C18 2, 21 7, 21 12 C21 17, 18 22, 11 22"/>
-              <path d="M10 9.5 C12 9.5, 13 10.5, 13 12 C13 13.5, 12 14.5, 10 14.5"/>
-            </svg>
-          </div>
-          <div class="card-title">Echo</div>
-          <span class="card-chevron">&#x203A;</span>
+      <a href="echo/" class="game-card echo" style="--c:#b58cff">
+        <div class="card-art">
+          <img src="img/cards/echo.jpg" alt="Echo" width="640" height="640" decoding="async" loading="lazy">
+          <div class="card-icon"></div>
         </div>
-        <div class="card-desc">Watch colored tiles flash in sequence. Tap them back — in reverse. How far can you go?</div>
-        <span class="card-tag">Memory</span>
+        <div class="card-body">
+          <span class="card-tag">Memory &amp; Reflexes</span>
+          <p class="card-desc">Watch colored tiles flash in sequence. Now tap them back — in reverse. How far can you go?</p>
+        </div>
       </a>
-
-      <a href="cipher/" class="game-card cipher">
-        <div class="card-top">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="8" cy="15" r="5"/>
-              <circle cx="8" cy="15" r="2"/>
-              <line x1="13" y1="15" x2="22" y2="15"/>
-              <line x1="22" y1="15" x2="22" y2="11"/>
-              <line x1="18" y1="15" x2="18" y2="12"/>
-            </svg>
-          </div>
-          <div class="card-title">Cipher</div>
-          <span class="card-chevron">&#x203A;</span>
+      <a href="cipher/" class="game-card cipher" style="--c:#3ee08f">
+        <div class="card-art">
+          <img src="img/cards/cipher.jpg" alt="Cipher" width="640" height="640" decoding="async" loading="lazy">
+          <div class="card-icon"></div>
         </div>
-        <div class="card-desc">Every letter has been swapped. Crack the substitution code to reveal the famous quote.</div>
-        <span class="card-tag">Codebreaking</span>
+        <div class="card-body">
+          <span class="card-tag">Codebreaking</span>
+          <p class="card-desc">Every letter has been swapped. Crack the substitution code to reveal the famous quote hidden underneath.</p>
+        </div>
       </a>
-
-      <a href="reflex/" class="game-card reflex">
-        <div class="card-top">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="13 2 10 10 16 10 11 22"/>
-            </svg>
-          </div>
-          <div class="card-title">Reflex</div>
-          <span class="card-chevron">&#x203A;</span>
+      <a href="reflex/" class="game-card reflex" style="--c:#ffc83a">
+        <div class="card-art">
+          <img src="img/cards/reflex.jpg" alt="Reflex" width="640" height="640" decoding="async" loading="lazy">
+          <div class="card-icon"></div>
         </div>
-        <div class="card-desc">A word flashes. Tap left or right to sort it into the correct category. It speeds up. 3 lives.</div>
-        <span class="card-tag">Speed Sorting</span>
+        <div class="card-body">
+          <span class="card-tag">Speed Sorting</span>
+          <p class="card-desc">A word flashes. Tap left or right to sort it into the correct category. It speeds up. 3 lives.</p>
+        </div>
       </a>
-
-      <a href="sequence/" class="game-card sequence">
-        <div class="card-top">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="4" cy="16" r="2" fill="white" stroke="none"/>
-              <circle cx="12" cy="8" r="2" fill="white" stroke="none"/>
-              <circle cx="20" cy="14" r="2" fill="white" stroke="none"/>
-              <path d="M6 15 C8 10, 10 9, 12 8"/>
-              <path d="M14 9 C16 10, 18 13, 20 14"/>
-            </svg>
-          </div>
-          <div class="card-title">Sequence</div>
-          <span class="card-chevron">&#x203A;</span>
+      <a href="sequence/" class="game-card sequence" style="--c:#5fa8ff">
+        <div class="card-art">
+          <img src="img/cards/sequence.jpg" alt="Sequence" width="640" height="640" decoding="async" loading="lazy">
+          <div class="card-icon"></div>
         </div>
-        <div class="card-desc">Study the pattern. Pick the missing number. 10 rounds of number sequences that get trickier.</div>
-        <span class="card-tag">Pattern &amp; Logic</span>
+        <div class="card-body">
+          <span class="card-tag">Pattern &amp; Logic</span>
+          <p class="card-desc">Study the pattern. Pick the missing number. 10 rounds of number sequences that get trickier.</p>
+        </div>
       </a>
-
-      <a href="rank/" class="game-card rank">
-        <div class="card-top">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M6 9 L12 3 L18 9"/>
-              <path d="M8 9 L5 20 L12 16 L19 20 L16 9"/>
-            </svg>
-          </div>
-          <div class="card-title">Rank</div>
-          <span class="card-chevron">&#x203A;</span>
+      <a href="rank/" class="game-card rank" style="--c:#ffc83a">
+        <div class="card-art">
+          <img src="img/cards/rank.jpg" alt="Rank" width="640" height="640" decoding="async" loading="lazy">
+          <div class="card-icon"></div>
         </div>
-        <div class="card-desc">Four items, one hidden metric. Drag them into the correct order — then discover the surprising truth.</div>
-        <span class="card-tag">Ranking &amp; Trivia</span>
+        <div class="card-body">
+          <span class="card-tag">Ranking &amp; Trivia</span>
+          <p class="card-desc">Four items, one hidden metric. Drag them into the correct order — then discover the surprising truth.</p>
+        </div>
       </a>
     </div>
 
@@ -741,64 +343,56 @@
     </div>
 
     <footer>
-      <div class="footer-logo">
-        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-          <rect width="1024" height="1024" rx="224" fill="#131A2B"/>
-          <g transform="translate(512, 180)">
-            <g fill="none" stroke="white" stroke-width="52" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="-180" y1="660" x2="0" y2="0"/>
-              <line x1="180" y1="660" x2="0" y2="0"/>
-              <line x1="-100" y1="460" x2="100" y2="460"/>
-            </g>
-            <polygon points="0,-90 -85,30 0,-5 85,30" fill="#E8A317"/>
-          </g>
-        </svg>
-      </div>
+      <div class="footer-logo"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="1024" height="1024" rx="224" fill="#131A2B"/><g transform="translate(512, 180)"><g fill="none" stroke="white" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"><line x1="-180" y1="660" x2="0" y2="0"/><line x1="180" y1="660" x2="0" y2="0"/><line x1="-100" y1="460" x2="100" y2="460"/></g><polygon points="0,-90 -85,30 0,-5 85,30" fill="#E8A317"/></g></svg></div>
       <span class="footer-text">Acumen v1.0</span>
     </footer>
     <script src="daily.js"></script>
     <script>
       document.getElementById('hub-date').textContent = Daily.getDateString();
 
+      // Completion tracking
       (function () {
         var DAILY_KEYS = ['threads','alibi','bluff','lineup','echo','cipher','reflex','sequence','rank'];
         var done = 0;
-        var total = DAILY_KEYS.length;
 
         DAILY_KEYS.forEach(function (key) {
           var result = Daily.getDailyResult(key);
           var streak = Daily.getStreak(key);
           var card = document.querySelector('.game-card.' + key);
           if (!card) return;
+          var art = card.querySelector('.card-art');
 
           var badges = '';
           if (result) {
             done++;
             card.classList.add('done');
             var icon = card.querySelector('.card-icon');
-            if (icon) icon.innerHTML += '<span class="done-check"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>';
+            if (icon) icon.innerHTML = '<span class="done-check"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>';
             badges += '<span class="card-done-badge">✓ DONE</span>';
           }
           if (streak > 1) {
             badges += '<span class="card-streak-badge">🔥 ' + streak + '</span>';
           }
-          if (badges) {
+          if (badges && art) {
             var wrap = document.createElement('div');
+            wrap.className = 'card-badges';
             wrap.innerHTML = badges;
-            card.appendChild(wrap);
+            art.appendChild(wrap);
           }
         });
 
         var prog = document.getElementById('hub-progress');
-        var r = 34;
+        var total = DAILY_KEYS.length;
+        var r = 40;
         var circ = 2 * Math.PI * r;
         var pct = done / total;
         var offset = circ * (1 - pct);
         prog.innerHTML =
           '<div class="progress-circle-wrap">' +
-            '<svg viewBox="0 0 80 80">' +
-              '<circle class="progress-track" cx="40" cy="40" r="' + r + '"/>' +
-              '<circle class="progress-fill" cx="40" cy="40" r="' + r + '" ' +
+            '<svg viewBox="0 0 100 100">' +
+              '<defs><linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff3b0"/><stop offset="1" stop-color="#ffb400"/></linearGradient></defs>' +
+              '<circle class="progress-track" cx="50" cy="50" r="' + r + '"/>' +
+              '<circle class="progress-fill" cx="50" cy="50" r="' + r + '" ' +
                 'stroke-dasharray="' + circ + '" ' +
                 'style="--circ:' + circ + ';--offset:' + offset + '"/>' +
             '</svg>' +
@@ -811,12 +405,12 @@
       })();
     </script>
     <script>
-      window.addEventListener('load', function() {
-        setTimeout(function() {
+      window.addEventListener('load', function () {
+        setTimeout(function () {
           var ls = document.getElementById('loading-screen');
           if (ls) {
             ls.classList.add('fade-out');
-            setTimeout(function() { ls.remove(); }, 600);
+            setTimeout(function () { ls.remove(); }, 600);
           }
         }, 800);
       });
