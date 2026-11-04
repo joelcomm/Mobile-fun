@@ -5,472 +5,329 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#f8f8fa">
+  <meta name="theme-color" content="#0d1024">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <title>Stats — Mobile Fun</title>
+  <title>Your Stats — Acumen</title>
   <style>
+    @font-face { font-family: 'Title'; src: url('theme/fonts/Titan-One.woff2') format('woff2'); font-display: swap; }
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
     :root {
-      --bg: #f8f8fa;
-      --card: #ffffff;
-      --card-hover: #f0f0f5;
-      --border: #dddde4;
-      --text: #2a2a3e;
-      --text-dim: #6b6b80;
-      --white: #1a1a2e;
-      --accent: #c89818;
-      --green: #1a9a45;
+      --bg: #0d1024;
+      --panel: #1a1e44;
+      --text: #eef1ff;
+      --dim: #a9b1e6;
+      --ink: #0a0720;
+      --lip: rgba(0, 0, 0, .45);
+      --gold: #ffc83a;
+      --green: #3ee08f;
+      --cut: 14px;
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
 
     html, body {
-      height: 100%;
-      background: var(--bg);
+      min-height: 100%;
       color: var(--text);
       font-family: 'Inter', -apple-system, sans-serif;
-      font-size: 18px;
+      font-size: 16px;
+      background:
+        radial-gradient(130% 55% at 50% -6%, #3a2f8a 0%, transparent 70%),
+        linear-gradient(180deg, var(--bg), #070916) #070916;   /* solid colour last, so nothing can ever show white */
+      background-attachment: fixed;
     }
-
-    .back-link {
-      position: fixed; top: 14px; left: 16px; z-index: 50;
-      font-size: 13px; font-weight: 600; color: var(--text-dim);
-      text-decoration: none; letter-spacing: 1px;
-      padding-top: var(--safe-top);
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none;
+      background: repeating-linear-gradient(135deg, rgba(255,255,255,.04) 0 2px, transparent 2px 26px);
     }
 
     #app {
-      max-width: 480px;
+      position: relative;
+      max-width: 640px;
       margin: 0 auto;
-      padding: 24px 20px;
-      padding-top: calc(24px + var(--safe-top));
-      padding-bottom: calc(24px + var(--safe-bottom));
+      padding: 20px 18px;
+      padding-top: calc(20px + var(--safe-top));
+      padding-bottom: calc(28px + var(--safe-bottom));
       min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
     }
 
-    header {
-      text-align: center;
-      margin-bottom: 28px;
-      padding-top: 32px;
+    /* ── shared bevel pieces ──────────────────────────────── */
+    .chamfer {
+      clip-path: polygon(var(--cut) 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% calc(100% - var(--cut)),
+                         calc(100% - var(--cut)) 100%, var(--cut) 100%, 0 calc(100% - var(--cut)), 0 var(--cut));
     }
+    .panel {
+      --c: var(--gold);
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.03)), var(--panel);
+      border-top: 4px solid var(--c); border-bottom: 6px solid var(--lip);
+      box-shadow: inset 0 2px 0 rgba(255,255,255,.14);
+    }
+    .gold-btn {
+      display: inline-flex; align-items: center; gap: 8px; text-decoration: none; cursor: pointer;
+      padding: 10px 20px; font-size: 12px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase;
+      color: #2a1500;
+      background: linear-gradient(180deg, #ffe58a, #ffc83a 52%, #f0a800);
+      border-bottom: 5px solid #a56a00; box-shadow: inset 0 3px 0 rgba(255,255,255,.5);
+      clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px);
+      transition: transform .1s;
+    }
+    .gold-btn:active { transform: translateY(3px); border-bottom-width: 2px; }
 
+    .topbar { display: flex; }
+
+    /* ── header ───────────────────────────────────────────── */
+    header { text-align: center; padding: 14px 0 4px; }
     h1 {
-      font-size: 32px;
-      font-weight: 900;
-      letter-spacing: 2px;
-      color: var(--white);
+      font-family: 'Title', 'Inter', sans-serif; font-weight: 400;
+      font-size: clamp(46px, 12.5vw, 80px); line-height: 1; letter-spacing: .05em;
+      padding: 4px 12px 14px; transform: rotate(-2deg);
+      color: transparent;
+      background: linear-gradient(180deg, #fff3b0 0 48%, #ffb400 50% 100%);
+      -webkit-background-clip: text; background-clip: text;
+      filter: drop-shadow(2px 0 0 var(--ink)) drop-shadow(-2px 0 0 var(--ink)) drop-shadow(0 2px 0 var(--ink)) drop-shadow(0 -2px 0 var(--ink))
+              drop-shadow(0 4px 0 #7a3b00) drop-shadow(0 8px 0 #7a3b00) drop-shadow(0 20px 14px rgba(0,0,0,.5));
+    }
+    .subtitle { font-size: 12px; font-weight: 800; letter-spacing: 4px; text-transform: uppercase; color: var(--dim); }
+    #stats-date {
+      display: inline-block; margin-top: 10px; padding: 5px 16px;
+      font-size: 11px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--gold);
+      background: rgba(255, 200, 58, .14);
+      clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px);
     }
 
-    .subtitle {
-      font-size: 13px;
-      letter-spacing: 3px;
-      color: var(--text-dim);
-      margin-top: 6px;
-      text-transform: uppercase;
-    }
-
-    /* ─── Summary Cards ────────────────────────────────────────── */
-    .summary-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 24px;
-    }
-
-    .summary-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px 12px;
-      text-align: center;
-    }
-
+    /* ── summary tiles ────────────────────────────────────── */
+    .summary-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 26px; }
+    .summary-card { padding: 16px 8px 14px; text-align: center; }
     .summary-num {
-      font-size: 32px;
-      font-weight: 900;
-      line-height: 1;
-      margin-bottom: 4px;
+      font-family: 'Title', 'Inter', sans-serif; font-size: clamp(30px, 8.5vw, 42px); line-height: 1.05;
+      color: var(--c); text-shadow: 0 3px 0 rgba(0,0,0,.4), 0 0 18px color-mix(in srgb, var(--c) 55%, transparent);
     }
+    .summary-num small { font-size: .5em; opacity: .75; }
+    .summary-label { margin-top: 6px; font-size: 10px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; color: var(--dim); }
 
-    .summary-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: var(--text-dim);
-      text-transform: uppercase;
-    }
-
-    /* ─── Countdown ────────────────────────────────────────────── */
-    .countdown-bar {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px 20px;
-      text-align: center;
-      margin-bottom: 24px;
-    }
-
-    .countdown-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: var(--text-dim);
-      margin-bottom: 6px;
-    }
-
+    /* ── countdown ────────────────────────────────────────── */
+    .countdown-bar { margin-top: 14px; padding: 14px 20px 16px; text-align: center; }
+    .countdown-label { font-size: 10px; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; color: var(--dim); }
     .countdown-time {
-      font-size: 28px;
-      font-weight: 900;
-      color: var(--accent);
-      letter-spacing: 3px;
-      font-variant-numeric: tabular-nums;
+      margin-top: 4px; font-size: 34px; font-weight: 900; letter-spacing: 4px; font-variant-numeric: tabular-nums;
+      color: var(--gold); text-shadow: 0 3px 0 #7a3b00, 0 0 18px rgba(255, 200, 58, .45);
     }
 
-    /* ─── Section Headers ──────────────────────────────────────── */
-    .section-hdr {
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 3px;
-      color: var(--text-dim);
-      margin-bottom: 12px;
-      text-transform: uppercase;
-    }
+    /* ── section headers ──────────────────────────────────── */
+    .section-header { display: flex; align-items: center; gap: 16px; margin: 30px 0 16px; }
+    .section-header::before, .section-header::after { content: ""; flex: 1; height: 3px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.22)); }
+    .section-header::after { background: linear-gradient(270deg, transparent, rgba(255,255,255,.22)); }
+    .section-label { font-size: 12px; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); text-shadow: 0 0 14px rgba(255, 200, 58, .4); white-space: nowrap; }
 
-    /* ─── Game Stats Grid ──────────────────────────────────────── */
-    .game-stats {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 28px;
-    }
-
-    .gs-card {
-      display: grid;
-      grid-template-columns: 44px 1fr auto;
-      align-items: center;
-      gap: 14px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px 16px;
-      text-decoration: none;
-      color: inherit;
-      transition: all 0.15s;
-    }
-    .gs-card:active { background: var(--card-hover); transform: scale(0.98); }
-
-    .gs-icon {
-      width: 44px; height: 44px;
-      display: flex; align-items: center; justify-content: center;
-      border-radius: 10px;
-      font-size: 22px;
-      flex-shrink: 0;
-    }
-
-    .gs-info { min-width: 0; }
-
-    .gs-name {
-      font-size: 16px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      margin-bottom: 3px;
-    }
-
-    .gs-meta {
-      font-size: 12px;
-      color: var(--text-dim);
-      display: flex;
-      gap: 12px;
-    }
-
-    .gs-meta span { white-space: nowrap; }
-
-    .gs-status {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 2px;
-    }
-
-    .gs-badge {
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      padding: 3px 8px;
-      border-radius: 4px;
-    }
-
-    .gs-badge.done {
-      background: rgba(26, 154, 69, 0.08);
-      color: var(--green);
-    }
-
-    .gs-badge.pending {
-      background: rgba(160, 160, 176, 0.08);
-      color: var(--text-dim);
-    }
-
-    .gs-score {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text-dim);
-    }
-
-    /* ─── Streak Chart ─────────────────────────────────────────── */
-    .streak-section { margin-bottom: 28px; }
-
-    .streak-grid {
-      display: grid;
-      grid-template-columns: repeat(10, 1fr);
-      gap: 6px;
-    }
-
-    .streak-col {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .streak-bar-wrap {
-      width: 100%;
-      height: 80px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-    }
-
+    /* ── streak chart ─────────────────────────────────────── */
+    .streak-panel { padding: 18px 14px 14px; }
+    .streak-grid { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 6px; }
+    .streak-col { display: flex; flex-direction: column; align-items: center; gap: 5px; min-width: 0; }
+    .streak-num { font-size: 12px; font-weight: 900; color: var(--text); }
+    .streak-col.zero .streak-num { color: var(--dim); opacity: .6; }
+    .streak-bar-wrap { width: 100%; height: 84px; display: flex; align-items: flex-end; border-bottom: 3px solid rgba(255,255,255,.2); }
     .streak-bar {
-      width: 100%;
-      border-radius: 4px 4px 0 0;
-      min-height: 4px;
-      transition: height 0.3s;
+      width: 100%; min-height: 5px;
+      background: linear-gradient(180deg, color-mix(in srgb, var(--c) 70%, #fff) 0, var(--c) 30%, color-mix(in srgb, var(--c) 55%, #000) 100%);
+      box-shadow: inset 0 2px 0 rgba(255,255,255,.4), 0 0 14px color-mix(in srgb, var(--c) 35%, transparent);
+      clip-path: polygon(0 4px, 4px 0, calc(100% - 4px) 0, 100% 4px, 100% 100%, 0 100%);
+      transform-origin: bottom; animation: grow .6s .15s cubic-bezier(.2,.9,.3,1.2) both;
     }
+    .streak-col.zero .streak-bar { background: rgba(255,255,255,.14); box-shadow: none; }
+    .streak-label { font-size: 8.5px; font-weight: 900; letter-spacing: .5px; color: var(--dim); }
+    .streak-empty { margin-top: 12px; text-align: center; font-size: 12.5px; line-height: 1.5; color: var(--dim); }
+    @keyframes grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
 
-    .streak-label {
-      font-size: 8px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      color: var(--text-dim);
-      text-align: center;
-      line-height: 1.1;
+    /* ── per-game rows ────────────────────────────────────── */
+    .game-stats { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; }
+    .gs-card {
+      --c: var(--gold);
+      display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; align-items: center; gap: 14px;
+      padding: 10px 14px 10px 10px; text-decoration: none; color: inherit;
+      transition: transform .15s, filter .15s;
     }
-
-    .streak-num {
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--white);
+    .gs-card:active { transform: translateY(3px); }
+    @media (hover: hover) { .gs-card:hover { transform: translateY(-3px); filter: brightness(1.1); } }
+    .gs-thumb {
+      width: 64px; height: 64px; overflow: hidden; background: #000;
+      clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px);
     }
-
-    /* ─── Per-game accent colors ───────────────────────────────── */
-    .gs-threads .gs-icon { background: rgba(138,109,0,.08); }
-    .gs-threads .gs-name { color: #8a6d00; }
-
-    .gs-alibi .gs-icon { background: rgba(200,144,24,.08); }
-    .gs-alibi .gs-name { color: #c89018; }
-
-    .gs-bluff .gs-icon { background: rgba(208,80,53,.08); }
-    .gs-bluff .gs-name { color: #d05035; }
-
-    .gs-lineup .gs-icon { background: rgba(74,110,224,.08); }
-    .gs-lineup .gs-name { color: #4a6ee0; }
-
-    .gs-echo .gs-icon { background: rgba(126,78,184,.08); }
-    .gs-echo .gs-name { color: #7e4eb8; }
-
-.gs-cipher .gs-icon { background: rgba(26,152,80,.08); }
-    .gs-cipher .gs-name { color: #1a9850; }
-
-    .gs-reflex .gs-icon { background: rgba(200,152,24,.08); }
-    .gs-reflex .gs-name { color: #c89818; }
-
-    .gs-vanish .gs-icon { background: rgba(0,152,120,.08); }
-    .gs-vanish .gs-name { color: #009878; }
-
-    .gs-sequence .gs-icon { background: rgba(74,110,224,.08); }
-    .gs-sequence .gs-name { color: #4a6ee0; }
-
-    .gs-rank .gs-icon { background: rgba(184,150,10,.08); }
-    .gs-rank .gs-name { color: #b8960a; }
-
-    /* Animations */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
+    .gs-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .gs-card.done .gs-thumb img { filter: saturate(.55) brightness(.7); }
+    .gs-info { min-width: 0; }
+    .gs-name {
+      font-family: 'Title', 'Inter', sans-serif; font-size: 21px; letter-spacing: .04em; line-height: 1.1;
+      color: var(--c); text-shadow: 0 3px 0 rgba(0,0,0,.45); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
-    .gs-card { animation: fadeInUp 0.35s ease-out both; }
-    .gs-card:nth-child(1) { animation-delay: 0.03s; }
-    .gs-card:nth-child(2) { animation-delay: 0.08s; }
-    .gs-card:nth-child(3) { animation-delay: 0.13s; }
-    .gs-card:nth-child(4) { animation-delay: 0.18s; }
-    .gs-card:nth-child(5) { animation-delay: 0.23s; }
-    .gs-card:nth-child(6) { animation-delay: 0.28s; }
-    .gs-card:nth-child(7) { animation-delay: 0.33s; }
-    .gs-card:nth-child(8) { animation-delay: 0.38s; }
-    .gs-card:nth-child(9) { animation-delay: 0.43s; }
-    .gs-card:nth-child(10) { animation-delay: 0.48s; }
-    .gs-card:nth-child(11) { animation-delay: 0.53s; }
+    .gs-meta { margin-top: 5px; display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; font-weight: 700; color: var(--dim); }
+    .gs-meta b { color: var(--text); font-weight: 800; }
+    .gs-badge {
+      display: inline-block; font-size: 10px; font-weight: 900; letter-spacing: 1.5px; padding: 6px 12px; color: #fff;
+      border-bottom: 3px solid rgba(0,0,0,.45);
+      clip-path: polygon(6px 0, calc(100% - 6px) 0, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px), 0 6px);
+    }
+    .gs-badge.done { background: linear-gradient(180deg, #34d98a, #138a4e); }
+    .gs-badge.pending { color: #2a1500; background: linear-gradient(180deg, #ffe58a, #ffc83a 52%, #f0a800); border-bottom-color: #a56a00; }
 
-    footer {
-      text-align: center;
-      padding-top: 20px;
-      font-size: 12px;
-      color: var(--text-dim);
-      letter-spacing: 1px;
+    footer { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: auto; padding-top: 34px; }
+    .footer-logo { width: 26px; height: 26px; }
+    .footer-logo svg { width: 100%; height: 100%; display: block; }
+    .footer-text { font-size: 11px; font-weight: 800; letter-spacing: 2px; color: var(--dim); opacity: .8; }
+
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .gs-card, .summary-card, .countdown-bar, .streak-panel { animation: fadeInUp .4s ease-out both; }
+    .summary-card:nth-child(2) { animation-delay: .05s; } .summary-card:nth-child(3) { animation-delay: .1s; }
+    .gs-card:nth-child(1) { animation-delay: .03s; } .gs-card:nth-child(2) { animation-delay: .06s; }
+    .gs-card:nth-child(3) { animation-delay: .09s; } .gs-card:nth-child(4) { animation-delay: .12s; }
+    .gs-card:nth-child(5) { animation-delay: .15s; } .gs-card:nth-child(6) { animation-delay: .18s; }
+    .gs-card:nth-child(7) { animation-delay: .21s; } .gs-card:nth-child(8) { animation-delay: .24s; }
+    .gs-card:nth-child(9) { animation-delay: .27s; } .gs-card:nth-child(10) { animation-delay: .30s; }
+    @media (prefers-reduced-motion: reduce) { .gs-card, .summary-card, .countdown-bar, .streak-panel, .streak-bar { animation: none; } }
+
+    /* ── bigger screens: two columns of games ─────────────── */
+    @media (min-width: 900px) {
+      #app { max-width: 980px; }
+      .game-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .summary-row { gap: 18px; }
+    }
+    @media (max-width: 360px) {
+      .gs-card { grid-template-columns: 52px minmax(0, 1fr) auto; gap: 10px; }
+      .gs-thumb { width: 52px; height: 52px; }
+      .gs-name { font-size: 18px; }
     }
   </style>
 </head>
 <body>
-  <a href="/" class="back-link">&larr; GAMES</a>
   <div id="app">
+    <div class="topbar"><a href="index.html" class="gold-btn">&larr; All Games</a></div>
+
     <header>
       <h1>YOUR STATS</h1>
       <p class="subtitle">Daily progress &amp; streaks</p>
+      <p id="stats-date"></p>
     </header>
 
-    <!-- Summary -->
     <div class="summary-row">
-      <div class="summary-card">
-        <div id="sum-today" class="summary-num" style="color:var(--green)">0</div>
-        <div class="summary-label">Today</div>
+      <div class="summary-card panel chamfer" style="--c:#3ee08f">
+        <div id="sum-today" class="summary-num">0</div>
+        <div class="summary-label">Done Today</div>
       </div>
-      <div class="summary-card">
-        <div id="sum-streak" class="summary-num" style="color:var(--accent)">0</div>
-        <div class="summary-label">Best Streak</div>
+      <div class="summary-card panel chamfer" style="--c:#ffc83a">
+        <div id="sum-streak" class="summary-num">0</div>
+        <div class="summary-label">Top Streak</div>
       </div>
-      <div class="summary-card">
-        <div id="sum-total" class="summary-num" style="color:#7e4eb8">0</div>
-        <div class="summary-label">All Time</div>
+      <div class="summary-card panel chamfer" style="--c:#b58cff">
+        <div id="sum-total" class="summary-num">0</div>
+        <div class="summary-label">Games Played</div>
       </div>
     </div>
 
-    <!-- Countdown -->
-    <div class="countdown-bar">
-      <div class="countdown-label">NEXT DAILY PUZZLE</div>
+    <div class="countdown-bar panel chamfer">
+      <div class="countdown-label">Next daily puzzle</div>
       <div id="countdown" class="countdown-time">--:--:--</div>
     </div>
 
-    <!-- Streak Chart -->
-    <div class="streak-section">
-      <div class="section-hdr">Current Streaks</div>
+    <div class="section-header"><span class="section-label">Current Streaks</span></div>
+    <div class="streak-panel panel chamfer">
       <div id="streak-chart" class="streak-grid"></div>
+      <p id="streak-empty" class="streak-empty" hidden>No streaks yet. Finish a daily game, then come back tomorrow to start one.</p>
     </div>
 
-    <!-- Daily Games -->
-    <div class="section-hdr">Daily Games</div>
+    <div class="section-header"><span class="section-label">Daily Games</span></div>
     <div id="daily-games" class="game-stats"></div>
 
-    <footer>Acumen</footer>
+    <footer>
+      <div class="footer-logo"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="1024" height="1024" rx="224" fill="#131A2B"/><g transform="translate(512, 180)"><g fill="none" stroke="white" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"><line x1="-180" y1="660" x2="0" y2="0"/><line x1="180" y1="660" x2="0" y2="0"/><line x1="-100" y1="460" x2="100" y2="460"/></g><polygon points="0,-90 -85,30 0,-5 85,30" fill="#E8A317"/></g></svg></div>
+      <span class="footer-text">Acumen</span>
+    </footer>
   </div>
 
   <script src="daily.js"></script>
   <script>
   (function () {
+    // Same colours as the hub cards.
     var GAMES = [
-      { key: 'threads',  name: 'Threads',  icon: '\uD83E\uDDF5', href: 'threads/',  abbr: 'THR' },
-      { key: 'alibi',    name: 'Alibi',    icon: '\uD83D\uDD75',  href: 'alibi/',    abbr: 'ALI' },
-      { key: 'bluff',    name: 'Bluff',    icon: '\uD83C\uDCCF', href: 'bluff/',    abbr: 'BLF' },
-      { key: 'lineup',   name: 'Lineup',   icon: '\uD83D\uDCCA', href: 'lineup/',   abbr: 'LIN' },
-      { key: 'echo',     name: 'Echo',     icon: '\uD83D\uDD19', href: 'echo/',     abbr: 'ECH' },
-      { key: 'cipher',   name: 'Cipher',   icon: '\uD83D\uDD10', href: 'cipher/',   abbr: 'CIP' },
-      { key: 'reflex',   name: 'Reflex',   icon: '\u26A1',       href: 'reflex/',   abbr: 'RFX' },
-      { key: 'vanish',   name: 'Vanish',   icon: '\uD83D\uDFE9', href: 'vanish/',   abbr: 'VAN' },
-      { key: 'sequence', name: 'Sequence', icon: '\uD83D\uDD22', href: 'sequence/', abbr: 'SEQ' },
-      { key: 'rank',     name: 'Rank',     icon: '\uD83C\uDFAF', href: 'rank/',     abbr: 'RNK' }
+      { key: 'threads',  name: 'Missing Link', abbr: 'LNK', color: '#ffbf4d', href: 'threads/' },
+      { key: 'alibi',    name: 'Alibi',        abbr: 'ALI', color: '#ffc24a', href: 'alibi/' },
+      { key: 'bluff',    name: 'Bluff',        abbr: 'BLF', color: '#ff6a52', href: 'bluff/' },
+      { key: 'lineup',   name: 'Lineup',       abbr: 'LIN', color: '#5b8bff', href: 'lineup/' },
+      { key: 'echo',     name: 'Echo',         abbr: 'ECH', color: '#b58cff', href: 'echo/' },
+      { key: 'cipher',   name: 'Cipher',       abbr: 'CIP', color: '#3ee08f', href: 'cipher/' },
+      { key: 'reflex',   name: 'Reflex',       abbr: 'RFX', color: '#ffc83a', href: 'reflex/' },
+      { key: 'vanish',   name: 'Vanish',       abbr: 'VAN', color: '#19dcb8', href: 'vanish/' },
+      { key: 'sequence', name: 'Sequence',     abbr: 'SEQ', color: '#5fa8ff', href: 'sequence/' },
+      { key: 'rank',     name: 'Rank',         abbr: 'RNK', color: '#ffc83a', href: 'rank/' }
     ];
 
-    var todayCount = 0;
-    var bestStreak = 0;
-    var totalPlayed = 0;
-    var streaks = [];
-    var gameData = [];
+    function esc(s) {
+      return String(s).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
 
-    GAMES.forEach(function (g) {
+    document.getElementById('stats-date').textContent = Daily.getDateString();
+
+    var todayCount = 0, bestStreak = 0, everPlayed = 0;
+    var rows = GAMES.map(function (g) {
       var result = Daily.getDailyResult(g.key);
       var streak = Daily.getStreak(g.key);
-      var played = result !== null;
-      if (played) todayCount++;
+      if (result) todayCount++;
       if (streak > bestStreak) bestStreak = streak;
-      streaks.push({ abbr: g.abbr, streak: streak, color: getColor(g.key) });
-
-      // Count total plays from streak data
       try {
         var sd = JSON.parse(localStorage.getItem(g.key + '-streak') || '{}');
-        if (sd.lastDay) totalPlayed++;
+        if (sd.lastDay) everPlayed++;
       } catch (e) {}
-
-      gameData.push({
-        key: g.key, name: g.name, icon: g.icon, href: g.href,
-        played: played, score: result ? result.score : null, streak: streak
-      });
+      return { g: g, played: !!result, score: result ? result.score : null, streak: streak };
     });
 
-    // Summary cards
-    document.getElementById('sum-today').textContent = todayCount + '/10';
+    document.getElementById('sum-today').innerHTML = todayCount + '<small>/' + GAMES.length + '</small>';
     document.getElementById('sum-streak').textContent = bestStreak;
-    document.getElementById('sum-total').textContent = totalPlayed;
+    document.getElementById('sum-total').innerHTML = everPlayed + '<small>/' + GAMES.length + '</small>';
 
-    // Countdown
-    function tickCd() {
-      document.getElementById('countdown').textContent = Daily.formatCountdown();
-    }
-    tickCd();
-    setInterval(tickCd, 1000);
+    // countdown to the next puzzle
+    var cd = document.getElementById('countdown');
+    function tick() { cd.textContent = Daily.formatCountdown(); }
+    tick();
+    setInterval(tick, 1000);
 
-    // Streak chart
-    var maxStreak = Math.max.apply(null, streaks.map(function (s) { return s.streak; }));
-    if (maxStreak < 1) maxStreak = 1;
-    var chartEl = document.getElementById('streak-chart');
-    streaks.forEach(function (s) {
+    // streak chart
+    var maxStreak = Math.max(1, bestStreak);
+    var chart = document.getElementById('streak-chart');
+    rows.forEach(function (r) {
       var col = document.createElement('div');
-      col.className = 'streak-col';
-      var h = Math.max((s.streak / maxStreak) * 68, s.streak > 0 ? 8 : 4);
+      col.className = 'streak-col' + (r.streak > 0 ? '' : ' zero');
+      col.style.setProperty('--c', r.g.color);
+      var h = r.streak > 0 ? Math.max(Math.round(r.streak / maxStreak * 80), 10) : 5;
       col.innerHTML =
-        '<div class="streak-num">' + s.streak + '</div>' +
-        '<div class="streak-bar-wrap"><div class="streak-bar" style="height:' + h + 'px;background:' + s.color + '"></div></div>' +
-        '<div class="streak-label">' + s.abbr + '</div>';
-      chartEl.appendChild(col);
+        '<div class="streak-num">' + r.streak + '</div>' +
+        '<div class="streak-bar-wrap"><div class="streak-bar" style="height:' + h + 'px"></div></div>' +
+        '<div class="streak-label">' + r.g.abbr + '</div>';
+      chart.appendChild(col);
     });
+    if (bestStreak === 0) document.getElementById('streak-empty').hidden = false;
 
-    // Game cards
-    var listEl = document.getElementById('daily-games');
-    gameData.forEach(function (g) {
+    // per-game cards
+    var list = document.getElementById('daily-games');
+    rows.forEach(function (r) {
       var a = document.createElement('a');
-      a.href = g.href;
-      a.className = 'gs-card gs-' + g.key;
-
-      var streakText = g.streak > 0 ? '\uD83D\uDD25 ' + g.streak : '—';
-      var scoreText = g.score !== null ? 'Score: ' + g.score : '';
-      var badge = g.played
-        ? '<span class="gs-badge done">DONE</span>'
-        : '<span class="gs-badge pending">PLAY</span>';
-
+      a.href = r.g.href;
+      a.className = 'gs-card panel chamfer' + (r.played ? ' done' : '');
+      a.style.setProperty('--c', r.g.color);
+      var streakTxt = r.streak > 0 ? '🔥 <b>' + r.streak + '</b> day' + (r.streak === 1 ? '' : 's') : 'No streak';
+      var scoreTxt = r.score !== null ? 'Score <b>' + esc(r.score) + '</b>' : '';
       a.innerHTML =
-        '<div class="gs-icon">' + g.icon + '</div>' +
+        '<div class="gs-thumb"><img src="img/cards/' + r.g.key + '.jpg" alt="" width="64" height="64" decoding="async"></div>' +
         '<div class="gs-info">' +
-          '<div class="gs-name">' + g.name.toUpperCase() + '</div>' +
-          '<div class="gs-meta"><span>Streak: ' + streakText + '</span>' +
-          (scoreText ? '<span>' + scoreText + '</span>' : '') +
-          '</div>' +
+          '<div class="gs-name">' + esc(r.g.name) + '</div>' +
+          '<div class="gs-meta"><span>' + streakTxt + '</span>' + (scoreTxt ? '<span>' + scoreTxt + '</span>' : '') + '</div>' +
         '</div>' +
-        '<div class="gs-status">' + badge + '</div>';
-      listEl.appendChild(a);
+        '<span class="gs-badge ' + (r.played ? 'done' : 'pending') + '">' + (r.played ? '✓ DONE' : 'PLAY') + '</span>';
+      list.appendChild(a);
     });
-
-    function getColor(key) {
-      var colors = {
-        threads: '#8a6d00', alibi: '#c89018',
-        bluff: '#d05035', lineup: '#4a6ee0', echo: '#7e4eb8',
-        cipher: '#1a9850', reflex: '#c89818',
-        vanish: '#009878',
-        sequence: '#4a6ee0',
-        rank: '#b8960a'
-      };
-      return colors[key] || '#888';
-    }
   })();
   </script>
 </body>
