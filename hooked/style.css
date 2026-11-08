@@ -323,3 +323,6 @@ html, body {
 .stmt-btn { font-weight: 600; }
 .hk-note { font-size: 12px; line-height: 1.5; color: var(--text-dim); text-align: center; margin-top: 14px; }
 .hk-grid { font-size: 26px; letter-spacing: 4px; text-align: center; margin: 4px 0 14px; }
+.hk-note a { color: var(--accent); font-weight: 700; text-decoration: none; }
+.hk-status { font-size: 13px; line-height: 1.5; text-align: center; color: var(--text-dim); margin-top: 12px; }
+.btn-main:disabled { opacity: .55; cursor: default; }

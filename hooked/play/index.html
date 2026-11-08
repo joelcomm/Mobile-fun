@@ -12,7 +12,7 @@
   <meta name="twitter:card" content="player">
   <meta name="twitter:site" content="@joelcomm">
   <meta name="twitter:title" content="Hooked — Acumen">
-  <meta name="twitter:description" content="Two hooks. One stops the scroll. Can you pick the winner? Play a quick round.">
+  <meta name="twitter:description" content="Two hooks. One stops the scroll. Can you pick the crowd favorite? Play a quick round.">
   <meta name="twitter:image" content="https://games.aiforeveryoneshow.com/hooked/x-card/card.png">
   <meta name="twitter:image:alt" content="Hooked: two opening lines for the same post. Tap the one that would stop your scroll.">
   <meta name="twitter:player" content="https://games.aiforeveryoneshow.com/hooked/play/">
@@ -32,9 +32,10 @@
     <div id="title-screen">
       <h1 class="game-title"><span class="title-icon">&#x1F3A3;</span> HOOKED</h1>
       <p class="tagline">Two hooks. One stops the scroll.</p>
-      <p class="embed-howto">Tap the hook that <strong>stops your scroll</strong> &middot; 5 rounds &middot; learn why it wins</p>
+      <p class="embed-howto">Tap the hook that <strong>stops your scroll</strong> &middot; score by matching the crowd</p>
       <button id="btn-start" class="btn-main">GET HOOKED</button>
       <p id="best-score" class="best-score"></p>
+      <p id="hk-status" class="hk-status hidden"></p>
     </div>
 
     <!-- Game Screen -->
@@ -45,7 +46,7 @@
       </div>
       <div id="streak-bar" class="streak-bar"></div>
       <p id="topic-label" class="topic-label"></p>
-      <p class="instruction-label">TAP THE STRONGER HOOK</p>
+      <p id="instruction-label" class="instruction-label">TAP THE HOOK THAT STOPS YOUR SCROLL</p>
       <div id="statements" class="statements"></div>
       <div id="feedback" class="feedback hidden">
         <div class="embed-feedback-row">

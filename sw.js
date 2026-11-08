@@ -84,7 +84,9 @@ var ASSETS = [
   '/hooked/index.html',
   '/hooked/game.js',
   '/hooked/hooks.js',
-  '/hooked/style.css'
+  '/hooked/style.css',
+  '/hooked/vote/index.html',
+  '/hooked/vote/vote.js'
 ];
 
 // De-duplicate: Cache.addAll rejects duplicate URLs, which used to make the whole install fail.

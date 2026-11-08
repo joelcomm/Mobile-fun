@@ -1,12 +1,16 @@
-/* Hooked — hook pairs. Each day deals 5 pairs (Daily.dealFromDeck), same for every player.
- * w = the stronger hook, l = the weaker version of the same post, why = the lesson shown after a pick.
- * Keep ids stable (crowd votes are keyed by id). Add new pairs at the end with the next id. */
+/* Hooked — hook pairs. Players vote on which hook of each pair stops their scroll; the answers
+ * are those votes (see game.js). w / l are just the two sides of a pair, in the order they were
+ * written: w is the version our editors preferred, which the game shows as the "editor's take"
+ * after a pick, never as the answer. why = the editor's reasoning.
+ * Keep ids stable (votes are keyed by id). Add new pairs at the end with the next id, then raise
+ * MAX_PAIR in the vote API's wrangler.toml. */
 
-// Optional crowd results endpoint (see game.js). Empty = off.
-var HOOKED_VOTE_URL = '';
+// Base URL of the Hooked vote API (Cloudflare Worker), e.g. 'https://hooked-api.example.workers.dev'.
+// Empty = the game shows "opens soon" instead of running with no player data.
+var HOOKED_API = '';
 
 var HOOKS = [
-  { id: 'h001', topic: 'PRICING', w: 'I raised my prices 40% and lost zero clients. Here\'s the email I sent.', l: 'I wanted to share some thoughts on pricing, because recently I raised my prices by about 40% and, interestingly, didn\'t lose any clients.', why: 'Same facts, but the winner leads with the result and promises the email. "I wanted to share some thoughts" wastes the first line.' },
+  { id: 'h001', topic: 'PRICING', w: 'I raised my prices 40% and lost zero clients. Here\'s the email I sent.', l: 'I wanted to share some thoughts on pricing, because recently I raised my prices by about 40% and, interestingly, didn\'t lose any clients.', why: 'Same facts, but this version leads with the result and promises the email. "I wanted to share some thoughts" wastes the first line.' },
   { id: 'h002', topic: 'PRODUCTIVITY', w: 'I deleted every app on my phone except four. Week one was miserable. Week three changed my work.', l: 'Here is why you should spend less time on your phone this year.', why: 'A personal experiment with a turning point creates a story. "You should" sounds like a lecture.' },
   { id: 'h003', topic: 'A PRODUCT LAUNCH', w: 'We almost didn\'t ship this. Today it\'s live.', l: 'We are thrilled to announce the launch of our brand new product!', why: 'Tension ("almost didn\'t") makes people curious. "Thrilled to announce" is the most skipped phrase online.' },
   { id: 'h004', topic: 'AI TOOLS', w: 'I gave an AI my last 50 sales calls. It found the one sentence that loses deals.', l: 'As many of you know, AI is changing sales, so I decided to try analyzing some of my recent sales calls with it, and the results were pretty interesting.', why: 'Concrete input (50 calls) and a single, specific finding make the payoff feel real.' },
@@ -38,7 +42,7 @@ var HOOKS = [
   { id: 'h030', topic: 'SIDE HUSTLES', w: 'My side project makes $2,100 a month. It took 11 hours to build.', l: 'I\'ve been working on a side project in my spare time, and I\'m happy to report it\'s now bringing in around $2,100 per month, which I\'m proud of.', why: 'Two concrete numbers set up an irresistible ratio.' },
   { id: 'h031', topic: 'FOCUS', w: 'I wear noise-cancelling headphones with nothing playing. My output doubled.', l: 'Reducing distractions can help you focus better at work.', why: 'An odd, specific behavior is more memorable than general advice.' },
   { id: 'h032', topic: 'LEADERSHIP', w: 'The worst boss I ever had taught me the only leadership lesson I still use.', l: 'Good leadership is about empathy, communication and trust.', why: 'Promises a story and a single takeaway instead of a list of virtues.' },
-  { id: 'h033', topic: 'EMAIL MARKETING', w: 'The subject line that beat everything we tested was just someone\'s first name.', l: 'We\'ve been running a lot of email subject line tests lately, and one of the most interesting findings was how well simply using a person\'s first name performed.', why: 'The winner states the finding as a surprise in one line. The weaker version hides it at the end of a long sentence.' },
+  { id: 'h033', topic: 'EMAIL MARKETING', w: 'The subject line that beat everything we tested was just someone\'s first name.', l: 'We\'ve been running a lot of email subject line tests lately, and one of the most interesting findings was how well simply using a person\'s first name performed.', why: 'This version states the finding as a surprise in one line. The weaker version hides it at the end of a long sentence.' },
   { id: 'h034', topic: 'INVESTING', w: 'The best investment I ever made cost $29.', l: 'Investing in yourself is one of the smartest things you can do.', why: 'A tiny number paired with "best investment" is a curiosity gap.' },
   { id: 'h035', topic: 'WEBSITES', w: 'We removed half the words from our homepage. Sign-ups went up 37%.', l: 'We recently went through our homepage and simplified the copy quite a bit, removing a lot of words, and we saw a nice increase in sign-ups as a result.', why: 'An action and a measurable result are proof, not opinion.' },
   { id: 'h036', topic: 'BURNOUT', w: 'I didn\'t realize I was burned out until I cried over a spreadsheet.', l: 'Burnout is a serious issue that many professionals face.', why: 'A raw, specific moment builds instant connection.' },
