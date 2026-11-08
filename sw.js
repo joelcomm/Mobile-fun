@@ -1,6 +1,6 @@
 // Bump the version whenever cached game assets (css/js/images/fonts) change, or returning visitors keep the old copies.
 // Pages (html) are fetched network-first, so a redeploy shows up on the next visit without a bump.
-var CACHE_NAME = 'acumen-v9';
+var CACHE_NAME = 'acumen-v8';
 
 var ASSETS = [
   '/',
@@ -22,7 +22,6 @@ var ASSETS = [
   '/img/cards/vanish.jpg',
   '/img/cards/sequence.jpg',
   '/img/cards/rank.jpg',
-  '/img/cards/hooked.jpg',
   '/img/cards/puptown.jpg',
   '/img/cards/poundbreak.jpg',
   '/img/cards/constellation.jpg',
@@ -37,7 +36,6 @@ var ASSETS = [
   '/theme/vanish.css',
   '/theme/sequence.css',
   '/theme/rank.css',
-  '/theme/hooked.css',
   '/theme/fonts/Lilita-One.woff2',
   '/theme/fonts/Alfa-Slab-One.woff2',
   '/theme/fonts/Rye.woff2',
@@ -80,13 +78,7 @@ var ASSETS = [
   '/sequence/style.css',
   '/rank/index.html',
   '/rank/game.js',
-  '/rank/style.css',
-  '/hooked/index.html',
-  '/hooked/game.js',
-  '/hooked/hooks.js',
-  '/hooked/style.css',
-  '/hooked/vote/index.html',
-  '/hooked/vote/vote.js'
+  '/rank/style.css'
 ];
 
 // De-duplicate: Cache.addAll rejects duplicate URLs, which used to make the whole install fail.

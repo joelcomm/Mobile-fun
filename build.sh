@@ -17,7 +17,7 @@ mkdir -p www/theme && cp -R theme/. www/theme/   # shared "Arcade Bevel" game th
 mkdir -p www/img && cp -R img/. www/img/             # hub card art
 cp privacy.html support.html www/ 2>/dev/null || true
 
-GAMES="threads alibi bluff lineup echo cipher reflex sequence rank hooked"
+GAMES="threads alibi bluff lineup echo cipher reflex sequence rank"
 
 for dir in $GAMES; do
   if [ -d "$dir" ]; then
@@ -43,4 +43,4 @@ done
 # Drop the unshipped "vanish" game from the stats list (app ships 9 games)
 [ -f "www/stats.html" ] && sed_inplace "/key: 'vanish'/d" www/stats.html
 
-echo "Build complete: www/ (10 games)"
+echo "Build complete: www/ (9 games)"

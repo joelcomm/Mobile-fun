@@ -326,3 +326,4 @@ html, body {
 .hk-note a { color: var(--accent); font-weight: 700; text-decoration: none; }
 .hk-status { font-size: 13px; line-height: 1.5; text-align: center; color: var(--text-dim); margin-top: 12px; }
 .btn-main:disabled { opacity: .55; cursor: default; }
+.daily-hub-link { display: none !important; }
