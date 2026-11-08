@@ -1,7 +1,7 @@
 {
   "name": "Acumen X Cards",
   "account": "@joelcomm",
-  "updated": "2026-11-01",
+  "updated": "2026-11-08",
   "instructions": "Each card is posted as an ordinary X post whose text is post_text exactly as given; it already ends with card_url, and X turns that link into a playable card. Post one card per post, one game at a time, in 'order'. Do not attach images or media (X builds the card from the link) and do not shorten or change card_url. To make X refresh a card it has cached, append ?v=2 (then ?v=3, ...) to card_url in the post. Never reveal puzzle answers in any post or reply.",
   "cards": [
     {
@@ -123,6 +123,18 @@
       "card_image": "https://games.aiforeveryoneshow.com/vanish/x-card/card.png",
       "card_image_alt": "Vanish: a 5x5 letter grid with some tiles already gone, spelling the example word STONE.",
       "full_game_url": "https://games.aiforeveryoneshow.com/vanish/"
+    },
+    {
+      "order": 11,
+      "game": "Hooked",
+      "key": "hooked",
+      "card_url": "https://games.aiforeveryoneshow.com/hooked/x-card/",
+      "post_text": "Two hooks for the same post. One stops the scroll.\n\nCan you pick the winner? Play today's Hooked right here in your feed.\n\nhttps://games.aiforeveryoneshow.com/hooked/x-card/",
+      "card_title": "Hooked — Acumen",
+      "card_description": "Two hooks. One stops the scroll. Can you pick the winner? Play a quick round.",
+      "card_image": "https://games.aiforeveryoneshow.com/hooked/x-card/card.png",
+      "card_image_alt": "Hooked: two opening lines for the same post. Tap the one that would stop your scroll.",
+      "full_game_url": "https://games.aiforeveryoneshow.com/hooked/"
     }
   ]
 }
