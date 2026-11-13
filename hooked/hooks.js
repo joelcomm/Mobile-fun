@@ -7,7 +7,7 @@
 
 // Base URL of the Hooked vote API (Cloudflare Worker), e.g. 'https://hooked-api.example.workers.dev'.
 // Empty = the game shows "opens soon" instead of running with no player data.
-var HOOKED_API = '';
+var HOOKED_API = 'https://hooked-api.joelcomm.workers.dev';
 
 var HOOKS = [
   { id: 'h001', topic: 'PRICING', w: 'I raised my prices 40% and lost zero clients. Here\'s the email I sent.', l: 'I wanted to share some thoughts on pricing, because recently I raised my prices by about 40% and, interestingly, didn\'t lose any clients.', why: 'Same facts, but this version leads with the result and promises the email. "I wanted to share some thoughts" wastes the first line.' },
