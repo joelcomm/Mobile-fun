@@ -1,13 +1,16 @@
-/* Hooked — hook pairs. Players vote on which hook of each pair stops their scroll; the answers
- * are those votes (see game.js). w / l are just the two sides of a pair, in the order they were
- * written: w is the version our editors preferred, which the game shows as the "editor's take"
- * after a pick, never as the answer. why = the editor's reasoning.
- * Keep ids stable (votes are keyed by id). Add new pairs at the end with the next id, then raise
- * MAX_PAIR in the vote API's wrangler.toml. */
+/* Hooked — one featured pair of posts per day. Players vote on which post is more likely to get
+ * engagement, then see what the majority said. w / l are just the two sides of a pair: w is the
+ * version our editors preferred (shown after voting as the "editor's note", never as the answer),
+ * why = the editor's reasoning.
+ *
+ * The pair for each UTC day is HOOKS in a fixed shuffled order, starting on HOOKED_START (day #1).
+ * Keep ids stable (votes are stored with the pair id). Add new pairs at the end with the next id and
+ * raise MAX_PAIR in the vote API's wrangler.toml. */
 
-// Base URL of the Hooked vote API (Cloudflare Worker), e.g. 'https://hooked-api.example.workers.dev'.
-// Empty = the game shows "opens soon" instead of running with no player data.
+// Base URL of the Hooked vote API (Cloudflare Worker).
 var HOOKED_API = 'https://hooked-api.joelcomm.workers.dev';
+// UTC date of Hooked #1.
+var HOOKED_START = '2026-11-14';
 
 var HOOKS = [
   { id: 'h001', topic: 'PRICING', w: 'I raised my prices 40% and lost zero clients. Here\'s the email I sent.', l: 'I wanted to share some thoughts on pricing, because recently I raised my prices by about 40% and, interestingly, didn\'t lose any clients.', why: 'Same facts, but this version leads with the result and promises the email. "I wanted to share some thoughts" wastes the first line.' },

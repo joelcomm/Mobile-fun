@@ -9,15 +9,6 @@
        The shareable URL is ../x-card/ (it carries the card meta tags). -->
   <meta name="robots" content="noindex">
   <link rel="canonical" href="https://games.aiforeveryoneshow.com/hooked/x-card/">
-  <meta name="twitter:card" content="player">
-  <meta name="twitter:site" content="@joelcomm">
-  <meta name="twitter:title" content="Hooked">
-  <meta name="twitter:description" content="Two hooks. One stops the scroll. Can you pick the crowd favorite? Play a quick round.">
-  <meta name="twitter:image" content="https://games.aiforeveryoneshow.com/hooked/x-card/card.png">
-  <meta name="twitter:image:alt" content="Hooked: two opening lines for the same post. Tap the one that would stop your scroll.">
-  <meta name="twitter:player" content="https://games.aiforeveryoneshow.com/hooked/play/">
-  <meta name="twitter:player:width" content="480">
-  <meta name="twitter:player:height" content="480">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -25,65 +16,33 @@
   <link rel="stylesheet" href="embed.css">
 </head>
 <body class="embed">
-  <a href="https://games.aiforeveryoneshow.com/hooked/" target="_blank" rel="noopener" class="embed-brand" data-external>FULL GAME &#x2197;</a>
-  <div id="app">
+  <main class="hk">
+    <header class="hk-head">
+      <h1 class="hk-title">HOOKED <span aria-hidden="true">&#x1F3A3;</span></h1>
+      <p id="hk-day" class="hk-day"></p>
+      <p id="hk-streak" class="hk-streak hidden"></p>
+    </header>
 
-    <!-- Title Screen -->
-    <div id="title-screen">
-      <h1 class="game-title"><span class="title-icon">&#x1F3A3;</span> HOOKED</h1>
-      <p class="tagline">Two hooks. One stops the scroll.</p>
-      <p class="embed-howto">Tap the hook that <strong>stops your scroll</strong> &middot; score by matching the crowd</p>
-      <button id="btn-start" class="btn-main">GET HOOKED</button>
-      <p id="best-score" class="best-score"></p>
-      <p id="hk-status" class="hk-status hidden"></p>
-    </div>
+    <p id="hk-yesterday" class="hk-yesterday hidden"></p>
 
-    <!-- Game Screen -->
-    <div id="game-screen" class="hidden">
-      <div class="game-header">
-        <span id="round-label" class="round-label">1 / 5</span>
-        <span id="score-label" class="score-label">0</span>
-      </div>
-      <div id="streak-bar" class="streak-bar"></div>
-      <p id="topic-label" class="topic-label"></p>
-      <p id="instruction-label" class="instruction-label">TAP THE HOOK THAT STOPS YOUR SCROLL</p>
-      <div id="statements" class="statements"></div>
-      <div id="feedback" class="feedback hidden">
-        <div class="embed-feedback-row">
-          <p id="feedback-result" class="feedback-result"></p>
-          <button id="btn-next" class="btn-main btn-next">NEXT</button>
-        </div>
-        <p id="feedback-explain" class="feedback-explain"></p>
-      </div>
-    </div>
+    <p id="hk-question" class="hk-question">Which of these two posts is more likely to get engagement? Vote and see what the majority said!</p>
+    <p id="hk-topic" class="hk-topic"></p>
+    <div id="hk-options" class="hk-options"></div>
+    <p id="hk-ask" class="hk-ask">Tap a post to vote.</p>
+    <p id="hk-error" class="hk-error hidden"></p>
 
-    <!-- Game Over Screen -->
-    <div id="gameover-screen" class="hidden">
-      <h2 class="gameover-heading">TODAY'S HOOKS</h2>
-      <div id="final-score" class="final-score"></div>
-      <div id="final-rank" class="final-rank"></div>
-      <div id="final-grid" class="hk-grid"></div>
-      <div id="final-stats" class="final-stats"></div>
-      <div class="embed-actions">
-        <button id="btn-share" class="btn-main">Share on X</button>
-      </div>
-      <p id="next-cd"></p>
-    </div>
+    <section id="hk-after" class="hk-after hidden">
+      <p id="hk-msg" class="hk-msg"></p>
+      <button id="hk-share" class="hk-btn">SHARE ON X</button>
+      <p id="hk-note" class="hk-note"></p>
+    </section>
 
-  </div>
-
-  <script src="../../daily.js"></script>
+    <footer class="hk-foot">
+      <p id="hk-cd" class="hk-cd"></p>
+      <a class="hk-link" href="https://games.aiforeveryoneshow.com/hooked/past/" target="_blank" rel="noopener" data-external>Past results &#x2197;</a>
+    </footer>
+  </main>
   <script src="../hooks.js"></script>
   <script src="../game.js"></script>
-  <script>
-    // Links injected by Daily (e.g. "ALL GAMES" after today's puzzle is done) must leave the iframe.
-    document.querySelectorAll('.daily-hub-link').forEach(function (a) {
-      a.href = 'https://games.aiforeveryoneshow.com/hooked/';
-      a.textContent = 'OPEN FULL GAME';
-      a.target = '_blank';
-      a.rel = 'noopener';
-      a.setAttribute('data-external', '');
-    });
-  </script>
 </body>
 </html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#170818">
+  <title>Past posts — Hooked</title>
+  <meta name="description" content="Past Hooked pairs: which post the majority said was more likely to get engagement.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .pp { background: rgba(255,255,255,.05); border: 1px solid var(--line); border-radius: 14px; padding: 14px; margin-bottom: 14px; }
+    .pp-h { display: flex; justify-content: space-between; font-size: 11px; font-weight: 800; letter-spacing: 1.5px; color: var(--dim); margin-bottom: 10px; text-transform: uppercase; }
+    .pp-h b { color: var(--accent); }
+    .pp-o { position: relative; overflow: hidden; background: var(--card); color: var(--card-text); border-radius: 10px; padding: 10px 12px 26px; margin-bottom: 8px; font-size: 14.5px; font-weight: 650; line-height: 1.4; }
+    .pp-o .bar { position: absolute; inset: 0 auto 0 0; background: rgba(255,61,127,.16); }
+    .pp-o.top .bar { background: rgba(53,224,138,.28); }
+    .pp-o span { position: relative; }
+    .pp-o .pc { position: absolute; left: 12px; bottom: 6px; font-size: 12px; font-weight: 900; color: #7a2a4e; }
+    .pp-o.top .pc { color: #0d6a3e; }
+    .pp-o.mine { outline: 3px solid var(--accent); outline-offset: -3px; }
+    .pp-n { font-size: 12.5px; line-height: 1.5; color: var(--dim); margin-top: 6px; }
+    .pp-empty { text-align: center; color: var(--dim); font-size: 14px; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <main class="hk">
+    <header class="hk-head">
+      <h1 class="hk-title">PAST POSTS</h1>
+      <p class="hk-day">Final results, newest first</p>
+    </header>
+    <div id="pp-list"><p class="pp-empty">Loading&hellip;</p></div>
+    <footer class="hk-foot"><a class="hk-link" href="../">&larr; Vote on today&rsquo;s pair</a></footer>
+  </main>
+  <script src="../hooks.js"></script>
+  <script src="past.js"></script>
+</body>
+</html>
