@@ -1,40 +1,33 @@
 /* Compact layout for the X Player Card iframe (~480x480, may be scaled down). */
 html, body { height: 100%; }
-body.embed { overflow-y: auto; background: linear-gradient(180deg, #2a0a26, #12040f); }
-.embed .hk { padding: 12px 14px 14px; }
-.embed .hk-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; text-align: left; margin-bottom: 8px; flex-wrap: wrap; }
-.embed .hk-title { font-size: 26px; text-shadow: 0 2px 0 #5c0a30, 0 4px 0 #3a0620; }
-.embed .hk-day { margin: 0; font-size: 10px; letter-spacing: 1.5px; }
-.embed .hk-streak { margin: 0; width: 100%; font-size: 12px; }
-.embed .hk-yesterday { font-size: 11.5px; padding: 6px 9px; margin-bottom: 8px; }
-.embed .hk-question { font-size: 15px; margin-bottom: 3px; }
-.embed .hk-topic { font-size: 9.5px; margin-bottom: 8px; }
-.embed .hk-options { gap: 8px; }
-.embed .hk-opt { font-size: 14px; padding: 10px 10px 10px 9px; gap: 9px; border-radius: 12px; box-shadow: 0 4px 0 #9a3a62; }
-.embed .hk-letter { flex-basis: 22px; height: 22px; font-size: 11px; }
-.embed.hk-voted .hk-opt { padding-bottom: 28px; }
-.embed.hk-voted .hk-pct { left: 41px; bottom: 7px; font-size: 11.5px; }
-.embed .hk-ask { margin-top: 8px; font-size: 12px; }
-.embed .hk-after { margin-top: 10px; }
-.embed .hk-msg { font-size: 14px; margin-bottom: 8px; }
-.embed .hk-btn { font-size: 13px; padding: 10px 22px; border-radius: 11px; }
-.embed .hk-note { margin-top: 10px; font-size: 11.5px; }
-.embed .hk-foot { margin-top: 10px; display: flex; justify-content: space-between; align-items: center; }
-.embed .hk-cd { font-size: 10px; letter-spacing: 1px; }
-.embed .hk-link { margin: 0; font-size: 11px; }
+body.embed { overflow-y: auto; }
+.embed .hk { padding: 12px 14px; }
+.embed .hk-head { margin-bottom: 8px; }
+.embed .hk-title { font-size: 17px; }
+.embed .hk-meta { font-size: 13px; }
+.embed .hk-yesterday { font-size: 13px; padding: 7px 10px; margin-bottom: 8px; border-radius: 12px; }
+.embed .hk-question { font-size: 17px; margin-bottom: 10px; }
+.embed .hk-post { padding: 10px 12px; gap: 10px; }
+.embed .hk-av { flex-basis: 34px; height: 34px; font-size: 15px; }
+.embed .hk-name, .embed .hk-text { font-size: 14px; }
+.embed .hk-ask, .embed .hk-msg { font-size: 13px; }
+.embed .hk-row { min-height: 32px; }
+.embed .hk-row-t, .embed .hk-row-p { font-size: 14px; }
+.embed .hk-btn { margin-top: 10px; font-size: 14px; padding: 8px 18px; }
+.embed .hk-note { margin-top: 10px; font-size: 13px; }
+.embed .hk-foot { margin-top: 12px; padding-top: 8px; }
+.embed .hk-cd, .embed .hk-link { font-size: 12px; }
 
 /* Smallest cards (X scales the card down on narrow timelines): keep both posts in view */
 @media (max-height: 420px) {
-  .embed .hk { padding: 8px 10px 10px; }
+  .embed .hk { padding: 8px 10px; }
   .embed .hk-head { margin-bottom: 4px; }
-  .embed .hk-title { font-size: 20px; }
-  .embed .hk-streak, .embed .hk-topic, .embed .hk-ask, .embed .hk-q2 { display: none; }
+  .embed .hk-streak, .embed .hk-q2, .embed .hk-ask, .embed .hk-name span { display: none; }
   .embed .hk-yesterday { display: none !important; }
-  .embed .hk-question { font-size: 13.5px; margin-bottom: 6px; }
-  .embed .hk-opt { font-size: 12.5px; padding: 8px 8px 8px 7px; }
-  .embed.hk-voted .hk-opt { padding-bottom: 24px; }
-  .embed.hk-voted .hk-pct { left: 36px; bottom: 5px; font-size: 10.5px; }
-  .embed .hk-letter { flex-basis: 20px; height: 20px; font-size: 10px; }
-  .embed .hk-msg { font-size: 12.5px; margin-bottom: 6px; }
-  .embed .hk-btn { font-size: 12px; padding: 8px 18px; }
+  .embed .hk-question { font-size: 15px; margin-bottom: 6px; }
+  .embed .hk-post { padding: 8px 10px; }
+  .embed .hk-av { flex-basis: 28px; height: 28px; font-size: 13px; }
+  .embed .hk-name, .embed .hk-text { font-size: 13px; }
+  .embed .hk-text { line-height: 1.3; }
+  .embed .hk-options { gap: 6px; }
 }

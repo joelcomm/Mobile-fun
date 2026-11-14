@@ -19,13 +19,14 @@
     list.innerHTML = days.map(function (d) {
       var p = BY_ID[d.id], n = d.w + d.l, top = d.w === d.l ? null : (d.w > d.l ? 'w' : 'l');
       var me = mine[d.day] && mine[d.day].id === d.id ? mine[d.day].pick : null;
-      function opt(side) {
-        var c = side === 'w' ? d.w : d.l, pc = Math.round(c / n * 100);
-        return '<div class="pp-o' + (side === top ? ' top' : '') + (side === me ? ' mine' : '') + '"><div class="bar" style="width:' + pc + '%"></div>' +
-          '<span>' + esc(p[side]) + '</span><span class="pc">' + pc + '%' + (side === top ? ' · MAJORITY' : '') + (side === me ? ' · YOUR VOTE' : '') + '</span></div>';
+      function opt(side, L) {
+        var c = side === 'w' ? d.w : d.l, pc = Math.round(c / n * 100), isTop = side === top;
+        return '<div class="hk-row' + (isTop ? ' hk-top' : '') + '"><i style="width:' + pc + '%"></i>' +
+          '<span class="hk-row-t">' + L + ' \u00B7 ' + esc(p[side]) + '</span><span class="hk-row-p">' + pc + '%' + (isTop ? ' \u2713' : '') + '</span></div>';
       }
-      return '<article class="pp"><div class="pp-h"><span>Hooked #' + num(d.day) + ' · ' + nice(d.day) + '</span><b>' + n.toLocaleString('en-US') + ' votes</b></div>' +
-        opt('w') + opt('l') + '<p class="pp-n"><b>Editor’s note:</b> we’d have bet on the first post. ' + esc(p.why) + '</p></article>';
+      return '<article class="pp"><div class="pp-h"><span>#' + num(d.day) + ' · ' + nice(d.day) + '</span><b>' + n.toLocaleString('en-US') + ' votes</b></div>' +
+        opt('w', 'A') + opt('l', 'B') + (me ? '<p class="pp-mine">You voted ' + (me === 'w' ? 'A' : 'B') + (top ? (me === top ? ' \u00B7 You called it \u2705' : ' \u00B7 The majority went the other way') : '') + '</p>' : '') +
+        '<p class="pp-n"><b>Editor\u2019s note:</b> we\u2019d have bet on A. ' + esc(p.why) + '</p></article>';
     }).join('');
   }).catch(function () { list.innerHTML = '<p class="pp-empty">Couldn’t load past results. Check your connection.</p>'; });
 })();

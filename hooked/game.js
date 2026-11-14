@@ -96,7 +96,7 @@
   /* ---------- render ---------- */
   function renderHeader() {
     var n = dayIndex(TODAY) + 1;
-    $('hk-day').textContent = 'Hooked #' + n + ' · ' + niceDate(TODAY);
+    $('hk-day').textContent = '#' + n + ' · ' + niceDate(TODAY);
     $('hk-topic').textContent = PAIR.topic;
   }
 
@@ -115,47 +115,60 @@
 
   function renderStreak() {
     var el = $('hk-streak');
-    el.textContent = streak > 0 ? 'Crowd Streak: ' + streak + ' 🔥' : '';
+    el.textContent = streak > 0 ? 'Crowd Streak ' + streak + ' 🔥' : '';
     el.classList.toggle('hidden', !streak);
   }
 
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
+  function letter(side) { return SIDES.indexOf(side) ? 'B' : 'A'; }
+
   function renderOptions() {
     var box = $('hk-options');
     box.innerHTML = '';
-    SIDES.forEach(function (side, i) {
+    SIDES.forEach(function (side) {
+      var L = letter(side);
       var b = document.createElement('button');
-      b.className = 'hk-opt';
+      b.className = 'hk-post';
       b.dataset.side = side;
-      b.innerHTML = '<span class="hk-letter">' + (i ? 'B' : 'A') + '</span><span class="hk-text">' + esc(PAIR[side]) + '</span>' +
-        '<span class="hk-bar"></span><span class="hk-pct"></span>';
+      b.innerHTML = '<span class="hk-av hk-av-' + L + '">' + L + '</span><span class="hk-body">' +
+        '<span class="hk-name">Post ' + L + ' <span>· Version ' + (L === 'A' ? 1 : 2) + '</span></span>' +
+        '<span class="hk-text">' + esc(PAIR[side]) + '</span></span>';
       box.appendChild(b);
     });
   }
 
+  function renderAsk() {
+    var t = days[TODAY], n = t && t.id === PAIR.id ? t.w + t.l : 0;
+    $('hk-ask').textContent = 'Tap a post to vote' + (n ? ' · ' + fmt(n) + ' vote' + (n === 1 ? '' : 's') + ' so far' : '');
+  }
+
   function renderResult(r, myPick) {
-    var n = r.w + r.l, m = majorityOf(r);
+    var n = r.w + r.l, m = majorityOf(r), few = n < FEW;
     document.body.classList.add('hk-voted');
-    $('hk-options').querySelectorAll('.hk-opt').forEach(function (b) {
-      var side = b.dataset.side, share = pct(side === 'w' ? r.w : r.l, n);
-      b.disabled = true;
-      b.classList.toggle('hk-mine', side === myPick);
-      b.classList.toggle('hk-top', !!m && side === m && n >= FEW);
-      var few = n < FEW;
-      b.querySelector('.hk-bar').style.width = few ? '0%' : share + '%';
-      b.querySelector('.hk-pct').textContent = few ? (side === myPick ? 'YOUR VOTE' : '') : share + '%' + (side === myPick ? ' · YOUR VOTE' : '');
+    $('hk-options').classList.add('hidden');
+    $('hk-ask').classList.add('hidden');
+    var poll = $('hk-poll');
+    poll.innerHTML = '';
+    SIDES.forEach(function (side) {
+      var share = pct(side === 'w' ? r.w : r.l, n), top = !few && !!m && side === m;
+      var row = document.createElement('div');
+      row.className = 'hk-row' + (top ? ' hk-top' : '') + (side === myPick ? ' hk-mine' : '');
+      row.innerHTML = '<i style="width:' + (few ? 0 : share) + '%"></i>' +
+        '<span class="hk-row-t">' + letter(side) + ' · ' + esc(PAIR[side]) + '</span>' +
+        '<span class="hk-row-p">' + (few ? '' : share + '%') + (top ? ' ✓' : '') + '</span>';
+      poll.appendChild(row);
     });
-    var msg;
-    if (n < FEW) msg = 'You’re one of the first votes today. Check back later to see what the majority says.';
-    else if (!m) msg = 'Dead heat so far: ' + fmt(r.w) + ' to ' + fmt(r.l) + '.';
-    else if (m === myPick) msg = 'You’re with the majority so far: ' + pct(m === 'w' ? r.w : r.l, n) + '% of ' + fmt(n) + ' votes.';
-    else msg = 'You’re in the minority so far: ' + pct(myPick === 'w' ? r.w : r.l, n) + '% of ' + fmt(n) + ' votes.';
+    poll.classList.remove('hidden');
+    var mine = 'You voted ' + letter(myPick), msg;
+    if (few) msg = mine + ' · You’re one of the first votes today. Check back later to see what the majority says.';
+    else if (!m) msg = mine + ' · Dead heat so far · ' + fmt(n) + ' votes';
+    else if (m === myPick) msg = mine + ' · You’re with the majority so far · ' + fmt(n) + ' votes';
+    else msg = mine + ' · You’re in the minority so far · ' + fmt(n) + ' votes';
     $('hk-msg').textContent = msg;
-    $('hk-note').innerHTML = '<b>Editor’s note:</b> we’d bet on “' + esc(short(PAIR.w, 60)) + '” ' + esc(PAIR.why) +
+    $('hk-note').innerHTML = '<b>Editor’s note:</b> we’d bet on Post ' + letter('w') + '. ' + esc(PAIR.why) +
       ' The final majority locks in at midnight UTC.';
     $('hk-after').classList.remove('hidden');
-    $('hk-ask').classList.add('hidden');
     lastResult = { r: r, pick: myPick };
   }
 
@@ -211,7 +224,7 @@
     renderOptions();
     $('hk-question').innerHTML = esc(QUESTION) + ' <span class="hk-q2">Vote and see what the majority said!</span>';
     $('hk-options').addEventListener('click', function (e) {
-      var b = e.target.closest('.hk-opt');
+      var b = e.target.closest('.hk-post');
       if (b && !b.disabled) vote(b.dataset.side);
     });
     $('hk-share').addEventListener('click', share);
@@ -224,6 +237,7 @@
       streak = computeStreak();
       renderYesterday();
       renderStreak();
+      renderAsk();
       var mine = history[TODAY];
       if (mine && mine.id === PAIR.id) renderResult(days[TODAY] || { w: 0, l: 0 }, mine.pick);
     }).catch(function () {
