@@ -2,70 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#f8f8fa">
-  <meta name="description" content="Two hooks. One stops the scroll. Guess the crowd favorite in Hooked, a daily hook-writing game for X.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#170818">
+  <title>Hooked</title>
+  <meta name="description" content="Which of these two posts is more likely to get engagement? Vote and see what the majority said. A new pair every day.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <title>Hooked</title>
   <link rel="stylesheet" href="style.css">
   <script src="../x-embed.js"></script>
-  <link rel="stylesheet" href="../theme/theme.css">
-  <link rel="stylesheet" href="../theme/hooked.css">
 </head>
 <body>
-  <div id="app">
+  <main class="hk">
+    <header class="hk-head">
+      <h1 class="hk-title">HOOKED <span aria-hidden="true">&#x1F3A3;</span></h1>
+      <p id="hk-day" class="hk-day"></p>
+      <p id="hk-streak" class="hk-streak hidden"></p>
+    </header>
 
-    <!-- Title Screen -->
-    <div id="title-screen">
-      <div class="title-icon">&#x1F3A3;</div>
-      <h1 class="game-title">HOOKED</h1>
-      <p class="tagline">TWO HOOKS. ONE STOPS THE SCROLL.</p>
-      <div class="rules-box">
-        <p><span class="hl">Read</span> two opening lines for the same post.</p>
-        <p><span class="hl">Tap</span> the one that would stop your scroll.</p>
-        <p><span class="hl">Score</span> when you match what most players picked.</p>
-      </div>
-      <button id="btn-start" class="btn-main">GET HOOKED</button>
-      <p id="best-score" class="best-score"></p>
-      <p id="hk-status" class="hk-status hidden"></p>
-      <p class="hk-note">Every answer comes from real players&rsquo; votes. <a href="vote/">Vote on more hooks &rarr;</a></p>
-    </div>
+    <p id="hk-yesterday" class="hk-yesterday hidden"></p>
 
-    <!-- Game Screen -->
-    <div id="game-screen" class="hidden">
-      <div class="game-header">
-        <span id="round-label" class="round-label">1 / 5</span>
-        <span id="score-label" class="score-label">0</span>
-      </div>
-      <div id="streak-bar" class="streak-bar"></div>
-      <p id="topic-label" class="topic-label"></p>
-      <p id="instruction-label" class="instruction-label">TAP THE HOOK THAT STOPS YOUR SCROLL</p>
-      <div id="statements" class="statements"></div>
-      <div id="feedback" class="feedback hidden">
-        <p id="feedback-result" class="feedback-result"></p>
-        <p id="feedback-explain" class="feedback-explain"></p>
-        <button id="btn-next" class="btn-main btn-next">NEXT</button>
-      </div>
-    </div>
+    <p id="hk-question" class="hk-question">Which of these two posts is more likely to get engagement? Vote and see what the majority said!</p>
+    <p id="hk-topic" class="hk-topic"></p>
+    <div id="hk-options" class="hk-options"></div>
+    <p id="hk-ask" class="hk-ask">Tap a post to vote.</p>
+    <p id="hk-error" class="hk-error hidden"></p>
 
-    <!-- Game Over Screen -->
-    <div id="gameover-screen" class="hidden">
-      <h2 class="gameover-heading">TODAY'S HOOKS</h2>
-      <div id="final-score" class="final-score"></div>
-      <div id="final-rank" class="final-rank"></div>
-      <div id="final-grid" class="hk-grid"></div>
-      <div id="final-stats" class="final-stats"></div>
-      <p id="next-cd" style="font-size:14px;font-weight:700;letter-spacing:2px;color:var(--accent);margin-bottom:16px"></p>
-      <button id="btn-share" class="btn-main btn-share">Share on X</button>
-      <p class="hk-note" style="margin:0 0 14px"><a href="vote/">Vote on more hooks &rarr;</a> Your votes set future answers.</p>
-    </div>
+    <section id="hk-after" class="hk-after hidden">
+      <p id="hk-msg" class="hk-msg"></p>
+      <button id="hk-share" class="hk-btn">SHARE ON X</button>
+      <p id="hk-note" class="hk-note"></p>
+    </section>
 
-  </div>
-  <script src="../daily.js"></script>
+    <footer class="hk-foot">
+      <p id="hk-cd" class="hk-cd"></p>
+      <a class="hk-link" href="past/">Past posts and results &rarr;</a>
+    </footer>
+  </main>
   <script src="hooks.js"></script>
   <script src="game.js"></script>
 </body>
